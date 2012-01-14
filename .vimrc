@@ -2,6 +2,8 @@
 set nocompatible
 source $VIMRUNTIME/vimrc_example.vim
 
+filetype plugin on
+
 function InitBackupDir() 
   if has('win32') || has('win32unix') "windows/cygwin 
     let separator = "_" 
@@ -77,14 +79,13 @@ if has('statusline')
   endif
 endif
 
-if has("gui")
+if has("X11")
   set guifont=Liberation\ Mono\ 10
 endif
 
 if has("win32")
-"  set backupdir=$VIM\\_backup\\,$TEMP\\_backup\\
-"  set directory=$VIM\\_backup\\,$TEMP\\_backup\\
   if has("gui")
+    set guifont=consolas:h12
     " start out maximized, otherwise, fit to the term
     autocmd GUIEnter * simalt ~x
   endif
@@ -151,15 +152,19 @@ nnoremap <C-y> 3<C-y>
 
 let mapleader = ","
 
+autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+
 autocmd BufNewFile,BufRead *.pl,*.pm set makeprg=perl
 autocmd BufNewFile,BufRead *.pl,*.pm compiler perl
+
 autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType python set            shiftwidth=4 tabstop=4 smarttab expandtab 
+autocmd BufEnter *.py   set autoindent shiftwidth=4 tabstop=4 smarttab expandtab formatoptions=croql
 
 " PostgreSQL 
 autocmd BufNewFile,BufRead *.psql setf psql
 
 autocmd BufRead *.aspx set filetype=html
-filetype plugin on
 if has("autocmd") && exists("+omnifunc")
   autocmd Filetype *
     \  if &omnifunc == "" |
