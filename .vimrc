@@ -10,68 +10,24 @@ Bundle 'gmarik/vundle'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'tpope/vim-surround'
 
-filetype plugin indent on
+filetype plugin indent on " also required by vundle
 
-function InitBackupDir()
-  if has('win32') || has('win32unix') "windows/cygwin
-    let separator = "_"
-  else
-    let separator = "."
-  endif
-
-  let parent = $HOME .'/' . separator . 'vim/'
-  let backup = parent . 'backup/'
-  let tmp    = parent . 'tmp/'
-
-  if exists("*mkdir")
-    if !isdirectory(parent)
-      call mkdir(parent)
-    endif
-    if !isdirectory(backup)
-      call mkdir(backup)
-    endif
-    if !isdirectory(tmp)
-      call mkdir(tmp)
-    endif
-  endif
-
-  let missing_dir = 0
-  if isdirectory(tmp)
-    execute 'set backupdir=' . escape(backup, " ") . "/,."
-  else
-    let missing_dir = 1
-  endif
-  if isdirectory(backup)
-    execute 'set directory=' . escape(tmp, " ") . "/,."
-  else
-    let missing_dir = 1
-  endif
-
-  if missing_dir
-    echo "Warning: Unable to create backup directories: " . backup ." and " . tmp
-    echo "Try: mkdir -p " . backup
-    echo "and: mkdir -p " . tmp
-    set backupdir=.
-    set directory=.
-  endif
-endfunction
-
-  " Status line detail:
-  " %f    file path
-  " %y    file type between braces (if defined)
-  " %([%R%M]%)  read-only, modified and modifiable flags between braces
-  " %{'!'[&ff=='default_file_format']}
-  "      shows a '!' if the file format is not the platform
-  "      default
-  " %{'$'[!&list]}  shows a '*' if in list mode
-  " %{'~'[&pm=='']}  shows a '~' if in patchmode
-  " (%{synIDattr(synID(line('.'),col('.'),0),'name')})
-  "      only for debug : display the current syntax item name
-  " %=    right-align following items
-  " #%n    buffer number
-  " %l/%L,%c%V  line number, total number of lines, and column number
+" Status line detail:
+" %f    file path
+" %y    file type between braces (if defined)
+" %([%R%M]%)  read-only, modified and modifiable flags between braces
+" %{'!'[&ff=='default_file_format']}
+"      shows a '!' if the file format is not the platform
+"      default
+" %{'$'[!&list]}  shows a '*' if in list mode
+" %{'~'[&pm=='']}  shows a '~' if in patchmode
+" (%{synIDattr(synID(line('.'),col('.'),0),'name')})
+"      only for debug : display the current syntax item name
+" %=    right-align following items
+" #%n    buffer number
+" %l/%L,%c%V  line number, total number of lines, and column number
 if has('statusline')
-  function SetStatusLineStyle()
+  function! SetStatusLineStyle()
     if &stl == '' || &stl =~ 'synID'
       let &stl="%f %y%([%R%M]%)%{'!'[&ff=='".&ff."']}%{'$'[!&list]}%{'~'[&pm=='']}%=#%n %l/%L,%c%V "
     else
@@ -137,8 +93,6 @@ set grepprg=grep\ -nH\ $*
 set backspace=indent,eol,start
 set shortmess=atI
 set scrolloff=3
-
-call InitBackupDir()
 
 " key remappings - toggle spell checking
 map <F7> :setlocal spell! spelllang=en_us<cr>
