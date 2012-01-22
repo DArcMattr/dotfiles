@@ -66,6 +66,8 @@ if has("win32")
 endif
 
 colo koehler
+syntax on
+
 " set guioptions=a
 set ruler
 set shiftwidth=2
