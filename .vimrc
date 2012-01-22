@@ -2,11 +2,13 @@
 set nocompatible
 filetype off " required by vundle
 
+let $GIT_SSL_NO_VERIFY = 'true'
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
 Bundle 'tsaleh/vim-matchit'
+Bundle 'tpope/vim-surround'
 
 filetype plugin indent on
 
