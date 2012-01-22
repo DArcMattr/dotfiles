@@ -1,52 +1,58 @@
 " Default settings
 set nocompatible
-source $VIMRUNTIME/vimrc_example.vim
+filetype off " required by vundle
 
-filetype plugin on
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
-function InitBackupDir() 
-  if has('win32') || has('win32unix') "windows/cygwin 
-    let separator = "_" 
-  else 
-    let separator = "." 
-  endif 
+Bundle 'gmarik/vundle'
+Bundle 'tsaleh/vim-matchit'
 
-  let parent = $HOME .'/' . separator . 'vim/' 
-  let backup = parent . 'backup/' 
-  let tmp    = parent . 'tmp/' 
+filetype plugin indent on
 
-  if exists("*mkdir") 
-    if !isdirectory(parent) 
-      call mkdir(parent) 
-    endif 
-    if !isdirectory(backup) 
-      call mkdir(backup) 
-    endif 
-    if !isdirectory(tmp) 
-      call mkdir(tmp) 
-    endif 
-  endif 
+function InitBackupDir()
+  if has('win32') || has('win32unix') "windows/cygwin
+    let separator = "_"
+  else
+    let separator = "."
+  endif
 
-  let missing_dir = 0 
-  if isdirectory(tmp) 
-    execute 'set backupdir=' . escape(backup, " ") . "/,." 
-  else 
-    let missing_dir = 1 
-  endif 
-  if isdirectory(backup) 
-    execute 'set directory=' . escape(tmp, " ") . "/,." 
-  else 
-    let missing_dir = 1 
-  endif 
-   
-  if missing_dir 
-    echo "Warning: Unable to create backup directories: " . backup ." and " . tmp 
-    echo "Try: mkdir -p " . backup 
-    echo "and: mkdir -p " . tmp 
-    set backupdir=. 
-    set directory=. 
-  endif   
-endfunction 
+  let parent = $HOME .'/' . separator . 'vim/'
+  let backup = parent . 'backup/'
+  let tmp    = parent . 'tmp/'
+
+  if exists("*mkdir")
+    if !isdirectory(parent)
+      call mkdir(parent)
+    endif
+    if !isdirectory(backup)
+      call mkdir(backup)
+    endif
+    if !isdirectory(tmp)
+      call mkdir(tmp)
+    endif
+  endif
+
+  let missing_dir = 0
+  if isdirectory(tmp)
+    execute 'set backupdir=' . escape(backup, " ") . "/,."
+  else
+    let missing_dir = 1
+  endif
+  if isdirectory(backup)
+    execute 'set directory=' . escape(tmp, " ") . "/,."
+  else
+    let missing_dir = 1
+  endif
+
+  if missing_dir
+    echo "Warning: Unable to create backup directories: " . backup ." and " . tmp
+    echo "Try: mkdir -p " . backup
+    echo "and: mkdir -p " . tmp
+    set backupdir=.
+    set directory=.
+  endif
+endfunction
 
   " Status line detail:
   " %f    file path
@@ -158,10 +164,10 @@ autocmd BufNewFile,BufRead *.pl,*.pm set makeprg=perl
 autocmd BufNewFile,BufRead *.pl,*.pm compiler perl
 
 autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType python set            shiftwidth=4 tabstop=4 smarttab expandtab 
+autocmd FileType python set            shiftwidth=4 tabstop=4 smarttab expandtab
 autocmd BufEnter *.py   set autoindent shiftwidth=4 tabstop=4 smarttab expandtab formatoptions=croql
 
-" PostgreSQL 
+" PostgreSQL
 autocmd BufNewFile,BufRead *.psql setf psql
 
 autocmd BufRead *.aspx set filetype=html
