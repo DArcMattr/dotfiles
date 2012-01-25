@@ -43,13 +43,12 @@ if has('statusline')
   endif
 endif
 
-if has("X11")
-  set guifont=Liberation\ Mono\ 10
+if has("gui")
+  set guifont=consolas:h12
 endif
 
 if has("win32")
   if has("gui")
-    set guifont=consolas:h12
     " start out maximized, otherwise, fit to the term
     autocmd GUIEnter * simalt ~x
   endif
