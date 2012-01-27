@@ -9,6 +9,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'tpope/vim-surround'
+Bundle 'thinca/vim-localrc'
 
 filetype plugin indent on " also required by vundle
 
@@ -123,8 +124,8 @@ autocmd BufNewFile,BufRead *.pl,*.pm set makeprg=perl
 autocmd BufNewFile,BufRead *.pl,*.pm compiler perl
 
 autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType python set            shiftwidth=4 tabstop=4 smarttab expandtab
-autocmd BufEnter *.py   set autoindent shiftwidth=4 tabstop=4 smarttab expandtab formatoptions=croql
+autocmd FileType python set            shiftwidth=4 tabstop=4 smarttab noexpandtab
+autocmd BufEnter *.py   set autoindent shiftwidth=4 tabstop=4 smarttab noexpandtab formatoptions=croql
 
 " PostgreSQL
 autocmd BufNewFile,BufRead *.psql setf psql
