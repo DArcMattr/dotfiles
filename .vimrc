@@ -9,7 +9,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'tpope/vim-surround'
-Bundle 'thinca/vim-localrc'
+"Bundle 'thinca/vim-localrc'
 
 filetype plugin indent on " also required by vundle
 
@@ -65,6 +65,12 @@ if has("win32")
   set pheader=%<%f%h%m\ %40{strftime(\"%c\",getftime(expand(\"%%\")))}%=Page\ %N
   set printoptions=formfeed:y,paper:letter,portrait:n,number:y,left:5mm,right:5mm,top:10mm,bottom:5mm,syntax:y
   set printfont=Anonymous:w4h7
+
+  set backupdir=C:\Windows\Temp
+  set directory=C:\Windows\Temp
+else
+  set backupdir=/tmp
+  set directory=/tmp
 endif
 
 colo koehler
