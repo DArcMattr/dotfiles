@@ -1,0 +1,98 @@
+[Background]
+Bold=false
+Color=0,0,0
+
+[BackgroundIntense]
+Bold=false
+Color=20,20,20
+
+[Color0]
+Bold=false
+Color=0,0,0
+
+
+[Color0Intense]
+Bold=true
+Color=20,20,20
+
+
+[Color1] # Red
+Bold=false
+Color=220,0,0
+
+
+[Color1Intense] # Red Bold
+Bold=true
+Color=255,20,20
+
+
+[Color2] # Green
+Bold=false
+Color=0,220,0
+
+
+[Color2Intense] # Yellow Bold
+Bold=true
+Color=20,255,20
+
+
+[Color3] # Yellow
+Bold=false
+Color=220,220,0
+
+
+[Color3Intense] # Yellow Bold
+Bold=true
+Color=255,255,20
+
+
+[Color4] # Blue
+Bold=false
+Color=0,0,220
+
+
+[Color4Intense] # Blue Bold
+Bold=true
+Color=20,84,255
+
+
+[Color5] # Magenta
+Bold=false
+Color=220,0,220
+
+
+[Color5Intense] # Magenta Bold
+Bold=true
+Color=255,20,255
+
+
+[Color6] # Cyan
+Bold=false
+Color=0,220,220
+
+
+[Color6Intense] # Cyan Bold
+Bold=true
+Color=20,255,255
+
+
+[Color7] # White
+Bold=false
+Color=220,220,220
+
+
+[Color7Intense] # White Bold
+Bold=true
+Color=255,255,255
+
+
+[Foreground]
+Bold=false
+Color=200,200,200
+
+[ForegroundIntense]
+Bold=false
+Color=255,255,255
+
+[General]
+Description=DArc Colors
