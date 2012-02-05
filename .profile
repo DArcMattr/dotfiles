@@ -1,24 +1,31 @@
 # $OpenBSD: dot.profile,v 1.4 2005/02/16 06:56:57 matthieu Exp $
 #
 # sh/ksh initialization
-. /etc/ksh.kshrc
+if [ -r /etc/ksh.kshrc ]; then
+  . /etc/ksh.kshrc
+fi
 
-PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:.
-export PATH HOME TERM
+if [ -x /usr/games/fortune ]; then
+  echo "\n$(fortune -a)"
+fi
+
+export PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:.
+export HOME TERM
 export PS1='\n[\e[41;33m\t\e[0m]\n${PWD}\n\$ '
 export CLICOLOR_FORCE=YES
 export PAGER=/usr/bin/less
 export EDITOR=/usr/local/bin/vim
 export LESS="-EXMrQ"
 export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
-
 export PKG_PATH=http://ftp5.usa.openbsd.org/pub/OpenBSD/`uname -r`/packages/`machine -a`/
 export CVSROOT=/var/www/cvs
 
 set -o vi
 #umask 007
 
-movetrash() { mv $* ~/.trash; }
+movetrash() {
+  mv $* ~/.trash;
+}
 
 dir() {
   /usr/local/bin/colorls -GAalFh $* | /usr/bin/less;
@@ -44,10 +51,6 @@ path() {
 manpath() {
   echo $MANPATH | tr ':' '\n'
 }
-
-if [ -x /usr/games/fortune ]; then
-  echo "\n$(fortune -a)"
-fi
 
 alias rm='movetrash'
 alias key='man -k'
