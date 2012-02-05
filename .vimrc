@@ -10,6 +10,7 @@ Bundle 'gmarik/vundle'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'tpope/vim-surround'
 "Bundle 'thinca/vim-localrc'
+Bundle 'ludovicPelle/vim-xdebug'
 
 filetype plugin indent on " also required by vundle
 
@@ -76,7 +77,7 @@ endif
 colo koehler
 syntax on
 
-" set guioptions=a
+set guioptions=aegimrLt
 set ruler
 set shiftwidth=2
 set tabstop=2
