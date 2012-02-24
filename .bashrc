@@ -31,12 +31,18 @@ function clearcache {
   yes y | rm /tmp/cache/{8,9,a,b}*.cache;
   yes y | rm /tmp/cache/{c,d,e,f}*.cache;
 }
+
 function clearmodps {
   sudo /etc/init.d/httpd graceful
   sudo mv /var/www/mod_pagespeed/cache /var/www/mod_pagespeed/cache.old
   sudo /etc/init.d/httpd start
   sudo rm -rf  /var/www/mod_pagespeed/cache.old
 }
+
+function png_correct {
+  pngcrush -rem gAMA -rem cHRM -rem iCCP -rem sRGB $@ $@_.png
+}
+
 # delete grep cache
 function dgc {
   rm -rf $(grep -l '<!-- http://aynrandlexicon.com/lexicon/quote_of_the_day.html' /var/www/libraries/cache/*.cache); curl -I -s http://aynrandlexicon.com/lexicon/quote_of_the_day.html > /dev/null
