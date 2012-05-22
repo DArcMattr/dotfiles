@@ -15,6 +15,7 @@ export PS1='\n[\e[41;33m\t\e[0m]\n${PWD}\n\$ '
 export CLICOLOR_FORCE=YES
 export PAGER=/usr/bin/less
 export EDITOR=/usr/local/bin/vim
+export HGEDITOR=~/dotfiles/hgeditor
 export LESS="-EXMrQ"
 export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
 export PKG_PATH=http://ftp5.usa.openbsd.org/pub/OpenBSD/`uname -r`/packages/`machine -a`/
@@ -29,10 +30,25 @@ movetrash() {
 
 dir() {
   if [ -x /usr/local/bin/colorls ]; then
-    /usr/local/bin/colorls -GAalFh $* | /usr/bin/less;
+    /usr/local/bin/colorls -GAalFh $* | \
+      egrep "^d" \
+    &&
+    /usr/local/bin/colorls -GAalFh $* | \
+      egrep -v "^d|total" \
+    &&
+    /usr/local/bin/colorls -lk | \
+      egrep "total"
   else
-    /bin/ls -AalFh $* | /usr/bin/less;
-  fi
+    /bin/ls -AalFh $* | /usr/bin/less
+  fi | \
+  less;
+}
+
+ll() {
+  colorls -Gla $* | \
+    egrep '^d|total';
+  colorls -Gla $* | \
+    egrep -v '^d|total';
 }
 
 tree() {
