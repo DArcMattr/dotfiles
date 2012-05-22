@@ -131,8 +131,8 @@ autocmd BufNewFile,BufRead *.pl,*.pm set makeprg=perl
 autocmd BufNewFile,BufRead *.pl,*.pm compiler perl
 
 autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType python set            shiftwidth=4 tabstop=4 smarttab noexpandtab
-autocmd BufEnter *.py   set autoindent shiftwidth=4 tabstop=4 smarttab noexpandtab formatoptions=croql
+autocmd FileType python set            textwidth=80 shiftwidth=4 tabstop=4 softtabstop=4 smarttab expandtab
+autocmd BufEnter *.py   set autoindent textwidth=80 shiftwidth=4 tabstop=4 softtabstop=4 smarttab expandtab formatoptions=croql
 
 " PostgreSQL
 autocmd BufNewFile,BufRead *.psql setf psql
