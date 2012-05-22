@@ -1,0 +1,19 @@
+[ui]
+username = David Arceneaux <darceneaux@aynrand.org>
+
+[extensions]
+graphlog=
+pager=
+color=
+fetch=
+record=
+bookmarks=
+hgext.bookmarks=
+#hggit=
+
+[alias]
+log=glog
+
+[pager]
+pager= LESS='FSRX' less
+ignore= version, help, update, serve, record
