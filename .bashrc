@@ -19,34 +19,49 @@ declare -x EDITOR='vim'
 declare -x VISUAL="${EDITOR}"
 declare -x LESS="-EXMRQ"
 declare -x CVSROOT="darceneaux@demo.aynrand.org:/var/www/cvs"
-declare -x WEB_ENVIRONMENT='live'
+declare -x WEB_ENVIRONMENT='test'
 declare -x MANWIDTH=80
+declare -x HGEDITOR=~/Downloads/hgeditor
 
-# --group-directories-first requires a recent version of coreutils
-function ll  { ls --color=auto --group-directories-first --sort=extension -FAqlh $@; }
-function dir { ls --color=always --group-directories-first --sort=extension -FAqlh $@ | less; }
+function ll  {
+  ls --color=auto --group-directories-first --sort=extension -FAqlh $@;
+}
+
+function dir {
+  ls --color=always --group-directories-first --sort=extension -FAqlh $@ | less;
+}
+
 function clearcache {
-  yes y | rm /tmp/cache/{0,1,2,3}*.cache;
-  yes y | rm /tmp/cache/{4,5,6,7}*.cache;
-  yes y | rm /tmp/cache/{8,9,a,b}*.cache;
-  yes y | rm /tmp/cache/{c,d,e,f}*.cache;
+  rm -f /tmp/cache/{0,1,2,3}*.cache;
+  rm -f /tmp/cache/{4,5,6,7}*.cache;
+  rm -f /tmp/cache/{8,9,a,b}*.cache;
+  rm -f /tmp/cache/{c,d,e,f}*.cache;
 }
 
 function clearmodps {
   sudo /etc/init.d/httpd graceful
   sudo mv /var/www/mod_pagespeed/cache /var/www/mod_pagespeed/cache.old
   sudo /etc/init.d/httpd start
-  sudo rm -rf  /var/www/mod_pagespeed/cache.old
+  sudo rm -rf /var/www/mod_pagespeed/cache.old
 }
 
-function png_correct {
-  pngcrush -rem gAMA -rem cHRM -rem iCCP -rem sRGB $@ $@_.png
+function ssh_cor {
+  ssh cor -t  'tmux attach || tmux new'
 }
 
-# delete grep cache
+function ssh_demo {
+  ssh demo -t 'tmux attach || tmux new'
+}
+
+function ssh_mc {
+  ssh mc -t   'tmux attach || tmux new'
+}
+
+# delete grep cache, not sure how to generalize it
 function dgc {
   rm -rf $(grep -l '<!-- http://aynrandlexicon.com/lexicon/quote_of_the_day.html' /var/www/libraries/cache/*.cache); curl -I -s http://aynrandlexicon.com/lexicon/quote_of_the_day.html > /dev/null
 }
+
 function tarlm {
   if [ ! -f $1.access.$2.tgz ]
   then
@@ -56,6 +71,10 @@ function tarlm {
   then
     sudo tar -zvcf $1.error.$2.tgz $1.error.$2*.log && sudo rm $1.error.$2*.log;
   fi
+}
+
+hgdiff() {
+  vimdiff -c 'map q :qa!<CR>' <(hg cat "$1") "$1";
 }
 
 ##############################
