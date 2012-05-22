@@ -28,7 +28,11 @@ movetrash() {
 }
 
 dir() {
-  /usr/local/bin/colorls -GAalFh $* | /usr/bin/less;
+  if -x /usr/local/bin/colorls then
+    /usr/local/bin/colorls -GAalFh $* | /usr/bin/less;
+  elif
+    /bin/ls -AalFh $* | /usr/bin/less;
+  then
 }
 
 tree() {
@@ -57,4 +61,4 @@ alias key='man -k'
 alias info='info --vi-keys'
 alias cycapache='/usr/bin/sudo /usr/bin/pkill -SIGQUIT -U www; /bin/sleep 2; /usr/bin/sudo /usr/sbin/apachectl start'
 alias forethought='ssh ari@216.241.32.130'
-alias updb='mysql <SQL/page.sql> /dev/null && mysql <SQL/page_content.sql> /dev/null'
+#alias updb='mysql <SQL/page.sql> /dev/null && mysql <SQL/page_content.sql> /dev/null'
