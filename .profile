@@ -28,11 +28,11 @@ movetrash() {
 }
 
 dir() {
-  if -x /usr/local/bin/colorls then
+  if [ -x /usr/local/bin/colorls ]; then
     /usr/local/bin/colorls -GAalFh $* | /usr/bin/less;
-  elif
+  else
     /bin/ls -AalFh $* | /usr/bin/less;
-  then
+  fi
 }
 
 tree() {
