@@ -2,6 +2,7 @@
 username = David Arceneaux <darceneaux@aynrand.org>
 
 [extensions]
+convert=
 graphlog=
 pager=
 color=
