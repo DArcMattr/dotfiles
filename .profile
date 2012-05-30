@@ -1,16 +1,13 @@
 # $OpenBSD: dot.profile,v 1.4 2005/02/16 06:56:57 matthieu Exp $
 #
 # sh/ksh initialization
+
 if [ -r /etc/ksh.kshrc ]; then
   . /etc/ksh.kshrc
 fi
 
-if [ -x /usr/games/fortune ]; then
-  echo "\n$(fortune -a)"
-fi
-
-export PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:.
 export HOME TERM
+export PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:.
 export PS1='\n[\e[41;33m\t\e[0m]\n${PWD}\n\$ '
 export CLICOLOR_FORCE=YES
 export PAGER=/usr/bin/less
@@ -20,6 +17,10 @@ export LESS="-EXMrQ"
 export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
 export PKG_PATH=http://ftp5.usa.openbsd.org/pub/OpenBSD/`uname -r`/packages/`machine -a`/
 export CVSROOT=/var/www/cvs
+
+if [ -x /usr/games/fortune ]; then
+  echo "\n$(/usr/games/fortune -a)"
+fi
 
 set -o vi
 #umask 007
@@ -42,13 +43,6 @@ dir() {
     /bin/ls -AalFh $* | /usr/bin/less
   fi | \
   less;
-}
-
-ll() {
-  colorls -Gla $* | \
-    egrep '^d|total';
-  colorls -Gla $* | \
-    egrep -v '^d|total';
 }
 
 tree() {
