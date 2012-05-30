@@ -1,5 +1,6 @@
 [ui]
 username = David Arceneaux <darceneaux@aynrand.org>
+merge = vimdiff
 
 [extensions]
 convert=
@@ -10,7 +11,7 @@ fetch=
 record=
 bookmarks=
 hgext.bookmarks=
-#hggit=
+hggit=
 
 [alias]
 log=glog
@@ -18,3 +19,7 @@ log=glog
 [pager]
 pager= LESS='FSRX' less
 ignore= version, help, update, serve, record
+
+[merge-tools]
+vimdiff.executable = vim
+vimdiff.args = -d $base $local $output $other +close +close
