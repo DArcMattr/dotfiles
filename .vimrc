@@ -138,6 +138,10 @@ autocmd BufEnter *.py   set autoindent textwidth=80 shiftwidth=4 tabstop=4 softt
 autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8 softtabstop=8
 let c_space_errors=1
 
+" hg commit messages
+autocmd BufRead,BufNewFile /tmp/hgeditor*/msg setf hgcommit
+autocmd FileType hgcommit set textwidth=72
+
 " PostgreSQL
 autocmd BufNewFile,BufRead *.psql setf psql
 
