@@ -11,6 +11,7 @@ Bundle 'tsaleh/vim-matchit'
 Bundle 'tpope/vim-surround'
 "Bundle 'thinca/vim-localrc'
 Bundle 'ludovicPelle/vim-xdebug'
+Bundle 'vim-scripts/vcscommand.vim'
 
 filetype plugin indent on " also required by vundle
 
@@ -133,6 +134,9 @@ autocmd BufNewFile,BufRead *.pl,*.pm compiler perl
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType python set            textwidth=80 shiftwidth=4 tabstop=4 softtabstop=4 smarttab expandtab
 autocmd BufEnter *.py   set autoindent textwidth=80 shiftwidth=4 tabstop=4 softtabstop=4 smarttab expandtab formatoptions=croql
+
+autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8 softtabstop=8
+let c_space_errors=1
 
 " PostgreSQL
 autocmd BufNewFile,BufRead *.psql setf psql
