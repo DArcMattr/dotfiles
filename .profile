@@ -29,20 +29,28 @@ movetrash() {
   mv $* ~/.trash;
 }
 
+playtime() {
+  if [ -x /usr/local/bin/ffmpeg ]; then
+    ffmpeg -i $@ 2>&1|sed -n "s/.*Duration: \([^,]*\).*/\1/p"
+  else
+    echo "ffmpeg is not installed"
+  fi
+}
+
 dir() {
   if [ -x /usr/local/bin/colorls ]; then
-    /usr/local/bin/colorls -GAalFh $* | \
+    /usr/local/bin/colorls -GAalFh $@ | \
       egrep "^d" \
     &&
-    /usr/local/bin/colorls -GAalFh $* | \
+    /usr/local/bin/colorls -GAalFh $@ | \
       egrep -v "^d|total" \
     &&
     /usr/local/bin/colorls -lk | \
       egrep "total"
   else
-    /bin/ls -AalFh $* | /usr/bin/less
+    /bin/ls -AalFh $@
   fi | \
-  less;
+  /usr/bin/less;
 }
 
 tree() {
@@ -69,6 +77,7 @@ manpath() {
 alias rm='movetrash'
 alias key='man -k'
 alias info='info --vi-keys'
+alias ssh_web="ssh darceneaux@10.10.10.10 -t 'tmux attach || tmux new'"
 alias cycapache='/usr/bin/sudo /usr/bin/pkill -SIGQUIT -U www; /bin/sleep 2; /usr/bin/sudo /usr/sbin/apachectl start'
 alias forethought='ssh ari@216.241.32.130'
 #alias updb='mysql <SQL/page.sql> /dev/null && mysql <SQL/page_content.sql> /dev/null'
