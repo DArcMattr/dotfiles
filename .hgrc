@@ -11,7 +11,7 @@ fetch=
 record=
 bookmarks=
 hgext.bookmarks=
-hggit=
+#hggit=
 
 [alias]
 log=glog
