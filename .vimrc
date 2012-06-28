@@ -12,6 +12,7 @@ Bundle 'tpope/vim-surround'
 "Bundle 'thinca/vim-localrc'
 Bundle 'ludovicPelle/vim-xdebug'
 Bundle 'vim-scripts/vcscommand.vim'
+Bundle "http://github.com/rstacruz/sparkup.git", {'rtp': 'vim'}
 
 filetype plugin indent on " also required by vundle
 
