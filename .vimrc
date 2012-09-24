@@ -12,7 +12,9 @@ Bundle 'tpope/vim-surround'
 "Bundle 'thinca/vim-localrc'
 Bundle 'ludovicPelle/vim-xdebug'
 Bundle 'vim-scripts/vcscommand.vim'
+Bundle 'othree/html5-syntax.vim'
 Bundle "http://github.com/rstacruz/sparkup.git", {'rtp': 'vim'}
+Bundle 'tpope/vim-vividchalk'
 
 filetype plugin indent on " also required by vundle
 
@@ -76,7 +78,8 @@ else
   set directory=/tmp
 endif
 
-colo koehler
+"colo koehler
+colo vividchalk
 syntax on
 
 set guioptions=aegimrLt
@@ -104,7 +107,7 @@ set smartcase
 set title
 set grepprg=grep\ -nH\ $*
 set backspace=indent,eol,start
-set shortmess=atI
+set shortmess=atIA
 set scrolloff=3
 
 " key remappings - toggle spell checking
@@ -131,6 +134,9 @@ autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
 autocmd BufNewFile,BufRead *.pl,*.pm set makeprg=perl
 autocmd BufNewFile,BufRead *.pl,*.pm compiler perl
+
+autocmd FileType lua   set            textwidth=80 shiftwidth=4 tabstop=4 softtabstop=4 smarttab noexpandtab
+autocmd BufEnter *.lua set autoindent textwidth=80 shiftwidth=4 tabstop=4 softtabstop=4 smarttab noexpandtab formatoptions=croql
 
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType python set            textwidth=80 shiftwidth=4 tabstop=4 softtabstop=4 smarttab expandtab
