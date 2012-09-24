@@ -10,7 +10,7 @@ Copy/paste the folliwing onto the command line:
     ln -s ~/dotfiles/.profile ~/.profile
     ln -s ~/dotfiles/.hgrc ~/.hgrc
     ln -s ~/dotfiles/.gitconfig ~/.gitconfig
-    ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
+    ln -s ~/dotfiles/tmux.conf ~/tmux.conf
     git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
 Open up `vim`, and run `:BundleInstall`

@@ -6,7 +6,15 @@ if [ -r /etc/ksh.kshrc ]; then
   . /etc/ksh.kshrc
 fi
 
-export HOME TERM
+if [[ $TERM == xterm || $TERM == screen ]]; then
+  export TERM="xterm-256color";
+else
+  export TERM="wsvt25";
+fi
+
+COLORTERM=
+
+export HOME TERM COLORTERM
 export PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:.
 export PS1='\n[\e[41;33m\t\e[0m]\n${PWD}\n\$ '
 export CLICOLOR_FORCE=YES
@@ -21,6 +29,9 @@ export CVSROOT=/var/www/cvs
 if [ -x /usr/games/fortune ]; then
   echo "\n$(/usr/games/fortune -a)"
 fi
+
+# This is for tmux
+[ -n "$TMUX" ] && export TERM="screen-256color"
 
 set -o vi
 #umask 007
