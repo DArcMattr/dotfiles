@@ -9,6 +9,7 @@ Copy/paste the folliwing onto the command line:
     ln -s ~/dotfiles/.bashrc ~/.bashrc
     ln -s ~/dotfiles/.profile ~/.profile
     ln -s ~/dotfiles/.hgrc ~/.hgrc
+    ln -s ~/dotfiles/.gitconfig ~/.gitconfig
     git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
 Open up `vim`, and run `:BundleInstall`
