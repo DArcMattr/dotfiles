@@ -11,6 +11,7 @@ fetch=
 record=
 bookmarks=
 hgext.bookmarks=
+eol=
 #hggit=
 
 [alias]
@@ -23,3 +24,11 @@ ignore= version, help, update, serve, record
 [merge-tools]
 vimdiff.executable = vim
 vimdiff.args = -d $base $local $output $other +close +close
+
+[hooks]
+#tag = hg push
+
+[eol]
+native=LF
+only-consistent=false
+fix-trailing-newline=true
