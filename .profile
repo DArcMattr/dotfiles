@@ -6,24 +6,38 @@ if [ -r /etc/ksh.kshrc ]; then
   . /etc/ksh.kshrc
 fi
 
-if [[ $TERM == xterm || $TERM == screen ]]; then
-  export TERM="xterm-256color";
-else
-  export TERM="wsvt25";
+if [ -f ~/.bashrc ]; then
+  . ~/.bashrc
 fi
 
+if [[ $TERM == xterm || $TERM == screen ]]; then
+  TERM="xterm-256color";
+else
+  TERM="wsvt25";
+fi
 COLORTERM=
 
-export HOME TERM COLORTERM
-export PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:.
+if [ `uname` == OpenBSD ]; then
+  PKG_PATH=http://ftp5.usa.openbsd.org/pub/OpenBSD/`uname -r`/packages/`machine -a`/
+else
+  PKG_PATH=
+fi
+
+if [ -x /usr/bin/vim ]; then
+  EDITOR=/usr/bin/vim
+else
+  EDITOR=/usr/local/bin/vim
+fi
+
+
+export HOME TERM COLORTERM EDITOR PKG_PATH
+export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/games:.
 export PS1='\n[\e[41;33m\t\e[0m]\n${PWD}\n\$ '
 export CLICOLOR_FORCE=YES
 export PAGER=/usr/bin/less
-export EDITOR=/usr/local/bin/vim
 export HGEDITOR=~/dotfiles/hgeditor
 export LESS="-EXMrQ"
 export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
-export PKG_PATH=http://ftp5.usa.openbsd.org/pub/OpenBSD/`uname -r`/packages/`machine -a`/
 export CVSROOT=/var/www/cvs
 
 if [ -x /usr/games/fortune ]; then
@@ -50,16 +64,16 @@ playtime() {
 
 dir() {
   if [ -x /usr/local/bin/colorls ]; then
-    /usr/local/bin/colorls -GAalFh $@ | \
+    /usr/local/bin/colorls -GAalFh "$@" | \
       egrep "^d" \
     &&
-    /usr/local/bin/colorls -GAalFh $@ | \
+    /usr/local/bin/colorls -GAalFh "$@" | \
       egrep -v "^d|total" \
     &&
     /usr/local/bin/colorls -lk | \
       egrep "total"
   else
-    /bin/ls -AalFh $@
+    /bin/ls -AalFh "$@"
   fi | \
   /usr/bin/less;
 }
