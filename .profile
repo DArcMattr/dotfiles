@@ -29,14 +29,14 @@ else
   EDITOR=/usr/local/bin/vim
 fi
 
-
 export HOME TERM COLORTERM EDITOR PKG_PATH
 export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/games:.
 export PS1='\n[\e[41;33m\t\e[0m]\n${PWD}\n\$ '
+export CLICOLOR=YES
 export CLICOLOR_FORCE=YES
 export PAGER=/usr/bin/less
 export HGEDITOR=~/dotfiles/hgeditor
-export LESS="-EXMrQ"
+export LESS="-EXMRQ"
 export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
 export CVSROOT=/var/www/cvs
 
@@ -49,6 +49,18 @@ fi
 
 set -o vi
 #umask 007
+
+alias rm='movetrash'
+alias key='man -k'
+alias info='info --vi-keys'
+alias ssh_web="ssh darceneaux@10.10.10.10 -t 'tmux attach || tmux new'"
+alias cycapache='/usr/bin/sudo /usr/bin/pkill -SIGQUIT -U www; /bin/sleep 2; /usr/bin/sudo /usr/sbin/apachectl start'
+alias forethought='ssh ari@216.241.32.130'
+
+#alias updb='mysql <SQL/page.sql> /dev/null && mysql <SQL/page_content.sql> /dev/null'
+if [ -x /usr/local/bin/colorls ]; then
+  alias ls='colorls'
+fi
 
 movetrash() {
   mv $* ~/.trash;
@@ -63,19 +75,13 @@ playtime() {
 }
 
 dir() {
-  if [ -x /usr/local/bin/colorls ]; then
-    /usr/local/bin/colorls -GAalFh "$@" | \
-      egrep "^d" \
-    &&
-    /usr/local/bin/colorls -GAalFh "$@" | \
-      egrep -v "^d|total" \
-    &&
-    /usr/local/bin/colorls -lk | \
-      egrep "total"
-  else
-    /bin/ls -AalFh "$@"
-  fi | \
-  /usr/bin/less;
+  (
+    ls -AalFh "$@" | egrep "^d" \
+  &&
+    ls -AalFh "$@" | egrep -v "^d|total" \
+  &&
+    ls -lk  | egrep "total"
+  ) | /usr/bin/less;
 }
 
 tree() {
@@ -102,11 +108,3 @@ manpath() {
 sshmac() {
   ssh darceneaux@10.10.10.169 -t '/usr/local/bin/tmux attach || /usr/local/bin/tmux new'
 }
-
-alias rm='movetrash'
-alias key='man -k'
-alias info='info --vi-keys'
-alias ssh_web="ssh darceneaux@10.10.10.10 -t 'tmux attach || tmux new'"
-alias cycapache='/usr/bin/sudo /usr/bin/pkill -SIGQUIT -U www; /bin/sleep 2; /usr/bin/sudo /usr/sbin/apachectl start'
-alias forethought='ssh ari@216.241.32.130'
-#alias updb='mysql <SQL/page.sql> /dev/null && mysql <SQL/page_content.sql> /dev/null'
