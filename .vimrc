@@ -109,6 +109,7 @@ set grepprg=grep\ -nH\ $*
 set backspace=indent,eol,start
 set shortmess=atIA
 set scrolloff=3
+set t_Co=256
 
 " key remappings - toggle spell checking
 map <F7> :setlocal spell! spelllang=en_us<cr>

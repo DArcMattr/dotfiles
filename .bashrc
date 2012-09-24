@@ -21,7 +21,7 @@ declare -x LESS="-EXMRQ"
 declare -x CVSROOT="darceneaux@demo.aynrand.org:/var/www/cvs"
 declare -x WEB_ENVIRONMENT='test'
 declare -x MANWIDTH=80
-declare -x HGEDITOR=~/Downloads/hgeditor
+declare -x HGEDITOR=~/dotfiles/hgeditor
 
 function ll  {
   ls --color=auto --group-directories-first --sort=extension -FAqlh $@;
