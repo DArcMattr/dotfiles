@@ -74,6 +74,10 @@ manpath() {
   echo $MANPATH | tr ':' '\n'
 }
 
+sshmac() {
+  ssh darceneaux@10.10.10.169 -t '/usr/local/bin/tmux attach || /usr/local/bin/tmux new'
+}
+
 alias rm='movetrash'
 alias key='man -k'
 alias info='info --vi-keys'
