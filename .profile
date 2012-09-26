@@ -106,5 +106,5 @@ manpath() {
 }
 
 sshmac() {
-  ssh darceneaux@10.10.10.169 -t '/usr/local/bin/tmux attach || /usr/local/bin/tmux new'
+  ssh mac -t '/usr/local/bin/tmux attach || /usr/local/bin/tmux new'
 }
