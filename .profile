@@ -75,13 +75,13 @@ playtime() {
 }
 
 dir() {
-  (
-    ls -AalFh "$@" | egrep "^d" \
+  {
+    ls -AalFh $* | egrep "^d" \
   &&
-    ls -AalFh "$@" | egrep -v "^d|total" \
+    ls -AalFh $* | egrep -v "^d|total" \
   &&
-    ls -lk  | egrep "total"
-  ) | /usr/bin/less;
+    ls -lk $* | egrep "total"
+  } | /usr/bin/less;
 }
 
 tree() {
