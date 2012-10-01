@@ -1,0 +1,9 @@
+[user]
+	name = David Arceneaux
+	email = darceneaux@aynrand.org
+[color]
+	ui = true
+[diff]
+  external = ~/dotfiles/git_diff_wrapper
+[pager]
+  diff =

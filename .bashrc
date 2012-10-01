@@ -21,14 +21,14 @@ declare -x LESS="-EXMRQ"
 declare -x CVSROOT="darceneaux@demo.aynrand.org:/var/www/cvs"
 declare -x WEB_ENVIRONMENT='test'
 declare -x MANWIDTH=80
-declare -x HGEDITOR=~/Downloads/hgeditor
+declare -x HGEDITOR=~/dotfiles/hgeditor
 
 function ll  {
   ls --color=auto --group-directories-first --sort=extension -FAqlh $@;
 }
 
 function dir {
-  ls --color=always --group-directories-first --sort=extension -FAqlh $@ | less;
+  ls --color=always --group-directories-first --sort=extension -FAqlh "$@" | less;
 }
 
 function clearcache {
@@ -39,27 +39,46 @@ function clearcache {
 }
 
 function clearmodps {
-  sudo /etc/init.d/httpd graceful
+  sudo /sbin/apachectl stop
   sudo mv /var/www/mod_pagespeed/cache /var/www/mod_pagespeed/cache.old
-  sudo /etc/init.d/httpd start
+  sudo /sbin/apachectl start
   sudo rm -rf /var/www/mod_pagespeed/cache.old
 }
 
 function ssh_cor {
-  ssh cor -t  'tmux attach || tmux new'
+  autossh -M424242 -t cor
+  ssh cor -t 'tmux attach || tmux new'
 }
 
 function ssh_demo {
+#  autossh -M434343 -t demo 'tmux attach || tmux new'
   ssh demo -t 'tmux attach || tmux new'
 }
 
 function ssh_mc {
-  ssh mc -t   'tmux attach || tmux new'
+  autossh -M434344 -t mc 'tmux attach || tmux new'
+}
+
+function ssh_web {
+  ssh demo -t "ssh web -t 'tmux attach || tmux new'"
+}
+
+function ssh_mac {
+  ssh demo -t "ssh mac -t '/usr/local/bin/tmux attach || /usr/local/bin/tmux new'"
+}
+
+function mountpub {
+  sudo mount -t cifs -o username=ARI/darceneaux,rw,file_mode=0666,dir_mode=0777 \\\\10.10.10.12\\Public /mnt/Public
+}
+
+function mountfr {
+  sudo mount -t cifs -o username=ARI/darceneaux,rw,file_mode=0666,dir_mode=0777 \\\\10.10.10.12\\Fundraising /mnt/Fundraising
 }
 
 # delete grep cache, not sure how to generalize it
 function dgc {
-  rm -rf $(grep -l '<!-- http://aynrandlexicon.com/lexicon/quote_of_the_day.html' /var/www/libraries/cache/*.cache); curl -I -s http://aynrandlexicon.com/lexicon/quote_of_the_day.html > /dev/null
+  rm -rf $(grep -l '<!-- http://aynrandlexicon.com/lexicon/quote_of_the_day.html' /var/www/libraries/cache/*.cache); \
+    curl -I -s http://aynrandlexicon.com/lexicon/quote_of_the_day.html > /dev/null
 }
 
 function tarlm {
