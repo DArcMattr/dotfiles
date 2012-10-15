@@ -46,13 +46,13 @@ function clearmodps {
 }
 
 function ssh_cor {
-  autossh -M424242 -t cor
+#  autossh -M424242 -t cor
   ssh cor -t 'tmux attach || tmux new'
 }
 
 function ssh_demo {
 #  autossh -M434343 -t demo 'tmux attach || tmux new'
-  ssh demo -t 'tmux attach || tmux new'
+  (export TERM=screen-256color-bce && ssh demo -t 'tmux attach || tmux new')
 }
 
 function ssh_mc {
@@ -64,7 +64,7 @@ function ssh_web {
 }
 
 function ssh_mac {
-  ssh demo -t "ssh mac -t '/usr/local/bin/tmux attach || /usr/local/bin/tmux new'"
+  (export TERM=screen-256color-bce && ssh macthing -t '/usr/local/bin/tmux attach || /usr/local/bin/tmux new')
 }
 
 function mountpub {
