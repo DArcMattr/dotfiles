@@ -80,9 +80,9 @@ else
   set directory=/tmp
 endif
 
-"colo koehler
+colo koehler
 "colo vividchalk
-colo Tomorrow-Night-Eighties
+"colo Tomorrow-Night-Eighties
 syntax on
 
 set guioptions=aegimrLt
