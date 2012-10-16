@@ -46,25 +46,25 @@ function clearmodps {
 }
 
 function ssh_cor {
-#  autossh -M424242 -t cor
-  ssh cor -t 'tmux attach || tmux new'
+  (export AUTOSSH_PORT=0 && ssh cor -t 'tmux attach || tmux new')
 }
 
 function ssh_demo {
-#  autossh -M434343 -t demo 'tmux attach || tmux new'
-  (export TERM=screen-256color-bce && ssh demo -t 'tmux attach || tmux new')
+#  autossh -M434343 -t demo
+  (export TERM=screen-256color-bce && ssh -t demo 'tmux attach || tmux new')
 }
 
 function ssh_mc {
-  autossh -M434344 -t mc 'tmux attach || tmux new'
+#  autossh -M434344 -t mc 'tmux attach || tmux new'
+  ssh mc -t 'tmux attach || tmux new'
 }
 
-function ssh_web {
-  ssh demo -t "ssh web -t 'tmux attach || tmux new'"
+function ssh_newdemo {
+  (export TERM=screen-256color-bce && export AUTOSSH_PORT=0 && ssh newdemo -t '/usr/local/bin/tmux attach || /usr/local/bin/tmux new')
 }
 
 function ssh_mac {
-  (export TERM=screen-256color-bce && ssh macthing -t '/usr/local/bin/tmux attach || /usr/local/bin/tmux new')
+  (export TERM=screen-256color-bce && export AUTOSSH_PORT=0 && ssh macthing -t '/usr/local/bin/tmux attach || /usr/local/bin/tmux new')
 }
 
 function mountpub {
