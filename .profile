@@ -69,7 +69,7 @@ movetrash() {
 
 playtime() {
   if [ -x /usr/local/bin/soxi ]; then
-    soxi -B $@ 2>&1
+    soxi -d $@ 2>&1
   else
     echo "soxi is not installed"
   fi
