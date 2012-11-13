@@ -5,7 +5,11 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-# User specific aliases and functions
+if [ -f ~/.bash_profile ]; then
+	. ~/.bash_profile
+fi
+
+# Settings
 
 ulimit -c 0
 set -o vi
@@ -17,84 +21,11 @@ declare -x LS_COLORS='no=01;37:fi=01;37:di=01;34:ln=01;36:pi=01;32:so=01;35:do=0
 declare -x PAGER='less'
 declare -x EDITOR='vim'
 declare -x VISUAL="${EDITOR}"
-declare -x LESS="-EXMRQ"
+declare -x LESS="-EXMRQc"
 declare -x CVSROOT="darceneaux@demo.aynrand.org:/var/www/cvs"
 declare -x WEB_ENVIRONMENT='test'
 declare -x MANWIDTH=80
 declare -x HGEDITOR=~/dotfiles/hgeditor
-
-function ll  {
-  ls --color=auto --group-directories-first --sort=extension -FAqlh $@;
-}
-
-function dir {
-  ls --color=always --group-directories-first --sort=extension -FAqlh "$@" | less;
-}
-
-function clearcache {
-  rm -f /tmp/cache/{0,1,2,3}*.cache;
-  rm -f /tmp/cache/{4,5,6,7}*.cache;
-  rm -f /tmp/cache/{8,9,a,b}*.cache;
-  rm -f /tmp/cache/{c,d,e,f}*.cache;
-}
-
-function clearmodps {
-  sudo /sbin/apachectl stop
-  sudo mv /var/www/mod_pagespeed/cache /var/www/mod_pagespeed/cache.old
-  sudo /sbin/apachectl start
-  sudo rm -rf /var/www/mod_pagespeed/cache.old
-}
-
-function ssh_cor {
-  (export AUTOSSH_PORT=0 && ssh cor -t 'tmux attach || tmux new')
-}
-
-function ssh_demo {
-#  autossh -M434343 -t demo
-  (export TERM=screen-256color-bce && ssh -t demo 'tmux attach || tmux new')
-}
-
-function ssh_mc {
-#  autossh -M434344 -t mc 'tmux attach || tmux new'
-  ssh mc -t 'tmux attach || tmux new'
-}
-
-function ssh_newdemo {
-  (export TERM=screen-256color-bce && export AUTOSSH_PORT=0 && ssh newdemo -t '/usr/local/bin/tmux attach || /usr/local/bin/tmux new')
-}
-
-function ssh_mac {
-  (export TERM=screen-256color-bce && export AUTOSSH_PORT=0 && ssh macthing -t '/usr/local/bin/tmux attach || /usr/local/bin/tmux new')
-}
-
-function mountpub {
-  sudo mount -t cifs -o username=ARI/darceneaux,rw,file_mode=0666,dir_mode=0777 \\\\10.10.10.12\\Public /mnt/Public
-}
-
-function mountfr {
-  sudo mount -t cifs -o username=ARI/darceneaux,rw,file_mode=0666,dir_mode=0777 \\\\10.10.10.12\\Fundraising /mnt/Fundraising
-}
-
-# delete grep cache, not sure how to generalize it
-function dgc {
-  rm -rf $(grep -l '<!-- http://aynrandlexicon.com/lexicon/quote_of_the_day.html' /var/www/libraries/cache/*.cache); \
-    curl -I -s http://aynrandlexicon.com/lexicon/quote_of_the_day.html > /dev/null
-}
-
-function tarlm {
-  if [ ! -f $1.access.$2.tgz ]
-  then
-    sudo tar -zvcf $1.access.$2.tgz $1.access.$2*.log && sudo rm $1.access.$2*.log;
-  fi
-  if [ ! -f $1.error.$2.tgz ]
-  then
-    sudo tar -zvcf $1.error.$2.tgz $1.error.$2*.log && sudo rm $1.error.$2*.log;
-  fi
-}
-
-hgdiff() {
-  vimdiff -c 'map q :qa!<CR>' <(hg cat "$1") "$1";
-}
 
 ##############################
 # ##### PROMPT SECTION ##### #
@@ -123,17 +54,12 @@ rgb_white='\[\033[01;37m\]'
 
 rgb_std="${rgb_white}"
 
-if [ `id -u` -eq 0 ]
-then
+if [ `id -u` -eq 0 ]; then
   rgb_usr="${rgb_red}"
 else
   rgb_usr="${rgb_yellow}"
 fi
 
-#function prompt_command { newPWD="${PWD}"; }
-#PROMPT_COMMAND=prompt_command
-
-#[ -n "$PS1" ] && PS1="${rgb_usr}[\t]${rgb_std}\n${newPWD}${rgb_usr}\$${rgb_restore} "
 [ -n "$PS1" ] && PS1="\n${rgb_usr}[\t]${rgb_std}\n\$(pwd)${rgb_usr}\n\$${rgb_restore} "
 
 unset   rgb_restore   \
