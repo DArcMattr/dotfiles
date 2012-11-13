@@ -80,8 +80,8 @@ else
   set directory=/tmp
 endif
 
-colo koehler
-"colo vividchalk
+"colo koehler
+colo vividchalk
 "colo Tomorrow-Night-Eighties
 syntax on
 
