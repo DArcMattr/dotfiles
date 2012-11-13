@@ -1,5 +1,27 @@
-# .bash_profile
+# .aliases
+# vim:ft=sh:
 # called by .bashrc
+
+if [ -x /usr/local/bin/colorls ]; then
+  alias ls='/usr/local/bin/colorls'
+fi
+
+alias ll='ls -AalFh'
+
+movetrash() {
+  if [ -d ~/.trash ]; then
+    mkdir ~/.trash
+  fi
+  mv "$*" ~/.trash;
+}
+
+path() {
+  echo $PATH | tr ':' '\n'
+}
+
+manpath() {
+  echo $MANPATH | tr ':' '\n'
+}
 
 tmux_self() {
   (export TERM=screen-256color-bce && tmux attach || tmux new)
@@ -10,14 +32,30 @@ tmux_self() {
 #}
 
 dir() {
-  ls --color=always --group-directories-first --sort=extension -FAqlh "$@" | less
+#  ls --color=always --group-directories-first --sort=extension -FAqlh "$@" | less
+  {
+    ll "$@" | egrep "^d" \
+  &&
+    ll "$@" | egrep -v "^d|total" \
+  &&
+    ll "$@" | egrep "total"
+  } | $PAGER
 }
 
 clearcache() {
-  rm -f /tmp/cache/{0,1,2,3}*.cache
-  rm -f /tmp/cache/{4,5,6,7}*.cache
-  rm -f /tmp/cache/{8,9,a,b}*.cache
-  rm -f /tmp/cache/{c,d,e,f}*.cache
+  if [ -d /tmp/cache ]; then
+    rm -f /tmp/cache/{0,1,2,3}*.cache
+    rm -f /tmp/cache/{4,5,6,7}*.cache
+    rm -f /tmp/cache/{8,9,a,b}*.cache
+    rm -f /tmp/cache/{c,d,e,f}*.cache
+  elif [ -d /var/www/tmp/cache ]; then
+    rm -f /var/www/tmp/cache/{0,1,2,3}*.cache
+    rm -f /var/www/tmp/cache/{4,5,6,7}*.cache
+    rm -f /var/www/tmp/cache/{8,9,a,b}*.cache
+    rm -f /var/www/tmp/cache/{c,d,e,f}*.cache
+  else
+    echo "no cache directories exist"
+  fi
 }
 
 clearmodps() {
@@ -40,11 +78,11 @@ ssh_mc() {
 }
 
 ssh_newdemo() {
-  (export TERM=screen-256color-bce && export AUTOSSH_PORT=0 && autossh newdemo -t 'tmux attach || tmux new')
+  (export TERM=screen-256color-bce && export AUTOSSH_PORT=0 && autossh web -t 'tmux attach || tmux new')
 }
 
 ssh_mac() {
-  (export TERM=screen-256color-bce && export AUTOSSH_PORT=0 && autossh macthing -t '/usr/local/bin/tmux attach || /usr/local/bin/tmux new')
+  (export TERM=screen-256color-bce && export AUTOSSH_PORT=0 && autossh mac -t '/usr/local/bin/tmux attach || /usr/local/bin/tmux new')
 }
 
 mountpub() {
@@ -71,5 +109,20 @@ tarlm() {
 }
 
 hgdiff() {
-  vimdiff -c 'map q :qa!<CR>' <(hg cat "$1") "$1"
+#  vimdiff -c 'map q :qa!<CR>' < (hg cat "$1") "$1"
+  vimdiff -c 'map q :qa!<CR>' < hg cat "$1" "$1"
 }
+
+playtime() {
+  if [ -x /usr/local/bin/soxi ]; then
+    soxi -d $@ 2>&1
+  else
+    echo "soxi is not installed"
+  fi
+}
+
+alias rm='movetrash'
+alias key='man -k'
+alias info='info --vi-keys'
+alias cycapache='/usr/bin/sudo /usr/bin/pkill -SIGQUIT -U www; /bin/sleep 2; /usr/bin/sudo /usr/sbin/apachectl start'
+alias forethought='ssh ari@216.241.32.130'
