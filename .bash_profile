@@ -5,12 +5,12 @@ tmux_self() {
   (export TERM=screen-256color-bce && tmux attach || tmux new)
 }
 
-ll() {
-  ls --color=auto --group-directories-first --sort=extension -FAqlh "$@"
-}
+#ll() {
+#  ls --color=auto --group-directories-first --sort=extension -FAqlh "$@"
+#}
 
 dir() {
-  ls --color=auto --group-directories-first --sort=extension -FAqlh "$@" | less
+  ls --color=always --group-directories-first --sort=extension -FAqlh "$@" | less
 }
 
 clearcache() {
