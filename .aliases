@@ -65,6 +65,10 @@ clearmodps() {
   sudo rm -rf /var/www/mod_pagespeed/cache.old
 }
 
+sssh() {
+  (export TERM=screen-256color-bce && export AUTOSSH_PORT=0 && autossh "$@" -t 'tmux attach || tmux new')
+}
+
 ssh_cor() {
   (export AUTOSSH_PORT=0 && autossh cor -t 'tmux attach || tmux new')
 }
