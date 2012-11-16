@@ -81,8 +81,8 @@ else
 endif
 
 "colo koehler
-"colo vividchalk
-colo Tomorrow-Night-Eighties
+colo vividchalk
+"colo Tomorrow-Night-Eighties
 syntax on
 
 set guioptions=aegimrLt
