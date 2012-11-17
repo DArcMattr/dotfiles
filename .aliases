@@ -2,7 +2,7 @@
 # vim:ft=sh:
 # called by .bashrc and .profile
 
-alias ll='~/dotfiles/l -A --color=always'
+alias ll='~/dotfiles/l -A --color=always --group-directories-first'
 
 movetrash() {
   if [ -d ~/.trash ]; then
@@ -19,22 +19,14 @@ manpath() {
   echo $MANPATH | tr ':' '\n'
 }
 
-tmux_self() {
-  (export TERM=screen-256color-bce && tmux attach || tmux new)
-}
-
-#ll() {
-#  ls --color=auto --group-directories-first --sort=extension -FAqlh "$@"
-#}
-
 dir() {
-#  ls --color=always --group-directories-first --sort=extension -FAqlh "$@" | less
   {
-    ll "$@" | egrep "^d" \
-  &&
-    ll "$@" | egrep -v "^d|total" \
-  &&
-    ll "$@" | egrep "total"
+#    ll "$@" | egrep "^d" \
+#  &&
+#    ll "$@" | egrep -v "^d|^total" \
+#  &&
+#    ll "$@" | egrep "^total"
+    ll "$@"
   } | $PAGER
 }
 
@@ -62,7 +54,7 @@ clearmodps() {
 }
 
 sssh() {
-  (export TERM=screen-256color-bce && export AUTOSSH_PORT=0 && autossh "$@" -t 'tmux attach || tmux new')
+  (export AUTOSSH_PORT=0 && autossh "$@" -t 'tmux -2 attach || tmux -2 new')
 }
 
 ssh_cor() {
