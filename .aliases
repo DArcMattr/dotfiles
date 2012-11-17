@@ -1,12 +1,8 @@
 # .aliases
 # vim:ft=sh:
-# called by .bashrc
+# called by .bashrc and .profile
 
-if [ -x /usr/local/bin/colorls ]; then
-  alias ls='/usr/local/bin/colorls'
-fi
-
-alias ll='ls -AalFh'
+alias ll='~/dotfiles/l -A --color=always'
 
 movetrash() {
   if [ -d ~/.trash ]; then
