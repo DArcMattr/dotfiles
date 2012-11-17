@@ -145,7 +145,7 @@ $ls -lrtq $color_opt$color_when $ng $gdf "$@" |
 # process with sed to...
 sed "
   # Remove total line(s) I never use
-  /$total [0-9,. ]\{1,\}$/d
+  #/$total [0-9,. ]\{1,\}$/d
 
   # prettify symlink arrows
   s/ -> / $BLD$SYM_ARROW$RST /
