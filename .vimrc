@@ -14,9 +14,9 @@ Bundle 'tpope/vim-markdown'
 Bundle 'ludovicPelle/vim-xdebug'
 Bundle 'vim-scripts/vcscommand.vim'
 Bundle 'othree/html5-syntax.vim'
-Bundle "http://github.com/rstacruz/sparkup.git", {'rtp': 'vim'}
 Bundle 'tpope/vim-vividchalk'
 Bundle 'jasonkuhrt/Tomorrow-Theme'
+Bundle 'mattn/zencoding-vim'
 
 filetype plugin indent on " also required by vundle
 
