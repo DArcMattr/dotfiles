@@ -156,6 +156,9 @@ autocmd FileType hgcommit set textwidth=72
 " PostgreSQL
 autocmd BufNewFile,BufRead *.psql setf psql
 
+" Apache
+autocmd BufNewFile,BufRead *.conf setf apache
+
 autocmd BufRead *.aspx set filetype=html
 if has("autocmd") && exists("+omnifunc")
   autocmd Filetype *
