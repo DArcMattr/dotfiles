@@ -60,7 +60,11 @@ else
   color_when=auto
 fi
 
-ls=ls #default to standard name
+if [ -x /usr/local/bin/gls ]; then
+  ls=/usr/local/bin/gls
+else
+  ls=ls #default to standard name
+fi
 
 $ls --color -d . >/dev/null 2>&1 || BSD=1
 
