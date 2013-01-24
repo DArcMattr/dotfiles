@@ -1,0 +1,26 @@
+!
+! This is an `xmodmap' input file for
+!   PC 101 key, thin Delete, tall Enter (XFree86; US) keyboards.
+! Automatically generated on Thu Jan 17 06:15:49 2013 by darc with
+! XKeyCaps 2.46; Copyright (c) 1999 Jamie Zawinski <jwz@jwz.org>.
+! http://www.jwz.org/xkeycaps/
+!
+! This file presupposes that the keyboard is in the default state, and
+! may malfunction if it is not.
+!
+remove Lock    = Caps_Lock
+remove Control = Control_L Control_R
+remove Mod1    = Alt_R
+remove Mod5    = Scroll_Lock
+
+keycode 0x09 =	Caps_Lock	NoSymbol	Caps_Lock
+keycode 0x69 =	Control_R	NoSymbol	Control_R
+keycode 0x42 =	Control_L	NoSymbol	Control_L
+keycode 0x6C =	Alt_R	Meta_R	Alt_R	Meta_R
+keycode 0x25 =	Escape	NoSymbol	Escape
+
+add    Lock    = Caps_Lock
+add    Control = Control_L Control_R
+add    Mod1    = Alt_R 0x00CD
+add    Mod4    = Super_L Super_R 0x00CE 0x00CF
+add    Mod5    = ISO_Level3_Shift Mode_switch

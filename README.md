@@ -12,6 +12,7 @@ Copy/paste the folliwing onto the command line:
     ln -s ~/dotfiles/.hgrc ~/.hgrc
     ln -s ~/dotfiles/.gitconfig ~/.gitconfig
     ln -s ~/dotfiles/tmux.conf ~/tmux.conf
+    ln -s ~/dotfiles/.xmodmap ~/.xmodmap
     git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
     vim +BundleInstall +qall
 
@@ -21,3 +22,4 @@ Open up `vim`, and run `:BundleInstall`
 
 1. copy/paste sections so I can drop and go on a new machine
 2. generalize more setup files
+3. xkeycaps usage instructions, .xmodmap is a product of the utility
