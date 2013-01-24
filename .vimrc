@@ -10,13 +10,14 @@ Bundle 'gmarik/vundle'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-markdown'
-"Bundle 'thinca/vim-localrc'
 Bundle 'ludovicPelle/vim-xdebug'
 Bundle 'vim-scripts/vcscommand.vim'
 Bundle 'othree/html5-syntax.vim'
 Bundle 'tpope/vim-vividchalk'
 Bundle 'jasonkuhrt/Tomorrow-Theme'
 Bundle 'mattn/zencoding-vim'
+Bundle 'krisajenkins/vim-postgresql-syntax'
+Bundle 'krisajenkins/vim-pipe'
 
 filetype plugin indent on " also required by vundle
 
@@ -52,7 +53,7 @@ if has('statusline')
 endif
 
 if has("X11")
-  set guifont=Consolas\ 11
+  set guifont=DejaVu\ Sans\ Mono\ 10
   set lines=999 columns=999
 endif
 
@@ -154,7 +155,9 @@ autocmd BufRead,BufNewFile /tmp/hgeditor*/msg setf hgcommit
 autocmd FileType hgcommit set textwidth=72
 
 " PostgreSQL
-autocmd BufNewFile,BufRead *.psql setf psql
+autocmd BufNewFile,BufRead *.psql setf postgresql
+autocmd FileType postgresql :let b:vimpipe_command="psql mydatabase"
+autocmd FileType postgresql :let b:vimpipe_filetype="postgresql"
 
 " Apache
 autocmd BufNewFile,BufRead *.conf setf apache
