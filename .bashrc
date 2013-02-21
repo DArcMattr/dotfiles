@@ -23,8 +23,9 @@ declare -x EDITOR='vim'
 declare -x VISUAL="${EDITOR}"
 declare -x LESS="-EXMRQ"
 declare -x CVSROOT="darceneaux@demo.aynrand.org:/var/www/cvs"
-declare -x WEB_ENVIRONMENT='test'
+#declare -x WEB_ENVIRONMENT='test'
 declare -x MANWIDTH=72
+
 declare -x HGEDITOR=~/dotfiles/hgeditor
 
 ##############################

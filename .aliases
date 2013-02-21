@@ -2,9 +2,8 @@
 # vim:ft=sh:
 # called by .bashrc and .profile
 
-#alias ll='~/dotfiles/l -A --color=always --group-directories-first'
-alias ll='~/dotfiles/l --color=always --group-directories-first'
-alias l='~/dotfiles/l'
+alias ll='~/dotfiles/l -AF --color=always --group-directories-first'
+alias l='~/dotfiles/l -AF'
 
 movetrash() {
   if [ -d ~/.trash ]; then
@@ -34,25 +33,28 @@ dir() {
 
 clearcache() {
   if [ -d /tmp/cache ]; then
-    rm -f /tmp/cache/{0,1,2,3}*.cache
-    rm -f /tmp/cache/{4,5,6,7}*.cache
-    rm -f /tmp/cache/{8,9,a,b}*.cache
-    rm -f /tmp/cache/{c,d,e,f}*.cache
+    /bin/rm -f /tmp/cache/{0,1,2,3}*.cache
+    /bin/rm -f /tmp/cache/{4,5,6,7}*.cache
+    /bin/rm -f /tmp/cache/{8,9,a,b}*.cache
+    /bin/rm -f /tmp/cache/{c,d,e,f}*.cache
   elif [ -d /var/www/tmp/cache ]; then
-    rm -f /var/www/tmp/cache/{0,1,2,3}*.cache
-    rm -f /var/www/tmp/cache/{4,5,6,7}*.cache
-    rm -f /var/www/tmp/cache/{8,9,a,b}*.cache
-    rm -f /var/www/tmp/cache/{c,d,e,f}*.cache
+    /bin/rm -f /var/www/tmp/cache/{0,1,2,3}*.cache
+    /bin/rm -f /var/www/tmp/cache/{4,5,6,7}*.cache
+    /bin/rm -f /var/www/tmp/cache/{8,9,a,b}*.cache
+    /bin/rm -f /var/www/tmp/cache/{c,d,e,f}*.cache
   else
     echo "no cache directories exist"
   fi
 }
 
 clearmodps() {
-  sudo /sbin/apachectl stop
-  sudo mv /var/www/mod_pagespeed/cache /var/www/mod_pagespeed/cache.old
-  sudo /sbin/apachectl start
-  sudo rm -rf /var/www/mod_pagespeed/cache.old
+  sudo /usr/sbin/apachectl stop
+  sudo mv /var/cache/mod_pagespeed /var/cache/mod_pagespeed.old
+  sleep 1
+  sudo mkdir -p /var/cache/mod_pagespeed
+  sudo chown apache:apache /var/cache/mod_pagespeed
+  sudo /usr/sbin/apachectl start
+  sudo /bin/rm -rf /var/cache/mod_pagespeed.old
 }
 
 sssh() {
@@ -100,3 +102,4 @@ alias key='man -k'
 alias info='info --vi-keys'
 alias cycapache='/usr/bin/sudo /usr/bin/pkill -SIGQUIT -U www; /bin/sleep 2; /usr/bin/sudo /usr/sbin/apachectl start'
 alias forethought='ssh ari@216.241.32.130'
+
