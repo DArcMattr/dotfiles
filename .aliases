@@ -2,7 +2,9 @@
 # vim:ft=sh:
 # called by .bashrc and .profile
 
-alias ll='~/dotfiles/l -A --color=always --group-directories-first'
+#alias ll='~/dotfiles/l -A --color=always --group-directories-first'
+alias ll='~/dotfiles/l --color=always --group-directories-first'
+alias l='~/dotfiles/l'
 
 movetrash() {
   if [ -d ~/.trash ]; then
@@ -55,26 +57,6 @@ clearmodps() {
 
 sssh() {
   (export AUTOSSH_PORT=0 && autossh "$@" -t 'tmux -2 attach || tmux -2 new')
-}
-
-ssh_cor() {
-  (export AUTOSSH_PORT=0 && autossh cor -t 'tmux attach || tmux new')
-}
-
-ssh_demo() {
-  (export TERM=screen-256color-bce && export AUTOSSH_PORT=0 && autossh demo -t 'tmux attach || tmux new')
-}
-
-ssh_mc() {
-  (export TERM=screen-256color-bce && export AUTOSSH_PORT=0 && autossh mc -t 'tmux attach || tmux new')
-}
-
-ssh_newdemo() {
-  (export TERM=screen-256color-bce && export AUTOSSH_PORT=0 && autossh web -t 'tmux attach || tmux new')
-}
-
-ssh_mac() {
-  (export TERM=screen-256color-bce && export AUTOSSH_PORT=0 && autossh mac -t '/usr/local/bin/tmux attach || /usr/local/bin/tmux new')
 }
 
 mountpub() {
