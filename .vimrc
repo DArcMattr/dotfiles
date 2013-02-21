@@ -146,6 +146,8 @@ autocmd BufEnter *.lua set autoindent textwidth=80 shiftwidth=4 tabstop=4 softta
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType python set            textwidth=80 shiftwidth=4 tabstop=4 softtabstop=4 smarttab expandtab
 autocmd BufEnter *.py   set autoindent textwidth=80 shiftwidth=4 tabstop=4 softtabstop=4 smarttab expandtab formatoptions=croql
+autocmd FileType python :let b:vimpipe_command="python"
+autocmd FileType python :let b:vimpipe_filetype="python"
 
 autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8 softtabstop=8
 let c_space_errors=1
