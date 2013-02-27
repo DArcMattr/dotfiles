@@ -17,7 +17,10 @@ umask 002
 #newgrp apache
 
 declare -x CVS_RSH='ssh'
+declare -x CLICOLOR=YES
+declare -x CLICOLOR_FORCE=YES
 declare -x LS_COLORS='no=01;37:fi=01;37:di=01;34:ln=01;36:pi=01;32:so=01;35:do=01;35:bd=01;33:cd=01;33:ex=01;31:mi=00;05;37:or=00;05;37:'
+declare -x LSCOLORS='ExFxCxDxBxEgEdAbAgAcAd'
 declare -x PAGER='less'
 declare -x EDITOR='vim'
 declare -x VISUAL="${EDITOR}"
