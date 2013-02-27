@@ -2,14 +2,18 @@
 # vim:ft=sh:
 # called by .bashrc and .profile
 
-alias ll='~/dotfiles/l -AF --color=always --group-directories-first'
+if [ -x /usr/local/bin/colorls ]; then
+  alias ls='/usr/local/bin/colorls'
+fi
+
+alias ll='ls -AalFh'
 alias l='~/dotfiles/l -AF'
 
 movetrash() {
-  if [ -d ~/.trash ]; then
-    mkdir ~/.trash
+  if [ ! -d ~/.Trash ]; then
+    mkdir ~/.Trash
   fi
-  mv "$*" ~/.trash;
+  mv "$*" ~/.Trash;
 }
 
 path() {
@@ -22,12 +26,11 @@ manpath() {
 
 dir() {
   {
-#    ll "$@" | egrep "^d" \
-#  &&
-#    ll "$@" | egrep -v "^d|^total" \
-#  &&
-#    ll "$@" | egrep "^total"
-    ll "$@"
+    ll "$@" | egrep "^d" \
+  &&
+    ll "$@" | egrep -v "^d|^total" \
+  &&
+    ll "$@" | egrep "^total"
   } | $PAGER
 }
 
