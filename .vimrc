@@ -52,13 +52,14 @@ else
   set directory=/tmp
 endif
 
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-
 "colo koehler
 colo vividchalk
 "colo Tomorrow-Night-Eighties
 syntax on
 
+set runtimepath+=~/.vim/bundle/powerline/powerline/bindings/vim
+set list
+set listchars=tab:▸\ ,eol:¬
 set guioptions=aegimrLt
 set ruler
 set shiftwidth=2
@@ -87,6 +88,8 @@ set backspace=indent,eol,start
 set shortmess=atIA
 set scrolloff=3
 set t_Co=256
+set cursorline
+set cursorcolumn
 
 " key remappings - toggle spell checking
 map <F7> :setlocal spell! spelllang=en_us<cr>
@@ -110,18 +113,22 @@ let mapleader = ","
 
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
+" Perl
 autocmd BufNewFile,BufRead *.pl,*.pm set makeprg=perl
 autocmd BufNewFile,BufRead *.pl,*.pm compiler perl
 
+" Lua
 autocmd FileType lua   set            textwidth=80 shiftwidth=4 tabstop=4 softtabstop=4 smarttab noexpandtab
 autocmd BufEnter *.lua set autoindent textwidth=80 shiftwidth=4 tabstop=4 softtabstop=4 smarttab noexpandtab formatoptions=croql
 
+" Python
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType python set            textwidth=80 shiftwidth=4 tabstop=4 softtabstop=4 smarttab expandtab
 autocmd BufEnter *.py   set autoindent textwidth=80 shiftwidth=4 tabstop=4 softtabstop=4 smarttab expandtab formatoptions=croql
 autocmd FileType python :let b:vimpipe_command="python"
 autocmd FileType python :let b:vimpipe_filetype="python"
 
+" C
 autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8 softtabstop=8
 let c_space_errors=1
 
