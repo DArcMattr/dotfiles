@@ -23,16 +23,10 @@ Bundle 'jeffkreeftmeijer/vim-numbertoggle'
 
 filetype plugin indent on " also required by vundle
 
-if has("X11")
-  set guifont=DejaVu\ Sans\ Mono\ 10
-  set lines=999 columns=999
-endif
-
 if has("win32")
-  if has("gui")
+  if has("gui_running")
     set guifont=consolas:h12
-    " start out maximized, otherwise, fit to the term
-    autocmd GUIEnter * simalt ~x
+    autocmd GUIEnter * simalt ~x " start out maximized, otherwise, fit to the term
   endif
   " In order: increment a number, decrement a number, enter an extended
   " character
@@ -48,6 +42,10 @@ if has("win32")
   set backupdir=C:\Windows\Temp
   set directory=C:\Windows\Temp
 else
+  if has("gui_running")
+    set guifont=DejaVu\ Sans\ Mono\ 10
+    set lines=999 columns=999
+  endif
   set backupdir=/tmp
   set directory=/tmp
 endif
@@ -59,7 +57,6 @@ syntax on
 
 set runtimepath+=~/.vim/bundle/powerline/powerline/bindings/vim
 set list
-set listchars=tab:▸\ ,eol:¬
 set guioptions=aegimrLt
 set ruler
 set shiftwidth=2
@@ -151,3 +148,4 @@ if has("autocmd") && exists("+omnifunc")
     \    setlocal omnifunc=syntaxcomplete#Complete |
     \  endif
 endif
+
