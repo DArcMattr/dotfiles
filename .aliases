@@ -2,8 +2,16 @@
 # vim:ft=sh:
 # called by .bashrc and .profile
 
-if [ -x /usr/local/bin/colorls ]; then
-  alias ls='/usr/local/bin/colorls'
+if [ ls --color -d . >/dev/null 2>&1 ]; then
+  alias ls='/bin/ls --color=always'
+elif ls -G -d . >/dev/null 2>&1; then
+  if [ -x /usr/local/bin/colorls ]; then
+    alias ls='/usr/local/bin/colorls'
+  else
+    alias ls='/bin/ls'
+  fi
+else # Solaris or other *NIX
+  alias ls='/bin/ls'
 fi
 
 alias ll='ls -AalFh'
@@ -13,7 +21,7 @@ movetrash() {
   if [ ! -d ~/.Trash ]; then
     mkdir ~/.Trash
   fi
-  mv "$*" ~/.Trash;
+  mv "$*" ~/.Trash
 }
 
 path() {
