@@ -29,9 +29,10 @@ export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sb
 export PS1='\n[\e[41;33m\t\e[0m]\n${PWD}\n\$ '
 export CLICOLOR=YES
 export CLICOLOR_FORCE=YES
-
+export LC_CTYPE=en_US.UTF-8
 export HGEDITOR=~/dotfiles/hgeditor
 export LESS="-EXMRQc"
+export LESSCHARSET=utf-8
 export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
 export CVSROOT=/var/www/cvs
 
