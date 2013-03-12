@@ -100,10 +100,14 @@ hgdiff() {
 
 playtime() {
   if [ -x /usr/local/bin/soxi ]; then
-    soxi -d $@ 2>&1
+    soxi -d "$@" 2>&1
   else
     echo "soxi is not installed"
   fi
+}
+
+dosass() {
+  sass --scss --compass -lC "$@" > $(basename -s .scss "$@").css
 }
 
 alias rm='movetrash'
@@ -111,4 +115,3 @@ alias key='man -k'
 alias info='info --vi-keys'
 alias cycapache='/usr/bin/sudo /usr/bin/pkill -SIGQUIT -U www; /bin/sleep 2; /usr/bin/sudo /usr/sbin/apachectl start'
 alias forethought='ssh ari@216.241.32.130'
-
