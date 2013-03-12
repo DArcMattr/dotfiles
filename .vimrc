@@ -41,7 +41,8 @@ if has("win32")
 
   set backupdir=C:\Windows\Temp
   set directory=C:\Windows\Temp
-else
+else " might could maybe be *nix
+  set shellcmdflag=-ic
   if has("gui_running")
     set guifont=DejaVu\ Sans\ Mono\ 10
     set lines=999 columns=999
