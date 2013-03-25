@@ -35,7 +35,7 @@ if has("win32")
 
   set pheader=%<%f%h%m\ %40{strftime(\"%c\",getftime(expand(\"%%\")))}%=Page\ %N
   set printoptions=formfeed:y,paper:letter,portrait:n,number:y,left:5mm,right:5mm,top:10mm,bottom:5mm,syntax:y
-  set printfont=Anonymous:w4h7
+  set printfont=consolas:h7
 
   set backupdir=%TEMP%
   set directory=%TEMP%
@@ -60,6 +60,7 @@ set cursorline
 set diffopt=filler,horizontal
 set encoding=utf-8
 set expandtab
+set fillchars+=stl:\ ,stlnc:\
 set grepprg=grep\ -nH\ $*
 set guioptions=aegimrLt
 set hidden
