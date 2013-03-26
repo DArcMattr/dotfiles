@@ -24,7 +24,7 @@ filetype plugin indent on " also required by vundle
 if has("win32")
   if has("gui_running")
     set guifont=consolas:h12
-    autocmd GUIEnter * simalt ~x " start out maximized, otherwise, fit to the term
+    autocmd GUIEnter * simalt ~x " start out maximized, else, fit to term
   endif
   " In order: increment a number, decrement a number, enter an extended
   " character
@@ -32,31 +32,27 @@ if has("win32")
   noremap <C-kMinus> <C-X>
   noremap <C-K> <C-V>
   set shellslash
-
-  set pheader=%<%f%h%m\ %40{strftime(\"%c\",getftime(expand(\"%%\")))}%=Page\ %N
-  set printoptions=formfeed:y,paper:letter,portrait:n,number:y,left:5mm,right:5mm,top:10mm,bottom:5mm,syntax:y
   set printfont=consolas:h7
 
   set backupdir=%TEMP%
   set directory=%TEMP%
 else " might could maybe be *nix
   set shellcmdflag=-ic
+  set printfont=DejaVu\ Sans\ Mono\ 7
   if has("gui_running")
-    set guifont=DejaVu\ Sans\ Mono\ 10
+    set guifont=DejaVu\ Sans\ Mono\ 12
     set lines=999 columns=999
   endif
+
   set backupdir=/tmp
   set directory=/tmp
 endif
 
-"colo koehler
-colo vividchalk
+colorscheme vividchalk
 syntax on
 
 set autoread
 set backspace=indent,eol,start
-"set cursorcolumn
-"set cursorline
 set diffopt=filler,horizontal
 set encoding=utf-8
 set expandtab
@@ -74,6 +70,10 @@ set matchtime=5
 set nocompatible
 set noshowmode
 set number
+set printheader=%<%f%h%m\ %40
+set printheader=+{strftime(\"%c\"getftime(expand(\"%%\")))}%=Page\ %N
+set printoptions=formfeed:y,paper:letter,portrait:n,number:y,syntax:7
+set printoptions+=left:5mm,right:5mm,top:10mm,bottom:5mm
 set ruler
 set runtimepath+=~/.vim/bundle/powerline/powerline/bindings/vim
 set scrolloff=3
@@ -153,7 +153,8 @@ autocmd FileType python :let b:vimpipe_command="python"
 autocmd FileType python :let b:vimpipe_filetype="python"
 
 " C
-autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8 softtabstop=8
+autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8
+  \ softtabstop=8
 let c_space_errors=1
 
 " hg commit messages
