@@ -41,7 +41,6 @@ else " might could maybe be *nix
   set printfont=DejaVu\ Sans\ Mono\ 7
   if has("gui_running")
     set guifont=DejaVu\ Sans\ Mono\ 12
-    set lines=999 columns=999
   endif
 
   set backupdir=/tmp
@@ -67,6 +66,7 @@ set incsearch
 set laststatus=2
 set list
 set matchtime=5
+set mouse=a
 set nocompatible
 set noshowmode
 set number
