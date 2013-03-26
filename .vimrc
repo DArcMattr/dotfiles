@@ -55,8 +55,8 @@ syntax on
 
 set autoread
 set backspace=indent,eol,start
-set cursorcolumn
-set cursorline
+"set cursorcolumn
+"set cursorline
 set diffopt=filler,horizontal
 set encoding=utf-8
 set expandtab
@@ -119,18 +119,36 @@ let mapleader = ","
 " Trim whitespace from the end of lines
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
+augroup CursorColumn
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
+  au WinLeave * setlocal nocursorcolumn
+augroup END
+
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
+
 " Perl
 autocmd BufNewFile,BufRead *.pl,*.pm set makeprg=perl
 autocmd BufNewFile,BufRead *.pl,*.pm compiler perl
 
 " Lua
-autocmd FileType lua   set            textwidth=80 shiftwidth=4 tabstop=4 softtabstop=4 smarttab noexpandtab
-autocmd BufEnter *.lua set autoindent textwidth=80 shiftwidth=4 tabstop=4 softtabstop=4 smarttab noexpandtab formatoptions=croql
+autocmd FileType lua set textwidth=80 shiftwidth=4 tabstop=4
+  \ softtabstop=4 smarttab noexpandtab colorcolumn=+1
+autocmd BufEnter *.lua set autoindent textwidth=80 shiftwidth=4
+  \ tabstop=4 softtabstop=4 smarttab noexpandtab formatoptions=croql
+  \ colorcolumn=+1
 
 " Python
 autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType python set            textwidth=80 shiftwidth=4 tabstop=4 softtabstop=4 smarttab expandtab
-autocmd BufEnter *.py   set autoindent textwidth=80 shiftwidth=4 tabstop=4 softtabstop=4 smarttab expandtab formatoptions=croql
+autocmd FileType python set textwidth=80 shiftwidth=4 tabstop=4
+  \ softtabstop=4 smarttab expandtab colorcolumn=+1
+autocmd BufEnter *.py set autoindent textwidth=80 shiftwidth=4
+  \ tabstop=4 softtabstop=4 smarttab expandtab formatoptions=croql
+  \ colorcolumn=+1
 autocmd FileType python :let b:vimpipe_command="python"
 autocmd FileType python :let b:vimpipe_filetype="python"
 
@@ -140,7 +158,7 @@ let c_space_errors=1
 
 " hg commit messages
 autocmd BufRead,BufNewFile /tmp/hgeditor*/msg setf hgcommit
-autocmd FileType hgcommit set textwidth=72
+autocmd FileType hgcommit set textwidth=72 colorcolumn=+1
 
 " PostgreSQL
 autocmd BufNewFile,BufRead *.psql setf postgresql
