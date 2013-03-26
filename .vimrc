@@ -20,33 +20,6 @@ Bundle 'tpope/vim-vividchalk'
 Bundle 'tsaleh/vim-matchit'
 
 filetype plugin indent on " also required by vundle
-
-if has("win32")
-  if has("gui_running")
-    set guifont=consolas:h12
-    autocmd GUIEnter * simalt ~x " start out maximized, else, fit to term
-  endif
-  " In order: increment a number, decrement a number, enter an extended
-  " character
-  noremap <C-kPlus> <C-A>
-  noremap <C-kMinus> <C-X>
-  noremap <C-K> <C-V>
-  set shellslash
-  set printfont=consolas:h7
-
-  set backupdir=%TEMP%
-  set directory=%TEMP%
-else " might could maybe be *nix
-  set shellcmdflag=-ic
-  set printfont=DejaVu\ Sans\ Mono\ 7
-  if has("gui_running")
-    set guifont=DejaVu\ Sans\ Mono\ 12
-  endif
-
-  set backupdir=/tmp
-  set directory=/tmp
-endif
-
 colorscheme vividchalk
 syntax on
 
@@ -67,8 +40,10 @@ set laststatus=2
 set list
 set matchtime=5
 set mouse=a
+set nobackup
 set nocompatible
 set noshowmode
+set noswapfile
 set number
 set printheader=%<%f%h%m\ %40
 set printheader=+{strftime(\"%c\"getftime(expand(\"%%\")))}%=Page\ %N
@@ -94,6 +69,25 @@ set wildmode=list:longest
 " Window title
 if has('title')
   set titlestring=%t%(\ [%R%M]%)
+endif
+
+if has("win32")
+  if has("gui_running")
+    set guifont=consolas:h12
+    autocmd GUIEnter * simalt ~x " start out maximized, else, fit to term
+  endif
+  set shellslash
+  set printfont=consolas:h7
+  noremap <C-kPlus> <C-A> " increment a number
+  noremap <C-kMinus> <C-X> " decrement a number
+  noremap <C-K> <C-V> " enter an extended character
+else " might could maybe be *nix
+  if has("gui_running")
+    set guifont=DejaVu\ Sans\ Mono\ 12
+    set fu " qvim specific
+  endif
+  set shellcmdflag=-ic
+  set printfont=DejaVu\ Sans\ Mono\ 7
 endif
 
 " key remappings - toggle spell checking
@@ -158,7 +152,7 @@ autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8
 let c_space_errors=1
 
 " hg commit messages
-autocmd BufRead,BufNewFile /tmp/hgeditor*/msg setf hgcommit
+autocmd BufRead,BufNewFile /tmp/hgeditor/msg setf hgcommit
 autocmd FileType hgcommit set textwidth=72 colorcolumn=+1
 
 " PostgreSQL
