@@ -22,8 +22,8 @@ log=glog
 ignore= version, help, update, serve, record
 
 [merge-tools]
-vimdiff.executable = vim
-vimdiff.args = -d $base $local $output $other +close +close
+vimdiff.executable = vimdiff
+#vimdiff.args = -d $base $local $output $other +close +close
 
 [hooks]
 #tag = hg push
