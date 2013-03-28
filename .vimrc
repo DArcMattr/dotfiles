@@ -4,15 +4,16 @@ let $GIT_SSL_NO_VERIFY = 'true'
 set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
 Bundle 'Lokaltog/powerline'
+Bundle 'gmarik/vundle'
+Bundle 'hail2u/vim-css3-syntax'
 Bundle 'jeffkreeftmeijer/vim-numbertoggle'
 Bundle 'krisajenkins/vim-pipe'
 Bundle 'krisajenkins/vim-postgresql-syntax'
 Bundle 'ludovicPelle/vim-xdebug'
-Bundle 'mattn/zencoding-vim'
 Bundle 'othree/html5-syntax.vim'
 Bundle 'phleet/vim-mercenary'
+Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-surround'
@@ -30,7 +31,6 @@ set encoding=utf-8
 set expandtab
 set fillchars+=stl:\ ,stlnc:\
 set grepprg=grep\ -nH\ $*
-set guioptions=aegimrLt
 set hidden
 set history=1000
 set hlsearch
@@ -62,6 +62,7 @@ set softtabstop=2
 set t_Co=256
 set tabstop=2
 set title
+set virtualedit=all
 set visualbell
 set wildmenu
 set wildmode=list:longest
@@ -84,18 +85,27 @@ if has("win32")
 else " might could maybe be *nix
   if has("gui_running")
     set guifont=DejaVu\ Sans\ Mono\ 12
-    set fu " qvim specific
+    set guioptions=aegiMprLtT
+    if ! has("X11")
+      set fu " qvim specific
+    endif
   endif
   set shellcmdflag=-ic
   set printfont=DejaVu\ Sans\ Mono\ 7
 endif
 
+if ! has('gui_running')
+  set ttimeoutlen=10
+  augroup FastEscape
+    autocmd!
+    au InsertEnter * set timeoutlen=0
+    au InsertLeave * set timeoutlen=1000
+  augroup END
+endif
+
 " key remappings - toggle spell checking
 map <F7> :setlocal spell! spelllang=en_us<cr>
 imap <F7> <C-o>:setlocal spell! spelllang=en_us<cr>
-
-" almost removes an HTML tag pair
-" map <C-F8> vat<Esc>`<df>`>F<df>
 
 map <C-Tab> gt
 map <C-S-Tab> gT
@@ -105,8 +115,13 @@ nmap k gk
 
 nnoremap ' `
 nnoremap ` '
-nnoremap <C-e> 3<C-e>
+"nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
+" make regex more sane
+nnoremap / /\v
+vnoremap / /\v
+
+cmap w!! w !sudo tee % >/dev/null
 
 let mapleader = ","
 
@@ -153,7 +168,8 @@ let c_space_errors=1
 
 " hg commit messages
 autocmd BufRead,BufNewFile /tmp/hgeditor/msg setf hgcommit
-autocmd FileType hgcommit set textwidth=72 colorcolumn=+1
+autocmd FileType hgcommit set textwidth=72
+  \ let &colorcolumn=join(range(73,999),",")
 
 " PostgreSQL
 autocmd BufNewFile,BufRead *.psql setf postgresql
