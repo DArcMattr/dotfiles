@@ -71,7 +71,7 @@ clearmodps() {
 }
 
 sssh() {
-  (export AUTOSSH_PORT=0 && autossh "$@" -t 'tmux -2 attach || tmux -2 new')
+  (export AUTOSSH_PORT=0 && autossh "$@" -t 'tmux -2 attach || tmux -2 new') 2>/dev/null
 }
 
 mountpub() {
@@ -83,7 +83,8 @@ mountfr() {
 }
 
 mountvbox() {
-  ssh -fNg -L 3306:127.0.0.1:3306 vbox
+  ssh -fNg -L 3306:127.0.0.1:3306 vbox # mysql tunnel
+  ssh -fNg -L 5432:127.0.0.1:5432 vbox # postgres tunnel
   sshfs -C -o idmap=user,nonempty,transform_symlinks,allow_other,BatchMode=yes vbox:/var/www /var/www
 }
 
