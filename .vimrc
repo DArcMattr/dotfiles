@@ -38,19 +38,18 @@ set ignorecase
 set incsearch
 set laststatus=2
 set list
+set listchars=tab:→\ ,nbsp:·
 set matchtime=5
 set mouse=a
 set nobackup
 set nocompatible
 set noshowmode
 set noswapfile
-set number
 set printheader=%<%f%h%m\ %40
 set printheader=+{strftime(\"%c\"getftime(expand(\"%%\")))}%=Page\ %N
 set printoptions=formfeed:y,paper:letter,portrait:n,number:y,syntax:7
 set printoptions+=left:5mm,right:5mm,top:10mm,bottom:5mm
 set ruler
-set runtimepath+=~/.vim/bundle/powerline/powerline/bindings/vim
 set scrolloff=3
 set shiftwidth=2
 set shortmess=atIA
@@ -61,7 +60,6 @@ set smartindent
 set softtabstop=2
 set t_Co=256
 set tabstop=2
-set title
 set virtualedit=all
 set visualbell
 set wildmenu
@@ -69,6 +67,7 @@ set wildmode=list:longest
 
 " Window title
 if has('title')
+  set title
   set titlestring=%t%(\ [%R%M]%)
 endif
 
@@ -84,14 +83,25 @@ if has("win32")
   noremap <C-K> <C-V> " enter an extended character
 else " might could maybe be *nix
   if has("gui_running")
-    set guifont=DejaVu\ Sans\ Mono\ 12
-    set guioptions=aegiMprLtT
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
     if ! has("X11")
       set fu " qvim specific
+      set guioptions=-Mt
+    else
+      set guioptions=aegiMprLtT
     endif
+  else
+    " powerline is b0rking graphical vim
   endif
-  set shellcmdflag=-ic
   set printfont=DejaVu\ Sans\ Mono\ 7
+  let $BASH_ENV = '~/.bashrc' " what to do for ksh/zsh?
+  set shellcmdflag=-O\ expand_aliases\ -c
+endif
+
+if has('python')
+  set runtimepath+=~/.vim/bundle/powerline/powerline/bindings/vim
+else
+  set statusline=[%n]\ %<%.99f\ %h%w%m%r%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%y%=%-16(\ %l,%c-%v\ %)%P
 endif
 
 if ! has('gui_running')
@@ -112,6 +122,7 @@ map <C-S-Tab> gT
 
 nmap j gj
 nmap k gk
+nmap . .`[
 
 nnoremap ' `
 nnoremap ` '
