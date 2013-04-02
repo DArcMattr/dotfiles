@@ -1,12 +1,14 @@
 # .bashrc
 
 # Source global definitions
-if [ -f /etc/bashrc ]; then
+if [[ -f /etc/bashrc ]]; then
 	. /etc/bashrc
 fi
 
-if [ -f ~/dotfiles/.aliases ]; then
-	. ~/dotfiles/.aliases
+if [[ $- = *i* ]] || [[ ! -z "$VIM" ]]; then
+  if [[ -f ~/dotfiles/.aliases ]]; then
+    . ~/dotfiles/.aliases
+  fi
 fi
 
 # Settings
