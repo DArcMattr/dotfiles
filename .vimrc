@@ -26,7 +26,7 @@ syntax on
 
 set autoread
 set backspace=indent,eol,start
-set diffopt=filler,horizontal
+set diffopt=filler,vertical
 set encoding=utf-8
 set expandtab
 set fillchars+=stl:\ ,stlnc:\
@@ -38,7 +38,7 @@ set ignorecase
 set incsearch
 set laststatus=2
 set list
-set listchars=tab:→\ ,nbsp:·
+set listchars=tab:→\ ,nbsp:·,eol:¬
 set matchtime=5
 set mouse=a
 set nobackup
@@ -99,7 +99,11 @@ else " might could maybe be *nix
 endif
 
 if has('python')
-  set runtimepath+=~/.vim/bundle/powerline/powerline/bindings/vim
+  if has('gui_running')
+    set statusline=[%n]\ %<%.99f\ %h%w%m%r%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%y%=%-16(\ %l,%c-%v\ %)%P
+  else
+    set runtimepath+=~/.vim/bundle/powerline/powerline/bindings/vim
+  endif
 else
   set statusline=[%n]\ %<%.99f\ %h%w%m%r%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%y%=%-16(\ %l,%c-%v\ %)%P
 endif
@@ -122,7 +126,7 @@ map <C-S-Tab> gT
 
 nmap j gj
 nmap k gk
-nmap . .`[
+nmap . .'[
 
 nnoremap ' `
 nnoremap ` '
@@ -138,6 +142,18 @@ let mapleader = ","
 
 " Trim whitespace from the end of lines
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+
+" update diffs aggressively
+" @link https://groups.google.com/forum/?fromgroups=#!topic/vim_use/ZNZcBAABDgE
+augroup AutoDiffUpdate
+  au!
+  autocmd InsertLeave * if &diff | diffupdate | let b:old_changedtick = b:changedtick | endif
+  autocmd CursorHold *
+        \ if &diff &&
+        \    (!exists('b:old_changedtick') || b:old_changedtick != b:changedtick) |
+        \   let b:old_changedtick = b:changedtick | diffupdate |
+        \ endif
+augroup END
 
 augroup CursorColumn
   au!
