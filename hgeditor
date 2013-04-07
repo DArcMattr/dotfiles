@@ -1,22 +1,8 @@
 #!/bin/sh
 #
+# @link https://github.com/sgraham/sgraham/blob/master/hgeditor
 # This is an example of using HGEDITOR to create of diff to review the
 # changes while commiting.
-
-# If you want to pass your favourite editor some other parameters
-# only for Mercurial, modify this:
-case "${EDITOR}" in
-    "")
-        EDITOR="vi"
-        ;;
-    emacs)
-        EDITOR="$EDITOR -nw"
-        ;;
-    gvim|vim)
-        EDITOR="$EDITOR -f -o"
-        ;;
-esac
-
 
 HGTMP=""
 cleanup_exit() {
@@ -25,12 +11,12 @@ cleanup_exit() {
 
 # Remove temporary files even if we get interrupted
 trap "cleanup_exit" 0 # normal exit
-trap "exit 255" HUP INT QUIT ABRT TERM
+trap "exit 255" 1 2 3 6 15 # HUP INT QUIT ABRT TERM
 
-HGTMP=$(mktemp -d ${TMPDIR-/tmp}/hgeditor.XXXXXX)
-[ x$HGTMP != x -a -d $HGTMP ] || {
-  echo "Could not create temporary directory! Exiting." 1>&2
-  exit 1
+HGTMP="${TMPDIR-/tmp}/hgeditor.$RANDOM.$RANDOM.$RANDOM.$$"
+(umask 077 && mkdir "$HGTMP") || {
+    echo "Could not create temporary directory! Exiting." 1>&2
+    exit 1
 }
 
 (
@@ -45,9 +31,9 @@ MD5=$(which md5sum 2>/dev/null) || \
     MD5=$(which md5 2>/dev/null)
 [ -x "${MD5}" ] && CHECKSUM=`${MD5} "$HGTMP/msg"`
 if [ -s "$HGTMP/diff" ]; then
-    $EDITOR "$HGTMP/msg" "$HGTMP/diff" || exit $?
+    vim "-f" "+split $HGTMP/msg" "$HGTMP/diff" || exit $?
 else
-    $EDITOR "$HGTMP/msg" || exit $?
+    vim "-f" "$HGTMP/msg" || exit $?
 fi
 [ -x "${MD5}" ] && (echo "$CHECKSUM" | ${MD5} -c >/dev/null 2>&1 && exit 13)
 
