@@ -10,9 +10,13 @@
 Copy/paste the folliwing onto the command line:
 
     cd
+    mkdir ~/contrib
+    hg clone http://bitbucket.org/sjl/hg-prompt/ ~/contrib/
     ln -s ~/dotfiles/hgcommit.vim ~/.vim/syntax/hgcommit.vim
+    curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
     rm ~/.vimrc && ln -s ~/dotfiles/.vimrc
     rm ~/.bashrc && ln -s ~/dotfiles/.bashrc
+    rm ~/.zshrc && ln -s ~/dotfiles/.zshrc
     rm ~/.profile && ln -s ~/dotfiles/.profile
     rm ~/.bash_profile && ln -s ~/dotfiles/.bash_profile
     rm ~/.hgrc && ln -s ~/dotfiles/.hgrc
