@@ -13,6 +13,7 @@ record=
 bookmarks=
 hgext.bookmarks=
 eol=
+prompt=~/contrib/hg-prompt/prompt.py
 #hggit=
 
 [alias]
