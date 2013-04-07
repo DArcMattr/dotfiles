@@ -1,14 +1,5 @@
 # $OpenBSD: dot.profile,v 1.4 2005/02/16 06:56:57 matthieu Exp $
 #
-# sh/ksh initialization
-
-if [ -r /etc/ksh.kshrc ]; then
-  . /etc/ksh.kshrc
-fi
-
-if [ -f ~/dotfiles/.aliases ]; then
-  . ~/dotfiles/.aliases
-fi
 
 if [[ $TERM == xterm || $TERM == screen ]]; then
   TERM="xterm-256color";
@@ -24,19 +15,20 @@ else
   EDITOR=/usr/bin/vi
 fi
 
-export HOME TERM EDITOR PAGER
 export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/games:.
-export PS1='\n[\e[41;33m\t\e[0m]\n${PWD}\n\$ '
+#export PS1='\n[\e[41;33m\t\e[0m]\n${PWD}\n\$ '
 export CLICOLOR=YES
 export CLICOLOR_FORCE=YES
 export LC_CTYPE=en_US.UTF-8
 export HGEDITOR=~/dotfiles/hgeditor
-export LESS="-EXMRQc"
+export PAGER=less
+export LESS="-EFXMRQcs~"
 export LESSCHARSET=utf-8
 export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
 export CVSROOT=/var/www/cvs
+export HOME TERM EDITOR PAGER
 
-if [ `uname` == OpenBSD ]; then
+if [[ -f /usr/bin/uname && `/usr/bin/uname` == OpenBSD ]]; then
   export PKG_PATH=http://ftp5.usa.openbsd.org/pub/OpenBSD/`uname -r`/packages/`machine -a`/
 fi
 
