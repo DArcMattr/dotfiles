@@ -13,6 +13,7 @@ record=
 bookmarks=
 hgext.bookmarks=
 eol=
+prompt=~/contrib/hg-prompt/prompt.py
 #hggit=
 
 [alias]
@@ -23,7 +24,7 @@ ignore= version, help, update, serve, record
 
 [merge-tools]
 vimdiff.executable = vimdiff
-#vimdiff.args = -d $base $local $output $other +close +close
+vimdiff.args = -d $base $local $output $other +close +close
 
 [hooks]
 #tag = hg push

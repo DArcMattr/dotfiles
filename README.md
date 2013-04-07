@@ -10,6 +10,8 @@
 Copy/paste the folliwing onto the command line:
 
     cd
+    mkdir ~/contrib
+    hg clone http://bitbucket.org/sjl/hg-prompt/ ~/contrib/
     ln -s ~/dotfiles/hgcommit.vim ~/.vim/syntax/hgcommit.vim
     rm ~/.vimrc && ln -s ~/dotfiles/.vimrc
     rm ~/.bashrc && ln -s ~/dotfiles/.bashrc
