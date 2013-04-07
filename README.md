@@ -15,6 +15,7 @@ Copy/paste the folliwing onto the command line:
     ln -s ~/dotfiles/hgcommit.vim ~/.vim/syntax/hgcommit.vim
     rm ~/.vimrc && ln -s ~/dotfiles/.vimrc
     rm ~/.bashrc && ln -s ~/dotfiles/.bashrc
+    rm ~/.zshrc && ln -s ~/dotfiles/.zshrc
     rm ~/.profile && ln -s ~/dotfiles/.profile
     rm ~/.bash_profile && ln -s ~/dotfiles/.bash_profile
     rm ~/.hgrc && ln -s ~/dotfiles/.hgrc
