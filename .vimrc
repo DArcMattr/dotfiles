@@ -94,8 +94,14 @@ else " might could maybe be *nix
     " powerline is b0rking graphical vim
   endif
   set printfont=DejaVu\ Sans\ Mono\ 7
-  let $BASH_ENV = '~/.bashrc' " what to do for ksh/zsh?
-  set shellcmdflag=-O\ expand_aliases\ -c
+  if $SHELL == '/bin/bash' || $SHELL == '/usr/local/bin/bash'
+    let $BASH_ENV = '~/.bashrc' " what to do for ksh/zsh?
+    set shellcmdflag=-O\ expand_aliases\ -c
+  elseif $SHELL == '/bin/ksh'
+    set shellcmdflag=-ic
+  else
+    set shellcmdflag=-c
+  endif
 endif
 
 if has('python')
