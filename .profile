@@ -25,6 +25,7 @@ export PAGER=less
 export LESS="-EFXMRQcs~"
 export LESSCHARSET=utf-8
 export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
+export MANWIDTH=80
 export CVSROOT=/var/www/cvs
 export HOME TERM EDITOR PAGER
 
