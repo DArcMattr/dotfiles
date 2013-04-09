@@ -38,7 +38,6 @@ set ignorecase
 set incsearch
 set laststatus=2
 set list
-set listchars=tab:→\ ,nbsp:·,eol:¬
 set matchtime=5
 set mouse=a
 set nobackup
