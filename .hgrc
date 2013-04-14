@@ -21,6 +21,7 @@ log=glog
 
 [pager]
 ignore= version, help, update, serve, record
+pager = LESS='FRX' less
 
 [merge-tools]
 vimdiff.executable = vimdiff
