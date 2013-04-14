@@ -1,3 +1,6 @@
+set -o vi
+umask 007
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -35,8 +38,8 @@ ZSH_THEME="rkj-repos"
 plugins=(git mercurial vundle vi-mode)
 
 source $ZSH/oh-my-zsh.sh
-source ~/dotfiles/.aliases
 source ~/.profile
+source ~/dotfiles/.aliases
 
 # Customize to your needs...
-export PATH=/usr/lib64/qt-3.3/bin:/usr/lib64/ccache:/home/darc/bin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/games:.:/home/darc/bin:/usr/sbin
+#export PATH=/usr/lib64/qt-3.3/bin:/usr/lib64/ccache:/home/darc/bin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/games:.:/home/darc/bin:/usr/sbin
