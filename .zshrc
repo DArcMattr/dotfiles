@@ -2,13 +2,14 @@ set -o vi
 umask 007
 
 # Path to your oh-my-zsh configuration.
+
 ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="rkj-repos"
+ZSH_THEME="dca"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -35,11 +36,8 @@ ZSH_THEME="rkj-repos"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git mercurial vundle vi-mode)
+plugins=(git mercurial vundle vi-mode tmux pip)
 
 source $ZSH/oh-my-zsh.sh
 source ~/.profile
 source ~/dotfiles/.aliases
-
-# Customize to your needs...
-#export PATH=/usr/lib64/qt-3.3/bin:/usr/lib64/ccache:/home/darc/bin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/games:.:/home/darc/bin:/usr/sbin
