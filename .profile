@@ -14,7 +14,7 @@ else
   export PAGER=less
 fi
 
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/games:.
+export PATH=.:$HOME/bin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/games:$HOME/.rvm/bin
 export CLICOLOR=YES
 export CLICOLOR_FORCE=YES
 export LC_CTYPE=en_US.UTF-8
