@@ -84,7 +84,7 @@ if has("win32")
   noremap <C-kPlus> <C-A> " increment a number
   noremap <C-kMinus> <C-X> " decrement a number
   noremap <C-K> <C-V> " enter an extended character
-else " might could maybe be *nix
+elseif has("unix")
   if has("gui_running")
     set guifont=Meslo\ LG\ S\ 12
     if ! has("X11")
@@ -96,17 +96,15 @@ else " might could maybe be *nix
     endif
   else
   endif
-  set printfont=DejaVu\ Sans\ Mono\ 7
-  if $SHELL == '/bin/bash' || $SHELL == '/usr/local/bin/bash'
-    let $BASH_ENV = '~/.bashrc' " what to do for ksh/zsh?
-    set shellcmdflag=-O\ expand_aliases\ -c
-  elseif $SHELL == '/bin/ksh'
-    set shellcmdflag=-ic
-  elseif $SHELL == '/bin/zsh' || $SHELL == '/usr/local/bin/zsh'
-    set shellcmdflag=-o\ ALIASES\ c
+  set printfont=Meslo\ LG\ S\ 7
+  let s:uname=system("uname")
+  if s:uname=="OpenBSD"
+    set shell=/usr/local/bin/bash
   else
-    set shellcmdflag=-ic
+    set shell=/bin/bash
   endif
+  let $BASH_ENV = '~/.bashrc' " what to do for ksh/zsh?
+  set shellcmdflag=-O\ expand_aliases\ -c
 endif
 
 if has('python')
