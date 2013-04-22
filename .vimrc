@@ -64,6 +64,10 @@ set visualbell
 set wildmenu
 set wildmode=list:longest
 
+highlight LineNr term=reverse
+highlight LineNr cterm=bold ctermfg=white ctermbg=darkblue
+highlight LineNr gui=bold guifg=white guibg=darkblue
+
 " Window title
 if has('title')
   set title
