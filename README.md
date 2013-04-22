@@ -11,7 +11,7 @@ Copy/paste the folliwing onto the command line:
 
     cd
     mkdir ~/contrib
-    hg clone http://bitbucket.org/sjl/hg-prompt/ ~/contrib/
+    hg clone http://bitbucket.org/sjl/hg-prompt/ ~/contrib/hg-prompt/
     ln -s ~/dotfiles/hgcommit.vim ~/.vim/syntax/hgcommit.vim
     curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
     rm ~/.vimrc && ln -s ~/dotfiles/.vimrc
