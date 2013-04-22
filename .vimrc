@@ -82,15 +82,15 @@ if has("win32")
   noremap <C-K> <C-V> " enter an extended character
 else " might could maybe be *nix
   if has("gui_running")
-    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
+    set guifont=Meslo\ LG\ S\ 12
     if ! has("X11")
       set fu " qvim specific
-      set guioptions=-Mt
+      "set guioptions=-Mt
+      set guioptions=aegiMprLtT
     else
       set guioptions=aegiMprLtT
     endif
   else
-    " powerline is b0rking graphical vim
   endif
   set printfont=DejaVu\ Sans\ Mono\ 7
   if $SHELL == '/bin/bash' || $SHELL == '/usr/local/bin/bash'
@@ -98,12 +98,15 @@ else " might could maybe be *nix
     set shellcmdflag=-O\ expand_aliases\ -c
   elseif $SHELL == '/bin/ksh'
     set shellcmdflag=-ic
+  elseif $SHELL == '/bin/zsh' || $SHELL == '/usr/local/bin/zsh'
+    set shellcmdflag=-o\ ALIASES\ c
   else
-    set shellcmdflag=-c
+    set shellcmdflag=-ic
   endif
 endif
 
 if has('python')
+  " powerline is b0rking graphical vim
   if has('gui_running')
     set statusline=[%n]\ %<%.99f\ %h%w%m%r%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%y%=%-16(\ %l,%c-%v\ %)%P
   else
@@ -141,6 +144,7 @@ nnoremap <C-y> 3<C-y>
 nnoremap / /\v
 vnoremap / /\v
 
+"in case of derp-sudo
 cmap w!! w !sudo tee % >/dev/null
 
 let mapleader = ","
