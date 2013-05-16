@@ -182,6 +182,9 @@ augroup END
 autocmd BufNewFile,BufRead *.pl,*.pm set makeprg=perl
 autocmd BufNewFile,BufRead *.pl,*.pm compiler perl
 
+" PHP
+autocmd FileType php set textwidth=80 colorcolumn=+1
+
 " Lua
 autocmd FileType lua set textwidth=80 shiftwidth=4 tabstop=4
   \ softtabstop=4 smarttab noexpandtab colorcolumn=+1
