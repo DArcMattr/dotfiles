@@ -1,7 +1,3 @@
-set -o vi
-set -o nocorrect
-umask 007
-
 # Path to your oh-my-zsh configuration.
 
 export ZSH=$HOME/.oh-my-zsh
@@ -32,7 +28,7 @@ ZSH_THEME="dca"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -42,3 +38,11 @@ plugins=(git mercurial vundle vi-mode tmux pip)
 source $ZSH/oh-my-zsh.sh
 source ~/.profile
 source ~/dotfiles/.aliases
+
+unsetopt correct_all
+unsetopt INC_APPEND_HISTORY
+
+setopt APPEND_HISTORY
+set -o vi
+
+umask 007
