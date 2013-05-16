@@ -11,9 +11,10 @@ Copy/paste the folliwing onto the command line:
 
     cd
     mkdir ~/contrib
-    hg clone http://bitbucket.org/sjl/hg-prompt/ ~/contrib/
+    hg clone http://bitbucket.org/sjl/hg-prompt/ ~/contrib/hg-prompt/
     ln -s ~/dotfiles/hgcommit.vim ~/.vim/syntax/hgcommit.vim
     curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+    cp -s ~/dotfiles/dca.zsh-theme ~/.oh-my-zsh/themes/dca.zsh-theme
     rm ~/.vimrc && ln -s ~/dotfiles/.vimrc
     rm ~/.bashrc && ln -s ~/dotfiles/.bashrc
     rm ~/.zshrc && ln -s ~/dotfiles/.zshrc
