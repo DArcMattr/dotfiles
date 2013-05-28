@@ -11,3 +11,10 @@
 	excludesfile = ~/dotfiles/.gitignore_global
 [push]
 	default = matching
+[alias]
+lol = log --graph --decorate --oneline --all
+ci = commit
+co = checkout
+st = status
+afetch = fetch --all --prune
+br = branch
