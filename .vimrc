@@ -86,7 +86,7 @@ if has("win32")
   noremap <C-K> <C-V> " enter an extended character
 elseif has("unix")
   if has("gui_running")
-    set guifont=Meslo\ LG\ S\ 12
+    set guifont=Meslo\ LG\ M\ 12
     if ! has("X11")
       set fu " qvim specific
       "set guioptions=-Mt
@@ -108,12 +108,7 @@ elseif has("unix")
 endif
 
 if has('python')
-  " powerline is b0rking graphical vim
-  if has('gui_running')
-    set statusline=[%n]\ %<%.99f\ %h%w%m%r%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%y%=%-16(\ %l,%c-%v\ %)%P
-  else
-    set runtimepath+=~/.vim/bundle/powerline/powerline/bindings/vim
-  endif
+  set runtimepath+=~/.vim/bundle/powerline/powerline/bindings/vim
 else
   set statusline=[%n]\ %<%.99f\ %h%w%m%r%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%y%=%-16(\ %l,%c-%v\ %)%P
 endif
