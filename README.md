@@ -25,6 +25,7 @@ Copy/paste the folliwing onto the command line:
     rm ~/.tmux.conf && ln -s ~/dotfiles/.tmux.conf
     rm ~/.Xmodmap && ln -s ~/dotfiles/.Xmodmap
     git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+    git clone git@github.com:dharrigan/giteditor.git ~/contrib/giteditor
     vim -E -c BundleInstall -c BundleClean -c q
 
 ## TODO
