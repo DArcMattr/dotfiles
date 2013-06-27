@@ -14,9 +14,10 @@
 [push]
   default = matching
 [alias]
-lol = log --graph --decorate --oneline --all
-ci = commit
-co = checkout
-st = status
-afetch = fetch --all --prune
-br = branch
+  lol = log --graph --decorate --oneline --all
+  ci = commit
+  co = checkout
+  st = status
+  afetch = fetch --all --prune
+  br = branch
+  diffall = !sh ~/contrib/git-diffall/git-diffall
