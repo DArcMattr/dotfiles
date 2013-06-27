@@ -15,17 +15,20 @@ Copy/paste the folliwing onto the command line:
     ln -s ~/dotfiles/hgcommit.vim ~/.vim/syntax/hgcommit.vim
     curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
     cp -s ~/dotfiles/dca.zsh-theme ~/.oh-my-zsh/themes/dca.zsh-theme
-    rm ~/.vimrc && ln -s ~/dotfiles/.vimrc
-    rm ~/.bashrc && ln -s ~/dotfiles/.bashrc
-    rm ~/.zshrc && ln -s ~/dotfiles/.zshrc
-    rm ~/.profile && ln -s ~/dotfiles/.profile
-    rm ~/.bash_profile && ln -s ~/dotfiles/.bash_profile
-    rm ~/.hgrc && ln -s ~/dotfiles/.hgrc
-    rm ~/.gitconfig && ln -s ~/dotfiles/.gitconfig
-    rm ~/.tmux.conf && ln -s ~/dotfiles/.tmux.conf
-    rm ~/.Xmodmap && ln -s ~/dotfiles/.Xmodmap
+    rm ~/.vimrc ~/.bashrc ~/.zshrc ~/.profile ~/.bash_profile ~/.hgrc \
+      ~/.gitconfig ~/.tmux.conf ~/.Xmodmap
+    ln -s ~/dotfiles/.vimrc
+    ln -s ~/dotfiles/.bashrc
+    ln -s ~/dotfiles/.zshrc
+    ln -s ~/dotfiles/.profile
+    ln -s ~/dotfiles/.bash_profile
+    ln -s ~/dotfiles/.hgrc
+    ln -s ~/dotfiles/.gitconfig
+    ln -s ~/dotfiles/.tmux.conf
+    ln -s ~/dotfiles/.Xmodmap
     git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-    git clone git@github.com:dharrigan/giteditor.git ~/contrib/giteditor
+    git clone https://github.com/thenigan/git-diffall.git ~/contrib/git-diffall
+    git clone https://github.com/dharrigan/giteditor.git ~/contrib/giteditor
     vim -E -c BundleInstall -c BundleClean -c q
 
 ## TODO
@@ -36,6 +39,6 @@ Copy/paste the folliwing onto the command line:
 
 ## Vagrant config for image
 
-vagrant box add FBSD_devel https://s3.amazonaws.com/VagrantBoxen/freebsd_amd64_zfs.box
-vagrant init FBSD_devel
-vagrant up
+    vagrant box add FBSD_devel https://s3.amazonaws.com/VagrantBoxen/freebsd_amd64_zfs.box
+    vagrant init FBSD_devel
+    vagrant up
