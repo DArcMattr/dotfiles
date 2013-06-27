@@ -44,6 +44,7 @@ set nobackup
 set nocompatible
 set noshowmode
 set noswapfile
+set number
 set printheader=%<%f%h%m\ %40
 set printheader=+{strftime(\"%c\"getftime(expand(\"%%\")))}%=Page\ %N
 set printoptions=formfeed:y,paper:letter,portrait:n,number:y,syntax:7
@@ -57,6 +58,8 @@ set showmatch
 set smartcase
 set smartindent
 set softtabstop=2
+set textwidth=80
+set colorcolumn=+1
 set t_Co=256
 set tabstop=2
 set virtualedit=all
