@@ -1,10 +1,11 @@
 [user]
-	name = David Arceneaux
-	email = darceneaux@aynrand.org
+  name = David Arceneaux
+  email = darceneaux@aynrand.org
 [color]
-	ui = true
+  ui = true
 [diff]
   external = ~/dotfiles/git_diff_wrapper
+  tool = vimdiff
 [pager]
   diff =
 [core]
@@ -20,4 +21,7 @@
   st = status
   afetch = fetch --all --prune
   br = branch
-  diffall = !sh ~/contrib/git-diffall/git-diffall
+  diffall = ~/contrib/git-diffall/git-diffall
+  d = difftool
+[difftool]
+  prompt = false
