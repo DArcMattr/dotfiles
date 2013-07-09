@@ -5,6 +5,8 @@ set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'Lokaltog/powerline'
+Bundle 'StanAngeloff/php.vim'
+Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'gmarik/vundle'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'jeffkreeftmeijer/vim-numbertoggle'
@@ -243,6 +245,9 @@ autocmd FileType postgresql :let b:vimpipe_filetype="postgresql"
 
 " Apache
 autocmd BufNewFile,BufRead *.conf setf apache
+
+" SCSS
+autocmd BufRead,BufNewFile *.scss setf scss
 
 autocmd BufRead *.aspx set filetype=html
 if has("autocmd") && exists("+omnifunc")
