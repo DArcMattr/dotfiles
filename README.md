@@ -42,3 +42,9 @@ Copy/paste the folliwing onto the command line:
     vagrant box add FBSD_devel https://s3.amazonaws.com/VagrantBoxen/freebsd_amd64_zfs.box
     vagrant init FBSD_devel
     vagrant up
+
+## `st` notes
+
+Under KDE:
+
+    kstart --maximize --windowclass "st-256color" st -e tmux attach
