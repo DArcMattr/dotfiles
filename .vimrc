@@ -7,9 +7,11 @@ call vundle#rc()
 Bundle 'Lokaltog/powerline'
 Bundle 'StanAngeloff/php.vim'
 Bundle 'cakebaker/scss-syntax.vim'
+Bundle 'embear/vim-localvimrc'
 Bundle 'gmarik/vundle'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'jeffkreeftmeijer/vim-numbertoggle'
+Bundle 'kloppster/Wordpress-Vim-Syntax'
 Bundle 'krisajenkins/vim-pipe'
 Bundle 'krisajenkins/vim-postgresql-syntax'
 Bundle 'ludovicPelle/vim-xdebug'
@@ -40,6 +42,7 @@ set ignorecase
 set incsearch
 set laststatus=2
 set list
+set listchars=eol:¶,tab:»·,trail:·
 set matchtime=5
 set mouse=a
 set nobackup
@@ -150,6 +153,8 @@ vnoremap / /\v
 cmap w!! w !sudo tee % >/dev/null
 
 let mapleader = ","
+let g:localvimrc_whitelist='/var/www/vhosts/wcsf/.*'
+let g:localvimrc_sandbox=0
 
 " @link http://www.codeography.com/2013/06/19/navigating-vim-and-tmux-splits.html
 if exists('$TMUX')
