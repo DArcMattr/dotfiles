@@ -124,16 +124,6 @@ clearcache() {
   fi
 }
 
-clearmodps() {
-  sudo /usr/sbin/apachectl stop
-  sudo mv /var/cache/mod_pagespeed /var/cache/mod_pagespeed.old
-  sleep 1
-  sudo mkdir -p /var/cache/mod_pagespeed
-  sudo chown apache:apache /var/cache/mod_pagespeed
-  sudo /usr/sbin/apachectl start
-  sudo /bin/rm -rf /var/cache/mod_pagespeed.old
-}
-
 sssh() {
   (export AUTOSSH_PORT=0 && autossh "$@" -t 'tmux -2 attach || tmux -2 new') 2>/dev/null
 }
