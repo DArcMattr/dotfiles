@@ -41,9 +41,13 @@ source ~/.profile
 source ~/dotfiles/.aliases
 
 unsetopt correct_all
-unsetopt INC_APPEND_HISTORY
+unsetopt correct
+unsetopt inc_append_history
 
-setopt APPEND_HISTORY
+setopt append_history
+setopt hist_ignore_dups
+setopt auto_cd
+
 set -o vi
 
-umask 007
+umask 002
