@@ -170,5 +170,5 @@ playtime() {
 }
 
 dosass() {
-  sass --scss --compass -lC "$@" > $(basename -s .scss "$@").css
+  sass --scss --compass -lC "$@" > "$(dirname "$@")/$(basename -s .scss "$@").css"
 }
