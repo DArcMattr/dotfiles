@@ -156,6 +156,10 @@ let mapleader = ","
 let g:localvimrc_whitelist='/var/www/vhosts/wcsf/.*'
 let g:localvimrc_sandbox=0
 
+command! -nargs=1 Silent
+  \ | execute ':silent !'.<q-args>
+  \ | execute ':redraw!'
+
 " @link http://www.codeography.com/2013/06/19/navigating-vim-and-tmux-splits.html
 if exists('$TMUX')
   function! TmuxOrSplitSwitch(wincmd, tmuxdir)
