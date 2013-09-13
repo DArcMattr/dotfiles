@@ -18,6 +18,7 @@ Bundle 'ludovicPelle/vim-xdebug'
 Bundle 'othree/html5-syntax.vim'
 Bundle 'phleet/vim-mercenary'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-surround'
