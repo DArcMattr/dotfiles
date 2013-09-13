@@ -5,21 +5,18 @@ set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'Lokaltog/powerline'
-Bundle 'StanAngeloff/php.vim'
-Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'embear/vim-localvimrc'
 Bundle 'gmarik/vundle'
-Bundle 'hail2u/vim-css3-syntax'
 Bundle 'jeffkreeftmeijer/vim-numbertoggle'
 Bundle 'kloppster/Wordpress-Vim-Syntax'
 Bundle 'krisajenkins/vim-pipe'
 Bundle 'krisajenkins/vim-postgresql-syntax'
 Bundle 'ludovicPelle/vim-xdebug'
-Bundle 'othree/html5-syntax.vim'
 Bundle 'phleet/vim-mercenary'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+Bundle 'scrooloose/syntastic'
+Bundle 'sheerun/vim-polyglot'
 Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-vividchalk'
 Bundle 'tsaleh/vim-matchit'
