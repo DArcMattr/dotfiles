@@ -23,5 +23,6 @@
   br = branch
   diffall = ~/contrib/git-diffall/git-diffall
   d = difftool
+  merge-to = "!f() { git checkout $1 && echo git merge $2 && echo git checkout -; }; f"
 [difftool]
   prompt = false
