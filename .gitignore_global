@@ -8,6 +8,7 @@
 *.so
 .sass-cache
 *.pyc
+tags
 
 # Packages #
 ############
