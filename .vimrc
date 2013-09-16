@@ -91,11 +91,11 @@ if has("win32")
   noremap <C-K> <C-V> " enter an extended character
 elseif has("unix")
   if has("gui_running")
-    set guifont=Meslo\ LG\ M\ 12
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
     if ! has("X11")
       set fu " qvim specific
       "set guioptions=-Mt
-      set guioptions=aegiMprLtT
+      "set guioptions=aegiMprLtT
     else
       set guioptions=aegiMprLtT
     endif
