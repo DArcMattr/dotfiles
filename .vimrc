@@ -4,17 +4,26 @@ let $GIT_SSL_NO_VERIFY = 'true'
 set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/powerline'
 Bundle 'embear/vim-localvimrc'
+Bundle 'ervandew/supertab'
 Bundle 'gmarik/vundle'
 Bundle 'jeffkreeftmeijer/vim-numbertoggle'
+Bundle 'joonty/vim-phpqa'
+Bundle 'joonty/vim-phpunitqf'
+Bundle 'joonty/vim-sauce'
+Bundle 'joonty/vim-taggatron'
+Bundle 'joonty/vdebug'
+Bundle 'kien/ctrlp.vim'
 Bundle 'kloppster/Wordpress-Vim-Syntax'
 Bundle 'krisajenkins/vim-pipe'
 Bundle 'krisajenkins/vim-postgresql-syntax'
-Bundle 'ludovicPelle/vim-xdebug'
 Bundle 'phleet/vim-mercenary'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
+Bundle 'shawncplus/phpcomplete.vim'
 Bundle 'sheerun/vim-polyglot'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
@@ -93,7 +102,7 @@ elseif has("unix")
   if has("gui_running")
     set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
     if ! has("X11")
-      set fu " qvim specific
+      "set fu " qvim specific
       "set guioptions=-Mt
       "set guioptions=aegiMprLtT
     else
@@ -140,48 +149,20 @@ nmap . .'[
 
 nnoremap ' `
 nnoremap ` '
-"nnoremap <C-e> 3<C-e>
+nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
-" make regex more sane
-nnoremap / /\v
-vnoremap / /\v
 
 "in case of derp-sudo
 cmap w!! w !sudo tee % >/dev/null
 
 let mapleader = ","
+let g:SuperTabDefaultCompletionType = ""
 let g:localvimrc_whitelist='/var/www/vhosts/wcsf/.*'
 let g:localvimrc_sandbox=0
 
 command! -nargs=1 Silent
   \ | execute ':silent !'.<q-args>
   \ | execute ':redraw!'
-
-" @link http://www.codeography.com/2013/06/19/navigating-vim-and-tmux-splits.html
-if exists('$TMUX')
-  function! TmuxOrSplitSwitch(wincmd, tmuxdir)
-    let previous_winnr = winnr()
-    execute "wincmd " . a:wincmd
-    if previous_winnr == winnr()
-      " The sleep and & gives time to get back to vim so tmux's focus tracking
-      " can kick in and send us our ^[[O
-      execute "silent !sh -c 'sleep 0.01; tmux select-pane -" . a:tmuxdir . "' &"
-      redraw!
-    endif
-  endfunction
-  let previous_title = substitute(system("tmux display-message -p '#{pane_title}'"), '\n', '', '')
-  let &t_ti = "\<Esc>]2;vim\<Esc>\\" . &t_ti
-  let &t_te = "\<Esc>]2;". previous_title . "\<Esc>\\" . &t_te
-  nnoremap <silent> <C-h> :call TmuxOrSplitSwitch('h', 'L')<cr>
-  nnoremap <silent> <C-j> :call TmuxOrSplitSwitch('j', 'D')<cr>
-  nnoremap <silent> <C-k> :call TmuxOrSplitSwitch('k', 'U')<cr>
-  nnoremap <silent> <C-l> :call TmuxOrSplitSwitch('l', 'R')<cr>
-else
-  map <C-h> <C-w>h
-  map <C-j> <C-w>j
-  map <C-k> <C-w>k
-  map <C-l> <C-w>l
-endif
 
 " Trim whitespace from the end of lines
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
@@ -251,6 +232,9 @@ autocmd FileType postgresql :let b:vimpipe_filetype="postgresql"
 
 " Apache
 autocmd BufNewFile,BufRead *.conf setf apache
+
+" Markdown
+autocmd BufRead,BufNewFile *.md setf markdown
 
 " SCSS
 autocmd BufRead,BufNewFile *.scss setf scss
