@@ -1,5 +1,7 @@
 # My Dotfiles
 
+Clone to `~/dotfiles`
+
 ## Requirements & Assumptions
 
 * Vim with the Python 2.7 engine compiled in
@@ -9,11 +11,10 @@
 
 Copy/paste the folliwing onto the command line:
 
-    cd
-    mkdir ~/contrib
-    hg clone http://bitbucket.org/sjl/hg-prompt/ ~/contrib/hg-prompt/
-    ln -s ~/dotfiles/hgcommit.vim ~/.vim/syntax/hgcommit.vim
-    curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+    cd ~
+    curl -L \
+      https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh \
+      | sh
     cp -s ~/dotfiles/dca.zsh-theme ~/.oh-my-zsh/themes/dca.zsh-theme
     rm ~/.vimrc ~/.bashrc ~/.zshrc ~/.profile ~/.bash_profile ~/.hgrc \
       ~/.gitconfig ~/.tmux.conf ~/.Xmodmap
@@ -26,10 +27,13 @@ Copy/paste the folliwing onto the command line:
     ln -s ~/dotfiles/.gitconfig
     ln -s ~/dotfiles/.tmux.conf
     ln -s ~/dotfiles/.Xmodmap
-    git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+    mkdir -p ~/{contrib,.vim/syntax}
+    hg clone http://bitbucket.org/sjl/hg-prompt/ ~/contrib/hg-prompt/
+    ln -s ~/dotfiles/hgcommit.vim ~/.vim/syntax/hgcommit.vim
     git clone https://github.com/thenigan/git-diffall.git ~/contrib/git-diffall
     git clone https://github.com/dharrigan/giteditor.git ~/contrib/giteditor
-    vim -E -c BundleInstall -c BundleClean -c q
+    vundle-update
+    vundle-clean
 
 ## TODO
 
@@ -39,7 +43,9 @@ Copy/paste the folliwing onto the command line:
 
 ## Vagrant config for image
 
-    vagrant box add FBSD_devel https://s3.amazonaws.com/VagrantBoxen/freebsd_amd64_zfs.box
+    vagrant box add \
+      FBSD_devel \
+      https://s3.amazonaws.com/VagrantBoxen/freebsd_amd64_zfs.box
     vagrant init FBSD_devel
     vagrant up
 
