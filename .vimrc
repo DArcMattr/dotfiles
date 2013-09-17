@@ -4,15 +4,16 @@ let $GIT_SSL_NO_VERIFY = 'true'
 set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+if has('python')
+  Bundle 'Lokaltog/powerline'
+endif
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'Lokaltog/powerline'
 Bundle 'embear/vim-localvimrc'
 Bundle 'ervandew/supertab'
 Bundle 'gmarik/vundle'
 Bundle 'jeffkreeftmeijer/vim-numbertoggle'
 Bundle 'joonty/vim-phpqa'
 Bundle 'joonty/vim-phpunitqf'
-Bundle 'joonty/vim-sauce'
 Bundle 'joonty/vim-taggatron'
 Bundle 'joonty/vdebug'
 Bundle 'kien/ctrlp.vim'
@@ -156,9 +157,12 @@ nnoremap <C-y> 3<C-y>
 cmap w!! w !sudo tee % >/dev/null
 
 let mapleader = ","
+
+" plugin specific settings
 let g:SuperTabDefaultCompletionType = ""
-let g:localvimrc_whitelist='/var/www/vhosts/wcsf/.*'
 let g:localvimrc_sandbox=0
+
+nnoremap <silent> <leader>n :NERDTreeToggle<CR>
 
 command! -nargs=1 Silent
   \ | execute ':silent !'.<q-args>
