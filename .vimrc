@@ -7,29 +7,27 @@ call vundle#rc()
 if has('python')
   Bundle 'Lokaltog/powerline'
 endif
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'embear/vim-localvimrc'
-Bundle 'ervandew/supertab'
 Bundle 'gmarik/vundle'
-Bundle 'jeffkreeftmeijer/vim-numbertoggle'
-Bundle 'joonty/vim-phpqa'
-Bundle 'joonty/vim-phpunitqf'
+"Bundle 'Lokaltog/vim-easymotion'
+Bundle 'embear/vim-localvimrc'
+"Bundle 'ervandew/supertab'
+"Bundle 'joonty/vim-phpqa'
+"Bundle 'joonty/vim-phpunitqf'
 Bundle 'joonty/vim-taggatron'
-Bundle 'joonty/vdebug'
+"Bundle 'joonty/vdebug'
 Bundle 'kien/ctrlp.vim'
 Bundle 'kloppster/Wordpress-Vim-Syntax'
-Bundle 'krisajenkins/vim-pipe'
+"Bundle 'krisajenkins/vim-pipe'
 Bundle 'krisajenkins/vim-postgresql-syntax'
 Bundle 'phleet/vim-mercenary'
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
-Bundle 'shawncplus/phpcomplete.vim'
+"Bundle 'shawncplus/phpcomplete.vim'
 Bundle 'sheerun/vim-polyglot'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-vividchalk'
 Bundle 'tsaleh/vim-matchit'
+Bundle 'jeffkreeftmeijer/vim-numbertoggle'
 
 filetype plugin indent on " also required by vundle
 colorscheme vividchalk
@@ -41,6 +39,7 @@ set diffopt=filler,vertical
 set encoding=utf-8
 set expandtab
 set fillchars+=stl:\ ,stlnc:\
+set formatoptions=qrn1
 set grepprg=grep\ -nH\ $*
 set hidden
 set history=1000
@@ -137,6 +136,8 @@ if ! has('gui_running')
   augroup END
 endif
 
+let mapleader = ","
+
 " key remappings - toggle spell checking
 map <F7> :setlocal spell! spelllang=en_us<cr>
 imap <F7> <C-o>:setlocal spell! spelllang=en_us<cr>
@@ -156,13 +157,11 @@ nnoremap <C-y> 3<C-y>
 "in case of derp-sudo
 cmap w!! w !sudo tee % >/dev/null
 
-let mapleader = ","
-
 " plugin specific settings
 let g:SuperTabDefaultCompletionType = ""
 let g:localvimrc_sandbox=0
-
-nnoremap <silent> <leader>n :NERDTreeToggle<CR>
+let g:ctrlp_show_hidden=1
+let g:NumberToggleTrigger="<F2>"
 
 command! -nargs=1 Silent
   \ | execute ':silent !'.<q-args>
