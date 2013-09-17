@@ -111,7 +111,7 @@ elseif has("unix")
     endif
   else
   endif
-  set printfont=Meslo\ LG\ S\ 7
+  set printfont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
   let s:uname=system("uname")
   if s:uname=="OpenBSD"
     set shell=/usr/local/bin/bash
