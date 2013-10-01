@@ -100,7 +100,7 @@ if has("win32")
   noremap <C-K> <C-V> " enter an extended character
 elseif has("unix")
   if has("gui_running")
-    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11
     if ! has("X11")
       "set fu " qvim specific
       "set guioptions=-Mt
@@ -110,9 +110,8 @@ elseif has("unix")
     endif
   else
   endif
-  set printfont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
-  let s:uname=system("uname")
-  if s:uname=="OpenBSD"
+  set printfont=DejaVu\ Sans\ Mono\ for\ Powerline:h11
+  if filereadable("/usr/local/bin/bash")
     set shell=/usr/local/bin/bash
   else
     set shell=/bin/bash
@@ -161,7 +160,7 @@ cmap w!! w !sudo tee % >/dev/null
 let g:SuperTabDefaultCompletionType = ""
 let g:localvimrc_sandbox=0
 let g:ctrlp_show_hidden=1
-let g:NumberToggleTrigger="<F2>"
+let g:NumberToggleTrigger="<leader>l"
 
 command! -nargs=1 Silent
   \ | execute ':silent !'.<q-args>
@@ -198,29 +197,22 @@ augroup END
 autocmd BufNewFile,BufRead *.pl,*.pm set makeprg=perl
 autocmd BufNewFile,BufRead *.pl,*.pm compiler perl
 
-" PHP
-autocmd FileType php set textwidth=80 colorcolumn=+1
-
 " Lua
-autocmd FileType lua set textwidth=80 shiftwidth=4 tabstop=4
-  \ softtabstop=4 smarttab noexpandtab colorcolumn=+1
-autocmd BufEnter *.lua set autoindent textwidth=80 shiftwidth=4
-  \ tabstop=4 softtabstop=4 smarttab noexpandtab formatoptions=croql
-  \ colorcolumn=+1
+autocmd FileType lua shiftwidth=4 tabstop=4 softtabstop=4 smarttab noexpandtab
+autocmd BufEnter *.lua set autoindent textwidth=80 shiftwidth=4 tabstop=4
+  \ softtabstop=4 smarttab noexpandtab formatoptions=croql
 
 " Python
 autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType python set textwidth=80 shiftwidth=4 tabstop=4
-  \ softtabstop=4 smarttab expandtab colorcolumn=+1
-autocmd BufEnter *.py set autoindent textwidth=80 shiftwidth=4
-  \ tabstop=4 softtabstop=4 smarttab expandtab formatoptions=croql
-  \ colorcolumn=+1
+autocmd FileType python shiftwidth=4 tabstop=4 softtabstop=4
+  \ smarttab expandtab
+autocmd BufEnter *.py set autoindent textwidth=80 shiftwidth=4 tabstop=4
+  \ softtabstop=4 smarttab expandtab formatoptions=croql
 autocmd FileType python :let b:vimpipe_command="python"
 autocmd FileType python :let b:vimpipe_filetype="python"
 
 " C
-autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8
-  \ softtabstop=8
+autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8 softtabstop=8
 let c_space_errors=1
 
 " hg commit messages
