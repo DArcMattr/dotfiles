@@ -34,7 +34,7 @@ DISABLE_CORRECTION="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git mercurial vundle vi-mode tmux pip git-flow svn)
+plugins=(git mercurial vundle vi-mode tmux pip git-flow svn brew)
 
 source $ZSH/oh-my-zsh.sh
 source ~/.profile
