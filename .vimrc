@@ -125,6 +125,9 @@ elseif has("unix")
   endif
   let $BASH_ENV = '~/.bashrc' " what to do for ksh/zsh?
   set shellcmdflag=-O\ expand_aliases\ -c
+  if &term=~'^screen'
+    set ttymouse=xterm2
+  endif
 endif
 
 if ! has('gui_running')
