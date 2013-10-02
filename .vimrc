@@ -4,28 +4,31 @@ let $GIT_SSL_NO_VERIFY = 'true'
 set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-if has('python')
-  Bundle 'Lokaltog/powerline'
-endif
 Bundle 'gmarik/vundle'
-"Bundle 'Lokaltog/vim-easymotion'
+if has('python')
+  Bundle 'Lokaltog/powerline', { 'rtp': 'powerline/bindings/vim/' }
+else
+  set statusline=[%n]\ %<%.99f\ %h%w%m%r%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%y%=%-16(\ %l,%c-%v\ %)%P
+endif
+Bundle 'Lokaltog/vim-easymotion'
 Bundle 'embear/vim-localvimrc'
-"Bundle 'ervandew/supertab'
-"Bundle 'joonty/vim-phpqa'
-"Bundle 'joonty/vim-phpunitqf'
+Bundle 'ervandew/supertab'
+Bundle 'joonty/vim-phpqa'
+Bundle 'joonty/vim-phpunitqf'
 Bundle 'joonty/vim-taggatron'
-"Bundle 'joonty/vdebug'
+Bundle 'joonty/vdebug'
 Bundle 'kien/ctrlp.vim'
 Bundle 'kloppster/Wordpress-Vim-Syntax'
-"Bundle 'krisajenkins/vim-pipe'
+Bundle 'krisajenkins/vim-pipe'
 Bundle 'krisajenkins/vim-postgresql-syntax'
 Bundle 'phleet/vim-mercenary'
 Bundle 'scrooloose/syntastic'
-"Bundle 'shawncplus/phpcomplete.vim'
+Bundle 'shawncplus/phpcomplete.vim'
 Bundle 'sheerun/vim-polyglot'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-vividchalk'
+Bundle 'tristen/vim-sparkup'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'jeffkreeftmeijer/vim-numbertoggle'
 
@@ -35,6 +38,7 @@ syntax on
 
 set autoread
 set backspace=indent,eol,start
+set clipboard=unnamed
 set diffopt=filler,vertical
 set encoding=utf-8
 set expandtab
@@ -100,17 +104,21 @@ if has("win32")
   noremap <C-K> <C-V> " enter an extended character
 elseif has("unix")
   if has("gui_running")
-    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11
+    if has('gui_macvim')
+      set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11
+      set printfont=DejaVu\ Sans\ Mono\ for\ Powerline:h11
+    else
+      set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
+      set printfont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
+    endif
     if ! has("X11")
       "set fu " qvim specific
-      "set guioptions=-Mt
-      "set guioptions=aegiMprLtT
+      set guioptions=-Mt
     else
       set guioptions=aegiMprLtT
     endif
   else
   endif
-  set printfont=DejaVu\ Sans\ Mono\ for\ Powerline:h11
   if filereadable("/usr/local/bin/bash")
     set shell=/usr/local/bin/bash
   else
@@ -118,12 +126,6 @@ elseif has("unix")
   endif
   let $BASH_ENV = '~/.bashrc' " what to do for ksh/zsh?
   set shellcmdflag=-O\ expand_aliases\ -c
-endif
-
-if has('python')
-  set runtimepath+=~/.vim/bundle/powerline/powerline/bindings/vim
-else
-  set statusline=[%n]\ %<%.99f\ %h%w%m%r%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%y%=%-16(\ %l,%c-%v\ %)%P
 endif
 
 if ! has('gui_running')
@@ -161,6 +163,8 @@ let g:SuperTabDefaultCompletionType = ""
 let g:localvimrc_sandbox=0
 let g:ctrlp_show_hidden=1
 let g:NumberToggleTrigger="<leader>l"
+let g:sparkupExecuteMapping="<leader>se"
+let g:sparkupNextMapping="<leader>sn"
 
 command! -nargs=1 Silent
   \ | execute ':silent !'.<q-args>
@@ -199,15 +203,14 @@ autocmd BufNewFile,BufRead *.pl,*.pm compiler perl
 
 " Lua
 autocmd FileType lua shiftwidth=4 tabstop=4 softtabstop=4 smarttab noexpandtab
-autocmd BufEnter *.lua set autoindent textwidth=80 shiftwidth=4 tabstop=4
-  \ softtabstop=4 smarttab noexpandtab formatoptions=croql
+autocmd BufEnter *.lua set autoindent tabstop=4 softtabstop=4 smarttab
+  \ noexpandtab formatoptions=croql
 
 " Python
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType python shiftwidth=4 tabstop=4 softtabstop=4
-  \ smarttab expandtab
-autocmd BufEnter *.py set autoindent textwidth=80 shiftwidth=4 tabstop=4
-  \ softtabstop=4 smarttab expandtab formatoptions=croql
+autocmd FileType python set omnifunc=pythoncomplete#Complete shiftwidth=4
+  \ tabstop=4 softtabstop=4 smarttab expandtab
+autocmd BufEnter *.py set autoindent tabstop=4 softtabstop=4 smarttab expandtab
+  \ formatoptions=croql
 autocmd FileType python :let b:vimpipe_command="python"
 autocmd FileType python :let b:vimpipe_filetype="python"
 
