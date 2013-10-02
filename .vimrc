@@ -1,3 +1,4 @@
+set nocompatible
 filetype off " required by vundle
 
 let $GIT_SSL_NO_VERIFY = 'true'
@@ -8,6 +9,7 @@ Bundle 'gmarik/vundle'
 if has('python')
   Bundle 'Lokaltog/powerline', { 'rtp': 'powerline/bindings/vim/' }
 else
+  set ruler
   set statusline=[%n]\ %<%.99f\ %h%w%m%r%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%y%=%-16(\ %l,%c-%v\ %)%P
 endif
 Bundle 'Lokaltog/vim-easymotion'
@@ -56,15 +58,12 @@ set listchars=eol:¶,tab:»·,trail:·
 set matchtime=5
 set mouse=a
 set nobackup
-set nocompatible
 set noshowmode
 set noswapfile
-set number
 set printheader=%<%f%h%m\ %40
 set printheader=+{strftime(\"%c\"getftime(expand(\"%%\")))}%=Page\ %N
 set printoptions=formfeed:y,paper:letter,portrait:n,number:y,syntax:7
 set printoptions+=left:5mm,right:5mm,top:10mm,bottom:5mm
-set ruler
 set scrolloff=3
 set shiftwidth=2
 set shortmess=atIA
@@ -162,6 +161,7 @@ cmap w!! w !sudo tee % >/dev/null
 let g:SuperTabDefaultCompletionType = ""
 let g:localvimrc_sandbox=0
 let g:ctrlp_show_hidden=1
+let g:EasyMotion_leader_key="<leader>"
 let g:NumberToggleTrigger="<leader>l"
 let g:sparkupExecuteMapping="<leader>se"
 let g:sparkupNextMapping="<leader>sn"
@@ -207,8 +207,8 @@ autocmd BufEnter *.lua set autoindent tabstop=4 softtabstop=4 smarttab
   \ noexpandtab formatoptions=croql
 
 " Python
-autocmd FileType python set omnifunc=pythoncomplete#Complete shiftwidth=4
-  \ tabstop=4 softtabstop=4 smarttab expandtab
+autocmd FileType python set shiftwidth=4 tabstop=4 softtabstop=4 smarttab
+  \ expandtab
 autocmd BufEnter *.py set autoindent tabstop=4 softtabstop=4 smarttab expandtab
   \ formatoptions=croql
 autocmd FileType python :let b:vimpipe_command="python"
@@ -237,7 +237,6 @@ autocmd BufRead,BufNewFile *.md setf markdown
 " SCSS
 autocmd BufRead,BufNewFile *.scss setf scss
 
-autocmd BufRead *.aspx set filetype=html
 if has("autocmd") && exists("+omnifunc")
   autocmd Filetype *
     \  if &omnifunc == "" |
