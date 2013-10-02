@@ -40,7 +40,6 @@ syntax on
 
 set autoread
 set backspace=indent,eol,start
-set clipboard=unnamed
 set diffopt=filler,vertical
 set encoding=utf-8
 set expandtab
@@ -135,8 +134,8 @@ if ! has('gui_running')
   set ttimeoutlen=10
   augroup FastEscape
     autocmd!
-    au InsertEnter * set timeoutlen=0
-    au InsertLeave * set timeoutlen=1000
+    autocmd InsertEnter * set timeoutlen=0
+    autocmd InsertLeave * set timeoutlen=1000
   augroup END
 endif
 
@@ -174,31 +173,44 @@ command! -nargs=1 Silent
   \ | execute ':silent !'.<q-args>
   \ | execute ':redraw!'
 
-" Trim whitespace from the end of lines
-autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+if has("autocmd") && exists("+omnifunc")
+  autocmd Filetype *
+    \  if &omnifunc == "" |
+    \    setlocal omnifunc=syntaxcomplete#Complete |
+    \  endif
+endif
+
+augroup TrimWhitespace
+  autocmd!
+  autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+augroup END
 
 " update diffs aggressively
 " @link https://groups.google.com/forum/?fromgroups=#!topic/vim_use/ZNZcBAABDgE
 augroup AutoDiffUpdate
-  au!
-  autocmd InsertLeave * if &diff | diffupdate | let b:old_changedtick = b:changedtick | endif
+  autocmd!
+  autocmd InsertLeave *
+    \ if &diff |
+    \   diffupdate |
+    \   let b:old_changedtick = b:changedtick |
+    \ endif
   autocmd CursorHold *
-        \ if &diff &&
-        \    (!exists('b:old_changedtick') || b:old_changedtick != b:changedtick) |
-        \   let b:old_changedtick = b:changedtick | diffupdate |
-        \ endif
+    \ if &diff &&
+    \    (!exists('b:old_changedtick') || b:old_changedtick != b:changedtick) |
+    \   let b:old_changedtick = b:changedtick | diffupdate |
+    \ endif
 augroup END
 
 augroup CursorColumn
-  au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
-  au WinLeave * setlocal nocursorcolumn
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
+  autocmd WinLeave * setlocal nocursorcolumn
 augroup END
 
 augroup CursorLine
-  au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  au WinLeave * setlocal nocursorline
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
 augroup END
 
 " Perl
@@ -240,10 +252,3 @@ autocmd BufRead,BufNewFile *.md setf markdown
 
 " SCSS
 autocmd BufRead,BufNewFile *.scss setf scss
-
-if has("autocmd") && exists("+omnifunc")
-  autocmd Filetype *
-    \  if &omnifunc == "" |
-    \    setlocal omnifunc=syntaxcomplete#Complete |
-    \  endif
-endif
