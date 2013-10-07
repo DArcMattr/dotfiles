@@ -1,4 +1,3 @@
-set nocompatible
 filetype off " required by vundle
 
 let $GIT_SSL_NO_VERIFY = 'true'
@@ -37,6 +36,7 @@ Bundle 'tristen/vim-sparkup'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'jeffkreeftmeijer/vim-numbertoggle'
 Bundle 'guns/xterm-color-table.vim'
+"Bundle 'vim-scripts/smarty.vim'
 
 filetype plugin indent on " also required by vundle
 syntax on
@@ -47,7 +47,7 @@ set diffopt=filler,vertical
 set encoding=utf-8
 set expandtab
 set fillchars+=stl:\ ,stlnc:\
-set formatoptions=qrn1
+set formatoptions=qrn12
 set grepprg=grep\ -nH\ $*
 set hidden
 set history=1000
@@ -64,6 +64,7 @@ endif
 set matchtime=5
 set mouse=a
 set nobackup
+set nocompatible
 set noshowmode
 set noswapfile
 set relativenumber
@@ -160,7 +161,7 @@ let mapleader = ","
 " key remappings - toggle spell checking
 map <F7> :setlocal spell! spelllang=en_us<cr>
 imap <F7> <C-o>:setlocal spell! spelllang=en_us<cr>
-nmap <silent> ,/ :nohlsearch<CR>
+nmap <silent> <leader>/ :nohlsearch<CR>
 
 map <C-Tab> gt
 map <C-S-Tab> gT
@@ -181,7 +182,7 @@ cmap w!! w !sudo tee % >/dev/null
 " plugin specific settings
 let g:SuperTabDefaultCompletionType = ""
 let g:localvimrc_sandbox=0
-let g:localvimrc_whitelist='/var/www/vhosts/\(metagenics\).*'
+let g:localvimrc_whitelist='/var/www/vhosts/*/.*'
 let g:ctrlp_show_hidden=1
 let g:EasyMotion_leader_key="<leader>"
 let g:NumberToggleTrigger="<leader>l"
@@ -189,40 +190,40 @@ let g:syntastic_php_checkers=[ 'php' ]
 let g:sparkupExecuteMapping="<leader>se"
 let g:sparkupNextMapping="<leader>sn"
 
-command! -nargs=1 Silent
-  \ | execute ':silent !'.<q-args>
-  \ | execute ':redraw!'
+command! -nargs=1 Silent |
+\ execute ':silent !'.<q-args> |
+\ execute ':redraw!'
 
 if has('autocmd')
   if exists('+omnifunc')
     autocmd Filetype *
-      \  if &omnifunc == "" |
-      \    setlocal omnifunc=syntaxcomplete#Complete |
-      \  endif
+    \  if &omnifunc == "" |
+    \    setlocal omnifunc=syntaxcomplete#Complete |
+    \  endif
   endif
 
   augroup TrimWhitespace
     autocmd!
     autocmd BufRead,BufWrite *
-      \ if ! &bin |
-      \   silent! %s/\s\+$//ge |
-      \ endif
+    \ if ! &bin |
+    \   silent! %s/\s\+$//ge |
+    \ endif
   augroup END
 
   " update diffs aggressively
-  " @link https://groups.google.com/forum/?fromgroups=#!topic/vim_use/ZNZcBAABDgE
+  " https://groups.google.com/forum/?fromgroups=#!topic/vim_use/ZNZcBAABDgE
   augroup AutoDiffUpdate
     autocmd!
     autocmd InsertLeave *
-      \ if &diff |
-      \   diffupdate |
-      \   let b:old_changedtick = b:changedtick |
-      \ endif
+    \ if &diff |
+    \   diffupdate |
+    \   let b:old_changedtick = b:changedtick |
+    \ endif
     autocmd CursorHold *
-      \ if &diff &&
-      \    (!exists('b:old_changedtick') || b:old_changedtick != b:changedtick) |
-      \   let b:old_changedtick = b:changedtick | diffupdate |
-      \ endif
+    \ if &diff &&
+    \     (!exists('b:old_changedtick') || b:old_changedtick != b:changedtick) |
+    \   let b:old_changedtick = b:changedtick | diffupdate |
+    \ endif
   augroup END
 
   augroup CursorColumn
@@ -244,19 +245,19 @@ if has('autocmd')
   augroup END
 
   " Perl
-  autocmd BufNewFile,BufRead *.pl,*.pm set makeprg=perl
-  autocmd BufNewFile,BufRead *.pl,*.pm compiler perl
+  autocmd BufNewFile,BufRead,BufEnter *.pl,*.pm set makeprg=perl
+  autocmd BufNewFile,BufRead,BufEnter *.pl,*.pm compiler perl
 
   " Lua
   autocmd FileType lua shiftwidth=4 tabstop=4 softtabstop=4 smarttab noexpandtab
   autocmd BufEnter *.lua set autoindent tabstop=4 softtabstop=4 smarttab
-    \ noexpandtab formatoptions=croql
+  \ noexpandtab formatoptions=croql
 
   " Python
   autocmd FileType python set shiftwidth=4 tabstop=4 softtabstop=4 smarttab
-    \ expandtab
-  autocmd BufEnter *.py set autoindent tabstop=4 softtabstop=4 smarttab expandtab
-    \ formatoptions=croql
+  \ expandtab
+  autocmd BufNewFile,BufRead,BufEnter *.py set autoindent tabstop=4
+  \ softtabstop=4 smarttab expandtab formatoptions=croql
   autocmd FileType python :let b:vimpipe_command="python"
   autocmd FileType python :let b:vimpipe_filetype="python"
 
@@ -264,22 +265,24 @@ if has('autocmd')
   autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8 softtabstop=8
   let c_space_errors=1
 
+  " PHP
+
   " hg commit messages
-  autocmd BufRead,BufNewFile /tmp/hgeditor/msg setf hgcommit
+  autocmd BufNewFile,BufRead,BufEnter msg setf hgcommit
   autocmd FileType hgcommit set textwidth=72
-    \ match OverLength /\%73v.\+/
+  autocmd FileType hgcommit match OverLength /\%73v.\+/
 
   " PostgreSQL
-  autocmd BufNewFile,BufRead *.psql setf postgresql
+  autocmd BufNewFile,BufRead,BufEnter *.psql setf postgresql
   autocmd FileType postgresql :let b:vimpipe_command="psql mydatabase"
   autocmd FileType postgresql :let b:vimpipe_filetype="postgresql"
 
   " Apache
-  autocmd BufNewFile,BufRead *.conf setf apache
+  autocmd BufNewFile,BufRead,BufEnter *.conf setf apache
 
   " Markdown
-  autocmd BufRead,BufNewFile *.md setf markdown
+  autocmd BufNewFile,BufRead,BufEnter *.md setf markdown
 
   " SCSS
-  autocmd BufRead,BufNewFile *.scss setf scss
+  autocmd BufNewFile,BufRead,BufEnter *.scss setf scss
 endif
