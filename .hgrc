@@ -36,5 +36,5 @@ only-consistent=false
 fix-trailing-newline=true
 
 [trusted]
-users=root,darc,darceneaux,jeriksen,www,80
-groups=www,apache,wheel,80
+users=root,darc,davidarceneaux,darceneaux,jeriksen,www,_www,,80
+groups=_www,www,apache,wheel,80
