@@ -10,12 +10,15 @@ if has('python')
   Bundle 'Lokaltog/powerline', { 'rtp': 'powerline/bindings/vim/' }
 else
   set ruler
-  set statusline=[%n]\ %<%.99f\ %h%w%m%r%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%y%=%-16(\ %l,%c-%v\ %)%P
+  set statusline=[%n]\ %<%.99f
+  set statusline+=\ %h%w%m%r
+  set statusline+=%{exists('*CapsLockStatusline')?CapsLockStatusline():''}
+  set statusline+=%y%=%-16(\ %l,%c-%v\ %)%P
 endif
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'embear/vim-localvimrc'
 Bundle 'ervandew/supertab'
-Bundle 'joonty/vim-phpqa'
+"Bundle 'joonty/vim-phpqa'
 Bundle 'joonty/vim-phpunitqf'
 Bundle 'joonty/vim-taggatron'
 Bundle 'joonty/vdebug'
@@ -33,6 +36,7 @@ Bundle 'tpope/vim-vividchalk'
 Bundle 'tristen/vim-sparkup'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'jeffkreeftmeijer/vim-numbertoggle'
+Bundle 'guns/xterm-color-table.vim'
 
 filetype plugin indent on " also required by vundle
 colorscheme vividchalk
@@ -53,7 +57,11 @@ set ignorecase
 set incsearch
 set laststatus=2
 set list
-set listchars=eol:¶,tab:»·,trail:·
+if has('multi_byte')
+  set listchars=eol:↲,precedes:«,extends:»,trail:·,tab:▸·
+else
+  set listchars=eol:$,precedes:<,extends:>,trail:.,tab:>·
+endif
 set matchtime=5
 set mouse=a
 set nobackup
@@ -73,19 +81,22 @@ set smartcase
 set smartindent
 set softtabstop=2
 set textwidth=80
+set ttyfast
 set colorcolumn=+1
 set t_Co=256
 set tabstop=2
 set virtualedit=all
 set visualbell
 set wildmenu
-set wildmode=list:longest
+set wildmode=list:longest,list:full
+set wildignore+=.git,.svn,.hg,tmp/**
 
 highlight LineNr term=reverse
 highlight LineNr cterm=bold ctermfg=white ctermbg=darkblue
 highlight LineNr gui=bold guifg=white guibg=darkblue
+highlight OverLength ctermbg=DarkGray ctermfg=white guibg=DarkGray
+match OverLength /\%81v.\+/
 
-" Window title
 if has('title')
   set title
   set titlestring=%t%(\ [%R%M]%)
@@ -110,8 +121,8 @@ elseif has("unix")
       set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
       set printfont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
     endif
-    if ! has("X11")
-      "set fu " qvim specific
+    if ! has("X11") " for qvim
+      "set fu
       set guioptions=-Mt
     else
       set guioptions=aegiMprLtT
@@ -137,6 +148,7 @@ if ! has('gui_running')
     autocmd InsertEnter * set timeoutlen=0
     autocmd InsertLeave * set timeoutlen=1000
   augroup END
+else
 endif
 
 let mapleader = ","
@@ -163,9 +175,11 @@ cmap w!! w !sudo tee % >/dev/null
 " plugin specific settings
 let g:SuperTabDefaultCompletionType = ""
 let g:localvimrc_sandbox=0
+let g:localvimrc_whitelist='/var/www/vhosts/\(metagenics\).*'
 let g:ctrlp_show_hidden=1
 let g:EasyMotion_leader_key="<leader>"
 let g:NumberToggleTrigger="<leader>l"
+let g:syntastic_php_checkers=[ 'php' ]
 let g:sparkupExecuteMapping="<leader>se"
 let g:sparkupNextMapping="<leader>sn"
 
