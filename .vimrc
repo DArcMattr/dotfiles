@@ -39,7 +39,6 @@ Bundle 'jeffkreeftmeijer/vim-numbertoggle'
 Bundle 'guns/xterm-color-table.vim'
 
 filetype plugin indent on " also required by vundle
-colorscheme vividchalk
 syntax on
 
 set autoread
@@ -92,13 +91,16 @@ set wildmenu
 set wildmode=list:longest,list:full
 set wildignore+=.git,.svn,.hg,tmp/**
 
-highlight NonText ctermfg=235 guifg=#262626
-highlight SpecialKey ctermfg=235 guifg=#262626
-highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
-highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
-highlight OverLength ctermbg=234 ctermfg=249
-highlight OverLength guibg=#1c1c1c guifg=#b2b2b2
-match OverLength /\%81v.\+/
+if &t_Co >= 256 || has('gui_running')
+  colorscheme vividchalk
+  highlight NonText ctermfg=235 guifg=#262626
+  highlight SpecialKey ctermfg=235 guifg=#262626
+  highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
+  highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
+  highlight OverLength ctermbg=234 ctermfg=249
+  highlight OverLength guibg=#1c1c1c guifg=#b2b2b2
+  match OverLength /\%81v.\+/
+endif
 
 if has('title')
   set title
@@ -151,7 +153,6 @@ if ! has('gui_running')
     autocmd InsertEnter * set timeoutlen=0
     autocmd InsertLeave * set timeoutlen=1000
   augroup END
-else
 endif
 
 let mapleader = ","
