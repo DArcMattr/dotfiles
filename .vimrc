@@ -237,6 +237,12 @@ if has('autocmd')
     autocmd WinLeave * setlocal nocursorline
   augroup END
 
+  augroup ShowListChars
+    autocmd!
+    autocmd InsertEnter * set nolist
+    autocmd InsertLeave * set list
+  augroup END
+
   " Perl
   autocmd BufNewFile,BufRead *.pl,*.pm set makeprg=perl
   autocmd BufNewFile,BufRead *.pl,*.pm compiler perl
