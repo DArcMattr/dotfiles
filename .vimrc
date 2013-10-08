@@ -9,6 +9,7 @@ if has('python')
   Bundle 'Lokaltog/powerline', { 'rtp': 'powerline/bindings/vim/' }
 else
   set ruler
+  set showmode
   set statusline=[%n]\ %<%.99f
   set statusline+=\ %h%w%m%r
   set statusline+=%{exists('*CapsLockStatusline')?CapsLockStatusline():''}
@@ -36,13 +37,13 @@ Bundle 'tristen/vim-sparkup'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'jeffkreeftmeijer/vim-numbertoggle'
 Bundle 'guns/xterm-color-table.vim'
-"Bundle 'vim-scripts/smarty.vim'
 
 filetype plugin indent on " also required by vundle
 syntax on
 
 set autoread
 set backspace=indent,eol,start
+set colorcolumn=+1
 set diffopt=filler,vertical
 set encoding=utf-8
 set expandtab
@@ -66,7 +67,6 @@ set matchtime=5
 set mouse=a
 set nobackup
 set nocompatible
-set noshowmode
 set noswapfile
 set relativenumber
 set number
@@ -81,10 +81,11 @@ set showbreak=>
 set showmatch
 set smartcase
 set smartindent
+set splitbelow
+set splitright
 set softtabstop=2
 set textwidth=80
 set ttyfast
-set colorcolumn=+1
 set t_Co=256
 set tabstop=2
 set virtualedit=all
@@ -166,9 +167,16 @@ nmap <silent> <leader>/ :nohlsearch<CR>
 
 map <C-Tab> gt
 map <C-S-Tab> gT
+map <leader>gs :Gstatus<CR>
+map <leader>gd :Gdiff<CR>
+map <leader>gc :Gcommit<CR>
+map <leader>gl :Glog<CR>
+map <leader>gp :Gpush<CR>
 
-nmap j gj
-nmap k gk
+nnoremap j gj
+nnoremap gj j
+nnoremap k gk
+nnoremap gk k
 nmap . .'[
 
 nnoremap ' `
