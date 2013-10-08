@@ -55,6 +55,7 @@ set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
+set lazyredraw
 set list
 if has('multi_byte')
   set listchars=eol:↲,precedes:«,extends:»,trail:·,tab:▸·
