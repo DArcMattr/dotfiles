@@ -81,12 +81,16 @@ set showbreak=>
 set showmatch
 set smartcase
 set smartindent
+set softtabstop=2
 set splitbelow
 set splitright
-set softtabstop=2
 set textwidth=80
 set ttyfast
-set t_Co=256
+if &term =~? 'mlterm\|xterm\|screen'
+  set t_Co=256
+else
+  set t_Co=88
+endif
 set tabstop=2
 set virtualedit=all
 set visualbell
@@ -94,15 +98,22 @@ set wildmenu
 set wildmode=list:longest,list:full
 set wildignore+=.git,.svn,.hg,tmp/**
 
+
 if &t_Co >= 256 || has('gui_running')
   colorscheme vividchalk
-  highlight NonText ctermfg=235 guifg=#262626
-  highlight SpecialKey ctermfg=235 guifg=#262626
+
+  highlight CursorLine cterm=NONE ctermbg=233 guibg=#121212#
+  highlight CursorColumn cterm=NONE ctermbg=233 guibg=#121212
   highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
   highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
+  highlight NonText ctermfg=235 guifg=#262626
   highlight OverLength ctermbg=234 ctermfg=249
   highlight OverLength guibg=#1c1c1c guifg=#b2b2b2
+  highlight SpecialKey ctermfg=235 guifg=#262626
+
   match OverLength /\%81v.\+/
+else
+  colorscheme koehler
 endif
 
 if has('title')
@@ -151,11 +162,13 @@ endif
 
 if ! has('gui_running')
   set ttimeoutlen=10
-  augroup FastEscape
-    autocmd!
-    autocmd InsertEnter * set timeoutlen=0
-    autocmd InsertLeave * set timeoutlen=1000
-  augroup END
+  if has('autocmd')
+    augroup FastEscape
+      autocmd!
+      autocmd InsertEnter * set timeoutlen=0
+      autocmd InsertLeave * set timeoutlen=1000
+    augroup END
+  endif
 endif
 
 let mapleader = ","
@@ -291,6 +304,9 @@ if has('autocmd')
 
   " Markdown
   autocmd BufNewFile,BufRead,BufEnter *.md setf markdown
+
+  " tmux
+  autocmd BufNewFile,BufRead,BufEnter .tmux.conf setf tmux
 
   " SCSS
   autocmd BufNewFile,BufRead,BufEnter *.scss setf scss
