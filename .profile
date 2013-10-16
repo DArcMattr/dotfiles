@@ -29,3 +29,7 @@ if [[ -f /usr/bin/uname && `/usr/bin/uname` == OpenBSD ]]; then
   export PKG_PATH=http://ftp5.usa.openbsd.org/pub/OpenBSD/`uname -r`/packages/`machine -a`/
   export CVSROOT=/var/www/cvs
 fi
+
+if [ -r ~/.profile.local ]; then
+  source ~/.profile.local
+fi
