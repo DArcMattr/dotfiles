@@ -129,7 +129,11 @@ clearcache() {
 }
 
 sssh() {
-  (export AUTOSSH_PORT=0 && autossh "$@" -t 'tmux -2 attach || tmux -2 new') 2>/dev/null
+  if ! type "autossh" > /dev/null; then
+    (ssh "$@" -t 'tmux -2 attach || tmux -2 new') 2>/dev/null
+  else
+    (export AUTOSSH_PORT=0 && autossh "$@" -t 'tmux -2 attach || tmux -2 new') 2>/dev/null
+  fi
 }
 
 mountpub() {
@@ -174,5 +178,9 @@ playtime() {
 }
 
 dosass() {
-  sass --scss --compass -lC "$@" > "$(dirname "$@")/$(basename -s .scss "$@").css"
+  if [ "$#" -eq 1 ]; then
+    sass --scss --compass -lC "$1" > "$(dirname "$1")/$(basename -s .scss "$1").css"
+  else
+    sass --scss --compass -lC "$1" > "$2"
+  fi
 }
