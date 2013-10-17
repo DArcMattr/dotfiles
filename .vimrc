@@ -35,7 +35,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-vividchalk'
 Bundle 'tristen/vim-sparkup'
 Bundle 'tsaleh/vim-matchit'
-Bundle 'jeffkreeftmeijer/vim-numbertoggle'
+Bundle 'DArcMattr/vim-numbertoggle'
 Bundle 'guns/xterm-color-table.vim'
 
 filetype plugin indent on " also required by vundle
@@ -68,7 +68,6 @@ set mouse=a
 set nobackup
 set nocompatible
 set noswapfile
-set relativenumber
 set number
 set printheader=%<%f%h%m\ %40
 set printheader=+{strftime(\"%c\"getftime(expand(\"%%\")))}%=Page\ %N
