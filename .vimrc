@@ -45,10 +45,11 @@ set autoread
 set backspace=indent,eol,start
 set colorcolumn=+1
 set diffopt=filler,vertical
-set encoding=utf-8
+set encoding=utf-8 nobomb
 set expandtab
 set fillchars+=stl:\ ,stlnc:\
-set formatoptions=qrn12
+set formatoptions=jnqr12
+set gdefault
 set grepprg=grep\ -nH\ $*
 set hidden
 set history=1000
@@ -64,9 +65,12 @@ else
   set listchars=eol:$,precedes:<,extends:>,trail:.,tab:>·
 endif
 set matchtime=5
+set modeline
 set mouse=a
 set nobackup
 set nocompatible
+set nojoinspaces
+set nostartofline
 set noswapfile
 set number
 set printheader=%<%f%h%m\ %40
@@ -146,12 +150,15 @@ elseif has("unix")
     endif
     set guioptions=aegiMprLtT
   else
+    set t_ti= t_te=
   endif
+
   if filereadable("/usr/local/bin/bash")
     set shell=/usr/local/bin/bash
   else
     set shell=/bin/bash
   endif
+  let $PAGER=''
   let $BASH_ENV = '~/.bashrc' " what to do for ksh/zsh?
   set shellcmdflag=-O\ expand_aliases\ -c
   if &term=~'^screen'
