@@ -32,14 +32,16 @@ Copy/paste the folliwing onto the command line:
     ln -s ~/dotfiles/hgcommit.vim ~/.vim/syntax/hgcommit.vim
     git clone https://github.com/thenigan/git-diffall.git ~/contrib/git-diffall
     git clone https://github.com/dharrigan/giteditor.git ~/contrib/giteditor
+
+Refresh your login session to pick up all the dotfile updates, then run:
+
     vundle-update
     vundle-clean
 
 ## TODO
 
-1. copy/paste sections so I can drop and go on a new machine
-1. generalize more setup files
-1. `xkeycaps` usage instructions, .Xmodmap is a product of the utility
+1. `xkeycaps` usage instructions, .Xmodmap is a product of the utility, and
+   different machines may have different keycodes
 
 ## Vagrant config for image
 
@@ -52,5 +54,7 @@ Copy/paste the folliwing onto the command line:
 ## `st` notes
 
 Under KDE:
+
+For running st:
 
     kstart --maximize --windowclass "st-256color" st -e tmux attach
