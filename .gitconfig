@@ -10,7 +10,8 @@
   diff =
 [core]
 [core]
-  editor = ~/contrib/giteditor/giteditor.sh
+  #editor = ~/contrib/giteditor/giteditor.sh
+  editor = vim
   excludesfile = ~/dotfiles/.gitignore_global
 [push]
   default = matching
