@@ -40,6 +40,7 @@ Bundle 'guns/xterm-color-table.vim'
 
 filetype plugin indent on " also required by vundle
 syntax on
+colo vividchalk
 
 set autoread
 set backspace=indent,eol,start
@@ -103,8 +104,6 @@ set wildignore+=.git,.svn,.hg,tmp/**
 
 
 if &t_Co >= 256 || has('gui_running')
-  colorscheme vividchalk
-
   highlight CursorLine cterm=NONE ctermbg=233 guibg=#121212#
   highlight CursorColumn cterm=NONE ctermbg=233 guibg=#121212
   highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
@@ -116,7 +115,7 @@ if &t_Co >= 256 || has('gui_running')
 
   match OverLength /\%81v.\+/
 else
-  colorscheme koehler
+  " nop!
 endif
 
 if has('title')
@@ -150,7 +149,7 @@ elseif has("unix")
     endif
     set guioptions=aegiMprLtT
   else
-    set t_ti= t_te=
+    "nop!
   endif
 
   if filereadable("/usr/local/bin/bash")
