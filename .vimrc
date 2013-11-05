@@ -37,6 +37,7 @@ Bundle 'tristen/vim-sparkup'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'DArcMattr/vim-numbertoggle'
 Bundle 'guns/xterm-color-table.vim'
+Bundle 'rking/ag.vim'
 
 filetype plugin indent on " also required by vundle
 syntax on
@@ -73,7 +74,6 @@ set nocompatible
 set nojoinspaces
 set nostartofline
 set noswapfile
-set number
 set printheader=%<%f%h%m\ %40
 set printheader=+{strftime(\"%c\"getftime(expand(\"%%\")))}%=Page\ %N
 set printoptions=formfeed:y,paper:letter,portrait:n,number:y,syntax:7
