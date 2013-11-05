@@ -15,6 +15,9 @@ Copy/paste the folliwing onto the command line:
     curl -L \
       https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh \
       | sh
+
+Refresh the login, then run the following:
+
     cp -s ~/dotfiles/dca.zsh-theme ~/.oh-my-zsh/themes/dca.zsh-theme
     rm ~/.vimrc ~/.bashrc ~/.zshrc ~/.profile ~/.bash_profile ~/.hgrc \
       ~/.gitconfig ~/.tmux.conf ~/.Xmodmap
