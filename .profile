@@ -1,5 +1,3 @@
-# $OpenBSD: dot.profile,v 1.4 2005/02/16 06:56:57 matthieu Exp $
-
 if [ -x /usr/bin/vim ]; then
   EDITOR=/usr/bin/vim
 elif [ -x /usr/local/bin/vim ]; then
@@ -19,11 +17,15 @@ export CLICOLOR=YES
 export CLICOLOR_FORCE=YES
 export LC_CTYPE=en_US.UTF-8
 export HGEDITOR=~/dotfiles/hgeditor
-export LESS="-EFMQRsX~"
+export LESS="-EFIMQRsX~ -x2"
 export LESSCHARSET=utf-8
 export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
 export MANWIDTH=80
 export HOME EDITOR
+
+if [ -x /usr/local/bin/vimpager ]; then
+  export MANPAGER=/usr/local/bin/vimpager
+fi
 
 if [[ -f /usr/bin/uname && `/usr/bin/uname` == OpenBSD ]]; then
   export PKG_PATH=http://ftp5.usa.openbsd.org/pub/OpenBSD/`uname -r`/packages/`machine -a`/
