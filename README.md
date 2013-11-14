@@ -16,9 +16,10 @@ Copy/paste the folliwing onto the command line:
       https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh \
       | sh
 
-Refresh the login, then run the following:
+Refresh the session, then run the following:
 
-    cp -s ~/dotfiles/dca.zsh-theme ~/.oh-my-zsh/themes/dca.zsh-theme
+    cp ~/dotfiles/dca.zsh-theme ~/.oh-my-zsh/themes/dca.zsh-theme
+    cp -R ~/dotfiles/neobundle ~/.oh-my-zsh/plugins/
     rm ~/.vimrc ~/.bashrc ~/.zshrc ~/.profile ~/.bash_profile ~/.hgrc \
       ~/.gitconfig ~/.tmux.conf ~/.Xmodmap
     ln -s ~/dotfiles/.vimrc
@@ -33,13 +34,14 @@ Refresh the login, then run the following:
     mkdir -p ~/{contrib,.vim/syntax}
     hg clone http://bitbucket.org/sjl/hg-prompt/ ~/contrib/hg-prompt/
     ln -s ~/dotfiles/hgcommit.vim ~/.vim/syntax/hgcommit.vim
+
     git clone https://github.com/thenigan/git-diffall.git ~/contrib/git-diffall
     git clone https://github.com/dharrigan/giteditor.git ~/contrib/giteditor
 
 Refresh your login session to pick up all the dotfile updates, then run:
 
-    vundle-update
-    vundle-clean
+    neobundle-update
+    neobundle-clean
 
 ## TODO
 
