@@ -1,12 +1,14 @@
-filetype off " required by vundle
+filetype off " required by NeoBundle
+if has('vim_starting')
+  set nocompatible
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
 
-let $GIT_SSL_NO_VERIFY = 'true'
-set runtimepath+=~/.vim/bundle/vundle/
-call vundle#rc()
+call neobundle#rc( expand('~/.vim/bundle/') )
 
-Bundle 'gmarik/vundle'
+NeoBundleFetch 'Shougo/neobundle.vim'
 if has('python')
-  Bundle 'Lokaltog/powerline', { 'rtp': 'powerline/bindings/vim/' }
+  NeoBundle 'Lokaltog/powerline', { 'rtp': 'powerline/bindings/vim/' }
 else
   set ruler
   set showmode
@@ -15,33 +17,42 @@ else
   set statusline+=%{exists('*CapsLockStatusline')?CapsLockStatusline():''}
   set statusline+=%y%=%-16(\ %l,%c-%v\ %)%P
 endif
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'embear/vim-localvimrc'
-Bundle 'ervandew/supertab'
-"Bundle 'joonty/vim-phpqa'
-Bundle 'joonty/vim-phpunitqf'
-Bundle 'joonty/vim-taggatron'
-Bundle 'joonty/vdebug'
-Bundle 'kien/ctrlp.vim'
-Bundle 'kloppster/Wordpress-Vim-Syntax'
-Bundle 'krisajenkins/vim-pipe'
-Bundle 'krisajenkins/vim-postgresql-syntax'
-Bundle 'phleet/vim-mercenary'
-Bundle 'scrooloose/syntastic'
-Bundle 'shawncplus/phpcomplete.vim'
-Bundle 'sheerun/vim-polyglot'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-vividchalk'
-Bundle 'tristen/vim-sparkup'
-Bundle 'tsaleh/vim-matchit'
-Bundle 'DArcMattr/vim-numbertoggle'
-Bundle 'guns/xterm-color-table.vim'
-Bundle 'rking/ag.vim'
+NeoBundle 'Shougo/vimproc', {
+\ 'build' : {
+\   'windows' : 'make -f make_mingw32.mak',
+\   'cygwin'  : 'make -f make_cygwin.mak',
+\   'mac'     : 'make -f make_mac.mak',
+\   'unix'    : 'make -f make_unix.mak',
+\  },
+\ }
+NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'DArcMattr/vim-numbertoggle'
+NeoBundle 'embear/vim-localvimrc'
+NeoBundle 'ervandew/supertab'
+NeoBundle 'guns/xterm-color-table.vim'
+"NeoBundle 'joonty/vim-phpqa'
+NeoBundle 'joonty/vim-phpunitqf'
+NeoBundle 'joonty/vim-taggatron'
+NeoBundle 'joonty/vdebug'
+NeoBundle 'kloppster/Wordpress-Vim-Syntax'
+NeoBundle 'krisajenkins/vim-pipe'
+NeoBundle 'krisajenkins/vim-postgresql-syntax'
+NeoBundle 'phleet/vim-mercenary'
+NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'shawncplus/phpcomplete.vim'
+NeoBundle 'sheerun/vim-polyglot'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-vividchalk'
+NeoBundle 'tristen/vim-sparkup'
+NeoBundle 'tsaleh/vim-matchit'
 
-filetype plugin indent on " also required by vundle
+filetype plugin indent on " required by NeoBundle
 syntax on
 colo vividchalk
+NeoBundleCheck
 
 set autoread
 set backspace=indent,eol,start
@@ -50,9 +61,15 @@ set diffopt=filler,vertical
 set encoding=utf-8 nobomb
 set expandtab
 set fillchars+=stl:\ ,stlnc:\
-set formatoptions=jnqr12
+set formatoptions=nqr12
 set gdefault
-set grepprg=grep\ -nH\ $*
+if executable("ag")
+  set grepprg=ag\ --nogroup\ --nocolor
+elseif executable("ack")
+  set grepprg=ack\ -H\ --nogroup\ --nocolor
+else
+  set grepprg=grep\ -nH\ $*
+endif
 set hidden
 set history=1000
 set hlsearch
@@ -70,7 +87,6 @@ set matchtime=5
 set modeline
 set mouse=a
 set nobackup
-set nocompatible
 set nojoinspaces
 set nostartofline
 set noswapfile
@@ -152,10 +168,10 @@ elseif has("unix")
     "nop!
   endif
 
-  if filereadable("/usr/local/bin/bash")
-    set shell=/usr/local/bin/bash
-  else
+  if filereadable("/bin/bash")
     set shell=/bin/bash
+  elseif filereadable("/usr/local/bin/bash")
+    set shell=/usr/local/bin/bash
   endif
   let $PAGER=''
   let $BASH_ENV = '~/.bashrc' " what to do for ksh/zsh?
@@ -177,11 +193,12 @@ if ! has('gui_running')
 endif
 
 let mapleader = ","
+let $GIT_SSL_NO_VERIFY = 'true'
 
 " key remappings - toggle spell checking
-map <F7> :setlocal spell! spelllang=en_us<cr>
-imap <F7> <C-o>:setlocal spell! spelllang=en_us<cr>
-nmap <silent> <leader>/ :nohlsearch<CR>
+map <F7> :setlocal spell! spelllang=en_us<CR>
+imap <F7> <C-o>:setlocal spell! spelllang=en_us<CR>
+imap <C-c> <CR><Esc>O
 
 map <C-Tab> gt
 map <C-S-Tab> gT
@@ -202,6 +219,8 @@ nnoremap ` '
 nnoremap ; :
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
+nnoremap <C-p> :Unite file_rec/async<CR>
+nnoremap <leader>/ :Unite grep:.<CR>
 
 "in case of derp-sudo
 cmap w!! w !sudo tee % >/dev/null
@@ -210,12 +229,26 @@ cmap w!! w !sudo tee % >/dev/null
 let g:SuperTabDefaultCompletionType = ""
 let g:localvimrc_sandbox=0
 let g:localvimrc_whitelist='/var/www/vhosts/*/.*'
-let g:ctrlp_show_hidden=1
 let g:EasyMotion_leader_key="<leader>"
 let g:NumberToggleTrigger="<leader>l"
+let g:syntastic_check_on_open=1
 let g:syntastic_php_checkers=[ 'php' ]
 let g:sparkupExecuteMapping="<leader>se"
 let g:sparkupNextMapping="<leader>sn"
+if executable('ag')
+  " Use ag in unite grep source.
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts =
+  \ '--line-numbers --nocolor --nogroup --hidden --ignore ' .
+  \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+  let g:unite_source_grep_recursive_opt = ''
+elseif executable('ack-grep')
+  " Use ack in unite grep source.
+  let g:unite_source_grep_command = 'ack-grep'
+  let g:unite_source_grep_default_opts =
+  \ '--no-heading --no-color -a -H'
+  let g:unite_source_grep_recursive_opt = ''
+endif
 
 command! -nargs=1 Silent |
 \ execute ':silent !'.<q-args> |
