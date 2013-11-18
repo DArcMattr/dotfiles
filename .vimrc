@@ -95,6 +95,7 @@ set printheader=+{strftime(\"%c\"getftime(expand(\"%%\")))}%=Page\ %N
 set printoptions=formfeed:y,paper:letter,portrait:n,number:y,syntax:7
 set printoptions+=left:5mm,right:5mm,top:10mm,bottom:5mm
 set scrolloff=3
+set sessionoptions-=options " Don't Save Options
 set shiftwidth=2
 set shortmess=atIA
 set showbreak=>
@@ -254,7 +255,30 @@ command! -nargs=1 Silent |
 \ execute ':silent !'.<q-args> |
 \ execute ':redraw!'
 
+command! -nargs=* -complete=help Help vertical belowright help <args>
+
+" From http://stackoverflow.com/a/5149992
+function! SaveSess()
+  execute 'mksession! ' . getcwd() . '/.session.vim'
+endfunction
+
+function! RestoreSess()
+  if filereadable( getcwd() . '/.session.vim' )
+    execute 'source ' . getcwd() . '/.session.vim'
+    if bufexists(1)
+      for l in range( 1, bufnr( '$' ) )
+        if bufwinnr( l ) == -1
+          exec 'sbuffer ' . l
+        endif
+      endfor
+    endif
+  endif
+endfunction
+
 if has('autocmd')
+  autocmd VimLeave * call SaveSess()
+  autocmd VimEnter * nested call RestoreSess()
+
   if exists('+omnifunc')
     autocmd Filetype *
     \  if &omnifunc == "" |
