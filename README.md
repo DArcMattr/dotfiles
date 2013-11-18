@@ -22,6 +22,7 @@ Refresh the session, then run the following:
     cp -R ~/dotfiles/neobundle ~/.oh-my-zsh/plugins/
     rm ~/.vimrc ~/.bashrc ~/.zshrc ~/.profile ~/.bash_profile ~/.hgrc \
       ~/.gitconfig ~/.tmux.conf ~/.Xmodmap
+    mv ~/.ssh/config ~/.ssh/config.orig
     ln -s ~/dotfiles/.vimrc
     ln -s ~/dotfiles/.bashrc
     ln -s ~/dotfiles/.zshrc
@@ -31,6 +32,8 @@ Refresh the session, then run the following:
     ln -s ~/dotfiles/.gitconfig
     ln -s ~/dotfiles/.tmux.conf
     ln -s ~/dotfiles/.Xmodmap
+    ln -s ~/dotfiles/.Xmodmap
+    ln -s ~/dotfiles/sshconfig ~/.ssh/config
     mkdir -p ~/{contrib,.vim/syntax}
     hg clone http://bitbucket.org/sjl/hg-prompt/ ~/contrib/hg-prompt/
     ln -s ~/dotfiles/hgcommit.vim ~/.vim/syntax/hgcommit.vim
