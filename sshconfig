@@ -1,0 +1,59 @@
+# vim:set ft=sshconfig:
+Host *
+  PreferredAuthentications publickey,keyboard-interactive,password
+  ServerAliveInterval 60
+  ServerAliveCountMax 3
+  Compression yes
+  CompressionLevel 9
+  IdentityFile ~/.ssh/id_rsa
+  ControlMaster auto
+  ControlPath ~/.ssh/socket-%r@%h:%p
+  AddressFamily inet
+  CheckHostIP no
+  PermitLocalCommand yes
+  LocalCommand if [[ $TERM == screen* ]]; then printf "\033k%h\033\\"; fi
+
+Host cor
+  HostName cultureofreason.org
+  User ariuser
+
+Host bb
+  HostName bitbucket.org
+  User hg
+
+Host github
+  HostName github.com
+  User git
+
+Host demo
+  HostName demo.aynrand.org
+  User darceneaux
+
+Host mac
+  HostName 10.10.10.200
+  ProxyCommand ssh -oCiphers=arcfour -oClearAllForwardings=yes darceneaux@demo.aynrand.org nc %h %p -w 10 2> /dev/null
+  User darceneaux
+
+Host geekisp
+  HostName login.geekisp.com
+  User DArc
+
+Host lab305
+  HostName betaari.lab305.com
+  User django
+
+Host canada
+  HostName server69.web-hosting.com
+  User aynrvyxe
+  Port 21098
+
+Host vbox
+  HostName virtual.dev
+  User darc
+
+Host do
+  HostName do.davidthemachine.org
+  User darc
+
+Host local
+  HostName localhost
