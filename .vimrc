@@ -48,6 +48,7 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-vividchalk'
 NeoBundle 'tristen/vim-sparkup'
 NeoBundle 'tsaleh/vim-matchit'
+NeoBundle 'vim-scripts/vcscommand.vim'
 
 filetype plugin indent on " required by NeoBundle
 syntax on
@@ -121,13 +122,14 @@ set wildignore+=.git,.svn,.hg,tmp/**
 
 
 if &t_Co >= 256 || has('gui_running')
-  highlight CursorLine cterm=NONE ctermbg=233 guibg=#121212#
-  highlight CursorColumn cterm=NONE ctermbg=233 guibg=#121212
+  highlight CursorLine cterm=NONE ctermbg=237 guibg=#3a3a3a
+  highlight CursorColumn cterm=NONE ctermbg=237 guibg=#3a3a3a
   highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
   highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
   highlight NonText ctermfg=235 guifg=#262626
   highlight OverLength ctermbg=234 ctermfg=249
   highlight OverLength guibg=#1c1c1c guifg=#b2b2b2
+  highlight Search ctermfg=222 guifg=#ffdf87
   highlight SpecialKey ctermfg=235 guifg=#262626
 
   match OverLength /\%81v.\+/
@@ -153,8 +155,11 @@ if has("win32")
 elseif has("unix")
   if has("gui_running")
     if has('gui_macvim')
-      set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11
-      set printfont=DejaVu\ Sans\ Mono\ for\ Powerline:h11
+      set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
+      set printfont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
+      " set guioptions-=rR
+      set fullscreen
+      set fuoptions=maxvert,maxhorz
     else
       set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
       set printfont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
@@ -164,7 +169,7 @@ elseif has("unix")
       "set guioptions=-Mt
     else
     endif
-    set guioptions=aegiMprLtT
+    " set guioptions=aegiMpLtT
   else
     "nop!
   endif
@@ -214,6 +219,7 @@ nnoremap gj j
 nnoremap k gk
 nnoremap gk k
 nmap . .'[
+nmap <leader>q :nohlsearch<CR>
 
 nnoremap ' `
 nnoremap ` '
@@ -258,6 +264,9 @@ command! -nargs=1 Silent |
 command! -nargs=* -complete=help Help vertical belowright help <args>
 
 " From http://stackoverflow.com/a/5149992
+" not feasible to use in a general setting, but handy in a .lvimrc
+"autocmd VimLeave * call SaveSess()
+"autocmd VimEnter * nested call RestoreSess()
 function! SaveSess()
   execute 'mksession! ' . getcwd() . '/.session.vim'
 endfunction
@@ -276,9 +285,6 @@ function! RestoreSess()
 endfunction
 
 if has('autocmd')
-  autocmd VimLeave * call SaveSess()
-  autocmd VimEnter * nested call RestoreSess()
-
   if exists('+omnifunc')
     autocmd Filetype *
     \  if &omnifunc == "" |
