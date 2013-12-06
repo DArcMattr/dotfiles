@@ -157,7 +157,7 @@ elseif has("unix")
     if has('gui_macvim')
       set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
       set printfont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
-      " set guioptions-=rR
+      set guioptions=egm
       set fullscreen
       set fuoptions=maxvert,maxhorz
     else
