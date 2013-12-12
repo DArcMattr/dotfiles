@@ -10,12 +10,12 @@ Host *
   ControlPath ~/.ssh/socket-%r@%h:%p
   AddressFamily inet
   CheckHostIP no
-  PermitLocalCommand yes
   LocalCommand if [[ $TERM == screen* ]]; then printf "\033k%h\033\\"; fi
 
 Host cor
   HostName cultureofreason.org
   User ariuser
+  PermitLocalCommand yes
 
 Host bb
   HostName bitbucket.org
@@ -24,10 +24,12 @@ Host bb
 Host github
   HostName github.com
   User git
+  PermitLocalCommand no
 
 Host demo
   HostName demo.aynrand.org
   User darceneaux
+  PermitLocalCommand yes
 
 Host mac
   HostName 10.10.10.200
@@ -37,23 +39,29 @@ Host mac
 Host geekisp
   HostName login.geekisp.com
   User DArc
+  PermitLocalCommand yes
 
 Host lab305
   HostName betaari.lab305.com
   User django
+  PermitLocalCommand yes
 
 Host canada
   HostName server69.web-hosting.com
   User aynrvyxe
   Port 21098
+  PermitLocalCommand yes
 
 Host vbox
   HostName virtual.dev
   User darc
+  PermitLocalCommand yes
 
 Host do
   HostName do.davidthemachine.org
   User darc
+  PermitLocalCommand yes
 
 Host local
   HostName localhost
+  PermitLocalCommand yes
