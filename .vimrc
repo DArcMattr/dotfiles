@@ -25,6 +25,11 @@ NeoBundle 'Shougo/vimproc', {
 \   'unix'    : 'make -f make_unix.mak',
 \  },
 \ }
+NeoBundle 'Valloric/YouCompleteMe.git', {
+\   'build' : {
+\     'unix' : './install.sh --clang-completer --system-libclang',
+\   },
+\ }
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'DArcMattr/vim-numbertoggle'
 NeoBundle 'embear/vim-localvimrc'
@@ -206,13 +211,14 @@ map <F7> :setlocal spell! spelllang=en_us<CR>
 imap <F7> <C-o>:setlocal spell! spelllang=en_us<CR>
 imap <C-c> <CR><Esc>O
 
-map <C-Tab> gt
-map <C-S-Tab> gT
+"map <C-Tab> gt
+"map <C-S-Tab> gT
 map <leader>gs :Gstatus<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>gc :Gcommit<CR>
 map <leader>gl :Glog<CR>
 map <leader>gp :Gpush<CR>
+map <leader>os :nested call RestoreSess()
 
 nnoremap j gj
 nnoremap gj j
@@ -265,8 +271,6 @@ command! -nargs=* -complete=help Help vertical belowright help <args>
 
 " From http://stackoverflow.com/a/5149992
 " not feasible to use in a general setting, but handy in a .lvimrc
-"autocmd VimLeave * call SaveSess()
-"autocmd VimEnter * nested call RestoreSess()
 function! SaveSess()
   execute 'mksession! ' . getcwd() . '/.session.vim'
 endfunction
@@ -332,6 +336,11 @@ if has('autocmd')
     autocmd!
     autocmd InsertEnter * set nolist
     autocmd InsertLeave * set list
+  augroup END
+
+  augroup SaveSession
+    autocmd!
+    autocmd VimLeave * call SaveSess()
   augroup END
 
   " Perl
