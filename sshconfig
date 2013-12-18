@@ -11,6 +11,11 @@ Host *
   AddressFamily inet
   CheckHostIP no
   LocalCommand if [[ $TERM == screen* ]]; then printf "\033k%h\033\\"; fi
+  PermitLocalCommand no
+
+Host live
+  HostName cultureofreason.org
+  User ariuser
 
 Host cor
   HostName cultureofreason.org
