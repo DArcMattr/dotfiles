@@ -35,7 +35,7 @@ NeoBundle 'DArcMattr/vim-numbertoggle'
 NeoBundle 'embear/vim-localvimrc'
 NeoBundle 'ervandew/supertab'
 NeoBundle 'guns/xterm-color-table.vim'
-"NeoBundle 'joonty/vim-phpqa'
+NeoBundle 'joonty/vim-phpqa'
 NeoBundle 'joonty/vim-phpunitqf'
 NeoBundle 'joonty/vim-taggatron'
 NeoBundle 'joonty/vdebug'
@@ -218,7 +218,7 @@ map <leader>gd :Gdiff<CR>
 map <leader>gc :Gcommit<CR>
 map <leader>gl :Glog<CR>
 map <leader>gp :Gpush<CR>
-map <leader>os :nested call RestoreSess()
+map <leader>os :call RestoreSess()
 
 nnoremap j gj
 nnoremap gj j
@@ -239,15 +239,19 @@ nnoremap <leader>/ :Unite grep:.<CR>
 cmap w!! w !sudo tee % >/dev/null
 
 " plugin specific settings
+let g:EasyMotion_leader_key="<leader>"
+let g:NumberToggleTrigger="<leader>l"
 let g:SuperTabDefaultCompletionType = ""
 let g:localvimrc_sandbox=0
 let g:localvimrc_whitelist='/var/www/vhosts/*/.*'
-let g:EasyMotion_leader_key="<leader>"
-let g:NumberToggleTrigger="<leader>l"
-let g:syntastic_check_on_open=1
-let g:syntastic_php_checkers=[ 'php' ]
+let g:phpqa_codecoverage_autorun=0 " default is 0
+let g:phpqa_codesniffer_autorun=0  " default is 1
+let g:phpqa_messdetecter_autorun=0 " default is 1
+let g:phpqa_open_loc=0             " default is 1
 let g:sparkupExecuteMapping="<leader>se"
 let g:sparkupNextMapping="<leader>sn"
+let g:syntastic_check_on_open=0
+let g:syntastic_php_checkers=[ 'php' ]
 if executable('ag')
   " Use ag in unite grep source.
   let g:unite_source_grep_command = 'ag'
