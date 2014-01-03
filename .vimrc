@@ -62,9 +62,11 @@ NeoBundleCheck
 
 set autoread
 set backspace=indent,eol,start
+set clipboard=unnamed
 set colorcolumn=+1
 set diffopt=filler,vertical
 set encoding=utf-8 nobomb
+set esckeys
 set expandtab
 set fillchars+=stl:\ ,stlnc:\
 set formatoptions=nqr12
@@ -201,6 +203,8 @@ if ! has('gui_running')
       autocmd InsertLeave * set timeoutlen=1000
     augroup END
   endif
+else
+  set linespace=1
 endif
 
 let mapleader = ","
@@ -342,10 +346,10 @@ if has('autocmd')
     autocmd InsertLeave * set list
   augroup END
 
-  augroup SaveSession
-    autocmd!
-    autocmd VimLeave * call SaveSess()
-  augroup END
+"  augroup SaveSession
+"    autocmd!
+"    autocmd VimLeave * call SaveSess()
+"  augroup END
 
   " Perl
   autocmd BufNewFile,BufRead,BufEnter *.pl,*.pm set makeprg=perl
