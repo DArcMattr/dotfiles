@@ -34,7 +34,7 @@ DISABLE_CORRECTION="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git mercurial neobundle vi-mode tmux pip git-flow svn brew)
+plugins=(git mercurial neobundle vi-mode tmux pip svn brew)
 
 source $ZSH/oh-my-zsh.sh
 source ~/.profile
@@ -47,6 +47,8 @@ unsetopt inc_append_history
 setopt append_history
 setopt hist_ignore_dups
 setopt auto_cd
+setopt nohup
+setopt notify
 
 set -o vi
 
