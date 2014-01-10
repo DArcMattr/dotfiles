@@ -5,7 +5,10 @@ Clone to `~/dotfiles`
 ## Requirements & Assumptions
 
 * Vim with the Python 2.7 engine compiled in
-* `hg` and `git` source control packages
+* `zsh` is available as a shell
+* `hg` and `git` source control programs
+* `hggit` package is installed through pip or package control
+* `composer.phar` is installed on a system-wide level
 
 ## Installation:
 
@@ -46,23 +49,8 @@ Refresh your login session to pick up all the dotfile updates, then run:
     neobundle-update
     neobundle-clean
 
-## TODO
-
-1. `xkeycaps` usage instructions, .Xmodmap is a product of the utility, and
-   different machines may have different keycodes
-
-## Vagrant config for image
-
-    vagrant box add \
-      FBSD_devel \
-      https://s3.amazonaws.com/VagrantBoxen/freebsd_amd64_zfs.box
-    vagrant init FBSD_devel
-    vagrant up
-
 ## `st` notes
 
-Under KDE:
-
-For running st:
+For running `st` under KDE:
 
     kstart --maximize --windowclass "st-256color" st -e tmux attach
