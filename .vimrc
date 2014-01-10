@@ -53,7 +53,10 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-vividchalk'
 NeoBundle 'tristen/vim-sparkup'
 NeoBundle 'tsaleh/vim-matchit'
+NeoBundle 'vim-scripts/DirDiff.vim'
 NeoBundle 'vim-scripts/vcscommand.vim'
+NeoBundle 'xolox/vim-misc'
+NeoBundle 'xolox/vim-session'
 
 filetype plugin indent on " required by NeoBundle
 syntax on
@@ -62,7 +65,7 @@ NeoBundleCheck
 
 set autoread
 set backspace=indent,eol,start
-set clipboard=unnamed
+"set clipboard=unnamed
 set colorcolumn=+1
 set diffopt=filler,vertical
 set encoding=utf-8 nobomb
@@ -104,6 +107,7 @@ set printoptions=formfeed:y,paper:letter,portrait:n,number:y,syntax:7
 set printoptions+=left:5mm,right:5mm,top:10mm,bottom:5mm
 set scrolloff=3
 set sessionoptions-=options " Don't Save Options
+set shiftround
 set shiftwidth=2
 set shortmess=atIA
 set showbreak=>
@@ -243,6 +247,7 @@ nnoremap <leader>/ :Unite grep:.<CR>
 cmap w!! w !sudo tee % >/dev/null
 
 " plugin specific settings
+let g:DirDiffDynamicDiffText = 1
 let g:EasyMotion_leader_key="<leader>"
 let g:NumberToggleTrigger="<leader>l"
 let g:SuperTabDefaultCompletionType = ""
@@ -276,25 +281,6 @@ command! -nargs=1 Silent |
 \ execute ':redraw!'
 
 command! -nargs=* -complete=help Help vertical belowright help <args>
-
-" From http://stackoverflow.com/a/5149992
-" not feasible to use in a general setting, but handy in a .lvimrc
-function! SaveSess()
-  execute 'mksession! ' . getcwd() . '/.session.vim'
-endfunction
-
-function! RestoreSess()
-  if filereadable( getcwd() . '/.session.vim' )
-    execute 'source ' . getcwd() . '/.session.vim'
-    if bufexists(1)
-      for l in range( 1, bufnr( '$' ) )
-        if bufwinnr( l ) == -1
-          exec 'sbuffer ' . l
-        endif
-      endfor
-    endif
-  endif
-endfunction
 
 if has('autocmd')
   if exists('+omnifunc')
@@ -346,11 +332,6 @@ if has('autocmd')
     autocmd InsertLeave * set list
   augroup END
 
-"  augroup SaveSession
-"    autocmd!
-"    autocmd VimLeave * call SaveSess()
-"  augroup END
-
   " Perl
   autocmd BufNewFile,BufRead,BufEnter *.pl,*.pm set makeprg=perl
   autocmd BufNewFile,BufRead,BufEnter *.pl,*.pm compiler perl
@@ -364,7 +345,7 @@ if has('autocmd')
   autocmd FileType python set shiftwidth=4 tabstop=4 softtabstop=4 smarttab
   \ expandtab
   autocmd BufNewFile,BufRead,BufEnter *.py set autoindent tabstop=4
-  \ softtabstop=4 smarttab expandtab formatoptions=croql
+  \ softtabstop=4 smarttab formatoptions=croql
   autocmd FileType python :let b:vimpipe_command="python"
   autocmd FileType python :let b:vimpipe_filetype="python"
 
@@ -388,7 +369,7 @@ if has('autocmd')
   autocmd BufNewFile,BufRead,BufEnter *.conf setf apache
 
   " Markdown
-  autocmd BufNewFile,BufRead,BufEnter *.md setf markdown
+  autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown setf markdown
 
   " tmux
   autocmd BufNewFile,BufRead,BufEnter .tmux.conf setf tmux
