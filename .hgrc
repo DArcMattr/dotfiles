@@ -1,6 +1,6 @@
 # vim:ft=cfg:
 [ui]
-username = David Arceneaux <darceneaux@aynrand.org>
+username = David Arceneaux <david@davidthemachine.org>
 merge = vimdiff
 
 [extensions]
@@ -11,10 +11,10 @@ color=
 fetch=
 record=
 bookmarks=
-hgext.bookmarks=
 eol=
 prompt=~/contrib/hg-prompt/prompt.py
-#hggit=
+hggit=
+extdiff=
 
 [alias]
 log=glog
@@ -38,3 +38,7 @@ fix-trailing-newline=true
 [trusted]
 users=root,darc,davidarceneaux,darceneaux,jeriksen,www,_www,,80
 groups=_www,www,apache,wheel,80
+
+[extdiff]
+cmd.vdiff=vim
+opts.vdiff=-f '+next' '+execute "DirDiff" fnameescape(argv(0)) fnameescape(argv(1))'
