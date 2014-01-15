@@ -30,11 +30,11 @@ NeoBundle 'Valloric/YouCompleteMe.git', {
 \     'unix' : './install.sh --clang-completer --system-libclang',
 \   },
 \ }
-NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'DArcMattr/vim-numbertoggle'
 NeoBundle 'embear/vim-localvimrc'
 NeoBundle 'ervandew/supertab'
 NeoBundle 'guns/xterm-color-table.vim'
+NeoBundle 'haya14busa/vim-easymotion'
 NeoBundle 'joonty/vim-phpqa'
 NeoBundle 'joonty/vim-phpunitqf'
 NeoBundle 'joonty/vim-taggatron'
@@ -65,7 +65,6 @@ NeoBundleCheck
 
 set autoread
 set backspace=indent,eol,start
-"set clipboard=unnamed
 set colorcolumn=+1
 set diffopt=filler,vertical
 set encoding=utf-8 nobomb
