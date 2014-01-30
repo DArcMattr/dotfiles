@@ -211,7 +211,6 @@ else
 endif
 
 let mapleader = ","
-let $GIT_SSL_NO_VERIFY = 'true'
 
 " key remappings - toggle spell checking
 map <F7> :setlocal spell! spelllang=en_us<CR>
@@ -241,11 +240,15 @@ nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 nnoremap <C-p> :Unite file_rec/async<CR>
 nnoremap <leader>/ :Unite grep:.<CR>
+" replace s & S mappings
+nnoremap s :<C-U>exec "normal i" . RepeatChar( nr2char( getchar() ), v:count1 )<CR>
+nnoremap S :<C-U>exec "normal a" . RepeatChar( nr2char( getchar() ), v:count1 )<CR>
 
 "in case of derp-sudo
 cmap w!! w !sudo tee % >/dev/null
 
 " plugin specific settings
+let $GIT_SSL_NO_VERIFY = 'true'
 let g:DirDiffDynamicDiffText = 1
 let g:EasyMotion_leader_key="<leader>"
 let g:NumberToggleTrigger="<leader>l"
@@ -260,6 +263,8 @@ let g:sparkupExecuteMapping="<leader>se"
 let g:sparkupNextMapping="<leader>sn"
 let g:syntastic_check_on_open=0
 let g:syntastic_php_checkers=[ 'php' ]
+let g:syntastic_error_symbol='⧰'
+let g:syntastic_warning_symbol='⚠'
 if executable('ag')
   " Use ag in unite grep source.
   let g:unite_source_grep_command = 'ag'
@@ -280,6 +285,10 @@ command! -nargs=1 Silent |
 \ execute ':redraw!'
 
 command! -nargs=* -complete=help Help vertical belowright help <args>
+
+function! RepeatChar( char, count )
+  return repeat( a:char, a:count )
+endfunction
 
 if has('autocmd')
   if exists('+omnifunc')
