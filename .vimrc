@@ -250,17 +250,19 @@ cmap w!! w !sudo tee % >/dev/null
 " plugin specific settings
 let $GIT_SSL_NO_VERIFY = 'true'
 let g:DirDiffDynamicDiffText = 1
-let g:EasyMotion_leader_key="<leader>"
-let g:NumberToggleTrigger="<leader>l"
-let g:SuperTabDefaultCompletionType = ""
+let g:EasyMotion_leader_key='<leader>'
+let g:NumberToggleTrigger='<leader>l'
+let g:SuperTabDefaultCompletionType = ''
+let g:VCSCommandSplit='vertical'
 let g:localvimrc_sandbox=0
 let g:localvimrc_whitelist='/var/www/vhosts/*/.*'
 let g:phpqa_codecoverage_autorun=0 " default is 0
 let g:phpqa_codesniffer_autorun=0  " default is 1
 let g:phpqa_messdetecter_autorun=0 " default is 1
 let g:phpqa_open_loc=0             " default is 1
-let g:sparkupExecuteMapping="<leader>se"
-let g:sparkupNextMapping="<leader>sn"
+let g:session_autosave='no'
+let g:sparkupExecuteMapping='<leader>se'
+let g:sparkupNextMapping='<leader>sn'
 let g:syntastic_check_on_open=0
 let g:syntastic_php_checkers=[ 'php' ]
 let g:syntastic_error_symbol='⧰'
@@ -381,7 +383,4 @@ if has('autocmd')
 
   " tmux
   autocmd BufNewFile,BufRead,BufEnter .tmux.conf setf tmux
-
-  " SCSS
-  autocmd BufNewFile,BufRead,BufEnter *.scss setf scss
 endif
