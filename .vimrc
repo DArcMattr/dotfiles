@@ -31,23 +31,24 @@ NeoBundle 'Valloric/YouCompleteMe.git', {
 \   },
 \ }
 NeoBundle 'DArcMattr/vim-numbertoggle'
+NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'Shougo/unite.vim'
 NeoBundle 'embear/vim-localvimrc'
 NeoBundle 'ervandew/supertab'
 NeoBundle 'guns/xterm-color-table.vim'
 NeoBundle 'haya14busa/vim-easymotion'
+NeoBundle 'joonty/vdebug'
 NeoBundle 'joonty/vim-phpqa'
 NeoBundle 'joonty/vim-phpunitqf'
 NeoBundle 'joonty/vim-taggatron'
-NeoBundle 'joonty/vdebug'
 NeoBundle 'kloppster/Wordpress-Vim-Syntax'
 NeoBundle 'krisajenkins/vim-pipe'
 NeoBundle 'krisajenkins/vim-postgresql-syntax'
 NeoBundle 'phleet/vim-mercenary'
-NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'reedes/vim-wheel'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'shawncplus/phpcomplete.vim'
 NeoBundle 'sheerun/vim-polyglot'
-NeoBundle 'Shougo/unite.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-vividchalk'
@@ -105,7 +106,7 @@ set printheader=+{strftime(\"%c\"getftime(expand(\"%%\")))}%=Page\ %N
 set printoptions=formfeed:y,paper:letter,portrait:n,number:y,syntax:7
 set printoptions+=left:5mm,right:5mm,top:10mm,bottom:5mm
 set scrolloff=3
-set sessionoptions-=options " Don't Save Options
+set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
 set shiftround
 set shiftwidth=2
 set shortmess=atIA
@@ -260,6 +261,7 @@ let g:phpqa_codecoverage_autorun=0 " default is 0
 let g:phpqa_codesniffer_autorun=0  " default is 1
 let g:phpqa_messdetecter_autorun=0 " default is 1
 let g:phpqa_open_loc=0             " default is 1
+let g:session_autoload='no'
 let g:session_autosave='no'
 let g:sparkupExecuteMapping='<leader>se'
 let g:sparkupNextMapping='<leader>sn'
@@ -267,6 +269,7 @@ let g:syntastic_check_on_open=0
 let g:syntastic_php_checkers=[ 'php' ]
 let g:syntastic_error_symbol='⧰'
 let g:syntastic_warning_symbol='⚠'
+let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 if executable('ag')
   " Use ag in unite grep source.
   let g:unite_source_grep_command = 'ag'
@@ -342,6 +345,8 @@ if has('autocmd')
     autocmd InsertLeave * set list
   augroup END
 
+  " common filetypes below
+
   " Perl
   autocmd BufNewFile,BufRead,BufEnter *.pl,*.pm set makeprg=perl
   autocmd BufNewFile,BufRead,BufEnter *.pl,*.pm compiler perl
@@ -363,8 +368,6 @@ if has('autocmd')
   autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8 softtabstop=8
   let c_space_errors=1
 
-  " PHP
-
   " hg commit messages
   autocmd BufNewFile,BufRead,BufEnter msg setf hgcommit
   autocmd FileType hgcommit set textwidth=72
@@ -375,12 +378,12 @@ if has('autocmd')
   autocmd FileType postgresql :let b:vimpipe_command="psql mydatabase"
   autocmd FileType postgresql :let b:vimpipe_filetype="postgresql"
 
-  " Apache
-  autocmd BufNewFile,BufRead,BufEnter *.conf setf apache
-
   " Markdown
   autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown setf markdown
 
   " tmux
-  autocmd BufNewFile,BufRead,BufEnter .tmux.conf setf tmux
+  autocmd BufNewFile,BufRead,BufEnter .tmux*,*/tmux-sessions/* setf tmux
+
+  " Apache
+  autocmd BufNewFile,BufRead,BufEnter *.conf setf apache
 endif
