@@ -130,9 +130,9 @@ clearcache() {
 
 sssh() {
   if ! type "autossh" > /dev/null; then
-    (ssh "$@" -t 'tmux -2 attach || tmux -2 new') 2>/dev/null
+    (ssh "$@" -t 'tmux -2u attach || tmux -2u new') 2>/dev/null
   else
-    (export AUTOSSH_PORT=0 && autossh "$@" -t 'tmux -2 attach || tmux -2 new') 2>/dev/null
+    (export AUTOSSH_PORT=0 && autossh "$@" -t 'tmux -2u attach || tmux -2u new') 2>/dev/null
   fi
 }
 
