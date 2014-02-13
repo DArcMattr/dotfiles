@@ -60,5 +60,5 @@ Host local
 
 Host centuria
   HostName centuria-guild.org
-  Port 34245
+  Port 32323
   User darc
