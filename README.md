@@ -21,6 +21,7 @@ Copy/paste the folliwing onto the command line:
 
 Refresh the session, then run the following:
 
+    chmod 600 ~/dotfiles/sshconfig
     cp ~/dotfiles/dca.zsh-theme ~/.oh-my-zsh/themes/dca.zsh-theme
     cp -R ~/dotfiles/neobundle ~/.oh-my-zsh/plugins/
     rm ~/.vimrc ~/.bashrc ~/.zshrc ~/.profile ~/.bash_profile ~/.hgrc \
