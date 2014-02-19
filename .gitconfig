@@ -6,9 +6,10 @@
 [diff]
   external = ~/dotfiles/git_diff_wrapper
   tool = vimdiff
+[format]
+  pretty = oneline
 [pager]
   diff =
-[core]
 [core]
   #editor = ~/contrib/giteditor/giteditor.sh
   editor = vim

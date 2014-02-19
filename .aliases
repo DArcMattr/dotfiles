@@ -184,3 +184,11 @@ dosass() {
     sass --scss --compass -lC "$1" > "$2"
   fi
 }
+
+catmd() {
+  if [ -x elinks ]; then
+    pandoc "$@" | elinks -force-html
+  else
+    pandoc "$@" | lynx -stdin
+  fi
+}

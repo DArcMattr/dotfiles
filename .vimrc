@@ -9,6 +9,11 @@ call neobundle#rc( expand('~/.vim/bundle/') )
 NeoBundleFetch 'Shougo/neobundle.vim'
 if has('python')
   NeoBundle 'Lokaltog/powerline', { 'rtp': 'powerline/bindings/vim/' }
+  NeoBundle 'Valloric/YouCompleteMe.git', {
+  \   'build' : {
+  \     'unix' : './install.sh --clang-completer --system-libclang',
+  \   },
+  \ }
 else
   set ruler
   set showmode
@@ -24,11 +29,6 @@ NeoBundle 'Shougo/vimproc', {
 \   'mac'     : 'make -f make_mac.mak',
 \   'unix'    : 'make -f make_unix.mak',
 \  },
-\ }
-NeoBundle 'Valloric/YouCompleteMe.git', {
-\   'build' : {
-\     'unix' : './install.sh --clang-completer --system-libclang',
-\   },
 \ }
 NeoBundle 'DArcMattr/vim-numbertoggle'
 NeoBundle 'Raimondi/delimitMate'
@@ -54,8 +54,8 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-vividchalk'
 NeoBundle 'tristen/vim-sparkup'
 NeoBundle 'tsaleh/vim-matchit'
-NeoBundle 'vim-scripts/DirDiff.vim'
 NeoBundle 'vim-scripts/vcscommand.vim'
+NeoBundle 'vim-scripts/smarty-syntax'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-session'
 
@@ -101,6 +101,7 @@ set nobackup
 set nojoinspaces
 set nostartofline
 set noswapfile
+set nowrap
 set printheader=%<%f%h%m\ %40
 set printheader=+{strftime(\"%c\"getftime(expand(\"%%\")))}%=Page\ %N
 set printoptions=formfeed:y,paper:letter,portrait:n,number:y,syntax:7
@@ -345,6 +346,8 @@ if has('autocmd')
     autocmd InsertLeave * set list
   augroup END
 
+  "autocmd BufRead * try | execute "compiler ".&filetype | catch /./ | endtry
+
   " common filetypes below
 
   " Perl
@@ -367,6 +370,9 @@ if has('autocmd')
   " C
   autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8 softtabstop=8
   let c_space_errors=1
+
+  " golang
+  autocmd FileType go autocmd BufWritePre <buffer> Fmt
 
   " hg commit messages
   autocmd BufNewFile,BufRead,BufEnter msg setf hgcommit
