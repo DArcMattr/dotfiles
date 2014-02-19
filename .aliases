@@ -186,9 +186,11 @@ dosass() {
 }
 
 catmd() {
+  TMPFILE=`mktemp /tmp/pandoc.XXXXXX.html`
+  pandoc -o "$TMPFILE" "$@"
   if [ -x elinks ]; then
-    pandoc "$@" | elinks -force-html
+    elinks $TMPFILE
   else
-    pandoc "$@" | lynx -stdin
+    lynx $TMPFILE
   fi
 }
