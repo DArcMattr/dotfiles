@@ -23,6 +23,7 @@ alias key='man -k'
 alias info='info --vi-keys'
 alias cycapache='/usr/bin/sudo /usr/bin/pkill -SIGQUIT -U www; /bin/sleep 2; /usr/bin/sudo /usr/sbin/apachectl start'
 
+## Mark Jaquith block start
 # search development scripts
 jsgrep() {
   find . \( -name "*.dev.js" -print \)  | xargs grep -n "$1"
@@ -86,6 +87,7 @@ alias ctp=clean_patch
 mod(){
   svn stat --ignore-externals | grep '^[^?X]'
 }
+## Mark Jaquith block end
 
 movetrash() {
   if [ ! -d ~/.Trash ]; then
@@ -186,11 +188,11 @@ dosass() {
 }
 
 catmd() {
-  TMPFILE=`mktemp /tmp/pandoc.XXXXXX.html`
-  pandoc -o "$TMPFILE" "$@"
+  TMPFILE=`mktemp -t pandoc.$RANDOM.html`
+  pandoc "$@" >> "$TMPFILE"
   if [ -x elinks ]; then
-    elinks $TMPFILE
+    elinks -force-html $TMPFILE
   else
-    lynx $TMPFILE
+    lynx -force_html $TMPFILE
   fi
 }
