@@ -33,6 +33,7 @@ NeoBundle 'Shougo/vimproc', {
 NeoBundle 'DArcMattr/vim-numbertoggle'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'embear/vim-localvimrc'
 NeoBundle 'ervandew/supertab'
 NeoBundle 'guns/xterm-color-table.vim'
@@ -64,10 +65,13 @@ syntax on
 colo vividchalk
 NeoBundleCheck
 
+set autoindent
 set autoread
 set backspace=indent,eol,start
 set colorcolumn=+1
+set complete-=i
 set diffopt=filler,vertical
+set display+=lastline
 set encoding=utf-8 nobomb
 set esckeys
 set expandtab
@@ -102,6 +106,7 @@ set nojoinspaces
 set nostartofline
 set noswapfile
 set nowrap
+set nrformats-=octal
 set printheader=%<%f%h%m\ %40
 set printheader=+{strftime(\"%c\"getftime(expand(\"%%\")))}%=Page\ %N
 set printoptions=formfeed:y,paper:letter,portrait:n,number:y,syntax:7
@@ -113,25 +118,29 @@ set shiftwidth=2
 set shortmess=atIA
 set showbreak=>
 set showmatch
+set sidescrolloff=5
 set smartcase
 set smartindent
+set smarttab
 set softtabstop=2
 set splitbelow
 set splitright
+set tabstop=2
 set textwidth=80
-set ttyfast
 if &term =~? 'mlterm\|xterm\|screen'
   set t_Co=256
 else
   set t_Co=88
 endif
-set tabstop=2
+set ttimeout
+set ttyfast
 set virtualedit=all
 set visualbell
 set wildmenu
 set wildmode=list:longest,list:full
 set wildignore+=.git,.svn,.hg,tmp/**
 
+setlocal bt=nofile bh=wipe nobl noswf ro
 
 if &t_Co >= 256 || has('gui_running')
   highlight CursorLine cterm=NONE ctermbg=237 guibg=#3a3a3a
@@ -245,6 +254,7 @@ nnoremap <leader>/ :Unite grep:.<CR>
 " replace s & S mappings
 nnoremap s :<C-U>exec "normal i" . RepeatChar( nr2char( getchar() ), v:count1 )<CR>
 nnoremap S :<C-U>exec "normal a" . RepeatChar( nr2char( getchar() ), v:count1 )<CR>
+nnoremap <buffer> q :bw<CR>
 
 "in case of derp-sudo
 cmap w!! w !sudo tee % >/dev/null
