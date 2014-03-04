@@ -140,8 +140,6 @@ set wildmenu
 set wildmode=list:longest,list:full
 set wildignore+=.git,.svn,.hg,tmp/**
 
-setlocal bt=nofile bh=wipe nobl noswf ro
-
 if &t_Co >= 256 || has('gui_running')
   highlight CursorLine cterm=NONE ctermbg=237 guibg=#3a3a3a
   highlight CursorColumn cterm=NONE ctermbg=237 guibg=#3a3a3a
@@ -254,7 +252,6 @@ nnoremap <leader>/ :Unite grep:.<CR>
 " replace s & S mappings
 nnoremap s :<C-U>exec "normal i" . RepeatChar( nr2char( getchar() ), v:count1 )<CR>
 nnoremap S :<C-U>exec "normal a" . RepeatChar( nr2char( getchar() ), v:count1 )<CR>
-nnoremap <buffer> q :bw<CR>
 
 "in case of derp-sudo
 cmap w!! w !sudo tee % >/dev/null
