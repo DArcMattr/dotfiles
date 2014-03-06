@@ -1,0 +1,39 @@
+#!/bin/sh
+# vim:ft=sh:
+
+SESSION=$USER
+
+tmux has-session -t $SESSION
+if [ $? -eq 0 ]; then
+  echo "Session $SESSION already exists, attaching"
+  sleep 1
+  tmux -2u attach -t $SESSION
+  exit 0;
+fi
+
+tmux new-session -d -s $SESSION
+
+tmux set-option -t $SESSION status-position top
+
+tmux new-window -t $SESSION:0 -k
+
+tmux new-window -t $SESSION:1 -k
+
+tmux new-window -t $SESSION:2 -k
+tmux send-keys -t $SESSION:2 "sssh cor" C-m
+tmux set-window-option -t $SESSION:2 automatic-rename off
+tmux rename-window -t $SESSION:2 cor
+
+tmux new-window -t $SESSION:3 -k
+tmux send-keys -t $SESSION:3 "sssh demo" C-m
+tmux set-window-option -t $SESSION:3 automatic-rename off
+tmux rename-window -t $SESSION:3 demo
+
+tmux new-window -t $SESSION:4 -k
+tmux send-keys -t $SESSION:4 "sssh centuria" C-m
+tmux set-window-option -t $SESSION:4 automatic-rename off
+tmux rename-window -t $SESSION:4 centuria
+
+tmux select-window -t $SESSION:0
+
+tmux -2u attach-session -t $SESSION
