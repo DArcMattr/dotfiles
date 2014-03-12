@@ -41,7 +41,7 @@ NeoBundle 'haya14busa/vim-easymotion'
 NeoBundle 'joonty/vdebug'
 NeoBundle 'joonty/vim-phpqa'
 NeoBundle 'joonty/vim-phpunitqf'
-NeoBundle 'joonty/vim-taggatron'
+NeoBundle 'UmkaDK/vim-taggatron'
 NeoBundle 'kloppster/Wordpress-Vim-Syntax'
 NeoBundle 'krisajenkins/vim-pipe'
 NeoBundle 'krisajenkins/vim-postgresql-syntax'
@@ -54,7 +54,7 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-vividchalk'
 NeoBundle 'tristen/vim-sparkup'
-NeoBundle 'tsaleh/vim-matchit'
+NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'vim-scripts/vcscommand.vim'
 NeoBundle 'vim-scripts/smarty-syntax'
 NeoBundle 'xolox/vim-misc'
@@ -174,11 +174,11 @@ if has("win32")
 elseif has("unix")
   if has("gui_running")
     if has('gui_macvim')
-      set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
-      set printfont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
-      set guioptions=egm
       set fullscreen
       set fuoptions=maxvert,maxhorz
+      set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
+      set guioptions=egm
+      set printfont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
     else
       set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
       set printfont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
@@ -265,6 +265,7 @@ let g:SuperTabDefaultCompletionType = ''
 let g:VCSCommandSplit='vertical'
 let g:localvimrc_sandbox=0
 let g:localvimrc_whitelist='/var/www/vhosts/*/.*'
+let g:localvimrc_persistent=1
 let g:phpqa_codecoverage_autorun=0 " default is 0
 let g:phpqa_codesniffer_autorun=0  " default is 1
 let g:phpqa_messdetecter_autorun=0 " default is 1
@@ -278,6 +279,7 @@ let g:syntastic_php_checkers=[ 'php' ]
 let g:syntastic_error_symbol='⧰'
 let g:syntastic_warning_symbol='⚠'
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
+
 if executable('ag')
   " Use ag in unite grep source.
   let g:unite_source_grep_command = 'ag'
