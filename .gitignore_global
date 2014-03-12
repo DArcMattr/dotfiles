@@ -38,3 +38,9 @@ tags
 Icon?
 ehthumbs.db
 Thumbs.db
+
+# Local config files #
+######################
+
+.lvimrc
+*.vim
