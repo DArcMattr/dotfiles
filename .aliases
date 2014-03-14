@@ -189,7 +189,8 @@ dosass() {
 }
 
 catmd() {
-  TMPFILE=`mktemp -t pandoc.$RANDOM.html`
+  TMPFILE=`mktemp -t pandoc.XXXXXX.html`
+  echo $TMPFILE
   pandoc "$@" >> "$TMPFILE"
   if [ -x elinks ]; then
     elinks -force-html $TMPFILE
