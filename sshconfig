@@ -42,10 +42,6 @@ Host geekisp
   HostName login.geekisp.com
   User DArc
 
-Host lab305
-  HostName betaari.lab305.com
-  User django
-
 Host canada
   HostName server69.web-hosting.com
   User aynrvyxe
@@ -53,6 +49,10 @@ Host canada
 
 Host vbox
   HostName virtual.dev
+  User darceneaux
+
+Host do
+  HostName do.davidthemachine.org
   User darc
 
 Host local
