@@ -1,5 +1,5 @@
-if [ -x /usr/bin/local/vim ]; then
-  EDITOR=/usr/bin/local/vim
+if [ -x /usr/local/bin/vim ]; then
+  EDITOR=/usr/local/bin/vim
 elif [ -x /usr/bin/vim ]; then
   EDITOR=/usr/bin/vim
 else
