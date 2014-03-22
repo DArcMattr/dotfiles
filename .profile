@@ -1,7 +1,7 @@
-if [ -x /usr/bin/vim ]; then
+if [ -x /usr/bin/local/vim ]; then
+  EDITOR=/usr/bin/local/vim
+elif [ -x /usr/bin/vim ]; then
   EDITOR=/usr/bin/vim
-elif [ -x /usr/local/bin/vim ]; then
-  EDITOR=/usr/local/bin/vim
 else
   EDITOR=/usr/bin/vi
 fi
@@ -32,6 +32,6 @@ if [[ -f /usr/bin/uname && `/usr/bin/uname` == OpenBSD ]]; then
   export CVSROOT=/var/www/cvs
 fi
 
-if [ -r ~/.profile.local ]; then
-  source ~/.profile.local
+if [ -r ~/.profile.${HOST} ]; then
+  source ~/.profile.${HOST}
 fi

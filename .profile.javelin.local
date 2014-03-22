@@ -1,0 +1,17 @@
+export PERL_LOCAL_LIB_ROOT="/Users/darc/perl5:$PERL_LOCAL_LIB_ROOT";
+export PERL_MB_OPT="--install_base "/Users/darc/perl5"";
+export PERL_MM_OPT="INSTALL_BASE=/Users/darc/perl5";
+export PERL5LIB="/Users/darc/perl5/lib/perl5:$PERL5LIB";
+export NODE_PATH=/usr/lib/node_modules:$NODE_PATH
+
+export PATH=/Users/darc/perl5/bin:$PATH
+export PATH=/usr/local/texlive2013/bin/x86_64-darwin:$PATH
+export PATH=$HOME/.rvm/bin:$HOME/.cabal/bin:$PATH
+export PATH=$(pear config-get bin_dir):$PATH
+export PATH=~/Applications:$PATH
+
+if [ -d /usr/local/lib/python2.7/site-packages ]; then
+  export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+fi
+
+# source ~/.rvm/scripts/rvm
