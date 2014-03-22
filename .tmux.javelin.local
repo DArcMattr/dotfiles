@@ -2,6 +2,7 @@
 # vim:ft=sh:
 
 SESSION=$USER
+tmux set-option -g default-command "reattach-to-user-namespace -l zsh"
 
 tmux has-session -t $SESSION
 if [ $? -eq 0 ]; then
