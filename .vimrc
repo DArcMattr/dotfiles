@@ -1,12 +1,14 @@
 filetype off " required by NeoBundle
+
 if has('vim_starting')
   set nocompatible
   set runtimepath+=~/.vim/bundle/neobundle.vim/
+
+  call neobundle#rc( expand('~/.vim/bundle/') )
 endif
 
-call neobundle#rc( expand('~/.vim/bundle/') )
-
 NeoBundleFetch 'Shougo/neobundle.vim'
+
 if has('python')
   NeoBundle 'Lokaltog/powerline', { 'rtp': 'powerline/bindings/vim/' }
   NeoBundle 'Valloric/YouCompleteMe.git', {
@@ -22,6 +24,7 @@ else
   set statusline+=%{exists('*CapsLockStatusline')?CapsLockStatusline():''}
   set statusline+=%y%=%-16(\ %l,%c-%v\ %)%P
 endif
+
 NeoBundle 'Shougo/vimproc', {
 \ 'build' : {
 \   'windows' : 'make -f make_mingw32.mak',
@@ -141,15 +144,23 @@ set wildmode=list:longest,list:full
 set wildignore+=.git,.svn,.hg,tmp/**
 
 if &t_Co >= 256 || has('gui_running')
-  highlight CursorLine cterm=NONE ctermbg=237 guibg=#3a3a3a
+  highlight clear SpellBad
+  highlight clear SpellCap
+  highlight clear SpellLocal
+  highlight clear SpellRare
   highlight CursorColumn cterm=NONE ctermbg=237 guibg=#3a3a3a
-  highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
+  highlight CursorLine cterm=NONE ctermbg=237 guibg=#3a3a3a
   highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
+  highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
   highlight NonText ctermfg=235 guifg=#262626
   highlight OverLength ctermbg=234 ctermfg=249
   highlight OverLength guibg=#1c1c1c guifg=#b2b2b2
   highlight Search ctermfg=222 guifg=#ffdf87
   highlight SpecialKey ctermfg=235 guifg=#262626
+  highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline guifg=#800000 gui=underline
+  highlight SpellCap term=underline cterm=underline gui=underline
+  highlight SpellLocal term=underline cterm=underline gui=underline
+  highlight SpellRare term=underline cterm=underline gui=underline
 
   match OverLength /\%81v.\+/
 else
@@ -226,8 +237,6 @@ map <F7> :setlocal spell! spelllang=en_us<CR>
 imap <F7> <C-o>:setlocal spell! spelllang=en_us<CR>
 imap <C-c> <CR><Esc>O
 
-"map <C-Tab> gt
-"map <C-S-Tab> gT
 map <leader>gs :Gstatus<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>gc :Gcommit<CR>
@@ -235,6 +244,8 @@ map <leader>gl :Glog<CR>
 map <leader>gp :Gpush<CR>
 map <leader>os :call RestoreSess()
 
+map <C-PageUp> :tabp<CR>
+map <C-PageDown> :tabn<CR>
 nnoremap j gj
 nnoremap gj j
 nnoremap k gk
