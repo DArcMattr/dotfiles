@@ -22,7 +22,7 @@
   ci = commit
   co = checkout
   d = difftool
-  diffall = ~/contrib/git-diffall/git-diffall
+  diffall = "!~/contrib/git-diffall/git-diffall"
   diffr = "!f() { git diff "%1"^.."$1"; }; f"
   dl = "!git ll -1"
   dlc = diff --cached HEAD^
