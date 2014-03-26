@@ -10,7 +10,6 @@ endif
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 if has('python')
-  NeoBundle 'Lokaltog/powerline', { 'rtp': 'powerline/bindings/vim/' }
   NeoBundle 'Valloric/YouCompleteMe.git', {
   \   'build' : {
   \     'unix' : './install.sh --clang-completer --system-libclang',
@@ -25,6 +24,12 @@ else
   set statusline+=%y%=%-16(\ %l,%c-%v\ %)%P
 endif
 
+if has('signs')
+  NeoBundle 'joonty/vim-phpqa'
+  NeoBundle 'joonty/vim-phpunitqf'
+else
+endif
+
 NeoBundle 'Shougo/vimproc', {
 \ 'build' : {
 \   'windows' : 'make -f make_mingw32.mak',
@@ -36,14 +41,13 @@ NeoBundle 'Shougo/vimproc', {
 NeoBundle 'DArcMattr/vim-numbertoggle'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'bling/vim-airline'
 NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'embear/vim-localvimrc'
 NeoBundle 'ervandew/supertab'
 NeoBundle 'guns/xterm-color-table.vim'
 NeoBundle 'haya14busa/vim-easymotion'
 NeoBundle 'joonty/vdebug'
-NeoBundle 'joonty/vim-phpqa'
-NeoBundle 'joonty/vim-phpunitqf'
 NeoBundle 'UmkaDK/vim-taggatron'
 NeoBundle 'kloppster/Wordpress-Vim-Syntax'
 NeoBundle 'krisajenkins/vim-pipe'
@@ -274,6 +278,7 @@ let g:EasyMotion_leader_key='<leader>'
 let g:NumberToggleTrigger='<leader>l'
 let g:SuperTabDefaultCompletionType = ''
 let g:VCSCommandSplit='vertical'
+let g:airline_powerline_fonts=1
 let g:localvimrc_sandbox=0
 let g:localvimrc_whitelist='/var/www/vhosts/*/.*'
 let g:localvimrc_persistent=1

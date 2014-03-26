@@ -28,6 +28,7 @@ Refresh the session, then run the following:
       ~/.gitconfig ~/.tmux.conf ~/.Xmodmap
     mv ~/.ssh/config ~/.ssh/config.orig
     ln -s ~/dotfiles/.vimrc
+    ln -s ~/dotfiles/.vimrc ~/.nvimrc
     ln -s ~/dotfiles/.bashrc
     ln -s ~/dotfiles/.zshrc
     ln -s ~/dotfiles/.profile
