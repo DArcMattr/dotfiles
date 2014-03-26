@@ -22,6 +22,7 @@ alias l='~/dotfiles/l -AF'
 alias key='man -k'
 alias info='info --vi-keys'
 alias cycapache='/usr/bin/sudo /usr/bin/pkill -SIGQUIT -U www; /bin/sleep 2; /usr/bin/sudo /usr/sbin/apachectl start'
+alias tmux='tmux -2u'
 alias tmuxt='sh ~/dotfiles/.tmux.$HOST'
 
 ## Mark Jaquith block start
@@ -133,9 +134,9 @@ clearcache() {
 
 sssh() {
   if ! type "autossh" > /dev/null; then
-    (ssh "$@" -t 'tmux -2u attach || tmux -2u new') 2>/dev/null
+    (ssh "$@" -t 'tmux attach || tmux -2u new') 2>/dev/null
   else
-    (export AUTOSSH_PORT=0 && autossh "$@" -t 'tmux -2u attach || tmux -2u new') 2>/dev/null
+    (export AUTOSSH_PORT=0 && autossh "$@" -t 'tmux attach || tmux new') 2>/dev/null
   fi
 }
 
