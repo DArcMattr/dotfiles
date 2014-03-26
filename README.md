@@ -4,7 +4,8 @@ Clone to `~/dotfiles`
 
 ## Requirements & Assumptions
 
-* Vim with the Python 2.7 engine compiled in
+* Vim with the Python 2.7 engine compiled in, and ability to use `pip` with all
+    the necessary permissions
 * `zsh` is available as a shell
 * `hg` and `git` source control programs
 * `hggit` package is installed through pip or package control
@@ -18,13 +19,14 @@ Copy/paste the folliwing onto the command line:
     curl -L \
       https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh \
       | sh
+    sudo pip install https://github.com/Lokaltog/powerline/tarball/develop
 
 Refresh the session, then run the following:
 
     chmod 600 ~/dotfiles/sshconfig
     cp ~/dotfiles/dca.zsh-theme ~/.oh-my-zsh/themes/dca.zsh-theme
     cp -R ~/dotfiles/neobundle ~/.oh-my-zsh/plugins/
-    rm ~/.vimrc ~/.bashrc ~/.zshrc ~/.profile ~/.bash_profile ~/.hgrc \
+    rm ~/.nvimrc ~/.vimrc ~/.bashrc ~/.zshrc ~/.profile ~/.bash_profile ~/.hgrc \
       ~/.gitconfig ~/.tmux.conf ~/.Xmodmap
     mv ~/.ssh/config ~/.ssh/config.orig
     ln -s ~/dotfiles/.vimrc
