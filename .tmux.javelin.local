@@ -2,8 +2,6 @@
 # vim:ft=sh:
 
 SESSION=$USER
-tmux set-option -g default-command "reattach-to-user-namespace -l zsh"
-
 tmux has-session -t $SESSION
 if [ $? -eq 0 ]; then
   echo "Session $SESSION already exists, attaching"
@@ -13,6 +11,8 @@ if [ $? -eq 0 ]; then
 fi
 
 tmux new-session -d -s $SESSION
+tmux set-option -g default-command "reattach-to-user-namespace -l zsh"
+tmux bind y run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
 
 tmux set-option -t $SESSION status-position top
 
@@ -42,4 +42,4 @@ tmux set-window-option -t $SESSION:5 automatic-rename off
 
 tmux select-window -t $SESSION:0
 
-tmux -2u attach-session -t $SESSION
+tmux attach-session -t $SESSION
