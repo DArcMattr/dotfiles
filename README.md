@@ -25,7 +25,6 @@ Refresh the session, then run the following:
 
     chmod 600 ~/dotfiles/sshconfig
     cp ~/dotfiles/dca.zsh-theme ~/.oh-my-zsh/themes/dca.zsh-theme
-    cp -R ~/dotfiles/neobundle ~/.oh-my-zsh/plugins/
     rm ~/.nvimrc ~/.vimrc ~/.bashrc ~/.zshrc ~/.profile ~/.bash_profile ~/.hgrc \
       ~/.gitconfig ~/.tmux.conf ~/.Xmodmap
     mv ~/.ssh/config ~/.ssh/config.orig
@@ -39,14 +38,8 @@ Refresh the session, then run the following:
     ln -s ~/dotfiles/.gitconfig
     ln -s ~/dotfiles/.tmux.conf
     ln -s ~/dotfiles/.Xmodmap
-    ln -s ~/dotfiles/.Xmodmap
     ln -s ~/dotfiles/sshconfig ~/.ssh/config
-    mkdir -p ~/{contrib,.vim/syntax}
-    hg clone http://bitbucket.org/sjl/hg-prompt/ ~/contrib/hg-prompt/
     ln -s ~/dotfiles/hgcommit.vim ~/.vim/syntax/hgcommit.vim
-
-    git clone https://github.com/thenigan/git-diffall.git ~/contrib/git-diffall
-    git clone https://github.com/dharrigan/giteditor.git ~/contrib/giteditor
 
 Refresh your login session to pick up all the dotfile updates, then run:
 

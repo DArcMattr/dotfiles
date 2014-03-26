@@ -33,18 +33,17 @@ NeoBundle 'Shougo/vimproc', {
 NeoBundle 'DArcMattr/vim-numbertoggle'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'bitbucket:ludovicchabant/vim-lawrencium', { 'type': 'hg' }
 NeoBundle 'bling/vim-airline'
 NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'embear/vim-localvimrc'
 NeoBundle 'ervandew/supertab'
-NeoBundle 'guns/xterm-color-table.vim'
 NeoBundle 'haya14busa/vim-easymotion'
 NeoBundle 'joonty/vdebug'
 NeoBundle 'UmkaDK/vim-taggatron'
 NeoBundle 'kloppster/Wordpress-Vim-Syntax'
 NeoBundle 'krisajenkins/vim-pipe'
 NeoBundle 'krisajenkins/vim-postgresql-syntax'
-NeoBundle 'phleet/vim-mercenary'
 NeoBundle 'reedes/vim-wheel'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'shawncplus/phpcomplete.vim'
@@ -265,21 +264,21 @@ cmap w!! w !sudo tee % >/dev/null
 
 " plugin specific settings
 let $GIT_SSL_NO_VERIFY = 'true'
+
 let g:DirDiffDynamicDiffText = 1
 let g:EasyMotion_leader_key='<leader>'
 let g:NumberToggleTrigger='<leader>l'
 let g:SuperTabDefaultCompletionType = ''
 let g:VCSCommandSplit='vertical'
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#show_tab_nr=1
-let g:airline#extensions#quickfix#quickfix_text='Quickfix'
+let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#quickfix#location_text='Location'
-let g:airline#extensions#branch#use_vcscommand=1
+let g:airline#extensions#quickfix#quickfix_text='Quickfix'
 let g:airline#extensions#syntastic#enabled=1
+let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
+let g:localvimrc_persistent=1
 let g:localvimrc_sandbox=0
 let g:localvimrc_whitelist='/var/www/vhosts/*/.*'
-let g:localvimrc_persistent=1
 let g:phpqa_codecoverage_autorun=0 " default is 0
 let g:phpqa_codesniffer_autorun=0  " default is 1
 let g:phpqa_messdetecter_autorun=0 " default is 1
@@ -289,8 +288,8 @@ let g:session_autosave='no'
 let g:sparkupExecuteMapping='<leader>se'
 let g:sparkupNextMapping='<leader>sn'
 let g:syntastic_check_on_open=0
-let g:syntastic_php_checkers=[ 'php' ]
 let g:syntastic_error_symbol='⧰'
+let g:syntastic_php_checkers=[ 'php' ]
 let g:syntastic_warning_symbol='⚠'
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
