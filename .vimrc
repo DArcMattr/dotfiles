@@ -15,19 +15,11 @@ if has('python')
   \     'unix' : './install.sh --clang-completer --system-libclang',
   \   },
   \ }
-else
-  set ruler
-  set showmode
-  set statusline=[%n]\ %<%.99f
-  set statusline+=\ %h%w%m%r
-  set statusline+=%{exists('*CapsLockStatusline')?CapsLockStatusline():''}
-  set statusline+=%y%=%-16(\ %l,%c-%v\ %)%P
 endif
 
 if has('signs')
   NeoBundle 'joonty/vim-phpqa'
   NeoBundle 'joonty/vim-phpunitqf'
-else
 endif
 
 NeoBundle 'Shougo/vimproc', {
@@ -248,8 +240,8 @@ map <leader>gl :Glog<CR>
 map <leader>gp :Gpush<CR>
 map <leader>os :call RestoreSess()
 
-map <C-PageUp> :tabp<CR>
-map <C-PageDown> :tabn<CR>
+nmap <C-PageUp> :tabp<CR>
+nmap <C-PageDown> :tabn<CR>
 nnoremap j gj
 nnoremap gj j
 nnoremap k gk
@@ -278,6 +270,12 @@ let g:EasyMotion_leader_key='<leader>'
 let g:NumberToggleTrigger='<leader>l'
 let g:SuperTabDefaultCompletionType = ''
 let g:VCSCommandSplit='vertical'
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#show_tab_nr=1
+let g:airline#extensions#quickfix#quickfix_text='Quickfix'
+let g:airline#extensions#quickfix#location_text='Location'
+let g:airline#extensions#branch#use_vcscommand=1
+let g:airline#extensions#syntastic#enabled=1
 let g:airline_powerline_fonts=1
 let g:localvimrc_sandbox=0
 let g:localvimrc_whitelist='/var/www/vhosts/*/.*'
