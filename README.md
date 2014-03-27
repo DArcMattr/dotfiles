@@ -13,23 +13,22 @@ Clone to `~/dotfiles`
 
 ## Installation:
 
-Copy/paste the folliwing onto the command line:
+Copy/paste the following onto the command line:
 
     cd ~
     curl -L \
       https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh \
       | sh
-    sudo pip install https://github.com/Lokaltog/powerline/tarball/develop
 
 Refresh the session, then run the following:
 
+    sudo pip install https://github.com/Lokaltog/powerline/tarball/develop
     chmod 600 ~/dotfiles/sshconfig
     cp ~/dotfiles/dca.zsh-theme ~/.oh-my-zsh/themes/dca.zsh-theme
     rm ~/.nvimrc ~/.vimrc ~/.bashrc ~/.zshrc ~/.profile ~/.bash_profile ~/.hgrc \
       ~/.gitconfig ~/.tmux.conf ~/.Xmodmap
     mv ~/.ssh/config ~/.ssh/config.orig
     ln -s ~/dotfiles/.vimrc
-    ln -s ~/dotfiles/.vimrc ~/.nvimrc
     ln -s ~/dotfiles/.bashrc
     ln -s ~/dotfiles/.zshrc
     ln -s ~/dotfiles/.profile

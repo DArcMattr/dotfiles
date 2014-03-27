@@ -24,6 +24,7 @@ alias info='info --vi-keys'
 alias cycapache='/usr/bin/sudo /usr/bin/pkill -SIGQUIT -U www; /bin/sleep 2; /usr/bin/sudo /usr/sbin/apachectl start'
 alias tmux='tmux -2u'
 alias tmuxt='sh ~/dotfiles/.tmux.$HOST'
+alias nvim='nvim -u ~/.vimrc'
 
 ## Mark Jaquith block start
 # search development scripts
