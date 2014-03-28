@@ -232,6 +232,7 @@ map <F7> :setlocal spell! spelllang=en_us<CR>
 imap <F7> <C-o>:setlocal spell! spelllang=en_us<CR>
 imap <C-c> <CR><Esc>O
 
+
 map <leader>gs :Gstatus<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>gc :Gcommit<CR>
@@ -241,13 +242,13 @@ map <leader>os :call RestoreSess()
 
 nmap <C-PageUp> :tabp<CR>
 nmap <C-PageDown> :tabn<CR>
+nmap . .'[
+nmap <leader>q :nohlsearch<CR>
+
 nnoremap j gj
 nnoremap gj j
 nnoremap k gk
 nnoremap gk k
-nmap . .'[
-nmap <leader>q :nohlsearch<CR>
-
 nnoremap ' `
 nnoremap ` '
 nnoremap ; :
@@ -255,9 +256,14 @@ nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 nnoremap <C-p> :Unite file_rec/async<CR>
 nnoremap <leader>/ :Unite grep:.<CR>
-" replace s & S mappings
-nnoremap s :<C-U>exec "normal i" . RepeatChar( nr2char( getchar() ), v:count1 )<CR>
-nnoremap S :<C-U>exec "normal a" . RepeatChar( nr2char( getchar() ), v:count1 )<CR>
+nnoremap <silent> <c-w>j :silent call TmuxMove('j')<cr>
+nnoremap <silent> <c-w>k :silent call TmuxMove('k')<cr>
+nnoremap <silent> <c-w>h :silent call TmuxMove('h')<cr>
+nnoremap <silent> <c-w>l :silent call TmuxMove('l')<cr>
+nnoremap <silent> <c-w><down> :silent call TmuxMove('j')<cr>
+nnoremap <silent> <c-w><up> :silent call TmuxMove('k')<cr>
+nnoremap <silent> <c-w><left> :silent call TmuxMove('h')<cr>
+nnoremap <silent> <c-w><right> :silent call TmuxMove('l')<cr>
 
 "in case of derp-sudo
 cmap w!! w !sudo tee % >/dev/null
@@ -314,9 +320,32 @@ command! -nargs=1 Silent |
 
 command! -nargs=* -complete=help Help vertical belowright help <args>
 
-function! RepeatChar( char, count )
-  return repeat( a:char, a:count )
-endfunction
+" from https://gist.github.com/tarruda/5158535
+if $TMUX != ''
+  function! TmuxMove(direction)
+    " Check if we are currently focusing on a edge window.
+    " To achieve that,  move to/from the requested window and
+    " see if the window number changed
+    let oldw = winnr()
+    silent! exe 'wincmd ' . a:direction
+    let neww = winnr()
+    silent! exe oldw . 'wincmd'
+    if oldw == neww
+      " The focused window is at an edge, so ask tmux to switch panes
+      if a:direction == 'j'
+        call system("tmux select-pane -D")
+      elseif a:direction == 'k'
+        call system("tmux select-pane -U")
+      elseif a:direction == 'h'
+        call system("tmux select-pane -L")
+      elseif a:direction == 'l'
+        call system("tmux select-pane -R")
+      endif
+    else
+      exe 'wincmd ' . a:direction
+    end
+  endfunction
+endif
 
 if has('autocmd')
   if exists('+omnifunc')
