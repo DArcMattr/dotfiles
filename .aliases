@@ -26,72 +26,6 @@ alias tmux='tmux -2u'
 alias tmuxt='sh ~/dotfiles/.tmux.$HOST'
 alias nvim='nvim -u ~/.vimrc'
 
-## Mark Jaquith block start
-# search development scripts
-jsgrep() {
-  find . \( -name "*.dev.js" -print \)  | xargs grep -n "$1"
-}
-
-# search development css files
-cssgrep() {
-  find . \( -name "*.dev.css" -print \)  | xargs grep -n "$1"
-}
-
-# search php files
-phpgrep() {
-  find . \( -name "*.php" -print \)  | xargs grep -n "$1"
-}
-
-# search php files and development scripts/styles
-wpgrep() {
-  find . \( -name "*.php" -print -or -name "*.dev.js" -or -name "*.dev.css" -print \)  | xargs grep -n "$1"
-}
-
-# Shortcuts for opening WP files insanely fast.
-wpinc(){
-  vim wp-includes/$1.php
-}
-
-wpa(){
-  vim wp-admin/$1.php
-}
-
-wpai(){
-  vim wp-admin/includes/$1.php
-}
-
-wpcss(){
-  vim wp-admin/css/$1.dev.css
-}
-
-wpjs(){
-  vim wp-admin/js/$1.dev.js
-}
-
-wptt(){
-  vim wp-content/themes/twentythirteen/$1.*
-}
-
-# Apply a Trac patch.
-trac_patch() {
-  curl "$1?format=raw" | patch -p0
-}
-# Apply a Trac patch on a clean repo.
-clean_patch() {
-  svn cleanup
-  svn revert -R *
-  svn up
-  curl "$1?format=raw" | patch -p0
-}
-
-alias tp=trac_patch
-alias ctp=clean_patch
-
-mod(){
-  svn stat --ignore-externals | grep '^[^?X]'
-}
-## Mark Jaquith block end
-
 movetrash() {
   if [ ! -d ~/.Trash ]; then
     mkdir ~/.Trash
@@ -191,7 +125,7 @@ dosass() {
 }
 
 catmd() {
-  TMPFILE=`mktemp -t pandoc.XXXXXX.html`
+  TMPFILE=`mktemp -t pandoc.XXXXX.html`
   echo $TMPFILE
   pandoc "$@" >> "$TMPFILE"
   if [ -x elinks ]; then
@@ -200,3 +134,69 @@ catmd() {
     lynx -force_html $TMPFILE
   fi
 }
+
+## Mark Jaquith block start
+# search development scripts
+jsgrep() {
+  find . \( -name "*.dev.js" -print \)  | xargs grep -n "$1"
+}
+
+# search development css files
+cssgrep() {
+  find . \( -name "*.dev.css" -print \)  | xargs grep -n "$1"
+}
+
+# search php files
+phpgrep() {
+  find . \( -name "*.php" -print \)  | xargs grep -n "$1"
+}
+
+# search php files and development scripts/styles
+wpgrep() {
+  find . \( -name "*.php" -print -or -name "*.dev.js" -or -name "*.dev.css" -print \)  | xargs grep -n "$1"
+}
+
+# Shortcuts for opening WP files insanely fast.
+wpinc(){
+  vim wp-includes/$1.php
+}
+
+wpa(){
+  vim wp-admin/$1.php
+}
+
+wpai(){
+  vim wp-admin/includes/$1.php
+}
+
+wpcss(){
+  vim wp-admin/css/$1.dev.css
+}
+
+wpjs(){
+  vim wp-admin/js/$1.dev.js
+}
+
+wptt(){
+  vim wp-content/themes/twentythirteen/$1.*
+}
+
+# Apply a Trac patch.
+trac_patch() {
+  curl "$1?format=raw" | patch -p0
+}
+# Apply a Trac patch on a clean repo.
+clean_patch() {
+  svn cleanup
+  svn revert -R *
+  svn up
+  curl "$1?format=raw" | patch -p0
+}
+
+alias tp=trac_patch
+alias ctp=clean_patch
+
+mod(){
+  svn stat --ignore-externals | grep '^[^?X]'
+}
+## Mark Jaquith block end
