@@ -16,6 +16,7 @@ if [ -r /etc/aliases.sh ]; then
   source /etc/aliases.sh
 fi
 
+alias cdl='cd `$*` && ll'
 alias ll='ls -AalFh'
 alias l='~/dotfiles/l -AF'
 #alias rm='movetrash'
