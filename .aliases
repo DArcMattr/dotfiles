@@ -16,9 +16,7 @@ if [ -r /etc/aliases.sh ]; then
   source /etc/aliases.sh
 fi
 
-alias cdl='cd `$*` && ll'
 alias ll='ls -AalFh'
-alias l='~/dotfiles/l -AF'
 #alias rm='movetrash'
 alias key='man -k'
 alias info='info --vi-keys'
@@ -26,6 +24,11 @@ alias cycapache='/usr/bin/sudo /usr/bin/pkill -SIGQUIT -U www; /bin/sleep 2; /us
 alias tmux='tmux -2u'
 alias tmuxt='sh ~/dotfiles/.tmux.$HOST'
 alias nvim='nvim -u ~/.vimrc'
+
+cdl() {
+  cd "$@"
+  ll
+}
 
 movetrash() {
   if [ ! -d ~/.Trash ]; then
@@ -44,11 +47,11 @@ manpath() {
 
 dir() {
   {
-    ll "$@" | grep -E "^d" \
+    ll "$@" | \grep -E "^d" \
   &&
-    ll "$@" | grep -E -v "^d|^total" \
+    ll "$@" | \grep -E -v "^d|^total" \
   &&
-    ll "$@" | grep -E "^total"
+    ll "$@" | \grep -E "^total"
   } | $PAGER
 }
 
@@ -138,16 +141,18 @@ catmd() {
 
 vim-tmux-move() {
   PROGRAM="`tmux display -p '#{pane_current_command}'`"
-  if [ ${PROGRAM} -eq "vim" -o ${PROGRAM} -eq "nvim" ]; then
+  case ${PROGRAM} in
+  {,n}vim)
     tmux send-keys 'Escape' 'C-w' $1
-  else
+    ;;
+  *)
     case $1 in
       j) tmux select-pane -D ;;
       k) tmux select-pane -U ;;
       h) tmux select-pane -L ;;
       l) tmux select-pane -R ;;
     esac
-  fi
+  esac
 }
 
 ## Mark Jaquith block start
