@@ -126,13 +126,27 @@ dosass() {
 }
 
 catmd() {
-  TMPFILE=`mktemp -t pandoc.XXXXX.html`
+  TMPFILE=`mktemp -t pandoc.XXXXXX.html`
   echo $TMPFILE
   pandoc "$@" >> "$TMPFILE"
   if [ -x elinks ]; then
     elinks -force-html $TMPFILE
   else
     lynx -force_html $TMPFILE
+  fi
+}
+
+vim-tmux-move() {
+  PROGRAM="`tmux display -p '#{pane_current_command}'`"
+  if [ ${PROGRAM} -eq "vim" -o ${PROGRAM} -eq "nvim" ]; then
+    tmux send-keys 'Escape' 'C-w' $1
+  else
+    case $1 in
+      j) tmux select-pane -D ;;
+      k) tmux select-pane -U ;;
+      h) tmux select-pane -L ;;
+      l) tmux select-pane -R ;;
+    esac
   fi
 }
 
