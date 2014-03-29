@@ -1,7 +1,8 @@
 #!/bin/sh
 
-mkdir -p ~/{contrib,.vim/{syntax,bundle/neobundle.vim/}}
+mkdir -p ~/{contrib,.vim/{syntax,bundle/neobundle.vim/},.config/powerline}
 dotfiles=".vimrc .bashrc .zshrc .profile .bash_profile .hgrc .gitconfig .tmux.conf .Xmodmap"
+PIP=`which pip`
 
 if [ ! -d ~/.vim/bundle/neobundle.vim/.git/ ]; then
   git clone http://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
@@ -34,3 +35,8 @@ else
   hg pull -u
   cd -
 fi
+
+sudo $PIP install -U https://github.com/Lokaltog/powerline/tarball/develop
+
+powerline_path=$(python -c 'import pkgutil; print pkgutil.get_loader("powerline").filename')
+cp -R ${powerline_path}/config_files/* ~/.config/powerline
