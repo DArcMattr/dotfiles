@@ -6,7 +6,7 @@ tmux has-session -t $SESSION
 if [ $? -eq 0 ]; then
   echo "Session $SESSION already exists, attaching"
   sleep 1
-  tmux -2u attach -t $SESSION
+  tmux attach -t $SESSION
   exit 0;
 fi
 

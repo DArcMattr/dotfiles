@@ -6,10 +6,6 @@ else
   EDITOR=/usr/bin/vi
 fi
 
-if [ -x pip ]; then
-  export PIP_DIR=`pip show pip | grep 'Location' | cut -d':' -f2 | sed 's/^ *$//g'`
-fi
-
 if [ -x /usr/bin/less ]; then
   export PAGER=/usr/bin/less
 else
@@ -31,7 +27,7 @@ if [ -x /usr/local/bin/vimpager ]; then
   export MANPAGER=/usr/local/bin/vimpager
 fi
 
-if [[ -f /usr/bin/uname && `/usr/bin/uname` == OpenBSD ]]; then
+if [[ -x /usr/bin/uname && `/usr/bin/uname` == "OpenBSD" ]]; then
   export PKG_PATH=http://ftp5.usa.openbsd.org/pub/OpenBSD/`uname -r`/packages/`machine -a`/
   export CVSROOT=/var/www/cvs
 fi
