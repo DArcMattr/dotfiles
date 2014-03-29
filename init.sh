@@ -40,3 +40,4 @@ sudo $PIP install -U https://github.com/Lokaltog/powerline/tarball/develop
 
 powerline_path=$(python -c 'import pkgutil; print pkgutil.get_loader("powerline").filename')
 cp -R ${powerline_path}/config_files/* ~/.config/powerline
+ln -s ${powerline_path}/bindings/tmux/powerline.conf ~/.config/powerline/powerline.conf
