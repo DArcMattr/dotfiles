@@ -11,6 +11,13 @@ Clone to `~/dotfiles`
 * `hggit` package is installed through pip or package control
 * `composer.phar` is installed on a system-wide level
 
+## `.hg/hgrc`
+
+There should be the following lines in this project's `.hg/hgrc` file:
+
+    [hooks]
+    update = chmod 600 sshconfig
+
 ## Installation:
 
 Copy/paste the following onto the command line:
@@ -22,7 +29,6 @@ Copy/paste the following onto the command line:
 
 Refresh the session, then run the following:
 
-    sudo pip install https://github.com/Lokaltog/powerline/tarball/develop
     chmod 600 ~/dotfiles/sshconfig
     cp ~/dotfiles/dca.zsh-theme ~/.oh-my-zsh/themes/dca.zsh-theme
     rm ~/.nvimrc ~/.vimrc ~/.bashrc ~/.zshrc ~/.profile ~/.bash_profile ~/.hgrc \
