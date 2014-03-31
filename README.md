@@ -31,11 +31,12 @@ Refresh the session, then run the following:
 
     chmod 600 ~/dotfiles/sshconfig
     cp ~/dotfiles/dca.zsh-theme ~/.oh-my-zsh/themes/dca.zsh-theme
-    rm ~/.nvimrc ~/.vimrc ~/.bashrc ~/.zshrc ~/.profile ~/.bash_profile ~/.hgrc \
-      ~/.gitconfig ~/.tmux.conf ~/.Xmodmap
+    rm ~/.vimrc ~/.bashrc ~/.zshrc ~/.profile ~/.bash_profile ~/.hgrc \
+      ~/.gitconfig ~/.tmux.conf ~/.Xmodmap ~/.pandoc
     mv ~/.ssh/config ~/.ssh/config.orig
     ln -s ~/dotfiles/.vimrc
     ln -s ~/dotfiles/.bashrc
+    ln -s ~/dotfiles/.pandoc
     ln -s ~/dotfiles/.zshrc
     ln -s ~/dotfiles/.profile
     ln -s ~/dotfiles/.bash_profile
@@ -45,11 +46,6 @@ Refresh the session, then run the following:
     ln -s ~/dotfiles/.Xmodmap
     ln -s ~/dotfiles/sshconfig ~/.ssh/config
     ln -s ~/dotfiles/hgcommit.vim ~/.vim/syntax/hgcommit.vim
-
-Refresh your login session to pick up all the dotfile updates, then run:
-
-    neobundle-update
-    neobundle-clean
 
 ## `st` notes
 
