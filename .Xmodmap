@@ -8,22 +8,17 @@
 ! This file presupposes that the keyboard is in the default state, and
 ! may malfunction if it is not.
 !
-remove Lock    = Caps_Lock
-remove Control = Control_L Control_R
-remove Mod1    = Alt_R
-remove Mod5    = Scroll_Lock
+remove Lock      = Caps_Lock
+remove Control   = Control_L
+!remove Escape    = Escape
 
 keycode 0x09 =	Caps_Lock	NoSymbol	Caps_Lock
-keycode 0x69 =	Control_R	NoSymbol	Control_R
 keycode 0x42 =	Control_L	NoSymbol	Control_L
-keycode 0x6C =	Alt_R	Meta_R	Alt_R	Meta_R
 keycode 0x25 =	Escape	NoSymbol	Escape
 
+add    Control = Control_L
 add    Lock    = Caps_Lock
-add    Control = Control_L Control_R
-add    Mod1    = Alt_R 0x00CD
-add    Mod4    = Super_L Super_R 0x00CE 0x00CF
-add    Mod5    = ISO_Level3_Shift Mode_switch
+!add    Escape  = Escape
 
 ! for the Thinkpad keyboard
 pointer = 1 9 3 4 5 6 7 8 2
