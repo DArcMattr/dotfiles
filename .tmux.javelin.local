@@ -30,7 +30,7 @@ tmux select-pane -l -t $SESSION:2
 tmux split-window -v -t $SESSION:2
 tmux send-keys -t $SESSION:2 "cd /var/www/vhosts/metagenicsadmin.com" C-m
 tmux select-pane -l -t $SESSION:2
-tmux resize-pane -y 5 -t $SESSION:2
+tmux resize-pane -y 8 -t $SESSION:2
 tmux select-pane -l -t $SESSION:2
 
 tmux new-window -t $SESSION:3 -k
