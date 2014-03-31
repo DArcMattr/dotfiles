@@ -1,7 +1,7 @@
 #!/bin/sh
 
-mkdir -p ~/{contrib,.vim/{syntax,bundle/neobundle.vim/},.config/powerline}
-dotfiles=".vimrc .bashrc .zshrc .profile .bash_profile .hgrc .gitconfig .tmux.conf .Xmodmap"
+mkdir -p ~/contrib ~/.vim/{syntax,bundle/neobundle.vim/ ~/.config/powerline ~/.pandoc
+dotfiles=".vimrc .bashrc .zshrc .profile .bash_profile .hgrc .gitconfig .tmux.conf .Xmodmap .pandoc"
 PIP=`which pip`
 
 if [ ! -d ~/.vim/bundle/neobundle.vim/.git/ ]; then
