@@ -131,8 +131,10 @@ dosass() {
 catmd() {
   TMPFILE=`mktemp -t pandoc.XXXXXX.html`
   echo $TMPFILE
-  pandoc "$@" >> "$TMPFILE"
-  if [ -x elinks ]; then
+  pandoc -s -S --toc --self-contained -c ~/.pandoc/buttondown.css -t html5 "$@" -o "$TMPFILE"
+  if [ ! `chromix ping` ]; then
+    chromix load "file://$TMPFILE"
+  elif [ -x elinks ]; then
     elinks -force-html $TMPFILE
   else
     lynx -force_html $TMPFILE
