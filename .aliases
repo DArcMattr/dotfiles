@@ -72,11 +72,11 @@ clearcache() {
 }
 
 sssh() {
-  if ! type "autossh" > /dev/null; then
-    (ssh "$@" -t 'tmux attach || tmux -2u new') 2>/dev/null
-  else
-    (export AUTOSSH_PORT=0 && autossh "$@" -t 'tmux attach || tmux new') 2>/dev/null
+  if [ ! `ssh -O check "$@"` ] || type "autossh">/dev/null; then
+    autossh -f -M 0 -N "$@"
   fi
+
+  (ssh "$@" -t 'tmux attach || tmux new') 2>/dev/null
 }
 
 mountpub() {

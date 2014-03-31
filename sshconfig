@@ -2,7 +2,7 @@
 Host *
   PreferredAuthentications publickey,keyboard-interactive,password
   ServerAliveInterval 60
-  ServerAliveCountMax 3
+  ServerAliveCountMax 60
   Compression yes
   CompressionLevel 9
   IdentityFile ~/.ssh/id_rsa
