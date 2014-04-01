@@ -73,7 +73,7 @@ clearcache() {
 
 sssh() {
   if [ ! `ssh -O check "$@"` ] || type "autossh">/dev/null; then
-    autossh -f -M 0 -N "$@"
+    autossh -f -N -q "$@"
   fi
 
   (ssh "$@" -t 'tmux attach || tmux new') 2>/dev/null
