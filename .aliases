@@ -72,11 +72,7 @@ clearcache() {
 }
 
 sssh() {
-  if [ ! `ssh -O check "$@"` ] || type "autossh">/dev/null; then
-    autossh -f -N -q "$@"
-  fi
-
-  (ssh "$@" -t 'tmux attach || tmux new') 2>/dev/null
+  (autossh -t "$@" 'if tmux has; then tmux attach -d; else tmux new; fi') 2>/dev/null
 }
 
 mountpub() {
@@ -131,7 +127,8 @@ dosass() {
 catmd() {
   TMPFILE=`mktemp -t pandoc.XXXXXX.html`
   echo $TMPFILE
-  pandoc -s -S --toc --self-contained -c ~/.pandoc/buttondown.css -t html5 "$@" -o "$TMPFILE"
+  pandoc -s -S --self-contained -c ~/.pandoc/buttondown.css \
+    -t html5 -f markdown_phpextra "$@" -o "$TMPFILE"
   if [ ! `chromix ping` ]; then
     chromix load "file://$TMPFILE"
   elif [ -x elinks ]; then
