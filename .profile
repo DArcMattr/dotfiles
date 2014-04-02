@@ -12,17 +12,18 @@ else
   export PAGER=less
 fi
 
-export PATH=.:$HOME/bin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/games:$HOME/.rvm/bin
 export AUTOSSH_PORT=0
 export CLICOLOR=YES
 export CLICOLOR_FORCE=YES
-export LC_CTYPE=en_US.UTF-8
 export HGEDITOR=~/dotfiles/hgeditor
+export HOME EDITOR
+export LC_CTYPE=en_US.UTF-8
 export LESS="-EFIMQRsX~ -x2"
 export LESSCHARSET=utf-8
 export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
 export MANWIDTH=80
-export HOME EDITOR
+export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/games:$HOME/.rvm/bin
+export VIMRUNTIME=`vim -e -T dumb --cmd 'exe "set t_cm=\<C-M>"|echo $VIMRUNTIME|quit' | tr -d '\015' `
 
 if [ -x /usr/local/bin/vimpager ]; then
   export MANPAGER=/usr/local/bin/vimpager
