@@ -15,11 +15,11 @@ if has('python')
   \     'unix' : './install.sh --clang-completer --system-libclang',
   \   },
   \ }
-endif
 
-if has('signs')
-  NeoBundle 'joonty/vim-phpqa'
-  NeoBundle 'joonty/vim-phpunitqf'
+  if has('signs')
+    NeoBundle 'joonty/vim-phpqa'
+    NeoBundle 'joonty/vim-phpunitqf'
+  endif
 endif
 
 NeoBundle 'Shougo/vimproc', {
