@@ -1,16 +1,6 @@
 # .aliases
 # vim:ft=sh:
 
-if ls --color=always -d . >/dev/null 2>&1; then
-  alias ls='/bin/ls --color=always'
-elif ls -G -d . >/dev/null 2>&1; then # colorls is main system ls already
-  alias ls='/bin/ls -G'
-elif colorls -G -d . >/dev/null 2>&1; then
-  alias ls='/usr/local/bin/colorls -G'
-else # Solaris or other *NIX
-  alias ls='/bin/ls'
-fi
-
 if [ -r /etc/aliases.sh ]; then
   source /etc/aliases.sh
 fi
