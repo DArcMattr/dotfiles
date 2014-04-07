@@ -39,17 +39,27 @@ plugins=(git mercurial vi-mode pip svn)
 
 source $ZSH/oh-my-zsh.sh
 source ~/.profile
-source ~/dotfiles/.aliases
 
-unsetopt correct_all
+source ~/dotfiles/.aliases
+if [ -r /etc/aliases.sh ]; then
+  source /etc/aliases.sh
+fi
+if [ -r ~/dotfiles/.aliases.${HOSTNAME} ]; then
+  source ~/dotfiles/.aliases.${HOSTNAME}
+fi
+
 unsetopt correct
+unsetopt correct_all
 unsetopt inc_append_history
+unsetopt share_history
 
 setopt append_history
-setopt hist_ignore_dups
 setopt auto_cd
+setopt complete_aliases
+setopt hist_ignore_dups
 setopt nohup
 setopt notify
+setopt pushd_ignore_dups
 
 set -o vi
 

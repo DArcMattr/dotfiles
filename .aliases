@@ -1,10 +1,6 @@
 # .aliases
 # vim:ft=sh:
 
-if [ -r /etc/aliases.sh ]; then
-  source /etc/aliases.sh
-fi
-
 alias ll='ls -AalFh'
 #alias rm='movetrash'
 alias key='man -k'
