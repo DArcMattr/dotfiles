@@ -1,6 +1,16 @@
 # .aliases
 # vim:ft=sh:
 
+if \ls --color=always -d . >/dev/null 2>&1; then
+  alias ls='\ls --color=always'
+elif \ls -G -d . >/dev/null 2>&1; then # colorls is main system ls already
+  alias ls='\ls -G'
+elif \colorls -G -d . >/dev/null 2>&1; then
+  alias ls='colorls -G'
+else # Solaris or other *NIX
+  alias ls='\ls'
+fi
+
 alias ll='ls -AalFh'
 #alias rm='movetrash'
 alias key='man -k'
@@ -32,11 +42,15 @@ manpath() {
 
 dir() {
   {
-    ll "$@" | \grep -E "^d" \
-  &&
-    ll "$@" | \grep -E -v "^d|^total" \
-  &&
-    ll "$@" | \grep -E "^total"
+    if \ls --group-directories-first -d . >/dev/null 2>&1; then
+      ll --group-directories-first "$@"
+    else
+      ll "$@" | grep -E "^d" \
+    &&
+      ll "$@" | grep -E -v "^d|^total" \
+    &&
+      ll "$@" | grep -E "^total"
+    fi
   } | $PAGER
 }
 
