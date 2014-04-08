@@ -253,6 +253,7 @@ nnoremap gk k
 nnoremap ' `
 nnoremap ` '
 nnoremap ; :
+nnoremap : ;
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 nnoremap <C-p> :Unite file_rec/async<CR>
@@ -431,10 +432,16 @@ if has('autocmd')
   autocmd FileType hgcommit set textwidth=72
   autocmd FileType hgcommit match OverLength /\%73v.\+/
 
+  " MySQL
+  autocmd BufNewFile,BufRead,BufEnter *.mysql setf mysql
+  autocmd FileType mysql :let b:vimpipe_filetype="mysql"
+  " should set this in the .lvimrc to match a particular database
+  " autocmd FileType mysql :let b:vimpipe_command="mysql mydatabase"
+
   " PostgreSQL
   autocmd BufNewFile,BufRead,BufEnter *.psql setf postgresql
-  autocmd FileType postgresql :let b:vimpipe_command="psql mydatabase"
   autocmd FileType postgresql :let b:vimpipe_filetype="postgresql"
+  " autocmd FileType postgresql :let b:vimpipe_command="psql mydatabase"
 
   " Markdown
   autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown setf markdown
