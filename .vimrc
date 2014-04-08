@@ -10,12 +10,13 @@ endif
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 if has('python')
+  NeoBundle 'UmkaDK/vim-taggatron'
   NeoBundle 'Valloric/YouCompleteMe.git', {
   \   'build' : {
   \     'unix' : './install.sh --clang-completer --system-libclang',
   \   },
   \ }
-
+  NeoBundle 'editorconfig/editorconfig-vim'
   if has('signs')
     NeoBundle 'joonty/vim-phpqa'
     NeoBundle 'joonty/vim-phpunitqf'
@@ -35,12 +36,10 @@ NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'bitbucket:ludovicchabant/vim-lawrencium', { 'type': 'hg' }
 NeoBundle 'bling/vim-airline'
-NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'embear/vim-localvimrc'
 NeoBundle 'ervandew/supertab'
 NeoBundle 'haya14busa/vim-easymotion'
 NeoBundle 'joonty/vdebug'
-NeoBundle 'UmkaDK/vim-taggatron'
 NeoBundle 'kloppster/Wordpress-Vim-Syntax'
 NeoBundle 'krisajenkins/vim-pipe'
 NeoBundle 'krisajenkins/vim-postgresql-syntax'
