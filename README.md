@@ -5,9 +5,9 @@ Clone to `~/dotfiles`
 ## Requirements & Assumptions
 
 * Vim with the Python 2.7 engine compiled in, and ability to use `pip` with all
-    the necessary permissions
-* `zsh` is available as a shell
-* `hg` and `git` source control programs
+  the necessary permissions
+* `zsh` is available and set as a shell, via `chsh`
+* `hg` (Mercurial) and `git` source control programs
 * `hggit` package is installed through pip or package control
 * `composer.phar` is installed on a system-wide level
 
@@ -18,7 +18,9 @@ There should be the following lines in this project's `.hg/hgrc` file:
     [hooks]
     update = chmod 600 sshconfig
 
-## Installation:
+## Installation Steps
+
+### for Oh-My-ZSH
 
 Copy/paste the following onto the command line:
 
@@ -27,9 +29,11 @@ Copy/paste the following onto the command line:
       https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh \
       | sh
 
+### All the rest
+
 Refresh the session, then run the following:
 
-    chmod 600 ~/dotfiles/sshconfig
+    source ~/dotfiles/init.sh
     cp ~/dotfiles/dca.zsh-theme ~/.oh-my-zsh/themes/dca.zsh-theme
     rm ~/.vimrc ~/.bashrc ~/.zshrc ~/.profile ~/.bash_profile ~/.hgrc \
       ~/.gitconfig ~/.tmux.conf ~/.Xmodmap ~/.pandoc

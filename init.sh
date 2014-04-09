@@ -1,6 +1,9 @@
 #!/bin/sh
+# only idempotent commands here so far
 
 mkdir -p ~/contrib ~/.vim/{syntax,bundle/neobundle.vim/ ~/.config/powerline ~/.pandoc
+chmod 600 ~/dotfiles/sshconfig
+
 dotfiles=".vimrc .bashrc .zshrc .profile .bash_profile .hgrc .gitconfig .tmux.conf .Xmodmap .pandoc"
 PIP=`which pip`
 
@@ -39,5 +42,9 @@ fi
 sudo $PIP install -U https://github.com/Lokaltog/powerline/tarball/develop
 
 powerline_path=$(python -c 'import pkgutil; print pkgutil.get_loader("powerline").filename')
-cp -R ${powerline_path}/config_files/* ~/.config/powerline
-ln -s ${powerline_path}/bindings/tmux/powerline.conf ~/.config/powerline/powerline.conf
+if [ ! -d ~/.config/powerline ]; then
+  cp -R ${powerline_path}/config_files/* ~/.config/powerline
+fi
+ln -s \
+  ${powerline_path}/bindings/tmux/powerline.conf \
+  ~/.config/powerline/powerline.conf
