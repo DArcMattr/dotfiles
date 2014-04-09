@@ -22,6 +22,8 @@ export EDITOR
 
 if [ -x ~/.vim/bundle/vimpager/vimpager ]; then
   export MANPAGER=~/.vim/bundle/vimpager/vimpager
+  alias vimcat='~/.vim/bundle/vimpager/vimcat'
+  alias vimpager='~/.vim/bundle/vimpager/vimpager'
 fi
 
 if [ -r ~/dotfiles/.profile.${HOSTNAME:=$HOST} ]; then
