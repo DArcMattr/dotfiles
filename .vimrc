@@ -407,7 +407,7 @@ if has('autocmd')
   autocmd BufNewFile,BufRead,BufEnter *.pl,*.pm compiler perl
 
   " Lua
-  autocmd FileType lua shiftwidth=4 tabstop=4 softtabstop=4 smarttab noexpandtab
+  autocmd FileType lua set shiftwidth=4 tabstop=4 softtabstop=4 smarttab noexpandtab
   autocmd BufEnter *.lua set autoindent tabstop=4 softtabstop=4 smarttab
   \ noexpandtab formatoptions=croql
 
