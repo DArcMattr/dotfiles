@@ -21,6 +21,9 @@ if has('python')
     NeoBundle 'joonty/vim-phpqa'
     NeoBundle 'joonty/vim-phpunitqf'
   endif
+else
+  NeoBundle 'ervandew/supertab'
+  NeoBundle 'shawncplus/phpcomplete.vim'
 endif
 
 NeoBundle 'Shougo/vimproc', {
@@ -37,8 +40,6 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'bitbucket:ludovicchabant/vim-lawrencium', { 'type': 'hg' }
 NeoBundle 'bling/vim-airline'
 NeoBundle 'embear/vim-localvimrc'
-NeoBundle 'ervandew/supertab'
-NeoBundle 'haya14busa/vim-easymotion'
 NeoBundle 'joonty/vdebug'
 NeoBundle 'kloppster/Wordpress-Vim-Syntax'
 NeoBundle 'krisajenkins/vim-pipe'
@@ -46,7 +47,6 @@ NeoBundle 'krisajenkins/vim-postgresql-syntax'
 NeoBundle 'reedes/vim-wheel'
 NeoBundle 'rkitover/vimpager'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'shawncplus/phpcomplete.vim'
 NeoBundle 'sheerun/vim-polyglot'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-surround'
