@@ -71,7 +71,7 @@ clearcache() {
 }
 
 sssh() {
-  (autossh -t "$@" 'if tmux has; then tmux -2u attach -d; else tmux -2u new; fi') 2>/dev/null
+  (autossh -t "$@" 'if tmux has; then tmux -2u attach; else tmux -2u new; fi') 2>/dev/null
 }
 
 mountpub() {
@@ -117,9 +117,9 @@ playtime() {
 
 dosass() {
   if [ "$#" -eq 1 ]; then
-    sass --scss --compass -lC "$1" > "$(dirname "$1")/$(basename -s .scss "$1").css"
+    sassc -glt nested -o "$(dirname "$1")/$(basename -s .scss "$1").css" "$1"
   else
-    sass --scss --compass -lC "$1" > "$2"
+    sassc -glt nested -o "$2" "$1"
   fi
 }
 
