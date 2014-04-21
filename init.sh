@@ -1,7 +1,7 @@
 #!/bin/sh
 # only idempotent commands here so far
 
-mkdir -p ~/contrib ~/.vim/{syntax,bundle/neobundle.vim/ ~/.config/powerline
+mkdir -p ~/contrib ~/.vim/{syntax,bundle} ~/.config/powerline
 chmod 600 ~/dotfiles/sshconfig
 
 dotfiles=".vimrc .bashrc .zshrc .profile .bash_profile .hgrc .gitconfig .tmux.conf .Xmodmap .pandoc"
