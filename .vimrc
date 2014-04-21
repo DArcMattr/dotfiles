@@ -24,6 +24,8 @@ if has('python')
 else
   NeoBundle 'ervandew/supertab'
   NeoBundle 'shawncplus/phpcomplete.vim'
+
+  let g:SuperTabDefaultCompletionType = ''
 endif
 
 NeoBundle 'Shougo/vimproc', {
@@ -226,6 +228,7 @@ else
 endif
 
 let mapleader = ","
+let maplocalleader = "<SPACE>"
 
 " key remappings - toggle spell checking
 map <F7> :setlocal spell! spelllang=en_us<CR>
@@ -275,9 +278,8 @@ let $GIT_SSL_NO_VERIFY = 'true'
 let g:DirDiffDynamicDiffText = 1
 let g:EasyMotion_leader_key='<leader>'
 let g:NumberToggleTrigger='<leader>l'
-let g:SuperTabDefaultCompletionType = ''
 let g:VCSCommandSplit='vertical'
-let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#quickfix#location_text='Location'
 let g:airline#extensions#quickfix#quickfix_text='Quickfix'
 let g:airline#extensions#syntastic#enabled=1
@@ -298,6 +300,10 @@ let g:syntastic_check_on_open=0
 let g:syntastic_error_symbol='⧰'
 let g:syntastic_php_checkers=[ 'php' ]
 let g:syntastic_warning_symbol='⚠'
+let g:unite_cursor_line_time=0.0
+let g:unite_enable_split_vertically=1
+let g:unite_update_time=0
+let g:unite_options_auto_resize=1
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
 if executable('ag')
