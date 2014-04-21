@@ -1,4 +1,6 @@
 # vim:ft=zsh:
+# plugins required: vi-mode
+#   mercurial must be configured for hg-prompt
 # based on oh-my-zsh's rkj-repos theme
 # user, host, full path, and time/date
 # on two lines for easier vgrepping
@@ -26,9 +28,9 @@ function mygit() {
 
 # alternate prompt with git & hg
 PROMPT=$'
-%{\e[0;34m%}%B[%b%{\e[0;33m%}'%D{"%Y-%m-%d %H:%M:%S"}%b$'%{\e[0;34m%}%B]%b%{\e[0m%}
-%{\e[0;34m%}%B[%b%{\e[0m%}%{\e[1;32m%}%n%{\e[1;33m%}@%{\e[0m%}%{\e[0;36m%}%m%{\e[0;33m%}%B:%b%/%{\e[0;34m%}%B]%b%{\e[0m%}
-%{\e[0;34m%}%B[%{\e[1;35m%}$%{\e[0;34m%}%B] <$(mygit)$(hg_prompt_info)$(svn_prompt_info)>%{\e[0m%}%b '
-PS2=$' \e[0;34m%}%B>%{\e[0m%}%b '
+%{$fg[blue]%}%B[%b%{\e[0;33m%}'%D{"%Y-%m-%d %H:%M:%S"}%b$'%{$fg[blue]%}%B]%b%{\e[0m%}
+%{$fg[blue]%}%B[%b%{\e[0m%}%{\e[1;32m%}%n%{\e[1;33m%}@%{\e[0m%}%{\e[0;36m%}%m%{\e[0;33m%}%B:%b%/%{$fg[blue]%}%B]%b%{\e[0m%}
+%{$fg[blue]%}%B[%{\e[1;35m%}$%{$fg[blue]%}%B] <%b%{$fg[white]%}$(mygit)$(hg_prompt_info)$(svn_prompt_info)%{$fg[blue]%}%B>%{\e[0m%}%b '
+PS2=$' $fg[blue]%}%B>%{\e[0m%}%b '
 
 RPROMPT='$(vi_mode_prompt_info)'
