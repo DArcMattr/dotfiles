@@ -47,6 +47,9 @@ fi
 if [ -r ~/dotfiles/.aliases.${HOSTNAME} ]; then
   source ~/dotfiles/.aliases.${HOSTNAME}
 fi
+if [ -r ./.env.aliases ]; then
+  source ./.env.aliases
+fi
 
 unsetopt correct
 unsetopt correct_all
