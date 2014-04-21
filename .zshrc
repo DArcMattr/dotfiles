@@ -41,6 +41,21 @@ plugins=(git mercurial vi-mode pip svn-fast-info)
 source $ZSH/oh-my-zsh.sh
 source ~/.profile
 
+autoload bashcompinit
+bashcompinit
+#have() {
+#  unset -v have
+#  PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin type $1 &>/dev/null && have="yes"
+#}
+#
+#if [ -d /etc/bash_completion.d/ ]; then
+#  source /etc/bash_completion.d/*
+#fi
+#if [ -d /usr/local/etc/bash_completion.d/ ]; then
+#  source /usr/local/etc/bash_completion.d/*
+#fi
+source ~/contrib/wp-completion/wp-completion.bash
+
 source ~/dotfiles/.aliases
 if [ -r /etc/aliases.sh ]; then
   source /etc/aliases.sh
