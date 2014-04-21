@@ -124,7 +124,7 @@ set smartindent
 set smarttab
 set softtabstop=2
 set splitbelow
-set splitright
+"set splitright
 set tabstop=2
 set textwidth=80
 if &term =~? 'mlterm\|xterm\|screen'
@@ -228,7 +228,7 @@ else
 endif
 
 let mapleader = ","
-let maplocalleader = "<SPACE>"
+let maplocalleader = "-"
 
 " key remappings - toggle spell checking
 map <F7> :setlocal spell! spelllang=en_us<CR>
@@ -437,15 +437,17 @@ if has('autocmd')
   autocmd FileType hgcommit set textwidth=72
   autocmd FileType hgcommit match OverLength /\%73v.\+/
 
+  " for databases, should set this in the .lvimrc to match a particular database
   " MySQL
   autocmd BufNewFile,BufRead,BufEnter *.mysql setf mysql
   autocmd FileType mysql :let b:vimpipe_filetype="mysql"
-  " should set this in the .lvimrc to match a particular database
+  autocmd FileType mysql :let b:vimpipe_command="mysql"
   " autocmd FileType mysql :let b:vimpipe_command="mysql mydatabase"
 
   " PostgreSQL
   autocmd BufNewFile,BufRead,BufEnter *.psql setf postgresql
   autocmd FileType postgresql :let b:vimpipe_filetype="postgresql"
+  autocmd FileType postgresql :let b:vimpipe_command="psql"
   " autocmd FileType postgresql :let b:vimpipe_command="psql mydatabase"
 
   " Markdown
