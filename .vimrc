@@ -10,6 +10,7 @@ endif
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 if has('python')
+  NeoBundle 'SirVer/ultisnips'
   NeoBundle 'UmkaDK/vim-taggatron'
   NeoBundle 'Valloric/YouCompleteMe.git', {
   \   'build' : {
@@ -23,7 +24,6 @@ if has('python')
   endif
 else
   NeoBundle 'ervandew/supertab'
-  NeoBundle 'shawncplus/phpcomplete.vim'
 
   let g:SuperTabDefaultCompletionType = ''
 endif
@@ -49,6 +49,7 @@ NeoBundle 'krisajenkins/vim-postgresql-syntax'
 NeoBundle 'reedes/vim-wheel'
 NeoBundle 'rkitover/vimpager'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'shawncplus/phpcomplete.vim'
 NeoBundle 'sheerun/vim-polyglot'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-surround'
@@ -182,7 +183,6 @@ if has("win32")
 elseif has("unix")
   if has("gui_running")
     if has('gui_macvim')
-      set fullscreen
       set fuoptions=maxvert,maxhorz
       set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
       set guioptions=egm
@@ -192,8 +192,7 @@ elseif has("unix")
       set printfont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
     endif
     if ! has("X11") " for qvim
-      "set fu
-      "set guioptions=-Mt
+      set guioptions=eg
     else
     endif
     " set guioptions=aegiMpLtT
