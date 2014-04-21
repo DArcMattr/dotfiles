@@ -31,3 +31,4 @@ PROMPT=$'
 %{\e[0;34m%}%B[%{\e[1;35m%}$%{\e[0;34m%}%B] <$(mygit)$(hg_prompt_info)$(svn_prompt_info)>%{\e[0m%}%b '
 PS2=$' \e[0;34m%}%B>%{\e[0m%}%b '
 
+RPROMPT='$(vi_mode_prompt_info)'
