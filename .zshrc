@@ -36,21 +36,21 @@ KEYTIMEOUT=1
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git mercurial vi-mode pip svn-fast-info)
+plugins=(git mercurial vi-mode pip svn-fast-info git-prompt)
 
 source $ZSH/oh-my-zsh.sh
 source ~/.profile
 
 autoload bashcompinit
 bashcompinit
-#have() {
-#  unset -v have
-#  PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin type $1 &>/dev/null && have="yes"
-#}
-#
-#if [ -d /etc/bash_completion.d/ ]; then
-#  source /etc/bash_completion.d/*
-#fi
+have() {
+  unset -v have
+  PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin type $1 &>/dev/null && have="yes"
+}
+
+if [ -d /etc/bash_completion.d/ ]; then
+  source /etc/bash_completion.d/*
+fi
 #if [ -d /usr/local/etc/bash_completion.d/ ]; then
 #  source /usr/local/etc/bash_completion.d/*
 #fi
