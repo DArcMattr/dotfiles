@@ -64,5 +64,11 @@ grab_powerline() {
   fi
 }
 
+grab_s3cmd() {
+  echo "installing/upgrading s3cmd"
+  sudo $PIP install -U https://github.com/s3tools/s3cmd/archive/master.zip
+}
+
 grab_wp_completion
 grab_powerline
+grab_s3cmd
