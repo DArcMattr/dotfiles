@@ -54,7 +54,7 @@ fi
 #if [ -d /usr/local/etc/bash_completion.d/ ]; then
 #  source /usr/local/etc/bash_completion.d/*
 #fi
-source ~/contrib/wp-completion/wp-completion.bash
+source ~/contrib/wp-cli/utils/wp-completion.bash
 
 source ~/dotfiles/.aliases
 if [ -r /etc/aliases.sh ]; then
