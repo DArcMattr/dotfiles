@@ -34,7 +34,6 @@ Copy/paste the following onto the command line:
 Refresh the session, then run the following:
 
     source ~/dotfiles/init.sh
-    cp ~/dotfiles/dca.zsh-theme ~/.oh-my-zsh/themes/dca.zsh-theme
     rm ~/.vimrc ~/.bashrc ~/.zshrc ~/.profile ~/.bash_profile ~/.hgrc \
       ~/.gitconfig ~/.tmux.conf ~/.Xmodmap ~/.pandoc
     mv ~/.ssh/config ~/.ssh/config.orig

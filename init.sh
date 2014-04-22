@@ -1,7 +1,7 @@
 #!/bin/sh
 # only idempotent commands here so far
 
-mkdir -p ~/contrib ~/.vim/{syntax,bundle/neobundle.vim/ ~/.config/powerline
+mkdir -p ~/contrib ~/.vim/{syntax,bundle} ~/.config/powerline
 chmod 600 ~/dotfiles/sshconfig
 
 dotfiles=".vimrc .bashrc .zshrc .profile .bash_profile .hgrc .gitconfig .tmux.conf .Xmodmap .pandoc"
@@ -31,20 +31,38 @@ else
   cd -
 fi
 
+function grab_wp_completion {
+  if [ ! -d ~/contrib/wp-completions/ ]; then
+    mkdir -p ~/contrib/wp-completion
+  fi
+
+  curl \
+    https://raw.githubusercontent.com/wp-cli/wp-cli/master/utils/wp-completion.bash > \
+      ~/contrib/wp-completion/wp-completion.bash
+}
+
 if [ ! -d ~/contrib/hg-prompt/.hg/ ]; then
-  hg clone http://bitbucket.org/sjl/hg-prompt/ ~/contrib/hg-prompt/
+  hg clone https://bitbucket.org/sjl/hg-prompt/ ~/contrib/hg-prompt/
 else
   cd ~/contrib/hg-prompt
   hg pull -u
   cd -
 fi
 
-sudo $PIP install -U https://github.com/Lokaltog/powerline/tarball/develop
+function grab_powerline {
+  echo "installing/upgrading Powerline"
+  sudo $PIP install -U https://github.com/Lokaltog/powerline/tarball/develop
 
-powerline_path=$(python -c 'import pkgutil; print pkgutil.get_loader("powerline").filename')
-if [ ! -d ~/.config/powerline ]; then
-  cp -R ${powerline_path}/config_files/* ~/.config/powerline
-fi
-ln -s \
-  ${powerline_path}/bindings/tmux/powerline.conf \
-  ~/.config/powerline/powerline.conf
+  powerline_path=$(python -c 'import pkgutil; print pkgutil.get_loader("powerline").filename')
+  if [ ! -d ~/.config/powerline ]; then
+    cp -R ${powerline_path}/config_files/* ~/.config/powerline
+  fi
+  if [ ! -f ~/.config/powerline/powerline.conf ]; then
+    ln -s \
+      ${powerline_path}/bindings/tmux/powerline.conf \
+      ~/.config/powerline/powerline.conf
+  fi
+}
+
+grab_wp_completion
+grab_powerline
