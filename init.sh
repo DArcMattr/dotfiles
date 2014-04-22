@@ -7,65 +7,72 @@ chmod 600 ~/dotfiles/sshconfig
 dotfiles=".vimrc .bashrc .zshrc .profile .bash_profile .hgrc .gitconfig .tmux.conf .Xmodmap .pandoc"
 PIP=`which pip`
 
-if [ ! -d ~/.vim/bundle/neobundle.vim/.git/ ]; then
-  git clone http://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-else
-  cd ~/.vim/bundle/neobundle.vim
-  git up
-  cd -
-fi
+grab_neobundle() {
+  if [ ! -d ~/.vim/bundle/neobundle.vim/.git/ ]; then
+    git clone http://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+  else
+    cd ~/.vim/bundle/neobundle.vim
+    git up
+    cd -
+  fi
+}
 
-if [ ! -d ~/contrib/giteditor/.git/ ]; then
-  git clone https://github.com/dharrigan/giteditor.git ~/contrib/giteditor
-else
-  cd ~/contrib/giteditor
-  git up
-  cd -
-fi
+grab_giteditor() {
+  if [ ! -d ~/contrib/giteditor/.git/ ]; then
+    git clone https://github.com/dharrigan/giteditor.git ~/contrib/giteditor
+  else
+    cd ~/contrib/giteditor
+    git up
+    cd -
+  fi
+}
 
-if [ ! -d ~/contrib/git-diffall/.git/ ]; then
-  git clone https://github.com/thenigan/git-diffall.git ~/contrib/git-diffall
-else
-  cd ~/contrib/git-diffall
-  git up
-  cd -
-fi
+grab_git_diffall() {
+  if [ ! -d ~/contrib/git-diffall/.git/ ]; then
+    git clone https://github.com/thenigan/git-diffall.git ~/contrib/git-diffall
+  else
+    cd ~/contrib/git-diffall
+    git up
+    cd -
+  fi
+}
+
+build_wp_cli() {
+  cd ~/contrib/wp-cli
+  git checkout "tags/v${1}"
+  git submodule update --init --recursive
+  if [ -f ~/contrib/wp-cli/composer.lock ]; then
+    composer update
+  else
+    composer install
+  fi
+  # TODO build phar
+  sudo rm /usr/local/bin/wp && \
+    sudo ln -s ~/contrib/wp-cli/bin/wp /usr/local/bin/wp
+}
 
 grab_wp_cli() {
-  cd /tmp
-  if [ command -v curl >/dev/null 2>&1 ]; then
-    echo "cUrl required" >&2
-    exit 1
+  VER='0.15.0'
+  if [ ! -d ~/contrib/wp-cli/.git/ ]; then
+    git clone --recursive https://github.com/wp-cli/wp-cli.git ~/contrib/wp-cli/
+    build_wp_cli ${VER}
   else
-    curl -L https://raw.github.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > \
-      /tmp/wp-cli.phar
-    chmod +x /tmp/wp-cli.phar
-    sudo mv /tmp/wp-cli.phar /usr/local/bin/wp
+    CURR_VER=$(~/contrib/wp-cli/bin/wp --version)
+    if [ "${CURR_VER}" != "WP-CLI ${VER}" ]; then
+      build_wp_cli ${VER}
+    fi
   fi
 }
 
-grab_wp_completion() {
-  if [ ! -d ~/contrib/wp-completions/ ]; then
-    mkdir -p ~/contrib/wp-completion
-  fi
-
-  if [ command -v curl >/dev/null 2>&1 ]; then
-    echo "cUrl required" >&2
-    exit 1
+grab_hg_prompt() {
+  if [ ! -d ~/contrib/hg-prompt/.hg/ ]; then
+    hg clone https://bitbucket.org/sjl/hg-prompt/ ~/contrib/hg-prompt/
   else
-    curl -L \
-      https://raw.githubusercontent.com/wp-cli/wp-cli/master/utils/wp-completion.bash > \
-        ~/contrib/wp-completion/wp-completion.bash
+    cd ~/contrib/hg-prompt
+    hg pull -u
+    cd -
   fi
 }
-
-if [ ! -d ~/contrib/hg-prompt/.hg/ ]; then
-  hg clone https://bitbucket.org/sjl/hg-prompt/ ~/contrib/hg-prompt/
-else
-  cd ~/contrib/hg-prompt
-  hg pull -u
-  cd -
-fi
 
 grab_powerline() {
   echo "installing/upgrading Powerline"
@@ -87,7 +94,10 @@ grab_s3cmd() {
   sudo $PIP install -U https://github.com/s3tools/s3cmd/archive/master.zip
 }
 
+grab_giteditor
+grab_git_diffall
+grab_neobundle
+grab_hg_prompt
 grab_wp_cli
-grab_wp_completion
 grab_powerline
 grab_s3cmd
