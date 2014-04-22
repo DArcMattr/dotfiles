@@ -31,7 +31,7 @@ else
   cd -
 fi
 
-function grab_wp_completion() {
+function grab_wp_completion {
   if [ ! -d ~/contrib/wp-completions/ ]; then
     mkdir -p ~/contrib/wp-completion
   fi
@@ -49,7 +49,7 @@ else
   cd -
 fi
 
-function grab_powerline() {
+function grab_powerline {
   echo "installing/upgrading Powerline"
   sudo $PIP install -U https://github.com/Lokaltog/powerline/tarball/develop
 
