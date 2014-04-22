@@ -31,14 +31,32 @@ else
   cd -
 fi
 
+grab_wp_cli() {
+  cd /tmp
+  if [ command -v curl >/dev/null 2>&1 ]; then
+    echo "cUrl required" >&2
+    exit 1
+  else
+    curl -L https://raw.github.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > \
+      /tmp/wp-cli.phar
+    chmod +x /tmp/wp-cli.phar
+    sudo mv /tmp/wp-cli.phar /usr/local/bin/wp
+  fi
+}
+
 grab_wp_completion() {
   if [ ! -d ~/contrib/wp-completions/ ]; then
     mkdir -p ~/contrib/wp-completion
   fi
 
-  curl \
-    https://raw.githubusercontent.com/wp-cli/wp-cli/master/utils/wp-completion.bash > \
-      ~/contrib/wp-completion/wp-completion.bash
+  if [ command -v curl >/dev/null 2>&1 ]; then
+    echo "cUrl required" >&2
+    exit 1
+  else
+    curl -L \
+      https://raw.githubusercontent.com/wp-cli/wp-cli/master/utils/wp-completion.bash > \
+        ~/contrib/wp-completion/wp-completion.bash
+  fi
 }
 
 if [ ! -d ~/contrib/hg-prompt/.hg/ ]; then
@@ -69,6 +87,7 @@ grab_s3cmd() {
   sudo $PIP install -U https://github.com/s3tools/s3cmd/archive/master.zip
 }
 
+grab_wp_cli
 grab_wp_completion
 grab_powerline
 grab_s3cmd
