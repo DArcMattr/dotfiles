@@ -8,8 +8,7 @@ Clone to `~/dotfiles`
   the necessary permissions
 * `zsh` is available and set as a shell, via `chsh`
 * `hg` (Mercurial) and `git` source control programs
-* `hggit` package is installed through pip or package control
-* `composer.phar` is installed on a system-wide level
+* `composer.phar` is installed on a system-wide level as `composer`
 
 ## `.hg/hgrc`
 

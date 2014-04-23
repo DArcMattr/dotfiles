@@ -13,7 +13,7 @@ record=
 bookmarks=
 eol=
 prompt=~/contrib/hg-prompt/prompt.py
-hggit=
+#hggit=
 extdiff=
 
 [alias]
