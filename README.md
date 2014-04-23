@@ -4,13 +4,13 @@ Clone to `~/dotfiles`
 
 ## Requirements & Assumptions
 
-* Vim with the Python 2.7 engine compiled in, and ability to use `pip` with all
-  the necessary permissions
-* `zsh` is available and set as a shell, via `chsh`
-* `hg` (Mercurial) and `git` source control programs
+* Vim with the Python 2.7 engine compiled in, and ability to use
+* Python's `pip` is available,  with all the necessary permissions to run it
+* Z-shell, `zsh` is available and set as a shell, via `chsh`
+* [Mercurial SCM][], `hg`, and [Git][], `git`, source control programs
 * `composer.phar` is installed on a system-wide level as `composer`
 
-## `.hg/hgrc`
+## `.hg/hgrc` Modifications
 
 There should be the following lines in this project's `.hg/hgrc` file:
 
@@ -54,3 +54,6 @@ Refresh the session, then run the following:
 For running `st` under KDE:
 
     kstart --maximize --windowclass "st-256color" st -e tmux attach
+
+[Mercurail SCM]: http://mercurial.selenic.com
+[Git]: http://git-scm.com
