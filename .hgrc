@@ -14,6 +14,7 @@ bookmarks=
 eol=
 prompt=~/contrib/hg-prompt/prompt.py
 #hggit=
+hgcfg=~/contrib/hgcfg/hgext/hgcfg.py
 extdiff=
 
 [alias]
@@ -42,3 +43,10 @@ groups=_www,www,apache,wheel,80
 [extdiff]
 cmd.vdiff=vim
 opts.vdiff=-f '+next' '+execute "DirDiff" fnameescape(argv(0)) fnameescape(argv(1))'
+
+# derived from the following command:
+# `openssl s_client -connect bitbucket.org:443 < /dev/null 2>/dev/null | \
+#   openssl x509 -fingerprint -noout -in /dev/stdin`
+
+[hostfingerprints]
+bitbucket.org = 45:ad:ae:1a:cf:0e:73:47:06:07:e0:88:f5:cc:10:e5:fa:1c:f7:99
