@@ -10,13 +10,6 @@ Clone to `~/dotfiles`
 * [Mercurial SCM][], `hg`, and [Git][], `git`, source control programs
 * `composer.phar` is installed on a system-wide level as `composer`
 
-## `.hg/hgrc` Modifications
-
-There should be the following lines in this project's `.hg/hgrc` file:
-
-    [hooks]
-    update = chmod 600 sshconfig
-
 ## Installation Steps
 
 ### for Oh-My-ZSH
@@ -32,7 +25,7 @@ Copy/paste the following onto the command line:
 
 Refresh the session, then run the following:
 
-    source ~/dotfiles/init.sh
+    ~/dotfiles/init.sh
     rm ~/.vimrc ~/.bashrc ~/.zshrc ~/.profile ~/.bash_profile ~/.hgrc \
       ~/.gitconfig ~/.tmux.conf ~/.Xmodmap ~/.pandoc
     mv ~/.ssh/config ~/.ssh/config.orig
