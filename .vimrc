@@ -17,15 +17,23 @@ if has('python')
   \     'unix' : './install.sh --clang-completer --system-libclang',
   \   },
   \ }
+  NeoBundle 'dsawardekar/wordpress.vim'
   NeoBundle 'editorconfig/editorconfig-vim'
   if has('signs')
     NeoBundle 'joonty/vim-phpqa'
     NeoBundle 'joonty/vim-phpunitqf'
   endif
+
+"  let g:UltiSnipsExpandTrigger       = "<c-j>"
+"  let g:UltiSnipsJumpForwardTrigger  = "<c-j>"
+"  let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
 else
   NeoBundle 'ervandew/supertab'
 
-  let g:SuperTabDefaultCompletionType = ''
+  let g:SuperTabDefaultCompletionType = "context"
+  let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+  let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+  let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
 endif
 
 NeoBundle 'Shougo/vimproc', {
@@ -43,7 +51,6 @@ NeoBundle 'bitbucket:ludovicchabant/vim-lawrencium', { 'type': 'hg' }
 NeoBundle 'bling/vim-airline'
 NeoBundle 'embear/vim-localvimrc'
 NeoBundle 'joonty/vdebug'
-NeoBundle 'kloppster/Wordpress-Vim-Syntax'
 NeoBundle 'krisajenkins/vim-pipe'
 NeoBundle 'krisajenkins/vim-postgresql-syntax'
 NeoBundle 'reedes/vim-wheel'
@@ -71,6 +78,7 @@ set autoread
 set backspace=indent,eol,start
 set colorcolumn=+1
 set complete-=i
+set completeopt=menu,menuone,longest
 set diffopt=filler,vertical
 set display+=lastline
 set encoding=utf-8 nobomb
@@ -112,6 +120,7 @@ set printheader=%<%f%h%m\ %40
 set printheader=+{strftime(\"%c\"getftime(expand(\"%%\")))}%=Page\ %N
 set printoptions=formfeed:y,paper:letter,portrait:n,number:y,syntax:7
 set printoptions+=left:5mm,right:5mm,top:10mm,bottom:5mm
+set pumheight=15
 set scrolloff=3
 set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
 set shiftround
@@ -126,6 +135,7 @@ set smarttab
 set softtabstop=2
 set splitbelow
 "set splitright
+set synmaxcol=512
 set tabstop=2
 set textwidth=80
 if &term =~? 'mlterm\|xterm\|screen'
@@ -139,7 +149,10 @@ set virtualedit=all
 set visualbell
 set wildmenu
 set wildmode=list:longest,list:full
-set wildignore+=.git,.svn,.hg,tmp/**
+set wildignore+=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg
+set wildignore+=*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc
+set wildignore+=vendor/*,docs/*,node_modules/*,components/*,build/*,dist/*
+
 
 if &t_Co >= 256 || has('gui_running')
   highlight clear SpellBad
