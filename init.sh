@@ -134,4 +134,5 @@ grab_s3cmd
 
 cd ~/dotfiles
 hg cfg --local hooks.update "chmod 600 ~/dotfiles/sshconfig"
+hg cfg --local paths.default "ssh://hg@bitbucket.org/darceneaux/dotfiles"
 cd -
