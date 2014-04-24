@@ -101,13 +101,13 @@ grab_powerline() {
 }
 
 grab_s3cmd() {
-  VER='s3cmd version 1.5.0-beta1'
-  CURR_VER=$(s3cmd --version 2>&1)
-  if [ "${CURR_VER}" != "${VER}"]; then
+  VER="s3cmd version 1.5.0-beta1"
+  CURR_VER="$(s3cmd --version 2>&1)"
+  if [ "$CURR_VER" = "$VER" ]; then
+    echo "s3cmd currently installed and up to date"
+  else
     echo "installing/upgrading s3cmd"
     \sudo $PIP install -U https://github.com/s3tools/s3cmd/archive/master.zip
-  else
-    echo "s3cmd currently installed and up to date"
   fi
 }
 
@@ -131,3 +131,7 @@ grab_hg_prompt
 grab_wp_cli
 grab_powerline
 grab_s3cmd
+
+cd ~/dotfiles
+hg cfg --local hooks.update "chmod 600 ~/dotfiles/sshconfig"
+cd -
