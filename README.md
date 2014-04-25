@@ -4,11 +4,11 @@ Clone to `~/dotfiles`
 
 ## Requirements & Assumptions
 
-* Vim with the Python 2.7 engine compiled in, and ability to use
-* Python's `pip` is available,  with all the necessary permissions to run it
+* Root access via `sudo`
+* Vim with the Python 2.7 engine compiled in
+* Python's `pip` is available, with all the necessary permissions to run it
 * Z-shell, `zsh` is available and set as a shell, via `chsh`
 * [Mercurial SCM][], `hg`, and [Git][], `git`, source control programs
-* `composer.phar` is installed on a system-wide level as `composer`
 
 ## Installation Steps
 
@@ -42,11 +42,13 @@ Refresh the session, then run the following:
     ln -s ~/dotfiles/sshconfig ~/.ssh/config
     ln -s ~/dotfiles/hgcommit.vim ~/.vim/syntax/hgcommit.vim
 
-## `st` notes
+## Experimental notes
+
+### `st`
 
 For running `st` under KDE:
 
     kstart --maximize --windowclass "st-256color" st -e tmux attach
 
-[Mercurail SCM]: http://mercurial.selenic.com
+[Mercurial SCM]: http://mercurial.selenic.com
 [Git]: http://git-scm.com
