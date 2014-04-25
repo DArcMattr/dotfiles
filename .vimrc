@@ -30,10 +30,10 @@ if has('python')
 else
   NeoBundle 'ervandew/supertab'
 
-  let g:SuperTabDefaultCompletionType = "context"
   let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
-  let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
   let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
+  let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+  let g:SuperTabDefaultCompletionType = "context"
 endif
 
 NeoBundle 'Shougo/vimproc', {
@@ -46,6 +46,7 @@ NeoBundle 'Shougo/vimproc', {
 \ }
 NeoBundle 'DArcMattr/vim-numbertoggle'
 NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'bitbucket:ludovicchabant/vim-lawrencium', { 'type': 'hg' }
 NeoBundle 'bling/vim-airline'
@@ -152,7 +153,6 @@ set wildmode=list:longest,list:full
 set wildignore+=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg
 set wildignore+=*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc
 set wildignore+=vendor/*,docs/*,node_modules/*,components/*,build/*,dist/*
-
 
 if &t_Co >= 256 || has('gui_running')
   highlight clear SpellBad
@@ -287,7 +287,6 @@ cmap w!! w !sudo tee % >/dev/null
 " plugin specific settings
 let $GIT_SSL_NO_VERIFY = 'true'
 
-let g:DirDiffDynamicDiffText = 1
 let g:EasyMotion_leader_key='<leader>'
 let g:NumberToggleTrigger='<leader>l'
 let g:VCSCommandSplit='vertical'
