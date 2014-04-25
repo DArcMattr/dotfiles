@@ -114,10 +114,17 @@ playtime() {
 }
 
 dosass() {
+  # TODO: allow for some command line options
   if [ "$#" -eq 1 ]; then
-    sassc -glt nested -o "$(dirname "$1")/$(basename -s .scss "$1").css" "$1"
+    OUT_FILE="$(dirname "$1")/$(basename -s .scss "$1").css"
   else
-    sassc -glt nested -o "$2" "$1"
+    OUT_FILE=$2
+  fi
+
+  if \sassc -g $1 >/dev/null 2>&1; then
+    \sassc -glt nested -o "$OUT_FILE" "$1"
+  else
+    \sassc -mlt nested "$1" "$OUT_FILE"
   fi
 }
 
