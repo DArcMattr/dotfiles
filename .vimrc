@@ -272,14 +272,6 @@ nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 nnoremap <C-p> :Unite file_rec/async<CR>
 nnoremap <leader>/ :Unite grep:.<CR>
-nnoremap <silent> <c-w>j :silent call TmuxMove('j')<cr>
-nnoremap <silent> <c-w>k :silent call TmuxMove('k')<cr>
-nnoremap <silent> <c-w>h :silent call TmuxMove('h')<cr>
-nnoremap <silent> <c-w>l :silent call TmuxMove('l')<cr>
-nnoremap <silent> <c-w><down> :silent call TmuxMove('j')<cr>
-nnoremap <silent> <c-w><up> :silent call TmuxMove('k')<cr>
-nnoremap <silent> <c-w><left> :silent call TmuxMove('h')<cr>
-nnoremap <silent> <c-w><right> :silent call TmuxMove('l')<cr>
 
 "in case of derp-sudo
 cmap w!! w !sudo tee % >/dev/null
@@ -363,6 +355,39 @@ if $TMUX != ''
       exe 'wincmd ' . a:direction
     end
   endfunction
+
+  function! TmuxSharedYank()
+    " Send the contents of the 't' register to a temporary file, invoke
+    " copy to tmux using load-buffer, and then to xclip
+    " FIXME for some reason, the 'tmux load-buffer -' form will hang
+    " when used with 'system()' which takes a second argument as stdin.
+    let tmpfile = tempname()
+    call writefile(split(@t, '\n'), tmpfile, 'b')
+    call system('tmux load-buffer '.shellescape(tmpfile).';tmux show-buffer | xclip -i -selection clipboard')
+    call delete(tmpfile)
+  endfunction
+
+  function! TmuxSharedPaste()
+    " put tmux copy buffer into the t register, the mapping will handle
+    " pasting into the buffer
+    let @t = system('xclip -o -selection clipboard | tmux load-buffer -;tmux show-buffer')
+  endfunction
+
+  vnoremap <silent> <esc>y "ty:call TmuxSharedYank()<cr>
+  vnoremap <silent> <esc>d "td:call TmuxSharedYank()<cr>
+  nnoremap <silent> <esc>p :call TmuxSharedPaste()<cr>"tp
+  vnoremap <silent> <esc>p d:call TmuxSharedPaste()<cr>h"tp
+  set clipboard= " Use this or vim will automatically put deleted text into x11 selection('*' register) which breaks the above map
+
+  nnoremap <silent> <c-w>j :silent call TmuxMove('j')<cr>
+  nnoremap <silent> <c-w>j :silent call TmuxMove('j')<cr>
+  nnoremap <silent> <c-w>k :silent call TmuxMove('k')<cr>
+  nnoremap <silent> <c-w>h :silent call TmuxMove('h')<cr>
+  nnoremap <silent> <c-w>l :silent call TmuxMove('l')<cr>
+  nnoremap <silent> <c-w><down> :silent call TmuxMove('j')<cr>
+  nnoremap <silent> <c-w><up> :silent call TmuxMove('k')<cr>
+  nnoremap <silent> <c-w><left> :silent call TmuxMove('h')<cr>
+  nnoremap <silent> <c-w><right> :silent call TmuxMove('l')<cr>
 endif
 
 if has('autocmd')
