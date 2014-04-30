@@ -45,12 +45,12 @@ NeoBundle 'Shougo/vimproc', {
 \  },
 \ }
 NeoBundle 'DArcMattr/vim-numbertoggle'
-NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'bitbucket:ludovicchabant/vim-lawrencium', { 'type': 'hg' }
 NeoBundle 'bling/vim-airline'
 NeoBundle 'embear/vim-localvimrc'
+NeoBundle 'jiangmiao/auto-pairs'
 NeoBundle 'joonty/vdebug'
 NeoBundle 'krisajenkins/vim-pipe'
 NeoBundle 'krisajenkins/vim-postgresql-syntax'
@@ -415,9 +415,23 @@ if has('autocmd')
     autocmd InsertLeave * set list
   augroup END
 
+  augroup cursor_position
+    autocmd!
+    " CURSOR ASSUMES PREVIOUS POSITION
+    autocmd BufReadPost * if line("'\"") > 0             |
+    \                       if line("'\"") <= line("$")  |
+    \                         exe("norm '\"")            |
+    \                       else                         |
+    \                         exe "norm $"               |
+    \                       endif                        |
+    \                     endif
+  augroup END
+
   "autocmd BufRead * try | execute "compiler ".&filetype | catch /./ | endtry
 
   " common filetypes below
+  " any project-specific settings should be included in the .lvimrc file placed
+  " in the root folder of that project
 
   " Perl
   autocmd BufNewFile,BufRead,BufEnter *.pl,*.pm set makeprg=perl
@@ -469,4 +483,7 @@ if has('autocmd')
 
   " Apache
   autocmd BufNewFile,BufRead,BufEnter *.conf setf apache
+
+  " Ruby
+  autocmd BufNewFile,BufRead Vagrantfile setf ruby
 endif
