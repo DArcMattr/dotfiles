@@ -1,0 +1,4 @@
+#!/bin/sh
+BRANCH="$1"
+[ -z "$BRANCH" ] && BRANCH=HEAD
+git diff $(git merge-base master "$BRANCH") "$BRANCH"
