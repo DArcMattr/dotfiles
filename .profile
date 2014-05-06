@@ -1,7 +1,7 @@
 export AUTOSSH_PORT=0
 export CLICOLOR=YES
 export CLICOLOR_FORCE=YES
-export HGEDITOR=~/dotfiles/hgeditor
+export HGEDITOR=~/dotfiles/helpers/hgeditor
 export LC_CTYPE=en_US.UTF-8
 export LESS="-EFIMQRsX~ -x2"
 export LESSCHARSET=utf-8

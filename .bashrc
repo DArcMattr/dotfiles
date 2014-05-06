@@ -31,7 +31,7 @@ declare -x CVSROOT="darceneaux@demo.aynrand.org:/var/www/cvs"
 #declare -x WEB_ENVIRONMENT='test'
 declare -x MANWIDTH=72
 
-declare -x HGEDITOR=~/dotfiles/hgeditor
+declare -x HGEDITOR=~/dotfiles/helpers/hgeditor
 
 ##############################
 # ##### PROMPT SECTION ##### #
