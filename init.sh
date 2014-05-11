@@ -28,6 +28,16 @@ grab_giteditor() {
   fi
 }
 
+grab_vimscript() {
+  if [ ! -d ~/contrib/vimscript/.git/ ]; then
+    git clone https://github.com/neovim/vimscript ~/contrib/vimscript
+  else
+    \cd ~/contrib/vimscript
+    git up
+    \cd -
+  fi
+}
+
 grab_git_diffall() {
   if [ ! -d ~/contrib/git-diffall/.git/ ]; then
     git clone https://github.com/thenigan/git-diffall.git ~/contrib/git-diffall
@@ -131,6 +141,7 @@ grab_hg_prompt
 grab_wp_cli
 grab_powerline
 grab_s3cmd
+grab_vimscript
 
 cd ~/dotfiles
 hg cfg --local hooks.update "chmod 600 ~/dotfiles/sshconfig"
