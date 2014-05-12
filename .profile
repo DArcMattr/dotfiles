@@ -14,7 +14,7 @@ export PATH=$PATH:/usr/sbin:/usr/X11R6/bin:/usr/games:$HOME/.rvm/bin
 if type "vim" > /dev/null; then
   EDITOR=`which vim`
   #export VIMRUNTIME=`vim -e -T dumb --cmd 'exe "set t_cm=\<C-M>"|echo $VIMRUNTIME|quit' | tr -d '\015' `
-  export VIMRUNTIME=~/vimscript/runtime/
+  export VIMRUNTIME=~/contrib/vimscript/runtime/
 else
   EDITOR=`which vi`
 fi
