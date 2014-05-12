@@ -2,7 +2,7 @@
 # only idempotent commands here so far
 # TODO: translate to ansible
 
-\mkdir -p ~/contrib ~/.vim/{syntax,bundle} ~/.config/powerline
+\mkdir -p ~/contrib ~/.vim/{syntax,bundle} ~/.config/powerline ~/bin
 chmod 600 ~/dotfiles/sshconfig
 
 dotfiles=".vimrc .bashrc .zshrc .profile .bash_profile .hgrc .gitconfig .tmux.conf .Xmodmap .pandoc"
@@ -60,6 +60,25 @@ build_wp_cli() {
   # TODO build phar
   \sudo \rm -f /usr/local/bin/wp && \
     \sudo \ln -s ~/contrib/wp-cli/bin/wp /usr/local/bin/wp
+}
+
+grab_sassc() {
+  # TODO: create a git hook to insert
+  if [ ! -d ~/contrib/libsass/.git/ ]; then
+    git clone https://github.com/hcatlin/libsass ~/contrib/libsass
+  else
+    cd ~/contrib/libsass
+    git up
+    cd -
+  fi
+
+  if [ ! -d ~/contrib/sassc/.git/ ]; then
+    git clone https://github.com/hcatlin/sassc ~/contrib/sassc
+  else
+    cd ~/contrib/sassc
+    git up
+    cd -
+  fi
 }
 
 grab_wp_cli() {
@@ -142,6 +161,7 @@ grab_wp_cli
 grab_powerline
 grab_s3cmd
 grab_vimscript
+grab_sassc
 
 cd ~/dotfiles
 hg cfg --local hooks.update "chmod 600 ~/dotfiles/sshconfig"
