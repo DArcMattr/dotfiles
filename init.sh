@@ -79,6 +79,7 @@ grab_sassc() {
     git up
     cd -
   fi
+  echo "you will need to compile these yourself"
 }
 
 grab_wp_cli() {
@@ -162,6 +163,9 @@ grab_powerline
 grab_s3cmd
 grab_vimscript
 grab_sassc
+
+composer global require 'phpmd/phpmd=*'
+composer global require 'squizlabs/php_codesniffer=*'
 
 cd ~/dotfiles
 hg cfg --local hooks.update "chmod 600 ~/dotfiles/sshconfig"
