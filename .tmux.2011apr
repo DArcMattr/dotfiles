@@ -18,6 +18,9 @@ tmux set-option -t $SESSION status-position top
 tmux new-window -t $SESSION:0 -k
 
 tmux new-window -t $SESSION:1 -k
+tmux send-keys -t $SESSION:1 "sssh aynrand2" C-m
+tmux set-window-option -t $SESSION:1 automatic-rename off
+tmux rename-window -t $SESSION:1 aynrand2
 
 tmux new-window -t $SESSION:2 -k
 tmux send-keys -t $SESSION:2 "sssh cor" C-m
