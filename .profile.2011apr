@@ -1,0 +1,5 @@
+if [ -r ~/.rvm/scripts/rvm ]; then
+  source ~/.rvm/scripts/rvm
+fi
+
+export PATH=$PATH:~/contrib/android-sdk/sdk/tools:~/contrib/android-sdk/sdk/platform-tools
