@@ -18,29 +18,31 @@ tmux set-option -t $SESSION status-position top
 tmux new-window -t $SESSION:0 -k
 
 tmux new-window -t $SESSION:1 -k
-tmux send-keys -t $SESSION:1 "sssh aynrand2" C-m
-tmux set-window-option -t $SESSION:1 automatic-rename off
-tmux rename-window -t $SESSION:1 aynrand2
 
 tmux new-window -t $SESSION:2 -k
-tmux send-keys -t $SESSION:2 "sssh cor" C-m
+tmux send-keys -t $SESSION:2 "sssh aynrand2" C-m
 tmux set-window-option -t $SESSION:2 automatic-rename off
-tmux rename-window -t $SESSION:2 cor
+tmux rename-window -t $SESSION:2 aynrand2
 
 tmux new-window -t $SESSION:3 -k
-tmux send-keys -t $SESSION:3 "sssh demo" C-m
+tmux send-keys -t $SESSION:3 "sssh cor" C-m
 tmux set-window-option -t $SESSION:3 automatic-rename off
-tmux rename-window -t $SESSION:3 demo
+tmux rename-window -t $SESSION:3 cor
 
 tmux new-window -t $SESSION:4 -k
-tmux send-keys -t $SESSION:4 "sssh centuria" C-m
+tmux send-keys -t $SESSION:4 "sssh demo" C-m
 tmux set-window-option -t $SESSION:4 automatic-rename off
-tmux rename-window -t $SESSION:4 centuria
+tmux rename-window -t $SESSION:4 demo
 
 tmux new-window -t $SESSION:5 -k
-tmux send-keys -t $SESSION:5 "sssh mc" C-m
+tmux send-keys -t $SESSION:5 "sssh centuria" C-m
 tmux set-window-option -t $SESSION:5 automatic-rename off
-tmux rename-window -t $SESSION:5 mc
+tmux rename-window -t $SESSION:5 centuria
+
+tmux new-window -t $SESSION:6 -k
+tmux send-keys -t $SESSION:6 "sssh mc" C-m
+tmux set-window-option -t $SESSION:6 automatic-rename off
+tmux rename-window -t $SESSION:6 mc
 
 tmux select-window -t $SESSION:0
 
