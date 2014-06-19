@@ -159,6 +159,7 @@ if &t_Co >= 256 || has('gui_running')
   highlight clear SpellCap
   highlight clear SpellLocal
   highlight clear SpellRare
+  highlight Comment ctermfg=227 guifg=#ffff5f
   highlight CursorColumn cterm=NONE ctermbg=237 guibg=#3a3a3a
   highlight CursorLine cterm=NONE ctermbg=237 guibg=#3a3a3a
   highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
@@ -301,6 +302,8 @@ let g:sparkupExecuteMapping='<leader>se'
 let g:sparkupNextMapping='<leader>sn'
 let g:syntastic_check_on_open=0
 let g:syntastic_error_symbol='⧰'
+"let g:syntastic_html_validator_api='http://localhost:8888/'
+"let g:syntastic_html_validator_parser='html5'
 let g:syntastic_php_checkers=[ 'php' ]
 let g:syntastic_warning_symbol='⚠'
 let g:unite_cursor_line_time=0.0
@@ -450,6 +453,11 @@ if has('autocmd')
     \                         exe "norm $"               |
     \                       endif                        |
     \                     endif
+  augroup END
+
+  augroup CenteringReadOnly
+    autocmd!
+    autocmd BufEnter * if !&modifiable | setl scrolloff=999 | endif
   augroup END
 
   "autocmd BufRead * try | execute "compiler ".&filetype | catch /./ | endtry
