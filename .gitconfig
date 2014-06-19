@@ -4,7 +4,7 @@
 [color]
   ui = true
 [diff]
-  external = ~/dotfiles/git_diff_wrapper
+  external = ~/dotfiles/helpers/git_diff_wrapper
   tool = vimdiff
 [format]
   pretty = oneline
