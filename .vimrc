@@ -65,7 +65,6 @@ NeoBundle 'tpope/vim-vividchalk'
 NeoBundle 'tristen/vim-sparkup'
 NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'vim-scripts/vcscommand.vim'
-NeoBundle 'vim-scripts/smarty-syntax'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-session'
 
