@@ -9,41 +9,6 @@ endif
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-if has('python')
-  NeoBundle 'SirVer/ultisnips'
-  NeoBundle 'UmkaDK/vim-taggatron'
-  NeoBundle 'Valloric/YouCompleteMe.git', {
-  \   'build' : {
-  \     'unix' : './install.sh --clang-completer --system-libclang',
-  \   },
-  \ }
-  NeoBundle 'dsawardekar/wordpress.vim'
-  NeoBundle 'editorconfig/editorconfig-vim'
-  if has('signs')
-    NeoBundle 'joonty/vim-phpqa'
-    NeoBundle 'joonty/vim-phpunitqf'
-  endif
-
-"  let g:UltiSnipsExpandTrigger       = "<c-j>"
-"  let g:UltiSnipsJumpForwardTrigger  = "<c-j>"
-"  let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
-else
-  NeoBundle 'ervandew/supertab'
-
-  let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
-  let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
-  let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-  let g:SuperTabDefaultCompletionType = "context"
-endif
-
-NeoBundle 'Shougo/vimproc', {
-\ 'build' : {
-\   'windows' : 'make -f make_mingw32.mak',
-\   'cygwin'  : 'make -f make_cygwin.mak',
-\   'mac'     : 'make -f make_mac.mak',
-\   'unix'    : 'make -f make_unix.mak',
-\  },
-\ }
 NeoBundle 'DArcMattr/vim-numbertoggle'
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/unite.vim'
@@ -67,6 +32,41 @@ NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'vim-scripts/vcscommand.vim'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-session'
+NeoBundle 'Shougo/vimproc', {
+\ 'build' : {
+\   'windows' : 'make -f make_mingw32.mak',
+\   'cygwin'  : 'make -f make_cygwin.mak',
+\   'mac'     : 'make -f make_mac.mak',
+\   'unix'    : 'make -f make_unix.mak',
+\  },
+\ }
+
+if has('python')
+  if has('signs')
+    NeoBundle 'joonty/vim-phpqa'
+    NeoBundle 'joonty/vim-phpunitqf'
+  endif
+  NeoBundle 'dsawardekar/wordpress.vim'
+  NeoBundle 'editorconfig/editorconfig-vim'
+  NeoBundle 'SirVer/ultisnips'
+  NeoBundle 'UmkaDK/vim-taggatron'
+  NeoBundle 'Valloric/YouCompleteMe.git', {
+  \   'build' : {
+  \     'unix' : './install.sh --clang-completer',
+  \   },
+  \ }
+
+"  let g:UltiSnipsExpandTrigger       = "<c-j>"
+"  let g:UltiSnipsJumpForwardTrigger  = "<c-j>"
+"  let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
+else
+  NeoBundle 'ervandew/supertab'
+
+  let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+  let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
+  let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+  let g:SuperTabDefaultCompletionType = "context"
+endif
 
 filetype plugin indent on " required by NeoBundle
 syntax on
@@ -158,7 +158,7 @@ if &t_Co >= 256 || has('gui_running')
   highlight clear SpellCap
   highlight clear SpellLocal
   highlight clear SpellRare
-  highlight Comment ctermfg=227 guifg=#ffff5f
+  highlight Comment ctermfg=105 guifg=#8787ff
   highlight CursorColumn cterm=NONE ctermbg=237 guibg=#3a3a3a
   highlight CursorLine cterm=NONE ctermbg=237 guibg=#3a3a3a
   highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
