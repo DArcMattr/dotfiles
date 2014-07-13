@@ -66,9 +66,13 @@ grab_sassc() {
   # TODO: create a git hook to insert
   if [ ! -d ~/contrib/libsass/.git/ ]; then
     git clone https://github.com/hcatlin/libsass ~/contrib/libsass
+    cd ~/contrib/libsass
+    git submodule init --recursive
+    cd -
   else
     cd ~/contrib/libsass
     git up
+    git submodule update --recursive
     cd -
   fi
 
