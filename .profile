@@ -7,6 +7,7 @@ export LESS="-EFIMQRsX~ -x2"
 export LESSCHARSET=utf-8
 export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
 export MANWIDTH=80
+export ANSIBLE_NOCOWS=1
 
 export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin
 export PATH=$PATH:/usr/sbin:/usr/X11R6/bin:/usr/games:$HOME/.rvm/bin
