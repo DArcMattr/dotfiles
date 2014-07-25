@@ -30,7 +30,7 @@ function mygit() {
 PROMPT=$'
 %{$fg[blue]%}%B[%b%{\e[0;33m%}'%D{"%Y-%m-%d %H:%M:%S"}%b$'%{$fg[blue]%}%B]%b%{\e[0m%}
 %{$fg[blue]%}%B[%b%{\e[0m%}%{\e[1;32m%}%n%{\e[1;33m%}@%{\e[0m%}%{\e[0;36m%}%m%{\e[0;33m%}%B:%b%/%{$fg[blue]%}%B]%b%{\e[0m%}
-%{$fg[blue]%}%B[%{\e[1;35m%}$%{$fg[blue]%}%B] <%b%{$fg[white]%}$(mygit)$(hg_prompt_info)$(svn_prompt_info)%{$fg[blue]%}%B>%{\e[0m%}%b '
+%{$fg[blue]%}%B[%{\e[1;35m%}%L:$%{$fg[blue]%}%B] <%b%{$fg[white]%}$(mygit)$(hg_prompt_info)$(svn_prompt_info)%{$fg[blue]%}%B>%{\e[0m%}%b '
 PS2=$'$fg[blue]%}%B>%{\e[0m%}%b '
 
 RPROMPT='$(vi_mode_prompt_info)'
