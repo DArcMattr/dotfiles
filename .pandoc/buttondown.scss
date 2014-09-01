@@ -40,6 +40,13 @@
 */
 $lh: 1.2rem;
 
+@mixin pseudo-text-stroke( $color, $radius ) {
+  text-shadow: $color $radius 0 0,
+    $color 0 $radius 0,
+    $color (-$radius) 0 0,
+    $color 0 (-$radius) 0;
+}
+
 $color-html-background: #c1c1c1;
 $dark-text-default: #080808 !default;
 $light-text-default: #f8f8f8 !default;
@@ -55,12 +62,12 @@ html {
   font-size: 92.5%;
   line-height: $lh;
   padding: $lh;
-  background: $color-html-background;
+  background-color: $color-html-background;
 }
 
 body {
   max-width: 37.5 * $lh;
-  background: $color-body-background;
+  background-color: $color-body-background;
   color: color-contrast( $color-body-background );
   margin: 0 auto;
   padding: $lh;
@@ -138,6 +145,7 @@ strong {}
 a {
   font-weight: 700;
   text-decoration: none;
+  @include pseudo-text-stroke( color-contrast( $color-body-background ), 1px );
   &:link {
   }
   &:visited {
