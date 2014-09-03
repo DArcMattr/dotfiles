@@ -12,6 +12,7 @@ Host *
   CheckHostIP no
   # LocalCommand if [[ $TERM == screen* ]]; then printf "\033k%h\033\\"; fi
   PermitLocalCommand no
+  ForwardAgent yes
 
 Host live
   HostName cultureofreason.org
