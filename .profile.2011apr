@@ -14,4 +14,5 @@ superupdate() {
     sudo apt-get -y clean
 }
 
-export PATH=$PATH:~/contrib/android-sdk/sdk/tools:~/contrib/android-sdk/sdk/platform-tools
+export GOPATH=$HOME/go
+export PATH=$PATH:~/contrib/android-sdk/sdk/tools:~/contrib/android-sdk/sdk/platform-tools:$GOROOT/bin:$GOPATH/bin
