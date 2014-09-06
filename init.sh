@@ -2,7 +2,7 @@
 # only idempotent commands here so far
 # TODO: translate to ansible
 
-\mkdir -p ~/contrib ~/.vim/{syntax,bundle} ~/.config/powerline ~/bin
+\mkdir -p ~/contrib ~/.vim/{syntax,bundle} ~/bin
 chmod 600 ~/dotfiles/sshconfig
 
 dotfiles=".vimrc .bashrc .zshrc .profile .bash_profile .hgrc .gitconfig .tmux.conf .Xmodmap .pandoc"
@@ -111,10 +111,11 @@ grab_hgcfg() {
 
 grab_powerline() {
   echo "installing/upgrading Powerline"
-  \sudo $PIP install -U https://github.com/Lokaltog/powerline/tarball/develop
+  \sudo $PIP install -U powerline-status
 
-  powerline_path=$(python -c 'import pkgutil; print pkgutil.get_loader("powerline").filename')
+  powerline_path=$(dirname `python -c 'import powerline; print (powerline.__file__)'`)
   if [ ! -d ~/.config/powerline ]; then
+    mkdir -p ~/.config/powerline
     \cp -R ${powerline_path}/config_files/* ~/.config/powerline
   fi
   if [ ! -f ~/.config/powerline/powerline.conf ]; then
@@ -131,7 +132,7 @@ grab_s3cmd() {
     echo "s3cmd currently installed and up to date"
   else
     echo "installing/upgrading s3cmd"
-    \sudo $PIP install -U https://github.com/s3tools/s3cmd/archive/master.zip
+    \sudo $PIP install -U s3cmd==1.5.0-alpha3
   fi
 }
 
