@@ -16,3 +16,4 @@ superupdate() {
 
 export GOPATH=$HOME/go
 export PATH=$PATH:~/contrib/android-sdk/sdk/tools:~/contrib/android-sdk/sdk/platform-tools:$GOROOT/bin:$GOPATH/bin
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
