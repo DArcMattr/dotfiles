@@ -40,6 +40,7 @@ grab_git_diffall() {
 
 build_wp_cli() {
   \cd ~/contrib/wp-cli
+  git up
   git checkout "tags/v${1}"
   git submodule update --init --recursive
   if [ -f ~/contrib/wp-cli/composer.lock ]; then
