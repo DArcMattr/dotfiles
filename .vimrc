@@ -158,7 +158,7 @@ if &t_Co >= 256 || has('gui_running')
   highlight clear SpellRare
   highlight Comment ctermfg=105 guifg=#8787ff
   highlight CursorColumn cterm=NONE ctermbg=237 guibg=#3a3a3a
-  highlight CursorLine cterm=NONE ctermbg=237 guibg=#3a3a3a
+  highlight CursorLine cterm=underline ctermbg=NONE guibg=NONE
   highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
   highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
   highlight NonText ctermfg=235 guifg=#262626
@@ -201,12 +201,13 @@ elseif has("unix")
     else
       set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
       set printfont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
+
+      if ! has("X11") " for qvim
+        set guioptions=eg
+      else
+        set guioptions=aegiMpLtT
+      endif
     endif
-    if ! has("X11") " for qvim
-      set guioptions=eg
-    else
-    endif
-    " set guioptions=aegiMpLtT
   else
     "nop!
   endif

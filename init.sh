@@ -28,16 +28,6 @@ grab_giteditor() {
   fi
 }
 
-grab_git_diffall() {
-  if [ ! -d ~/contrib/git-diffall/.git/ ]; then
-    git clone https://github.com/thenigan/git-diffall.git ~/contrib/git-diffall
-  else
-    \cd ~/contrib/git-diffall
-    git up
-    \cd -
-  fi
-}
-
 build_wp_cli() {
   \cd ~/contrib/wp-cli
   git up
@@ -150,7 +140,6 @@ grab_composer() {
 
 grab_composer
 grab_giteditor
-grab_git_diffall
 grab_neobundle
 grab_hgcfg
 grab_hg_prompt
