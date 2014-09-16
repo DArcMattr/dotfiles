@@ -5,9 +5,14 @@ if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 
   call neobundle#rc( expand('~/.vim/bundle/') )
+  NeoBundleFetch 'Shougo/neobundle.vim'
+  call neobundle#end()
 endif
 
-NeoBundleFetch 'Shougo/neobundle.vim'
+let g:make = 'gmake'
+if system('uname -o') =~ '^GNU/'
+  let g:make = 'make'
+endif
 
 NeoBundle 'DArcMattr/vim-numbertoggle'
 NeoBundle 'Shougo/neobundle.vim'
@@ -32,14 +37,7 @@ NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'vim-scripts/vcscommand.vim'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-session'
-NeoBundle 'Shougo/vimproc', {
-\ 'build' : {
-\   'windows' : 'make -f make_mingw32.mak',
-\   'cygwin'  : 'make -f make_cygwin.mak',
-\   'mac'     : 'make -f make_mac.mak',
-\   'unix'    : 'make -f make_unix.mak',
-\  },
-\ }
+NeoBundle 'Shougo/vimproc', { 'build': { 'unix': g:make }}
 
 if has('python')
   if has('signs')
@@ -519,3 +517,4 @@ if has('autocmd')
   " Ruby
   autocmd BufNewFile,BufRead Vagrantfile setf ruby
 endif
+
