@@ -4,6 +4,7 @@ fi
 
 # machine/Desktop Environment dependent
 alias open='kioclient exec'
+alias sicp='racket -i -p neil/sicp -l xrepl'
 
 # XXX pull back into .aliases under a feature check
 superupdate() {
