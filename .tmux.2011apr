@@ -39,11 +39,6 @@ tmux send-keys -t $SESSION:5 "sssh centuria" C-m
 tmux set-window-option -t $SESSION:5 automatic-rename off
 tmux rename-window -t $SESSION:5 centuria
 
-tmux new-window -t $SESSION:6 -k
-tmux send-keys -t $SESSION:6 "sssh mc" C-m
-tmux set-window-option -t $SESSION:6 automatic-rename off
-tmux rename-window -t $SESSION:6 mc
-
 tmux select-window -t $SESSION:0
 
 tmux -2u attach-session -t $SESSION
