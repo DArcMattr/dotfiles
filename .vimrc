@@ -33,6 +33,7 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-vividchalk'
 NeoBundle 'tristen/vim-sparkup'
+NeoBundle 'vim-scripts/DirDiff.vim'
 NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'vim-scripts/vcscommand.vim'
 NeoBundle 'xolox/vim-misc'
@@ -152,13 +153,9 @@ set wildignore+=*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc
 set wildignore+=vendor/*,docs/*,node_modules/*,components/*,build/*,dist/*
 
 if &t_Co >= 256 || has('gui_running')
-  highlight clear SpellBad
-  highlight clear SpellCap
-  highlight clear SpellLocal
-  highlight clear SpellRare
   highlight Comment ctermfg=105 guifg=#8787ff
   highlight CursorColumn cterm=NONE ctermbg=237 guibg=#3a3a3a
-  highlight CursorLine cterm=underline ctermbg=NONE guibg=NONE
+  highlight CursorLine term=underline cterm=underline ctermbg=NONE gui=underline guibg=NONE
   highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
   highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
   highlight NonText ctermfg=235 guifg=#262626
@@ -166,10 +163,14 @@ if &t_Co >= 256 || has('gui_running')
   highlight OverLength guibg=#1c1c1c guifg=#b2b2b2
   highlight Search ctermfg=222 guifg=#ffdf87
   highlight SpecialKey ctermfg=235 guifg=#262626
+  highlight clear SpellBad
   highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline guifg=#800000 gui=underline
-  highlight SpellCap term=underline cterm=underline gui=underline
-  highlight SpellLocal term=underline cterm=underline gui=underline
-  highlight SpellRare term=underline cterm=underline gui=underline
+  highlight clear SpellCap
+  highlight SpellCap term=underline cterm=underline gui=undercurl
+  highlight clear SpellLocal
+  highlight SpellLocal term=underline cterm=underline gui=undercurl
+  highlight clear SpellRare
+  highlight SpellRare term=underline cterm=underline gui=undercurl
 
   match OverLength /\%81v.\+/
 else
@@ -427,12 +428,14 @@ if has('autocmd')
     autocmd!
     autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
     autocmd WinLeave * setlocal nocursorcolumn
+    set cursorcolumn
   augroup END
 
   augroup CursorLine
     autocmd!
     autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
     autocmd WinLeave * setlocal nocursorline
+    set cursorline
   augroup END
 
   augroup ShowListChars
