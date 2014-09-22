@@ -257,10 +257,11 @@ map <leader>gl :Glog<CR>
 map <leader>gp :Gpush<CR>
 map <leader>os :call RestoreSess()
 
+nmap . .'[
 nmap <C-PageUp> :tabp<CR>
 nmap <C-PageDown> :tabn<CR>
-nmap . .'[
 nmap <leader>q :nohlsearch<CR>
+nmap <F8> :TagbarToggle<CR>
 
 nnoremap j gj
 nnoremap gj j
