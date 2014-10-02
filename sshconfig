@@ -72,3 +72,7 @@ Host aynrand2
   HostName aynrand2.org
   Port 32323
   User darc
+
+Host ricochet-live
+  HostName ricochet-web1.pagelydev.com
+  User darc
