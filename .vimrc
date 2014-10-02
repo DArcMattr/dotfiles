@@ -15,7 +15,6 @@ if system('uname -o') =~ '^GNU/'
 endif
 
 NeoBundle 'DArcMattr/vim-numbertoggle'
-NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'bitbucket:ludovicchabant/vim-lawrencium', { 'type': 'hg' }
 NeoBundle 'bling/vim-airline'
@@ -40,7 +39,15 @@ NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'vim-scripts/vcscommand.vim'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-session'
-NeoBundle 'Shougo/vimproc', { 'build': { 'unix': g:make }}
+"NeoBundle 'Shougo/vimproc', { 'build': { 'unix': g:make }}
+NeoBundle 'Shougo/vimproc.vim', {
+  \ 'build' : {
+  \     'windows' : 'tools\\update-dll-mingw',
+  \     'cygwin' : 'make -f make_cygwin.mak',
+  \     'mac' : 'make -f make_mac.mak',
+  \     'unix' : 'make -f make_unix.mak',
+  \    },
+  \ }
 
 if has('python')
   if has('signs')
