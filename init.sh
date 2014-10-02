@@ -68,7 +68,7 @@ grab_sassc() {
 }
 
 grab_wp_cli() {
-  VER='0.16.0'
+  VER='0.17.0'
   if [ ! -d ~/contrib/wp-cli/.git/ ]; then
     git clone --recursive https://github.com/wp-cli/wp-cli.git ~/contrib/wp-cli/
     build_wp_cli ${VER}
