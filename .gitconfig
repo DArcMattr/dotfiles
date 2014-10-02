@@ -14,7 +14,7 @@
   editor = ~/contrib/giteditor/giteditor.sh
   excludesfile = ~/dotfiles/.gitignore_global
 [push]
-  default = matching
+  default = current
 [alias]
   afetch = fetch --all --prune
   br = branch
