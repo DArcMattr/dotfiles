@@ -102,6 +102,7 @@ grab_hgcfg() {
 
 grab_powerline() {
   echo "installing/upgrading Powerline"
+  \sudo $PIP install -U psutil
   \sudo $PIP install -U powerline-status
 
   powerline_path=$(dirname `python -c 'import powerline; print (powerline.__file__)'`)
