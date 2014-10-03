@@ -28,7 +28,7 @@ tmux select-pane -l -t $SESSION:0
 tmux new-window -t $SESSION:1 -k
 tmux send-keys -t $SESSION:1 "cd ~/contrib/VVV/www" C-m
 tmux split-window -h -t $SESSION:1
-tmux send-keys -t $SESSION:1 "cd ~/contrib/VVV/www" C-m
+tmux send-keys -t $SESSION:1 "cd ~/contrib/VVV/www; vagrant up; sssh vagrant" C-m
 tmux split-window -v -t $SESSION:1
 tmux send-keys -t $SESSION:1 "cd ~/contrib/VVV/www" C-m
 
