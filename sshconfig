@@ -88,3 +88,19 @@ Host vagrant
   IdentitiesOnly yes
   LogLevel FATAL
   ForwardAgent yes
+
+Host tb-dev
+  HostName 162.216.42.80
+  User tech03admin
+
+Host tb-prod-1
+  HostName 199.79.81.110
+  User tech03admin
+
+Host tb-prod-2
+  HostName 199.79.51.31
+  User tech03admin
+
+Host tb-prod-3
+  HostName 162.216.42.79
+  User tech03admin
