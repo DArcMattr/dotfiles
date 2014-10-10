@@ -1,4 +1,4 @@
 export PATH="$(brew --prefix josegonzalez/php/php56)/bin":/usr/local/bin:$PATH
 export HOMEBREW_GITHUB_API_TOKEN="47968cb7f6d5d97d101e49f4deafcc85ac8dafbe"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-export VIMRUNTIME=~/contrib/vim/runtime/
+export VIMRUNTIME="~/contrib/vim/runtime/"
