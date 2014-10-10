@@ -26,6 +26,7 @@
   dlc = diff --cached HEAD^
   dl = "!git ll -1"
   dr = "!f() { git diff "$1"^.."$1"; }; f"
+  merge-dry-run = "!f() { git merge --no-commit --no-ff $@; git merge --abort; }; f"
   filelog = log -u
   fl = log -u
   gra = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
