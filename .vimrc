@@ -1,10 +1,12 @@
+if !1 | finish | endif
+
 filetype off " required by NeoBundle
 
 if has('vim_starting')
   set nocompatible
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 
-  call neobundle#rc( expand('~/.vim/bundle/') )
+  call neobundle#begin( expand('~/.vim/bundle/') )
   NeoBundleFetch 'Shougo/neobundle.vim'
   call neobundle#end()
 endif
@@ -39,13 +41,12 @@ NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'vim-scripts/vcscommand.vim'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-session'
-"NeoBundle 'Shougo/vimproc', { 'build': { 'unix': g:make }}
 NeoBundle 'Shougo/vimproc.vim', {
   \ 'build' : {
   \     'windows' : 'tools\\update-dll-mingw',
   \     'cygwin' : 'make -f make_cygwin.mak',
   \     'mac' : 'make -f make_mac.mak',
-  \     'unix' : 'make -f make_unix.mak',
+  \     'unix' : g:make
   \    },
   \ }
 
