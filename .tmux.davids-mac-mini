@@ -12,8 +12,12 @@ if [ $? -eq 0 ]; then
 fi
 
 tmux new-session -d -s $SESSION
+
 tmux set-option -g default-command "reattach-to-user-namespace -l zsh"
-tmux bind y run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
+
+tmux bind-key -t y copy-pipe "reattach-to-user-namespace pbcopy"
+tmux unbind   -t vi-copy Enter
+tmux bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
 
 tmux set-option -t $SESSION status-position top
 tmux set-option -t $SESSION aggressive-resize off
@@ -42,4 +46,4 @@ tmux rename-window -t $SESSION:3 "centuria"
 
 tmux select-window -t $SESSION:0
 
-tmux -CC -2u attach-session -t $SESSION
+tmux -2u attach-session -t $SESSION
