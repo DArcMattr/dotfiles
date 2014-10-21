@@ -104,3 +104,28 @@ Host tb-prod-2
 Host tb-prod-3
   HostName 162.216.42.79
   User tech03admin
+
+Host dcjump
+  HostName 10.10.20.2
+  User root
+
+Host dcprod1
+  HostName 10.10.12.1
+  ProxyCommand ssh -oCiphers=arcfour -oClearAllForwardings=yes root@10.10.20.2 nc %h %p -w 10 2> /dev/null
+  User root
+
+Host dcprod2
+  HostName 10.10.12.2
+  ProxyCommand ssh -oCiphers=arcfour -oClearAllForwardings=yes root@10.10.20.2 nc %h %p -w 10 2> /dev/null
+  User root
+
+Host dcprod3
+  HostName 10.10.12.3
+  ProxyCommand ssh -oCiphers=arcfour -oClearAllForwardings=yes root@10.10.20.2 nc %h %p -w 10 2> /dev/null
+  User root
+
+Host dcprod4
+  HostName 10.10.12.4
+  ProxyCommand ssh -oCiphers=arcfour -oClearAllForwardings=yes root@10.10.20.2 nc %h %p -w 10 2> /dev/null
+  User root
+

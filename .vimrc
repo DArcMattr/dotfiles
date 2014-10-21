@@ -18,6 +18,7 @@ endif
 
 NeoBundle 'DArcMattr/vim-numbertoggle'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'bitbucket:ludovicchabant/vim-lawrencium', { 'type': 'hg' }
 NeoBundle 'bling/vim-airline'
 NeoBundle 'embear/vim-localvimrc'
@@ -33,10 +34,10 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'shawncplus/phpcomplete.vim'
 NeoBundle 'sheerun/vim-polyglot'
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-git'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-vividchalk'
 NeoBundle 'tristen/vim-sparkup'
-NeoBundle 'vim-scripts/DirDiff.vim'
 NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'vim-scripts/vcscommand.vim'
 NeoBundle 'xolox/vim-misc'
@@ -51,12 +52,6 @@ NeoBundle 'Shougo/vimproc.vim', {
   \ }
 
 if has('python')
-  if has('signs')
-    NeoBundle 'joonty/vim-phpqa'
-    NeoBundle 'joonty/vim-phpunitqf'
-  endif
-  NeoBundle 'dsawardekar/wordpress.vim'
-  NeoBundle 'editorconfig/editorconfig-vim'
   NeoBundle 'SirVer/ultisnips'
   NeoBundle 'UmkaDK/vim-taggatron'
   NeoBundle 'Valloric/YouCompleteMe.git', {
@@ -64,6 +59,10 @@ if has('python')
   \     'unix' : './install.sh --clang-completer',
   \   },
   \ }
+  NeoBundle 'joonty/vim-phpqa'
+  NeoBundle 'joonty/vim-phpunitqf'
+  NeoBundle 'dsawardekar/wordpress.vim'
+  NeoBundle 'editorconfig/editorconfig-vim'
 
 "  let g:UltiSnipsExpandTrigger       = "<c-j>"
 "  let g:UltiSnipsJumpForwardTrigger  = "<c-j>"
