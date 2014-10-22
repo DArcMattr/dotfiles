@@ -1,4 +1,5 @@
 # vim:set ft=sshconfig:
+# requires netcat for the proxy connections
 Host *
   PreferredAuthentications publickey,keyboard-interactive,password
   ServerAliveInterval 60
@@ -32,11 +33,6 @@ Host github
 
 Host demo
   HostName demo.aynrand.org
-  User darceneaux
-
-Host mac
-  HostName 10.10.10.200
-  ProxyCommand ssh -oCiphers=arcfour -oClearAllForwardings=yes darceneaux@demo.aynrand.org nc %h %p -w 10 2> /dev/null
   User darceneaux
 
 Host geekisp
@@ -111,7 +107,7 @@ Host dcjump
 
 Host dcprod1
   HostName 10.10.12.1
-  ProxyCommand ssh -oCiphers=arcfour -oClearAllForwardings=yes root@10.10.20.2 nc %h %p -w 10 2> /dev/null
+  ProxyCommand ssh -oCiphers=arcfour -oClearAllForwardings=yes root@10.10.20.2 nc %h %p -q0 -w 10 2> /dev/null
   User root
 
 Host dcprod2
