@@ -3,18 +3,23 @@
   email = david@davidthemachine.org
 [color]
   ui = true
+[core]
+  editor = ~/contrib/giteditor/giteditor.sh
+  excludesfile = ~/dotfiles/.gitignore_global
 [diff]
 #  external = ~/dotfiles/helpers/git_diff_wrapper
   tool = vimdiff
+[difftool]
+  prompt = false
 [format]
   pretty = oneline
 [pager]
   diff =
-[core]
-  editor = ~/contrib/giteditor/giteditor.sh
-  excludesfile = ~/dotfiles/.gitignore_global
+[pull]
+  ff = only
 [push]
   default = current
+  ff = only
 [alias]
   afetch = fetch --all --prune
   br = branch
@@ -23,15 +28,14 @@
   d = difftool
   diffall = difftool --dir-diff
   diffr = "!f() { git diff "%1"^.."$1"; }; f"
-  dlc = diff --cached HEAD^
   dl = "!git ll -1"
+  dlc = diff --cached HEAD^
   dr = "!f() { git diff "$1"^.."$1"; }; f"
-  merge-dry-run = "!f() { git merge --no-commit --no-ff $@; git merge --abort; }; f"
   filelog = log -u
   fl = log -u
+  gr = grep -Ii
   gra = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
   grep = grep -Ii
-  gr = grep -Ii
   integrate = "!~/dotfiles/helpers/git-integrate"
   la = "!git config -l | grep alias | cut -c 7-"
   lasttag = describe --tags --abbrev=0
@@ -42,11 +46,11 @@
   ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
   lt = describe --tags --abbrev=0
   mdiff = "!~/dotfiles/helpers/git-mdiff"
+  merge-dry-run = "!f() { git merge --no-commit --no-ff $@; git merge --abort; }; f"
   merge-to = "!gitmergeto() { export tmp_branch=`git branch | grep '* ' | tr -d '* '` && git checkout $1 && git merge $tmp_branch && git checkout $tmp_branch; unset tmp_branch; }; gitmergeto"
   ours = "!f() { git co --ours $@ && git add $@; }; f"
   ship = "!~/dotfiles/helpers/git-ship"
   st = status
   theirs = "!f() { git co --theirs $@ && git add $@; }; f"
   up = "!git remote update -p; git merge --ff-only @{u}"
-[difftool]
-  prompt = false
+  workprofile = "config user.email 'david@zeek.com'"
