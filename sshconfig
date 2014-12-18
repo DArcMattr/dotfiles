@@ -84,6 +84,7 @@ Host vagrant
   IdentitiesOnly yes
   LogLevel FATAL
   ForwardAgent yes
+  IdentityFile ~/contrib/VVV/.vagrant/machines/default/virtualbox/private_key
 
 Host tb-dev
   HostName 162.216.42.80
@@ -125,3 +126,6 @@ Host dcprod4
   ProxyCommand ssh -oCiphers=arcfour -oClearAllForwardings=yes root@10.10.20.2 nc %h %p -w 10 2> /dev/null
   User root
 
+Host create-re
+  HostName 165.225.148.133
+  User admin
