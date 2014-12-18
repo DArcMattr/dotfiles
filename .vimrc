@@ -52,7 +52,11 @@ NeoBundle 'Shougo/vimproc.vim', {
   \    },
   \ }
 
-if has('python')
+if has('nvim')
+  runtime! plugin/python_setup.vim
+endif
+
+if has('python') || has('nvim')
   NeoBundle 'SirVer/ultisnips'
   NeoBundle 'UmkaDK/vim-taggatron'
   NeoBundle 'Valloric/YouCompleteMe.git', {
