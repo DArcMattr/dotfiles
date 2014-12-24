@@ -84,7 +84,7 @@ Host vagrant
   IdentitiesOnly yes
   LogLevel FATAL
   ForwardAgent yes
-  IdentityFile ~/contrib/VVV/.vagrant/machines/default/virtualbox/private_key
+  IdentityFile ~/contrib/vvv/.vagrant/machines/default/virtualbox/private_key
 
 Host tb-dev
   HostName 162.216.42.80
