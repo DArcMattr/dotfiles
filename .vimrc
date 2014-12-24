@@ -18,6 +18,7 @@ endif
 
 NeoBundle 'DArcMattr/vim-numbertoggle'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/unite-outline'
 NeoBundle 'Valloric/MatchTagAlways'
 NeoBundle 'airblade/vim-gitgutter.git'
 NeoBundle 'bitbucket:ludovicchabant/vim-lawrencium', { 'type': 'hg' }
@@ -27,7 +28,6 @@ NeoBundle 'jiangmiao/auto-pairs'
 NeoBundle 'joonty/vdebug'
 NeoBundle 'krisajenkins/vim-pipe'
 NeoBundle 'krisajenkins/vim-postgresql-syntax'
-"NeoBundle 'majutsushi/tagbar'
 NeoBundle 'nacitar/terminalkeys.vim'
 NeoBundle 'reedes/vim-wheel'
 NeoBundle 'rkitover/vimpager'
@@ -273,7 +273,7 @@ nmap . .'[
 nmap <C-PageUp> :tabp<CR>
 nmap <C-PageDown> :tabn<CR>
 nmap <leader>q :nohlsearch<CR>
-nmap <F8> :TagbarToggle<CR>
+nmap <F8> :Unite outline<CR>
 
 nnoremap j gj
 nnoremap gj j
