@@ -1,3 +1,5 @@
+PIP=`which pip`
+
 grab_neobundle() {
   if [ ! -d ~/.vim/bundle/neobundle.vim/.git/ ]; then
     git clone http://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim

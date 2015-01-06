@@ -6,7 +6,6 @@
 chmod 600 ~/dotfiles/sshconfig
 
 dotfiles=".vimrc .bashrc .zshrc .profile .bash_profile .hgrc .gitconfig .tmux.conf .Xmodmap .pandoc"
-PIP=`which pip`
 
 source ~/dotfiles/init_libs.sh
 
