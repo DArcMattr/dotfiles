@@ -39,6 +39,7 @@ NeoBundle 'tpope/vim-git'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-vividchalk'
 NeoBundle 'tristen/vim-sparkup'
+NeoBundle 'vim-scripts/DirDiff.vim'
 NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'vim-scripts/vcscommand.vim'
 NeoBundle 'xolox/vim-misc'
@@ -138,7 +139,7 @@ set scrolloff=3
 set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
 set shiftround
 set shiftwidth=2
-set shortmess=atIA
+set shortmess=atIAoO
 set showbreak=>
 set showmatch
 set sidescrolloff=5
