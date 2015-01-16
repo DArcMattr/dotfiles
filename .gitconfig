@@ -9,9 +9,12 @@
 [diff]
   tool = vimdiff
 [difftool]
+  tool = vimdiff
   prompt = false
 [format]
   pretty = oneline
+[merge]
+  tool = vimdiff
 [pager]
   diff =
 [pull]
