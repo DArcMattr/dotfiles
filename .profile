@@ -13,7 +13,9 @@ export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin
 export PATH=$PATH:/usr/sbin:/usr/X11R6/bin:/usr/games:$HOME/.rvm/bin
 export PATH=$PATH:~/.composer/vendor/bin
 
-if type "vim" > /dev/null; then
+if type "nvim" > /dev/null; then
+  EDITOR=`which nvim`
+else if type "vim" > /dev/null; then
   EDITOR=`which vim`
 else
   EDITOR=`which vi`
