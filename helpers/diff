@@ -1,0 +1,6 @@
+#!/bin/sh
+if command -v icdiff 2>/dev/null; then
+  icdiff "$2" "$5"
+else
+  diff -y "$2" "$5"
+fi
