@@ -17,15 +17,20 @@ if system('uname -o') =~ '^GNU/'
 endif
 
 NeoBundle 'DArcMattr/vim-numbertoggle'
-NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/unite-outline'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'SirVer/ultisnips'
+NeoBundle 'UmkaDK/vim-taggatron'
 NeoBundle 'Valloric/MatchTagAlways'
 NeoBundle 'airblade/vim-gitgutter.git'
 NeoBundle 'bitbucket:ludovicchabant/vim-lawrencium', { 'type': 'hg' }
 NeoBundle 'bling/vim-airline'
+NeoBundle 'dsawardekar/wordpress.vim'
+NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'embear/vim-localvimrc'
 NeoBundle 'jiangmiao/auto-pairs'
-NeoBundle 'joonty/vdebug'
+NeoBundle 'joonty/vim-phpqa'
+NeoBundle 'joonty/vim-phpunitqf'
 NeoBundle 'krisajenkins/vim-pipe'
 NeoBundle 'krisajenkins/vim-postgresql-syntax'
 NeoBundle 'nacitar/terminalkeys.vim'
@@ -39,48 +44,25 @@ NeoBundle 'tpope/vim-git'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-vividchalk'
 NeoBundle 'tristen/vim-sparkup'
-NeoBundle 'vim-scripts/DirDiff.vim'
 NeoBundle 'vim-scripts/matchit.zip'
 NeoBundle 'vim-scripts/vcscommand.vim'
-NeoBundle 'xolox/vim-misc'
-NeoBundle 'xolox/vim-session'
+NeoBundleLazy 'xolox/vim-misc'
+NeoBundleLazy 'xolox/vim-session', {'depends': 'xolox/vim-misc'}
+NeoBundleLazy 'joonty/vdebug'
+NeoBundleLazy 'vim-scripts/DirDiff.vim'
 NeoBundle 'Shougo/vimproc.vim', {
-  \ 'build' : {
-  \     'windows' : 'tools\\update-dll-mingw',
-  \     'cygwin' : 'make -f make_cygwin.mak',
-  \     'mac' : 'make -f make_mac.mak',
-  \     'unix' : g:make
-  \    },
-  \ }
-
-if has('nvim')
-  runtime! plugin/python_setup.vim
-endif
-
-if has('python') || has('nvim')
-  NeoBundle 'SirVer/ultisnips'
-  NeoBundle 'UmkaDK/vim-taggatron'
-  NeoBundle 'Valloric/YouCompleteMe.git', {
-  \   'build' : {
-  \     'unix' : './install.sh --clang-completer',
-  \   },
-  \ }
-  NeoBundle 'dsawardekar/wordpress.vim'
-  NeoBundle 'editorconfig/editorconfig-vim'
-  NeoBundle 'joonty/vim-phpqa'
-  NeoBundle 'joonty/vim-phpunitqf'
-
-"  let g:UltiSnipsExpandTrigger       = "<c-j>"
-"  let g:UltiSnipsJumpForwardTrigger  = "<c-j>"
-"  let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
-else
-  NeoBundle 'ervandew/supertab'
-
-  let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
-  let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
-  let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-  let g:SuperTabDefaultCompletionType = "context"
-endif
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'unix' : g:make
+\    },
+\ }
+NeoBundle 'Valloric/YouCompleteMe.git', {
+\   'build' : {
+\     'unix' : './install.sh --clang-completer',
+\   },
+\ }
 
 filetype plugin indent on " required by NeoBundle
 syntax on
@@ -262,7 +244,6 @@ map <F7> :setlocal spell! spelllang=en_us<CR>
 imap <F7> <C-o>:setlocal spell! spelllang=en_us<CR>
 imap <C-c> <CR><Esc>O
 
-
 map <leader>gs :Gstatus<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>gc :Gcommit<CR>
@@ -297,6 +278,9 @@ let $GIT_SSL_NO_VERIFY = 'true'
 
 let g:EasyMotion_leader_key='<leader>'
 let g:NumberToggleTrigger='<leader>l'
+let g:UltiSnipsExpandTrigger="<m-x>"
+let g:UltiSnipsJumpBackwardTrigger="<m-h>"
+let g:UltiSnipsJumpForwardTrigger="<m-l>"
 let g:VCSCommandSplit='vertical'
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#quickfix#location_text='Location'
@@ -317,14 +301,13 @@ let g:sparkupExecuteMapping='<leader>se'
 let g:sparkupNextMapping='<leader>sn'
 let g:syntastic_check_on_open=0
 let g:syntastic_error_symbol='⧰'
-"let g:syntastic_html_validator_api='http://localhost:8888/'
-"let g:syntastic_html_validator_parser='html5'
+let g:syntastic_html_validator_parser='html5'
 let g:syntastic_php_checkers=[ 'php' ]
 let g:syntastic_warning_symbol='⚠'
 let g:unite_cursor_line_time=0.0
 let g:unite_enable_split_vertically=1
-let g:unite_update_time=0
 let g:unite_options_auto_resize=1
+let g:unite_update_time=0
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
 if executable('ag')
