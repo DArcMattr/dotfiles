@@ -30,6 +30,7 @@ Refresh the session, then run the following:
       ~/.gitconfig ~/.tmux.conf ~/.Xmodmap ~/.pandoc
     mv ~/.ssh/config ~/.ssh/config.orig
     ln -s ~/dotfiles/.vimrc
+    ln -s ~/dotfiles/.vimrc ~/.nvimrc
     ln -s ~/dotfiles/.bashrc
     ln -s ~/dotfiles/.pandoc
     ln -s ~/dotfiles/.zshrc
