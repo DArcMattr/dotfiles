@@ -1,5 +1,3 @@
 export PATH="$(brew --prefix josegonzalez/php/php56)/bin":/usr/local/bin:$PATH
 export HOMEBREW_GITHUB_API_TOKEN="47968cb7f6d5d97d101e49f4deafcc85ac8dafbe"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-alias ricochet_sql="ssh ricochet 'mysqldump -h vps-ricochet.czvuylgsbq58.us-east-1.rds.amazonaws.com -u db_dom7373 -pISxrelj1QaueLMti6dg2dnRY3eJOIf9jGSqu4w1U db_dom7373 | tee /tmp/ricochet_`date +%Y%m%d`.mysql' | pv | gzip > ricochet_`date +%Y%m%d`.mysql.gz"
-#export VIMRUNTIME="~/contrib/vim/runtime/"
