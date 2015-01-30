@@ -24,6 +24,11 @@ cdl() {
   ll
 }
 
+cdd() {
+  cd "$@"
+  dir
+}
+
 movetrash() {
   if [ ! -d ~/.Trash ]; then
     mkdir ~/.Trash
