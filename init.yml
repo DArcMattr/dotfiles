@@ -1,0 +1,22 @@
+- name: install zsh
+  apt: pkg=zsh state=present
+
+- name: replace bash with zsh as the default login shell
+  sudo: yes
+  shell: chsh -s `which zsh` {{whoami}}
+
+- name: git clone oh-my-zsh
+  sudo: no
+  git: repo=git://github.com/robbyrussell/oh-my-zsh.git
+       dest=~/.oh-my-zsh
+       update=no
+
+- name: hg clone my dotfiles
+  sudo: no
+  hg: repo=https://bitbucket.org/darceneaux/dotfiles
+      dest=~/dotfiles
+      update=yes
+
+- name: symlink config files
+  sudo: no
+  command: /bin/ln ~/dotfiles/.zshrc ~/.zshrc
