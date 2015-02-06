@@ -129,3 +129,7 @@ Host dcprod4
 Host create-re
   HostName 165.225.148.133
   User admin
+
+Host zeek
+  HostName zeek.pagelydev.com
+  User darc
