@@ -25,7 +25,7 @@ ignore= version, help, update, serve, record
 pager = LESS='FRX' less
 
 [merge-tools]
-vimdiff.executable = vimdiff
+vimdiff.executable = nvim
 vimdiff.args = -d $base $local $output $other +close +close
 
 [hooks]
