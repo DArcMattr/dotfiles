@@ -2,8 +2,12 @@ if !1 | finish | endif
 
 filetype off " required by NeoBundle
 
-if has('vim_starting')
+if ! has('nvim')
   set nocompatible
+  set ttyfast
+endif
+
+if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 
   call neobundle#begin( expand('~/.vim/bundle/') )
@@ -140,7 +144,6 @@ else
   set t_Co=88
 endif
 set ttimeout
-set ttyfast
 set virtualedit=all
 set visualbell
 set wildmenu
