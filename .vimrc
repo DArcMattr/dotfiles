@@ -213,14 +213,8 @@ elseif has("unix")
     "nop!
   endif
 
-  if filereadable("/bin/bash")
-    set shell=/bin/bash
-  elseif filereadable("/usr/local/bin/bash")
-    set shell=/usr/local/bin/bash
-  endif
   let $PAGER=''
-  let $BASH_ENV = '~/.bashrc' " what to do for ksh/zsh?
-  set shellcmdflag=-O\ expand_aliases\ -c
+  set shell=zsh\ -l
   if &term=~'^screen'
     set ttymouse=xterm2
   endif
