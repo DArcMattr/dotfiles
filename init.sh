@@ -7,6 +7,11 @@ chmod 600 ~/dotfiles/sshconfig
 
 dotfiles=".vimrc .bashrc .zshrc .profile .bash_profile .hgrc .gitconfig .tmux.conf .Xmodmap .pandoc .zshenv"
 
+for i in dotfiles; do
+  rm "~/${i}"
+  ln -s "~/dotfiles/${i}" "~/${i}"
+done
+
 source ~/dotfiles/init_libs.sh
 
 grab_composer
