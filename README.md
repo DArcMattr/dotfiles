@@ -29,20 +29,14 @@ Refresh the session, then run the following:
     rm ~/.vimrc ~/.bashrc ~/.zshrc ~/.profile ~/.bash_profile ~/.hgrc \
       ~/.gitconfig ~/.tmux.conf ~/.Xmodmap ~/.pandoc
     mv ~/.ssh/config ~/.ssh/config.orig
-    ln -s ~/dotfiles/.vimrc
     ln -s ~/dotfiles/.vimrc ~/.nvimrc
-    ln -s ~/dotfiles/.bashrc
-    ln -s ~/dotfiles/.pandoc
-    ln -s ~/dotfiles/.zshenv
-    ln -s ~/dotfiles/.zshrc
-    ln -s ~/dotfiles/.profile
-    ln -s ~/dotfiles/.bash_profile
-    ln -s ~/dotfiles/.hgrc
-    ln -s ~/dotfiles/.gitconfig
-    ln -s ~/dotfiles/.tmux.conf
-    ln -s ~/dotfiles/.Xmodmap
     ln -s ~/dotfiles/sshconfig ~/.ssh/config
     ln -s ~/dotfiles/hgcommit.vim ~/.vim/syntax/hgcommit.vim
+
+I have transitioned to using NeoVim as a full replacement for Vim, and will
+transition my configs to use nvim directly. In the meantime, I will place
+a symlink for `vim` -> `nvim` where ever I can put it, either in
+`/usr/local/bin`, or `~/bin`
 
 ## Experimental notes
 
