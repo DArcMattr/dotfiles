@@ -23,6 +23,7 @@ grab_wp_cli
 grab_powerline
 grab_s3cmd
 grab_sassc
+grab_icdiff
 
 composer global require 'phpmd/phpmd=*'
 composer global require 'squizlabs/php_codesniffer=*'
