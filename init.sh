@@ -5,7 +5,7 @@
 \mkdir -p ~/contrib ~/.vim/{syntax,bundle} ~/bin
 chmod 600 ~/dotfiles/sshconfig
 
-dotfiles=".vimrc .bashrc .zshrc .profile .bash_profile .hgrc .gitconfig .tmux.conf .Xmodmap .pandoc"
+dotfiles=".vimrc .bashrc .zshrc .profile .bash_profile .hgrc .gitconfig .tmux.conf .Xmodmap .pandoc .zshenv"
 
 source ~/dotfiles/init_libs.sh
 
