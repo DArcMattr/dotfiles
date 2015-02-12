@@ -33,6 +33,7 @@ Refresh the session, then run the following:
     ln -s ~/dotfiles/.vimrc ~/.nvimrc
     ln -s ~/dotfiles/.bashrc
     ln -s ~/dotfiles/.pandoc
+    ln -s ~/dotfiles/.zshenv
     ln -s ~/dotfiles/.zshrc
     ln -s ~/dotfiles/.profile
     ln -s ~/dotfiles/.bash_profile
