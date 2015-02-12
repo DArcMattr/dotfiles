@@ -116,6 +116,7 @@ set nostartofline
 set noswapfile
 set nowrap
 set nrformats-=octal
+set previewheight=20
 set printheader=%<%f%h%m\ %40
 set printheader=+{strftime(\"%c\"getftime(expand(\"%%\")))}%=Page\ %N
 set printoptions=formfeed:y,paper:letter,portrait:n,number:y,syntax:7
@@ -483,6 +484,9 @@ if has('autocmd')
   " C
   autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8 softtabstop=8
   let c_space_errors=1
+
+  " git commit messages
+  au BufRead,BufNewFile COMMIT_EDITMSG :DiffGitCached
 
   " golang
   autocmd FileType go autocmd BufWritePre <buffer> Fmt
