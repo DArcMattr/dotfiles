@@ -1,0 +1,5 @@
+bind -v
+set keymap vi-insert
+set editing-mode vi
+set expand-tilde off
+set bell-style
