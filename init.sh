@@ -7,10 +7,10 @@
 
 dotfiles=".Xmodmap .bash_profile .bashrc .editrc .gitconfig .hgrc .inputrc .pandoc .profile .tmux.conf .vimrc .zshenv .zshrc"
 
-for i in dotfiles; do
-  \rm "~/${i}"
-  \ln -s "~/dotfiles/${i}" "~/${i}"
-done
+while read i; do
+  \rm -rf ~/${i}
+  \ln -s ~/dotfiles/${i} ~/${i}
+done < <(echo ${dotfiles} | tr ' ' '\n')
 
 source ~/dotfiles/init_libs.sh
 
