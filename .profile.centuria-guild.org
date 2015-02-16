@@ -1,9 +1,11 @@
+# XXX pull back into .aliases under a feature check
 superupdate() {
-  sudo apt-get update && \
-    sudo apt-get -y --force-yes upgrade && \
-    sudo apt-get -y dist-upgrade && \
-    sudo apt-get -y autoremove && \
-    sudo apt-get -y clean
+  \sudo \sh -c " \
+    \apt-get update && \
+    \apt-get -y --force-yes upgrade && \
+    \apt-get -y dist-upgrade && \
+    \apt-get -y autoremove && \
+    \apt-get -y clean"
 }
 
 export CC=clang
