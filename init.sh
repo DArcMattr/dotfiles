@@ -3,13 +3,13 @@
 # TODO: translate to ansible
 
 \mkdir -p ~/contrib ~/.vim/{syntax,bundle} ~/bin
-chmod 600 ~/dotfiles/sshconfig
+\chmod 600 ~/dotfiles/sshconfig
 
-dotfiles=".vimrc .bashrc .zshrc .profile .bash_profile .hgrc .gitconfig .tmux.conf .Xmodmap .pandoc .zshenv"
+dotfiles=".Xmodmap .bash_profile .bashrc .editrc .gitconfig .hgrc .inputrc .pandoc .profile .tmux.conf .vimrc .zshenv .zshrc"
 
 for i in dotfiles; do
-  rm "~/${i}"
-  ln -s "~/dotfiles/${i}" "~/${i}"
+  \rm "~/${i}"
+  \ln -s "~/dotfiles/${i}" "~/${i}"
 done
 
 source ~/dotfiles/init_libs.sh
