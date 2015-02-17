@@ -26,10 +26,8 @@ Copy/paste the following onto the command line:
 Refresh the session, then run the following:
 
     ~/dotfiles/init.sh
-    rm ~/.vimrc ~/.bashrc ~/.zshrc ~/.profile ~/.bash_profile ~/.hgrc \
-      ~/.gitconfig ~/.tmux.conf ~/.Xmodmap ~/.pandoc
-    mv ~/.ssh/config ~/.ssh/config.orig
     ln -s ~/dotfiles/.vimrc ~/.nvimrc
+    mv ~/.ssh/config ~/.ssh/config.orig
     ln -s ~/dotfiles/sshconfig ~/.ssh/config
     ln -s ~/dotfiles/hgcommit.vim ~/.vim/syntax/hgcommit.vim
 
