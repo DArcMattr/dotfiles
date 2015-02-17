@@ -31,7 +31,6 @@ KEYTIMEOUT=1
 plugins=(git mercurial vi-mode pip svn-fast-info git-prompt env-proc)
 
 source $ZSH/oh-my-zsh.sh
-source ~/.profile
 
 autoload bashcompinit
 bashcompinit
