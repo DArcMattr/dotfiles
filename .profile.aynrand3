@@ -7,3 +7,5 @@ superupdate() {
 }
 
 export VIMRUNTIME=~/contrib/vim/runtime/
+export CC=clang
+export CXX=clang++
