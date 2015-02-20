@@ -10,16 +10,6 @@ grab_neobundle() {
   fi
 }
 
-grab_giteditor() {
-  if [ ! -d ~/contrib/giteditor/.git/ ]; then
-    \git clone https://github.com/dharrigan/giteditor.git ~/contrib/giteditor
-  else
-    \cd ~/contrib/giteditor
-    \git up
-    \cd -
-  fi
-}
-
 build_wp_cli() {
   \cd ~/contrib/wp-cli
   \git up

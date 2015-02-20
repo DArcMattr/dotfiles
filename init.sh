@@ -15,7 +15,6 @@ done < <(echo ${dotfiles} | tr ' ' '\n')
 source ~/dotfiles/init_libs.sh
 
 grab_composer
-grab_giteditor
 grab_neobundle
 grab_hgcfg
 grab_hg_prompt
