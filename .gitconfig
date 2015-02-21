@@ -58,4 +58,5 @@
   st = status
   theirs = "!f() { git co --theirs $@ && git add $@; }; f"
   up = "!git remote update -p; git merge --ff-only @{u}"
+  upr = "!git pull && git submodule update --init --recursive"
   workprofile = "config user.email 'david@zeek.com'"
