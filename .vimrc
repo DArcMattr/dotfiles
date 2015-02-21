@@ -32,6 +32,7 @@ NeoBundle 'bling/vim-airline'
 NeoBundle 'dsawardekar/wordpress.vim'
 NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'embear/vim-localvimrc'
+NeoBundle 'hhvm/vim-hack'
 NeoBundle 'jiangmiao/auto-pairs'
 NeoBundle 'joonty/vim-phpqa'
 NeoBundle 'joonty/vim-phpunitqf'
@@ -43,6 +44,7 @@ NeoBundle 'rkitover/vimpager'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'shawncplus/phpcomplete.vim'
 NeoBundle 'sheerun/vim-polyglot'
+NeoBundle 'sjl/vitality.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-git'
 NeoBundle 'tpope/vim-surround'
@@ -135,15 +137,9 @@ set smartindent
 set smarttab
 set softtabstop=2
 set splitbelow
-"set splitright
 set synmaxcol=512
 set tabstop=2
 set textwidth=80
-if &term =~? 'mlterm\|xterm\|screen'
-  set t_Co=256
-else
-  set t_Co=88
-endif
 set ttimeout
 set virtualedit=all
 set visualbell
@@ -521,4 +517,3 @@ if has('autocmd')
   " Ruby
   autocmd BufNewFile,BufRead Vagrantfile setf ruby
 endif
-
