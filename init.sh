@@ -5,12 +5,12 @@
 \mkdir -p ~/contrib ~/.vim/{syntax,bundle} ~/bin
 \chmod 600 ~/dotfiles/sshconfig
 
-for i in ~/dotfiles/symlink/.*; do
+for i in $(find ~/dotfiles/symlinks/ -maxdepth 1); do
   \rm -rf ~/$(basename ${i})
   \ln -s ${i} ~/$(basename ${i})
 done
 
-source ~/dotfiles/init_libs.sh
+. ~/dotfiles/init_libs.sh
 
 grab_composer
 grab_neobundle
