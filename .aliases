@@ -18,7 +18,13 @@ alias info='info --vi-keys'
 alias cycapache='/usr/bin/sudo /usr/bin/pkill -SIGQUIT -U www; /bin/sleep 2; /usr/bin/sudo /usr/sbin/apachectl start'
 alias tmux='tmux -2u'
 alias tmuxt='ssh-agent; ssh-add; sh ~/dotfiles/.tmux.$HOST'
-#alias vim='unset VIMRUNTIME; nvim'
+
+# Suffix aliases
+alias -s php=vim
+alias -s css=vim
+alias -s js=vim
+
+# Functions, used where aliases would break
 
 cdl() {
   cd "$@"
