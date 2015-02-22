@@ -5,12 +5,10 @@
 \mkdir -p ~/contrib ~/.vim/{syntax,bundle} ~/bin
 \chmod 600 ~/dotfiles/sshconfig
 
-dotfiles=".Xmodmap .bash_profile .bashrc .editrc .gitconfig .hgrc .inputrc .pandoc .tmux.conf .vimrc .zprofile .zshenv .zshrc .zlogin .zpreztorc"
-
-while read i; do
-  \rm -rf ~/${i}
-  \ln -s ~/dotfiles/${i} ~/${i}
-done < <(echo ${dotfiles} | tr ' ' '\n')
+for i in ~/dotfiles/symlink/.*; do
+  \rm -rf ~/$(basename ${i})
+  \ln -s ${i} ~/$(basename ${i})
+done
 
 source ~/dotfiles/init_libs.sh
 

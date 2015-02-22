@@ -10,9 +10,7 @@ export CLICOLOR_FORCE=YES
 
 #ZSH_THEME="dca"
 
-autoload bashcompinit
-
-bashcompinit
+autoload -U +X bashcompinit && bashcompinit
 
 have() {
   unset -v have
@@ -31,8 +29,8 @@ if [ -r /etc/aliases.sh ]; then
   source /etc/aliases.sh
 fi
 
-unsetopt correct
-unsetopt correct_all
+#unsetopt correct
+#unsetopt correct_all
 unsetopt inc_append_history
 unsetopt share_history
 
