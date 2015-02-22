@@ -12,14 +12,13 @@ Clone to `~/dotfiles`
 
 ## Installation Steps
 
-### for Oh-My-ZSH
+### for zprezto
 
 Copy/paste the following onto the command line:
 
     cd ~
-    curl -L \
-      https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh \
-      | sh
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git \
+      "${ZDOTDIR:-$HOME}/.zprezto"
 
 ### All the rest
 
