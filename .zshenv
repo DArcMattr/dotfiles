@@ -8,3 +8,7 @@ export PATH=$PATH:/usr/sbin:/usr/X11R6/bin:/usr/games
 export PATH=$PATH:~/.composer/vendor/bin
 
 source ~/dotfiles/.aliases
+
+if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprofile"
+fi
