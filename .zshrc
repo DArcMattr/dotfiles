@@ -1,18 +1,14 @@
-export ZSH=$HOME/.oh-my-zsh
-export ZSH_CUSTOM=$HOME/dotfiles/zsh-custom
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+#export ZSH=$HOME/.oh-my-zsh
+#export ZSH_CUSTOM=$HOME/dotfiles/zsh-custom
 export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
 export CLICOLOR=YES
 export CLICOLOR_FORCE=YES
 
-ZSH_THEME="dca"
-
-COMPLETION_WAITING_DOTS="true"
-DISABLE_CORRECTION="true"
-KEYTIMEOUT=1
-
-plugins=(git mercurial vi-mode svn-fast-info git-prompt)
-
-source $ZSH/oh-my-zsh.sh
+#ZSH_THEME="dca"
 
 autoload bashcompinit
 
