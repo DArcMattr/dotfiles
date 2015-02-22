@@ -5,7 +5,7 @@
 \mkdir -p ~/contrib ~/.vim/{syntax,bundle} ~/bin
 \chmod 600 ~/dotfiles/sshconfig
 
-for i in $(find ~/dotfiles/symlinks/ -maxdepth 1); do
+for i in $(ls -dA ~/dotfiles/symlinks/.*); do
   \rm -rf ~/$(basename ${i})
   \ln -s ${i} ~/$(basename ${i})
 done
