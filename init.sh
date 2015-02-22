@@ -5,7 +5,7 @@
 \mkdir -p ~/contrib ~/.vim/{syntax,bundle} ~/bin
 \chmod 600 ~/dotfiles/sshconfig
 
-dotfiles=".Xmodmap .bash_profile .bashrc .editrc .gitconfig .hgrc .inputrc .pandoc .tmux.conf .vimrc .zprofile .zshenv .zshrc"
+dotfiles=".Xmodmap .bash_profile .bashrc .editrc .gitconfig .hgrc .inputrc .pandoc .tmux.conf .vimrc .zprofile .zshenv .zshrc .zlogin .zpreztorc"
 
 while read i; do
   \rm -rf ~/${i}
