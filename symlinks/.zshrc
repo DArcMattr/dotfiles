@@ -2,8 +2,6 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-#export ZSH=$HOME/.oh-my-zsh
-#export ZSH_CUSTOM=$HOME/dotfiles/zsh-custom
 export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
 export CLICOLOR=YES
 export CLICOLOR_FORCE=YES
@@ -41,6 +39,9 @@ setopt hist_ignore_dups
 setopt nohup
 setopt notify
 setopt pushd_ignore_dups
+
+bindkey '\e[1~' beginning-of-line
+bindkey '\e[4~' end-of-line
 
 set -o vi
 
