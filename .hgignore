@@ -1,2 +1,3 @@
 Syntax: glob
-.pandoc/buttondown.css
+symlinks/.pandoc/buttondown.css
+symlinks/.pandoc/.sass-cache
