@@ -44,18 +44,32 @@ tmux resize-pane -y 10 -t 2
 tmux resize-pane -y 10 -t 3
 
 tmux new-window -t $SESSION:2 -k
-tmux send-keys -t $SESSION:2 "sssh centuria" C-m
-tmux rename-window -t $SESSION:2 "centuria"
+tmux send-keys -t $SESSION:2 "cd ~/contrib/vvv/www/bootleggr/htdocs" C-m
+tmux split-window -h -t $SESSION:2
+tmux send-keys -t $SESSION:2 "cd ~/contrib/vvv/www/bootleggr/htdocs" C-m
+tmux split-window -v -t $SESSION:2
+tmux send-keys -t $SESSION:2 "sssh zeek" C-m
+tmux split-window -v -t $SESSION:2
+tmux send-keys -t $SESSION:2 "cd ~/contrib/vvv/www/bootleggr/htdocs; tail -f ./wp-content/debug.log" C-m
+tmux split-window -v -t $SESSION:2
+tmux send-keys -t $SESSION:2 "cd ~/contrib/vvv/www/bootleggr/htdocs" C-m
+tmux resize-pane -y 10 -t 1
+tmux resize-pane -y 10 -t 2
+tmux resize-pane -y 10 -t 3
 
 tmux new-window -t $SESSION:3 -k
-tmux send-keys -t $SESSION:3 "htop" C-m
-tmux rename-window -t $SESSION:3 "htop"
+tmux send-keys -t $SESSION:3 "sssh centuria" C-m
+tmux rename-window -t $SESSION:3 "centuria"
 
 tmux new-window -t $SESSION:4 -k
-tmux send-keys -t $SESSION:4 "cd" C-m
+tmux send-keys -t $SESSION:4 "htop" C-m
+tmux rename-window -t $SESSION:4 "htop"
 
 tmux new-window -t $SESSION:5 -k
 tmux send-keys -t $SESSION:5 "cd" C-m
+
+tmux new-window -t $SESSION:6 -k
+tmux send-keys -t $SESSION:6 "cd" C-m
 
 tmux select-window -t $SESSION:0
 
