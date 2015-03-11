@@ -10,6 +10,20 @@ Clone to `~/dotfiles`
 * Z-shell, `zsh` is available and set as a shell, via `chsh`
 * [Mercurial SCM][], `hg`, and [Git][], `git`, source control programs
 
+### For Ubuntu flavors:
+
+    sudo add-apt-repository -y ppa:neovim-ppa/unstable
+    sudo apt-get update
+    sudo apt-get install curl php5-fpm virtualbox git mercurial python-dev \
+      python-pip clang zsh autossh neovim tmux mysql-client
+    sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
+    sudo update-alternatives --config vi
+    sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
+    sudo update-alternatives --config vim
+    sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
+    sudo update-alternatives --config editor
+    pip install neovim # recent-ish Ubuntu does this non-overrideable personal pip directory stuffs
+
 ## Installation Steps
 
 ### for zprezto
