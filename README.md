@@ -15,7 +15,8 @@ Clone to `~/dotfiles`
     sudo add-apt-repository -y ppa:neovim-ppa/unstable
     sudo apt-get update
     sudo apt-get install curl php5-fpm virtualbox git mercurial python-dev \
-      python-pip clang zsh autossh neovim tmux mysql-client
+      python-pip clang zsh autossh neovim tmux mysql-client pv httpie \
+      silversearcher-ag xsel s3cmd
     sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
     sudo update-alternatives --config vi
     sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
