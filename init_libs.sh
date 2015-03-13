@@ -132,3 +132,13 @@ grab_icdiff() {
     \cd -
   fi
 }
+
+grab_tpm() {
+  if [ ! -d ~/.tmux/plugins/tpm/.git/ ]; then
+    \git clone https://github.com/tmux-plugins/tpm.git ~/.tmux/plugins/tpm
+  else
+    \cd ~/.tmux/plugins/tpm
+    \git up
+    \cd -
+  fi
+}
