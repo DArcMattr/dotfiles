@@ -358,14 +358,14 @@ if $TMUX != ''
     " when used with 'system()' which takes a second argument as stdin.
     let tmpfile = tempname()
     call writefile(split(@t, '\n'), tmpfile, 'b')
-    call system('tmux load-buffer '.shellescape(tmpfile).';tmux show-buffer | xsel -ib')
+    call system('tmux load-buffer '.shellescape(tmpfile).';tmux show-buffer | xclip -i -selection clipboard')
     call delete(tmpfile)
   endfunction
 
   function! TmuxSharedPaste()
     " put tmux copy buffer into the t register, the mapping will handle
     " pasting into the buffer
-    let @t = system('xsel -b | tmux load-buffer -;tmux show-buffer')
+    let @t = system('xclip -o -selection clipboard | tmux load-buffer -;tmux show-buffer')
   endfunction
 
   vnoremap <silent> <esc>y "ty:call TmuxSharedYank()<cr>
