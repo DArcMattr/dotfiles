@@ -44,8 +44,6 @@ NeoBundle 'rkitover/vimpager'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'shawncplus/phpcomplete.vim'
 NeoBundle 'sheerun/vim-polyglot'
-NeoBundle 'sjl/vitality.vim'
-NeoBundle 'tmux-plugins/vim-tmux-focus-events'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-git'
 NeoBundle 'tpope/vim-surround'
@@ -84,7 +82,7 @@ set complete-=i
 set completeopt=menu,menuone,longest
 set diffopt=filler,vertical
 set display+=lastline
-set encoding=utf-8 nobomb
+set encoding=utf-8
 set esckeys
 set expandtab
 set fillchars+=stl:\ ,stlnc:\
@@ -114,6 +112,7 @@ set matchtime=5
 set modeline
 set mouse=a
 set nobackup
+set nobomb
 set nojoinspaces
 set nostartofline
 set noswapfile
