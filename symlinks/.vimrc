@@ -284,6 +284,12 @@ let g:airline_powerline_fonts=1
 let g:localvimrc_persistent=1
 let g:localvimrc_sandbox=0
 let g:localvimrc_whitelist='/var/www/vhosts/*/.*'
+let g:mta_filetypes = {
+    \ 'html' : 1,
+    \ 'xhtml' : 1,
+    \ 'xml' : 1,
+    \ 'php' : 1,
+    \}
 let g:phpqa_codecoverage_autorun=0 " default is 0
 let g:phpqa_codesniffer_autorun=0  " default is 1
 let g:phpqa_messdetecter_autorun=0 " default is 1
