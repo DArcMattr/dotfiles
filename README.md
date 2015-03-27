@@ -16,14 +16,16 @@ Clone to `~/dotfiles`
     sudo apt-get update
     sudo apt-get install curl php5-fpm virtualbox git mercurial python-dev \
       python-pip clang zsh autossh neovim tmux mysql-client pv httpie \
-      silversearcher-ag xsel s3cmd
+      silversearcher-ag xsel s3cmd nodejs
     sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
     sudo update-alternatives --config vi
     sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
     sudo update-alternatives --config vim
     sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
     sudo update-alternatives --config editor
+    sudo update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
     pip install neovim # recent-ish Ubuntu does this non-overrideable personal pip directory stuffs
+    sudo npm -g install gulp bower
 
 ## Installation Steps
 
