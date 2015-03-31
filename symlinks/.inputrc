@@ -1,3 +1,8 @@
+# Two escapes clears command line
+"\e\e": "\C-a\C-k"
+
+"\t": menu-complete
+
 set editing-mode vi
 $if mode=vi
   set keymap vi-command
@@ -5,3 +10,19 @@ $if mode=vi
   "\C-p": history-search-backward
   "\C-l": clear-screen
 $endif
+
+set completion-ignore-case On
+set expand-tilde on
+set convert-meta off
+set input-meta on
+set mark-directories on
+set output-meta on
+set show-all-if-ambiguous on
+set visible-stats on
+set bell-style off
+set meta-flag on
+set input-meta on
+set convert-meta off
+set output-meta on
+
+$include /etc/inputrc
