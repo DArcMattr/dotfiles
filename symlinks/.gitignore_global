@@ -27,6 +27,8 @@ tags
 ######################
 *.log
 *.sqlite
+debug.log
+tags
 
 # OS generated files #
 ######################

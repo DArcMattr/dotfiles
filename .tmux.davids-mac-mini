@@ -22,16 +22,16 @@ tmux bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
 tmux set-option -t $SESSION status-position top
 tmux set-option -t $SESSION aggressive-resize off
 
-tmux new-window -t $SESSION:1 -k
-tmux send-keys -t $SESSION:1 "cd ~/contrib/vvv/www/daily-caller/htdocs" C-m
+tmux new-window -t $SESSION:0 -k
+tmux send-keys -t $SESSION:0 "cd ~/contrib/vvv/www/daily-caller/htdocs" C-m
 tmux split-window -h -t $SESSION:0
-tmux send-keys -t $SESSION:1 "cd ~/contrib/vvv/www/daily-caller/htdocs" C-m
+tmux send-keys -t $SESSION:0 "cd ~/contrib/vvv/www/daily-caller/htdocs" C-m
 tmux split-window -v -t $SESSION:0
-tmux send-keys -t $SESSION:1 "cd ~/contrib/vvv/www/daily-caller/htdocs" C-m
+tmux send-keys -t $SESSION:0 "cd ~/contrib/vvv/www/daily-caller/htdocs" C-m
 tmux split-window -v -t $SESSION:0
-tmux send-keys -t $SESSION:1 "cd ~/contrib/vvv/www/daily-caller/htdocs; tail -f ./wp-content/debug.log" C-m
+tmux send-keys -t $SESSION:0 "cd ~/contrib/vvv/www/daily-caller/htdocs; tail -f ./wp-content/debug.log" C-m
 tmux split-window -v -t $SESSION:0
-tmux send-keys -t $SESSION:1 "cd ~/contrib/vvv/www/daily-caller/htdocs; wp shell" C-m
+tmux send-keys -t $SESSION:0 "cd ~/contrib/vvv/www/daily-caller/htdocs; wp shell" C-m
 tmux resize-pane -y 10 -t 1
 tmux resize-pane -y 10 -t 2
 tmux resize-pane -y 10 -t 3
