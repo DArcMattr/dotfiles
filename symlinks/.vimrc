@@ -222,7 +222,7 @@ if ! has('gui_running')
     augroup FastEscape
       autocmd!
       autocmd InsertEnter * set timeoutlen=0
-      autocmd InsertLeave * set timeoutlen=1000
+      autocmd InsertLeave * set timeoutlen=500
     augroup END
   endif
 else
@@ -302,6 +302,7 @@ let g:syntastic_check_on_open=0
 let g:syntastic_error_symbol='⧰'
 let g:syntastic_html_validator_parser='html5'
 let g:syntastic_php_checkers=[ 'php' ]
+let g:syntastic_javascript_checkers=[ 'jshint' ]
 let g:syntastic_warning_symbol='⚠'
 let g:unite_cursor_line_time=0.0
 let g:unite_enable_split_vertically=1
