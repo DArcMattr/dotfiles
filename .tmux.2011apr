@@ -81,6 +81,8 @@ tmux send-keys -t $SESSION:7 "htop" C-m
 tmux set-window-option -t $SESSION:7 automatic-rename off
 tmux rename-window -t $SESSION:7 htop
 
+tmux new-window -t $SESSION:8 -k
+
 tmux select-window -t $SESSION:0
 
 tmux -2u attach-session -t $SESSION
