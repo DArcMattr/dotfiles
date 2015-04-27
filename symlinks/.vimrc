@@ -103,9 +103,9 @@ set laststatus=2
 set lazyredraw
 set list
 if has('multi_byte')
-  set listchars=eol:↲,precedes:«,extends:»,trail:·,tab:▸·
+  set listchars=eol:↲,precedes:«,extends:»,trail:·,tab:▸·,nbsp:¯
 else
-  set listchars=eol:$,precedes:<,extends:>,trail:.,tab:>·
+  set listchars=eol:$,precedes:<,extends:>,trail:.,tab:>·,nbsp:_
 endif
 set matchtime=5
 set modeline
