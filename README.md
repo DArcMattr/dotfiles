@@ -25,7 +25,7 @@ Clone to `~/dotfiles`
     sudo update-alternatives --config editor
     sudo update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
     pip install neovim # recent-ish Ubuntu does this non-overrideable personal pip directory stuffs
-    sudo npm -g install gulp bower
+    sudo npm -g install gulp bower jshint js-beautify css-beautify minify
 
 ## Installation Steps
 
