@@ -2,8 +2,11 @@ if !1 | finish | endif
 
 filetype off " required by NeoBundle
 
-if ! has('nvim')
+if has('nvim')
+  set nottimeout
+else
   set nocompatible
+  set ttimeout
   set ttyfast
 endif
 
@@ -139,7 +142,6 @@ set splitbelow
 set synmaxcol=512
 set tabstop=2
 set textwidth=80
-set ttimeout
 set virtualedit=all
 set visualbell
 set wildmenu
@@ -210,7 +212,6 @@ elseif has("unix")
   endif
 
   let $PAGER=''
-  set shell=zsh\ -l
   if &term=~'^screen'
     set ttymouse=xterm2
   endif
@@ -245,10 +246,11 @@ map <leader>gp :Gpush<CR>
 map <leader>os :call RestoreSess()
 
 nmap . .'[
-nmap <C-PageUp> :tabp<CR>
-nmap <C-PageDown> :tabn<CR>
+nmap <C-PageUp> :bnext<CR>
+nmap <C-PageDown> :bprevious<CR>
 nmap <leader>q :nohlsearch<CR>
 nmap <F8> :Unite outline<CR>
+nmap <leader>t :enew<CR>
 
 nnoremap j gj
 nnoremap gj j
@@ -280,6 +282,7 @@ let g:airline#extensions#quickfix#location_text='Location'
 let g:airline#extensions#quickfix#quickfix_text='Quickfix'
 let g:airline#extensions#syntastic#enabled=1
 let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#buffer_nr_show=1
 let g:airline_powerline_fonts=1
 let g:localvimrc_persistent=1
 let g:localvimrc_sandbox=0
