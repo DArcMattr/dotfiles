@@ -30,15 +30,15 @@ tmux resize-pane -y 22 -t 1
 tmux resize-pane -y 22 -t 2
 
 tmux new-window -t $SESSION:1 -k
-tmux send-keys -t $SESSION:1 "cd ~/contrib/vvv/www/ricochet/htdocs" C-m
+tmux send-keys -t $SESSION:1 "cd ~/contrib/vvv/www/beautycon/htdocs" C-m
 tmux split-window -h -t $SESSION:1
-tmux send-keys -t $SESSION:1 "cd ~/contrib/vvv/www/ricochet/htdocs; vagrant up; sssh vagrant" C-m
+tmux send-keys -t $SESSION:1 "cd ~/contrib/vvv/www/beautycon/htdocs; vagrant up; sssh vagrant" C-m
 tmux split-window -v -t $SESSION:1
-tmux send-keys -t $SESSION:1 "sssh ricochet" C-m
+tmux send-keys -t $SESSION:1 "sssh beautycon" C-m
 tmux split-window -v -t $SESSION:1
-tmux send-keys -t $SESSION:1 "cd ~/contrib/vvv/www/ricochet/htdocs; tail -f ./wp-content/debug.log" C-m
+tmux send-keys -t $SESSION:1 "cd ~/contrib/vvv/www/beautycon/htdocs; tail -f ./wp-content/debug.log" C-m
 tmux split-window -v -t $SESSION:1
-tmux send-keys -t $SESSION:1 "cd ~/contrib/vvv/www/ricochet/htdocs" C-m
+tmux send-keys -t $SESSION:1 "cd ~/contrib/vvv/www/beautycon/htdocs" C-m
 tmux resize-pane -x 161 -t 0
 tmux resize-pane -y 17 -t 1
 tmux resize-pane -y 17 -t 2
