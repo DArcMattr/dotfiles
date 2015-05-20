@@ -10,21 +10,6 @@ grab_neobundle() {
   fi
 }
 
-build_wp_cli() {
-  \cd ~/contrib/wp-cli
-  \git up
-  \git checkout "tags/v${1}"
-  \git submodule update --init --recursive
-  if [ -f ~/contrib/wp-cli/composer.lock ]; then
-    \composer update
-  else
-    \composer install
-  fi
-  # TODO build phar
-  \sudo \rm -f /usr/local/bin/wp && \
-    \sudo \ln -s ~/contrib/wp-cli/bin/wp /usr/local/bin/wp
-}
-
 grab_sassc() {
   # TODO: create a git hook to insert
   if [ ! -d ~/contrib/libsass/.git/ ]; then
@@ -50,16 +35,9 @@ grab_sassc() {
 }
 
 grab_wp_cli() {
-  VER='0.18.0'
-  if [ ! -d ~/contrib/wp-cli/.git/ ]; then
-    \git clone --recursive https://github.com/wp-cli/wp-cli.git ~/contrib/wp-cli/
-    build_wp_cli ${VER}
-  else
-    CURR_VER=$(~/contrib/wp-cli/bin/wp --version)
-    if [ "${CURR_VER}" != "WP-CLI ${VER}" ]; then
-      build_wp_cli ${VER}
-    fi
-  fi
+  curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar ~/contrib
+  chmod +x ~/contrib/wp-cli.phar
+  ln -s ~/contrib/wp-cli.phar ~/bin/wp
 }
 
 grab_hg_prompt() {
