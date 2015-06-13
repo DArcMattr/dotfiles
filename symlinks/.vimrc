@@ -23,6 +23,7 @@ if system('uname -o') =~ '^GNU/'
   let g:make = 'make'
 endif
 
+NeoBundle 'ConradIrwin/vim-bracketed-paste'
 NeoBundle 'DArcMattr/vim-numbertoggle'
 NeoBundle 'Shougo/unite-outline'
 NeoBundle 'Shougo/unite.vim'
@@ -252,17 +253,24 @@ nmap <leader>q :nohlsearch<CR>
 nmap <F8> :Unite outline<CR>
 nmap <leader>t :enew<CR>
 
+nnoremap J mzJ`z
 nnoremap j gj
 nnoremap gj j
+nnoremap Q <nop>
+nnoremap K <nop>
 nnoremap k gk
 nnoremap gk k
 nnoremap ' `
 nnoremap ` '
 nnoremap ; :
 nnoremap : ;
+nnoremap n nzz
+nnoremap } }zz
+nnoremap Y y$
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 nnoremap <C-p> :Unite file_rec/async<CR>
+nnoremap <F1> <nop>
 nnoremap <leader>/ :Unite grep:.<CR>
 
 "in case of derp-sudo
