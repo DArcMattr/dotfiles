@@ -133,3 +133,11 @@ Host create-re
 Host zeek
   HostName zeek.pagelydev.com
   User darc
+
+Host bootleggr
+  HostName bootleggrbottle.club
+  User darc
+
+Host bc
+  HostName beautycon.pagelydev.com
+  User darc
