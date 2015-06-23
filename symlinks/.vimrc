@@ -11,11 +11,11 @@ else
 endif
 
 if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+  if &compatible
+    set nocompatible
+  endif
 
-  call neobundle#begin( expand('~/.vim/bundle/') )
-  NeoBundleFetch 'Shougo/neobundle.vim'
-  call neobundle#end()
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
 let g:make = 'gmake'
@@ -23,6 +23,8 @@ if system('uname -o') =~ '^GNU/'
   let g:make = 'make'
 endif
 
+call neobundle#begin( expand('~/.vim/bundle/') )
+NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'ConradIrwin/vim-bracketed-paste'
 NeoBundle 'DArcMattr/vim-numbertoggle'
 NeoBundle 'Shougo/unite-outline'
@@ -30,25 +32,25 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'UmkaDK/vim-taggatron'
 NeoBundle 'Valloric/MatchTagAlways'
-NeoBundle 'airblade/vim-gitgutter.git'
-NeoBundle 'bitbucket:ludovicchabant/vim-lawrencium', { 'type': 'hg' }
+NeoBundleLazy 'airblade/vim-gitgutter.git'
+NeoBundleLazy 'bitbucket:ludovicchabant/vim-lawrencium', { 'type': 'hg' }
 NeoBundle 'bling/vim-airline'
 NeoBundle 'dsawardekar/wordpress.vim'
-NeoBundle 'editorconfig/editorconfig-vim'
-NeoBundle 'embear/vim-localvimrc'
-NeoBundle 'hhvm/vim-hack'
+NeoBundleLazy 'editorconfig/editorconfig-vim'
+NeoBundleLazy 'embear/vim-localvimrc'
+NeoBundleLazy 'hhvm/vim-hack'
 NeoBundle 'jiangmiao/auto-pairs'
 NeoBundle 'joonty/vim-phpqa'
 NeoBundle 'joonty/vim-phpunitqf'
 NeoBundle 'krisajenkins/vim-pipe'
 NeoBundle 'krisajenkins/vim-postgresql-syntax'
 NeoBundle 'reedes/vim-wheel'
-NeoBundle 'rkitover/vimpager'
+NeoBundleLazy 'rkitover/vimpager'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'shawncplus/phpcomplete.vim'
 NeoBundle 'sheerun/vim-polyglot'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-git'
+NeoBundleLazy 'tpope/vim-fugitive'
+NeoBundleLazy 'tpope/vim-git'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-vividchalk'
 NeoBundle 'tristen/vim-sparkup'
@@ -71,6 +73,7 @@ NeoBundle 'Valloric/YouCompleteMe.git', {
 \     'unix' : './install.sh --clang-completer',
 \   },
 \ }
+call neobundle#end()
 
 filetype plugin indent on " required by NeoBundle
 syntax on
@@ -245,13 +248,11 @@ map <leader>gc :Gcommit<CR>
 map <leader>gl :Glog<CR>
 map <leader>gp :Gpush<CR>
 map <leader>os :call RestoreSess()
+map <C-PageUp> :bn<CR>
+map <C-PageDown> :bp<CR>
 
 nmap . .'[
-nmap <C-PageUp> :bnext<CR>
-nmap <C-PageDown> :bprevious<CR>
-nmap <leader>q :nohlsearch<CR>
-nmap <F8> :Unite outline<CR>
-nmap <leader>t :enew<CR>
+noremap <leader>t :enew<CR>
 
 nnoremap J mzJ`z
 nnoremap j gj
@@ -271,7 +272,9 @@ nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 nnoremap <C-p> :Unite file_rec/async<CR>
 nnoremap <F1> <nop>
+nnoremap <leader>q :nohlsearch<CR>
 nnoremap <leader>/ :Unite grep:.<CR>
+nnoremap <F8> :Unite outline<CR>
 
 "in case of derp-sudo
 cmap w!! w !sudo tee % >/dev/null
