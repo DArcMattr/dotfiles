@@ -515,5 +515,11 @@ autocmd BufNewFile,BufRead,BufEnter .tmux*,*/tmux-sessions/* setf tmux
 " Apache
 autocmd BufNewFile,BufRead,BufEnter *.conf setf apache
 
+" HTML
+autocmd BufNewFile *.html 0r ~/dotfiles/lang/html/index.html
+
+" COBOL
+autocmd BufNewFile *.cob 0r ~/dotfiles/lang/cobol/header.cob
+
 " Ruby
 autocmd BufNewFile,BufRead Vagrantfile setf ruby
