@@ -28,6 +28,7 @@ declare -x EDITOR='vim'
 declare -x VISUAL="${EDITOR}"
 declare -x LESS="-EXMRQ"
 declare -x CVSROOT="darceneaux@demo.aynrand.org:/var/www/cvs"
+declare -x TMP=/tmp
 #declare -x WEB_ENVIRONMENT='test'
 declare -x MANWIDTH=72
 
