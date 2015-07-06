@@ -2,13 +2,15 @@ OCOBOL >>SOURCE FORMAT IS FIXED
 
       *> ***************************************************************
 
-      *> Author:    Brian Tiffin
+      *> Author: David Arceneaux
 
       *> Date:
 
       *> Purpose:
 
       *> Tectonics: cobc
+
+      *> Link: https://vivaldi.net/blogs/entry/some-simple-vim-settings-for-opencobol
 
       *> ***************************************************************
 
