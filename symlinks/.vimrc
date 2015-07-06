@@ -2,21 +2,7 @@ if !1 | finish | endif
 
 filetype off " required by NeoBundle
 
-if has('nvim')
-  set nottimeout
-else
-  set nocompatible
-  set ttimeout
-  set ttyfast
-endif
-
-if has('vim_starting')
-  if &compatible
-    set nocompatible
-  endif
-
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
+set runtimepath+=~/.vim/bundle/neobundle.vim/
 
 let g:make = 'gmake'
 if system('uname -o') =~ '^GNU/'
@@ -32,12 +18,12 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'UmkaDK/vim-taggatron'
 NeoBundle 'Valloric/MatchTagAlways'
-NeoBundleLazy 'airblade/vim-gitgutter.git'
-NeoBundleLazy 'bitbucket:ludovicchabant/vim-lawrencium', { 'type': 'hg' }
+NeoBundle 'airblade/vim-gitgutter.git'
+NeoBundle 'bitbucket:ludovicchabant/vim-lawrencium', { 'type': 'hg' }
 NeoBundle 'bling/vim-airline'
 NeoBundle 'dsawardekar/wordpress.vim'
-NeoBundleLazy 'editorconfig/editorconfig-vim'
-NeoBundleLazy 'embear/vim-localvimrc'
+NeoBundle 'editorconfig/editorconfig-vim'
+NeoBundle 'embear/vim-localvimrc'
 NeoBundleLazy 'hhvm/vim-hack'
 NeoBundle 'jiangmiao/auto-pairs'
 NeoBundle 'joonty/vim-phpqa'
@@ -49,7 +35,7 @@ NeoBundleLazy 'rkitover/vimpager'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'shawncplus/phpcomplete.vim'
 NeoBundle 'sheerun/vim-polyglot'
-NeoBundleLazy 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-fugitive'
 NeoBundleLazy 'tpope/vim-git'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-vividchalk'
@@ -77,7 +63,6 @@ call neobundle#end()
 
 filetype plugin indent on " required by NeoBundle
 syntax on
-colo vividchalk
 NeoBundleCheck
 
 set autoindent
@@ -109,15 +94,12 @@ set incsearch
 set laststatus=2
 set lazyredraw
 set list
-if has('multi_byte')
-  set listchars=eol:↲,precedes:«,extends:»,trail:·,tab:▸·,nbsp:¯
-else
-  set listchars=eol:$,precedes:<,extends:>,trail:.,tab:>·,nbsp:_
-endif
+set listchars=eol:↲,precedes:«,extends:»,trail:·,tab:▸·,nbsp:¯
 set matchtime=5
 set modeline
 set mouse=a
-set nobackup
+set backup
+set backupdir=$TEMP,$TMP,.
 set nobomb
 set nojoinspaces
 set nostartofline
@@ -136,6 +118,7 @@ set shiftround
 set shiftwidth=2
 set shortmess=atIAoO
 set showbreak=>
+set showcmd
 set showmatch
 set sidescrolloff=5
 set smartcase
@@ -146,6 +129,14 @@ set splitbelow
 set synmaxcol=512
 set tabstop=2
 set textwidth=80
+set title
+set titlestring=%t%(\ [%R%M]%)
+set timeout
+set timeoutlen=750
+set ttimeout
+set ttimeoutlen=0
+set undodir=$TEMP,$TMP,.
+set undofile
 set virtualedit=all
 set visualbell
 set wildmenu
@@ -154,38 +145,30 @@ set wildignore+=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg
 set wildignore+=*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc
 set wildignore+=vendor/*,docs/*,node_modules/*,components/*,build/*,dist/*
 
-if &t_Co >= 256 || has('gui_running')
-  highlight Comment ctermfg=105 guifg=#8787ff
-  highlight CursorColumn cterm=NONE ctermbg=237 guibg=#3a3a3a
-  highlight CursorLine term=underline cterm=underline ctermbg=NONE gui=underline guibg=NONE
-  highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
-  highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
-  highlight NonText ctermfg=235 guifg=#262626
-  highlight OverLength ctermbg=234 ctermfg=249
-  highlight OverLength guibg=#1c1c1c guifg=#b2b2b2
-  highlight Search ctermfg=222 guifg=#ffdf87
-  highlight SpecialKey ctermfg=235 guifg=#262626
-  highlight clear SpellBad
-  highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline guifg=#800000 gui=underline
-  highlight clear SpellCap
-  highlight SpellCap term=underline cterm=underline gui=undercurl
-  highlight clear SpellLocal
-  highlight SpellLocal term=underline cterm=underline gui=undercurl
-  highlight clear SpellRare
-  highlight SpellRare term=underline cterm=underline gui=undercurl
+colo vividchalk
+highlight Comment ctermfg=105 guifg=#8787ff
+highlight CursorColumn cterm=NONE ctermbg=237 guibg=#3a3a3a
+highlight CursorLine term=underline cterm=underline ctermbg=NONE gui=underline guibg=NONE
+highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
+highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
+highlight NonText ctermfg=235 guifg=#262626
+highlight OverLength ctermbg=234 ctermfg=249
+highlight OverLength guibg=#1c1c1c guifg=#b2b2b2
+highlight Search ctermfg=222 guifg=#ffdf87
+highlight SpecialKey ctermfg=235 guifg=#262626
+highlight clear SpellBad
+highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline guifg=#800000 gui=underline
+highlight clear SpellCap
+highlight SpellCap term=underline cterm=underline gui=undercurl
+highlight clear SpellLocal
+highlight SpellLocal term=underline cterm=underline gui=undercurl
+highlight clear SpellRare
+highlight SpellRare term=underline cterm=underline gui=undercurl
 
-  match OverLength /\%81v.\+/
-else
-  " nop!
-endif
+match OverLength /\%81v.\+/
 
-if has('title')
-  set title
-  set titlestring=%t%(\ [%R%M]%)
-endif
-
-if has("win32")
-  if has("gui_running")
+if has('win32')
+  if has('gui_running')
     set guifont=consolas:h12
     autocmd GUIEnter * simalt ~x " start out maximized, else, fit to term
   endif
@@ -194,8 +177,8 @@ if has("win32")
   noremap <C-kPlus> <C-A> " increment a number
   noremap <C-kMinus> <C-X> " decrement a number
   noremap <C-K> <C-V> " enter an extended character
-elseif has("unix")
-  if has("gui_running")
+elseif has('unix')
+  if has('gui_running')
     if has('gui_macvim')
       set fuoptions=maxvert,maxhorz
       set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
@@ -205,7 +188,7 @@ elseif has("unix")
       set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
       set printfont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
 
-      if ! has("X11") " for qvim
+      if ! has('X11') " for qvim
         set guioptions=eg
       else
         set guioptions=aegiMpLtT
@@ -221,72 +204,17 @@ elseif has("unix")
   endif
 endif
 
-if ! has('gui_running')
-  set ttimeoutlen=10
-  if has('autocmd')
-    augroup FastEscape
-      autocmd!
-      autocmd InsertEnter * set timeoutlen=0
-      autocmd InsertLeave * set timeoutlen=500
-    augroup END
-  endif
-else
-  set linespace=1
-endif
-
 let mapleader = ","
 let maplocalleader = "-"
-
-" key remappings - toggle spell checking
-map <F7> :setlocal spell! spelllang=en_us<CR>
-imap <F7> <C-o>:setlocal spell! spelllang=en_us<CR>
-imap <C-c> <CR><Esc>O
-
-map <leader>gs :Gstatus<CR>
-map <leader>gd :Gdiff<CR>
-map <leader>gc :Gcommit<CR>
-map <leader>gl :Glog<CR>
-map <leader>gp :Gpush<CR>
-map <leader>os :call RestoreSess()
-map <C-PageUp> :bn<CR>
-map <C-PageDown> :bp<CR>
-
-nmap . .'[
-noremap <leader>t :enew<CR>
-
-nnoremap J mzJ`z
-nnoremap j gj
-nnoremap gj j
-nnoremap Q <nop>
-nnoremap K <nop>
-nnoremap k gk
-nnoremap gk k
-nnoremap ' `
-nnoremap ` '
-nnoremap ; :
-nnoremap : ;
-nnoremap n nzz
-nnoremap } }zz
-nnoremap Y y$
-nnoremap <C-e> 3<C-e>
-nnoremap <C-y> 3<C-y>
-nnoremap <C-p> :Unite file_rec/async<CR>
-nnoremap <F1> <nop>
-nnoremap <leader>q :nohlsearch<CR>
-nnoremap <leader>/ :Unite grep:.<CR>
-nnoremap <F8> :Unite outline<CR>
-
-"in case of derp-sudo
-cmap w!! w !sudo tee % >/dev/null
-
-" plugin specific settings
+let c_space_errors = 1
 let $GIT_SSL_NO_VERIFY = 'true'
 
+" plugin specific settings
 let g:EasyMotion_leader_key='<leader>'
 let g:NumberToggleTrigger='<leader>l'
-let g:UltiSnipsExpandTrigger="<m-x>"
-let g:UltiSnipsJumpBackwardTrigger="<m-h>"
-let g:UltiSnipsJumpForwardTrigger="<m-l>"
+let g:UltiSnipsExpandTrigger="<M-x>"
+let g:UltiSnipsJumpBackwardTrigger="<M-h>"
+let g:UltiSnipsJumpForwardTrigger="<M-l>"
 let g:VCSCommandSplit='vertical'
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#quickfix#location_text='Location'
@@ -297,7 +225,7 @@ let g:airline#extensions#tabline#buffer_nr_show=1
 let g:airline_powerline_fonts=1
 let g:localvimrc_persistent=1
 let g:localvimrc_sandbox=0
-let g:localvimrc_whitelist='/var/www/vhosts/*/.*'
+let g:localvimrc_whitelist='~/contrib/vvv/www/*/.*'
 let g:mta_filetypes = {
     \ 'html' : 1,
     \ 'xhtml' : 1,
@@ -324,6 +252,50 @@ let g:unite_options_auto_resize=1
 let g:unite_update_time=0
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
+" key remappings - toggle spell checking
+map <F7> :setlocal spell! spelllang=en_us<CR>
+imap <F7> <C-o>:setlocal spell! spelllang=en_us<CR>
+imap <C-c> <CR><Esc>O
+
+map <leader>gs :Gstatus<CR>
+map <leader>gd :Gdiff<CR>
+map <leader>gc :Gcommit<CR>
+map <leader>gl :Glog<CR>
+map <leader>gp :Gpush<CR>
+map <leader>os :call RestoreSess()
+map <C-PageUp> :bn<CR>
+map <C-PageDown> :bp<CR>
+
+nmap . .'[
+noremap <leader>t :enew<CR>
+
+nnoremap J mzJ`z
+nnoremap j gj
+nnoremap gj j
+nnoremap Q gq
+nnoremap K <nop>
+nnoremap k gk
+nnoremap gk k
+nnoremap ' `
+nnoremap ` '
+nnoremap ; :
+nnoremap : ;
+nnoremap n nzz
+nnoremap } }zz
+nnoremap Y y$
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
+nnoremap <C-p> :Unite file_rec/async<CR>
+nnoremap <F1> <nop>
+nnoremap <leader>q :nohlsearch<CR>
+nnoremap <leader>/ :Unite grep:.<CR>
+nnoremap <F8> :Unite outline<CR>
+
+inoremap <C-U> <C-G>u<C-U>
+
+"in case of derp-sudo
+cmap w!! w !sudo tee % >/dev/null
+
 if executable('ag')
   " Use ag in unite grep source.
   let g:unite_source_grep_command = 'ag'
@@ -344,6 +316,14 @@ command! -nargs=1 Silent |
 \ execute ':redraw!'
 
 command! -nargs=* -complete=help Help vertical belowright help <args>
+
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_ | diffthis
+  \ | wincmd p | diffthis
+endif
 
 " from https://gist.github.com/tarruda/5158535
 if $TMUX != ''
@@ -405,135 +385,135 @@ if $TMUX != ''
   nnoremap <silent> <c-w><right> :silent call TmuxMove('l')<cr>
 endif
 
-if has('autocmd')
-  if exists('+omnifunc')
-    autocmd Filetype *
-    \  if &omnifunc == "" |
-    \    setlocal omnifunc=syntaxcomplete#Complete |
-    \  endif
-  endif
+augroup OmniFunc
+  autocmd!
+  autocmd Filetype *
+  \  if &omnifunc == "" |
+  \    setlocal omnifunc=syntaxcomplete#Complete |
+  \  endif
+augroup END
 
-  augroup TrimWhitespace
-    autocmd!
-    autocmd BufRead,BufWrite *
-    \ if ! &bin |
-    \   silent! %s/\s\+$//ge |
-    \ endif
-  augroup END
+augroup FastEscape
+  autocmd!
+  autocmd InsertEnter * set timeoutlen=0
+  autocmd InsertLeave * set timeoutlen=200
+augroup END
 
-  " update diffs aggressively
-  " https://groups.google.com/forum/?fromgroups=#!topic/vim_use/ZNZcBAABDgE
-  augroup AutoDiffUpdate
-    autocmd!
-    autocmd InsertLeave *
-    \ if &diff |
-    \   diffupdate |
-    \   let b:old_changedtick = b:changedtick |
-    \ endif
-    autocmd CursorHold *
-    \ if &diff &&
-    \     (!exists('b:old_changedtick') || b:old_changedtick != b:changedtick) |
-    \   let b:old_changedtick = b:changedtick | diffupdate |
-    \ endif
-  augroup END
+augroup TrimWhitespace
+  autocmd!
+  autocmd BufRead,BufWrite *
+  \ if ! &bin |
+  \   silent! %s/\s\+$//ge |
+  \ endif
+augroup END
 
-  augroup CursorColumn
-    autocmd!
-    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
-    autocmd WinLeave * setlocal nocursorcolumn
-    set cursorcolumn
-  augroup END
+" update diffs aggressively
+" https://groups.google.com/forum/?fromgroups=#!topic/vim_use/ZNZcBAABDgE
+augroup AutoDiffUpdate
+  autocmd!
+  autocmd InsertLeave *
+  \ if &diff |
+  \   diffupdate |
+  \   let b:old_changedtick = b:changedtick |
+  \ endif
+  autocmd CursorHold *
+  \ if &diff &&
+  \     (!exists('b:old_changedtick') || b:old_changedtick != b:changedtick) |
+  \   let b:old_changedtick = b:changedtick | diffupdate |
+  \ endif
+augroup END
 
-  augroup CursorLine
-    autocmd!
-    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-    autocmd WinLeave * setlocal nocursorline
-    set cursorline
-  augroup END
+augroup CursorColumn
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
+  autocmd WinLeave * setlocal nocursorcolumn
+  set cursorcolumn
+augroup END
 
-  augroup ShowListChars
-    autocmd!
-    autocmd InsertEnter * set nolist
-    autocmd InsertLeave * set list
-  augroup END
+augroup CursorLine
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+  set cursorline
+augroup END
 
-  augroup cursor_position
-    autocmd!
-    " CURSOR ASSUMES PREVIOUS POSITION
-    autocmd BufReadPost * if line("'\"") > 0             |
-    \                       if line("'\"") <= line("$")  |
-    \                         exe("norm '\"")            |
-    \                       else                         |
-    \                         exe "norm $"               |
-    \                       endif                        |
-    \                     endif
-  augroup END
+augroup ShowListChars
+  autocmd!
+  autocmd InsertEnter * set nolist
+  autocmd InsertLeave * set list
+augroup END
 
-  augroup CenteringReadOnly
-    autocmd!
-    autocmd BufEnter * if !&modifiable | setl scrolloff=999 | endif
-  augroup END
+augroup cursor_position
+  autocmd!
+  autocmd BufReadPost *
+  \ if line("'\"") > 1 && line("'\"") <= line("$") |
+  \   execute "normal! g`\""                       |
+  \ endif                                          |
+augroup END
 
-  "autocmd BufRead * try | execute "compiler ".&filetype | catch /./ | endtry
+augroup CenteringReadOnly
+  autocmd!
+  autocmd BufEnter * if !&modifiable | setl scrolloff=999 | endif
+augroup END
 
-  " common filetypes below
-  " any project-specific settings should be included in the .lvimrc file placed
-  " in the root folder of that project
+"autocmd BufRead * try | execute "compiler ".&filetype | catch /./ | endtry
 
-  " Perl
-  autocmd BufNewFile,BufRead,BufEnter *.pl,*.pm set makeprg=perl
-  autocmd BufNewFile,BufRead,BufEnter *.pl,*.pm compiler perl
+" common filetypes below
+" any project-specific settings should be included in the .lvimrc file placed
+" in the root folder of that project
 
-  " Lua
-  autocmd FileType lua set shiftwidth=4 tabstop=4 softtabstop=4 smarttab noexpandtab
-  autocmd BufEnter *.lua set autoindent tabstop=4 softtabstop=4 smarttab
-  \ noexpandtab formatoptions=croql
+" Perl
+autocmd BufNewFile,BufRead,BufEnter *.pl,*.pm set makeprg=perl
+autocmd BufNewFile,BufRead,BufEnter *.pl,*.pm compiler perl
 
-  " Python
-  autocmd FileType python set shiftwidth=4 tabstop=4 softtabstop=4 smarttab
-  \ expandtab
-  autocmd BufNewFile,BufRead,BufEnter *.py set autoindent tabstop=4
-  \ softtabstop=4 smarttab formatoptions=croql
-  autocmd FileType python :let b:vimpipe_command="python"
-  autocmd FileType python :let b:vimpipe_filetype="python"
+" Lua
+autocmd FileType lua set shiftwidth=4 tabstop=4 softtabstop=4 smarttab noexpandtab
+autocmd BufEnter *.lua set autoindent tabstop=4 softtabstop=4 smarttab
+\ noexpandtab formatoptions=croql
 
-  " C
-  autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8 softtabstop=8
-  let c_space_errors=1
+" Python
+autocmd FileType python set shiftwidth=4 tabstop=4 softtabstop=4 smarttab
+\ expandtab
+autocmd BufNewFile,BufRead,BufEnter *.py set autoindent tabstop=4
+\ softtabstop=4 smarttab formatoptions=croql
+autocmd FileType python :let b:vimpipe_command="python"
+autocmd FileType python :let b:vimpipe_filetype="python"
 
-  " git commit messages
-  au BufRead,BufNewFile COMMIT_EDITMSG :DiffGitCached
+" C
+autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8 softtabstop=8
 
-  " golang
-  autocmd FileType go autocmd BufWritePre <buffer> Fmt
+" git commit messages
+autocmd BufRead,BufNewFile COMMIT_EDITMSG :DiffGitCached
 
-  " hg commit messages
-  autocmd BufNewFile,BufRead,BufEnter msg setf hgcommit
-  autocmd FileType hgcommit set textwidth=72
-  autocmd FileType hgcommit match OverLength /\%73v.\+/
+" golang
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
 
-  " for databases, should set this in the .lvimrc to match a particular database
-  " MySQL
-  autocmd BufNewFile,BufRead,BufEnter *.mysql setf mysql
-  autocmd FileType mysql :let b:vimpipe_filetype="mysql"
-  autocmd FileType mysql :let b:vimpipe_command="mysql"
-  " autocmd FileType mysql :let b:vimpipe_command="mysql mydatabase"
+" hg commit messages
+autocmd BufNewFile,BufRead,BufEnter msg setf hgcommit
+autocmd FileType hgcommit set textwidth=72
+autocmd FileType hgcommit match OverLength /\%73v.\+/
 
-  " PostgreSQL
-  autocmd BufNewFile,BufRead,BufEnter *.psql setf postgresql
-  autocmd FileType postgresql :let b:vimpipe_filetype="postgresql"
-  autocmd FileType postgresql :let b:vimpipe_command="psql"
-  " autocmd FileType postgresql :let b:vimpipe_command="psql mydatabase"
+" for databases, should set this in the .lvimrc to match a particular database
+" MySQL
+autocmd BufNewFile,BufRead,BufEnter *.mysql setf mysql
+autocmd FileType mysql :let b:vimpipe_filetype="mysql"
+autocmd FileType mysql :let b:vimpipe_command="mysql"
+" autocmd FileType mysql :let b:vimpipe_command="mysql mydatabase"
 
-  " Markdown
-  autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown setf markdown
+" PostgreSQL
+autocmd BufNewFile,BufRead,BufEnter *.psql setf postgresql
+autocmd FileType postgresql :let b:vimpipe_filetype="postgresql"
+autocmd FileType postgresql :let b:vimpipe_command="psql"
+" autocmd FileType postgresql :let b:vimpipe_command="psql mydatabase"
 
-  " tmux
-  autocmd BufNewFile,BufRead,BufEnter .tmux*,*/tmux-sessions/* setf tmux
+" Markdown
+autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown setf markdown
 
-  " Apache
-  autocmd BufNewFile,BufRead,BufEnter *.conf setf apache
+" tmux
+autocmd BufNewFile,BufRead,BufEnter .tmux*,*/tmux-sessions/* setf tmux
 
-  " Ruby
-  autocmd BufNewFile,BufRead Vagrantfile setf ruby
-endif
+" Apache
+autocmd BufNewFile,BufRead,BufEnter *.conf setf apache
+
+" Ruby
+autocmd BufNewFile,BufRead Vagrantfile setf ruby
