@@ -2,68 +2,53 @@ if !1 | finish | endif
 
 filetype off " required by NeoBundle
 
-set runtimepath+=~/.vim/bundle/neobundle.vim/
-
 let g:make = 'gmake'
 if system('uname -o') =~ '^GNU/'
   let g:make = 'make'
 endif
 
-call neobundle#begin( expand('~/.vim/bundle/') )
-NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'ConradIrwin/vim-bracketed-paste'
-NeoBundle 'DArcMattr/vim-numbertoggle'
-NeoBundle 'Shougo/unite-outline'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'UmkaDK/vim-taggatron'
-NeoBundle 'Valloric/MatchTagAlways'
-NeoBundle 'airblade/vim-gitgutter.git'
-NeoBundle 'bitbucket:ludovicchabant/vim-lawrencium', { 'type': 'hg' }
-NeoBundle 'bling/vim-airline'
-NeoBundle 'dsawardekar/wordpress.vim'
-NeoBundle 'editorconfig/editorconfig-vim'
-NeoBundle 'embear/vim-localvimrc'
-NeoBundleLazy 'hhvm/vim-hack'
-NeoBundle 'jiangmiao/auto-pairs'
-NeoBundle 'joonty/vim-phpqa'
-NeoBundle 'joonty/vim-phpunitqf'
-NeoBundle 'krisajenkins/vim-pipe'
-NeoBundle 'krisajenkins/vim-postgresql-syntax'
-NeoBundle 'reedes/vim-wheel'
-NeoBundleLazy 'rkitover/vimpager'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'shawncplus/phpcomplete.vim'
-NeoBundle 'sheerun/vim-polyglot'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundleLazy 'tpope/vim-git'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-vividchalk'
-NeoBundle 'tristen/vim-sparkup'
-NeoBundle 'vim-scripts/matchit.zip'
-NeoBundle 'vim-scripts/vcscommand.vim'
-NeoBundleLazy 'xolox/vim-misc'
-NeoBundleLazy 'xolox/vim-session', {'depends': 'xolox/vim-misc'}
-NeoBundleLazy 'joonty/vdebug'
-NeoBundleLazy 'vim-scripts/DirDiff.vim'
-NeoBundle 'Shougo/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make -f make_mac.mak',
-\     'unix' : g:make
-\    },
-\ }
-NeoBundle 'Valloric/YouCompleteMe.git', {
-\   'build' : {
-\     'unix' : './install.sh --clang-completer',
-\   },
-\ }
-call neobundle#end()
+call plug#begin('~/.nvim/plugged')
+Plug 'Shougo/neobundle.vim'
+Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'DArcMattr/vim-numbertoggle'
+Plug 'Shougo/unite-outline'
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimproc.vim', { 'do' : g:make }
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'Valloric/MatchTagAlways'
+Plug 'Valloric/YouCompleteMe', { 'do' : './install.sh --clang-completer' }
+Plug 'airblade/vim-gitgutter'
+Plug 'bling/vim-airline'
+Plug 'dsawardekar/wordpress.vim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'embear/vim-localvimrc'
+Plug 'hhvm/vim-hack'
+Plug 'jiangmiao/auto-pairs'
+Plug 'joonty/vim-phpqa'
+Plug 'joonty/vim-phpunitqf'
+Plug 'joonty/vim-taggatron'
+Plug 'krisajenkins/vim-pipe'
+Plug 'krisajenkins/vim-postgresql-syntax'
+Plug 'ludovicchabant/vim-lawrencium'
+Plug 'reedes/vim-wheel'
+Plug 'rkitover/vimpager'
+Plug 'scrooloose/syntastic'
+Plug 'shawncplus/phpcomplete.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vividchalk'
+Plug 'tristen/vim-sparkup'
+Plug 'vim-scripts/matchit.zip'
+Plug 'vim-scripts/vcscommand.vim'
+Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
+Plug 'joonty/vdebug'
+Plug 'vim-scripts/DirDiff.vim'
+call plug#end()
 
 filetype plugin indent on " required by NeoBundle
 syntax on
-NeoBundleCheck
 
 set autoindent
 set autoread
@@ -250,6 +235,7 @@ let g:unite_cursor_line_time=0.0
 let g:unite_enable_split_vertically=1
 let g:unite_options_auto_resize=1
 let g:unite_update_time=0
+"let g:vdebug_options["server"]="192.168.50.1"
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
 " key remappings - toggle spell checking
