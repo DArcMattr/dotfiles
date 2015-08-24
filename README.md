@@ -24,7 +24,7 @@ Clone to `~/dotfiles`
     sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
     sudo update-alternatives --config editor
     sudo update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
-    pip install neovim # recent-ish Ubuntu does this non-overrideable personal pip directory stuffs
+    pip install --upgrade neovim # recent-ish Ubuntu does this non-overrideable personal pip directory stuffs
     sudo npm -g install gulp bower jshint js-beautify css-beautify minify
 
 ## Installation Steps
@@ -46,6 +46,8 @@ Refresh the session, then run the following:
     mv ~/.ssh/config ~/.ssh/config.orig
     ln -s ~/dotfiles/sshconfig ~/.ssh/config
     ln -s ~/dotfiles/hgcommit.vim ~/.vim/syntax/hgcommit.vim
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 I have transitioned to using NeoVim as a full replacement for Vim, and will
 transition my configs to use nvim directly. In the meantime, I will place
