@@ -8,7 +8,6 @@ if system('uname -o') =~ '^GNU/'
 endif
 
 call plug#begin('~/.nvim/plugged')
-Plug 'Shougo/neobundle.vim'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'DArcMattr/vim-numbertoggle'
 Plug 'Shougo/unite-outline'
@@ -30,6 +29,7 @@ Plug 'joonty/vim-taggatron'
 Plug 'krisajenkins/vim-pipe'
 Plug 'krisajenkins/vim-postgresql-syntax'
 Plug 'ludovicchabant/vim-lawrencium'
+Plug 'moll/vim-node'
 Plug 'reedes/vim-wheel'
 Plug 'rkitover/vimpager'
 Plug 'scrooloose/syntastic'
