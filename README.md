@@ -45,8 +45,8 @@ Refresh the session, then run the following:
     ln -s ~/dotfiles/.vimrc ~/.nvimrc
     mv ~/.ssh/config ~/.ssh/config.orig
     ln -s ~/dotfiles/sshconfig ~/.ssh/config
-    ln -s ~/dotfiles/hgcommit.vim ~/.vim/syntax/hgcommit.vim
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    ln -s ~/dotfiles/hgcommit.vim ~/.nvim/syntax/hgcommit.vim
+    curl -fLo ~/.nvim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 I have transitioned to using NeoVim as a full replacement for Vim, and will
