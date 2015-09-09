@@ -22,6 +22,8 @@ tags
 *.rar
 *.tar
 *.zip
+*.bz2
+*.tgz
 
 # Logs and databases #
 ######################
