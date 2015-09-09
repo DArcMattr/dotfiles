@@ -13,7 +13,7 @@ done
 . ~/dotfiles/init_libs.sh
 
 grab_composer
-grab_neobundle
+grab_vimplug
 grab_hgcfg
 grab_hg_prompt
 grab_wp_cli

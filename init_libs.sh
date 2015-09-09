@@ -1,15 +1,5 @@
 PIP=`which pip`
 
-grab_neobundle() {
-  if [ ! -d ~/.vim/bundle/neobundle.vim/.git/ ]; then
-    \git clone http://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-  else
-    \cd ~/.vim/bundle/neobundle.vim
-    \git up
-    \cd -
-  fi
-}
-
 grab_sassc() {
   # TODO: create a git hook to insert
   if [ ! -d ~/contrib/libsass/.git/ ]; then
@@ -32,6 +22,13 @@ grab_sassc() {
     \cd -
   fi
   echo "you will need to compile these yourself"
+}
+
+grab_vimplug() {
+  if [ ! -f ~/.nvim/autoload/plug.vim ]; then
+    curl -fLo ~/.nvim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  fi
 }
 
 grab_wp_cli() {
