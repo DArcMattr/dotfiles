@@ -138,6 +138,11 @@ Host bootleggr
   HostName bootleggrbottle.club
   User darc
 
+Host store_taca
+  HostName store.tacanow.org
+  User storetacanow
+  Port 8616
+
 Host bc
   HostName beautycon.pagelydev.com
   User darc
