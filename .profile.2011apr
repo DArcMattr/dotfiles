@@ -4,6 +4,7 @@ fi
 
 if [ -r ~/.nvm/nvm.sh ]; then
   source ~/.nvm/nvm.sh
+  nvm use v4.0.0
 fi
 
 # machine/Desktop Environment dependent
