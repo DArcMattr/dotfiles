@@ -12,10 +12,10 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'DArcMattr/vim-numbertoggle'
 Plug 'Shougo/unite-outline'
 Plug 'Shougo/unite.vim'
-Plug 'Shougo/vimproc.vim', { 'do' : g:make }
+Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'Valloric/MatchTagAlways'
-Plug 'Valloric/YouCompleteMe', { 'do' : './install.sh --clang-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer' }
 Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
 Plug 'dsawardekar/wordpress.vim'
