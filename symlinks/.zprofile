@@ -9,14 +9,16 @@
 # Browser
 #
 
-if [ -x ~/.vim/bundle/vimpager/vimpager ]; then
-  export MANPAGER=~/.vim/bundle/vimpager/vimpager
-  alias vimcat='~/.vim/bundle/vimpager/vimcat'
-  alias vimpager='~/.vim/bundle/vimpager/vimpager'
+if [ -x ~/.nvim/plugged/vimpager/vimpager ]; then
+  export MANPAGER=~/.nvim/plugged/vimpager/vimpager
+  alias vimcat='~/.nvim/plugged/vimpager/vimcat'
+  alias vimpager='~/.nvim/plugged/vimpager/vimpager'
 fi
 
 if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
+else
+  export BROWSER='xdg-open'
 fi
 
 #
