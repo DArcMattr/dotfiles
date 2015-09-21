@@ -36,6 +36,8 @@ Plug 'rkitover/vimpager'
 Plug 'scrooloose/syntastic'
 Plug 'shawncplus/phpcomplete.vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'sjl/tslime2.vim'
+Plug 'tpope/timl'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
@@ -190,7 +192,7 @@ elseif has('unix')
 endif
 
 let mapleader = ","
-let maplocalleader = "-"
+let maplocalleader = " "
 let c_space_errors = 1
 let $GIT_SSL_NO_VERIFY = 'true'
 
@@ -231,6 +233,10 @@ let g:syntastic_html_validator_parser='html5'
 let g:syntastic_php_checkers=[ 'php' ]
 let g:syntastic_javascript_checkers=[ 'jshint' ]
 let g:syntastic_warning_symbol='⚠'
+let g:tslime_ensure_trailing_newlines = 1
+let g:tslime_normal_mapping = '<localleader>t'
+let g:tslime_visual_mapping = '<localleader>t'
+let g:tslime_vars_mapping = '<localleader>T'
 let g:unite_cursor_line_time=0.0
 let g:unite_enable_split_vertically=1
 let g:unite_options_auto_resize=1
@@ -509,3 +515,6 @@ autocmd BufNewFile *.cob 0r ~/dotfiles/lang/cobol/header.cob
 
 " Ruby
 autocmd BufNewFile,BufRead Vagrantfile setf ruby
+
+" Lisp
+autocmd filetype lisp,scheme,art setlocal equalprg=scmindent.rkt
