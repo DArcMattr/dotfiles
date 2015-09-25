@@ -21,6 +21,7 @@ tmux split-window -v -t $SESSION:0.1 -c "#{pane_current_path}"
 tmux resize-pane -t $SESSION:0.0 -x 161
 tmux send-keys -t $SESSION:0.1 "tail -f ./wp-content/debug.log" C-m
 tmux send-keys -t $SESSION:0.2 "sleep 120; wp shell" C-m
+tmux rename-window -t $SESSION:0 "Daily Caller"
 
 tmux new-window -t $SESSION:1 -c ~/contrib/vvv/www/tacanow/htdocs
 tmux split-window -h -t $SESSION:1.0 -c "#{pane_current_path}"
@@ -32,6 +33,7 @@ tmux resize-pane -t $SESSION:1.2 -y 22
 tmux send-keys -t $SESSION:1.1 "vagrant up; sssh vagrant" C-m
 tmux send-keys -t $SESSION:1.2 "tail -f ./wp-content/debug.log" C-m
 tmux send-keys -t $SESSION:1.3 "cd ./wp-content/themes/tacanow; gulp" C-m
+tmux rename-window -t $SESSION:1 "TACA Now"
 
 tmux new-window -t $SESSION:2 -c ~/contrib/vvv/www/bestofnj/htdocs
 tmux split-window -h -t $SESSION:2.0 -c "#{pane_current_path}"
@@ -43,28 +45,41 @@ tmux send-keys -t $SESSION:2.3 "cd ./wp-content/themes/bestofnj; gulp" C-m
 tmux resize-pane -t $SESSION:2.0 -x 161
 tmux resize-pane -t $SESSION:2.1 -y 22
 tmux resize-pane -t $SESSION:2.2 -y 22
+tmux rename-window -t $SESSION:2 "Best of NJ"
 
-tmux new-window -t $SESSION:3
+tmux new-window -t $SESSION:3 -c ~/contrib/vvv/www/fnf/htdocs
+tmux split-window -h -t $SESSION:3.0 -c "#{pane_current_path}"
+tmux split-window -v -t $SESSION:3.1 -c "#{pane_current_path}"
+tmux split-window -v -t $SESSION:3.2 -c "#{pane_current_path}"
+tmux resize-pane -t $SESSION:3.0 -x 161
+tmux resize-pane -t $SESSION:3.1 -y 22
+tmux resize-pane -t $SESSION:3.2 -y 22
+tmux send-keys -t $SESSION:3.1 "tail -f ./wp-content/debug.log" C-m
+tmux send-keys -t $SESSION:3.2 "cd ./wp-content/plugins/fnf" C-m
+tmux send-keys -t $SESSION:3.3 "cd ./wp-content/plugins/fnf" C-m
+tmux rename-window -t $SESSION:3 Fidelity
+
 tmux new-window -t $SESSION:4
 tmux new-window -t $SESSION:5
 tmux new-window -t $SESSION:6
 tmux new-window -t $SESSION:7
 tmux new-window -t $SESSION:8
+tmux new-window -t $SESSION:9
 
-tmux send-keys -t $SESSION:3 "sssh aynrand2" C-m
-tmux rename-window -t $SESSION:3 aynrand2
+tmux send-keys -t $SESSION:4 "sssh aynrand2" C-m
+tmux rename-window -t $SESSION:4 aynrand2
 
-tmux send-keys -t $SESSION:4 "sssh cor" C-m
-tmux rename-window -t $SESSION:4 cor
+tmux send-keys -t $SESSION:5 "sssh cor" C-m
+tmux rename-window -t $SESSION:5 cor
 
-tmux send-keys -t $SESSION:5 "sssh demo" C-m
-tmux rename-window -t $SESSION:5 demo
+tmux send-keys -t $SESSION:6 "sssh demo" C-m
+tmux rename-window -t $SESSION:6 demo
 
-tmux send-keys -t $SESSION:6 "sssh centuria" C-m
-tmux rename-window -t $SESSION:6 centuria
+tmux send-keys -t $SESSION:7 "sssh centuria" C-m
+tmux rename-window -t $SESSION:7 centuria
 
-tmux send-keys -t $SESSION:7 "htop" C-m
-tmux rename-window -t $SESSION:7 htop
+tmux send-keys -t $SESSION:8 "htop" C-m
+tmux rename-window -t $SESSION:8 htop
 
 tmux select-window -t $SESSION:0
 tmux select-pane -t $SESSION:0.0
