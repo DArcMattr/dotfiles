@@ -29,8 +29,6 @@ if [ -r /etc/aliases.sh ]; then
   source /etc/aliases.sh
 fi
 
-#unsetopt correct
-#unsetopt correct_all
 unsetopt inc_append_history
 unsetopt share_history
 
@@ -45,21 +43,6 @@ setopt pushd_ignore_dups
 bindkey '\e[1~' beginning-of-line
 bindkey '\e[4~' end-of-line
 bindkey -v
-
-#vim_ins_mode="%{$fg[yellow]%}[INS]%{$reset_color%}"
-#vim_cmd_mode="%{$fg[cyan]%}[CMD]%{$reset_color%}"
-#vim_mode=$vim_ins_mode
-
-#function zle-keymap-select {
-#  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
-#  zle reset-prompt
-#}
-#zle -N zle-keymap-select
-
-#function zle-line-finish {
-#  vim_mode=$vim_ins_mode
-#}
-#zle -N zle-line-finish
 
 umask 002
 
