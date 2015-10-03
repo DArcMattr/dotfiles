@@ -64,6 +64,12 @@ path=(
   $path
 )
 
+export MANPATH=$(manpath)
+
+if [ -r ~/.nvm/nvm.sh ]; then
+  source ~/.nvm/nvm.sh
+fi
+
 #
 # Less
 #
