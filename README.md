@@ -12,11 +12,13 @@ Clone to `~/dotfiles`
 
 ### For Ubuntu flavors:
 
+    sudo -v
     sudo add-apt-repository -y ppa:neovim-ppa/unstable
+    curl --silent --location https://deb.nodesource.com/setup_4.x | sudo bash -
     sudo apt-get update
     sudo apt-get install curl php5-fpm virtualbox git mercurial python-dev \
       python-pip clang zsh autossh neovim tmux mysql-client pv httpie \
-      silversearcher-ag xsel s3cmd nodejs exuberant-ctags
+      silversearcher-ag xsel s3cmd nodejs exuberant-ctags build-essential
     sudo update-alternatives --install /usr/bin/vi vi /usr/local/bin/nvim 60
     sudo update-alternatives --config vi
     sudo update-alternatives --install /usr/bin/vim vim /usr/local/bin/nvim 60
@@ -25,7 +27,7 @@ Clone to `~/dotfiles`
     sudo update-alternatives --config editor
     sudo update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
     pip install --upgrade neovim # recent-ish Ubuntu does this non-overrideable personal pip directory stuffs
-    sudo npm -g install gulp bower jshint js-beautify css-beautify minify
+    sudo npm -g install gulp bower eslint eslint_d js-beautify cssbeautify minify
 
 ## Installation Steps
 
