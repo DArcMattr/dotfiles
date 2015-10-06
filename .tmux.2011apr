@@ -57,7 +57,7 @@ tmux resize-pane -t $SESSION:3.2 -y 22
 tmux send-keys -t $SESSION:3.1 "tail -f ./wp-content/debug.log" C-m
 tmux send-keys -t $SESSION:3.2 "cd ./wp-content/plugins/fnf" C-m
 tmux send-keys -t $SESSION:3.3 "cd ./wp-content/plugins/fnf" C-m
-tmux rename-window -t $SESSION:3 Fidelity
+tmux rename-window -t $SESSION:3 "Fidelity"
 
 tmux new-window -t $SESSION:4
 tmux new-window -t $SESSION:5
