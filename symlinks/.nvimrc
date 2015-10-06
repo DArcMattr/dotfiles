@@ -24,17 +24,15 @@ Plug 'embear/vim-localvimrc'
 Plug 'hhvm/vim-hack'
 Plug 'jiangmiao/auto-pairs'
 Plug 'joonty/vdebug'
-Plug 'joonty/vim-phpqa'
-Plug 'joonty/vim-phpunitqf'
 Plug 'joonty/vim-taggatron'
 Plug 'krisajenkins/vim-pipe'
 Plug 'krisajenkins/vim-postgresql-syntax'
 Plug 'ludovicchabant/vim-lawrencium'
-Plug 'moll/vim-node'
+Plug 'moll/vim-node', { 'for': 'javascript' }
 Plug 'reedes/vim-wheel'
 Plug 'rkitover/vimpager'
 Plug 'scrooloose/syntastic'
-Plug 'shawncplus/phpcomplete.vim'
+Plug 'shawncplus/phpcomplete.vim', { 'for': 'php' }
 Plug 'sheerun/vim-polyglot'
 Plug 'sjl/tslime2.vim'
 Plug 'tpope/timl'
@@ -42,7 +40,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vividchalk'
-Plug 'tristen/vim-sparkup'
+Plug 'tristen/vim-sparkup', { 'for': 'html' }
 Plug 'vim-scripts/DirDiff.vim'
 Plug 'vim-scripts/matchit.zip'
 Plug 'vim-scripts/vcscommand.vim'
@@ -209,6 +207,7 @@ let g:airline#extensions#quickfix#quickfix_text='Quickfix'
 let g:airline#extensions#syntastic#enabled=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#buffer_nr_show=1
+let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline_powerline_fonts=1
 let g:localvimrc_persistent=1
 let g:localvimrc_sandbox=0
@@ -219,10 +218,6 @@ let g:mta_filetypes = {
     \ 'xml' : 1,
     \ 'php' : 1,
     \}
-let g:phpqa_codecoverage_autorun=0 " default is 0
-let g:phpqa_codesniffer_autorun=0  " default is 1
-let g:phpqa_messdetecter_autorun=0 " default is 1
-let g:phpqa_open_loc=0             " default is 1
 let g:session_autoload='no'
 let g:session_autosave='no'
 let g:sparkupExecuteMapping='<leader>se'
@@ -230,8 +225,9 @@ let g:sparkupNextMapping='<leader>sn'
 let g:syntastic_check_on_open=0
 let g:syntastic_error_symbol='⧰'
 let g:syntastic_html_validator_parser='html5'
-let g:syntastic_php_checkers=[ 'php' ]
-let g:syntastic_javascript_checkers=[ 'jshint' ]
+let g:syntastic_php_checkers=['php', 'phpmd']
+let g:syntastic_javascript_checkers=['eslint']
+let g:syntastic_javascript_eslint_exec='eslint_d -c ~/.eslintrc'
 let g:syntastic_warning_symbol='⚠'
 let g:tslime_ensure_trailing_newlines = 1
 let g:tslime_normal_mapping = '<localleader>t'
@@ -241,7 +237,6 @@ let g:unite_cursor_line_time=0.0
 let g:unite_enable_split_vertically=1
 let g:unite_options_auto_resize=1
 let g:unite_update_time=0
-"let g:vdebug_options["server"]="192.168.50.1"
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
 " key remappings - toggle spell checking
