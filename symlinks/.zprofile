@@ -36,6 +36,7 @@ export EDITOR
 
 export VISUAL=$EDITOR
 export PAGER='less'
+export TERM=xterm-256color
 
 #
 # Language
@@ -65,10 +66,6 @@ path=(
 )
 
 export MANPATH=$(manpath)
-
-if [ -r ~/.nvm/nvm.sh ]; then
-  source ~/.nvm/nvm.sh
-fi
 
 #
 # Less
