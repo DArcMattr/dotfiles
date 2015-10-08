@@ -65,8 +65,6 @@ path=(
   $path
 )
 
-export MANPATH=$(manpath)
-
 #
 # Less
 #
