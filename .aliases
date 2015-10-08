@@ -17,7 +17,7 @@ alias key='man -k'
 alias info='info --vi-keys'
 alias cycapache='/usr/bin/sudo /usr/bin/pkill -SIGQUIT -U www; /bin/sleep 2; /usr/bin/sudo /usr/sbin/apachectl start'
 alias tmux='tmux -2u'
-alias tmuxt='ssh-agent; ssh-add; sh ~/dotfiles/.tmux.$HOST'
+alias tmuxt='sh ~/dotfiles/.tmux.$HOST'
 alias agp='ag --pager=less'
 
 # Suffix aliases
@@ -46,10 +46,6 @@ movetrash() {
 
 path() {
   echo $PATH | tr ':' '\n'
-}
-
-manpath() {
-  echo $MANPATH | tr ':' '\n'
 }
 
 dir() {
@@ -209,6 +205,7 @@ wptt(){
 trac_patch() {
   curl "$1?format=raw" | patch -p0
 }
+
 # Apply a Trac patch on a clean repo.
 clean_patch() {
   svn cleanup
