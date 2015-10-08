@@ -1,5 +1,6 @@
 if [ -r ~/.rvm/scripts/rvm ]; then
   source ~/.rvm/scripts/rvm
+  export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 fi
 
 # machine/Desktop Environment dependent
@@ -19,7 +20,6 @@ export GOPATH=$HOME/go
 export PATH=$PATH:~/contrib/android-sdk/sdk/tools
 export PATH=$PATH:~/contrib/android-sdk/sdk/platform-tools
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export CC=clang
 export CXX=clang++
 
