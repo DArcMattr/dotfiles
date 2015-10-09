@@ -40,7 +40,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vividchalk'
-Plug 'tristen/vim-sparkup', { 'for': 'html' }
+Plug 'tristen/vim-sparkup', { 'for': [ 'html', 'php' ] }
 Plug 'vim-scripts/DirDiff.vim'
 Plug 'vim-scripts/matchit.zip'
 Plug 'vim-scripts/vcscommand.vim'
