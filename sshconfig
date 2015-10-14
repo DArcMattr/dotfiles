@@ -130,6 +130,10 @@ Host create-re
   HostName 165.225.148.133
   User admin
 
+Host bestofnj
+  HostName bestofnj.com
+  User darc
+
 Host zeek
   HostName zeek.pagelydev.com
   User darc
