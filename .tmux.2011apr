@@ -40,7 +40,7 @@ tmux select-window -t $SESSION:1
 tmux split-window -h -t $SESSION:1.0 -c "#{pane_current_path}"
 tmux split-window -v -t $SESSION:1.1 -c "#{pane_current_path}"
 tmux split-window -v -t $SESSION:1.2 -c "#{pane_current_path}"
-tmux send-keys -t $SESSION:1.1 "sssh zeek" C-m
+tmux send-keys -t $SESSION:1.1 "sssh darc@bestofnj.com" C-m
 tmux send-keys -t $SESSION:1.2 "tail -f ./wp-content/debug.log" C-m
 tmux send-keys -t $SESSION:1.3 "cd ./wp-content/themes/bestofnj; gulp" C-m
 tmux resize-pane -t $SESSION:1.0 -x 161
@@ -54,8 +54,8 @@ tmux split-window -v -t $SESSION:2.2 -c "#{pane_current_path}"
 tmux resize-pane -t $SESSION:2.0 -x 161
 tmux resize-pane -t $SESSION:2.1 -y 22
 tmux resize-pane -t $SESSION:2.2 -y 22
-tmux send-keys -t $SESSION:2.1 "tail -f ./wp-content/debug.log" C-m
-tmux send-keys -t $SESSION:2.2 "cd ./wp-content/plugins/fnf" C-m
+tmux send-keys -t $SESSION:2.1 "sssh zeek" C-m
+tmux send-keys -t $SESSION:2.2 "tail -f ./wp-content/debug.log" C-m
 tmux send-keys -t $SESSION:2.3 "cd ./wp-content/plugins/fnf" C-m
 
 tmux send-keys -t $SESSION:3 "vagrant up; sssh vagrant" C-m
