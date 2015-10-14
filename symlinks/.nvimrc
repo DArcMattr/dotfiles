@@ -12,7 +12,7 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'DArcMattr/vim-numbertoggle'
 Plug 'Shougo/unite-outline'
 Plug 'Shougo/unite.vim'
-Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
+Plug 'Shougo/vimproc.vim', { 'do' : g:make }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'Valloric/MatchTagAlways'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer' }
@@ -218,6 +218,7 @@ let g:mta_filetypes = {
     \ 'xml' : 1,
     \ 'php' : 1,
     \}
+let g:netrw_silent=1
 let g:session_autoload='no'
 let g:session_autosave='no'
 let g:sparkupExecuteMapping='<leader>se'
@@ -260,7 +261,7 @@ nnoremap J mzJ`z
 nnoremap j gj
 nnoremap gj j
 nnoremap Q gq
-nnoremap K <nop>
+"nnoremap K <nop>
 nnoremap k gk
 nnoremap gk k
 nnoremap ' `
@@ -513,3 +514,6 @@ autocmd BufNewFile,BufRead Vagrantfile setf ruby
 
 " Lisp
 autocmd filetype lisp,scheme,art setlocal equalprg=scmindent.rkt
+
+" PHP
+autocmd filetype php set keywordprg=pman
