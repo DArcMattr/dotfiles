@@ -46,6 +46,7 @@ tmux send-keys -t $SESSION:1.3 "cd ./wp-content/themes/bestofnj; gulp" C-m
 tmux resize-pane -t $SESSION:1.0 -x 161
 tmux resize-pane -t $SESSION:1.1 -y 22
 tmux resize-pane -t $SESSION:1.2 -y 22
+tmux select-pane -t $SESSION:1.0
 
 tmux select-window -t $SESSION:2
 tmux split-window -h -t $SESSION:2.0 -c "#{pane_current_path}"
@@ -57,6 +58,7 @@ tmux resize-pane -t $SESSION:2.2 -y 22
 tmux send-keys -t $SESSION:2.1 "sssh zeek" C-m
 tmux send-keys -t $SESSION:2.2 "tail -f ./wp-content/debug.log" C-m
 tmux send-keys -t $SESSION:2.3 "cd ./wp-content/plugins/fnf" C-m
+tmux select-pane -t $SESSION:2.0
 
 tmux send-keys -t $SESSION:3 "vagrant up; sssh vagrant" C-m
 tmux send-keys -t $SESSION:4 "sssh aynrand2" C-m
