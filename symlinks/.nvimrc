@@ -1,7 +1,5 @@
 if !1 | finish | endif
 
-filetype off " required by NeoBundle
-
 let g:make = 'gmake'
 if system('uname -o') =~ '^GNU/'
   let g:make = 'make'
