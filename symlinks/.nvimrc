@@ -5,7 +5,7 @@ if system('uname -o') =~ '^GNU/'
   let g:make = 'make'
 endif
 
-call plug#begin('~/.nvim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'DArcMattr/vim-numbertoggle'
 Plug 'Shougo/unite-outline'
