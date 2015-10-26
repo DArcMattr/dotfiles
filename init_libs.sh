@@ -25,8 +25,9 @@ grab_sassc() {
 }
 
 grab_vimplug() {
-  if [ ! -f ~/.nvim/autoload/plug.vim ]; then
-    curl -fLo ~/.nvim/autoload/plug.vim --create-dirs \
+  mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
+  if [ ! -f ${XDG_CONFIG_HOME}/nvim/autoload/plug.vim ]; then
+    curl -fLo {$XDG_CONFIG_HOME}/nvim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   fi
 }
