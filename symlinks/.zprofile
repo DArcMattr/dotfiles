@@ -94,3 +94,6 @@ if [[ ! -d "$TMPPREFIX" ]]; then
   mkdir -p "$TMPPREFIX"
 fi
 
+if [ -r ~/dotfiles/.profile.${HOSTNAME:=$HOST} ]; then
+  source ~/dotfiles/.profile.${HOSTNAME:=$HOST}
+fi
