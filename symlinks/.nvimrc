@@ -208,8 +208,7 @@ let g:airline#extensions#tabline#buffer_nr_show=1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline_powerline_fonts=1
 let g:localvimrc_persistent=1
-let g:localvimrc_sandbox=0
-let g:localvimrc_whitelist='~/contrib/vvv/www/*/.*'
+let g:localvimrc_reverse=1
 let g:mta_filetypes = {
     \ 'html' : 1,
     \ 'xhtml' : 1,
