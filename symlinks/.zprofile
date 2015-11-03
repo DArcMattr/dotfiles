@@ -9,10 +9,10 @@
 # Browser
 #
 
-if [ -x ~/.nvim/plugged/vimpager/vimpager ]; then
-  export MANPAGER=~/.nvim/plugged/vimpager/vimpager
-  alias vimcat='~/.nvim/plugged/vimpager/vimcat'
-  alias vimpager='~/.nvim/plugged/vimpager/vimpager'
+if [ -x ~/.vim/plugged/vimpager/vimpager ]; then
+  export MANPAGER=~/.vim/plugged/vimpager/vimpager
+  alias vimcat='~/.vim/plugged/vimpager/vimcat'
+  alias vimpager='~/.vim/plugged/vimpager/vimpager'
 fi
 
 if [[ "$OSTYPE" == darwin* ]]; then
@@ -94,3 +94,6 @@ if [[ ! -d "$TMPPREFIX" ]]; then
   mkdir -p "$TMPPREFIX"
 fi
 
+if [ -r ~/dotfiles/.profile.${HOSTNAME:=$HOST} ]; then
+  source ~/dotfiles/.profile.${HOSTNAME:=$HOST}
+fi

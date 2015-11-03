@@ -6,6 +6,8 @@
 # on two lines for easier vgrepping
 # entry in a nice long thread on the Arch Linux forums: http://bbs.archlinux.org/viewtopic.php?pid=521888#p521888
 
+MODE_INDICATOR="%{%K{white}%}%{$fg_bold[black]%}ESC%{%K{black}%}%{$reset_color%}%b"
+
 function hg_prompt_info {
     hg prompt --angle-brackets "\
 <hg:%{$fg[magenta]%}<branch>%{$reset_color%}>\
@@ -14,23 +16,29 @@ function hg_prompt_info {
 patches: <patches|join( → )|pre_applied(%{$fg[yellow]%})|post_applied(%{$reset_color%})|pre_unapplied(%{$fg_bold[black]%})|post_unapplied(%{$reset_color%})>>" 2>/dev/null
 }
 
-ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[cyan]%}+"
-ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}✱"
-ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}✗"
-ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[blue]%}➦"
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[magenta]%}✂"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[grey]%}✈"
+ZSH_THEME_GIT_PROMPT_ADDED="%{$fg_bold[cyan]%}+%b"
+ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg_bold[yellow]%}✱%b"
+ZSH_THEME_GIT_PROMPT_DELETED="%{$fg_bold[red]%}✗%b"
+ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg_bold[blue]%}➦%b"
+ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg_bold[magenta]%}✂%b"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg_bold[grey]%}✈%b"
+ZSH_THEME_GIT_PROMPT_SHA_BEFORE=" %{$fg_bold[blue]%}"
+ZSH_THEME_GIT_PROMPT_SHA_AFTER="%b%{$reset_color%}"
 
 function mygit() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo "git:$(prompt_git_info)"
+  if [[ "$(git config --get oh-my-zsh.hide-status)" != "1" ]]; then
+    ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
+    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
+    echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(git_prompt_short_sha)$(git_prompt_status)%{$reset_color%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  fi
 }
 
 # alternate prompt with git & hg
 PROMPT=$'
 %{$fg[blue]%}%B[%b%{\e[0;33m%}'%D{"%Y-%m-%d %H:%M:%S"}%b$'%{$fg[blue]%}%B]%b%{\e[0m%}
 %{$fg[blue]%}%B[%b%{\e[0m%}%{\e[1;32m%}%n%{\e[1;33m%}@%{\e[0m%}%{\e[0;36m%}%m%{\e[0;33m%}%B:%b%/%{$fg[blue]%}%B]%b%{\e[0m%}
-%{$fg[blue]%}%B[%{\e[1;35m%}%L:$%{$fg[blue]%}%B] <%b%{$fg[white]%}$(mygit)$(hg_prompt_info)$(svn_prompt_info)%{$fg[blue]%}%B>%{\e[0m%}%b '
+%{$fg[blue]%}%B[%{\e[1;35m%}%L:$%{$fg[blue]%}%B] <%b%{$fg[white]%}$(mygit)$(hg_prompt_info)$(svn_prompt_info)%{$fg[blue]%}%B$(vi_mode_prompt_info)>%{\e[0m%}%b '
 PS2=$'$fg[blue]%}%B>%{\e[0m%}%b '
 
-RPROMPT='$(vi_mode_prompt_info)'
+# RPROMPT='$(vi_mode_prompt_info)'
+RPROMPT=''

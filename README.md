@@ -44,7 +44,7 @@ Copy/paste the following onto the command line:
 Refresh the session, then run the following:
 
     ~/dotfiles/init.sh
-    ln -s ~/dotfiles/.vimrc ~/.nvimrc
+    ln -s ~/dotfiles/.vimrc ~/.config/nvim/init.vim
     mv ~/.ssh/config ~/.ssh/config.orig
     ln -s ~/dotfiles/sshconfig ~/.ssh/config
     ln -s ~/dotfiles/hgcommit.vim ~/.nvim/syntax/hgcommit.vim

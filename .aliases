@@ -141,12 +141,8 @@ catmd() {
   echo $TMPFILE
   pandoc -s -S --self-contained -c ~/.pandoc/buttondown.css \
     -t html5 -f markdown_phpextra "$@" -o "$TMPFILE"
-  if command -v "chromix" &>/dev/null; then
-    if ! chromix 2>&1 >/dev/null; then
-      nohup chromix-server >/dev/null 2>&1 &
-    fi
-    chromix with pandoc close
-    chromix load "file://$TMPFILE"
+  if command -v "xdg-open" &>/dev/null; then
+    xdg-open "${TMPFILE}"
   elif command -v "elinks" &>/dev/null; then
     elinks -force-html "file://${TMPFILE}"
   else
