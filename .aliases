@@ -6,16 +6,14 @@ if \ls --color=always -d . >/dev/null 2>&1; then
 elif \ls -G -d . >/dev/null 2>&1; then # colorls is main system ls already
   alias ls='\ls -G'
 elif \colorls -G -d . >/dev/null 2>&1; then
-  alias ls='colorls -G'
+  alias ls='\colorls -G'
 else # Solaris or other *NIX
   alias ls='\ls'
 fi
 
 alias ll='ls -AalFh'
-#alias rm='movetrash'
 alias key='man -k'
 alias info='info --vi-keys'
-alias cycapache='/usr/bin/sudo /usr/bin/pkill -SIGQUIT -U www; /bin/sleep 2; /usr/bin/sudo /usr/sbin/apachectl start'
 alias tmux='tmux -2u'
 alias tmuxt='sh ~/dotfiles/.tmux.$HOST'
 alias agp='ag --pager=less'
@@ -28,85 +26,34 @@ alias -s js=vim
 # Functions, used where aliases would break
 
 cdl() {
-  cd "$@"
+  cd "${@}"
   ll
 }
 
 cdd() {
-  cd "$@"
+  cd "${@}"
   dir
 }
 
-movetrash() {
-  if [ ! -d ~/.Trash ]; then
-    mkdir ~/.Trash
-  fi
-  mv "$*" ~/.Trash
-}
-
 path() {
-  echo $PATH | tr ':' '\n'
+  echo "${PATH}" | tr ':' '\n'
 }
 
 dir() {
   {
     if \ls --group-directories-first -d . >/dev/null 2>&1; then
-      ll --group-directories-first "$@"
+      ll --group-directories-first "${@}"
     else
-      ll "$@" | grep -E "^d"
-      ll "$@" | grep -E -v "^d|^total"
-      ll "$@" | grep -E "^total"
+      LL=$(ll "${@}")
+      ${LL} | grep -E "^d"
+      ${LL} | grep -E -v "^d|^total"
+      ${LL} | grep -E "^total"
     fi
   } | $PAGER
 }
 
-clearcache() {
-  if [ -d /tmp/cache ]; then
-    /bin/rm -f /tmp/cache/{0,1,2,3}*.cache
-    /bin/rm -f /tmp/cache/{4,5,6,7}*.cache
-    /bin/rm -f /tmp/cache/{8,9,a,b}*.cache
-    /bin/rm -f /tmp/cache/{c,d,e,f}*.cache
-  elif [ -d /var/www/tmp/cache ]; then
-    /bin/rm -f /var/www/tmp/cache/{0,1,2,3}*.cache
-    /bin/rm -f /var/www/tmp/cache/{4,5,6,7}*.cache
-    /bin/rm -f /var/www/tmp/cache/{8,9,a,b}*.cache
-    /bin/rm -f /var/www/tmp/cache/{c,d,e,f}*.cache
-  else
-    echo "no cache directories exist"
-  fi
-}
-
 sssh() {
-  (autossh -t "$@" 'if tmux has; then tmux -2u attach; else tmux -2u new; fi') 2>/dev/null
-}
-
-mountpub() {
-  sudo mount -t cifs -o username=ARI/darceneaux,rw,file_mode=0666,dir_mode=0777 \\\\10.10.10.12\\Public /mnt/Public
-}
-
-mountfr() {
-  sudo mount -t cifs -o username=ARI/darceneaux,rw,file_mode=0666,dir_mode=0777 \\\\10.10.10.12\\Fundraising /mnt/Fundraising
-}
-
-mountvbox() {
-  ssh -fNg -L 3306:127.0.0.1:3306 vbox # mysql tunnel
-  ssh -fNg -L 5432:127.0.0.1:5432 vbox # postgres tunnel
-  sshfs -C -o idmap=user,nonempty,transform_symlinks,allow_other,BatchMode=yes vbox:/var/www /var/www
-}
-
-# delete grep cache, not sure how to generalize it
-dgc() {
-  rm -rf $(grep -l '<!-- http://aynrandlexicon.com/lexicon/quote_of_the_day.html' /var/www/libraries/cache/*.cache)
-  curl -I -s http://aynrandlexicon.com/lexicon/quote_of_the_day.html > /dev/null
-}
-
-tarlm() {
-  if [ ! -f $1.access.$2.tgz ]; then
-    sudo tar -zvcf $1.access.$2.tgz $1.access.$2*.log && sudo rm $1.access.$2*.log
-  fi
-  if [ ! -f $1.error.$2.tgz ]; then
-    sudo tar -zvcf $1.error.$2.tgz $1.error.$2*.log && sudo rm $1.error.$2*.log
-  fi
+  (autossh -t "${@}" 'if tmux has; then tmux -2u attach; else tmux -2u new; fi') 2>/dev/null
 }
 
 hgdiff() {
@@ -115,7 +62,7 @@ hgdiff() {
 
 playtime() {
   if [ -x /usr/local/bin/soxi ]; then
-    soxi -d "$@" 2>&1
+    soxi -d "${@}" 2>&1
   else
     echo "soxi is not installed"
   fi
@@ -138,11 +85,14 @@ dosass() {
 
 catmd() {
   TMPFILE=`mktemp -t pandoc.XXXXXX.html`
-  echo $TMPFILE
+
+  echo ${TMPFILE}
+
   pandoc -s -S --self-contained -c ~/.pandoc/buttondown.css \
-    -t html5 -f markdown_phpextra "$@" -o "$TMPFILE"
-  if command -v "xdg-open" &>/dev/null; then
-    xdg-open "${TMPFILE}"
+    -t html5 -f markdown_phpextra "${@}" -o "${TMPFILE}"
+
+  if command -v "${BROWSER}" &>/dev/null; then
+    ${BROWSER} "${TMPFILE}"
   elif command -v "elinks" &>/dev/null; then
     elinks -force-html "file://${TMPFILE}"
   else
@@ -150,70 +100,42 @@ catmd() {
   fi
 }
 
-
-## Mark Jaquith block start
-# search development scripts
-jsgrep() {
-  find . \( -name "*.dev.js" -print \)  | xargs grep -n "$1"
-}
-
-# search development css files
-cssgrep() {
-  find . \( -name "*.dev.css" -print \)  | xargs grep -n "$1"
-}
-
-# search php files
-phpgrep() {
-  find . \( -name "*.php" -print \)  | xargs grep -n "$1"
-}
-
-# search php files and development scripts/styles
-wpgrep() {
-  find . \( -name "*.php" -print -or -name "*.dev.js" -or -name "*.dev.css" -print \)  | xargs grep -n "$1"
-}
-
-# Shortcuts for opening WP files insanely fast.
-wpinc(){
-  vim wp-includes/$1.php
-}
-
-wpa(){
-  vim wp-admin/$1.php
-}
-
-wpai(){
-  vim wp-admin/includes/$1.php
-}
-
-wpcss(){
-  vim wp-admin/css/$1.dev.css
-}
-
-wpjs(){
-  vim wp-admin/js/$1.dev.js
-}
-
-wptt(){
-  vim wp-content/themes/twentythirteen/$1.*
-}
-
-# Apply a Trac patch.
-trac_patch() {
-  curl "$1?format=raw" | patch -p0
-}
-
-# Apply a Trac patch on a clean repo.
-clean_patch() {
-  svn cleanup
-  svn revert -R *
-  svn up
-  curl "$1?format=raw" | patch -p0
-}
-
-alias tp=trac_patch
-alias ctp=clean_patch
-
-mod(){
-  svn stat --ignore-externals | grep '^[^?X]'
-}
-## Mark Jaquith block end
+# I'm keeping the following around for historical reference
+# mountpub() {
+#   sudo mount -t cifs -o username=ARI/darceneaux,rw,file_mode=0666,dir_mode=0777 \\\\10.10.10.12\\Public /mnt/Public
+# }
+#
+# mountfr() {
+#   sudo mount -t cifs -o username=ARI/darceneaux,rw,file_mode=0666,dir_mode=0777 \\\\10.10.10.12\\Fundraising /mnt/Fundraising
+# }
+#
+# mountvbox() {
+#   ssh -fNg -L 3306:127.0.0.1:3306 vbox # mysql tunnel
+#   ssh -fNg -L 5432:127.0.0.1:5432 vbox # postgres tunnel
+#   sshfs -C -o idmap=user,nonempty,transform_symlinks,allow_other,BatchMode=yes vbox:/var/www /var/www
+# }
+#
+# # delete grep cache, not sure how to generalize it
+# dgc() {
+#   rm -rf $(grep -l '<!-- http://aynrandlexicon.com/lexicon/quote_of_the_day.html' /var/www/libraries/cache/*.cache)
+#   curl -I -s http://aynrandlexicon.com/lexicon/quote_of_the_day.html > /dev/null
+# }
+#
+# tarlm() {
+#   if [ ! -f $1.access.$2.tgz ]; then
+#     sudo tar -zvcf $1.access.$2.tgz $1.access.$2*.log && sudo rm $1.access.$2*.log
+#   fi
+#   if [ ! -f $1.error.$2.tgz ]; then
+#     sudo tar -zvcf $1.error.$2.tgz $1.error.$2*.log && sudo rm $1.error.$2*.log
+#   fi
+# }
+#
+# movetrash() {
+#   if [ ! -d ~/.Trash ]; then
+#     mkdir ~/.Trash
+#   fi
+#   mv "${*}" ~/.Trash
+# }
+#
+# alias cycapache='/usr/bin/sudo /usr/bin/pkill -SIGQUIT -U www; /bin/sleep 2; /usr/bin/sudo /usr/sbin/apachectl start'
+# alias rm='movetrash'
