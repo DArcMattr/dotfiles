@@ -5,6 +5,12 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+export PAGER='less'
+export TERM=xterm-256color
+export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
+export CLICOLOR=YES
+export CLICOLOR_FORCE=YES
+
 #
 # Browser
 #
@@ -16,10 +22,11 @@ if [ -x ~/.vim/plugged/vimpager/vimpager ]; then
 fi
 
 if [[ "$OSTYPE" == darwin* ]]; then
-  export BROWSER='open'
+  BROWSER='open'
 else
-  export BROWSER='xdg-open'
+  BROWSER='xdg-open'
 fi
+export BROWSER
 
 #
 # Editors
@@ -33,10 +40,7 @@ else
   EDITOR=`which vi`
 fi
 export EDITOR
-
-export VISUAL=$EDITOR
-export PAGER='less'
-export TERM=xterm-256color
+export VISUAL=${EDITOR}
 
 #
 # Language
