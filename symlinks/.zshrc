@@ -23,7 +23,7 @@ if [ -n ${ZSH_VERSION-} ]; then
   fi
 fi
 
-if [ -d ~/dotfiles/.aliases ]; then
+if [ -r ~/dotfiles/.aliases ]; then
   source ~/dotfiles/.aliases
 fi
 
@@ -34,11 +34,16 @@ fi
 unsetopt correct correct_all inc_append_history share_history
 setopt append_history auto_cd complete_aliases hist_ignore_dups nohup notify pushd_ignore_dups
 
+bindkey -v
 bindkey '\e[1~' beginning-of-line
 bindkey '\e[4~' end-of-line
-bindkey -v
 
 umask 002
 
 export LESS="-EFIMQRsX~ -x2"
 export LESSCHARSET="utf-8"
+
+if [[ -f "./.env" ]]
+then
+    check_and_exec "./.env"
+fi
