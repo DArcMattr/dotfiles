@@ -1,15 +1,16 @@
 if !1 | finish | endif
 
+syntax on
+
 let g:make = 'gmake'
+
 if system('uname -o') =~ '^GNU/'
   let g:make = 'make'
 endif
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'ConradIrwin/vim-bracketed-paste'
-Plug 'DArcMattr/vim-numbertoggle'
-Plug 'Shougo/unite-outline'
-Plug 'Shougo/unite.vim'
+Plug 'Shougo/unite.vim' | Plug 'Shougo/unite-outline'
 Plug 'Shougo/vimproc.vim', { 'do' : g:make }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'Valloric/MatchTagAlways'
@@ -19,12 +20,13 @@ Plug 'bling/vim-airline'
 Plug 'dsawardekar/wordpress.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
-Plug 'hhvm/vim-hack'
+Plug 'hhvm/vim-hack', { 'for': 'php' }
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jiangmiao/auto-pairs'
 Plug 'joonty/vdebug'
 Plug 'joonty/vim-taggatron'
 Plug 'krisajenkins/vim-pipe'
-Plug 'krisajenkins/vim-postgresql-syntax'
+Plug 'krisajenkins/vim-postgresql-syntax', { 'for': 'psql' }
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'moll/vim-node', { 'for': 'javascript' }
 Plug 'reedes/vim-wheel'
@@ -33,7 +35,6 @@ Plug 'scrooloose/syntastic'
 Plug 'shawncplus/phpcomplete.vim', { 'for': 'php' }
 Plug 'sheerun/vim-polyglot'
 Plug 'sjl/tslime2.vim'
-Plug 'tpope/timl'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
@@ -45,12 +46,11 @@ Plug 'vim-scripts/vcscommand.vim'
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
 call plug#end()
 
-filetype plugin indent on " required by NeoBundle
-syntax on
-
 set autoindent
 set autoread
 set backspace=indent,eol,start
+set backup
+set backupdir=$TEMP,$TMP,.
 set colorcolumn=+1
 set complete-=i
 set completeopt=menu,menuone,longest
@@ -81,20 +81,20 @@ set listchars=eol:↲,precedes:«,extends:»,trail:·,tab:▸·,nbsp:¯
 set matchtime=5
 set modeline
 set mouse=a
-set backup
-set backupdir=$TEMP,$TMP,.
 set nobomb
 set nojoinspaces
 set nostartofline
 set noswapfile
 set nowrap
 set nrformats-=octal
+set number
 set previewheight=20
 set printheader=%<%f%h%m\ %40
 set printheader=+{strftime(\"%c\"getftime(expand(\"%%\")))}%=Page\ %N
 set printoptions=formfeed:y,paper:letter,portrait:n,number:y,syntax:7
 set printoptions+=left:5mm,right:5mm,top:10mm,bottom:5mm
 set pumheight=15
+set relativenumber
 set scrolloff=3
 set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
 set shiftround
@@ -209,7 +209,8 @@ let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline_powerline_fonts=1
 let g:localvimrc_persistent=1
 let g:localvimrc_reverse=1
-let g:mta_filetypes = {
+let g:localvimrc_sandbox=0
+let g:mta_FileTypes = {
     \ 'html' : 1,
     \ 'xhtml' : 1,
     \ 'xml' : 1,
@@ -222,24 +223,24 @@ let g:sparkupExecuteMapping='<leader>se'
 let g:sparkupNextMapping='<leader>sn'
 let g:syntastic_check_on_open=0
 let g:syntastic_error_symbol='⧰'
-let g:syntastic_html_validator_parser='html5'
-let g:syntastic_php_checkers=['php', 'phpmd']
-let g:syntastic_javascript_checkers=['eslint']
-let g:syntastic_javascript_eslint_exec='eslint_d -c ~/.eslintrc'
-let g:syntastic_warning_symbol='⚠'
+let g:syntastic_php_checkers = ['php']
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = 'eslint_d -c ~/.eslintrc'
+let g:syntastic_warning_symbol = '⚠'
+let g:tagcommands = { 'php': { 'args': '-R' } }
 let g:tslime_ensure_trailing_newlines = 1
 let g:tslime_normal_mapping = '<localleader>t'
 let g:tslime_visual_mapping = '<localleader>t'
 let g:tslime_vars_mapping = '<localleader>T'
-let g:unite_cursor_line_time=0.0
+let g:unite_cursor_line_time="0.0"
 let g:unite_enable_split_vertically=1
 let g:unite_options_auto_resize=1
 let g:unite_update_time=0
-let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
+let g:ycm_FileType_blacklist = { 'markdown': 1, 'text': 1, }
 
 " key remappings - toggle spell checking
-map <F7> :setlocal spell! spelllang=en_us<CR>
-imap <F7> <C-o>:setlocal spell! spelllang=en_us<CR>
+"map <F7> :setlocal spell! spelllang=en_us<CR>
+"imap <F7> <C-o>:setlocal spell! spelllang=en_us<CR>
 imap <C-c> <CR><Esc>O
 
 map <leader>gs :Gstatus<CR>
@@ -258,7 +259,6 @@ nnoremap J mzJ`z
 nnoremap j gj
 nnoremap gj j
 nnoremap Q gq
-"nnoremap K <nop>
 nnoremap k gk
 nnoremap gk k
 nnoremap ' `
@@ -271,10 +271,9 @@ nnoremap Y y$
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 nnoremap <C-p> :Unite file_rec/async<CR>
-nnoremap <F1> <nop>
 nnoremap <leader>q :nohlsearch<CR>
 nnoremap <leader>/ :Unite grep:.<CR>
-nnoremap <F8> :Unite outline<CR>
+nnoremap <leader>o :Unite outline<CR>
 
 inoremap <C-U> <C-G>u<C-U>
 
@@ -372,7 +371,7 @@ endif
 
 augroup OmniFunc
   autocmd!
-  autocmd Filetype *
+  autocmd FileType *
   \  if &omnifunc == "" |
   \    setlocal omnifunc=syntaxcomplete#Complete |
   \  endif
@@ -441,76 +440,76 @@ augroup CenteringReadOnly
   autocmd BufEnter * if !&modifiable | setl scrolloff=999 | endif
 augroup END
 
-"autocmd BufRead * try | execute "compiler ".&filetype | catch /./ | endtry
+"autocmd BufRead * try | execute "compiler ".&FileType | catch /./ | endtry
 
-" common filetypes below
+" common FileTypes below
 " any project-specific settings should be included in the .lvimrc file placed
 " in the root folder of that project
-
-" Perl
-autocmd BufNewFile,BufRead,BufEnter *.pl,*.pm set makeprg=perl
-autocmd BufNewFile,BufRead,BufEnter *.pl,*.pm compiler perl
-
-" Lua
-autocmd FileType lua set shiftwidth=4 tabstop=4 softtabstop=4 smarttab noexpandtab
-autocmd BufEnter *.lua set autoindent tabstop=4 softtabstop=4 smarttab
-\ noexpandtab formatoptions=croql
-
-" Python
-autocmd FileType python set shiftwidth=4 tabstop=4 softtabstop=4 smarttab
-\ expandtab
-autocmd BufNewFile,BufRead,BufEnter *.py set autoindent tabstop=4
-\ softtabstop=4 smarttab formatoptions=croql
-autocmd FileType python :let b:vimpipe_command="python"
-autocmd FileType python :let b:vimpipe_filetype="python"
-
-" C
-autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8 softtabstop=8
-
-" git commit messages
-autocmd BufRead,BufNewFile COMMIT_EDITMSG :DiffGitCached
-
-" golang
-autocmd FileType go autocmd BufWritePre <buffer> Fmt
-
-" hg commit messages
-autocmd BufNewFile,BufRead,BufEnter msg setf hgcommit
-autocmd FileType hgcommit set textwidth=72
-autocmd FileType hgcommit match OverLength /\%73v.\+/
-
-" for databases, should set this in the .lvimrc to match a particular database
-" MySQL
-autocmd BufNewFile,BufRead,BufEnter *.mysql setf mysql
-autocmd FileType mysql :let b:vimpipe_filetype="mysql"
-autocmd FileType mysql :let b:vimpipe_command="mysql"
-" autocmd FileType mysql :let b:vimpipe_command="mysql mydatabase"
-
-" PostgreSQL
-autocmd BufNewFile,BufRead,BufEnter *.psql setf postgresql
-autocmd FileType postgresql :let b:vimpipe_filetype="postgresql"
-autocmd FileType postgresql :let b:vimpipe_command="psql"
-" autocmd FileType postgresql :let b:vimpipe_command="psql mydatabase"
-
-" Markdown
-autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown setf markdown
-
-" tmux
-autocmd BufNewFile,BufRead,BufEnter .tmux*,*/tmux-sessions/* setf tmux
 
 " Apache
 autocmd BufNewFile,BufRead,BufEnter *.conf setf apache
 
-" HTML
-autocmd BufNewFile *.html 0r ~/dotfiles/lang/html/index.html
+" C
+autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8 softtabstop=8
+autocmd FileType c set keywordprg=man
 
 " COBOL
 autocmd BufNewFile *.cob 0r ~/dotfiles/lang/cobol/header.cob
 
-" Ruby
-autocmd BufNewFile,BufRead Vagrantfile setf ruby
+" Git commit messages
+autocmd BufRead,BufNewFile COMMIT_EDITMSG :DiffGitCached
+
+" Golang
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
+
+" HTML
+autocmd BufNewFile *.html 0r ~/dotfiles/lang/html/index.html
 
 " Lisp
-autocmd filetype lisp,scheme,art setlocal equalprg=scmindent.rkt
+autocmd FileType lisp,scheme,art setlocal equalprg=scmindent.rkt
+
+" Lua
+autocmd FileType lua set shiftwidth=4 tabstop=4 softtabstop=4 smarttab
+      \ noexpandtab formatoptions=croql
+
+" Markdown
+autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown setf markdown
+
+" Mercurial commit messages
+autocmd BufNewFile,BufRead,BufEnter msg setf hgcommit
+autocmd FileType hgcommit set textwidth=72
+autocmd FileType hgcommit match OverLength /\%73v.\+/
+
+" MySQL
+autocmd BufNewFile,BufRead,BufEnter *.mysql setf mysql
+autocmd FileType mysql :let b:vimpipe_FileType="mysql"
+autocmd FileType mysql :let b:vimpipe_command="mysql"
+
+" Perl
+autocmd FileType perl set makeprg=perl
+autocmd FileType perl compiler perl
 
 " PHP
-autocmd filetype php set keywordprg=pman
+autocmd FileType php set keywordprg=pman
+
+" PostgreSQL
+autocmd BufNewFile,BufRead,BufEnter *.psql setf postgresql
+autocmd FileType postgresql :let b:vimpipe_FileType="postgresql"
+autocmd FileType postgresql :let b:vimpipe_command="psql"
+
+" Python
+autocmd FileType python set shiftwidth=4 tabstop=4 softtabstop=4
+      \ smarttab expandtab formatoptions=croql
+autocmd FileType python :let b:vimpipe_command="python"
+autocmd FileType python :let b:vimpipe_FileType="python"
+autocmd FileType python set keywordprg=pydoc
+
+" Ruby
+autocmd BufNewFile,BufRead Vagrantfile setf ruby
+autocmd FileType ruby set keywordprg=ri
+
+" tmux
+autocmd BufNewFile,BufRead,BufEnter .tmux* setf tmux
+
+" Vim
+autocmd FileType vim set keywordprg=:Help
