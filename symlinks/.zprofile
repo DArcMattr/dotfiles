@@ -21,35 +21,6 @@ if [ -x ~/.vim/plugged/vimpager/vimpager ]; then
   alias vimpager='~/.vim/plugged/vimpager/vimpager'
 fi
 
-if [[ "$OSTYPE" == darwin* ]]; then
-  BROWSER='open'
-else
-  BROWSER='xdg-open'
-fi
-export BROWSER
-
-#
-# Editors
-#
-
-if type "nvim" > /dev/null; then
-  EDITOR=`which nvim`
-elif type "vim" > /dev/null; then
-  EDITOR=`which vim`
-else
-  EDITOR=`which vi`
-fi
-export EDITOR
-export VISUAL=${EDITOR}
-
-#
-# Language
-#
-
-if [[ -z "$LANG" ]]; then
-  export LANG='en_US.UTF-8'
-fi
-
 #
 # Paths
 #
@@ -82,20 +53,6 @@ path=(
 # Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
 if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
-fi
-
-#
-# Temporary Files
-#
-
-if [[ ! -d "$TMPDIR" ]]; then
-  export TMPDIR="/tmp/$LOGNAME"
-  mkdir -p -m 700 "$TMPDIR"
-fi
-
-TMPPREFIX="${TMPDIR%/}/zsh"
-if [[ ! -d "$TMPPREFIX" ]]; then
-  mkdir -p "$TMPPREFIX"
 fi
 
 if [ -r ~/dotfiles/.profile.${HOSTNAME:=$HOST} ]; then
