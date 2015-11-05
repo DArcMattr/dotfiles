@@ -210,7 +210,7 @@ let g:airline_powerline_fonts=1
 let g:localvimrc_persistent=1
 let g:localvimrc_reverse=1
 let g:localvimrc_sandbox=0
-let g:mta_FileTypes = {
+let g:mta_filetypes = {
     \ 'html' : 1,
     \ 'xhtml' : 1,
     \ 'xml' : 1,
@@ -236,7 +236,7 @@ let g:unite_cursor_line_time="0.0"
 let g:unite_enable_split_vertically=1
 let g:unite_options_auto_resize=1
 let g:unite_update_time=0
-let g:ycm_FileType_blacklist = { 'markdown': 1, 'text': 1, }
+let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
 " key remappings - toggle spell checking
 "map <F7> :setlocal spell! spelllang=en_us<CR>
