@@ -447,7 +447,7 @@ augroup END
 " in the root folder of that project
 
 " Apache
-autocmd BufNewFile,BufRead,BufEnter *.conf setf apache
+autocmd BufNewFile,BufRead,BufEnter httpd.conf setf apache
 
 " C
 autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8 softtabstop=8
@@ -509,7 +509,7 @@ autocmd BufNewFile,BufRead Vagrantfile setf ruby
 autocmd FileType ruby set keywordprg=ri
 
 " tmux
-autocmd BufNewFile,BufRead,BufEnter .tmux* setf tmux
+autocmd BufNewFile,BufRead,BufEnter .tmux.*,.tmux.conf* setf tmux
 
 " Vim
 autocmd FileType vim set keywordprg=:Help
