@@ -20,7 +20,7 @@ tmux set-option -t $SESSION status-position top
 
 tmux new-window -t $SESSION:0 -k -c ~/contrib/vvv/www/daily-caller/htdocs
 tmux new-window -t $SESSION:1 -c ~/contrib/vvv/www/bestofnj/htdocs
-tmux new-window -t $SESSION:2 -c ~/contrib/vvv/www/fnf/htdocs
+tmux new-window -t $SESSION:2 -c ~/contrib/vvv/www/thisorthat/htdocs
 tmux new-window -t $SESSION:3 -c ~/contrib/vvv
 tmux new-window -t $SESSION:4
 tmux new-window -t $SESSION:5
@@ -57,7 +57,7 @@ tmux resize-pane -t $SESSION:2.1 -y 22
 tmux resize-pane -t $SESSION:2.2 -y 22
 tmux send-keys -t $SESSION:2.1 "sssh zeek" C-m
 tmux send-keys -t $SESSION:2.2 "tail -f ./wp-content/debug.log" C-m
-tmux send-keys -t $SESSION:2.3 "cd ./wp-content/plugins/fnf" C-m
+tmux send-keys -t $SESSION:2.3 "source ../.env; cd ./wp-content/plugins/this-or-that" C-m
 tmux select-pane -t $SESSION:2.0
 
 tmux send-keys -t $SESSION:3 "vagrant up; sssh vagrant" C-m
@@ -69,7 +69,7 @@ tmux send-keys -t $SESSION:8 "htop" C-m
 
 tmux rename-window -t $SESSION:0 "Daily Caller"
 tmux rename-window -t $SESSION:1 "Best of NJ"
-tmux rename-window -t $SESSION:2 Fidelity
+tmux rename-window -t $SESSION:2 "This or That"
 tmux rename-window -t $SESSION:3 Vagrant
 tmux rename-window -t $SESSION:4 aynrand2
 tmux rename-window -t $SESSION:5 cor
