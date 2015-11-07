@@ -2,10 +2,10 @@ if !1 | finish | endif
 
 syntax on
 
-let g:make = 'gmake'
-
 if system('uname -o') =~ '^GNU/'
   let g:make = 'make'
+else
+  let g:make = 'gmake'
 endif
 
 call plug#begin('~/.config/nvim/plugged')
