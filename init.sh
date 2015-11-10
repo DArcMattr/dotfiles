@@ -22,6 +22,7 @@ grab_s3cmd
 grab_sassc
 grab_icdiff
 grab_tpm
+grab_autoenv
 
 composer global require 'phpmd/phpmd=*'
 composer global require 'squizlabs/php_codesniffer=*'

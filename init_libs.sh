@@ -3,15 +3,15 @@ PIP=`which pip`
 grab_sassc() {
   # TODO: create a git hook to insert
   if [ ! -d ~/contrib/libsass/.git/ ]; then
-    git clone https://github.com/hcatlin/libsass ~/contrib/libsass
-    cd ~/contrib/libsass
-    git submodule init --recursive
-    cd -
+    \git clone https://github.com/hcatlin/libsass ~/contrib/libsass
+    \cd ~/contrib/libsass
+    \git submodule init --recursive
+    \cd -
   else
-    cd ~/contrib/libsass
-    git up
-    git submodule update --recursive
-    cd -
+    \cd ~/contrib/libsass
+    \git up
+    \git submodule update --recursive
+    \cd -
   fi
 
   if [ ! -d ~/contrib/sassc/.git/ ]; then
@@ -25,17 +25,17 @@ grab_sassc() {
 }
 
 grab_vimplug() {
-  mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
+  \mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
   if [ ! -f ${XDG_CONFIG_HOME}/nvim/autoload/plug.vim ]; then
-    curl -fLo {$XDG_CONFIG_HOME}/nvim/autoload/plug.vim --create-dirs \
+    \curl -fLo {$XDG_CONFIG_HOME}/nvim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   fi
 }
 
 grab_wp_cli() {
-  curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar ~/contrib
-  chmod +x ~/contrib/wp-cli.phar
-  ln -s ~/contrib/wp-cli.phar ~/bin/wp
+  \curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar ~/contrib
+  \chmod +x ~/contrib/wp-cli.phar
+  \ln -s ~/contrib/wp-cli.phar ~/bin/wp
 }
 
 grab_hg_prompt() {
@@ -44,6 +44,17 @@ grab_hg_prompt() {
   else
     \cd ~/contrib/hg-prompt
     \hg pull -u
+    \cd -
+  fi
+}
+
+grab_autoenv() {
+  if [ ! -d ~/contrib/autoenv/.git ]; then
+    \git clone https://github.com/horosgrisa/autoenv.git ~/contrib/autoenv
+    \ln -s ~/contrib/autoenv $ZSH_CUSTOM/plugins/
+  else
+    \cd ~/contrib/autoenv
+    \git up
     \cd -
   fi
 }
@@ -65,7 +76,7 @@ grab_powerline() {
 
   powerline_path=$(dirname `python -c 'import powerline; print (powerline.__file__)'`)
   if [ ! -d ~/.config/powerline ]; then
-    mkdir -p ~/.config/powerline
+    \mkdir -p ~/.config/powerline
     \cp -R ${powerline_path}/config_files/* ~/.config/powerline
   fi
   if [ ! -f ~/.config/powerline/powerline.conf ]; then
@@ -80,9 +91,9 @@ grab_s3cmd() {
   VER_STRING="s3cmd version ${VER}"
   CURR_VER="$(s3cmd --version 2>&1)"
   if [ "$CURR_VER" = "$VER_STRING" ]; then
-    echo "s3cmd currently installed and up to date"
+    \echo "s3cmd currently installed and up to date"
   else
-    echo "installing/upgrading s3cmd"
+    \echo "installing/upgrading s3cmd"
     \sudo $PIP install -U s3cmd==$VER
   fi
 }
