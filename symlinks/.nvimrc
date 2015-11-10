@@ -10,7 +10,7 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'ConradIrwin/vim-bracketed-paste'
-Plug 'Shougo/unite.vim' | Plug 'Shougo/unite-outline'
+Plug 'Shougo/unite.vim', { 'on': 'Unite' } | Plug 'Shougo/unite-outline'
 Plug 'Shougo/vimproc.vim', { 'do' : g:make }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'Valloric/MatchTagAlways'
@@ -129,6 +129,7 @@ set wildignore+=*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc
 set wildignore+=vendor/*,docs/*,node_modules/*,components/*,build/*,dist/*
 
 colo vividchalk
+
 highlight Comment ctermfg=105 guifg=#8787ff
 highlight CursorColumn cterm=NONE ctermbg=237 guibg=#3a3a3a
 highlight CursorLine term=underline cterm=underline ctermbg=NONE gui=underline guibg=NONE
@@ -139,16 +140,19 @@ highlight OverLength ctermbg=234 ctermfg=249
 highlight OverLength guibg=#1c1c1c guifg=#b2b2b2
 highlight Search ctermfg=222 guifg=#ffdf87
 highlight SpecialKey ctermfg=235 guifg=#262626
+
 highlight clear SpellBad
-highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline guifg=#800000 gui=underline
 highlight clear SpellCap
-highlight SpellCap term=underline cterm=underline gui=undercurl
 highlight clear SpellLocal
-highlight SpellLocal term=underline cterm=underline gui=undercurl
 highlight clear SpellRare
+
+highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline guifg=#800000 gui=underline
+highlight SpellCap term=underline cterm=underline gui=undercurl
+highlight SpellLocal term=underline cterm=underline gui=undercurl
 highlight SpellRare term=underline cterm=underline gui=undercurl
 
 match OverLength /\%81v.\+/
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 if has('win32')
   if has('gui_running')
@@ -190,6 +194,7 @@ endif
 let mapleader = ","
 let maplocalleader = " "
 let c_space_errors = 1
+let php_sync_method = 1
 let $GIT_SSL_NO_VERIFY = 'true'
 
 " plugin specific settings
@@ -253,29 +258,43 @@ map <C-PageUp> :bn<CR>
 map <C-PageDown> :bp<CR>
 
 nmap . .'[
+
+noremap n nzz
+noremap N Nzz
+noremap <C-d> <C-d>zz
+noremap <C-u> <C-u>zz
 noremap <leader>t :enew<CR>
 
+nnoremap <C-e> 3<C-e>
+nnoremap <C-p> :Unite file_rec/async<CR>
+nnoremap <C-y> 3<C-y>
+nnoremap <leader>/ :Unite grep:.<CR>
+nnoremap <leader>o :Unite outline<CR>
+nnoremap <leader>q :nohlsearch<CR>
+nnoremap H ^
 nnoremap J mzJ`z
-nnoremap j gj
-nnoremap gj j
+nnoremap L $
 nnoremap Q gq
-nnoremap k gk
+nnoremap Y y$
+nnoremap c "xc
+nnoremap gj j
 nnoremap gk k
+nnoremap j gj
+nnoremap k gk
+nnoremap { {zz
+nnoremap } }zz
 nnoremap ' `
 nnoremap ` '
 nnoremap ; :
 nnoremap : ;
-nnoremap n nzz
-nnoremap } }zz
-nnoremap Y y$
-nnoremap <C-e> 3<C-e>
-nnoremap <C-y> 3<C-y>
-nnoremap <C-p> :Unite file_rec/async<CR>
-nnoremap <leader>q :nohlsearch<CR>
-nnoremap <leader>/ :Unite grep:.<CR>
-nnoremap <leader>o :Unite outline<CR>
 
 inoremap <C-U> <C-G>u<C-U>
+inoremap <C-x><C-k> <nop>
+
+vnoremap y y`]
+vnoremap p "_dP`]
+
+xnoremap c "xc
 
 "in case of derp-sudo
 cmap w!! w !sudo tee % >/dev/null
