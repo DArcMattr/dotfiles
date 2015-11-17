@@ -466,7 +466,7 @@ augroup END
 " in the root folder of that project
 
 " Apache
-autocmd BufNewFile,BufRead,BufEnter httpd.conf setf apache
+autocmd BufNewFile,BufRead,BufEnter httpd.conf setfiletype apache
 
 " C
 autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8 softtabstop=8
@@ -488,47 +488,46 @@ autocmd BufNewFile *.html 0r ~/dotfiles/lang/html/index.html
 autocmd FileType lisp,scheme,art setlocal equalprg=scmindent.rkt
 
 " Lua
-autocmd FileType lua set shiftwidth=4 tabstop=4 softtabstop=4 smarttab
+autocmd FileType lua setlocal shiftwidth=4 tabstop=4 softtabstop=4 smarttab
       \ noexpandtab formatoptions=croql
 
 " Markdown
-autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown setf markdown
+autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown setfiletype markdown
 
 " Mercurial commit messages
-autocmd BufNewFile,BufRead,BufEnter msg setf hgcommit
-autocmd FileType hgcommit set textwidth=72
+autocmd BufNewFile,BufRead,BufEnter msg setfiletype hgcommit
+autocmd FileType hgcommit setlocal textwidth=72
 autocmd FileType hgcommit match OverLength /\%73v.\+/
 
 " MySQL
-autocmd BufNewFile,BufRead,BufEnter *.mysql setf mysql
+autocmd BufNewFile,BufRead,BufEnter *.mysql setfiletype mysql
 autocmd FileType mysql :let b:vimpipe_FileType="mysql"
 autocmd FileType mysql :let b:vimpipe_command="mysql"
 
 " Perl
-autocmd FileType perl set makeprg=perl
+autocmd FileType perl setlocal makeprg=perl keywordprg=perldoc\ -f
 autocmd FileType perl compiler perl
 
 " PHP
-autocmd FileType php set keywordprg=pman
+autocmd FileType php setlocal keywordprg=pman
 
 " PostgreSQL
-autocmd BufNewFile,BufRead,BufEnter *.psql setf postgresql
+autocmd BufNewFile,BufRead,BufEnter *.psql setfiletype postgresql
 autocmd FileType postgresql :let b:vimpipe_FileType="postgresql"
 autocmd FileType postgresql :let b:vimpipe_command="psql"
 
 " Python
-autocmd FileType python set shiftwidth=4 tabstop=4 softtabstop=4
-      \ smarttab expandtab formatoptions=croql
+autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
+      \ smarttab expandtab formatoptions=croql keywordprg=pydoc
 autocmd FileType python :let b:vimpipe_command="python"
 autocmd FileType python :let b:vimpipe_FileType="python"
-autocmd FileType python set keywordprg=pydoc
 
 " Ruby
-autocmd BufNewFile,BufRead Vagrantfile setf ruby
-autocmd FileType ruby set keywordprg=ri
+autocmd BufNewFile,BufRead Vagrantfile setfiletype ruby
+autocmd FileType ruby setlocal keywordprg=ri
 
 " tmux
-autocmd BufNewFile,BufRead,BufEnter .tmux.*,.tmux.conf* setf tmux
+autocmd BufNewFile,BufRead,BufEnter .tmux.*,.tmux.conf* setfiletype tmux
 
 " Vim
-autocmd FileType vim set keywordprg=:Help
+autocmd FileType vim setlocal keywordprg=:Help
