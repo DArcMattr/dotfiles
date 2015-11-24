@@ -2,6 +2,12 @@ if !1 | finish | endif
 
 syntax on
 
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
 if system('uname -o') =~ '^GNU/'
   let g:make = 'make'
 else
@@ -128,7 +134,7 @@ set wildignore+=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg
 set wildignore+=*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc
 set wildignore+=vendor/*,docs/*,node_modules/*,components/*,build/*,dist/*
 
-colo vividchalk
+colorscheme vividchalk
 
 highlight Comment ctermfg=105 guifg=#8787ff
 highlight CursorColumn cterm=NONE ctermbg=237 guibg=#3a3a3a
