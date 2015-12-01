@@ -45,9 +45,9 @@ dir() {
       ll --group-directories-first "${@}"
     else
       LL=$(ll "${@}")
-      ${LL} | grep -E "^d"
-      ${LL} | grep -E -v "^d|^total"
-      ${LL} | grep -E "^total"
+      echo ${LL} | grep -E "^d"
+      echo ${LL} | grep -E -v "^d|^total"
+      echo ${LL} | grep -E "^total"
     fi
   } | $PAGER
 }
