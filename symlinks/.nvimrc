@@ -204,49 +204,51 @@ let php_sync_method = 1
 let $GIT_SSL_NO_VERIFY = 'true'
 
 " plugin specific settings
-let g:EasyMotion_leader_key='<leader>'
-let g:NumberToggleTrigger='<leader>l'
-let g:UltiSnipsExpandTrigger="<M-x>"
-let g:UltiSnipsJumpBackwardTrigger="<M-h>"
-let g:UltiSnipsJumpForwardTrigger="<M-l>"
-let g:VCSCommandSplit='vertical'
-let g:airline#extensions#branch#enabled=1
-let g:airline#extensions#quickfix#location_text='Location'
-let g:airline#extensions#quickfix#quickfix_text='Quickfix'
-let g:airline#extensions#syntastic#enabled=1
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#buffer_nr_show=1
+let g:EasyMotion_leader_key = '<leader>'
+let g:NumberToggleTrigger = '<leader>l'
+let g:UltiSnipsExpandTrigger = "<M-x>"
+let g:UltiSnipsJumpBackwardTrigger = "<M-h>"
+let g:UltiSnipsJumpForwardTrigger = "<M-l>"
+let g:VCSCommandSplit = 'vertical'
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#quickfix#location_text = 'Location'
+let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
-let g:airline_powerline_fonts=1
-let g:localvimrc_persistent=1
-let g:localvimrc_reverse=1
-let g:localvimrc_sandbox=0
+let g:airline_powerline_fonts = 1
+let g:localvimrc_persistent = 1
+let g:localvimrc_reverse = 1
+let g:localvimrc_sandbox = 0
 let g:mta_filetypes = {
     \ 'html' : 1,
     \ 'xhtml' : 1,
     \ 'xml' : 1,
     \ 'php' : 1,
     \}
-let g:netrw_silent=1
-let g:session_autoload='no'
-let g:session_autosave='no'
-let g:sparkupExecuteMapping='<leader>se'
-let g:sparkupNextMapping='<leader>sn'
-let g:syntastic_check_on_open=0
-let g:syntastic_error_symbol='⧰'
+let g:netrw_silent = 1
+let g:session_autoload = 'no'
+let g:session_autosave = 'no'
+let g:sparkupExecuteMapping = '<leader>se'
+let g:sparkupNextMapping = '<leader>sn'
+let g:syntastic_check_on_open = 0
+let g:syntastic_error_symbol = '⧰'
 let g:syntastic_php_checkers = ['php']
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d -c ~/.eslintrc'
 let g:syntastic_warning_symbol = '⚠'
 let g:tagcommands = { 'php': { 'args': '-R' } }
+let g:tslime_always_current_session = 1
+let g:tslime_always_current_window = 1
 let g:tslime_ensure_trailing_newlines = 1
 let g:tslime_normal_mapping = '<localleader>t'
 let g:tslime_visual_mapping = '<localleader>t'
 let g:tslime_vars_mapping = '<localleader>T'
-let g:unite_cursor_line_time="0.0"
-let g:unite_enable_split_vertically=1
-let g:unite_options_auto_resize=1
-let g:unite_update_time=0
+let g:unite_cursor_line_time = "0.0"
+let g:unite_enable_split_vertically = 1
+let g:unite_options_auto_resize = 1
+let g:unite_update_time = 0
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
 " key remappings - toggle spell checking
