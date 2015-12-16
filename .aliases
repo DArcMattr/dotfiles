@@ -71,22 +71,23 @@ playtime() {
 dosass() {
   # TODO: allow for some command line options
   if [ "$#" -eq 1 ]; then
-    OUT_FILE="$(dirname "$1")/$(basename -s .scss "$1").css"
+    OUT_FILE="$(dirname "${1}")/$(basename -s .scss "${1}").css"
   else
-    OUT_FILE=$2
+    OUT_FILE="${2}"
   fi
 
-  if \sassc -g $1 >/dev/null 2>&1; then
-    \sassc -glt nested -o "$OUT_FILE" "$1"
+  if sassc -g "${1}" >/dev/null 2>&1; then
+    sassc -glt nested -o "${OUT_FILE}" "${1}"
   else
-    \sassc -mlt nested "$1" "$OUT_FILE"
+    sassc -mlt nested "${1}" "${OUT_FILE}"
   fi
 }
 
 catmd() {
-  TMPFILE=`mktemp -t pandoc.XXXXXX.html`
+  PANDOCDIR=$(mktemp -d)
+  TMPFILE="${PANDOCDIR}/index.html"
 
-  echo ${TMPFILE}
+  echo "${TMPFILE}"
 
   pandoc -s -S --self-contained -c ~/.pandoc/buttondown.css \
     -t html5 -f markdown_phpextra "${@}" -o "${TMPFILE}"
