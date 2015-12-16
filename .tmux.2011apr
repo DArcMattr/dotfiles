@@ -44,7 +44,7 @@ tmux split-window -v -p 66 -t ${SESSION}:3.1 -c "#{pane_current_path}"
 tmux split-window -v -p 50 -t ${SESSION}:3.2 -c "#{pane_current_path}"
 tmux send-keys -t ${SESSION}:3.1 "check_and_exec ./.env; sssh zeek" C-m
 tmux send-keys -t ${SESSION}:3.2 "check_and_exec ./.env; tail -f ./htdocs/wp-content/debug.log" C-m
-tmux send-keys -t ${SESSION}:3.3 "check_and_exec ./.env; _theme" C-m
+tmux send-keys -t ${SESSION}:3.3 "check_and_exec ./.env; _t" C-m
 tmux select-pane -t ${SESSION}:3.0
 tmux rename-window -t ${SESSION}:3 "This or That"
 
@@ -55,7 +55,7 @@ tmux split-window -v -p 66 -t ${SESSION}:4.1 -c "#{pane_current_path}"
 tmux split-window -v -p 50 -t ${SESSION}:4.2 -c "#{pane_current_path}"
 tmux send-keys -t ${SESSION}:4.1 "check_and_exec ./.env; sssh darc@bestofnj.com" C-m
 tmux send-keys -t ${SESSION}:4.2 "check_and_exec ./.env; tail -f ./htdocs/wp-content/debug.log" C-m
-tmux send-keys -t ${SESSION}:4.3 "check_and_exec ./.env; _theme; gulp" C-m
+tmux send-keys -t ${SESSION}:4.3 "check_and_exec ./.env; _t; gulp" C-m
 tmux select-pane -t ${SESSION}:4.0
 tmux rename-window -t ${SESSION}:4 "Best of NJ"
 
@@ -74,7 +74,7 @@ tmux split-window -v -p 66 -t ${SESSION}:6.1 -c "#{pane_current_path}"
 tmux split-window -v -p 50 -t ${SESSION}:6.2 -c "#{pane_current_path}"
 tmux send-keys -t ${SESSION}:6.1 "check_and_exec ./.env; sssh zeek" C-m
 tmux send-keys -t ${SESSION}:6.2 "check_and_exec ./.env; tail -f ./htdocs/wp-content/debug.log" C-m
-tmux send-keys -t ${SESSION}:6.3 "check_and_exec ./.env; _theme; gulp" C-m
+tmux send-keys -t ${SESSION}:6.3 "check_and_exec ./.env; _t; gulp" C-m
 tmux select-pane -t ${SESSION}:6.0
 tmux rename-window -t ${SESSION}:6 "PruLite"
 
@@ -85,7 +85,7 @@ tmux split-window -v -p 66 -t ${SESSION}:7.1 -c "#{pane_current_path}"
 tmux split-window -v -p 50 -t ${SESSION}:7.2 -c "#{pane_current_path}"
 tmux send-keys -t ${SESSION}:7.1 "check_and_exec ./.env; sssh zeek" C-m
 tmux send-keys -t ${SESSION}:7.2 "check_and_exec ./.env; tail -f ./htdocs/wp-content/debug.log" C-m
-tmux send-keys -t ${SESSION}:7.3 "check_and_exec ./.env; _theme; gulp" C-m
+tmux send-keys -t ${SESSION}:7.3 "check_and_exec ./.env; _t; gulp" C-m
 tmux select-pane -t ${SESSION}:7.0
 tmux rename-window -t ${SESSION}:7 "Fidelity"
 
