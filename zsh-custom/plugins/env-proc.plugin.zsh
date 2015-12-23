@@ -1,1 +1,0 @@
-/home/darc/contrib/env-zsh/env-proc.plugin.zsh
