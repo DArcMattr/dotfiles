@@ -1,5 +1,6 @@
 export ZSH="${HOME}/.oh-my-zsh"
 export ZSH_CUSTOM="${HOME}/dotfiles/zsh-custom"
+export AUTOENV_IN_FILE=".in"
 
 ZSH_THEME="dca"
 COMPLETION_WAITING_DOTS="true"
