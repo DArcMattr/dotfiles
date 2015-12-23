@@ -7,7 +7,7 @@ COMPLETION_WAITING_DOTS="true"
 DISABLE_CORRECTION="true"
 KEYTIMEOUT=1
 
-plugins=(git mercurial vi-mode svn-fast-info git-prompt wp-cli autoenv)
+plugins=(vi-mode svn-fast-info git-prompt autoenv nvm)
 
 source ${ZSH}/oh-my-zsh.sh
 
@@ -48,7 +48,7 @@ umask 002
 export LESS="-EFIMQRsX~ -x2"
 export LESSCHARSET="utf-8"
 
-if [[ -f "./.env" ]]
+if [[ -f "./.in" ]]
 then
-    check_and_exec "./.env"
+    check_and_exec "./.in"
 fi
