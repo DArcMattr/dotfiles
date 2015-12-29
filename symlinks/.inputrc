@@ -3,6 +3,7 @@
 
 "\t": menu-complete
 
+set keymap vi
 set editing-mode vi
 $if mode=vi
   set keymap vi-command
