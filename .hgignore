@@ -1,3 +1,4 @@
 Syntax: glob
 symlinks/.pandoc/buttondown.css
 symlinks/.pandoc/.sass-cache
+zsh-custom/plugins/autoenv
