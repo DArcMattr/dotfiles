@@ -15,7 +15,6 @@ else
 endif
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'Shougo/unite.vim', { 'on': 'Unite' } | Plug 'Shougo/unite-outline'
 Plug 'Shougo/vimproc.vim', { 'do' : g:make }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -40,7 +39,7 @@ Plug 'rkitover/vimpager'
 Plug 'scrooloose/syntastic'
 Plug 'shawncplus/phpcomplete.vim', { 'for': 'php' }
 Plug 'sheerun/vim-polyglot'
-Plug 'sjl/tslime2.vim'
+Plug 'tpope/timl' | Plug 'sjl/tslime2.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
