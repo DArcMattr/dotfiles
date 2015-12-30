@@ -40,7 +40,7 @@ Plug 'rkitover/vimpager'
 Plug 'scrooloose/syntastic'
 Plug 'shawncplus/phpcomplete.vim', { 'for': 'php' }
 Plug 'sheerun/vim-polyglot'
-Plug 'sjl/tslime2.vim'
+Plug 'tpope/timl' | Plug 'sjl/tslime2.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
