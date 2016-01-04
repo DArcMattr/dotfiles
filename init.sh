@@ -17,11 +17,12 @@ grab_pips
 grab_sassc
 grab_icdiff
 grab_tpm
+grab_nvm
 grab_autoenv
 
-composer global require 'phpmd/phpmd=*' \\
-  'squizlabs/php_codesniffer=*' \\
-  'phing/phing=*' \\
+composer global require 'phpmd/phpmd=*' \
+  'squizlabs/php_codesniffer=*' \
+  'phing/phing=*' \
   'psy/psysh=*'
 
 (

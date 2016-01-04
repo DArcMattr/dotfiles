@@ -122,3 +122,19 @@ grab_tpm() {
     ( cd "${INSTALL_PATH}" && git up )
   fi
 }
+
+grab_nvm() {
+  INSTALL_PATH="${HOME}/.nvm/"
+  if [ ! -d "${INSTALL_PATH}/.git/" ]; then
+    git clone https://github.com/creationix/nvm.git "${INSTALL_PATH}" && (
+      cd "${INSTALL_PATH}" &&
+      git checkout "$(git describe --abbrev=0 --tags)"
+    )
+  else
+    (
+      cd "${INSTALL_PATH}" &&
+      git fetch &&
+      git checkout "$(git describe --abbrev=0 --tags)"
+    )
+  fi
+}
