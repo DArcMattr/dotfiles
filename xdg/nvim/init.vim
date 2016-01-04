@@ -203,7 +203,6 @@ let php_sync_method = 1
 let $GIT_SSL_NO_VERIFY = 'true'
 
 " plugin specific settings
-let g:EasyMotion_leader_key = '<leader>'
 let g:NumberToggleTrigger = '<leader>l'
 let g:UltiSnipsExpandTrigger = "<M-x>"
 let g:UltiSnipsJumpBackwardTrigger = "<M-h>"
