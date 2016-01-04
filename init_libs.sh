@@ -16,46 +16,47 @@ grab_sassc() {
   echo "you will need to compile these yourself"
 }
 
-grab_vimplug() {
-  mkdir -p "${XDG_CONFIG_HOME:=$HOME/.config}"
-  if [ ! -f "${XDG_CONFIG_HOME}/nvim/autoload/plug.vim" ]; then
-    curl -fLo "${XDG_CONFIG_HOME}/nvim/autoload/plug.vim" --create-dirs \
-      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  fi
-}
-
 grab_wp_cli() {
-  if [ ! -d ~/contrib/wp-cli/.git ]; then
-    git clone https://github.com/wp-cli/wp-cli.git ~/contrib/wp-cli
-    ( cd ~/contrib/wp-cli && composer update )
-    ln -s ~/contrib/wp-cli/bin/wp ~/bin/wp
+  INSTALL_PATH="${HOME}/contrib/wp-cli"
+  if [ ! -d "$INSTALL_PATH/.git" ]; then
+    git clone https://github.com/wp-cli/wp-cli.git "${INSTALL_PATH}"
+    (
+      cd "${INSTALL_PATH}" && git fetch &&
+      git checkout "$(git describe --abbrev=0 --tags)" && composer update
+    )
+    ln -s "${INSTALL_PATH}/bin/wp" ~/bin/wp
   else
-    ( cd ~/contrib/wp-cli && git up && composer update )
+    (
+      cd "${INSTALL_PATH}" && git fetch &&
+      git checkout "$(git describe --abbrev=0 --tags)" && composer update
+    )
   fi
 }
 
 grab_hg_prompt() {
-  if [ ! -d ~/contrib/hg-prompt/.hg/ ]; then
-    hg clone https://bitbucket.org/sjl/hg-prompt/ ~/contrib/hg-prompt/
+  INSTALL_PATH="${HOME}/contrib/hg-prompt"
+  if [ ! -d "${INSTALL_PATH}/.hg/" ]; then
+    hg clone https://bitbucket.org/sjl/hg-prompt/ "${INSTALL_PATH}"
   else
-    ( cd ~/contrib/hg-prompt; hg pull -u )
+    ( cd "${INSTALL_PATH}" && hg pull -u )
   fi
 }
 
 grab_autoenv() {
-  if [ ! -d ~/contrib/autoenv/.git ]; then
-    git clone https://github.com/horosgrisa/autoenv.git ~/contrib/autoenv
-    ln -s ~/contrib/autoenv "${ZSH_CUSTOM}/plugins/"
+  INSTALL_PATH="${HOME}/contrib/autoenv"
+  if [ ! -d "${INSTALL_PATH}/.git" ]; then
+    git clone https://github.com/darcmattr/autoenv.git ~/contrib/autoenv
+    ln -s "${INSTALL_PATH}" "${ZSH_CUSTOM}/plugins/"
   else
-    ( cd ~/contrib/autoenv; git up )
+    ( cd "${INSTALL_PATH}" && git up )
   fi
 }
 
 grab_hgcfg() {
-  if [ ! -d ~/contrib/hgcfg/.hg/ ]; then
-    hg clone https://bitbucket.org/bmearns/hgcfg ~/contrib/hgcfg
+  if [ ! -d "${INSTALL_PATH}/.hg/" ]; then
+    hg clone https://bitbucket.org/bmearns/hgcfg "${INSTALL_PATH}"
   else
-    ( cd ~/contrib/hgcfg; hg pull -u )
+    ( cd "${INSTALL_PATH}" && hg pull -u )
   fi
 }
 
@@ -63,7 +64,7 @@ grab_powerline() {
   echo "installing/upgrading Powerline"
   sudo pip install -U psutil powerline-status
 
-  powerline_path="$(dirname `python -c 'import powerline; print (powerline.__file__)'`)"
+  powerline_path="$(dirname "$(python -c 'import powerline; print (powerline.__file__)')")"
   if [ ! -d "${XDG_CONFIG_HOME}/powerline" ]; then
     mkdir -p "${XDG_CONFIG_HOME}/powerline"
     cp -R "${powerline_path}/config_files/*" "${XDG_CONFIG_HOME}/powerline"
@@ -98,18 +99,23 @@ grab_composer() {
 }
 
 grab_icdiff() {
+  INSTALL_PATH="${HOME}/contrib/icdiff"
   if ! command -v icdiff >/dev/null 2>&1 ; then
-    git clone https://github.com/jeffkaufman/icdiff.git ~/contrib/icdiff
-    ln -s ~/contrib/icdiff ~/bin/icdiff
+    git clone https://github.com/jeffkaufman/icdiff.git "${INSTALL_PATH}"
+    ln -s "${INSTALL_PATH}/icdiff" ~/bin/icdiff
   else
-    ( cd ~/contrib/icdiff; git up )
+    (
+      cd "${INSTALL_PATH}" && git fetch &&
+      git checkout "$(git describe --abbrev=0 --tags)"
+    )
   fi
 }
 
 grab_tpm() {
-  if [ ! -d ~/.tmux/plugins/tpm/.git/ ]; then
-    git clone https://github.com/tmux-plugins/tpm.git ~/.tmux/plugins/tpm
+  INSTALL_PATH="${HOME}/.tmux/plugins/tpm"
+  if [ ! -d "${INSTALL_PATH}/.git/" ]; then
+    git clone https://github.com/tmux-plugins/tpm.git "${INSTALL_PATH}"
   else
-    ( cd ~/.tmux/plugins/tpm; git up )
+    ( cd "${INSTALL_PATH}" && git up )
   fi
 }
