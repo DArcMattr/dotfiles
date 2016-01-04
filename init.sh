@@ -2,18 +2,14 @@
 # only idempotent commands here so far
 # TODO: translate to ansible
 
-\mkdir -p ~/contrib ~/.vim/{syntax,bundle} ~/bin
-\chmod 600 ~/dotfiles/sshconfig
+mkdir -p ~/contrib ~/.vim/syntax ~/.vim/bundle ~/bin
+chmod 600 ~/dotfiles/sshconfig
 
-for i in $(ls -dA ~/dotfiles/symlinks/.*); do
-  \rm -rf ~/$(basename ${i})
-  \ln -s ${i} ~/$(basename ${i})
-done
+find ~/dotfiles/symlinks/ -name ".*" -exec ln -sf "{}" "${HOME}" \;
 
 . ~/dotfiles/init_libs.sh
 
 grab_composer
-grab_vimplug
 grab_hgcfg
 grab_hg_prompt
 grab_wp_cli
@@ -24,12 +20,13 @@ grab_icdiff
 grab_tpm
 grab_autoenv
 
-composer global require 'phpmd/phpmd=*'
-composer global require 'squizlabs/php_codesniffer=*'
-composer global require 'phing/phing=*'
-composer global require 'psy/psysh=*'
+composer global require 'phpmd/phpmd=*' \\
+  'squizlabs/php_codesniffer=*' \\
+  'phing/phing=*' \\
+  'psy/psysh=*'
 
-cd ~/dotfiles
-hg cfg --local hooks.update "chmod 600 ~/dotfiles/sshconfig"
-hg cfg --local paths.default "ssh://hg@bitbucket.org/darceneaux/dotfiles"
-cd -
+(
+  cd ~/dotfiles &&
+  hg cfg --local hooks.update "chmod 600 ~/dotfiles/sshconfig" &&
+  hg cfg --local paths.default "ssh://hg@bitbucket.org/darceneaux/dotfiles"
+)
