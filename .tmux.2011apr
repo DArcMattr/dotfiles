@@ -5,7 +5,6 @@ ssh-agent
 ssh-add
 
 SESSION=${USER}
-WWW="~/contrib/vvv/www"
 
 tmux has-session -t ${SESSION}
 if [ $? -eq 0 ]; then
@@ -42,50 +41,58 @@ tmux select-window -t ${SESSION}:3
 tmux split-window -h -l 112 -t ${SESSION}:3.0 -c "#{pane_current_path}"
 tmux split-window -v -p 66 -t ${SESSION}:3.1 -c "#{pane_current_path}"
 tmux split-window -v -p 50 -t ${SESSION}:3.2 -c "#{pane_current_path}"
-tmux send-keys -t ${SESSION}:3.1 "check_and_exec ./.env; sssh zeek" C-m
-tmux send-keys -t ${SESSION}:3.2 "check_and_exec ./.env; tail -f ./htdocs/wp-content/debug.log" C-m
-tmux send-keys -t ${SESSION}:3.3 "check_and_exec ./.env; _t" C-m
+tmux send-keys -t ${SESSION}:3.1 "sssh zeek" C-m
+tmux send-keys -t ${SESSION}:3.2 "tail -f ./htdocs/wp-content/debug.log" C-m
+tmux send-keys -t ${SESSION}:3.3 "_t" C-m
 tmux select-pane -t ${SESSION}:3.0
 tmux rename-window -t ${SESSION}:3 "This or That"
+
+sleep 2
 
 tmux new-window -t ${SESSION}:4 -c ~/contrib/vvv/www/bestofnj
 tmux select-window -t ${SESSION}:4
 tmux split-window -h -l 112 -t ${SESSION}:4.0 -c "#{pane_current_path}"
 tmux split-window -v -p 66 -t ${SESSION}:4.1 -c "#{pane_current_path}"
 tmux split-window -v -p 50 -t ${SESSION}:4.2 -c "#{pane_current_path}"
-tmux send-keys -t ${SESSION}:4.1 "check_and_exec ./.env; sssh darc@bestofnj.com" C-m
-tmux send-keys -t ${SESSION}:4.2 "check_and_exec ./.env; tail -f ./htdocs/wp-content/debug.log" C-m
-tmux send-keys -t ${SESSION}:4.3 "check_and_exec ./.env; _t; gulp" C-m
+tmux send-keys -t ${SESSION}:4.1 "sssh darc@bestofnj.com" C-m
+tmux send-keys -t ${SESSION}:4.2 "tail -f ./htdocs/wp-content/debug.log" C-m
+tmux send-keys -t ${SESSION}:4.3 "_t; gulp" C-m
 tmux select-pane -t ${SESSION}:4.0
 tmux rename-window -t ${SESSION}:4 "Best of NJ"
+
+sleep 2
 
 tmux new-window -t ${SESSION}:5 -c ~/contrib/vvv/www/daily-caller
 tmux select-window -t ${SESSION}:5
 tmux split-window -h -l 112 -t ${SESSION}:5.0 -c "#{pane_current_path}"
 tmux split-window -v -t ${SESSION}:5.1 -c "#{pane_current_path}"
-tmux send-keys -t ${SESSION}:5.1 "check_and_exec ./.env; tail -f ./htdocs/wp-content/debug.log" C-m
-tmux send-keys -t ${SESSION}:5.2 "check_and_exec ./.env; sleep 120; wp shell" C-m
+tmux send-keys -t ${SESSION}:5.1 "tail -f ./htdocs/wp-content/debug.log" C-m
+tmux send-keys -t ${SESSION}:5.2 "sleep 120; wp shell" C-m
 tmux rename-window -t ${SESSION}:5 "Daily Caller"
+
+sleep 2
 
 tmux new-window -t ${SESSION}:6 -c ~/contrib/vvv/www/prulite
 tmux select-window -t ${SESSION}:6
 tmux split-window -h -l 112 -t ${SESSION}:6.0 -c "#{pane_current_path}"
 tmux split-window -v -p 66 -t ${SESSION}:6.1 -c "#{pane_current_path}"
 tmux split-window -v -p 50 -t ${SESSION}:6.2 -c "#{pane_current_path}"
-tmux send-keys -t ${SESSION}:6.1 "check_and_exec ./.env; sssh zeek" C-m
-tmux send-keys -t ${SESSION}:6.2 "check_and_exec ./.env; tail -f ./htdocs/wp-content/debug.log" C-m
-tmux send-keys -t ${SESSION}:6.3 "check_and_exec ./.env; _t; gulp" C-m
+tmux send-keys -t ${SESSION}:6.1 "sssh zeek" C-m
+tmux send-keys -t ${SESSION}:6.2 "tail -f ./htdocs/wp-content/debug.log" C-m
+tmux send-keys -t ${SESSION}:6.3 "_t; gulp" C-m
 tmux select-pane -t ${SESSION}:6.0
 tmux rename-window -t ${SESSION}:6 "PruLite"
+
+sleep 2
 
 tmux new-window -t ${SESSION}:7 -c ~/contrib/vvv/www/fnf
 tmux select-window -t ${SESSION}:7
 tmux split-window -h -l 112 -t ${SESSION}:7.0 -c "#{pane_current_path}"
 tmux split-window -v -p 66 -t ${SESSION}:7.1 -c "#{pane_current_path}"
 tmux split-window -v -p 50 -t ${SESSION}:7.2 -c "#{pane_current_path}"
-tmux send-keys -t ${SESSION}:7.1 "check_and_exec ./.env; sssh zeek" C-m
-tmux send-keys -t ${SESSION}:7.2 "check_and_exec ./.env; tail -f ./htdocs/wp-content/debug.log" C-m
-tmux send-keys -t ${SESSION}:7.3 "check_and_exec ./.env; _t; gulp" C-m
+tmux send-keys -t ${SESSION}:7.1 "sssh zeek" C-m
+tmux send-keys -t ${SESSION}:7.2 "tail -f ./htdocs/wp-content/debug.log" C-m
+tmux send-keys -t ${SESSION}:7.3 "_t; gulp" C-m
 tmux select-pane -t ${SESSION}:7.0
 tmux rename-window -t ${SESSION}:7 "Fidelity"
 
