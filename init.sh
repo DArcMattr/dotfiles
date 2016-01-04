@@ -13,8 +13,7 @@ grab_composer
 grab_hgcfg
 grab_hg_prompt
 grab_wp_cli
-grab_powerline
-grab_s3cmd
+grab_pips
 grab_sassc
 grab_icdiff
 grab_tpm

@@ -1,19 +1,34 @@
 #!/bin/sh
 grab_sassc() {
-  # TODO: create a git hook to insert
-  if [ ! -d ~/contrib/libsass/.git/ ]; then
-    git clone https://github.com/hcatlin/libsass ~/contrib/libsass
-    ( cd ~/contrib/libsass; git submodule init --recursive )
+  LIBSASS_PATH="${HOME}/contrib/libsass"
+  if [ ! -d "${LIBSASS_PATH}/.git/" ]; then
+    git clone https://github.com/hcatlin/libsass "${LIBSASS_PATH}"
+    (
+      cd "${LIBSASS_PATH}" &&
+      git checkout "$(git describe --abbrev=0 --tags)"
+    )
   else
-    ( cd ~/contrib/libsass; git up; git submodule update --recursive; )
+    (
+      cd "${LIBSASS_PATH}" && git fetch &&
+      git checkout "$(git describe --abbrev=0 --tags)"
+    )
   fi
 
-  if [ ! -d ~/contrib/sassc/.git/ ]; then
-    git clone https://github.com/hcatlin/sassc ~/contrib/sassc
+  INSTALL_PATH="${HOME}/contrib/sassc"
+  if [ ! -d "${INSTALL_PATH}/.git/" ]; then
+    git clone https://github.com/hcatlin/sassc "${INSTALL_PATH}"
+    (
+      cd "${INSTALL_PATH}" &&
+      git checkout "$(git describe --abbrev=0 --tags)"
+    )
   else
-    ( cd ~/contrib/sassc; git up )
+    (
+      cd "${INSTALL_PATH}" && git fetch &&
+      git checkout "$(git describe --abbrev=0 --tags)"
+    )
   fi
-  echo "you will need to compile these yourself"
+
+  ( cd "${INSTALL_PATH}" && SASS_LIBSASS_PATH="${LIBSASS_PATH}" make )
 }
 
 grab_wp_cli() {
@@ -60,31 +75,19 @@ grab_hgcfg() {
   fi
 }
 
-grab_powerline() {
-  echo "installing/upgrading Powerline"
-  sudo pip install -U psutil powerline-status
+grab_pips() {
+  sudo pip install -U psutil powerline-status s3cmd
 
   powerline_path="$(dirname "$(python -c 'import powerline; print (powerline.__file__)')")"
   if [ ! -d "${XDG_CONFIG_HOME}/powerline" ]; then
     mkdir -p "${XDG_CONFIG_HOME}/powerline"
     cp -R "${powerline_path}/config_files/*" "${XDG_CONFIG_HOME}/powerline"
   fi
+
   if [ ! -f ~/.config/powerline/powerline.conf ]; then
     ln -s \
       "${powerline_path}/bindings/tmux/powerline.conf" \
       "${XDG_CONFIG_HOME}/powerline/powerline.conf"
-  fi
-}
-
-grab_s3cmd() {
-  VER="1.6.0"
-  VER_STRING="s3cmd version ${VER}"
-  CURR_VER="$(s3cmd --version 2>&1)"
-  if [ "$CURR_VER" = "$VER_STRING" ]; then
-    echo "s3cmd currently installed and up to date"
-  else
-    echo "installing/upgrading s3cmd"
-    sudo pip install -U s3cmd==${VER}
   fi
 }
 
