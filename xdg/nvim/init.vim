@@ -46,6 +46,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vividchalk'
 Plug 'tristen/vim-sparkup', { 'for': [ 'html', 'php' ] }
 Plug 'vim-scripts/DirDiff.vim'
+Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/matchit.zip'
 Plug 'vim-scripts/vcscommand.vim'
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
