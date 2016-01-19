@@ -68,6 +68,7 @@ grab_autoenv() {
 }
 
 grab_hgcfg() {
+  INSTALL_PATH="${HOME}/contrib/hgcfg"
   if [ ! -d "${INSTALL_PATH}/.hg/" ]; then
     hg clone https://bitbucket.org/bmearns/hgcfg "${INSTALL_PATH}"
   else
@@ -95,9 +96,9 @@ grab_composer() {
   if ! command -v composer >/dev/null 2>&1 ; then
     ( cd /tmp; \
       curl -sS https://getcomposer.org/installer | php -d "allow_url_fopen=On"; \
-      sudo mv composer.phar /usr/local/bin/composer )
+      mv composer.phar ~/bin/composer )
   else
-    sudo composer self-update
+    composer self-update
   fi
 }
 
