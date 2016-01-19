@@ -101,6 +101,10 @@ catmd() {
   fi
 }
 
+sscerts() {
+  openssl req -new -newkey rsa:4096 -days 3653 -nodes -x509 -subj '/CN=${1}/O=Zeek Interactive/C=US/ST=California/L=Huntington Beach' -keyout "${1}.key" -out "${1}.cert"
+}
+
 # I'm keeping the following around for historical reference
 # mountpub() {
 #   sudo mount -t cifs -o username=ARI/darceneaux,rw,file_mode=0666,dir_mode=0777 \\\\10.10.10.12\\Public /mnt/Public
