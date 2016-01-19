@@ -1,9 +1,6 @@
 #!/bin/sh
 # vim:ft=sh:
 
-ssh-agent
-ssh-add
-
 SESSION=${USER}
 
 tmux has-session -t ${SESSION}

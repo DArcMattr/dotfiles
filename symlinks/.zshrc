@@ -7,7 +7,7 @@ COMPLETION_WAITING_DOTS="true"
 DISABLE_CORRECTION="true"
 KEYTIMEOUT=1
 
-plugins=(vi-mode svn-fast-info git-prompt autoenv nvm)
+plugins=(vi-mode svn-fast-info git-prompt autoenv nvm ssh-agent)
 
 source ${ZSH}/oh-my-zsh.sh
 
