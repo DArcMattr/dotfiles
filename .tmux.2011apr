@@ -93,6 +93,19 @@ tmux send-keys -t ${SESSION}:7.3 "_t; gulp" C-m
 tmux select-pane -t ${SESSION}:7.0
 tmux rename-window -t ${SESSION}:7 "Fidelity"
 
+sleep 2
+
+tmux new-window -t ${SESSION}:8 -c ~/contrib/vvv/www/linktune
+tmux select-window -t ${SESSION}:8
+tmux split-window -h -l 112 -t ${SESSION}:8.0 -c "#{pane_current_path}"
+tmux split-window -v -p 66 -t ${SESSION}:8.1 -c "#{pane_current_path}"
+tmux split-window -v -p 50 -t ${SESSION}:8.2 -c "#{pane_current_path}"
+tmux send-keys -t ${SESSION}:8.1 "" C-m
+tmux send-keys -t ${SESSION}:8.2 "tail -f ./storage/logs/laravel.log" C-m
+tmux send-keys -t ${SESSION}:8.3 "gulp watch" C-m
+tmux select-pane -t ${SESSION}:8.0
+tmux rename-window -t ${SESSION}:8 "Linktune"
+
 tmux select-window -t ${SESSION}:0
 
 tmux -2u attach-session -t ${SESSION}
