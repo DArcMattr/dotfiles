@@ -6,8 +6,8 @@ export MANWIDTH=80
 export HGEDITOR=~/dotfiles/helpers/hgeditor
 export TMP=/tmp
 
-export PATH=/bin:/sbin:/usr/bin:${HOME}/bin:/usr/local/bin:/usr/local/sbin
-export PATH=/usr/sbin:/usr/X11R6/bin:/usr/games:~/.composer/vendor/bin:${PATH}
+export PATH=/bin:/sbin:/usr/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/X11R6/bin:/usr/games
+export PATH=${HOME}/.composer/vendor/bin:${HOME}/.local/bin:${HOME}/bin:${PATH}
 
 #
 # Language
