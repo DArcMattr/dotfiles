@@ -150,3 +150,13 @@ Host store_taca
 Host bc
   HostName beautycon.pagelydev.com
   User darc
+
+Host linktune
+  HostName ec2-54-69-34-158.us-west-2.compute.amazonaws.com
+  User ec2-user
+  IdentityFile ~/.ssh/linktune-dev.pem
+
+Host zsandbox
+  HostName ec2-52-88-16-211.us-west-2.compute.amazonaws.com
+  User ec2-user
+  IdentityFile ~/.ssh/sandbox.pem
