@@ -215,6 +215,7 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
+let g:airline#extensions#ycm#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:localvimrc_persistent = 1
 let g:localvimrc_reverse = 1
