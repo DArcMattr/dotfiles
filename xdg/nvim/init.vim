@@ -1,7 +1,5 @@
 if !1 | finish | endif
 
-syntax on
-
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -35,7 +33,7 @@ Plug 'krisajenkins/vim-postgresql-syntax', { 'for': 'psql' }
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'moll/vim-node', { 'for': 'javascript' }
 Plug 'reedes/vim-wheel'
-Plug 'rkitover/vimpager'
+Plug 'rkitover/vimpager', { 'do': g:make }
 Plug 'shawncplus/phpcomplete.vim', { 'for': [ 'php', 'php.wordpress' ] }
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/timl' | Plug 'sjl/tslime2.vim'
@@ -75,7 +73,6 @@ else
   set grepprg=grep\ -nH\ $*
 endif
 set hidden
-set history=1000
 set hlsearch
 set ignorecase
 set incsearch
@@ -201,8 +198,6 @@ let maplocalleader = " "
 let c_space_errors = 1
 let php_sync_method = 1
 let $GIT_SSL_NO_VERIFY = 'true'
-
-" plugin specific settings
 let g:NumberToggleTrigger = '<leader>l'
 let g:UltiSnipsExpandTrigger = "<M-x>"
 let g:UltiSnipsJumpBackwardTrigger = "<M-h>"
@@ -217,6 +212,7 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline#extensions#ycm#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:less = { 'enabled' : 0, }
 let g:localvimrc_persistent = 1
 let g:localvimrc_reverse = 1
 let g:localvimrc_sandbox = 0
@@ -232,7 +228,7 @@ let g:session_autosave = 'no'
 let g:sparkupExecuteMapping = '<leader>se'
 let g:sparkupNextMapping = '<leader>sn'
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wp = 0
 let g:syntastic_error_symbol = '⧰'
 let g:syntastic_javascript_checkers = ['eslint']
@@ -252,6 +248,7 @@ let g:unite_cursor_line_time = "0.0"
 let g:unite_enable_split_vertically = 1
 let g:unite_options_auto_resize = 1
 let g:unite_update_time = 0
+let g:vimpager = {}
 let g:wordpress_vim_tags_file_name='../tags'
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
@@ -310,7 +307,7 @@ xnoremap c "xc
 
 "in case of derp-sudo
 cmap w!! w !sudo tee % >/dev/null
-command W w !sudo tee % >/dev/null
+command! W w !sudo tee % >/dev/null
 
 if executable('ag')
   " Use ag in unite grep source.
