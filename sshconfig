@@ -2,8 +2,8 @@
 # requires netcat for the proxy connections
 Host *
   PreferredAuthentications publickey,keyboard-interactive,password
-  ServerAliveInterval 60
-  ServerAliveCountMax 60
+  ServerAliveInterval 20
+  ServerAliveCountMax 20
   Compression yes
   CompressionLevel 9
   IdentityFile ~/.ssh/id_rsa
@@ -58,6 +58,11 @@ Host do
 
 Host local
   HostName localhost
+
+Host personal-git
+  HostName centuria-guild.org
+  Port 32323
+  User git
 
 Host centuria
   HostName centuria-guild.org
