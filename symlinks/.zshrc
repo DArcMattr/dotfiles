@@ -22,6 +22,15 @@ if [ -n ${ZSH_VERSION-} ]; then
   if [ -d /etc/bash_completion.d/ ]; then
     source /etc/bash_completion.d/*
   fi
+
+  autoload -U add-zsh-hook
+
+  load-nvmrc() {
+    if [[ -f .nvmrc && -r .nvmrc ]]; then
+      nvm use
+    fi
+  }
+  add-zsh-hook chpwd load-nvmrc
 fi
 
 if [ -r ~/dotfiles/.aliases ]; then
@@ -32,8 +41,19 @@ if [ -r /etc/aliases.sh ]; then
   source /etc/aliases.sh
 fi
 
-unsetopt correct correct_all inc_append_history share_history
-setopt append_history auto_cd complete_aliases hist_ignore_dups nohup notify pushd_ignore_dups
+unsetopt correct
+unsetopt correct_all
+unsetopt inc_append_history
+unsetopt share_history
+
+setopt append_history
+setopt auto_cd
+setopt auto_resume
+setopt complete_aliases
+setopt hist_ignore_dups
+setopt nohup
+setopt notify
+setopt pushd_ignore_dups
 
 bindkey -v
 bindkey '\e[1~' beginning-of-line
@@ -48,7 +68,6 @@ umask 002
 export LESS="-EFIMQRsX~ -x2"
 export LESSCHARSET="utf-8"
 
-if [[ -f "./.in" ]]
-then
+if [[ -f "./.in" ]]; then
     check_and_exec "./.in"
 fi
