@@ -20,10 +20,10 @@ Plug 'Shougo/unite.vim', { 'on': 'Unite' } | Plug 'Shougo/unite-outline'
 Plug 'Shougo/vimproc.vim', { 'do' : g:make }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'Valloric/MatchTagAlways'
-Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer --tern-completer --gocode-completer' }
 Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
-Plug 'dsawardekar/wordpress.vim'
+Plug 'scrooloose/syntastic' | Plug 'dsawardekar/wordpress.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'hhvm/vim-hack', { 'for': 'php' }
@@ -36,9 +36,8 @@ Plug 'krisajenkins/vim-postgresql-syntax', { 'for': 'psql' }
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'moll/vim-node', { 'for': 'javascript' }
 Plug 'reedes/vim-wheel'
-Plug 'rkitover/vimpager'
-Plug 'scrooloose/syntastic'
-Plug 'shawncplus/phpcomplete.vim', { 'for': 'php' }
+Plug 'rkitover/vimpager', { 'do': g:make }
+Plug 'shawncplus/phpcomplete.vim', { 'for': [ 'php', 'php.wordpress' ] }
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/timl' | Plug 'sjl/tslime2.vim'
 Plug 'tpope/vim-fugitive'
@@ -47,6 +46,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vividchalk'
 Plug 'tristen/vim-sparkup', { 'for': [ 'html', 'php' ] }
 Plug 'vim-scripts/DirDiff.vim'
+Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/matchit.zip'
 Plug 'vim-scripts/vcscommand.vim'
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
@@ -211,32 +211,38 @@ let g:UltiSnipsJumpBackwardTrigger = "<M-h>"
 let g:UltiSnipsJumpForwardTrigger = "<M-l>"
 let g:VCSCommandSplit = 'vertical'
 let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#quickfix#location_text='Location'
-let g:airline#extensions#quickfix#quickfix_text='Quickfix'
-let g:airline#extensions#syntastic#enabled=1
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#buffer_nr_show=1
+let g:airline#extensions#quickfix#location_text = 'Location'
+let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
-let g:airline_powerline_fonts=1
-let g:localvimrc_persistent=1
-let g:localvimrc_reverse=1
-let g:localvimrc_sandbox=0
+let g:airline#extensions#ycm#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:less = { 'enabled' : 0, }
+let g:localvimrc_persistent = 1
+let g:localvimrc_reverse = 1
+let g:localvimrc_sandbox = 0
 let g:mta_filetypes = {
-    \ 'html' : 1,
-    \ 'xhtml' : 1,
-    \ 'xml' : 1,
-    \ 'php' : 1,
-    \}
-let g:netrw_silent=1
-let g:session_autoload='no'
-let g:session_autosave='no'
-let g:sparkupExecuteMapping='<leader>se'
-let g:sparkupNextMapping='<leader>sn'
-let g:syntastic_check_on_open=0
-let g:syntastic_error_symbol='⧰'
-let g:syntastic_php_checkers = ['php']
+  \ 'html' : 1,
+  \ 'xhtml' : 1,
+  \ 'xml' : 1,
+  \ 'php' : 1,
+  \}
+let g:netrw_silent = 1
+let g:session_autoload = 'no'
+let g:session_autosave = 'no'
+let g:sparkupExecuteMapping = '<leader>se'
+let g:sparkupNextMapping = '<leader>sn'
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wp = 0
+let g:syntastic_error_symbol = '⧰'
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d -c ~/.eslintrc'
+let g:syntastic_php_phpcs_args = '--report=csv --standard=WordPress-Core'
+let g:syntastic_wordpress_checkers = ['php', 'phpcs']
+let g:syntastic_wordpress_phpcs_args = '--report=csv --standard=WordPress-Core'
 let g:syntastic_warning_symbol = '⚠'
 let g:tagcommands = { 'php': { 'args': '-R' } }
 let g:tslime_always_current_session = 1
@@ -249,11 +255,13 @@ let g:unite_cursor_line_time = "0.0"
 let g:unite_enable_split_vertically = 1
 let g:unite_options_auto_resize = 1
 let g:unite_update_time = 0
+let g:vimpager = {}
+let g:wordpress_vim_tags_file_name='../tags'
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
 " key remappings - toggle spell checking
-"map <F7> :setlocal spell! spelllang=en_us<CR>
-"imap <F7> <C-o>:setlocal spell! spelllang=en_us<CR>
+map <F7> :setlocal spell! spelllang=en_us<CR>
+imap <F7> <C-o>:setlocal spell! spelllang=en_us<CR>
 imap <C-c> <CR><Esc>O
 
 map <leader>gs :Gstatus<CR>
@@ -306,19 +314,20 @@ xnoremap c "xc
 
 "in case of derp-sudo
 cmap w!! w !sudo tee % >/dev/null
+command! W w !sudo tee % >/dev/null
 
 if executable('ag')
   " Use ag in unite grep source.
   let g:unite_source_grep_command = 'ag'
   let g:unite_source_grep_default_opts =
-  \ '--line-numbers --nocolor --nogroup --hidden --ignore ' .
-  \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+    \ '--line-numbers --nocolor --nogroup --hidden --ignore ' .
+    \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
   let g:unite_source_grep_recursive_opt = ''
 elseif executable('ack-grep')
   " Use ack in unite grep source.
   let g:unite_source_grep_command = 'ack-grep'
   let g:unite_source_grep_default_opts =
-  \ '--no-heading --no-color -a -H'
+    \ '--no-heading --no-color -a -H'
   let g:unite_source_grep_recursive_opt = ''
 endif
 
@@ -333,7 +342,7 @@ command! -nargs=* -complete=help Help vertical belowright help <args>
 " Only define it when not defined already.
 if !exists(":DiffOrig")
   command DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_ | diffthis
-  \ | wincmd p | diffthis
+    \ | wincmd p | diffthis
 endif
 
 " from https://gist.github.com/tarruda/5158535
@@ -399,9 +408,9 @@ endif
 augroup OmniFunc
   autocmd!
   autocmd FileType *
-  \  if &omnifunc == "" |
-  \    setlocal omnifunc=syntaxcomplete#Complete |
-  \  endif
+    \  if &omnifunc == "" |
+    \    setlocal omnifunc=syntaxcomplete#Complete |
+    \  endif
 augroup END
 
 augroup FastEscape
@@ -413,9 +422,9 @@ augroup END
 augroup TrimWhitespace
   autocmd!
   autocmd BufRead,BufWrite *
-  \ if ! &bin |
-  \   silent! %s/\s\+$//ge |
-  \ endif
+    \ if ! &bin |
+    \   silent! %s/\s\+$//ge |
+    \ endif
 augroup END
 
 " update diffs aggressively
@@ -423,15 +432,15 @@ augroup END
 augroup AutoDiffUpdate
   autocmd!
   autocmd InsertLeave *
-  \ if &diff |
-  \   diffupdate |
-  \   let b:old_changedtick = b:changedtick |
-  \ endif
+    \ if &diff |
+    \   diffupdate |
+    \   let b:old_changedtick = b:changedtick |
+    \ endif
   autocmd CursorHold *
-  \ if &diff &&
-  \     (!exists('b:old_changedtick') || b:old_changedtick != b:changedtick) |
-  \   let b:old_changedtick = b:changedtick | diffupdate |
-  \ endif
+    \ if &diff &&
+    \     (!exists('b:old_changedtick') || b:old_changedtick != b:changedtick) |
+    \   let b:old_changedtick = b:changedtick | diffupdate |
+    \ endif
 augroup END
 
 augroup CursorColumn
@@ -457,9 +466,9 @@ augroup END
 augroup cursor_position
   autocmd!
   autocmd BufReadPost *
-  \ if line("'\"") > 1 && line("'\"") <= line("$") |
-  \   execute "normal! g`\""                       |
-  \ endif                                          |
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   execute "normal! g`\""                       |
+    \ endif                                          |
 augroup END
 
 augroup CenteringReadOnly
@@ -497,7 +506,7 @@ autocmd FileType lisp,scheme,art setlocal equalprg=scmindent.rkt
 
 " Lua
 autocmd FileType lua setlocal shiftwidth=4 tabstop=4 softtabstop=4 smarttab
-      \ noexpandtab formatoptions=croql
+  \ noexpandtab formatoptions=croql
 
 " Markdown
 autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown setfiletype markdown
@@ -509,8 +518,8 @@ autocmd FileType hgcommit match OverLength /\%73v.\+/
 
 " MySQL
 autocmd BufNewFile,BufRead,BufEnter *.mysql setfiletype mysql
-autocmd FileType mysql :let b:vimpipe_FileType="mysql"
-autocmd FileType mysql :let b:vimpipe_command="mysql"
+autocmd FileType mysql let b:vimpipe_FileType="mysql"
+autocmd FileType mysql let b:vimpipe_command="mysql"
 
 " Perl
 autocmd FileType perl setlocal makeprg=perl keywordprg=perldoc\ -f
@@ -521,14 +530,14 @@ autocmd FileType php setlocal keywordprg=pman
 
 " PostgreSQL
 autocmd BufNewFile,BufRead,BufEnter *.psql setfiletype postgresql
-autocmd FileType postgresql :let b:vimpipe_FileType="postgresql"
-autocmd FileType postgresql :let b:vimpipe_command="psql"
+autocmd FileType postgresql let b:vimpipe_FileType="postgresql"
+autocmd FileType postgresql let b:vimpipe_command="psql"
 
 " Python
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
-      \ smarttab expandtab formatoptions=croql keywordprg=pydoc
-autocmd FileType python :let b:vimpipe_command="python"
-autocmd FileType python :let b:vimpipe_FileType="python"
+  \ smarttab expandtab formatoptions=croql keywordprg=pydoc
+autocmd FileType python let b:vimpipe_command="python"
+autocmd FileType python let b:vimpipe_FileType="python"
 
 " Ruby
 autocmd BufNewFile,BufRead Vagrantfile setfiletype ruby
@@ -536,6 +545,21 @@ autocmd FileType ruby setlocal keywordprg=ri
 
 " tmux
 autocmd BufNewFile,BufRead,BufEnter .tmux.*,.tmux.conf* setfiletype tmux
+
+" WordPress
+autocmd FileType php.wordpress setlocal shiftwidth=4 tabstop=4 softtabstop=4
+  \ smarttab noexpandtab smartindent textwidth=85
+autocmd FileType javascript.wordpress setlocal shiftwidth=4 tabstop=4
+  \ softtabstop=4 smarttab noexpandtab smartindent textwidth=85
+autocmd FileType css.wordpress setlocal shiftwidth=2 tabstop=2 softtabstop=2
+  \ smarttab expandtab smartindent textwidth=85
+autocmd FileType scss.wordpress setlocal shiftwidth=2 tabstop=2 softtabstop=2
+  \ smarttab expandtab smartindent textwidth=85
+
+autocmd FileType php.wordpress match OverLength /%86v.\+/
+autocmd FileType javascript.wordpress match OverLength /%86v.\+/
+autocmd FileType css.wordpress match OverLength /%86v.\+/
+autocmd FileType scss.wordpress match OverLength /%86v.\+/
 
 " Vim
 autocmd FileType vim setlocal keywordprg=:Help
