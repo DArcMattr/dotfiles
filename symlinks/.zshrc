@@ -19,6 +19,10 @@ if [ -n ${ZSH_VERSION-} ]; then
     (( ${+commands[$1]} )) && have=yes
   }
 
+  if [[ -f "./.in" ]]; then
+    check_and_exec "./.in"
+  fi
+
   if [ -d /etc/bash_completion.d/ ]; then
     source /etc/bash_completion.d/*
   fi
@@ -67,7 +71,3 @@ umask 002
 
 export LESS="-EFIMQRsX~ -x2"
 export LESSCHARSET="utf-8"
-
-if [[ -f "./.in" ]]; then
-    check_and_exec "./.in"
-fi
