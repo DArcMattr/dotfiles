@@ -1,6 +1,8 @@
 [user]
   name = David Arceneaux
   email = david@davidthemachine.org
+[branch]
+  autosetupmerge = always
 [color]
   ui = true
   branch = auto
