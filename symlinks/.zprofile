@@ -15,10 +15,8 @@ export CLICOLOR_FORCE=YES
 # Browser
 #
 
-if [ -x ~/.vim/plugged/vimpager/vimpager ]; then
-  export MANPAGER=~/.vim/plugged/vimpager/vimpager
-  alias vimcat='~/.vim/plugged/vimpager/vimcat'
-  alias vimpager='~/.vim/plugged/vimpager/vimpager'
+if [ -x /usr/local/bin/vimpager ]; then
+  export MANPAGER=/usr/local/bin/vimpager
 fi
 
 #
