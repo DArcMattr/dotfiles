@@ -13,6 +13,7 @@ fi
 
 alias ll='ls -AalFh'
 alias key='man -k'
+alias vim='nvim'
 alias info='info --vi-keys'
 alias tmux='tmux -2u'
 alias tmuxt='sh ~/dotfiles/.tmux.$HOST'
