@@ -84,6 +84,6 @@
   ship = "!~/dotfiles/helpers/git-ship"
   st = status
   theirs = "!f() { git co --theirs $@ && git add $@; }; f"
-  up = "!f() { git remote update -p; git merge --ff-only @{u}; }; f"
+  up = "!f() { git remote update -p origin; git merge --ff-only @{u}; }; f"
   upr = "!f() { git pull && git submodule update --init --recursive; }; f"
   workprofile = "config user.email 'david@zeek.com'"
