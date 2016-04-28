@@ -1,8 +1,6 @@
 [user]
   name = David Arceneaux
   email = david@davidthemachine.org
-[branch]
-  autosetupmerge = always
 [color]
   ui = true
   branch = auto
@@ -63,6 +61,7 @@
   fl = log -u
   gr = grep -Ii
   gra = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
+  graph = log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
   grep = grep -Ii
   integrate = "!~/dotfiles/helpers/git-integrate"
   la = "!f() { git config -l | grep alias | cut -c 7-; }; f"
