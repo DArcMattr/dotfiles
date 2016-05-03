@@ -36,7 +36,7 @@ Plug 'krisajenkins/vim-postgresql-syntax', { 'for': 'psql' }
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'moll/vim-node', { 'for': 'javascript' }
 Plug 'reedes/vim-wheel'
-Plug 'rkitover/vimpager', { 'do': g:make }
+Plug 'rkitover/vimpager', { 'do': 'sudo ' . g:make . ' install-deb' }
 Plug 'shawncplus/phpcomplete.vim', { 'for': [ 'php', 'php.wordpress' ] }
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/timl' | Plug 'sjl/tslime2.vim'
@@ -202,9 +202,6 @@ let maplocalleader = " "
 let c_space_errors = 1
 let php_sync_method = 1
 let $GIT_SSL_NO_VERIFY = 'true'
-
-" plugin specific settings
-let g:EasyMotion_leader_key = '<leader>'
 let g:NumberToggleTrigger = '<leader>l'
 let g:UltiSnipsExpandTrigger = "<M-x>"
 let g:UltiSnipsJumpBackwardTrigger = "<M-h>"
