@@ -23,6 +23,7 @@ Plug 'bling/vim-airline'
 Plug 'scrooloose/syntastic' | Plug 'dsawardekar/wordpress.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
+Plug 'equalsraf/neovim-gui-shim'
 Plug 'hhvm/vim-hack', { 'for': 'php' }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jiangmiao/auto-pairs'
