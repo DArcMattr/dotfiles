@@ -29,3 +29,6 @@ PERL5LIB="/home/darc/perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="/home/darc/perl5${PERL_LOCAL_LIB_ROOT+:}${PERL_LOCAL_LIB_ROOT}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/darc/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/darc/perl5"; export PERL_MM_OPT;
+
+# Ubuntu make installation of Swift Lang
+PATH=/home/darc/.local/share/umake/swift/swift-lang/usr/bin:$PATH
