@@ -54,7 +54,7 @@ set autoindent
 set autoread
 set backspace=indent,eol,start
 set backup
-set backupdir=$TEMP,$TMP,.
+set backupdir=$TMPDIR,$TEMP,$TMP,.
 set colorcolumn=+1
 set complete-=i
 set completeopt=menu,menuone,longest
