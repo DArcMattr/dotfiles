@@ -11,7 +11,7 @@ alias sicp='racket -i -p neil/sicp -l xrepl'
 superupdate() {
   \sudo \sh -c " \
     \apt-get update && \
-    \apt-get -y --force-yes upgrade && \
+    \apt-get -y upgrade && \
     \apt-get -y dist-upgrade && \
     \apt-get -y autoremove && \
     \apt-get -y clean"
