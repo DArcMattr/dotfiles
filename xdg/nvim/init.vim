@@ -115,6 +115,7 @@ set splitbelow
 set synmaxcol=512
 set tabstop=2
 set textwidth=80
+set termguicolors
 set title
 set titlestring=%t%(\ [%R%M]%)
 set timeout
@@ -289,8 +290,8 @@ nnoremap Y y$
 nnoremap c "xc
 nnoremap gj j
 nnoremap gk k
-nnoremap j gj
-nnoremap k gk
+nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 nnoremap { {zz
 nnoremap } }zz
 nnoremap ' `
