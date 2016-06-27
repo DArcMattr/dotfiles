@@ -1,8 +1,9 @@
+# vim:ft=gitconfig
 [user]
   name = David Arceneaux
   email = david@davidthemachine.org
 [color]
-  ui = true
+  ui = auto
   branch = auto
   diff = auto
   status = auto
@@ -23,9 +24,10 @@
   excludesfile = ~/.gitignore_global
 [diff]
   external = "~/dotfiles/helpers/diff"
+  mnemonicprefix = true
 [difftool]
-  tool = vimdiff
   prompt = false
+  tool = vimdiff
 [difftool "vimdiff"]
   cmd = nvim -d $LOCAL $REMOTE
 [format]
@@ -34,6 +36,7 @@
   tool = vimdiff
 [mergetool]
   prompt = false
+ stat = true
 [mergetool "vimdiff"]
   cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c '$wincmd J'
 [pager]
