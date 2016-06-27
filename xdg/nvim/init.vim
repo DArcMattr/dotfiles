@@ -34,7 +34,7 @@ Plug 'krisajenkins/vim-postgresql-syntax', { 'for': 'psql' }
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'moll/vim-node', { 'for': 'javascript' }
 Plug 'reedes/vim-wheel'
-Plug 'rkitover/vimpager', { 'do': g:make }
+Plug 'rkitover/vimpager'
 Plug 'shawncplus/phpcomplete.vim', { 'for': [ 'php', 'php.wordpress' ] }
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/timl' | Plug 'sjl/tslime2.vim'
