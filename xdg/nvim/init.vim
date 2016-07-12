@@ -158,43 +158,6 @@ highlight SpellRare term=underline cterm=underline gui=undercurl
 match OverLength /\%81v.\+/
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
-if has('win32')
-  if has('gui_running')
-    set guifont=consolas:h12
-    autocmd GUIEnter * simalt ~x " start out maximized, else, fit to term
-  endif
-  set shellslash
-  set printfont=consolas:h7
-  noremap <C-kPlus> <C-A> " increment a number
-  noremap <C-kMinus> <C-X> " decrement a number
-  noremap <C-K> <C-V> " enter an extended character
-elseif has('unix')
-  if has('gui_running')
-    if has('gui_macvim')
-      set fuoptions=maxvert,maxhorz
-      set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
-      set guioptions=egm
-      set printfont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
-    else
-      set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
-      set printfont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
-
-      if ! has('X11') " for qvim
-        set guioptions=eg
-      else
-        set guioptions=aegiMpLtT
-      endif
-    endif
-  else
-    "nop!
-  endif
-
-  let $PAGER=''
-  if &term=~'^screen'
-    set ttymouse=xterm2
-  endif
-endif
-
 let mapleader = ","
 let maplocalleader = " "
 let c_space_errors = 1
