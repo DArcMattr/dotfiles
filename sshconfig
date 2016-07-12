@@ -91,22 +91,6 @@ Host vagrant
   ForwardAgent yes
   IdentityFile ~/contrib/vvv/.vagrant/machines/default/virtualbox/private_key
 
-Host tb-dev
-  HostName 162.216.42.80
-  User tech03admin
-
-Host tb-prod-1
-  HostName 199.79.81.110
-  User tech03admin
-
-Host tb-prod-2
-  HostName 199.79.51.31
-  User tech03admin
-
-Host tb-prod-3
-  HostName 162.216.42.79
-  User tech03admin
-
 Host dcjump
   HostName 10.10.20.2
   User root
@@ -143,10 +127,6 @@ Host zeek
   HostName zeek.pagelydev.com
   User darc
 
-Host bootleggr
-  HostName bootleggrbottle.club
-  User darc
-
 Host store_taca
   HostName store.tacanow.org
   User storetacanow
@@ -157,7 +137,7 @@ Host bc
   User darc
 
 Host linktune
-  HostName ec2-54-69-34-158.us-west-2.compute.amazonaws.com
+  HostName ec2-52-25-221-236.us-west-2.compute.amazonaws.com
   User ec2-user
   IdentityFile ~/.ssh/linktune-dev.pem
 
@@ -165,3 +145,12 @@ Host zsandbox
   HostName ec2-52-88-16-211.us-west-2.compute.amazonaws.com
   User ec2-user
   IdentityFile ~/.ssh/sandbox.pem
+
+Host wedge
+  HostName 173.231.39.18
+  User darc
+  Port 2093
+
+Host lt
+  HostName linktune.xyz
+  User darc
