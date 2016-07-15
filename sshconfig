@@ -35,28 +35,8 @@ Host demo
   HostName demo.aynrand.org
   User darceneaux
 
-Host geekisp
-  HostName login.geekisp.com
-  User DArc
-
-Host canada
-  HostName server69.web-hosting.com
-  User aynrvyxe
-  Port 21098
-
-Host vbox
-  HostName virtual.dev
-  User darceneaux
-
-Host mc
-  HostName mc.davidthemachine.org
-  User darc
-
-Host do
-  HostName do.davidthemachine.org
-  User darc
-
 Host local
+  User darc
   HostName localhost
 
 Host personal-git
@@ -74,10 +54,6 @@ Host aynrand2
   Port 32323
   User darc
 
-Host ricochet
-  HostName ricochet-web1.pagelydev.com
-  User darc
-
 Host vagrant
   HostName 127.0.0.1
   User vagrant
@@ -90,67 +66,3 @@ Host vagrant
   LogLevel FATAL
   ForwardAgent yes
   IdentityFile ~/contrib/vvv/.vagrant/machines/default/virtualbox/private_key
-
-Host dcjump
-  HostName 10.10.20.2
-  User root
-
-Host dcprod1
-  HostName 10.10.12.1
-  ProxyCommand ssh -oCiphers=arcfour -oClearAllForwardings=yes root@10.10.20.2 nc %h %p -q0 -w 10 2> /dev/null
-  User root
-
-Host dcprod2
-  HostName 10.10.12.2
-  ProxyCommand ssh -oCiphers=arcfour -oClearAllForwardings=yes root@10.10.20.2 nc %h %p -w 10 2> /dev/null
-  User root
-
-Host dcprod3
-  HostName 10.10.12.3
-  ProxyCommand ssh -oCiphers=arcfour -oClearAllForwardings=yes root@10.10.20.2 nc %h %p -w 10 2> /dev/null
-  User root
-
-Host dcprod4
-  HostName 10.10.12.4
-  ProxyCommand ssh -oCiphers=arcfour -oClearAllForwardings=yes root@10.10.20.2 nc %h %p -w 10 2> /dev/null
-  User root
-
-Host create-re
-  HostName 165.225.148.133
-  User admin
-
-Host bestofnj
-  HostName bestofnj.com
-  User darc
-
-Host zeek
-  HostName zeek.pagelydev.com
-  User darc
-
-Host store_taca
-  HostName store.tacanow.org
-  User storetacanow
-  Port 8616
-
-Host bc
-  HostName beautycon.pagelydev.com
-  User darc
-
-Host linktune
-  HostName ec2-52-25-221-236.us-west-2.compute.amazonaws.com
-  User ec2-user
-  IdentityFile ~/.ssh/linktune-dev.pem
-
-Host zsandbox
-  HostName ec2-52-88-16-211.us-west-2.compute.amazonaws.com
-  User ec2-user
-  IdentityFile ~/.ssh/sandbox.pem
-
-Host wedge
-  HostName 173.231.39.18
-  User darc
-  Port 2093
-
-Host lt
-  HostName linktune.xyz
-  User darc
