@@ -48,6 +48,15 @@ grab_wp_cli() {
   fi
 }
 
+grab_hg_git() {
+  INSTALL_PATH="${HOME}/contrib/hg-git"
+  if [ ! -d "${INSTALL_PATH}/.hg/" ]; then
+    hg clone https://bitbucket.org/durin42/hg-git "${INSTALL_PATH}"
+  else
+    ( cd "${INSTALL_PATH}" && hg pull -u )
+  fi
+}
+
 grab_hg_prompt() {
   INSTALL_PATH="${HOME}/contrib/hg-prompt"
   if [ ! -d "${INSTALL_PATH}/.hg/" ]; then
@@ -77,7 +86,7 @@ grab_hgcfg() {
 }
 
 grab_pips() {
-  sudo pip install -U psutil powerline-status s3cmd
+  sudo pip install -U psutil powerline-status s3cmd dulwich httpie neovim
 
   powerline_path="$(dirname "$(python -c 'import powerline; print (powerline.__file__)')")"
   if [ ! -d "${XDG_CONFIG_HOME}/powerline" ]; then
