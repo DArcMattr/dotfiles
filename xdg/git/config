@@ -34,6 +34,7 @@
   pretty = oneline
 [merge]
   tool = vimdiff
+  ff = false
 [mergetool]
   prompt = false
  stat = true
@@ -99,4 +100,4 @@
   upr = "!f() { git pull && git submodule update --init --recursive; }; f"
   unmerged = diff --name-only --diff-filter=U
   unstage = reset -q HEAD
-  workprofile = "config user.email 'david@zeek.com'"
+  workprofile = "config user.email 'DArceneaux@enthusiastnetwork.com'"
