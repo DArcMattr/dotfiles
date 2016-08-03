@@ -1,7 +1,7 @@
 # vim:ft=cfg:
 [ui]
 username = David Arceneaux <david@davidthemachine.org>
-merge = vim -d
+merge = nvim -d
 
 [extensions]
 convert=
@@ -13,7 +13,7 @@ record=
 bookmarks=
 eol=
 prompt=~/contrib/hg-prompt/prompt.py
-hggit=
+hggit=~/contrib/hg-git/hggit
 hgcfg=~/contrib/hgcfg/hgext/hgcfg.py
 extdiff=
 
@@ -37,8 +37,8 @@ only-consistent=false
 fix-trailing-newline=true
 
 [trusted]
-users=root,darc,davidarceneaux,darceneaux,jeriksen,www,_www,,www-data,80
-groups=_www,www,apache,wheel,80,www-data
+users=vagrant,root,darc,davidarceneaux,darceneaux,www,_www,,www-data,80
+groups=vagrant,_www,www,apache,wheel,80,www-data
 
 [extdiff]
 cmd.vdiff=nvim
