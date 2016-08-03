@@ -1,0 +1,16 @@
+#!/bin/sh
+# vim:ft=sh:
+
+SESSION=${USER}
+
+tmux has-session -t "${SESSION}"
+if [ $? -eq 0 ]; then
+  echo "Session ${SESSION} already exists, attaching"
+  sleep 1
+  tmux -2u attach -t "${SESSION}"
+  exit 0;
+fi
+
+tmux new-session -d -s "${SESSION}"
+
+tmux set-option -t "${SESSION}" status-position top
