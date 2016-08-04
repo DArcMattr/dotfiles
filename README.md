@@ -4,8 +4,9 @@ Clone to `~/dotfiles`
 
 ## Requirements & Assumptions
 
+Some of these will be installed via the install scripts or apt-get below.
+
 * Root access via `sudo`
-* Vim with the Python 2.7 engine compiled in
 * Python's `pip` is available, with all the necessary permissions to run it
 * Z-shell, `zsh` is available and set as a shell, via `chsh`
 * [Mercurial SCM][], `hg`, and [Git][], `git`, source control programs
@@ -13,31 +14,35 @@ Clone to `~/dotfiles`
 ### For Ubuntu flavors:
 
     sudo -v
-    sudo add-apt-repository -y ppa:neovim-ppa/unstable
-    curl --silent --location https://deb.nodesource.com/setup_4.x | sudo bash -
+    curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - # argh, I hate this
     sudo apt-get update
-    sudo apt-get install curl php5-fpm virtualbox git mercurial python-dev \
-      python-pip clang zsh autossh neovim tmux mysql-client pv httpie \
-      silversearcher-ag xsel s3cmd nodejs exuberant-ctags build-essential
-    sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
-    sudo update-alternatives --config vi
-    sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
-    sudo update-alternatives --config vim
-    sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
-    sudo update-alternatives --config editor
+    sudo apt-get install -y curl virtualbox git mercurial python-dev \
+      python3-dev python-pip python3-pip clang zsh autossh tmux pv xsel s3cmd \
+      nodejs silversearcher-ag exuberant-ctags build-essential zsh-lovers \
+      software-properties-common
+    sudo add-apt-repository -y ppa:neovim-ppa/unstable
+    sudo add-apt-repository -y ppa:ondrej/php
+    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
+    sudo add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu xenial main'
+    sudo apt-get update
+    sudo apt-get install -y neovim mariadb-server php-common php-imagick \
+      php-memcache php-pear php-xml php7.0-cli php7.0-common php7.0-curl \
+      php7.0-dev php7.0-fpm php7.0-gd php7.0-imap php7.0-json php7.0-mbstring \
+      php7.0-mcrypt php7.0-mysql php7.0-opcache php7.0-readline php7.0-soap \
+      php7.0-xml
     sudo update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
-    pip install --upgrade neovim # recent-ish Ubuntu does this non-overrideable personal pip directory stuffs
-    sudo npm -g install gulp bower eslint eslint_d js-beautify cssbeautify minify
+    sudo npm -g install gulp bower eslint eslint_d js-beautify cssbeautify \
+      minify node-sass
 
 ## Installation Steps
 
-### for zprezto
+### for oh-my-zsh
 
-Copy/paste the following onto the command line:
+I had troubles with the prompts in zprezto, else I'd still be using it
 
     cd ~
-    git clone --recursive https://github.com/sorin-ionescu/prezto.git \
-      "${ZDOTDIR:-$HOME}/.zprezto"
+    git clone --recursive https://github.com/robbyrussell/oh-my-zsh.git \
+      ~/.oh-my-zsh
 
 ### All the rest
 
@@ -49,10 +54,8 @@ Refresh the session, then run the following:
     ln -s ~/dotfiles/sshconfig ~/.ssh/config
     ln -s ~/dotfiles/hgcommit.vim ~/.nvim/syntax/hgcommit.vim
 
-I have transitioned to using NeoVim as a full replacement for Vim, and will
-transition my configs to use nvim directly. In the meantime, I will place
-a symlink for `vim` -> `nvim` where ever I can put it, either in
-`/usr/local/bin`, or `~/bin`
+I have transitioned to using NeoVim, but still keep Vim around with its own
+configuration file, because vimpager.
 
 ## Experimental notes
 
@@ -62,5 +65,14 @@ For running `st` under KDE:
 
     kstart --maximize --windowclass "st-256color" st -e tmux attach
 
+### for zprezto (old, might switch back)
+
+Copy/paste the following onto the command line:
+
+    cd ~
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git \
+      "${ZDOTDIR:-$HOME}/.zprezto"
+
 [Mercurial SCM]: http://mercurial.selenic.com
 [Git]: http://git-scm.com
+
