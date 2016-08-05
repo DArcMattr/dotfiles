@@ -75,6 +75,7 @@
   integrate = "!~/dotfiles/helpers/git-integrate"
   la = "!f() { git config -l | grep alias | cut -c 7-; }; f"
   lasttag = describe --tags --abbrev=0
+  lasttagcheckout = "!f() { git checkout \"$(git describe --tags --abbrev=0)\"; }; f"
   lc = "!f() { git ll "$1"^.."$1"; }; f"
   ld = log --pretty=format:'%C(bold yellow)%h %C(bold white)%ad%C(red)%d %Creset%s%C(bold blue) [%cn]' --date=relative --decorate
   lds = log --pretty=format:'%C(bold yellow)%h %C(bold white)%ad%C(red)%d %Creset%s%C(bold blue) [%cn]' --date=short --decorate
