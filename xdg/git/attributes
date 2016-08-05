@@ -1,0 +1,3 @@
+*.min.css diff=nodiff
+*.min.js diff=nodiff
+*.map diff=nodiff

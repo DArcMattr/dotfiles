@@ -25,6 +25,8 @@
 [diff]
   external = "~/dotfiles/helpers/diff"
   mnemonicprefix = true
+[diff "nodiff"]
+  command = /bin/true
 [difftool]
   prompt = false
   tool = vimdiff
