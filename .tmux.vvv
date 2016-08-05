@@ -14,3 +14,52 @@ fi
 tmux new-session -d -s "${SESSION}"
 
 tmux set-option -t "${SESSION}" status-position top
+
+tmux new-window -t "${SESSION}":0 -k
+
+tmux new-window -t "${SESSION}":1
+tmux send-keys -t "${SESSION}":1 "htop" C-m
+tmux rename-window -t "${SESSION}":1 "htop"
+
+tmux new-window -t "${SESSION}":2 -c /srv/www/ten/wordpress/wp-content/themes/motortrend
+tmux select-window -t "${SESSION}":2
+tmux split-window -h -l 112 -t "${SESSION}":2.0 -c "#{pane_current_path}"
+tmux split-window -v -p 50 -t "${SESSION}":2.1 -c "#{pane_current_path}"
+tmux send-keys -t "${SESSION}":2.1 "tail -F ../../debug.log" C-m
+tmux send-keys -t "${SESSION}":2.2 "gulp" C-m
+tmux select-pane -t "${SESSION}":2.0
+tmux split-window -v -l 6 -t "${SESSION}":2.0 -c "#{pane_current_path}"
+tmux select-pane -t "${SESSION}":2.0
+tmux rename-window -t "${SESSION}":2 "Motortrend"
+
+sleep 2
+
+tmux new-window -t "${SESSION}":3 -c /srv/www/ten/wordpress/wp-content/themes/automobilemag
+tmux select-window -t "${SESSION}":3
+tmux split-window -h -l 112 -t "${SESSION}":3.0 -c "#{pane_current_path}"
+tmux split-window -v -p 50 -t "${SESSION}":3.1 -c "#{pane_current_path}"
+tmux send-keys -t "${SESSION}":3.1 "tail -F ../../debug.log" C-m
+tmux send-keys -t "${SESSION}":3.2 "gulp" C-m
+tmux select-pane -t "${SESSION}":3.0
+tmux split-window -v -l 6 -t "${SESSION}":3.0 -c "#{pane_current_path}"
+tmux select-pane -t "${SESSION}":3.0
+tmux rename-window -t "${SESSION}":3 "Automobilemag"
+
+sleep 2
+
+tmux new-window -t "${SESSION}":4 -c /srv/www/ten/wordpress/wp-content/themes/lowrider
+tmux select-window -t "${SESSION}":4
+tmux split-window -h -l 112 -t "${SESSION}":4.0 -c "#{pane_current_path}"
+tmux split-window -v -p 50 -t "${SESSION}":4.1 -c "#{pane_current_path}"
+tmux send-keys -t "${SESSION}":4.1 "tail -F ../../debug.log" C-m
+tmux send-keys -t "${SESSION}":4.2 "gulp" C-m
+tmux select-pane -t "${SESSION}":4.0
+tmux split-window -v -l 6 -t "${SESSION}":4.0 -c "#{pane_current_path}"
+tmux select-pane -t "${SESSION}":4.0
+tmux rename-window -t "${SESSION}":4 "Lowrider"
+
+sleep 2
+
+tmux select-window -t "${SESSION}":0
+
+tmux -2u attach-session -t "${SESSION}"
