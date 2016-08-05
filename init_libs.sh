@@ -86,7 +86,7 @@ grab_hgcfg() {
 }
 
 grab_pips() {
-  sudo pip install -U psutil powerline-status s3cmd dulwich httpie neovim
+  sudo pip install -U psutil powerline-status s3cmd dulwich httpie neovim icdiff
 
   powerline_path="$(dirname "$(python -c 'import powerline; print (powerline.__file__)')")"
   if [ ! -d "${XDG_CONFIG_HOME}/powerline" ]; then
@@ -108,19 +108,6 @@ grab_composer() {
       mv composer.phar ~/bin/composer )
   else
     composer self-update
-  fi
-}
-
-grab_icdiff() {
-  INSTALL_PATH="${HOME}/contrib/icdiff"
-  if ! command -v icdiff >/dev/null 2>&1 ; then
-    git clone https://github.com/jeffkaufman/icdiff.git "${INSTALL_PATH}"
-    ln -s "${INSTALL_PATH}/icdiff" ~/bin/icdiff
-  else
-    (
-      cd "${INSTALL_PATH}" && git fetch &&
-      git checkout "$(git describe --abbrev=0 --tags)"
-    )
   fi
 }
 

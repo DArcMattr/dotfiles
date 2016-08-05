@@ -16,7 +16,6 @@ grab_hg_prompt
 grab_wp_cli
 grab_pips
 grab_sassc
-grab_icdiff
 grab_tpm
 grab_nvm
 grab_autoenv
