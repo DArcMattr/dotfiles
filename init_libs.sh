@@ -69,7 +69,7 @@ grab_hg_prompt() {
 grab_autoenv() {
   INSTALL_PATH="${HOME}/contrib/autoenv"
   if [ ! -d "${INSTALL_PATH}/.git" ]; then
-    git clone https://github.com/darcmattr/autoenv.git ~/contrib/autoenv
+    git clone https://github.com/horosgrisa/autoenv.git ~/contrib/autoenv
     ln -s "${INSTALL_PATH}" "${ZSH_CUSTOM}/plugins/"
   else
     ( cd "${INSTALL_PATH}" && git up )
