@@ -218,8 +218,8 @@ let g:wordpress_vim_tags_file_name='../tags'
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
 " key remappings - toggle spell checking
-map <F7> :setlocal spell! spelllang=en_us<CR>
-imap <F7> <C-o>:setlocal spell! spelllang=en_us<CR>
+map <F7> :setlocal spell! spell? spelllang=en_us<CR>
+imap <F7> <C-o>:setlocal spell! spell? spelllang=en_us<CR>
 imap <C-c> <CR><Esc>O
 
 map <leader>gs :Gstatus<CR>
