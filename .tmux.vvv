@@ -26,7 +26,7 @@ tmux select-window -t "${SESSION}":2
 tmux split-window -h -l 112 -t "${SESSION}":2.0 -c "#{pane_current_path}"
 tmux split-window -v -p 50 -t "${SESSION}":2.1 -c "#{pane_current_path}"
 tmux send-keys -t "${SESSION}":2.1 "tail -F ../../debug.log" C-m
-tmux send-keys -t "${SESSION}":2.2 "gulp" C-m
+tmux send-keys -t "${SESSION}":2.2 "grunt" C-m
 tmux select-pane -t "${SESSION}":2.0
 tmux split-window -v -l 6 -t "${SESSION}":2.0 -c "#{pane_current_path}"
 tmux select-pane -t "${SESSION}":2.0
@@ -39,7 +39,7 @@ tmux select-window -t "${SESSION}":3
 tmux split-window -h -l 112 -t "${SESSION}":3.0 -c "#{pane_current_path}"
 tmux split-window -v -p 50 -t "${SESSION}":3.1 -c "#{pane_current_path}"
 tmux send-keys -t "${SESSION}":3.1 "tail -F ../../debug.log" C-m
-tmux send-keys -t "${SESSION}":3.2 "gulp" C-m
+tmux send-keys -t "${SESSION}":3.2 "grunt" C-m
 tmux select-pane -t "${SESSION}":3.0
 tmux split-window -v -l 6 -t "${SESSION}":3.0 -c "#{pane_current_path}"
 tmux select-pane -t "${SESSION}":3.0
@@ -52,7 +52,7 @@ tmux select-window -t "${SESSION}":4
 tmux split-window -h -l 112 -t "${SESSION}":4.0 -c "#{pane_current_path}"
 tmux split-window -v -p 50 -t "${SESSION}":4.1 -c "#{pane_current_path}"
 tmux send-keys -t "${SESSION}":4.1 "tail -F ../../debug.log" C-m
-tmux send-keys -t "${SESSION}":4.2 "gulp" C-m
+tmux send-keys -t "${SESSION}":4.2 "grunt" C-m
 tmux select-pane -t "${SESSION}":4.0
 tmux split-window -v -l 6 -t "${SESSION}":4.0 -c "#{pane_current_path}"
 tmux select-pane -t "${SESSION}":4.0
