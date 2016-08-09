@@ -57,15 +57,6 @@ grab_hg_git() {
   fi
 }
 
-grab_hg_prompt() {
-  INSTALL_PATH="${HOME}/contrib/hg-prompt"
-  if [ ! -d "${INSTALL_PATH}/.hg/" ]; then
-    hg clone https://bitbucket.org/sjl/hg-prompt/ "${INSTALL_PATH}"
-  else
-    ( cd "${INSTALL_PATH}" && hg pull -u )
-  fi
-}
-
 grab_autoenv() {
   INSTALL_PATH="${HOME}/contrib/autoenv"
   if [ ! -d "${INSTALL_PATH}/.git" ]; then

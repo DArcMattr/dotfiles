@@ -12,7 +12,6 @@ find ~/dotfiles/symlinks/ -name ".*" -exec ln -sf "{}" "${HOME}" \;
 grab_composer
 grab_hgcfg
 grab_hg_git
-grab_hg_prompt
 grab_wp_cli
 grab_pips
 grab_sassc
