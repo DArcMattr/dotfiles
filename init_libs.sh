@@ -48,6 +48,15 @@ grab_wp_cli() {
   fi
 }
 
+grab_hg_prompt() {
+  INSTALL_PATH="${HOME}/contrib/hg-prompt"
+  if [ ! -d "${INSTALL_PATH}/.hg/" ]; then
+    hg clone https://bitbucket.org/sjl/hg-prompt "${INSTALL_PATH}"
+  else
+    ( cd "${INSTALL_PATH}" && hg pull -u )
+  fi
+}
+
 grab_hg_git() {
   INSTALL_PATH="${HOME}/contrib/hg-git"
   if [ ! -d "${INSTALL_PATH}/.hg/" ]; then
