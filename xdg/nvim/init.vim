@@ -213,13 +213,12 @@ let g:unite_cursor_line_time = "0.0"
 let g:unite_enable_split_vertically = 1
 let g:unite_options_auto_resize = 1
 let g:unite_update_time = 0
+let g:vdebug_options = { "server" : '192.168.50.1' }
 let g:vimpager = {}
 let g:wordpress_vim_tags_file_name='../tags'
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
 " key remappings - toggle spell checking
-map <F7> :setlocal spell! spell? spelllang=en_us<CR>
-imap <F7> <C-o>:setlocal spell! spell? spelllang=en_us<CR>
 imap <C-c> <CR><Esc>O
 
 map <leader>gs :Gstatus<CR>
@@ -230,6 +229,7 @@ map <leader>gp :Gpush<CR>
 map <leader>os :call RestoreSess()
 map <C-PageUp> :bn<CR>
 map <C-PageDown> :bp<CR>
+map <leader><F7> :setlocal spell! spell? spelllang=en_us<CR>
 
 nmap . .'[
 
@@ -510,9 +510,9 @@ autocmd FileType php.wordpress setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType javascript.wordpress setlocal shiftwidth=4 tabstop=4
   \ softtabstop=4 smarttab noexpandtab smartindent textwidth=85
 autocmd FileType css.wordpress setlocal shiftwidth=2 tabstop=2 softtabstop=2
-  \ smarttab expandtab smartindent textwidth=85
+  \ smarttab noexpandtab smartindent textwidth=85
 autocmd FileType scss.wordpress setlocal shiftwidth=2 tabstop=2 softtabstop=2
-  \ smarttab expandtab smartindent textwidth=85
+  \ smarttab noexpandtab smartindent textwidth=85
 
 autocmd FileType php.wordpress match OverLength /%86v.\+/
 autocmd FileType javascript.wordpress match OverLength /%86v.\+/
