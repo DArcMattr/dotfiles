@@ -60,6 +60,32 @@ tmux rename-window -t "${SESSION}":4 "Lowrider"
 
 sleep 2
 
+tmux new-window -t "${SESSION}":5 -c /srv/www/ten/wordpress/wp-content/plugins/
+tmux select-window -t "${SESSION}":5
+tmux split-window -h -l 112 -t "${SESSION}":5.0 -c "#{pane_current_path}"
+tmux split-window -v -p 50 -t "${SESSION}":5.1 -c "#{pane_current_path}"
+tmux send-keys -t "${SESSION}":5.1 "tail -F ../debug.log" C-m
+tmux send-keys -t "${SESSION}":5.2 "" C-m
+tmux select-pane -t "${SESSION}":5.0
+tmux split-window -v -l 6 -t "${SESSION}":5.0 -c "#{pane_current_path}"
+tmux select-pane -t "${SESSION}":5.0
+tmux rename-window -t "${SESSION}":5 "Plugins"
+
+sleep 2
+
+tmux new-window -t "${SESSION}":6 -c /srv/www/ten/wordpress/wp-content/mu-plugins/
+tmux select-window -t "${SESSION}":6
+tmux split-window -h -l 112 -t "${SESSION}":6.0 -c "#{pane_current_path}"
+tmux split-window -v -p 50 -t "${SESSION}":6.1 -c "#{pane_current_path}"
+tmux send-keys -t "${SESSION}":6.1 "tail -F ../debug.log" C-m
+tmux send-keys -t "${SESSION}":6.2 "" C-m
+tmux select-pane -t "${SESSION}":6.0
+tmux split-window -v -l 6 -t "${SESSION}":6.0 -c "#{pane_current_path}"
+tmux select-pane -t "${SESSION}":6.0
+tmux rename-window -t "${SESSION}":6 "MU-Plugin"
+
+sleep 2
+
 tmux select-window -t "${SESSION}":0
 
 tmux -2u attach-session -t "${SESSION}"
