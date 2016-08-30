@@ -89,15 +89,15 @@ grab_pips() {
   sudo pip install -U psutil powerline-status s3cmd dulwich httpie neovim icdiff
 
   powerline_path="$(dirname "$(python -c 'import powerline; print (powerline.__file__)')")"
-  if [ ! -d "${XDG_CONFIG_HOME}/powerline" ]; then
-    mkdir -p "${XDG_CONFIG_HOME}/powerline"
-    cp -R "${powerline_path}/config_files/*" "${XDG_CONFIG_HOME}/powerline"
+  if [ ! -d "${XDG_CONFIG_HOME:=$HOME/.config}/powerline" ]; then
+    mkdir -p "${XDG_CONFIG_HOME:=$HOME/.config}/powerline"
+    cp -R "${powerline_path}/config_files/*" "${XDG_CONFIG_HOME:=$HOME/.config}/powerline"
   fi
 
   if [ ! -f ~/.config/powerline/powerline.conf ]; then
     ln -s \
       "${powerline_path}/bindings/tmux/powerline.conf" \
-      "${XDG_CONFIG_HOME}/powerline/powerline.conf"
+      "${XDG_CONFIG_HOME:=$HOME/.config}/powerline/powerline.conf"
   fi
 }
 

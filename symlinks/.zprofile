@@ -10,6 +10,7 @@ export TERM=xterm-256color
 export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
 export CLICOLOR=YES
 export CLICOLOR_FORCE=YES
+export XDG_CONFIG_HOME="${HOME}/.config"
 
 #
 # Browser
