@@ -34,6 +34,8 @@
   cmd = nvim -d $LOCAL $REMOTE
 [format]
   pretty = oneline
+[init]
+  templatedir = "~/.config/git/template"
 [merge]
   tool = vimdiff
   ff = false
