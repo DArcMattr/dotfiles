@@ -12,19 +12,17 @@ $if mode=vi
   "\C-l": clear-screen
 $endif
 
+set bell-style off
+set colored-stats on
 set completion-ignore-case On
-set expand-tilde on
 set convert-meta off
+set convert-meta off
+set expand-tilde on
 set input-meta on
 set mark-directories on
+set meta-flag on
 set output-meta on
 set show-all-if-ambiguous on
 set visible-stats on
-set bell-style off
-set meta-flag on
-set input-meta on
-set convert-meta off
-set output-meta on
-set colored-stats on
 
 $include /etc/inputrc
