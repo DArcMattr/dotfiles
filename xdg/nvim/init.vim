@@ -14,13 +14,12 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'Shougo/unite.vim', { 'on': 'Unite' } | Plug 'Shougo/unite-outline'
-Plug 'Shougo/vimproc.vim', { 'do' : g:make }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'Valloric/MatchTagAlways'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer --tern-completer --gocode-completer' }
 Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
-Plug 'scrooloose/syntastic' | Plug 'dsawardekar/wordpress.vim'
+Plug 'scrooloose/syntastic' | Plug 'dsawardekar/wordpress.vim', { 'branch': 'develop' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'equalsraf/neovim-gui-shim'
@@ -213,7 +212,6 @@ let g:unite_cursor_line_time = "0.0"
 let g:unite_enable_split_vertically = 1
 let g:unite_options_auto_resize = 1
 let g:unite_update_time = 0
-let g:vdebug_options = { "server" : '192.168.50.1' }
 let g:vimpager = {}
 let g:wordpress_vim_tags_file_name='../tags'
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
