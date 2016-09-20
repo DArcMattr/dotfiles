@@ -41,7 +41,8 @@
   ff = false
 [mergetool]
   prompt = false
- stat = true
+  stat = true
+  keepBackup = false
 [mergetool "vimdiff"]
   cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c '$wincmd J'
 [pager]
