@@ -23,6 +23,7 @@ tmux rename-window -t "${SESSION}":1 "htop"
 
 tmux new-window -t "${SESSION}":2 -c /srv/www/ten/wordpress/wp-content/themes/motortrend
 tmux select-window -t "${SESSION}":2
+sleep 1
 tmux split-window -h -l 112 -t "${SESSION}":2.0 -c "#{pane_current_path}"
 tmux split-window -v -p 50 -t "${SESSION}":2.1 -c "#{pane_current_path}"
 tmux send-keys -t "${SESSION}":2.1 "tail -F ../../debug.log" C-m
@@ -32,10 +33,11 @@ tmux split-window -v -l 6 -t "${SESSION}":2.0 -c "#{pane_current_path}"
 tmux select-pane -t "${SESSION}":2.0
 tmux rename-window -t "${SESSION}":2 "Motortrend"
 
-sleep 2
+sleep 1
 
 tmux new-window -t "${SESSION}":3 -c /srv/www/ten/wordpress/wp-content/themes/automobilemag
 tmux select-window -t "${SESSION}":3
+sleep 1
 tmux split-window -h -l 112 -t "${SESSION}":3.0 -c "#{pane_current_path}"
 tmux split-window -v -p 50 -t "${SESSION}":3.1 -c "#{pane_current_path}"
 tmux send-keys -t "${SESSION}":3.1 "tail -F ../../debug.log" C-m
@@ -45,10 +47,11 @@ tmux split-window -v -l 6 -t "${SESSION}":3.0 -c "#{pane_current_path}"
 tmux select-pane -t "${SESSION}":3.0
 tmux rename-window -t "${SESSION}":3 "Automobilemag"
 
-sleep 2
+sleep 1
 
 tmux new-window -t "${SESSION}":4 -c /srv/www/ten/wordpress/wp-content/themes/lowrider
 tmux select-window -t "${SESSION}":4
+sleep 1
 tmux split-window -h -l 112 -t "${SESSION}":4.0 -c "#{pane_current_path}"
 tmux split-window -v -p 50 -t "${SESSION}":4.1 -c "#{pane_current_path}"
 tmux send-keys -t "${SESSION}":4.1 "tail -F ../../debug.log" C-m
@@ -58,23 +61,25 @@ tmux split-window -v -l 6 -t "${SESSION}":4.0 -c "#{pane_current_path}"
 tmux select-pane -t "${SESSION}":4.0
 tmux rename-window -t "${SESSION}":4 "Lowrider"
 
-sleep 2
+sleep 1
 
-tmux new-window -t "${SESSION}":5 -c /srv/www/ten/wordpress/wp-content/plugins/
+tmux new-window -t "${SESSION}":5 -c /srv/www/ten/wordpress/wp-content/themes/hotrod
 tmux select-window -t "${SESSION}":5
+sleep 1
 tmux split-window -h -l 112 -t "${SESSION}":5.0 -c "#{pane_current_path}"
 tmux split-window -v -p 50 -t "${SESSION}":5.1 -c "#{pane_current_path}"
-tmux send-keys -t "${SESSION}":5.1 "tail -F ../debug.log" C-m
+tmux send-keys -t "${SESSION}":5.1 "tail -F ../../debug.log" C-m
 tmux send-keys -t "${SESSION}":5.2 "" C-m
 tmux select-pane -t "${SESSION}":5.0
 tmux split-window -v -l 6 -t "${SESSION}":5.0 -c "#{pane_current_path}"
 tmux select-pane -t "${SESSION}":5.0
-tmux rename-window -t "${SESSION}":5 "Plugins"
+tmux rename-window -t "${SESSION}":5 "Hot Rod"
 
-sleep 2
+sleep 1
 
-tmux new-window -t "${SESSION}":6 -c /srv/www/ten/wordpress/wp-content/mu-plugins/
+tmux new-window -t "${SESSION}":6 -c /srv/www/ten/wordpress/wp-content/plugins/
 tmux select-window -t "${SESSION}":6
+sleep 1
 tmux split-window -h -l 112 -t "${SESSION}":6.0 -c "#{pane_current_path}"
 tmux split-window -v -p 50 -t "${SESSION}":6.1 -c "#{pane_current_path}"
 tmux send-keys -t "${SESSION}":6.1 "tail -F ../debug.log" C-m
@@ -82,9 +87,23 @@ tmux send-keys -t "${SESSION}":6.2 "" C-m
 tmux select-pane -t "${SESSION}":6.0
 tmux split-window -v -l 6 -t "${SESSION}":6.0 -c "#{pane_current_path}"
 tmux select-pane -t "${SESSION}":6.0
-tmux rename-window -t "${SESSION}":6 "MU-Plugin"
+tmux rename-window -t "${SESSION}":6 "Plugins"
 
-sleep 2
+sleep 1
+
+tmux new-window -t "${SESSION}":7 -c /srv/www/ten/wordpress/wp-content/mu-plugins/
+tmux select-window -t "${SESSION}":7
+sleep 1
+tmux split-window -h -l 112 -t "${SESSION}":7.0 -c "#{pane_current_path}"
+tmux split-window -v -p 50 -t "${SESSION}":7.1 -c "#{pane_current_path}"
+tmux send-keys -t "${SESSION}":7.1 "tail -F ../debug.log" C-m
+tmux send-keys -t "${SESSION}":7.2 "" C-m
+tmux select-pane -t "${SESSION}":7.0
+tmux split-window -v -l 6 -t "${SESSION}":7.0 -c "#{pane_current_path}"
+tmux select-pane -t "${SESSION}":7.0
+tmux rename-window -t "${SESSION}":7 "MU-Plugin"
+
+sleep 1
 
 tmux select-window -t "${SESSION}":0
 
