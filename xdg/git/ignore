@@ -47,6 +47,7 @@ Thumbs.db
 ######################
 .lvimrc
 *.vim
+wp-cli.local.yml
 
 # tool-generated files #
 ########################
