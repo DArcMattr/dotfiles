@@ -46,7 +46,7 @@ Host personal-git
 
 Host centuria
   HostName centuria-guild.org
-  Port 32323
+  Port 23232
   User darc
 
 Host aynrand2
