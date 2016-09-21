@@ -15,9 +15,10 @@ fi
 # TODO:
 #  - optional parameter for debug.log location
 #  - optional parameter for whether to run a command in a pane
+#  - check if no parameters given, exit, or use some fallbacks
 
 wp_project_pane() {
-  while getopts ":d:n:" opt; do
+  while getopts ":d:n:t:" opt; do
     case "$opt" in
       d) DIRECTORY=${OPTARG}
         ;;
@@ -61,65 +62,11 @@ tmux new-window -t "${SESSION}":1
 tmux send-keys -t "${SESSION}":1 "htop" C-m
 tmux rename-window -t "${SESSION}":1 "htop"
 
-tmux new-window -t "${SESSION}":2 -c /srv/www/ten/wordpress/wp-content/themes/motortrend
-tmux select-window -t "${SESSION}":2
-sleep 1
-tmux split-window -h -l 112 -t "${SESSION}":2.0 -c "#{pane_current_path}"
-sleep 1
-tmux split-window -v -p 50 -t "${SESSION}":2.1 -c "#{pane_current_path}"
-tmux send-keys -t "${SESSION}":2.1 "tail -F ../../debug.log" C-m
-tmux select-pane -t "${SESSION}":2.0
-tmux split-window -v -l 6 -t "${SESSION}":2.0 -c "#{pane_current_path}"
-tmux select-pane -t "${SESSION}":2.0
-tmux rename-window -t "${SESSION}":2 "Motortrend"
-
-tmux new-window -t "${SESSION}":3 -c /srv/www/ten/wordpress/wp-content/themes/automobilemag
-tmux select-window -t "${SESSION}":3
-sleep 1
-tmux split-window -h -l 112 -t "${SESSION}":3.0 -c "#{pane_current_path}"
-sleep 1
-tmux split-window -v -p 50 -t "${SESSION}":3.1 -c "#{pane_current_path}"
-tmux send-keys -t "${SESSION}":3.1 "tail -F ../../debug.log" C-m
-tmux select-pane -t "${SESSION}":3.0
-tmux split-window -v -l 6 -t "${SESSION}":3.0 -c "#{pane_current_path}"
-tmux select-pane -t "${SESSION}":3.0
-tmux rename-window -t "${SESSION}":3 "Automobilemag"
-
-tmux new-window -t "${SESSION}":4 -c /srv/www/ten/wordpress/wp-content/themes/lowrider
-tmux select-window -t "${SESSION}":4
-sleep 1
-tmux split-window -h -l 112 -t "${SESSION}":4.0 -c "#{pane_current_path}"
-sleep 1
-tmux split-window -v -p 50 -t "${SESSION}":4.1 -c "#{pane_current_path}"
-tmux send-keys -t "${SESSION}":4.1 "tail -F ../../debug.log" C-m
-tmux select-pane -t "${SESSION}":4.0
-tmux split-window -v -l 6 -t "${SESSION}":4.0 -c "#{pane_current_path}"
-tmux select-pane -t "${SESSION}":4.0
-tmux rename-window -t "${SESSION}":4 "Lowrider"
-
-tmux new-window -t "${SESSION}":5 -c /srv/www/ten/wordpress/wp-content/themes/hotrod
-tmux select-window -t "${SESSION}":5
-sleep 1
-tmux split-window -h -l 112 -t "${SESSION}":5.0 -c "#{pane_current_path}"
-sleep 1
-tmux split-window -v -p 50 -t "${SESSION}":5.1 -c "#{pane_current_path}"
-tmux send-keys -t "${SESSION}":5.1 "tail -F ../../debug.log" C-m
-tmux select-pane -t "${SESSION}":5.0
-tmux split-window -v -l 6 -t "${SESSION}":5.0 -c "#{pane_current_path}"
-tmux select-pane -t "${SESSION}":5.0
-tmux rename-window -t "${SESSION}":5 "Hot Rod"
-
-tmux new-window -t "${SESSION}":6 -c /srv/www/ten/wordpress/wp-content/plugins/
-tmux select-window -t "${SESSION}":6
-sleep 1
-tmux split-window -h -l 112 -t "${SESSION}":6.0 -c "#{pane_current_path}"
-sleep 1
-tmux split-window -v -p 50 -t "${SESSION}":6.1 -c "#{pane_current_path}"
-tmux send-keys -t "${SESSION}":6.1 "tail -F ../debug.log" C-m
-tmux select-pane -t "${SESSION}":6.0
-tmux split-window -v -l 6 -t "${SESSION}":6.0 -c "#{pane_current_path}"
-tmux select-pane -t "${SESSION}":6.0
-tmux rename-window -t "${SESSION}":6 "Plugins"
+wp_project_pane -t "${SESSION}" -n "Motortrend"   -d /srv/www/ten/wordpress/wp-content/themes/motortrend
+wp_project_pane -t "${SESSION}" -n "AMAG"         -d /srv/www/ten/wordpress/wp-content/themes/automobilemag
+wp_project_pane -t "${SESSION}" -n "Low Rider"    -d /srv/www/ten/wordpress/wp-content/themes/lowrider
+wp_project_pane -t "${SESSION}" -n "Hot Rod"      -d /srv/www/ten/wordpress/wp-content/themes/hotrod
+wp_project_pane -t "${SESSION}" -n "Vehicle Data" -d /srv/www/ten/wordpress/wp-content/plugins/vehicle-data
 
 tmux new-window -t "${SESSION}":7 -c /srv/www/ten/wordpress/wp-content/mu-plugins/
 tmux select-window -t "${SESSION}":7
