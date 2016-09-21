@@ -11,6 +11,46 @@ if [ $? -eq 0 ]; then
   exit 0;
 fi
 
+# Open a tmux window in a WordPress theme/plugin directory
+# TODO:
+#  - optional parameter for debug.log location
+#  - optional parameter for whether to run a command in a pane
+
+wp_project_pane() {
+  while getopts ":d:n:" opt; do
+    case "$opt" in
+      d) DIRECTORY=${OPTARG}
+        ;;
+
+      n) NAME=${OPTARG}
+        ;;
+
+      t) SESSION=${OPTARG}
+        ;;
+
+      *) echo "Invalid Option: -${OPTARG}" >&2
+        exit 1
+        ;;
+
+      :) echo "Option -${OPTARG} requires an argument." >&2
+        exit 1
+        ;;
+    esac
+  done
+
+  WIN_NUM=$(tmux display-message -p '#{session_windows}')
+
+  tmux new-window -t "${SESSION}":${WIN_NUM} -c "${DIRECTORY}"
+  tmux select-window -t "${SESSION}":${WIN_NUM}
+  tmux split-window -h -l 112 -t "${SESSION}":${WIN_NUM}.0 -c "${DIRECTORY}"
+  tmux split-window -v -p 50 -t "${SESSION}":${WIN_NUM}.1 -c "${DIRECTORY}"
+  tmux send-keys -t "${SESSION}":${WIN_NUM}.1 "tail -F ../../debug.log" C-m
+  tmux select-pane -t "${SESSION}":${WIN_NUM}.0
+  tmux split-window -v -l 6 -t "${SESSION}":${WIN_NUM}.0 -c "${DIRECTORY}"
+  tmux select-pane -t "${SESSION}":${WIN_NUM}.0
+  tmux rename-window -t "${SESSION}":${WIN_NUM} "${NAME}"
+}
+
 tmux new-session -d -s "${SESSION}"
 
 tmux set-option -t "${SESSION}" status-position top
@@ -25,85 +65,73 @@ tmux new-window -t "${SESSION}":2 -c /srv/www/ten/wordpress/wp-content/themes/mo
 tmux select-window -t "${SESSION}":2
 sleep 1
 tmux split-window -h -l 112 -t "${SESSION}":2.0 -c "#{pane_current_path}"
+sleep 1
 tmux split-window -v -p 50 -t "${SESSION}":2.1 -c "#{pane_current_path}"
 tmux send-keys -t "${SESSION}":2.1 "tail -F ../../debug.log" C-m
-tmux send-keys -t "${SESSION}":2.2 "grunt" C-m
 tmux select-pane -t "${SESSION}":2.0
 tmux split-window -v -l 6 -t "${SESSION}":2.0 -c "#{pane_current_path}"
 tmux select-pane -t "${SESSION}":2.0
 tmux rename-window -t "${SESSION}":2 "Motortrend"
 
-sleep 1
-
 tmux new-window -t "${SESSION}":3 -c /srv/www/ten/wordpress/wp-content/themes/automobilemag
 tmux select-window -t "${SESSION}":3
 sleep 1
 tmux split-window -h -l 112 -t "${SESSION}":3.0 -c "#{pane_current_path}"
+sleep 1
 tmux split-window -v -p 50 -t "${SESSION}":3.1 -c "#{pane_current_path}"
 tmux send-keys -t "${SESSION}":3.1 "tail -F ../../debug.log" C-m
-tmux send-keys -t "${SESSION}":3.2 "grunt" C-m
 tmux select-pane -t "${SESSION}":3.0
 tmux split-window -v -l 6 -t "${SESSION}":3.0 -c "#{pane_current_path}"
 tmux select-pane -t "${SESSION}":3.0
 tmux rename-window -t "${SESSION}":3 "Automobilemag"
 
-sleep 1
-
 tmux new-window -t "${SESSION}":4 -c /srv/www/ten/wordpress/wp-content/themes/lowrider
 tmux select-window -t "${SESSION}":4
 sleep 1
 tmux split-window -h -l 112 -t "${SESSION}":4.0 -c "#{pane_current_path}"
+sleep 1
 tmux split-window -v -p 50 -t "${SESSION}":4.1 -c "#{pane_current_path}"
 tmux send-keys -t "${SESSION}":4.1 "tail -F ../../debug.log" C-m
-tmux send-keys -t "${SESSION}":4.2 "grunt" C-m
 tmux select-pane -t "${SESSION}":4.0
 tmux split-window -v -l 6 -t "${SESSION}":4.0 -c "#{pane_current_path}"
 tmux select-pane -t "${SESSION}":4.0
 tmux rename-window -t "${SESSION}":4 "Lowrider"
 
-sleep 1
-
 tmux new-window -t "${SESSION}":5 -c /srv/www/ten/wordpress/wp-content/themes/hotrod
 tmux select-window -t "${SESSION}":5
 sleep 1
 tmux split-window -h -l 112 -t "${SESSION}":5.0 -c "#{pane_current_path}"
+sleep 1
 tmux split-window -v -p 50 -t "${SESSION}":5.1 -c "#{pane_current_path}"
 tmux send-keys -t "${SESSION}":5.1 "tail -F ../../debug.log" C-m
-tmux send-keys -t "${SESSION}":5.2 "" C-m
 tmux select-pane -t "${SESSION}":5.0
 tmux split-window -v -l 6 -t "${SESSION}":5.0 -c "#{pane_current_path}"
 tmux select-pane -t "${SESSION}":5.0
 tmux rename-window -t "${SESSION}":5 "Hot Rod"
 
-sleep 1
-
 tmux new-window -t "${SESSION}":6 -c /srv/www/ten/wordpress/wp-content/plugins/
 tmux select-window -t "${SESSION}":6
 sleep 1
 tmux split-window -h -l 112 -t "${SESSION}":6.0 -c "#{pane_current_path}"
+sleep 1
 tmux split-window -v -p 50 -t "${SESSION}":6.1 -c "#{pane_current_path}"
 tmux send-keys -t "${SESSION}":6.1 "tail -F ../debug.log" C-m
-tmux send-keys -t "${SESSION}":6.2 "" C-m
 tmux select-pane -t "${SESSION}":6.0
 tmux split-window -v -l 6 -t "${SESSION}":6.0 -c "#{pane_current_path}"
 tmux select-pane -t "${SESSION}":6.0
 tmux rename-window -t "${SESSION}":6 "Plugins"
 
-sleep 1
-
 tmux new-window -t "${SESSION}":7 -c /srv/www/ten/wordpress/wp-content/mu-plugins/
 tmux select-window -t "${SESSION}":7
 sleep 1
 tmux split-window -h -l 112 -t "${SESSION}":7.0 -c "#{pane_current_path}"
+sleep 1
 tmux split-window -v -p 50 -t "${SESSION}":7.1 -c "#{pane_current_path}"
 tmux send-keys -t "${SESSION}":7.1 "tail -F ../debug.log" C-m
-tmux send-keys -t "${SESSION}":7.2 "" C-m
 tmux select-pane -t "${SESSION}":7.0
 tmux split-window -v -l 6 -t "${SESSION}":7.0 -c "#{pane_current_path}"
 tmux select-pane -t "${SESSION}":7.0
 tmux rename-window -t "${SESSION}":7 "MU-Plugin"
-
-sleep 1
 
 tmux select-window -t "${SESSION}":0
 
