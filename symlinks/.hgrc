@@ -43,6 +43,7 @@ groups=vagrant,_www,www,apache,wheel,80,www-data
 [extdiff]
 cmd.vdiff=nvim
 opts.vdiff=-d -f '+next' '+execute "DirDiff" fnameescape(argv(0)) fnameescape(argv(1))'
+cmd.icdiff=~/dotfiles/helpers/hg-icdiff
 
 # derived from the following command:
 # `openssl s_client -connect bitbucket.org:443 < /dev/null 2>/dev/null | \
