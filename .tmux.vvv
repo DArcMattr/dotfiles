@@ -6,80 +6,27 @@ SESSION=${USER}
 tmux has-session -t "${SESSION}"
 if [ $? -eq 0 ]; then
   echo "Session ${SESSION} already exists, attaching"
-  sleep 1
-  tmux -2u attach -t "${SESSION}"
-  exit 0;
+else
+  . ~/dotfiles/helpers/project_pane.sh
+
+  tmux new-session -d -s "${SESSION}"
+
+  tmux set-option -t "${SESSION}" status-position top
+
+  tmux new-window -t "${SESSION}":0 -k
+
+  tmux new-window -t "${SESSION}":1
+  tmux send-keys -t "${SESSION}":1 "htop" C-m
+  tmux rename-window -t "${SESSION}":1 "htop"
+
+  project_pane -t "${SESSION}" -n "Motortrend"   -d "/srv/www/ten/wordpress/wp-content/themes/motor-trend"
+  project_pane -t "${SESSION}" -n "AMAG"         -d "/srv/www/ten/wordpress/wp-content/themes/automobile-mag"
+  project_pane -t "${SESSION}" -n "Low Rider"    -d "/srv/www/ten/wordpress/wp-content/themes/low-rider"
+  project_pane -t "${SESSION}" -n "Hot Rod"      -d "/srv/www/ten/wordpress/wp-content/themes/hot-rod"
+  project_pane -t "${SESSION}" -n "Vehicle Data" -d "/srv/www/ten/wordpress/wp-content/plugins/vehicle-data"
+  project_pane -t "${SESSION}" -n "MU Plugins"   -d "/srv/www/ten/wordpress/wp-content/mu-plugins"            -l "../debug.log"
+
+  tmux select-window -t "${SESSION}":0
 fi
-
-# Open a tmux window in a WordPress theme/plugin directory
-# TODO:
-#  - optional parameter for debug.log location
-#  - optional parameter for whether to run a command in a pane
-#  - check if no parameters given, exit, or use some fallbacks
-
-wp_project_pane() {
-  while getopts ":d:n:t:" opt; do
-    case "$opt" in
-      d) DIRECTORY=${OPTARG}
-        ;;
-
-      n) NAME=${OPTARG}
-        ;;
-
-      t) SESSION=${OPTARG}
-        ;;
-
-      *) echo "Invalid Option: -${OPTARG}" >&2
-        exit 1
-        ;;
-
-      :) echo "Option -${OPTARG} requires an argument." >&2
-        exit 1
-        ;;
-    esac
-  done
-
-  WIN_NUM=$(tmux display-message -p '#{session_windows}')
-
-  tmux new-window -t "${SESSION}":${WIN_NUM} -c "${DIRECTORY}"
-  tmux select-window -t "${SESSION}":${WIN_NUM}
-  tmux split-window -h -l 112 -t "${SESSION}":${WIN_NUM}.0 -c "${DIRECTORY}"
-  tmux split-window -v -p 50 -t "${SESSION}":${WIN_NUM}.1 -c "${DIRECTORY}"
-  tmux send-keys -t "${SESSION}":${WIN_NUM}.1 "tail -F ../../debug.log" C-m
-  tmux select-pane -t "${SESSION}":${WIN_NUM}.0
-  tmux split-window -v -l 6 -t "${SESSION}":${WIN_NUM}.0 -c "${DIRECTORY}"
-  tmux select-pane -t "${SESSION}":${WIN_NUM}.0
-  tmux rename-window -t "${SESSION}":${WIN_NUM} "${NAME}"
-}
-
-tmux new-session -d -s "${SESSION}"
-
-tmux set-option -t "${SESSION}" status-position top
-
-tmux new-window -t "${SESSION}":0 -k
-
-tmux new-window -t "${SESSION}":1
-tmux send-keys -t "${SESSION}":1 "htop" C-m
-tmux rename-window -t "${SESSION}":1 "htop"
-
-wp_project_pane -t "${SESSION}" -n "Motortrend"   -d /srv/www/ten/wordpress/wp-content/themes/motortrend
-wp_project_pane -t "${SESSION}" -n "AMAG"         -d /srv/www/ten/wordpress/wp-content/themes/automobilemag
-wp_project_pane -t "${SESSION}" -n "Low Rider"    -d /srv/www/ten/wordpress/wp-content/themes/lowrider
-wp_project_pane -t "${SESSION}" -n "Hot Rod"      -d /srv/www/ten/wordpress/wp-content/themes/hotrod
-wp_project_pane -t "${SESSION}" -n "Vehicle Data" -d /srv/www/ten/wordpress/wp-content/plugins/vehicle-data
-
-tmux new-window -t "${SESSION}":7 -c /srv/www/ten/wordpress/wp-content/mu-plugins/
-tmux select-window -t "${SESSION}":7
-sleep 1
-tmux split-window -h -l 112 -t "${SESSION}":7.0 -c "#{pane_current_path}"
-sleep 1
-tmux split-window -v -p 50 -t "${SESSION}":7.1 -c "#{pane_current_path}"
-tmux send-keys -t "${SESSION}":7.1 "tail -F ../debug.log" C-m
-tmux select-pane -t "${SESSION}":7.0
-tmux split-window -v -l 6 -t "${SESSION}":7.0 -c "#{pane_current_path}"
-tmux select-pane -t "${SESSION}":7.0
-tmux rename-window -t "${SESSION}":7 "MU-Plugin"
-
-tmux select-window -t "${SESSION}":0
 
 tmux -2u attach-session -t "${SESSION}"
