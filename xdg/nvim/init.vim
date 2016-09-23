@@ -14,6 +14,7 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'Shougo/unite.vim', { 'on': 'Unite' } | Plug 'Shougo/unite-outline'
+Plug 'Shougo/vimproc.vim', { 'do' : g:make }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'Valloric/MatchTagAlways'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer --tern-completer --gocode-completer' }
@@ -23,13 +24,10 @@ Plug 'scrooloose/syntastic' | Plug 'dsawardekar/wordpress.vim', { 'branch': 'dev
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'equalsraf/neovim-gui-shim'
-Plug 'hhvm/vim-hack', { 'for': 'php' }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jiangmiao/auto-pairs'
 Plug 'joonty/vdebug'
 Plug 'joonty/vim-taggatron'
-Plug 'krisajenkins/vim-pipe'
-Plug 'krisajenkins/vim-postgresql-syntax', { 'for': 'psql' }
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'moll/vim-node', { 'for': 'javascript' }
 Plug 'reedes/vim-wheel'
@@ -46,7 +44,6 @@ Plug 'vim-scripts/DirDiff.vim'
 Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/matchit.zip'
 Plug 'vim-scripts/vcscommand.vim'
-Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
 call plug#end()
 
 set autoindent
@@ -176,6 +173,10 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline#extensions#ycm#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:AutoPairsShortcutToggle = '<leader>ap'
+let g:AutoPairsShortcutFastWrap = '<leader>ae'
+let g:AutoPairsShortcutJump = '<leader>an'
+let g:AutoPairsShortcutBackInsert = '<leader>ab'
 let g:less = { 'enabled' : 0, }
 let g:localvimrc_persistent = 1
 let g:localvimrc_reverse = 1
@@ -474,8 +475,6 @@ autocmd FileType hgcommit match OverLength /\%73v.\+/
 
 " MySQL
 autocmd BufNewFile,BufRead,BufEnter *.mysql setfiletype mysql
-autocmd FileType mysql let b:vimpipe_FileType="mysql"
-autocmd FileType mysql let b:vimpipe_command="mysql"
 
 " Perl
 autocmd FileType perl setlocal makeprg=perl keywordprg=perldoc\ -f
@@ -486,14 +485,10 @@ autocmd FileType php setlocal keywordprg=pman
 
 " PostgreSQL
 autocmd BufNewFile,BufRead,BufEnter *.psql setfiletype postgresql
-autocmd FileType postgresql let b:vimpipe_FileType="postgresql"
-autocmd FileType postgresql let b:vimpipe_command="psql"
 
 " Python
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
   \ smarttab expandtab formatoptions=croql keywordprg=pydoc
-autocmd FileType python let b:vimpipe_command="python"
-autocmd FileType python let b:vimpipe_FileType="python"
 
 " Ruby
 autocmd BufNewFile,BufRead Vagrantfile setfiletype ruby
