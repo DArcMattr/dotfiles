@@ -1,53 +1,64 @@
 # .aliases
 # vim:ft=sh:
 
-if \ls --color=always -d . >/dev/null 2>&1; then
+if ls --color=always -d . >/dev/null 2>&1; then
   alias ls='\ls --color=always'
-elif \ls -G -d . >/dev/null 2>&1; then # colorls is main system ls already
+elif ls -G -d . >/dev/null 2>&1; then # colorls is main system ls already
   alias ls='\ls -G'
-elif \colorls -G -d . >/dev/null 2>&1; then
+elif colorls -G -d . >/dev/null 2>&1; then
   alias ls='\colorls -G'
 else # Solaris or other *NIX
   alias ls='\ls'
 fi
 
 alias ll='ls -AalFh'
-alias key='man -k'
+alias key='\man -k'
+alias man='vman'
 alias info='info --vi-keys'
 alias tmux='tmux -2u'
-alias tmuxt='sh ~/dotfiles/.tmux.$HOST'
+alias tmuxt='sh ~/dotfiles/.tmux.${HOST}'
 alias agp='ag --pager=less'
 
 # Suffix aliases
-alias -s php=vim
-alias -s css=vim
-alias -s js=vim
+alias -s php=nvim
+alias -s css=nvim
+alias -s js=nvim
 
 # Functions, used where aliases would break
 
 cdl() {
-  cd "${@}"
-  ll
+  cd "${@}" && ll .
 }
 
 cdd() {
-  cd "${@}"
-  dir
+  cd "${@}" && dir .
 }
 
 path() {
   echo "${PATH}" | tr ':' '\n'
 }
 
+vman() {
+  if [ -x /usr/bin/nvim ]; then
+    if [ "${#}" -eq 2 ]; then
+      /usr/bin/nvim -R "man://${2}(${1})"
+    else
+      /usr/bin/nvim -R "man://${1}"
+    fi
+  else
+    /usr/bin/man "${@}"
+  fi
+}
+
 dir() {
   {
-    if \ls --group-directories-first -d . >/dev/null 2>&1; then
+    if ls --group-directories-first -d . >/dev/null 2>&1; then
       ll --group-directories-first "${@}"
     else
       LL=$(ll "${@}")
-      echo ${LL} | grep -E "^d"
-      echo ${LL} | grep -E -v "^d|^total"
-      echo ${LL} | grep -E "^total"
+      echo "${LL}" | grep -E "^d"
+      echo "${LL}" | grep -E -v "^d|^total"
+      echo "${LL}" | grep -E "^total"
     fi
   } | $PAGER
 }
@@ -57,7 +68,7 @@ sssh() {
 }
 
 hgdiff() {
-  vimdiff -c 'map q :qa!<CR>' <(hg cat "$1") "$1"
+  nvim -d -c 'map q :qa!<CR>' <(hg cat "$1") "$1"
 }
 
 playtime() {
@@ -69,18 +80,13 @@ playtime() {
 }
 
 dosass() {
-  # TODO: allow for some command line options
-  if [ "$#" -eq 1 ]; then
+  if [ "${#}" -eq 1 ]; then
     OUT_FILE="$(dirname "${1}")/$(basename -s .scss "${1}").css"
   else
     OUT_FILE="${2}"
   fi
 
-  if sassc -g "${1}" >/dev/null 2>&1; then
-    sassc -glt nested -o "${OUT_FILE}" "${1}"
-  else
-    sassc -mlt nested "${1}" "${OUT_FILE}"
-  fi
+  sassc -mlt nested "${1}" "${OUT_FILE}"
 }
 
 catmd() {
@@ -102,7 +108,7 @@ catmd() {
 }
 
 sscerts() {
-  openssl req -new -newkey rsa:4096 -days 3653 -nodes -x509 -subj '/CN=${1}/O=Zeek Interactive/C=US/ST=California/L=Huntington Beach' -keyout "${1}.key" -out "${1}.cert"
+  openssl req -new -newkey rsa:4096 -days 3653 -nodes -x509 -subj "/CN=${1}/O=DavidTheMachine/C=US/ST=California/L=Anaheim" -keyout "${1}.key" -out "${1}.cert"
 }
 
 # I'm keeping the following around for historical reference
