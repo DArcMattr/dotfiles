@@ -16,8 +16,9 @@ alias key='\man -k'
 alias man='vman'
 alias info='info --vi-keys'
 alias tmux='tmux -2u'
-alias tmuxt='sh ~/dotfiles/.tmux.${HOST}'
 alias agp='ag --pager=less'
+#shellcheck disable=SC2139
+alias tmuxt="sh ~/dotfiles/.tmux.${HOST}"
 
 # Suffix aliases
 alias -s php=nvim
