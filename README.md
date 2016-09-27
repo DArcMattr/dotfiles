@@ -52,7 +52,6 @@ Refresh the session, then run the following:
     ln -s ~/dotfiles/.vimrc ~/.config/nvim/init.vim
     mv ~/.ssh/config ~/.ssh/config.orig
     ln -s ~/dotfiles/sshconfig ~/.ssh/config
-    ln -s ~/dotfiles/hgcommit.vim ~/.nvim/syntax/hgcommit.vim
 
 I have transitioned to using NeoVim, but still keep Vim around with its own
 configuration file, because vimpager.
