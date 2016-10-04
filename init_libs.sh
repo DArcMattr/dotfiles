@@ -32,19 +32,15 @@ grab_sassc() {
 }
 
 grab_wp_cli() {
-  INSTALL_PATH="${HOME}/contrib/wp-cli"
-  if [ ! -d "$INSTALL_PATH/.git" ]; then
-    git clone https://github.com/wp-cli/wp-cli.git "${INSTALL_PATH}"
-    (
-      cd "${INSTALL_PATH}" && git fetch &&
-      git checkout "$(git describe --abbrev=0 --tags)" && composer update
-    )
-    ln -s "${INSTALL_PATH}/bin/wp" ~/bin/wp
+  INSTALL_PATH="${HOME}/bin/wp-cli"
+  if [ ! -d "${INSTALL_PATH}" ]; then
+    mkdir -p "${INSTALL_PATH}" && cd "${INSTALL_PATH}"
+    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+    chmod +x "${INSTALL_PATH}/wp-cli.phar"
+    ln -s "${INSTALL_PATH}/wp-cli.phar" ~/bin/wp
   else
-    (
-      cd "${INSTALL_PATH}" && git fetch &&
-      git checkout "$(git describe --abbrev=0 --tags)" && composer update
-    )
+    cd "${INSTALL_PATH}"
+    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
   fi
 }
 
@@ -69,8 +65,8 @@ grab_hg_git() {
 grab_autoenv() {
   INSTALL_PATH="${HOME}/contrib/autoenv"
   if [ ! -d "${INSTALL_PATH}/.git" ]; then
-    git clone https://github.com/horosgrisa/autoenv.git ~/contrib/autoenv
-    ln -s "${INSTALL_PATH}" "${ZSH_CUSTOM}/plugins/"
+    git clone https://github.com/horosgrisa/autoenv.git ${INSTALL_PATH}
+    ln -s "${INSTALL_PATH}" "${ZSH_CUSTOM}/plugins/autoenv"
   else
     ( cd "${INSTALL_PATH}" && git up )
   fi
@@ -86,13 +82,16 @@ grab_hgcfg() {
 }
 
 grab_pips() {
+  # I install mercurial via hg on Ubuntu, because the package version is out of
+  # date and drags in all kinds of X dependencies
   sudo pip install -U psutil powerline-status s3cmd dulwich httpie neovim icdiff
 
   powerline_path="$(dirname "$(python -c 'import powerline; print (powerline.__file__)')")"
   if [ ! -d "${XDG_CONFIG_HOME:=$HOME/.config}/powerline" ]; then
     mkdir -p "${XDG_CONFIG_HOME:=$HOME/.config}/powerline"
-    cp -R "${powerline_path}/config_files/*" "${XDG_CONFIG_HOME:=$HOME/.config}/powerline"
   fi
+  rsync -a --prune-empty-dirs --include '*/' "${powerline_path}/config_files/" \
+    "${XDG_CONFIG_HOME:=$HOME/.config}/powerline"
 
   if [ ! -f ~/.config/powerline/powerline.conf ]; then
     ln -s \
