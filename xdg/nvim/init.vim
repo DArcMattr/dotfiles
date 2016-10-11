@@ -50,7 +50,6 @@ set autoindent
 set autoread
 set backspace=indent,eol,start
 set backup
-set backupdir=$TMPDIR,$TEMP,$TMP,.
 set colorcolumn=+1
 set complete-=i
 set completeopt=menu,menuone,longest
@@ -118,7 +117,6 @@ set timeout
 set timeoutlen=750
 set ttimeout
 set ttimeoutlen=0
-set undodir=$TEMP,$TMP,.
 set undofile
 set virtualedit=all
 set visualbell
