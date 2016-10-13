@@ -22,6 +22,8 @@
   untracked = cyan
 [core]
   excludesfile = ~/.gitignore_global
+  autocrlf = input
+  whitespace = trailing-space,space-before-tab,indent-with-non-tab
 [diff]
   external = "~/dotfiles/helpers/diff"
   mnemonicprefix = true
@@ -56,10 +58,10 @@
   afetch = fetch --all --prune
   amend = commit --amend
   br = branch
-  branchdiff = "!f() { git diff `git oldest-ancestor`..; }; f"
-  branchdifftool = "!f() { git difftool `git oldest-ancestor`..; }; f"
+  branchdiff = "!f() { git diff $(git oldest-ancestor ${1:-master} ${2:-HEAD})..; }; f"
+  branchdifftool = "!f() { git difftool $(git oldest-ancestor ${1:-master} ${2:-HEAD})..; }; f"
   branches = branch -a
-  branchlog = "!f() { git log `git oldest-ancestor`..; }; f"
+  branchlog = "!f() { git log $(git oldest-ancestor ${1:-master} ${2:-HEAD})..; }; f"
   ci = commit
   co = checkout
   d = difftool
