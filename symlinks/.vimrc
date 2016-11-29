@@ -26,20 +26,16 @@ Plug 'bling/vim-airline'
 Plug 'scrooloose/syntastic' | Plug 'dsawardekar/wordpress.vim', { 'branch' : 'develop' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
-Plug 'hhvm/vim-hack', { 'for': 'php' }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jiangmiao/auto-pairs'
 Plug 'joonty/vdebug'
 Plug 'joonty/vim-taggatron'
-Plug 'krisajenkins/vim-pipe'
-Plug 'krisajenkins/vim-postgresql-syntax', { 'for': 'psql' }
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'moll/vim-node', { 'for': 'javascript' }
 Plug 'reedes/vim-wheel'
 Plug 'rkitover/vimpager', { 'do': 'sudo ' . g:make . ' install-deb' }
 Plug 'shawncplus/phpcomplete.vim', { 'for': [ 'php', 'php.wordpress' ] }
 Plug 'sheerun/vim-polyglot'
-Plug 'tpope/timl' | Plug 'sjl/tslime2.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
@@ -49,7 +45,6 @@ Plug 'vim-scripts/DirDiff.vim'
 Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/matchit.zip'
 Plug 'vim-scripts/vcscommand.vim'
-Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
 call plug#end()
 
 set autoindent
@@ -202,7 +197,7 @@ let maplocalleader = " "
 let c_space_errors = 1
 let php_sync_method = 1
 let $GIT_SSL_NO_VERIFY = 'true'
-let g:NumberToggleTrigger = '<leader>l'
+let g:NumberToggleTrigger = '<Leader>l'
 let g:UltiSnipsExpandTrigger = "<M-x>"
 let g:UltiSnipsJumpBackwardTrigger = "<M-h>"
 let g:UltiSnipsJumpForwardTrigger = "<M-l>"
@@ -216,6 +211,10 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline#extensions#ycm#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:AutoPairsShortcutToggle = '<Leader>ap'
+let g:AutoPairsShortcutFastWrap = '<Leader>ae'
+let g:AutoPairsShortcutJump = '<Leader>an'
+let g:AutoPairsShortcutBackInsert = '<Leader>ab'
 let g:less = { 'enabled' : 0, }
 let g:localvimrc_persistent = 1
 let g:localvimrc_reverse = 1
@@ -229,8 +228,8 @@ let g:mta_filetypes = {
 let g:netrw_silent = 1
 let g:session_autoload = 'no'
 let g:session_autosave = 'no'
-let g:sparkupExecuteMapping = '<leader>se'
-let g:sparkupNextMapping = '<leader>sn'
+let g:sparkupExecuteMapping = '<Leader>se'
+let g:sparkupNextMapping = '<Leader>sn'
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wp = 0
@@ -245,9 +244,9 @@ let g:tagcommands = { 'php': { 'args': '-R' } }
 let g:tslime_always_current_session = 1
 let g:tslime_always_current_window = 1
 let g:tslime_ensure_trailing_newlines = 1
-let g:tslime_normal_mapping = '<localleader>t'
-let g:tslime_visual_mapping = '<localleader>t'
-let g:tslime_vars_mapping = '<localleader>T'
+let g:tslime_normal_mapping = '<LocalLeader>t'
+let g:tslime_visual_mapping = '<LocalLeader>t'
+let g:tslime_vars_mapping = '<LocalLeader>T'
 let g:unite_cursor_line_time = "0.0"
 let g:unite_enable_split_vertically = 1
 let g:unite_options_auto_resize = 1
@@ -257,18 +256,17 @@ let g:wordpress_vim_tags_file_name='../tags'
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
 " key remappings - toggle spell checking
-map <F7> :setlocal spell! spelllang=en_us<CR>
-imap <F7> <C-o>:setlocal spell! spelllang=en_us<CR>
 imap <C-c> <CR><Esc>O
 
-map <leader>gs :Gstatus<CR>
-map <leader>gd :Gdiff<CR>
-map <leader>gc :Gcommit<CR>
-map <leader>gl :Glog<CR>
-map <leader>gp :Gpush<CR>
-map <leader>os :call RestoreSess()
+map <Leader>gs :Gstatus<CR>
+map <Leader>gd :Gdiff<CR>
+map <Leader>gc :Gcommit<CR>
+map <Leader>gl :Glog<CR>
+map <Leader>gp :Gpush<CR>
+map <Leader>os :call RestoreSess()
 map <C-PageUp> :bn<CR>
 map <C-PageDown> :bp<CR>
+map <Leader><F7> :setlocal spell! spell? spelllang=en_us<CR>
 
 nmap . .'[
 
@@ -276,14 +274,14 @@ noremap n nzz
 noremap N Nzz
 noremap <C-d> <C-d>zz
 noremap <C-u> <C-u>zz
-noremap <leader>t :enew<CR>
+noremap <Leader>t :enew<CR>
 
 nnoremap <C-e> 3<C-e>
 nnoremap <C-p> :Unite file_rec/async<CR>
 nnoremap <C-y> 3<C-y>
-nnoremap <leader>/ :Unite grep:.<CR>
-nnoremap <leader>o :Unite outline<CR>
-nnoremap <leader>q :nohlsearch<CR>
+nnoremap <Leader>/ :Unite grep:.<CR>
+nnoremap <Leader>o :Unite outline<CR>
+nnoremap <Leader>q :nohlsearch<CR>
 nnoremap H ^
 nnoremap J mzJ`z
 nnoremap L $
@@ -292,8 +290,8 @@ nnoremap Y y$
 nnoremap c "xc
 nnoremap gj j
 nnoremap gk k
-nnoremap j gj
-nnoremap k gk
+nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 nnoremap { {zz
 nnoremap } }zz
 nnoremap ' `
@@ -401,6 +399,14 @@ if $TMUX != ''
   nnoremap <silent> <c-w><left> :silent call TmuxMove('h')<cr>
   nnoremap <silent> <c-w><right> :silent call TmuxMove('l')<cr>
 endif
+
+function! SetDiffColors()
+  highlight DiffAdd cterm=bold ctermfg=white ctermbg DarkGreen
+  highlight DiffDelete cterm=bold ctermfg=white ctermbg DarkGrey
+  highlight DiffChange cterm=bold ctermfg=white ctermbg DarkBlue
+  highlight DiffText cterm=bold ctermfg=white ctermbg DarkRed
+endfunction
+autocmd FilterWritePre * call SetDiffColors()
 
 augroup OmniFunc
   autocmd!
@@ -515,8 +521,6 @@ autocmd FileType hgcommit match OverLength /\%73v.\+/
 
 " MySQL
 autocmd BufNewFile,BufRead,BufEnter *.mysql setfiletype mysql
-autocmd FileType mysql let b:vimpipe_FileType="mysql"
-autocmd FileType mysql let b:vimpipe_command="mysql"
 
 " Perl
 autocmd FileType perl setlocal makeprg=perl keywordprg=perldoc\ -f
@@ -527,14 +531,10 @@ autocmd FileType php setlocal keywordprg=pman
 
 " PostgreSQL
 autocmd BufNewFile,BufRead,BufEnter *.psql setfiletype postgresql
-autocmd FileType postgresql let b:vimpipe_FileType="postgresql"
-autocmd FileType postgresql let b:vimpipe_command="psql"
 
 " Python
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
   \ smarttab expandtab formatoptions=croql keywordprg=pydoc
-autocmd FileType python let b:vimpipe_command="python"
-autocmd FileType python let b:vimpipe_FileType="python"
 
 " Ruby
 autocmd BufNewFile,BufRead Vagrantfile setfiletype ruby
@@ -549,9 +549,9 @@ autocmd FileType php.wordpress setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType javascript.wordpress setlocal shiftwidth=4 tabstop=4
   \ softtabstop=4 smarttab noexpandtab smartindent textwidth=85
 autocmd FileType css.wordpress setlocal shiftwidth=2 tabstop=2 softtabstop=2
-  \ smarttab expandtab smartindent textwidth=85
+  \ smarttab noexpandtab smartindent textwidth=85
 autocmd FileType scss.wordpress setlocal shiftwidth=2 tabstop=2 softtabstop=2
-  \ smarttab expandtab smartindent textwidth=85
+  \ smarttab noexpandtab smartindent textwidth=85
 
 autocmd FileType php.wordpress match OverLength /%86v.\+/
 autocmd FileType javascript.wordpress match OverLength /%86v.\+/

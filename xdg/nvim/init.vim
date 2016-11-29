@@ -20,7 +20,7 @@ Plug 'Valloric/MatchTagAlways'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer --tern-completer --gocode-completer' }
 Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
-Plug 'scrooloose/syntastic' | Plug 'dsawardekar/wordpress.vim', { 'branch': 'develop' }
+Plug 'scrooloose/syntastic' | Plug 'dsawardekar/wordpress.vim', { 'branch' : 'develop' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'equalsraf/neovim-gui-shim'
@@ -34,7 +34,6 @@ Plug 'reedes/vim-wheel'
 Plug 'rkitover/vimpager'
 Plug 'shawncplus/phpcomplete.vim', { 'for': [ 'php', 'php.wordpress' ] }
 Plug 'sheerun/vim-polyglot'
-Plug 'tpope/timl' | Plug 'sjl/tslime2.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
@@ -49,7 +48,6 @@ call plug#end()
 set autoindent
 set autoread
 set backspace=indent,eol,start
-set backup
 set colorcolumn=+1
 set complete-=i
 set completeopt=menu,menuone,longest
@@ -109,8 +107,8 @@ set softtabstop=2
 set splitbelow
 set synmaxcol=512
 set tabstop=2
-set textwidth=80
 set termguicolors
+set textwidth=80
 set title
 set titlestring=%t%(\ [%R%M]%)
 set timeout
@@ -157,7 +155,7 @@ let maplocalleader = " "
 let c_space_errors = 1
 let php_sync_method = 1
 let $GIT_SSL_NO_VERIFY = 'true'
-let g:NumberToggleTrigger = '<leader>l'
+let g:NumberToggleTrigger = '<Leader>l'
 let g:UltiSnipsExpandTrigger = "<M-x>"
 let g:UltiSnipsJumpBackwardTrigger = "<M-h>"
 let g:UltiSnipsJumpForwardTrigger = "<M-l>"
@@ -171,10 +169,10 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline#extensions#ycm#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:AutoPairsShortcutToggle = '<leader>ap'
-let g:AutoPairsShortcutFastWrap = '<leader>ae'
-let g:AutoPairsShortcutJump = '<leader>an'
-let g:AutoPairsShortcutBackInsert = '<leader>ab'
+let g:AutoPairsShortcutToggle = '<Leader>ap'
+let g:AutoPairsShortcutFastWrap = '<Leader>ae'
+let g:AutoPairsShortcutJump = '<Leader>an'
+let g:AutoPairsShortcutBackInsert = '<Leader>ab'
 let g:less = { 'enabled' : 0, }
 let g:localvimrc_persistent = 1
 let g:localvimrc_reverse = 1
@@ -188,8 +186,8 @@ let g:mta_filetypes = {
 let g:netrw_silent = 1
 let g:session_autoload = 'no'
 let g:session_autosave = 'no'
-let g:sparkupExecuteMapping = '<leader>se'
-let g:sparkupNextMapping = '<leader>sn'
+let g:sparkupExecuteMapping = '<Leader>se'
+let g:sparkupNextMapping = '<Leader>sn'
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wp = 0
@@ -204,9 +202,9 @@ let g:tagcommands = { 'php': { 'args': '-R' } }
 let g:tslime_always_current_session = 1
 let g:tslime_always_current_window = 1
 let g:tslime_ensure_trailing_newlines = 1
-let g:tslime_normal_mapping = '<localleader>t'
-let g:tslime_visual_mapping = '<localleader>t'
-let g:tslime_vars_mapping = '<localleader>T'
+let g:tslime_normal_mapping = '<LocalLeader>t'
+let g:tslime_visual_mapping = '<LocalLeader>t'
+let g:tslime_vars_mapping = '<LocalLeader>T'
 let g:unite_cursor_line_time = "0.0"
 let g:unite_enable_split_vertically = 1
 let g:unite_options_auto_resize = 1
@@ -218,15 +216,15 @@ let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 " key remappings - toggle spell checking
 imap <C-c> <CR><Esc>O
 
-map <leader>gs :Gstatus<CR>
-map <leader>gd :Gdiff<CR>
-map <leader>gc :Gcommit<CR>
-map <leader>gl :Glog<CR>
-map <leader>gp :Gpush<CR>
-map <leader>os :call RestoreSess()
+map <Leader>gs :Gstatus<CR>
+map <Leader>gd :Gdiff<CR>
+map <Leader>gc :Gcommit<CR>
+map <Leader>gl :Glog<CR>
+map <Leader>gp :Gpush<CR>
+map <Leader>os :call RestoreSess()
 map <C-PageUp> :bn<CR>
 map <C-PageDown> :bp<CR>
-map <leader><F7> :setlocal spell! spell? spelllang=en_us<CR>
+map <Leader><F7> :setlocal spell! spell? spelllang=en_us<CR>
 
 nmap . .'[
 
@@ -234,14 +232,14 @@ noremap n nzz
 noremap N Nzz
 noremap <C-d> <C-d>zz
 noremap <C-u> <C-u>zz
-noremap <leader>t :enew<CR>
+noremap <Leader>t :enew<CR>
 
 nnoremap <C-e> 3<C-e>
 nnoremap <C-p> :Unite file_rec/async<CR>
 nnoremap <C-y> 3<C-y>
-nnoremap <leader>/ :Unite grep:.<CR>
-nnoremap <leader>o :Unite outline<CR>
-nnoremap <leader>q :nohlsearch<CR>
+nnoremap <Leader>/ :Unite grep:.<CR>
+nnoremap <Leader>o :Unite outline<CR>
+nnoremap <Leader>q :nohlsearch<CR>
 nnoremap H ^
 nnoremap J mzJ`z
 nnoremap L $
@@ -359,6 +357,14 @@ if $TMUX != ''
   nnoremap <silent> <c-w><left> :silent call TmuxMove('h')<cr>
   nnoremap <silent> <c-w><right> :silent call TmuxMove('l')<cr>
 endif
+
+function! SetDiffColors()
+  highlight DiffAdd cterm=bold ctermfg=white ctermbg DarkGreen
+  highlight DiffDelete cterm=bold ctermfg=white ctermbg DarkGrey
+  highlight DiffChange cterm=bold ctermfg=white ctermbg DarkBlue
+  highlight DiffText cterm=bold ctermfg=white ctermbg DarkRed
+endfunction
+autocmd FilterWritePre * call SetDiffColors()
 
 augroup OmniFunc
   autocmd!
