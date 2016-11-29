@@ -13,3 +13,4 @@ superupdate() {
 export CC=clang
 export CXX=clang++
 export TZ='/usr/share/zoneinfo/US/Pacific'
+export PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:${PATH}"
