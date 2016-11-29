@@ -23,6 +23,7 @@ else
   project_pane -t "${SESSION}" -n "AMAG"         -d "/srv/www/ten/wordpress/wp-content/themes/automobile-mag"
   project_pane -t "${SESSION}" -n "Low Rider"    -d "/srv/www/ten/wordpress/wp-content/themes/low-rider"
   project_pane -t "${SESSION}" -n "Hot Rod"      -d "/srv/www/ten/wordpress/wp-content/themes/hot-rod"
+  project_pane -t "${SESSION}" -n "MT Intl"      -d "/srv/www/ten/wordpress/wp-content/themes/motor-trend-international"
   project_pane -t "${SESSION}" -n "Vehicle Data" -d "/srv/www/ten/wordpress/wp-content/plugins/vehicle-data"
   project_pane -t "${SESSION}" -n "MU Plugins"   -d "/srv/www/ten/wordpress/wp-content/mu-plugins"            -l "../debug.log"
 
