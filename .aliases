@@ -30,24 +30,6 @@ fi
 
 # Functions, used where aliases would break
 
-superupdate() {
-  if apt-get >/dev/null 2>&1; then
-    \sudo \sh -c " \
-      \apt-get update && \
-      \apt-get -y upgrade && \
-      \apt-get -y dist-upgrade && \
-      \apt-get -y autoremove && \
-      \apt-get -y clean"
-  elif portsnap >/dev/null 2>&1; then # XXX rewrite as pkg
-    \sudo \sh -c " \
-      \portsnap fetch update && \
-      \sudo \portmaster -aD && \
-      \sudo \pkg2ng && \
-      \sudo \freebsd-update fetch &&
-      \sudo \freebsd-update install"
-  fi
-}
-
 cdl() {
   cd "${@}" && ll .
 }
@@ -56,59 +38,12 @@ cdd() {
   cd "${@}" && dir .
 }
 
+echoerr() {
+  printf "%s\n" "$*" >&2;
+}
+
 path() {
   echo "${PATH}" | tr ':' '\n'
-}
-
-vman() {
-  if [ -x /usr/bin/nvim ]; then
-    if [ "${#}" -eq 2 ]; then
-      /usr/bin/nvim -R "man://${2}(${1})"
-    else
-      /usr/bin/nvim -R "man://${1}"
-    fi
-  else
-    /usr/bin/man "${@}"
-  fi
-}
-
-dir() {
-  {
-    if ls --group-directories-first -d . >/dev/null 2>&1; then
-      ll --group-directories-first "${@}"
-    else
-      LL=$(ll "${@}")
-      echo "${LL}" | grep -E "^d"
-      echo "${LL}" | grep -E -v "^d|^total"
-      echo "${LL}" | grep -E "^total"
-    fi
-  } | $PAGER
-}
-
-sssh() {
-  (autossh -t "${@}" 'if tmux has; then tmux -2u attach; else tmux -2u new; fi') 2>/dev/null
-}
-
-hgdiff() {
-  nvim -d -c 'map q :qa!<CR>' <(hg cat "$1") "$1"
-}
-
-playtime() {
-  if [ -x /usr/local/bin/soxi ]; then
-    soxi -d "${@}" 2>&1
-  else
-    echo "soxi is not installed"
-  fi
-}
-
-dosass() {
-  if [ "${#}" -eq 1 ]; then
-    OUT_FILE="$(dirname "${1}")/$(basename -s .scss "${1}").css"
-  else
-    OUT_FILE="${2}"
-  fi
-
-  sassc -mlt nested "${1}" "${OUT_FILE}"
 }
 
 catmd() {
@@ -129,8 +64,79 @@ catmd() {
   fi
 }
 
+dir() {
+  {
+    if ls --group-directories-first -d . >/dev/null 2>&1; then
+      ll --group-directories-first "${@}"
+    else
+      LL=$(ll "${@}")
+      echo "${LL}" | grep -E "^d"
+      echo "${LL}" | grep -E -v "^d|^total"
+      echo "${LL}" | grep -E "^total"
+    fi
+  } | $PAGER
+}
+
+dosass() {
+  if [ "${#}" -eq 1 ]; then
+    OUT_FILE="$(dirname "${1}")/$(basename -s .scss "${1}").css"
+  else
+    OUT_FILE="${2}"
+  fi
+
+  sassc -mlt nested "${1}" "${OUT_FILE}"
+}
+
+hgdiff() {
+  nvim -d -c 'map q :qa!<CR>' <(hg cat "$1") "$1"
+}
+
+playtime() {
+  if [ -x /usr/local/bin/soxi ]; then
+    soxi -d "${@}" 2>&1
+  else
+    echo "soxi is not installed"
+  fi
+}
+
 sscerts() {
   openssl req -new -newkey rsa:4096 -days 3653 -nodes -x509 -subj "/CN=${1}/O=DavidTheMachine/C=US/ST=California/L=Anaheim" -keyout "${1}.key" -out "${1}.cert"
+}
+
+sssh() {
+  (autossh -t "${@}" 'if tmux has; then tmux -2u attach; else tmux -2u new; fi') 2>/dev/null
+}
+
+superupdate() {
+  if apt-get >/dev/null 2>&1; then
+    \sudo \sh -c " \
+      \apt-get update && \
+      \apt-get -y upgrade && \
+      \apt-get -y dist-upgrade && \
+      \apt-get -y autoremove && \
+      \apt-get -y clean"
+  elif portsnap >/dev/null 2>&1; then # XXX rewrite as pkg
+    \sudo \sh -c " \
+      \portsnap fetch update && \
+      \sudo \portmaster -aD && \
+      \sudo \pkg2ng && \
+      \sudo \freebsd-update fetch &&
+      \sudo \freebsd-update install"
+  else
+    echoerr "This script is not configured for your system."
+  fi
+}
+
+vman() {
+  if [ -x /usr/bin/nvim ]; then
+    if [ "${#}" -eq 2 ]; then
+      /usr/bin/nvim -R "man://${2}(${1})"
+    else
+      /usr/bin/nvim -R "man://${1}"
+    fi
+  else
+    /usr/bin/man "${@}"
+  fi
 }
 
 # I'm keeping the following around for historical reference
