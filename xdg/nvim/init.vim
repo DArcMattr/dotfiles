@@ -359,10 +359,10 @@ if $TMUX != ''
 endif
 
 function! SetDiffColors()
-  highlight DiffAdd cterm=bold ctermfg=white ctermbg DarkGreen
-  highlight DiffDelete cterm=bold ctermfg=white ctermbg DarkGrey
-  highlight DiffChange cterm=bold ctermfg=white ctermbg DarkBlue
-  highlight DiffText cterm=bold ctermfg=white ctermbg DarkRed
+  highlight DiffAdd cterm=bold ctermfg=white ctermbg=DarkGreen
+  highlight DiffDelete cterm=bold ctermfg=white ctermbg=DarkGrey
+  highlight DiffChange cterm=bold ctermfg=white ctermbg=DarkBlue
+  highlight DiffText cterm=bold ctermfg=white ctermbg=DarkRed
 endfunction
 autocmd FilterWritePre * call SetDiffColors()
 
