@@ -61,7 +61,7 @@ rgb_white='\[\033[01;37m\]'
 
 rgb_std="${rgb_white}"
 
-if [ `id -u` -eq 0 ]; then
+if [ $(id -u) -eq 0 ]; then
   rgb_usr="${rgb_red}"
 else
   rgb_usr="${rgb_yellow}"
