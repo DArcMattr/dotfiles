@@ -155,11 +155,6 @@ let maplocalleader = " "
 let c_space_errors = 1
 let php_sync_method = 1
 let $GIT_SSL_NO_VERIFY = 'true'
-let g:NumberToggleTrigger = '<Leader>l'
-let g:UltiSnipsExpandTrigger = "<M-x>"
-let g:UltiSnipsJumpBackwardTrigger = "<M-h>"
-let g:UltiSnipsJumpForwardTrigger = "<M-l>"
-let g:VCSCommandSplit = 'vertical'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#quickfix#location_text = 'Location'
 let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
@@ -184,6 +179,7 @@ let g:mta_filetypes = {
   \ 'php' : 1,
   \}
 let g:netrw_silent = 1
+let g:NumberToggleTrigger = '<Leader>l'
 let g:session_autoload = 'no'
 let g:session_autosave = 'no'
 let g:sparkupExecuteMapping = '<Leader>se'
@@ -194,21 +190,17 @@ let g:syntastic_check_on_wp = 0
 let g:syntastic_error_symbol = '⧰'
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d -c ~/.eslintrc'
-let g:syntastic_php_phpcs_args = '--report=csv --standard=WordPress-Core'
-let g:syntastic_wordpress_checkers = ['php', 'phpcs']
-let g:syntastic_wordpress_phpcs_args = '--report=csv --standard=WordPress-Core'
 let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_wordpress_phpcs_standard = 'WordPress-Core'
 let g:tagcommands = { 'php': { 'args': '-R' } }
-let g:tslime_always_current_session = 1
-let g:tslime_always_current_window = 1
-let g:tslime_ensure_trailing_newlines = 1
-let g:tslime_normal_mapping = '<LocalLeader>t'
-let g:tslime_visual_mapping = '<LocalLeader>t'
-let g:tslime_vars_mapping = '<LocalLeader>T'
+let g:UltiSnipsExpandTrigger = "<M-x>"
+let g:UltiSnipsJumpBackwardTrigger = "<M-h>"
+let g:UltiSnipsJumpForwardTrigger = "<M-l>"
 let g:unite_cursor_line_time = "0.0"
 let g:unite_enable_split_vertically = 1
 let g:unite_options_auto_resize = 1
 let g:unite_update_time = 0
+let g:VCSCommandSplit = 'vertical'
 let g:vimpager = {}
 let g:wordpress_vim_tags_file_name='../tags'
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
@@ -259,6 +251,8 @@ nnoremap : ;
 
 inoremap <C-U> <C-G>u<C-U>
 inoremap <C-x><C-k> <nop>
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-n>" : "\<S-Tab>"
 
 vnoremap y y`]
 vnoremap p "_dP`]
@@ -285,8 +279,8 @@ elseif executable('ack-grep')
 endif
 
 command! -nargs=1 Silent |
-\ execute ':silent !'.<q-args> |
-\ execute ':redraw!'
+  \ execute ':silent !'.<q-args> |
+  \ execute ':redraw!'
 
 command! -nargs=* -complete=help Help vertical belowright help <args>
 
@@ -481,8 +475,8 @@ autocmd FileType hgcommit match OverLength /\%73v.\+/
 autocmd BufNewFile,BufRead,BufEnter *.mysql setfiletype mysql
 
 " Perl
-autocmd FileType perl setlocal makeprg=perl keywordprg=perldoc\ -f
-autocmd FileType perl compiler perl
+autocmd FileType perl setlocal makeprg=perl keywordprg=perldoc\ -f |
+  \ compiler perl
 
 " PHP
 autocmd FileType php setlocal keywordprg=pman
@@ -491,8 +485,8 @@ autocmd FileType php setlocal keywordprg=pman
 autocmd BufNewFile,BufRead,BufEnter *.psql setfiletype postgresql
 
 " Python
-autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
-  \ smarttab expandtab formatoptions=croql keywordprg=pydoc
+autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 smarttab
+  \ expandtab formatoptions=croql keywordprg=pydoc
 
 " Ruby
 autocmd BufNewFile,BufRead Vagrantfile setfiletype ruby
@@ -511,8 +505,10 @@ autocmd FileType css.wordpress setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType scss.wordpress setlocal shiftwidth=2 tabstop=2 softtabstop=2
   \ smarttab noexpandtab smartindent textwidth=85
 
-autocmd FileType php.wordpress match OverLength /%86v.\+/
-autocmd FileType javascript.wordpress match OverLength /%86v.\+/
+autocmd FileType php.wordpress match OverLength /%86v.\+/ |
+  \ let b:syntastic_checkers = ['php', 'wordpress/phpcs'] |
+autocmd FileType javascript.wordpress match OverLength /%86v.\+/ |
+  \ let b:syntastic_checkers = ['eslint']
 autocmd FileType css.wordpress match OverLength /%86v.\+/
 autocmd FileType scss.wordpress match OverLength /%86v.\+/
 
