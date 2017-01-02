@@ -108,14 +108,14 @@ sssh() {
 }
 
 superupdate() {
-  if apt-get >/dev/null 2>&1; then
+  if [ -z $(apt-get >/dev/null 2>&1) ]; then
     \sudo \sh -c " \
       \apt-get update && \
       \apt-get -y upgrade && \
       \apt-get -y dist-upgrade && \
       \apt-get -y autoremove && \
       \apt-get -y clean"
-  elif portsnap >/dev/null 2>&1; then # XXX rewrite as pkg
+  elif [ -z $(portsnap >/dev/null 2>&1) ]; then # XXX rewrite as pkg
     \sudo \sh -c " \
       \portsnap fetch update && \
       \sudo \portmaster -aD && \
