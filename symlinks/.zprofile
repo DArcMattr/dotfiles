@@ -6,7 +6,7 @@
 #
 
 export PAGER='less'
-export TERM=xterm-256color
+#export TERM=xterm-256color
 export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
 export CLICOLOR=YES
 export CLICOLOR_FORCE=YES
