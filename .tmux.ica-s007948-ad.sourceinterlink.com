@@ -1,7 +1,7 @@
 #!/bin/sh
 # vim:ft=sh:
 
-SESSION=${USER}
+SESSION="$(echo "${USER}" | sed -e 's/[\. ]/_/g')"
 
 tmux has-session -t "${SESSION}"
 if [ $? -eq 0 ]; then
