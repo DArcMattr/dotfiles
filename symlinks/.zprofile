@@ -6,19 +6,11 @@
 #
 
 export PAGER='less'
-#export TERM=xterm-256color
+export MANPAGER="nvim -c 'set ft=man' -"
 export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
 export CLICOLOR=YES
 export CLICOLOR_FORCE=YES
 export XDG_CONFIG_HOME="${HOME}/.config"
-
-#
-# Browser
-#
-
-if [ -x /usr/local/bin/vimpager ]; then
-  export MANPAGER=/usr/local/bin/vimpager
-fi
 
 #
 # Paths
@@ -34,8 +26,8 @@ typeset -gU cdpath fpath mailpath path
 
 # Set the list of directories that Zsh searches for programs.
 path=(
-  /usr/local/{bin,sbin}
   ~/bin
+  /usr/local/{bin,sbin}
   $path
 )
 
