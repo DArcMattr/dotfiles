@@ -54,7 +54,6 @@ set completeopt=menu,menuone,longest
 set diffopt=filler,vertical
 set display+=lastline
 set encoding=utf-8
-set esckeys
 set expandtab
 set fillchars+=stl:\ ,stlnc:\
 set formatoptions=nqr12
@@ -84,6 +83,7 @@ set noswapfile
 set nowrap
 set nrformats-=octal
 set number
+set path+=**
 set previewheight=20
 set printheader=%<%f%h%m\ %40
 set printheader=+{strftime(\"%c\"getftime(expand(\"%%\")))}%=Page\ %N
