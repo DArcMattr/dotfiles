@@ -13,8 +13,7 @@ else
 endif
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'Shougo/unite.vim', { 'on': 'Unite' } | Plug 'Shougo/unite-outline'
-Plug 'Shougo/vimproc.vim', { 'do' : g:make }
+Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'Valloric/MatchTagAlways'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer --tern-completer --gocode-completer' }
@@ -227,10 +226,10 @@ noremap <C-u> <C-u>zz
 noremap <Leader>t :enew<CR>
 
 nnoremap <C-e> 3<C-e>
-nnoremap <C-p> :Unite file_rec/async<CR>
+nnoremap <C-p> :Denite file_rec/async<CR>
 nnoremap <C-y> 3<C-y>
-nnoremap <Leader>/ :Unite grep:.<CR>
-nnoremap <Leader>o :Unite outline<CR>
+nnoremap <Leader>/ :Denite grep:.<CR>
+nnoremap <Leader>o :Denite outline<CR>
 nnoremap <Leader>q :nohlsearch<CR>
 nnoremap H ^
 nnoremap J mzJ`z
@@ -264,18 +263,24 @@ cmap w!! w !sudo tee % >/dev/null
 command! W w !sudo tee % >/dev/null
 
 if executable('ag')
-  " Use ag in unite grep source.
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts =
-    \ '--line-numbers --nocolor --nogroup --hidden --ignore ' .
-    \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-  let g:unite_source_grep_recursive_opt = ''
+  " Use ag in denite grep source.
+  call denite#custom#var('grep', 'command', ['ag'])
+  call denite#custom#var('grep', 'default_opts',
+      \ ['-i', '--vimgrep'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', [])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
 elseif executable('ack-grep')
   " Use ack in unite grep source.
-  let g:unite_source_grep_command = 'ack-grep'
-  let g:unite_source_grep_default_opts =
-    \ '--no-heading --no-color -a -H'
-  let g:unite_source_grep_recursive_opt = ''
+  call denite#custom#var('grep', 'command', ['ack'])
+  call denite#custom#var('grep', 'default_opts',
+      \ ['--ackrc', $HOME.'/.ackrc', '-H',
+      \  '--nopager', '--nocolor', '--nogroup', '--column'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', ['--match'])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
 endif
 
 command! -nargs=1 Silent |

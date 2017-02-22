@@ -1,6 +1,8 @@
 #!/bin/sh
 # vim:ft=sh:
 
+tmux set-option -g default-terminal "tmux-256color"
+tmux set-option -gu terminal-overrides
 SESSION="$(echo "${USER}" | sed -e 's/[\. ]/_/g')"
 
 tmux has-session -t "${SESSION}"
