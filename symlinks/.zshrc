@@ -1,18 +1,18 @@
-export ZSH="${HOME}/.oh-my-zsh"
 export ZSH_CUSTOM="${HOME}/dotfiles/zsh-custom"
 export AUTOENV_IN_FILE=".in"
+fpath=(~/dotfiles/zsh-custom $fpath)
 
-ZSH_THEME="dca"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_CORRECTION="true"
 KEYTIMEOUT=1
 
-plugins=(vi-mode svn-fast-info git-prompt autoenv ssh-agent)
-
-source ${ZSH}/oh-my-zsh.sh
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
 
 if [ -n ${ZSH_VERSION-} ]; then
   autoload -U +X bashcompinit && bashcompinit
+  source ~/contrib/autoenv/autoenv.plugin.zsh
 
   have() {
     unset have
