@@ -10,6 +10,7 @@ ln -s ~/dotfiles/xdg/git/config ~/.config/git/config
 ln -s ~/dotfiles/xdg/git/attributes ~/.config/git/attributes
 ln -s ~/dotfiles/xdg/git/template ~/.config/git/template
 ln -s ~/dotfiles/xdg/nvim/init.vim ~/.config/nvim/init.vim
+tic -x ~/dotfiles/tmux-256color.terminfo
 
 find ~/dotfiles/symlinks/ -name ".*" -exec ln -sf "{}" "${HOME}" \;
 
