@@ -5,7 +5,7 @@ prompt_darc_help () {
 
   prompt darc [<color1> [<color2> [<color3> [<color4> [<color5>]]]]]
 
-  defaults are blue, cyan, green, yellow, and white, respectively.
+  defaults are red, yellow, green, blue, and white, respectively.
 
 EOF
 }
@@ -20,15 +20,20 @@ prompt_darc_setup () {
 
   add-zsh-hook precmd prompt_darc_precmd
 
+  pcc[1]=${1:-${${SSH_CLIENT+'yellow'}:-'red'}}
+  pcc[2]=${2:-'yellow'}
+  pcc[3]=${3:-'green'}
+  pcc[4]=${4:-'blue'}
+  pcc[5]=${5:-'white'}
 
   typeset -ga zle_highlight
   zle_highlight[(r)default:*]=default:$pcc[2]
 
   # Set editor-info parameters.
-  zstyle ':prezto:module:editor:info:completing' format '%B%F{$pcc[1]}...%f%b'
-  zstyle ':prezto:module:editor:info:keymap:primary' format '%B%F{$pcc[1]}❯%f%b'
-  zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format '%F{$pcc[1]}♺%f'
-  zstyle ':prezto:module:editor:info:keymap:alternate' format '%B%F{$pcc[1]}❮%f%b'
+  zstyle ':prezto:module:editor:info:completing' format "%B%F{$pcc[1]}...%f%b"
+  zstyle ':prezto:module:editor:info:keymap:primary' format "%B%F{$pcc[1]}❯%f%b"
+  zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format "%F{$pcc[1]}♺%f"
+  zstyle ':prezto:module:editor:info:keymap:alternate' format "%B%F{$pcc[1]}❮%f%b"
 
   PROMPT='
 ${(e)$(prompt_darc_build)}${editor_info[keymap]} '
@@ -38,6 +43,7 @@ ${(e)$(prompt_darc_build)}${editor_info[keymap]} '
 
 prompt_darc_build () {
   setopt noxtrace noksharrays localoptions
+  local -a pcc
   local -A pc
   local p_date p_tty p_plat p_ver p_userpwd p_apm p_shlvlhist p_rc p_end p_win p_vcs
 
@@ -47,12 +53,10 @@ prompt_darc_build () {
   pcc[4]=${4:-'blue'}
   pcc[5]=${5:-'white'}
 
-  pc['\[']="%F{$pcc[1]}%B[%b"
-  pc['\]']="%F{$pcc[1]}%B]%b"
-  pc['<']="%F{$pcc[1]}<"
-  pc['>']="%F{$pcc[1]}>"
-  pc['\(']="%F{$pcc[1]}("
-  pc['\)']="%F{$pcc[1]})"
+  pc['\[']="%F{$pcc[1]}%S["
+  pc['\]']="%F{$pcc[1]}]%s"
+  pc['<']="%F{$pcc[1]}%B<"
+  pc['>']="%F{$pcc[1]}>%b"
 
   p_date="$pc['\[']%F{$pcc[2]}%D{%A %F %T %Z}$pc['\]']"
 
