@@ -37,13 +37,11 @@ Some of these will be installed via the install scripts or apt-get below.
 
 ## Installation Steps
 
-### for oh-my-zsh
+### for prezto
 
-I had troubles with the prompts in zprezto, else I'd still be using it
 
     cd ~
-    git clone --recursive https://github.com/robbyrussell/oh-my-zsh.git \
-      ~/.oh-my-zsh
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 
 ### All the rest
 

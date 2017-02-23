@@ -66,7 +66,6 @@ grab_autoenv() {
   INSTALL_PATH="${HOME}/contrib/autoenv"
   if [ ! -d "${INSTALL_PATH}/.git" ]; then
     git clone https://github.com/horosgrisa/autoenv.git ${INSTALL_PATH}
-    ln -s "${INSTALL_PATH}" "${ZSH_CUSTOM}/plugins/autoenv"
   else
     ( cd "${INSTALL_PATH}" && git up )
   fi
