@@ -54,21 +54,16 @@ prompt_darc_build () {
   pc['\(']="%F{$pcc[1]}("
   pc['\)']="%F{$pcc[1]})"
 
-  p_date="$pc['\[']%F{$pcc[2]}%D{%a %y/%m/%d %R %Z}$pc['\]']"
-  p_tty="$pc['\[']%F{$pcc[3]}%l$pc['\]']"
-  p_plat="$pc['\[']%F{$pcc[2]}${MACHTYPE}/${OSTYPE}/$(uname -r)$pc['\]']"
-  p_ver="$pc['\[']%F{$pcc[2]}${ZSH_VERSION}$pc['\]']"
+  p_date="$pc['\[']%F{$pcc[2]}%D{%A %F %T %Z}$pc['\]']"
 
-  [[ -n "$WINDOW" ]] && p_win="$pc['\(']%F{$pcc[4]}$WINDOW$pc['\)']"
-
-  p_userpwd="$pc['<']%F{$pcc[3]}%n@%m$p_win%F{$pcc[5]}:%F{$pcc[4]}%~$pc['>']"
+  p_userpwd="$pc['<']%F{$pcc[3]}%n@%m%F{$pcc[5]}:%F{$pcc[4]}%d$pc['>']"
   p_vcs="%(2v.%U%2v%u.)"
 
   p_shlvlhist="%fzsh%(2L./$SHLVL.) %B%h%b "
   p_rc="%(?..[%?%1v] )"
   p_end="%f%B%#%b "
 
-  print "$p_date$p_tty$p_plat$p_ver
+  print "$p_date
 $p_userpwd
 $p_shlvlhist$p_rc$p_vcs$p_end "
 }
