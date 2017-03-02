@@ -3,12 +3,12 @@
 
 SESSION="$(echo "${USER}" | sed -e 's/[\. ]/_/g')"
 
-tmux set-option -g default-terminal "tmux-256color"
-
 tmux has-session -t "${SESSION}"
 if [ $? -eq 0 ]; then
   echo "Session ${SESSION} already exists, attaching"
 else
+  tmux set-option -g default-terminal "tmux-256color"
+
   . ~/dotfiles/helpers/project_pane.sh
 
   tmux new-session -d -s "${SESSION}"
