@@ -16,7 +16,7 @@ $filename_pattern = '/\.php$/';
 $exit_status = 0;
 
 foreach ( $output as $file ) {
-	if ( ! preg_match( $filename_pattern, $file ) ) {
+	if ( ! ( preg_match( $filename_pattern, $file ) && file_exists( $file ) ) ) {
 		// don't check files that aren't PHP
 		continue;
 	}
