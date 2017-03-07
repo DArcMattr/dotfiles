@@ -5,18 +5,21 @@
 #  - optional parameter for whether to run a command in a pane
 #  - check if no parameters given, exit, or use some fallbacks
 project_pane() {
-  while getopts ":d:n:t:l:" opt; do
+  while getopts ":d:gl:n:t:" opt; do
     case "$opt" in
       d) DIRECTORY=${OPTARG}
+        ;;
+
+      g) GRUNT=${OPTARG:-local}
+        ;;
+
+      l) LOG=${OPTARG}
         ;;
 
       n) NAME=${OPTARG}
         ;;
 
       t) SESSION=${OPTARG}
-        ;;
-
-      l) LOG=${OPTARG}
         ;;
 
       *) echo "Invalid Option: -${OPTARG}" >&2
@@ -41,9 +44,12 @@ project_pane() {
   tmux split-window -h -l 112 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}"
   tmux split-window -v -p 50 -t "${SESSION}:${WIN_NUM}.1" -c "${DIRECTORY}"
   tmux split-window -v -l 6 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}"
+  if [ ! -n ${GRUNT} ]; then
+    tmux send-keys -t "${SESSION}:${WIN_NUM}.3" "grunt ${GRUNT}"
+  fi
   tmux select-pane -t "${SESSION}:${WIN_NUM}.0"
   tmux rename-window -t "${SESSION}:${WIN_NUM}" "${NAME}"
 
-  tmux send-keys -t "${SESSION}:${WIN_NUM}".2 "tail -F ${LOG}" C-m
+  tmux send-keys -t "${SESSION}:${WIN_NUM}.2" "tail -F ${LOG}" C-m
 }
 
