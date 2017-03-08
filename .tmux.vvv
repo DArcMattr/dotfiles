@@ -7,12 +7,12 @@ tmux has-session -t "${SESSION}"
 if [ $? -eq 0 ]; then
   echo "Session ${SESSION} already exists, attaching"
 else
-  tmux set-option -g default-terminal "tmux-256color"
-
+  WP_DIR="/srv/www/ten/wordpress/wp-content/"
   . ~/dotfiles/helpers/project_pane.sh
 
   tmux new-session -d -s "${SESSION}"
 
+  tmux set-option -t "${SESSION}" -g default-terminal "tmux-256color"
   tmux set-option -t "${SESSION}" status-position top
 
   tmux new-window -t "${SESSION}":0 -k
@@ -21,13 +21,13 @@ else
   tmux send-keys -t "${SESSION}":1 "htop" C-m
   tmux rename-window -t "${SESSION}":1 "htop"
 
-  project_pane -t "${SESSION}" -n "Motortrend"   -d "/srv/www/ten/wordpress/wp-content/themes/motor-trend"
-  project_pane -t "${SESSION}" -n "AMAG"         -d "/srv/www/ten/wordpress/wp-content/themes/automobile-mag"
-  project_pane -t "${SESSION}" -n "Low Rider"    -d "/srv/www/ten/wordpress/wp-content/themes/low-rider"
-  project_pane -t "${SESSION}" -n "Hot Rod"      -d "/srv/www/ten/wordpress/wp-content/themes/hot-rod"
-  project_pane -t "${SESSION}" -n "MT Intl"      -d "/srv/www/ten/wordpress/wp-content/themes/motor-trend-international"
-  project_pane -t "${SESSION}" -n "Vehicle Data" -d "/srv/www/ten/wordpress/wp-content/plugins/vehicle-data"
-  project_pane -t "${SESSION}" -n "MU Plugins"   -d "/srv/www/ten/wordpress/wp-content/mu-plugins"            -l "../debug.log"
+  project_pane -t "${SESSION}" -n "AMAG"         -d "${WP_DIR}themes/automobile-mag"
+  project_pane -t "${SESSION}" -n "Hot Rod"      -d "${WP_DIR}themes/hot-rod"
+  project_pane -t "${SESSION}" -n "Low Rider"    -d "${WP_DIR}themes/low-rider"
+  project_pane -t "${SESSION}" -n "Motortrend"   -d "${WP_DIR}themes/motor-trend"
+  project_pane -t "${SESSION}" -n "MT Intl"      -d "${WP_DIR}themes/motor-trend-international"
+  project_pane -t "${SESSION}" -n "MU Plugins"   -d "${WP_DIR}mu-plugins/ten-shared"
+  project_pane -t "${SESSION}" -n "Vehicle Data" -d "${WP_DIR}plugins/vehicle-data"
 
   tmux select-window -t "${SESSION}":0
 fi
