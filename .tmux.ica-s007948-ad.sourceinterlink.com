@@ -26,7 +26,7 @@ else
   ( project_pane -t "${SESSION}" -n "Low Rider"    -d "${WP_DIR}themes/low-rider" -g )
   ( project_pane -t "${SESSION}" -n "Motortrend"   -d "${WP_DIR}themes/motor-trend" -g )
   ( project_pane -t "${SESSION}" -n "MT Intl"      -d "${WP_DIR}themes/motor-trend-international" -g )
-  ( project_pane -t "${SESSION}" -n "MU Plugins"   -d "${WP_DIR}mu-plugins/ten-shared" -l "../debug.log" -g )
+  ( project_pane -t "${SESSION}" -n "MU Plugins"   -d "${WP_DIR}mu-plugins/ten-shared" -g )
   ( project_pane -t "${SESSION}" -n "Vehicle Data" -d "${WP_DIR}plugins/vehicle-data" -g watch )
 
   tmux select-window -t "${SESSION}":0
