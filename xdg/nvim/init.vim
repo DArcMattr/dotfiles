@@ -195,10 +195,6 @@ let g:tagcommands = { 'php': { 'args': '-R' } }
 let g:UltiSnipsExpandTrigger = "<M-x>"
 let g:UltiSnipsJumpBackwardTrigger = "<M-h>"
 let g:UltiSnipsJumpForwardTrigger = "<M-l>"
-let g:unite_cursor_line_time = "0.0"
-let g:unite_enable_split_vertically = 1
-let g:unite_options_auto_resize = 1
-let g:unite_update_time = 0
 let g:VCSCommandSplit = 'vertical'
 let g:vimpager = {}
 let g:wordpress_vim_tags_file_name='../tags'
@@ -228,7 +224,7 @@ noremap <Leader>t :enew<CR>
 nnoremap <C-e> 3<C-e>
 nnoremap <C-p> :Denite file_rec/async<CR>
 nnoremap <C-y> 3<C-y>
-nnoremap <Leader>/ :Denite grep:.<CR>
+nnoremap <Leader>/ :Denite grep .<CR>
 nnoremap <Leader>o :Denite outline<CR>
 nnoremap <Leader>q :nohlsearch<CR>
 nnoremap H ^
@@ -262,17 +258,22 @@ xnoremap c "xc
 cmap w!! w !sudo tee % >/dev/null
 command! W w !sudo tee % >/dev/null
 
+" Denite
+
+call denite#custom#option( 'default', 'vertical_preview', 1 )
+call denite#custom#option( 'list', 'mode', 'normal' )
+call denite#custom#option( 'grep', 'vertical_preview', 1 )
+
 if executable('ag')
   " Use ag in denite grep source.
-  call denite#custom#var('grep', 'command', ['ag'])
-  call denite#custom#var('grep', 'default_opts',
-      \ ['-i', '--vimgrep'])
+  call denite#custom#var('grep', 'command',      ['ag'])
+  call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
   call denite#custom#var('grep', 'recursive_opts', [])
   call denite#custom#var('grep', 'pattern_opt', [])
   call denite#custom#var('grep', 'separator', ['--'])
   call denite#custom#var('grep', 'final_opts', [])
 elseif executable('ack-grep')
-  " Use ack in unite grep source.
+  " Use ack in denite grep source.
   call denite#custom#var('grep', 'command', ['ack'])
   call denite#custom#var('grep', 'default_opts',
       \ ['--ackrc', $HOME.'/.ackrc', '-H',
