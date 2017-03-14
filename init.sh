@@ -24,17 +24,11 @@ find ~/dotfiles/symlinks/ -name ".*" -exec ln -sf "{}" "${HOME}" \;
   grab_wp_cli
   grab_pips
   grab_sassc
+  grab_sniffs
   grab_tpm
   grab_nvm
   grab_autoenv
-)
 
-composer global require 'phpmd/phpmd=*' \
-  'squizlabs/php_codesniffer=*' \
-  'phing/phing=*' \
-  'psy/psysh=*'
-
-(
   cd ~/dotfiles &&
   hg cfg --local hooks.update "chmod 600 ~/dotfiles/sshconfig" &&
   hg cfg --local paths.default "ssh://hg@bitbucket.org/darceneaux/dotfiles"

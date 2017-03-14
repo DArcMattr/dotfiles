@@ -103,9 +103,17 @@ grab_composer() {
   if ! command -v composer >/dev/null 2>&1 ; then
     ( cd /tmp; \
       curl -sS https://getcomposer.org/installer | php -d "allow_url_fopen=On"; \
-      mv composer.phar ~/bin/composer )
+      mv composer.phar ~/bin/composer
+      cd ~
+      composer global require 'phpmd/phpmd=*' \
+        'squizlabs/php_codesniffer=*' \
+        'phing/phing=*' \
+        'psy/psysh=*' \
+        'phpunit/phpunit=6.*'
+    )
   else
     composer self-update
+    composer global update
   fi
 }
 
@@ -130,6 +138,23 @@ grab_nvm() {
       cd "${INSTALL_PATH}" &&
       git fetch &&
       git checkout "$(git describe --abbrev=0 --tags)"
+    )
+  fi
+}
+
+grab_sniffs() {
+  INSTALL_PATH="${HOME}/contrib/wpcs"
+  if [ ! -d "${INSTALL_PATH}/.git" ]; then
+    git clone https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git "${INSTALL_PATH}" && (
+      cd "${INSTALL_PATH}" &&
+      git checkout "$(git describe --abbrev=0 --tags)"
+      phpcs --config-set installed_paths "${INSTALL_PATH}"
+    )
+  else
+    (
+      cd "${INSTALL_PATH}" &&
+        git fetch &&
+        git checkout "$(git describe --abbrev=0 --tags)"
     )
   fi
 }
