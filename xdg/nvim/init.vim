@@ -200,30 +200,28 @@ let g:vimpager = {}
 let g:wordpress_vim_tags_file_name='../tags'
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
-" key remappings - toggle spell checking
-imap <C-c> <CR><Esc>O
+imap <C-c>       <CR><ESC>O
 
-map <Leader>gs :Gstatus<CR>
-map <Leader>gd :Gdiff<CR>
-map <Leader>gc :Gcommit<CR>
-map <Leader>gl :Glog<CR>
-map <Leader>gp :Gpush<CR>
-map <Leader>os :call RestoreSess()
-map <C-PageUp> :bn<CR>
+map <Leader>gs   :Gstatus<CR>
+map <Leader>gd   :Gdiff<CR>
+map <Leader>gc   :Gcommit<CR>
+map <Leader>gl   :Glog<CR>
+map <Leader>gp   :Gpush<CR>
+map <C-PageUp>   :bn<CR>
 map <C-PageDown> :bp<CR>
 map <Leader><F7> :setlocal spell! spell? spelllang=en_us<CR>
 
 nmap . .'[
 
-noremap n nzz
-noremap N Nzz
-noremap <C-d> <C-d>zz
-noremap <C-u> <C-u>zz
+noremap n         nzz
+noremap N         Nzz
+noremap <C-d>     <C-d>zz
+noremap <C-u>     <C-u>zz
 noremap <Leader>t :enew<CR>
 
-nnoremap <C-e> 3<C-e>
-nnoremap <C-p> :Denite file_rec/async<CR>
-nnoremap <C-y> 3<C-y>
+nnoremap <C-e>     3<C-e>
+nnoremap <C-p>     :Denite file_rec/async<CR>
+nnoremap <C-y>     3<C-y>
 nnoremap <Leader>/ :Denite grep:.<CR>
 nnoremap <Leader>o :Denite outline<CR>
 nnoremap <Leader>q :nohlsearch<CR>
@@ -244,10 +242,10 @@ nnoremap ` '
 nnoremap ; :
 nnoremap : ;
 
-inoremap <C-U> <C-G>u<C-U>
+inoremap <C-u>      <C-g>u<C-u>
 inoremap <C-x><C-k> <nop>
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-n>" : "\<S-Tab>"
+inoremap <expr>     <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr>     <S-Tab> pumvisible() ? "\<C-n>" : "\<S-Tab>"
 
 vnoremap y y`]
 vnoremap p "_dP`]
@@ -341,21 +339,21 @@ if $TMUX != ''
     let @t = system('xclip -o -selection clipboard | tmux load-buffer -;tmux show-buffer')
   endfunction
 
-  vnoremap <silent> <esc>y "ty:call TmuxSharedYank()<cr>
-  vnoremap <silent> <esc>d "td:call TmuxSharedYank()<cr>
-  nnoremap <silent> <esc>p :call TmuxSharedPaste()<cr>"tp
-  vnoremap <silent> <esc>p d:call TmuxSharedPaste()<cr>h"tp
+  vnoremap <silent> <ESC>y "ty:call TmuxSharedYank()<cr>
+  vnoremap <silent> <ESC>d "td:call TmuxSharedYank()<cr>
+  nnoremap <silent> <ESC>p :call TmuxSharedPaste()<cr>"tp
+  vnoremap <silent> <ESC>p d:call TmuxSharedPaste()<cr>h"tp
   set clipboard= " Use this or vim will automatically put deleted text into x11 selection('*' register) which breaks the above map
 
-  nnoremap <silent> <c-w>j :silent call TmuxMove('j')<cr>
-  nnoremap <silent> <c-w>j :silent call TmuxMove('j')<cr>
-  nnoremap <silent> <c-w>k :silent call TmuxMove('k')<cr>
-  nnoremap <silent> <c-w>h :silent call TmuxMove('h')<cr>
-  nnoremap <silent> <c-w>l :silent call TmuxMove('l')<cr>
-  nnoremap <silent> <c-w><down> :silent call TmuxMove('j')<cr>
-  nnoremap <silent> <c-w><up> :silent call TmuxMove('k')<cr>
-  nnoremap <silent> <c-w><left> :silent call TmuxMove('h')<cr>
-  nnoremap <silent> <c-w><right> :silent call TmuxMove('l')<cr>
+  nnoremap <silent> <C-w>j :silent call TmuxMove('j')<cr>
+  nnoremap <silent> <C-w>j :silent call TmuxMove('j')<cr>
+  nnoremap <silent> <C-w>k :silent call TmuxMove('k')<cr>
+  nnoremap <silent> <C-w>h :silent call TmuxMove('h')<cr>
+  nnoremap <silent> <C-w>l :silent call TmuxMove('l')<cr>
+  nnoremap <silent> <C-w><down> :silent call TmuxMove('j')<cr>
+  nnoremap <silent> <C-w><up> :silent call TmuxMove('k')<cr>
+  nnoremap <silent> <C-w><left> :silent call TmuxMove('h')<cr>
+  nnoremap <silent> <C-w><right> :silent call TmuxMove('l')<cr>
 endif
 
 function! SetDiffColors()
