@@ -1,24 +1,22 @@
 #!/bin/sh
+
 if [ -r ~/.rvm/scripts/rvm ]; then
   . ~/.rvm/scripts/rvm
-  export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+  PATH="${HOME}/.rvm/bin:${PATH}" # Add RVM to PATH for scripting
 fi
 
 # machine/Desktop Environment dependent
-alias sicp='racket -i -p neil/sicp -l xrepl'
-
-export GOPATH=$HOME/go
-export PATH=$PATH:~/contrib/android-sdk/sdk/tools
-export PATH=$PATH:~/contrib/android-sdk/sdk/platform-tools
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export GOPATH=${HOME}/go
 export CC=clang
 export CXX=clang++
-
-PATH="/home/darc/perl5/bin${PATH+:}${PATH}"; export PATH;
-PERL5LIB="/home/darc/perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/darc/perl5${PERL_LOCAL_LIB_ROOT+:}${PERL_LOCAL_LIB_ROOT}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/darc/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/darc/perl5"; export PERL_MM_OPT;
+export PERL5LIB="/home/darc/perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"
+export PERL_LOCAL_LIB_ROOT="/home/darc/perl5${PERL_LOCAL_LIB_ROOT+:}${PERL_LOCAL_LIB_ROOT}"
+export PERL_MB_OPT="--install_base \"/home/darc/perl5\""
+export PERL_MM_OPT="INSTALL_BASE=/home/darc/perl5"
 
 # Ubuntu make installation of Swift Lang
-PATH=/home/darc/.local/share/umake/swift/swift-lang/usr/bin:$PATH
+PATH=~/contrib/android-sdk/sdk/tools:${PATH}
+PATH=~/contrib/android-sdk/sdk/platform-tools:${PATH}
+PATH=${GOPATH}/bin:${PATH}
+PATH="/home/darc/perl5/bin${PATH+:}${PATH}"
+export PATH=/home/darc/.local/share/umake/swift/swift-lang/usr/bin:${PATH}
