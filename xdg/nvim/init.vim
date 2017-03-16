@@ -224,7 +224,7 @@ noremap <Leader>t :enew<CR>
 nnoremap <C-e> 3<C-e>
 nnoremap <C-p> :Denite file_rec/async<CR>
 nnoremap <C-y> 3<C-y>
-nnoremap <Leader>/ :Denite grep .<CR>
+nnoremap <Leader>/ :Denite grep:.<CR>
 nnoremap <Leader>o :Denite outline<CR>
 nnoremap <Leader>q :nohlsearch<CR>
 nnoremap H ^
@@ -463,7 +463,7 @@ autocmd FileType go autocmd BufWritePre <buffer> Fmt
 autocmd BufNewFile *.html 0r ~/dotfiles/lang/html/index.html
 
 " Lisp
-autocmd FileType lisp,scheme,art setlocal equalprg=scmindent.rkt
+autocmd FileType lisp,scheme,art setlocal equalprg=~/dotfiles/helpers/scmindent.rkt
 
 " Lua
 autocmd FileType lua setlocal shiftwidth=4 tabstop=4 softtabstop=4 smarttab
