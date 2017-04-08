@@ -89,6 +89,7 @@ set noswapfile
 set nowrap
 set nrformats-=octal
 set number
+set path+=**
 set previewheight=20
 set printheader=%<%f%h%m\ %40
 set printheader=+{strftime(\"%c\"getftime(expand(\"%%\")))}%=Page\ %N
@@ -255,12 +256,12 @@ map <Leader>gd :Gdiff<CR>
 map <Leader>gc :Gcommit<CR>
 map <Leader>gl :Glog<CR>
 map <Leader>gp :Gpush<CR>
-map <Leader>os :call RestoreSess()
 map <C-PageUp> :bn<CR>
 map <C-PageDown> :bp<CR>
 map <Leader><F7> :setlocal spell! spell? spelllang=en_us<CR>
 
 nmap . .'[
+nmap <C-i>       i<SPACE><ESC>
 
 noremap n nzz
 noremap N Nzz

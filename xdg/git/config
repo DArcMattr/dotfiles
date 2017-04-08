@@ -54,6 +54,11 @@
 [push]
   default = current
   ff = only
+  followTags = true
+[status]
+  showUntrackedFiles = all
+[transfer]
+  fsckobjects = true
 [alias]
   afetch = fetch --all --prune
   amend = commit --amend
@@ -98,12 +103,15 @@
   oldest-ancestor = !zsh -c 'diff --old-line-format= --new-line-format= <(git rev-list --first-parent \"${1:-master}\") <(git rev-list --first-parent \"${2:-HEAD}\") | head -1' -
   ours = "!f() { git co --ours $@ && git add $@; }; f"
   precommit = diff --cached --diff-algorithm=minimal -w
+  prune = fetch --prune
   remotes = remove -v
   ship = "!~/dotfiles/helpers/git-ship"
   st = status
+  stash-all = stash save --include-untracked
   stashes = stash list
   tags = tag
   theirs = "!f() { git co --theirs $@ && git add $@; }; f"
+  undo = reset --soft HEAD^
   unmerged = diff --name-only --diff-filter=U
   unstage = reset -q HEAD
   up = "!f() { git remote update -p origin; git merge --ff-only @{u}; }; f"

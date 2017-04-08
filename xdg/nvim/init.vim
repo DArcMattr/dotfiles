@@ -212,6 +212,7 @@ map <C-PageDown> :bp<CR>
 map <Leader><F7> :setlocal spell! spell? spelllang=en_us<CR>
 
 nmap . .'[
+nmap <C-i>       i<SPACE><ESC>
 
 noremap n         nzz
 noremap N         Nzz
