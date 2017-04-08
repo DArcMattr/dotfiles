@@ -13,7 +13,7 @@ record=
 bookmarks=
 eol=
 prompt=~/contrib/hg-prompt/prompt.py
-hggit=~/contrib/hg-git/hggit
+hggit=
 hgcfg=~/contrib/hgcfg/hgext/hgcfg.py
 extdiff=
 
