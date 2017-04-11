@@ -83,8 +83,9 @@ grab_hgcfg() {
 grab_pips() {
   # I install mercurial via hg on Ubuntu, because the package version is out of
   # date and drags in all kinds of X dependencies
-  sudo pip install -U psutil powerline-status s3cmd dulwich httpie neovim icdiff
-  sudo pip3 install -U psutil powerline-status s3cmd dulwich httpie neovim icdiff
+  pips=(psutil powerline-status s3cmd dulwich httpie neovim icdiff)
+  pip install -U --user $pips
+  pip3 install -U --user $pips
 
   powerline_path="$(dirname "$(python -c 'import powerline; print (powerline.__file__)')")"
   if [ ! -d "${XDG_CONFIG_HOME:=$HOME/.config}/powerline" ]; then
