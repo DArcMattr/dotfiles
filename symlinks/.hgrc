@@ -4,25 +4,26 @@ username = David Arceneaux <david@davidthemachine.org>
 merge = nvim -d
 
 [extensions]
-convert=
-graphlog=
-pager=
-color=
-fetch=
-record=
 bookmarks=
+color=
+convert=
 eol=
-prompt=~/contrib/hg-prompt/prompt.py
-hggit=~/contrib/hg-git/hggit
-hgcfg=~/contrib/hgcfg/hgext/hgcfg.py
 extdiff=
+fetch=
+graphlog=
+hgcfg=~/contrib/hgcfg/hgext/hgcfg.py
+largefiles=
+pager=
+record=
+rebase=
+record=
 
 [alias]
 log=glog
 
 [pager]
 ignore= version, help, update, serve, record
-pager = LESS='FRX' less
+pager = LESS='FRSX' less
 
 [merge-tools]
 vimdiff.executable = nvim
