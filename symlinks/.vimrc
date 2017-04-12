@@ -2,8 +2,10 @@ if !1 | finish | endif
 
 syntax on
 
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+set runtimepath+=~/.config/nvim
+
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
@@ -14,10 +16,9 @@ else
   let g:make = 'gmake'
 endif
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 Plug 'ConradIrwin/vim-bracketed-paste'
-Plug 'Shougo/unite.vim', { 'on': 'Unite' } | Plug 'Shougo/unite-outline'
-Plug 'Shougo/vimproc.vim', { 'do' : g:make }
+Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'Valloric/MatchTagAlways'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer --tern-completer --gocode-completer' }
@@ -239,41 +240,36 @@ let g:tagcommands = { 'php': { 'args': '-R' } }
 let g:UltiSnipsExpandTrigger = "<M-x>"
 let g:UltiSnipsJumpBackwardTrigger = "<M-h>"
 let g:UltiSnipsJumpForwardTrigger = "<M-l>"
-let g:unite_cursor_line_time = "0.0"
-let g:unite_enable_split_vertically = 1
-let g:unite_options_auto_resize = 1
-let g:unite_update_time = 0
 let g:VCSCommandSplit = 'vertical'
 let g:vimpager = {}
 let g:wordpress_vim_tags_file_name='../tags'
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
-" key remappings - toggle spell checking
-imap <C-c> <CR><Esc>O
+imap <C-c>       <CR><ESC>O
 
-map <Leader>gs :Gstatus<CR>
-map <Leader>gd :Gdiff<CR>
-map <Leader>gc :Gcommit<CR>
-map <Leader>gl :Glog<CR>
-map <Leader>gp :Gpush<CR>
-map <C-PageUp> :bn<CR>
+map <Leader>gs   :Gstatus<CR>
+map <Leader>gd   :Gdiff<CR>
+map <Leader>gc   :Gcommit<CR>
+map <Leader>gl   :Glog<CR>
+map <Leader>gp   :Gpush<CR>
+map <C-PageUp>   :bn<CR>
 map <C-PageDown> :bp<CR>
 map <Leader><F7> :setlocal spell! spell? spelllang=en_us<CR>
 
 nmap . .'[
 nmap <C-i>       i<SPACE><ESC>
 
-noremap n nzz
-noremap N Nzz
-noremap <C-d> <C-d>zz
-noremap <C-u> <C-u>zz
+noremap n         nzz
+noremap N         Nzz
+noremap <C-d>     <C-d>zz
+noremap <C-u>     <C-u>zz
 noremap <Leader>t :enew<CR>
 
-nnoremap <C-e> 3<C-e>
-nnoremap <C-p> :Unite file_rec/async<CR>
-nnoremap <C-y> 3<C-y>
-nnoremap <Leader>/ :Unite grep:.<CR>
-nnoremap <Leader>o :Unite outline<CR>
+nnoremap <C-e>     3<C-e>
+nnoremap <C-p>     :Denite file_rec/async<CR>
+nnoremap <C-y>     3<C-y>
+nnoremap <Leader>/ :Denite grep:.<CR>
+nnoremap <Leader>o :Denite outline<CR>
 nnoremap <Leader>q :nohlsearch<CR>
 nnoremap H ^
 nnoremap J mzJ`z
@@ -292,10 +288,10 @@ nnoremap ` '
 nnoremap ; :
 nnoremap : ;
 
-inoremap <C-U> <C-G>u<C-U>
+inoremap <C-u>      <C-g>u<C-u>
 inoremap <C-x><C-k> <nop>
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-n>" : "\<S-Tab>"
+inoremap <expr>     <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr>     <S-Tab> pumvisible() ? "\<C-n>" : "\<S-Tab>"
 
 vnoremap y y`]
 vnoremap p "_dP`]
@@ -306,19 +302,30 @@ xnoremap c "xc
 cmap w!! w !sudo tee % >/dev/null
 command! W w !sudo tee % >/dev/null
 
+" Denite
+
+call denite#custom#option( 'default', 'vertical_preview', 1 )
+call denite#custom#option( 'list', 'mode', 'normal' )
+call denite#custom#option( 'grep', 'vertical_preview', 1 )
+
 if executable('ag')
-  " Use ag in unite grep source.
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts =
-    \ '--line-numbers --nocolor --nogroup --hidden --ignore ' .
-    \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-  let g:unite_source_grep_recursive_opt = ''
+  " Use ag in denite grep source.
+  call denite#custom#var('grep', 'command',      ['ag'])
+  call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', [])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
 elseif executable('ack-grep')
-  " Use ack in unite grep source.
-  let g:unite_source_grep_command = 'ack-grep'
-  let g:unite_source_grep_default_opts =
-    \ '--no-heading --no-color -a -H'
-  let g:unite_source_grep_recursive_opt = ''
+  " Use ack in denite grep source.
+  call denite#custom#var('grep', 'command', ['ack'])
+  call denite#custom#var('grep', 'default_opts',
+      \ ['--ackrc', $HOME.'/.ackrc', '-H',
+      \  '--nopager', '--nocolor', '--nogroup', '--column'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', ['--match'])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
 endif
 
 command! -nargs=1 Silent |
@@ -378,21 +385,21 @@ if $TMUX != ''
     let @t = system('xclip -o -selection clipboard | tmux load-buffer -;tmux show-buffer')
   endfunction
 
-  vnoremap <silent> <esc>y "ty:call TmuxSharedYank()<cr>
-  vnoremap <silent> <esc>d "td:call TmuxSharedYank()<cr>
-  nnoremap <silent> <esc>p :call TmuxSharedPaste()<cr>"tp
-  vnoremap <silent> <esc>p d:call TmuxSharedPaste()<cr>h"tp
+  vnoremap <silent> <ESC>y "ty:call TmuxSharedYank()<cr>
+  vnoremap <silent> <ESC>d "td:call TmuxSharedYank()<cr>
+  nnoremap <silent> <ESC>p :call TmuxSharedPaste()<cr>"tp
+  vnoremap <silent> <ESC>p d:call TmuxSharedPaste()<cr>h"tp
   set clipboard= " Use this or vim will automatically put deleted text into x11 selection('*' register) which breaks the above map
 
-  nnoremap <silent> <c-w>j :silent call TmuxMove('j')<cr>
-  nnoremap <silent> <c-w>j :silent call TmuxMove('j')<cr>
-  nnoremap <silent> <c-w>k :silent call TmuxMove('k')<cr>
-  nnoremap <silent> <c-w>h :silent call TmuxMove('h')<cr>
-  nnoremap <silent> <c-w>l :silent call TmuxMove('l')<cr>
-  nnoremap <silent> <c-w><down> :silent call TmuxMove('j')<cr>
-  nnoremap <silent> <c-w><up> :silent call TmuxMove('k')<cr>
-  nnoremap <silent> <c-w><left> :silent call TmuxMove('h')<cr>
-  nnoremap <silent> <c-w><right> :silent call TmuxMove('l')<cr>
+  nnoremap <silent> <C-w>j :silent call TmuxMove('j')<cr>
+  nnoremap <silent> <C-w>j :silent call TmuxMove('j')<cr>
+  nnoremap <silent> <C-w>k :silent call TmuxMove('k')<cr>
+  nnoremap <silent> <C-w>h :silent call TmuxMove('h')<cr>
+  nnoremap <silent> <C-w>l :silent call TmuxMove('l')<cr>
+  nnoremap <silent> <C-w><down> :silent call TmuxMove('j')<cr>
+  nnoremap <silent> <C-w><up> :silent call TmuxMove('k')<cr>
+  nnoremap <silent> <C-w><left> :silent call TmuxMove('h')<cr>
+  nnoremap <silent> <C-w><right> :silent call TmuxMove('l')<cr>
 endif
 
 function! SetDiffColors()
@@ -500,7 +507,7 @@ autocmd FileType go autocmd BufWritePre <buffer> Fmt
 autocmd BufNewFile *.html 0r ~/dotfiles/lang/html/index.html
 
 " Lisp
-autocmd FileType lisp,scheme,art setlocal equalprg=scmindent.rkt
+autocmd FileType lisp,scheme,art setlocal equalprg=~/dotfiles/helpers/scmindent.rkt
 
 " Lua
 autocmd FileType lua setlocal shiftwidth=4 tabstop=4 softtabstop=4 smarttab

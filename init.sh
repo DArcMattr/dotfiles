@@ -2,14 +2,14 @@
 # only idempotent commands here so far
 # TODO: translate to ansible
 
-mkdir -p ~/contrib ~/bin ~/.config/git ~/.config/nvim
+DOT_CONFIG=${XDG_CONFIG_HOME:=$HOME/.config}
+
+mkdir -p ~/contrib ~/bin ~/.config/nvim
 chmod 600 ~/dotfiles/sshconfig
 mv ~/.ssh/config ~/.ssh/config.orig
 ln -s ~/dotfiles/sshconfig ~/.ssh/config
-ln -s ~/dotfiles/xdg/git/config ~/.config/git/config
-ln -s ~/dotfiles/xdg/git/attributes ~/.config/git/attributes
-ln -s ~/dotfiles/xdg/git/template ~/.config/git/template
-ln -s ~/dotfiles/xdg/nvim/init.vim ~/.config/nvim/init.vim
+ln -s ~/dotfiles/xdg/git "${DOT_CONFIG}/git"
+ln -s ~/dotfiles/xdg/nvim/init.vim "${DOT_CONFIG}/nvim/init.vim"
 tic -x ~/dotfiles/tmux-256color.terminfo
 
 find ~/dotfiles/symlinks/ -name ".*" -exec ln -sf "{}" "${HOME}" \;
