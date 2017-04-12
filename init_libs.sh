@@ -28,19 +28,29 @@ grab_sassc() {
     )
   fi
 
-  ( cd "${INSTALL_PATH}" && SASS_LIBSASS_PATH="${LIBSASS_PATH}" make )
+  (
+    cd "${INSTALL_PATH}" &&
+    SASS_LIBSASS_PATH="${LIBSASS_PATH}" make
+    cp ./bin/sassc ~/.local/bin/sassc
+  )
 }
 
 grab_wp_cli() {
-  INSTALL_PATH="${HOME}/bin/wp-cli"
+  INSTALL_PATH="${HOME}/contrib/wp-cli"
   if [ ! -d "${INSTALL_PATH}" ]; then
-    mkdir -p "${INSTALL_PATH}" && cd "${INSTALL_PATH}"
-    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-    chmod +x "${INSTALL_PATH}/wp-cli.phar"
-    ln -s "${INSTALL_PATH}/wp-cli.phar" ~/bin/wp
+    (
+      mkdir -p "${INSTALL_PATH}" && cd "${INSTALL_PATH}"
+      curl -O \
+        https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+      chmod +x "${INSTALL_PATH}/wp-cli.phar"
+      ln -s "${INSTALL_PATH}/wp-cli.phar" ~/.local/bin/wp
+    )
   else
-    cd "${INSTALL_PATH}"
-    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+    (
+      cd "${INSTALL_PATH}"
+      curl -O \
+        https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+    )
   fi
 }
 
@@ -81,23 +91,24 @@ grab_hgcfg() {
 }
 
 grab_pips() {
-  # I install mercurial via hg on Ubuntu, because the package version is out of
-  # date and drags in all kinds of X dependencies
+  config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
   pips=(psutil powerline-status s3cmd dulwich httpie neovim icdiff)
+
   pip install -U --user $pips
   pip3 install -U --user $pips
 
-  powerline_path="$(dirname "$(python -c 'import powerline; print (powerline.__file__)')")"
-  if [ ! -d "${XDG_CONFIG_HOME:=$HOME/.config}/powerline" ]; then
-    mkdir -p "${XDG_CONFIG_HOME:=$HOME/.config}/powerline"
+  powerline_path= \
+    "$(dirname "$(python -c 'import powerline; print (powerline.__file__)')")"
+  if [ ! -d "${config_home}/powerline" ]; then
+    mkdir -p "${config_home}/powerline"
   fi
   rsync -a --prune-empty-dirs --include '*/' "${powerline_path}/config_files/" \
-    "${XDG_CONFIG_HOME:=$HOME/.config}/powerline"
+    "${config_home}/powerline"
 
   if [ ! -f ~/.config/powerline/powerline.conf ]; then
     ln -s \
       "${powerline_path}/bindings/tmux/powerline.conf" \
-      "${XDG_CONFIG_HOME:=$HOME/.config}/powerline/powerline.conf"
+      "${config_home}/powerline/powerline.conf"
   fi
 }
 
@@ -117,6 +128,26 @@ grab_composer() {
     composer self-update
     composer global update
   fi
+
+  (
+    INSTALL_PATH="${HOME}/contrib/wpcs"
+    if [ ! -d "${INSTALL_PATH}/.git" ]; then
+      git clone \
+        https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git \
+        "${INSTALL_PATH}" &&
+      (
+        cd "${INSTALL_PATH}" &&
+        git checkout "$(git describe --abbrev=0 --tags)"
+        phpcs --config-set installed_paths "${INSTALL_PATH}"
+      )
+    else
+      (
+        cd "${INSTALL_PATH}" &&
+          git fetch &&
+          git checkout "$(git describe --abbrev=0 --tags)"
+      )
+    fi
+  )
 }
 
 grab_tpm() {
@@ -144,19 +175,25 @@ grab_nvm() {
   fi
 }
 
-grab_sniffs() {
-  INSTALL_PATH="${HOME}/contrib/wpcs"
+grab_ctags() {
+  INSTALL_PATH="${HOME}/contrib/ctags"
   if [ ! -d "${INSTALL_PATH}/.git" ]; then
-    git clone https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git "${INSTALL_PATH}" && (
+    git clone https://github.com/universal-ctags/ctags.git \
+      "${INSTALL_PATH}" && (
       cd "${INSTALL_PATH}" &&
-      git checkout "$(git describe --abbrev=0 --tags)"
-      phpcs --config-set installed_paths "${INSTALL_PATH}"
+        git checkout master
     )
   else
     (
       cd "${INSTALL_PATH}" &&
-        git fetch &&
-        git checkout "$(git describe --abbrev=0 --tags)"
+      git fetch &&
+      git checkout master
     )
   fi
+
+  cd "${INSTALL_PATH}" && \
+  ./autogen.sh && \
+  ./configure --prefix="${HOME}/.local" && \
+  make && \
+  make install
 }

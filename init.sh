@@ -24,10 +24,10 @@ find ~/dotfiles/symlinks/ -name ".*" -exec ln -sf "{}" "${HOME}" \;
   grab_wp_cli
   grab_pips
   grab_sassc
-  grab_sniffs
   grab_tpm
   grab_nvm
   grab_autoenv
+  grab_ctags
 
   cd ~/dotfiles &&
   hg cfg --local hooks.update "chmod 600 ~/dotfiles/sshconfig" &&
