@@ -32,6 +32,11 @@ path=(
   $path
 )
 
+manpath=(
+  ~/.local/share/man
+  $manpath
+)
+
 #
 # Less
 #
