@@ -5,7 +5,7 @@ export CC=clang
 export CXX=clang++
 export TZ='/usr/share/zoneinfo/US/Pacific'
 
-PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:${PATH}"
 PATH=${GOPATH}/bin:${PATH}
+PYTHONPATH="${PYTHONPATH}:${HOME}/.local/lib/python3.4/site-packages:/usr/local/lib/python3.4/site-packages"
 
-export PATH
+export PATH PYTHONPATH
