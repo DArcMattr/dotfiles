@@ -20,6 +20,7 @@ record=
 
 [alias]
 log=glog
+up=pull -u
 
 [pager]
 ignore= version, help, update, serve, record
