@@ -14,24 +14,23 @@ grab_sassc() {
     )
   fi
 
-  INSTALL_PATH="${HOME}/contrib/sassc"
-  if [ ! -d "${INSTALL_PATH}/.git/" ]; then
-    git clone https://github.com/hcatlin/sassc "${INSTALL_PATH}"
+  SOURCE_PATH="${HOME}/contrib/sassc"
+  if [ ! -d "${SOURCE_PATH}/.git/" ]; then
+    git clone https://github.com/hcatlin/sassc "${SOURCE_PATH}"
     (
-      cd "${INSTALL_PATH}" &&
+      cd "${SOURCE_PATH}" &&
       git checkout "$(git describe --abbrev=0 --tags)"
     )
   else
     (
-      cd "${INSTALL_PATH}" && git fetch &&
+      cd "${SOURCE_PATH}" && git fetch &&
       git checkout "$(git describe --abbrev=0 --tags)"
     )
   fi
 
   (
-    cd "${INSTALL_PATH}" &&
-    SASS_LIBSASS_PATH="${LIBSASS_PATH}" make
-    cp ./bin/sassc ~/.local/bin/sassc
+    cd "${SOURCE_PATH}" &&
+    SASS_LIBSASS_PATH="${LIBSASS_PATH}" PREFIX="${HOME}/.local" make install
   )
 }
 
@@ -43,7 +42,7 @@ grab_wp_cli() {
       curl -O \
         https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
       chmod +x "${INSTALL_PATH}/wp-cli.phar"
-      ln -s "${INSTALL_PATH}/wp-cli.phar" ~/.local/bin/wp
+      ln -s "${INSTALL_PATH}/wp-cli.phar" "${HOME}/.local/bin/wp"
     )
   else
     (
@@ -51,24 +50,6 @@ grab_wp_cli() {
       curl -O \
         https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
     )
-  fi
-}
-
-grab_hg_prompt() {
-  INSTALL_PATH="${HOME}/contrib/hg-prompt"
-  if [ ! -d "${INSTALL_PATH}/.hg/" ]; then
-    hg clone https://bitbucket.org/sjl/hg-prompt "${INSTALL_PATH}"
-  else
-    ( cd "${INSTALL_PATH}" && hg pull -u )
-  fi
-}
-
-grab_hg_git() {
-  INSTALL_PATH="${HOME}/contrib/hg-git"
-  if [ ! -d "${INSTALL_PATH}/.hg/" ]; then
-    hg clone https://bitbucket.org/durin42/hg-git "${INSTALL_PATH}"
-  else
-    ( cd "${INSTALL_PATH}" && hg pull -u )
   fi
 }
 
@@ -92,20 +73,19 @@ grab_hgcfg() {
 
 grab_pips() {
   config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
-  pips=(psutil powerline-status s3cmd dulwich httpie neovim icdiff)
 
-  pip install -U --user $pips
-  pip3 install -U --user $pips
+  pip install -U --user s3cmd
+  pip3 install -U --user psutil powerline-status httpie neovim icdiff doge
 
   powerline_path= \
-    "$(dirname "$(python -c 'import powerline; print (powerline.__file__)')")"
+    "$(dirname "$(python3 -c 'import powerline; print (powerline.__file__)')")"
   if [ ! -d "${config_home}/powerline" ]; then
     mkdir -p "${config_home}/powerline"
   fi
   rsync -a --prune-empty-dirs --include '*/' "${powerline_path}/config_files/" \
     "${config_home}/powerline"
 
-  if [ ! -f ~/.config/powerline/powerline.conf ]; then
+  if [ ! -f "${config_home}/powerline/powerline.conf" ]; then
     ln -s \
       "${powerline_path}/bindings/tmux/powerline.conf" \
       "${config_home}/powerline/powerline.conf"
@@ -172,6 +152,12 @@ grab_nvm() {
       git fetch &&
       git checkout "$(git describe --abbrev=0 --tags)"
     )
+  fi
+}
+
+grab_gems() {
+  if which ruby >/dev/null && which gem >/dev/null; then
+    gem install --user-install neovim sass lolcat
   fi
 }
 

@@ -18,11 +18,10 @@ find ~/dotfiles/symlinks/ -name ".*" -exec ln -sf "{}" "${HOME}" \;
   . ~/dotfiles/init_libs.sh
 
   grab_hgcfg
-  grab_hg_git
-  grab_hg_prompt
   grab_composer
   grab_wp_cli
   grab_pips
+  grab_gems
   grab_sassc
   grab_tpm
   grab_nvm
