@@ -12,6 +12,12 @@ export CLICOLOR=YES
 export CLICOLOR_FORCE=YES
 export XDG_CONFIG_HOME="${HOME}/.config"
 
+if which ruby >/dev/null && which gem >/dev/null; then
+  gem_path="$(ruby -rubygems -e 'puts Gem.user_dir')/bin"
+else
+  gem_path=""
+fi
+
 #
 # Paths
 #
@@ -20,13 +26,14 @@ export XDG_CONFIG_HOME="${HOME}/.config"
 typeset -gU cdpath fpath mailpath path
 
 # Set the the list of directories that cd searches.
-# cdpath=(
-#   $cdpath
-# )
+cdpath=(
+  $cdpath
+)
 
 # Set the list of directories that Zsh searches for programs.
 path=(
   ~/.local/bin
+  $gem_path
   ~/bin
   /usr/local/{bin,sbin}
   $path
