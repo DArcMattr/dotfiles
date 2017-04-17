@@ -19,7 +19,7 @@ Plug 'Valloric/MatchTagAlways'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer --tern-completer --gocode-completer' }
 Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
-Plug 'scrooloose/syntastic' | Plug 'joseluis/wordpress.vim', { 'branch' : 'develop' }
+Plug 'scrooloose/syntastic' | Plug 'DArcMattr/wordpress.vim', { 'branch' : 'develop' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'equalsraf/neovim-gui-shim'
@@ -197,7 +197,6 @@ let g:UltiSnipsJumpBackwardTrigger = "<M-h>"
 let g:UltiSnipsJumpForwardTrigger = "<M-l>"
 let g:VCSCommandSplit = 'vertical'
 let g:vimpager = {}
-let g:wordpress_vim_tags_file_name='../tags'
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
 imap <C-c>       <CR><ESC>O
@@ -485,6 +484,7 @@ autocmd FileType perl setlocal makeprg=perl keywordprg=perldoc\ -f |
 
 " PHP
 autocmd FileType php setlocal keywordprg=pman
+"autocmd bufwritepost *.php silent !phpcbf -w %
 
 " PostgreSQL
 autocmd BufNewFile,BufRead,BufEnter *.psql setfiletype postgresql
