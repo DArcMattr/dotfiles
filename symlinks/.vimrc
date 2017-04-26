@@ -24,7 +24,7 @@ Plug 'Valloric/MatchTagAlways'
 Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer --tern-completer --gocode-completer' }
 Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
-Plug 'scrooloose/syntastic' | Plug 'joseluis/wordpress.vim', { 'branch' : 'develop' }
+Plug 'scrooloose/syntastic' | Plug 'DArcMattr/wordpress.vim', { 'branch' : 'develop' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
