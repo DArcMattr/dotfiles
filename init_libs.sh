@@ -77,11 +77,12 @@ grab_pips() {
   pip install -U --user s3cmd
   pip3 install -U --user psutil powerline-status httpie neovim icdiff doge
 
-  powerline_path= \
-    "$(dirname "$(python3 -c 'import powerline; print (powerline.__file__)')")"
   if [ ! -d "${config_home}/powerline" ]; then
     mkdir -p "${config_home}/powerline"
   fi
+
+  powerline_path="$(dirname "$(python3 -c 'import powerline; print (powerline.__file__)')")"
+
   rsync -a --prune-empty-dirs --include '*/' "${powerline_path}/config_files/" \
     "${config_home}/powerline"
 
