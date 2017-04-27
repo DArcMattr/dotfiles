@@ -181,6 +181,5 @@ grab_ctags() {
   cd "${INSTALL_PATH}" && \
   ./autogen.sh && \
   ./configure --prefix="${HOME}/.local" && \
-  make && \
-  make install
+  make install clean
 }
