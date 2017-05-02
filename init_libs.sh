@@ -1,56 +1,46 @@
 #!/bin/sh
 grab_sassc() {
-  LIBSASS_PATH="${HOME}/contrib/libsass"
-  if [ ! -d "${LIBSASS_PATH}/.git/" ]; then
-    git clone https://github.com/hcatlin/libsass "${LIBSASS_PATH}"
-    (
+  (
+    LIBSASS_PATH="${HOME}/contrib/libsass"
+    if [ ! -d "${LIBSASS_PATH}/.git/" ]; then
+      git clone https://github.com/hcatlin/libsass "${LIBSASS_PATH}"
       cd "${LIBSASS_PATH}" &&
       git checkout "$(git describe --abbrev=0 --tags)"
-    )
-  else
-    (
+    else
       cd "${LIBSASS_PATH}" && git fetch &&
       git checkout "$(git describe --abbrev=0 --tags)"
-    )
-  fi
+    fi
 
-  SOURCE_PATH="${HOME}/contrib/sassc"
-  if [ ! -d "${SOURCE_PATH}/.git/" ]; then
-    git clone https://github.com/hcatlin/sassc "${SOURCE_PATH}"
-    (
+    SOURCE_PATH="${HOME}/contrib/sassc"
+    if [ ! -d "${SOURCE_PATH}/.git/" ]; then
+      git clone https://github.com/hcatlin/sassc "${SOURCE_PATH}"
       cd "${SOURCE_PATH}" &&
       git checkout "$(git describe --abbrev=0 --tags)"
-    )
-  else
-    (
+    else
       cd "${SOURCE_PATH}" && git fetch &&
       git checkout "$(git describe --abbrev=0 --tags)"
-    )
-  fi
+    fi
 
-  (
     cd "${SOURCE_PATH}" &&
     SASS_LIBSASS_PATH="${LIBSASS_PATH}" PREFIX="${HOME}/.local" make install
   )
 }
 
 grab_wp_cli() {
-  INSTALL_PATH="${HOME}/contrib/wp-cli"
-  if [ ! -d "${INSTALL_PATH}" ]; then
-    (
+  (
+    INSTALL_PATH="${HOME}/contrib/wp-cli"
+    if [ ! -d "${INSTALL_PATH}" ]; then
       mkdir -p "${INSTALL_PATH}" && cd "${INSTALL_PATH}"
       curl -O \
         https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
       chmod +x "${INSTALL_PATH}/wp-cli.phar"
       ln -s "${INSTALL_PATH}/wp-cli.phar" "${HOME}/.local/bin/wp"
-    )
-  else
-    (
+    else
       cd "${INSTALL_PATH}"
       curl -O \
         https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-    )
-  fi
+    fi
+  )
 }
 
 grab_autoenv() {
@@ -116,17 +106,13 @@ grab_composer() {
       git clone \
         https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git \
         "${INSTALL_PATH}" &&
-      (
         cd "${INSTALL_PATH}" &&
         git checkout "$(git describe --abbrev=0 --tags)"
         phpcs --config-set installed_paths "${INSTALL_PATH}"
-      )
     else
-      (
-        cd "${INSTALL_PATH}" &&
-          git fetch &&
-          git checkout "$(git describe --abbrev=0 --tags)"
-      )
+      cd "${INSTALL_PATH}" &&
+        git fetch &&
+        git checkout "$(git describe --abbrev=0 --tags)"
     fi
   )
 }
@@ -141,19 +127,18 @@ grab_tpm() {
 }
 
 grab_nvm() {
-  INSTALL_PATH="${HOME}/.nvm/"
-  if [ ! -d "${INSTALL_PATH}/.git/" ]; then
-    git clone https://github.com/creationix/nvm.git "${INSTALL_PATH}" && (
-      cd "${INSTALL_PATH}" &&
-      git checkout "$(git describe --abbrev=0 --tags)"
-    )
-  else
-    (
+  (
+    INSTALL_PATH="${HOME}/.nvm/"
+    if [ ! -d "${INSTALL_PATH}/.git/" ]; then
+      git clone https://github.com/creationix/nvm.git "${INSTALL_PATH}" &&
+        cd "${INSTALL_PATH}" &&
+        git checkout "$(git describe --abbrev=0 --tags)"
+    else
       cd "${INSTALL_PATH}" &&
       git fetch &&
       git checkout "$(git describe --abbrev=0 --tags)"
-    )
-  fi
+    fi
+  )
 }
 
 grab_gems() {
@@ -163,23 +148,43 @@ grab_gems() {
 }
 
 grab_ctags() {
-  INSTALL_PATH="${HOME}/contrib/ctags"
-  if [ ! -d "${INSTALL_PATH}/.git" ]; then
-    git clone https://github.com/universal-ctags/ctags.git \
-      "${INSTALL_PATH}" && (
-      cd "${INSTALL_PATH}" &&
-        git checkout master
-    )
-  else
-    (
+  (
+    INSTALL_PATH="${HOME}/contrib/ctags"
+    if [ ! -d "${INSTALL_PATH}/.git" ]; then
+      git clone https://github.com/universal-ctags/ctags.git \
+        "${INSTALL_PATH}" &&
+        cd "${INSTALL_PATH}" &&
+          git checkout master
+    else
       cd "${INSTALL_PATH}" &&
       git fetch &&
       git checkout master
-    )
-  fi
+    fi
 
-  cd "${INSTALL_PATH}" && \
-  ./autogen.sh && \
-  ./configure --prefix="${HOME}/.local" && \
-  make install clean
+    cd "${INSTALL_PATH}" && \
+    ./autogen.sh && \
+    ./configure --prefix="${HOME}/.local" && \
+    make install clean
+  )
+}
+
+grab_ag() {
+  (
+    INSTALL_PATH="${HOME}/contrib/the_silver_searcher"
+    if [ ! -d "${INSTALL_PATH}/.git" ]; then
+      git clone https://github.com/ggreer/the_silver_searcher.git \
+        "${INSTALL_PATH}" &&
+        cd "${INSTALL_PATH}" &&
+          git checkout master
+    else
+      cd "${INSTALL_PATH}" &&
+      git fetch &&
+      git checkout master
+    fi
+
+    cd "${INSTALL_PATH}" && \
+    ./autogen.sh && \
+    ./configure --prefix="${HOME}/.local" && \
+    make install clean
+  )
 }
