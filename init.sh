@@ -26,7 +26,8 @@ find ~/dotfiles/symlinks/ -name ".*" -exec ln -sf "{}" "${HOME}" \;
   grab_tpm
   grab_nvm
   grab_autoenv
-  grab_ctags
+  grab_git -d ~/contrib/the_silver_searcher -r https://github.com/ggreer/the_silver_searcher.git
+  grab_git -d ~/contrib/ctags               -r https://github.com/universal-ctags/ctags.git
 
   cd ~/dotfiles &&
   hg cfg --local hooks.update "chmod 600 ~/dotfiles/sshconfig" &&

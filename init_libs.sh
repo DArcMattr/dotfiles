@@ -147,32 +147,29 @@ grab_gems() {
   fi
 }
 
-grab_ctags() {
-  (
-    INSTALL_PATH="${HOME}/contrib/ctags"
-    if [ ! -d "${INSTALL_PATH}/.git" ]; then
-      git clone https://github.com/universal-ctags/ctags.git \
-        "${INSTALL_PATH}" &&
-        cd "${INSTALL_PATH}" &&
-          git checkout master
-    else
-      cd "${INSTALL_PATH}" &&
-      git fetch &&
-      git checkout master
-    fi
+grab_git() {
+  while getopts ":r:d:" opt; do
+    case "${opt}" in
+      d) INSTALL_PATH="${OPTARG}"
+        ;;
 
-    cd "${INSTALL_PATH}" && \
-    ./autogen.sh && \
-    ./configure --prefix="${HOME}/.local" && \
-    make install clean
-  )
-}
+      r) REPO="${OPTARG}"
+        ;;
 
-grab_ag() {
+      *) echo "Invalid Option: -${OPTARG}" >&2
+        exit 1
+        ;;
+
+      :) echo "Option -${OPTARG} requires arguments." >&2
+        exit 1
+        ;;
+    esac
+  done
+
   (
     INSTALL_PATH="${HOME}/contrib/the_silver_searcher"
     if [ ! -d "${INSTALL_PATH}/.git" ]; then
-      git clone https://github.com/ggreer/the_silver_searcher.git \
+      git clone "${REPO}" \
         "${INSTALL_PATH}" &&
         cd "${INSTALL_PATH}" &&
           git checkout master
