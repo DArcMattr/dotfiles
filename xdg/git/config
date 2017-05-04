@@ -34,8 +34,12 @@
   tool = vimdiff
 [difftool "vimdiff"]
   cmd = nvim -d $LOCAL $REMOTE
+[fetch]
+  fsckobjects = true
 [format]
   pretty = oneline
+[fsck]
+  badTimezone = ignore
 [init]
   templatedir = "~/.config/git/template"
 [merge]
@@ -55,6 +59,8 @@
   default = current
   ff = only
   followTags = true
+[receive]
+  fsckobjects = true
 [status]
   showUntrackedFiles = all
 [transfer]
