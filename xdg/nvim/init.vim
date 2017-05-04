@@ -16,8 +16,9 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'Valloric/MatchTagAlways'
-Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer --tern-completer --gocode-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer --system-libclang --tern-completer --gocode-completer' }
 Plug 'airblade/vim-gitgutter'
+Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
 Plug 'scrooloose/syntastic' | Plug 'DArcMattr/wordpress.vim', { 'branch' : 'develop' }
 Plug 'editorconfig/editorconfig-vim'
@@ -459,6 +460,9 @@ autocmd FileType go autocmd BufWritePre <buffer> Fmt
 
 " HTML
 autocmd BufNewFile *.html 0r ~/dotfiles/lang/html/index.html
+
+" LaTeX
+autocmd BufNewFile *.tex 0r ~/dotfiles/lang/latex/template.tex
 
 " Lisp
 autocmd FileType lisp,scheme,art setlocal equalprg=~/dotfiles/helpers/scmindent.rkt
