@@ -7,6 +7,8 @@ tmux has-session -t "${SESSION}"
 if [ $? -eq 0 ]; then
   echo "Session ${SESSION} already exists, attaching"
   sleep 1
+  eval "$(ssh-agent -s)"
+  ssh-add ~/.ssh/id_ed25519
   tmux -2u attach -t "${SESSION}"
   exit 0;
 fi
