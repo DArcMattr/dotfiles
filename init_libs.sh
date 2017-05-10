@@ -7,7 +7,7 @@ grab_sassc() {
       cd "${LIBSASS_PATH}" &&
       git checkout "$(git describe --abbrev=0 --tags)"
     else
-      cd "${LIBSASS_PATH}" && git fetch &&
+      cd "${LIBSASS_PATH}" && git fetch && git merge &&
       git checkout "$(git describe --abbrev=0 --tags)"
     fi
 
@@ -17,7 +17,8 @@ grab_sassc() {
       cd "${SOURCE_PATH}" &&
       git checkout "$(git describe --abbrev=0 --tags)"
     else
-      cd "${SOURCE_PATH}" && git fetch &&
+      cd "${SOURCE_PATH}" && git remote update -p origin &&
+      git merge --ff-only &&
       git checkout "$(git describe --abbrev=0 --tags)"
     fi
 
@@ -48,7 +49,11 @@ grab_autoenv() {
   if [ ! -d "${INSTALL_PATH}/.git" ]; then
     git clone https://github.com/horosgrisa/autoenv.git ${INSTALL_PATH}
   else
-    ( cd "${INSTALL_PATH}" && git up )
+    (
+      cd "${INSTALL_PATH}" &&
+      git remote update -p origin &&
+      git merge --ff-only
+    )
   fi
 }
 
@@ -135,7 +140,8 @@ grab_nvm() {
         git checkout "$(git describe --abbrev=0 --tags)"
     else
       cd "${INSTALL_PATH}" &&
-      git fetch &&
+      git remote update -p origin  &&
+      git merge --ff-only &&
       git checkout "$(git describe --abbrev=0 --tags)"
     fi
   )
@@ -175,7 +181,8 @@ grab_git() {
           git checkout master
     else
       cd "${INSTALL_PATH}" &&
-      git fetch &&
+      git remote update -p origin  &&
+      git merge --ff-only &&
       git checkout master
     fi
 
