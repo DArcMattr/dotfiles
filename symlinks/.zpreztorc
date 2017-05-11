@@ -34,7 +34,6 @@ zstyle ':prezto:load' pmodule \
   'directory' \
   'spectrum' \
   'ssh' \
-  'git' \
   'syntax-highlighting' \
   'prompt'
 
@@ -47,13 +46,6 @@ zstyle ':prezto:module:editor' key-bindings 'vi'
 
 # Auto convert .... to ../..
 zstyle ':prezto:module:editor' dot-expansion 'yes'
-
-#
-# Git
-#
-
-# Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
-zstyle ':prezto:module:git:status:ignore' submodules 'all'
 
 #
 # GNU Utility

@@ -1,5 +1,3 @@
-export ZSH_CUSTOM="${HOME}/dotfiles/zsh-custom"
-export AUTOENV_IN_FILE=".in"
 fpath=(~/dotfiles/zsh-custom $fpath)
 
 COMPLETION_WAITING_DOTS="true"
@@ -10,34 +8,33 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-if [ -n ${ZSH_VERSION-} ]; then
-  autoload -U +X bashcompinit && bashcompinit
+if [[ -r ~/contrib/autoenv/autoenv.plugin.zsh ]]; then
   source ~/contrib/autoenv/autoenv.plugin.zsh
+fi
+
+if [[ -n ${ZSH_VERSION-} ]]; then
+  autoload -U +X bashcompinit && bashcompinit
 
   have() {
     unset have
     (( ${+commands[$1]} )) && have=yes
   }
 
-  if [ -f "./.in" ]; then
-    check_and_exec "./.in"
-  fi
-
-  if [ -d ~/contrib/wp-completion.bash ]; then
-    source ~/contrib/wp-completion.bash
-  fi
-
-  if [ -d /etc/bash_completion.d/ ]; then
+  if [[ -d /etc/bash_completion.d/ ]]; then
     source /etc/bash_completion.d/*
   fi
+
+  if [[ -r ~/contrib/wp-completion.bash ]]; then
+    source ~/contrib/wp-completion.bash
+  fi
 fi
 
-if [ -r ~/dotfiles/.aliases ]; then
-  source ~/dotfiles/.aliases
-fi
-
-if [ -r /etc/aliases.sh ]; then
+if [[ -r /etc/aliases.sh ]]; then
   source /etc/aliases.sh
+fi
+
+if [[ -r ~/dotfiles/.aliases ]]; then
+  source ~/dotfiles/.aliases
 fi
 
 unsetopt correct
@@ -63,6 +60,3 @@ autoload -Uz compinit
 compinit
 
 umask 002
-
-export LESS="-EFIMQRsX~ -x2"
-export LESSCHARSET="utf-8"
