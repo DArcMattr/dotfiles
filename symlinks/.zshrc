@@ -19,8 +19,12 @@ if [ -n ${ZSH_VERSION-} ]; then
     (( ${+commands[$1]} )) && have=yes
   }
 
-  if [[ -f "./.in" ]]; then
+  if [ -f "./.in" ]; then
     check_and_exec "./.in"
+  fi
+
+  if [ -d ~/contrib/wp-completion.bash ]; then
+    source ~/contrib/wp-completion.bash
   fi
 
   if [ -d /etc/bash_completion.d/ ]; then
