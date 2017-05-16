@@ -41,20 +41,10 @@ grab_wp_cli() {
       curl -O \
         https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
     fi
+    curl -s \
+      https://raw.githubusercontent.com/wp-cli/wp-cli/master/utils/wp-completion.bash \
+      -o ~/contrib/wp-completion.bash
   )
-}
-
-grab_autoenv() {
-  INSTALL_PATH="${HOME}/contrib/autoenv"
-  if [ ! -d "${INSTALL_PATH}/.git" ]; then
-    git clone https://github.com/horosgrisa/autoenv.git ${INSTALL_PATH}
-  else
-    (
-      cd "${INSTALL_PATH}" &&
-      git remote update -p origin &&
-      git merge --ff-only
-    )
-  fi
 }
 
 grab_hgcfg() {
@@ -69,8 +59,8 @@ grab_hgcfg() {
 grab_pips() {
   config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
 
-  pip install -U --user s3cmd
-  pip3 install -U --user psutil powerline-status httpie neovim icdiff doge
+  pip  install -U --user neovim s3cmd
+  pip3 install -U --user doge httpie icdiff neovim psutil powerline-status
 
   if [ ! -d "${config_home}/powerline" ]; then
     mkdir -p "${config_home}/powerline"
@@ -122,31 +112,6 @@ grab_composer() {
   )
 }
 
-grab_tpm() {
-  INSTALL_PATH="${HOME}/.tmux/plugins/tpm"
-  if [ ! -d "${INSTALL_PATH}/.git/" ]; then
-    git clone https://github.com/tmux-plugins/tpm.git "${INSTALL_PATH}"
-  else
-    ( cd "${INSTALL_PATH}" && git up )
-  fi
-}
-
-grab_nvm() {
-  (
-    INSTALL_PATH="${HOME}/.nvm/"
-    if [ ! -d "${INSTALL_PATH}/.git/" ]; then
-      git clone https://github.com/creationix/nvm.git "${INSTALL_PATH}" &&
-        cd "${INSTALL_PATH}" &&
-        git checkout "$(git describe --abbrev=0 --tags)"
-    else
-      cd "${INSTALL_PATH}" &&
-      git remote update -p origin  &&
-      git merge --ff-only &&
-      git checkout "$(git describe --abbrev=0 --tags)"
-    fi
-  )
-}
-
 grab_gems() {
   if which ruby >/dev/null && which gem >/dev/null; then
     gem install --user-install neovim sass lolcat
@@ -154,12 +119,18 @@ grab_gems() {
 }
 
 grab_git() {
-  while getopts ":r:d:" opt; do
+  while getopts ":r:d:b:n" opt; do
     case "${opt}" in
       d) INSTALL_PATH="${OPTARG}"
         ;;
 
       r) REPO="${OPTARG}"
+        ;;
+
+      b) BRANCH="${OPTARG}"
+        ;;
+
+      n) NO_COMPILE=1
         ;;
 
       *) echo "Invalid Option: -${OPTARG}" >&2
@@ -173,22 +144,24 @@ grab_git() {
   done
 
   (
-    INSTALL_PATH="${HOME}/contrib/the_silver_searcher"
     if [ ! -d "${INSTALL_PATH}/.git" ]; then
       git clone "${REPO}" \
         "${INSTALL_PATH}" &&
         cd "${INSTALL_PATH}" &&
-          git checkout master
+        git checkout "${BRANCH:-$(git describe --abbrev=0 --tags)}"
     else
       cd "${INSTALL_PATH}" &&
       git remote update -p origin  &&
+      git checkout master &&
       git merge --ff-only &&
-      git checkout master
+      git checkout "${BRANCH:-$(git describe --abbrev=0 --tags)}"
     fi
 
-    cd "${INSTALL_PATH}" && \
-    ./autogen.sh && \
-    ./configure --prefix="${HOME}/.local" && \
-    make install clean
+    if [ -z ${NO_COMPILE} ]; then
+      cd "${INSTALL_PATH}" && \
+      ./autogen.sh && \
+      ./configure --prefix="${HOME}/.local" && \
+      make install clean
+    fi
   )
 }

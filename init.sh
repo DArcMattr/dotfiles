@@ -23,11 +23,11 @@ find ~/dotfiles/symlinks/ -name ".*" -exec ln -sf "{}" "${HOME}" \;
   grab_pips
   grab_gems
   grab_sassc
-  grab_tpm
-  grab_nvm
-  grab_autoenv
-  grab_git -d ~/contrib/the_silver_searcher -r https://github.com/ggreer/the_silver_searcher.git
-  grab_git -d ~/contrib/ctags               -r https://github.com/universal-ctags/ctags.git
+  grab_git -d ~/contrib/the_silver_searcher -r https://github.com/ggreer/the_silver_searcher.git -b master
+  grab_git -d ~/contrib/ctags               -r https://github.com/universal-ctags/ctags.git      -b master
+  grab_git -d ~/.nvm                        -r https://github.com/creationix/nvm.git -n
+  grab_git -d ~/.tmux/plugins/tpm           -r https://github.com/tmux-plugins/tpm.git -n
+  grab_git -d ~/contrib/autoenv             -r https://github.com/horogrisa/autoenv.git -n
 
   cd ~/dotfiles &&
   hg cfg --local hooks.update "chmod 600 ~/dotfiles/sshconfig" &&
