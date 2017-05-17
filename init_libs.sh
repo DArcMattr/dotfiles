@@ -1,32 +1,4 @@
 #!/bin/sh
-grab_sassc() {
-  (
-    LIBSASS_PATH="${HOME}/contrib/libsass"
-    if [ ! -d "${LIBSASS_PATH}/.git/" ]; then
-      git clone https://github.com/hcatlin/libsass "${LIBSASS_PATH}"
-      cd "${LIBSASS_PATH}" &&
-      git checkout "$(git describe --abbrev=0 --tags)"
-    else
-      cd "${LIBSASS_PATH}" && git fetch && git merge &&
-      git checkout "$(git describe --abbrev=0 --tags)"
-    fi
-
-    SOURCE_PATH="${HOME}/contrib/sassc"
-    if [ ! -d "${SOURCE_PATH}/.git/" ]; then
-      git clone https://github.com/hcatlin/sassc "${SOURCE_PATH}"
-      cd "${SOURCE_PATH}" &&
-      git checkout "$(git describe --abbrev=0 --tags)"
-    else
-      cd "${SOURCE_PATH}" && git remote update -p origin &&
-      git merge --ff-only &&
-      git checkout "$(git describe --abbrev=0 --tags)"
-    fi
-
-    cd "${SOURCE_PATH}" &&
-    SASS_LIBSASS_PATH="${LIBSASS_PATH}" PREFIX="${HOME}/.local" make install
-  )
-}
-
 grab_wp_cli() {
   (
     INSTALL_PATH="${HOME}/contrib/wp-cli"
@@ -163,5 +135,19 @@ grab_git() {
       ./configure --prefix="${HOME}/.local" && \
       make install clean
     fi
+  )
+}
+
+grab_sassc() {
+  (
+    SASS_LIBSASS_PATH="${HOME}/contrib/libsass"
+    grab_git -d ${SASS_LIBSASS_PATH} -r https://github.com/hcatlin/libsass -n
+
+    SASSC_PATH="${HOME}/contrib/sassc"
+    grab_git -d ${SASSC_PATH} -r https://github.com/hcatlin/sassc -n
+
+    cd "${SASSC_PATH}" && \
+      SASS_LIBSASS_PATH="${SASS_LIBSASS_PATH}" PREFIX="${HOME}/.local" \
+      make install
   )
 }
