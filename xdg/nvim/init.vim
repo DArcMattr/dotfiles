@@ -13,6 +13,7 @@ else
 endif
 
 call plug#begin('~/.config/nvim/plugged')
+Plug 'DArcMattr/wordpress.vim', { 'branch' : 'develop' }
 Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'Valloric/MatchTagAlways'
@@ -20,7 +21,6 @@ Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer --system
 Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
-Plug 'scrooloose/syntastic' | Plug 'DArcMattr/wordpress.vim', { 'branch' : 'develop' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'equalsraf/neovim-gui-shim'
@@ -43,6 +43,7 @@ Plug 'vim-scripts/DirDiff.vim'
 Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/matchit.zip'
 Plug 'vim-scripts/vcscommand.vim'
+Plug 'w0rp/ale'
 call plug#end()
 
 set autoindent
@@ -69,6 +70,7 @@ set hidden
 set hlsearch
 set ignorecase
 set incsearch
+set iskeyword+=-
 set laststatus=2
 set lazyredraw
 set list
@@ -158,12 +160,24 @@ let $GIT_SSL_NO_VERIFY = 'true'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#quickfix#location_text = 'Location'
 let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline#extensions#ycm#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 0
+let g:ale_linters = {
+  \ 'php': ['php -l', 'phpcs'],
+  \}
+let g:ale_sign_error = '⨉'
+let g:ale_sign_warning = '⚠'
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+let g:ale_open_list = 1
+let g:ale_keep_list_window_open = 1
 let g:AutoPairsShortcutToggle = '<Leader>ap'
 let g:AutoPairsShortcutFastWrap = '<Leader>ae'
 let g:AutoPairsShortcutJump = '<Leader>an'
@@ -184,14 +198,6 @@ let g:session_autoload = 'no'
 let g:session_autosave = 'no'
 let g:sparkupExecuteMapping = '<Leader>se'
 let g:sparkupNextMapping = '<Leader>sn'
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wp = 0
-let g:syntastic_error_symbol = '⧰'
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exec = 'eslint_d -c ~/.eslintrc'
-let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_wordpress_phpcs_standard = 'WordPress-Core'
 let g:tagcommands = { 'php': { 'args': '-R' } }
 let g:UltiSnipsExpandTrigger = "<M-x>"
 let g:UltiSnipsJumpBackwardTrigger = "<M-h>"
@@ -452,6 +458,9 @@ autocmd FileType c set keywordprg=man
 " COBOL
 autocmd BufNewFile *.cob 0r ~/dotfiles/lang/cobol/header.cob
 
+" CSS
+autocmd FileType css setlocal iskeyword+=.,#
+
 " Git commit messages
 autocmd BufRead,BufNewFile COMMIT_EDITMSG :DiffGitCached
 
@@ -460,6 +469,9 @@ autocmd FileType go autocmd BufWritePre <buffer> Fmt
 
 " HTML
 autocmd BufNewFile *.html 0r ~/dotfiles/lang/html/index.html
+
+" JavaScript
+autocmd FileType javascript setlocal iskeyword+=$
 
 " LaTeX
 autocmd BufNewFile *.tex 0r ~/dotfiles/lang/latex/template.tex
@@ -487,8 +499,11 @@ autocmd FileType perl setlocal makeprg=perl keywordprg=perldoc\ -f |
   \ compiler perl
 
 " PHP
-autocmd FileType php setlocal keywordprg=pman
-"autocmd bufwritepost *.php silent !phpcbf -w %
+autocmd FileType php setlocal keywordprg=pman |
+  \ setlocal foldmarker={,} foldmethod=marker foldlevelstart=1 |
+  \ setlocal iskeyword+=$
+
+" autocmd BufWritePost *.php silent !phpcbf --standard=WordPress %
 
 " PostgreSQL
 autocmd BufNewFile,BufRead,BufEnter *.psql setfiletype postgresql
@@ -500,6 +515,9 @@ autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 smarttab
 " Ruby
 autocmd BufNewFile,BufRead Vagrantfile setfiletype ruby
 autocmd FileType ruby setlocal keywordprg=ri
+
+" SCSS
+autocmd FileType scss setlocal iskeyword+=.,#
 
 " tmux
 autocmd BufNewFile,BufRead,BufEnter .tmux.*,.tmux.conf* setfiletype tmux
@@ -515,9 +533,8 @@ autocmd FileType scss.wordpress setlocal shiftwidth=2 tabstop=2 softtabstop=2
   \ smarttab noexpandtab smartindent textwidth=85
 
 autocmd FileType php.wordpress match OverLength /%86v.\+/ |
-  \ let b:syntastic_checkers = ['php', 'wordpress/phpcs'] |
-autocmd FileType javascript.wordpress match OverLength /%86v.\+/ |
-  \ let b:syntastic_checkers = ['eslint']
+  \ let g:ale_php_phpcs_standard = 'WordPress'
+autocmd FileType javascript.wordpress match OverLength /%86v.\+/
 autocmd FileType css.wordpress match OverLength /%86v.\+/
 autocmd FileType scss.wordpress match OverLength /%86v.\+/
 
