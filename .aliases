@@ -17,7 +17,7 @@ alias info='info --vi-keys'
 alias sicp='racket -i -p neil/sicp -l xrepl'
 alias agp='ag --pager=less'
 #shellcheck disable=SC2139
-alias tmuxt="sh ~/dotfiles/.tmux.${HOST}"
+alias tmuxt="sh ~/dotfiles/.tmux.${HOST:-$HOSTNAME}"
 
 # Suffix aliases
 
