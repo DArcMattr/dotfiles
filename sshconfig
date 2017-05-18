@@ -66,3 +66,13 @@ Host vagrant
   LogLevel FATAL
   ForwardAgent yes
   IdentityFile ~/contrib/vvv/.vagrant/machines/default/virtualbox/private_key
+
+Host staging
+  HostName 10.5.101.20
+  User ec2-user
+  IdentityFile ~/.ssh/ten-staging.pem
+
+Host preprod
+  HostName 10.21.21.40
+  User ec2-user
+  IdentityFile ~/.ssh/ten-preprod.pem
