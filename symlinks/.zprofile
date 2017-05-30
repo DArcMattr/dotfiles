@@ -18,12 +18,26 @@ else
   gem_path=""
 fi
 
+if which python >/dev/null && [ "$(python -c 'import platform; print(platform.python_version_tuple()[0]);')" -eq 2 ]; then
+  python2_path=$(python -c $'import sys\nfor x in sys.path:\n  print(x)')
+fi
+
+if which python3 >/dev/null; then
+  python3_path=$(python3 -c $'import sys\nfor x in sys.path:\n  print(x)')
+fi
+
 #
 # Paths
 #
+typeset -T PYTHONPATH pythonpath
 
 # Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
+typeset -gU cdpath fpath mailpath path pythonpath
+
+pythonpath=(
+  $python2_path
+  $python3_path
+)
 
 # Set the the list of directories that cd searches.
 cdpath=(
