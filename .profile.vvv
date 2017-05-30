@@ -6,6 +6,3 @@ export CXX=clang++
 export TZ='/usr/share/zoneinfo/US/Pacific'
 
 PATH=${GOPATH}/bin:${PATH}
-PYTHONPATH="${PYTHONPATH}:${HOME}/.local/lib/python3.4/site-packages:/usr/local/lib/python3.4/site-packages"
-
-export PATH PYTHONPATH
