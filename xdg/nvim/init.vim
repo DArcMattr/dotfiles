@@ -51,7 +51,7 @@ set autoread
 set backspace=indent,eol,start
 set colorcolumn=+1
 set complete-=i
-set completeopt=menu,menuone,longest
+set completeopt=menuone,longest
 set diffopt=filler,vertical
 set display+=lastline
 set encoding=utf-8
@@ -172,12 +172,11 @@ let g:ale_lint_on_text_changed = 0
 let g:ale_linters = {
   \ 'php': ['php -l', 'phpcs'],
   \}
+let g:ale_open_list = 1
 let g:ale_sign_error = '⨉'
 let g:ale_sign_warning = '⚠'
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
-let g:ale_open_list = 1
-let g:ale_keep_list_window_open = 1
 let g:AutoPairsShortcutToggle = '<Leader>ap'
 let g:AutoPairsShortcutFastWrap = '<Leader>ae'
 let g:AutoPairsShortcutJump = '<Leader>an'
@@ -252,7 +251,7 @@ nnoremap : ;
 inoremap <C-u>      <C-g>u<C-u>
 inoremap <C-x><C-k> <nop>
 inoremap <expr>     <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr>     <S-Tab> pumvisible() ? "\<C-n>" : "\<S-Tab>"
+inoremap <expr>     <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 vnoremap y y`]
 vnoremap p "_dP`]
@@ -500,8 +499,8 @@ autocmd FileType perl setlocal makeprg=perl keywordprg=perldoc\ -f |
 
 " PHP
 autocmd FileType php setlocal keywordprg=pman |
-  \ setlocal foldmarker={,} foldmethod=marker foldlevelstart=1 |
   \ setlocal iskeyword+=$
+" \ setlocal foldmarker={,} foldmethod=marker foldlevelstart=1 |
 
 " autocmd BufWritePost *.php silent !phpcbf --standard=WordPress %
 
