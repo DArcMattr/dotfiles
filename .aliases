@@ -46,8 +46,7 @@ path() {
 }
 
 catmd() {
-  PANDOCDIR=$(mktemp -d)
-  TMPFILE="${PANDOCDIR}/index.html"
+  TMPFILE="$(mktemp -d)/index.html"
 
   echo "${TMPFILE}"
 
@@ -73,7 +72,7 @@ dir() {
       echo "${LL}" | grep -E -v "^d|^total"
       echo "${LL}" | grep -E "^total"
     fi
-  } | $PAGER
+  } | ${PAGER}
 }
 
 dosass() {
@@ -96,6 +95,11 @@ playtime() {
   else
     echo "soxi is not installed"
   fi
+}
+
+# from https://unix.stackexchange.com/a/67541
+pushterms() {
+  infocmp -x | ssh -t "${@}" 'cat > "~/nuterm.info" && tic -x "~/$nuterm.info"'
 }
 
 sscerts() {
