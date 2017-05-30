@@ -52,9 +52,10 @@ grab_pips() {
 
 grab_composer() {
   if ! command -v composer >/dev/null 2>&1 ; then
-    ( cd /tmp; \
+    (
+      cd ${TMP}; \
       curl -sS https://getcomposer.org/installer | php -d "allow_url_fopen=On"; \
-      mv composer.phar ~/bin/composer
+      mv composer.phar ~/.local/bin/composer
       cd ~
       composer global require 'phpmd/phpmd=*' \
         'squizlabs/php_codesniffer=*' \
