@@ -22,6 +22,7 @@ else
   tmux rename-window -t "${SESSION}":1 "htop"
 
   ( project_pane -t "${SESSION}" -n "AMAG"         -d "${WP_DIR}themes/automobile-mag" -g )
+  ( project_pane -t "${SESSION}" -n "Classifieds"  -d "${WP_DIR}plugins/classifieds" -g )
   ( project_pane -t "${SESSION}" -n "Hot Rod"      -d "${WP_DIR}themes/hot-rod" -g )
   ( project_pane -t "${SESSION}" -n "Low Rider"    -d "${WP_DIR}themes/low-rider" -g )
   ( project_pane -t "${SESSION}" -n "Motortrend"   -d "${WP_DIR}themes/motor-trend" -g )
