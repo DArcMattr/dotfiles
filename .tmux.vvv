@@ -8,7 +8,7 @@ tmux has-session -t "${SESSION}"
 if [ $? -eq 0 ]; then
   echo "Session ${SESSION} already exists, attaching"
 else
-  WP_DIR="/srv/www/ten/wordpress/wp-content/"
+  WP_DIR="/srv/www/ten/htdocs/wp-content/"
   . ~/dotfiles/helpers/project_pane.sh
 
   tmux new-session -d -s "${SESSION}"
