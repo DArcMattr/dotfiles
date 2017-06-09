@@ -11,10 +11,10 @@ Some of these will be installed via the install scripts or apt-get below.
 * Z-shell, `zsh` is available and set as a shell, via `chsh`
 * [Mercurial SCM][], `hg`, and [Git][], `git`, source control programs
 
-### For Ubuntu flavors (I'm looking at you, 14.04):
+### For Ubuntu flavors (I'm looking at you, 16.04):
 
     sudo -v
-    curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash - # argh, I hate this
+    curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - # argh, I hate this
     sudo apt-get update
     sudo apt-get install -y curl git python-dev cmake python3-dev python-pip \
       python3-pip zsh zsh-lovers autossh tmux pv xsel s3cmd nodejs \
@@ -31,16 +31,16 @@ Some of these will be installed via the install scripts or apt-get below.
       php7.1-mcrypt php7.1-mysql php7.1-opcache php7.1-readline php7.1-soap \
       php7.1-xml vim-nox
     sudo update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
-    sudo npm -g install gulp bower eslint eslint_d js-beautify cssbeautify \
+    sudo npm -g install gulp eslint eslint_d js-beautify cssbeautify \
       minify node-sass tern grunt
 
 ## Installation Steps
 
 ### for prezto
 
-
     cd ~
-    git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git \
+      "${ZDOTDIR:-$HOME}/.zprezto"
 
 ### All the rest
 
@@ -58,14 +58,6 @@ configuration file, because vimpager.
 For running `st` under KDE:
 
     kstart --maximize --windowclass "st-256color" st -e tmux attach
-
-### for zprezto (old, might switch back)
-
-Copy/paste the following onto the command line:
-
-    cd ~
-    git clone --recursive https://github.com/sorin-ionescu/prezto.git \
-      "${ZDOTDIR:-$HOME}/.zprezto"
 
 [Mercurial SCM]: http://mercurial.selenic.com
 [Git]: http://git-scm.com
