@@ -35,7 +35,7 @@
 [difftool "vimdiff"]
   cmd = nvim -d $LOCAL $REMOTE
 [fetch]
-  fsckobjects = true
+  fsckobjects = false
 [format]
   pretty = oneline
 [fsck]
