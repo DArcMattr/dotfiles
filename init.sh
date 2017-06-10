@@ -29,7 +29,6 @@ find ~/dotfiles/symlinks/ -name ".*" -exec ln -sf "{}" "${HOME}" \;
   grab_git -d ~/.tmux/plugins/tpm           -r https://github.com/tmux-plugins/tpm.git -n
   grab_git -d ~/contrib/autoenv             -r https://github.com/horogrisa/autoenv.git -n
 
-  cd ~/dotfiles &&
-  hg cfg --local hooks.update "chmod 600 ~/dotfiles/sshconfig" &&
-  hg cfg --local paths.default "ssh://hg@bitbucket.org/darceneaux/dotfiles"
+  cd ~/dotfiles && \
+    hg config hooks.update "chmod 600 ~/dotfiles/sshconfig"
 )
