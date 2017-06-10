@@ -13,14 +13,10 @@ else
 endif
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'DArcMattr/wordpress.vim', { 'branch' : 'develop' }
-Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'Valloric/MatchTagAlways'
-Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer --system-libclang --tern-completer --gocode-completer' }
 Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
+Plug 'DArcMattr/wordpress.vim', { 'branch' : 'develop' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'equalsraf/neovim-gui-shim'
@@ -29,20 +25,22 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'joonty/vdebug'
 Plug 'joonty/vim-taggatron'
 Plug 'ludovicchabant/vim-lawrencium'
-Plug 'moll/vim-node', { 'for': 'javascript' }
 Plug 'reedes/vim-wheel'
-Plug 'rkitover/vimpager'
+Plug 'rkitover/vimpager', { 'do': 'sudo ' . g:make . ' install-deb' }
 Plug 'shawncplus/phpcomplete.vim', { 'for': [ 'php', 'php.wordpress' ] }
 Plug 'sheerun/vim-polyglot'
+Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vividchalk'
 Plug 'tristen/vim-sparkup', { 'for': [ 'html', 'php' ] }
-Plug 'vim-scripts/DirDiff.vim'
+Plug 'Valloric/MatchTagAlways'
+Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer --system-libclang --tern-completer --gocode-completer' }
 Plug 'vim-scripts/csv.vim'
+Plug 'vim-scripts/DirDiff.vim'
 Plug 'vim-scripts/matchit.zip'
-Plug 'vim-scripts/vcscommand.vim'
 Plug 'w0rp/ale'
 call plug#end()
 
