@@ -31,7 +31,7 @@ grab_hgcfg() {
 grab_pips() {
   config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
 
-  pip  install -U --user neovim s3cmd
+  pip  install -U --user gsutil neovim s3cmd
   pip3 install -U --user doge httpie icdiff neovim psutil powerline-status
 
   if [ ! -d "${config_home}/powerline" ]; then
