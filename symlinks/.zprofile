@@ -1,9 +1,7 @@
-#
 # Executes commands at login pre-zshrc.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
 
 export PAGER='less'
 export MANPAGER="nvim -c 'set ft=man' -"
@@ -24,6 +22,12 @@ fi
 
 if which python3 >/dev/null; then
   python3_path=$(python3 -c $'import sys\nfor x in sys.path:\n  print(x)')
+fi
+
+if which composer >/dev/null; then
+  php_path="$(composer global config bin-dir --absolute 2>/dev/null)"
+else
+  php_path=""
 fi
 
 #
@@ -47,6 +51,7 @@ cdpath=(
 # Set the list of directories that Zsh searches for programs.
 path=(
   ~/.local/bin
+  $php_path
   $gem_path
   ~/bin
   /usr/local/{bin,sbin}
