@@ -196,11 +196,13 @@ let g:session_autosave = 'no'
 let g:sparkupExecuteMapping = '<Leader>se'
 let g:sparkupNextMapping = '<Leader>sn'
 let g:tagcommands = { 'php': { 'args': '-R' } }
-let g:UltiSnipsExpandTrigger = "<M-x>"
-let g:UltiSnipsJumpBackwardTrigger = "<M-h>"
-let g:UltiSnipsJumpForwardTrigger = "<M-l>"
+let g:UltiSnipsExpandTrigger = "<Leader>u"
+let g:UltiSnipsJumpBackwardTrigger = "<C-j>"
+let g:UltiSnipsJumpForwardTrigger = "<C-k>"
 let g:VCSCommandSplit = 'vertical'
 let g:vimpager = {}
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
 imap <C-c>       <CR><ESC>O
