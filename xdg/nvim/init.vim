@@ -15,7 +15,7 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
-Plug 'bling/vim-airline'
+Plug 'edkolev/tmuxline.vim' | Plug 'bling/vim-airline'
 Plug 'DArcMattr/wordpress.vim', { 'branch' : 'develop' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
