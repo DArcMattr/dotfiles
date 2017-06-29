@@ -7,9 +7,15 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 if system('uname -o') =~ '^GNU/'
-  let g:make = 'make'
+  let b:make = 'make'
 else
-  let g:make = 'gmake'
+  let b:make = 'gmake'
+endif
+
+if filereadable("/etc/debian_version")
+  let b:pager_install = ' install-deb'
+else
+  let b:pager_install = ' install'
 endif
 
 call plug#begin('~/.config/nvim/plugged')
@@ -20,13 +26,14 @@ Plug 'DArcMattr/wordpress.vim', { 'branch' : 'develop' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'equalsraf/neovim-gui-shim'
+Plug 'fatih/vim-go', { 'for': [ 'go' ] }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jiangmiao/auto-pairs'
 Plug 'joonty/vdebug'
 Plug 'joonty/vim-taggatron'
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'reedes/vim-wheel'
-Plug 'rkitover/vimpager', { 'do': 'sudo ' . g:make . ' install-deb' }
+Plug 'rkitover/vimpager', { 'do': 'sudo ' . b:make . b:pager_install }
 Plug 'shawncplus/phpcomplete.vim', { 'for': [ 'php', 'php.wordpress' ] }
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
@@ -37,7 +44,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vividchalk'
 Plug 'tristen/vim-sparkup', { 'for': [ 'html', 'php' ] }
 Plug 'Valloric/MatchTagAlways'
-Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer --system-libclang --tern-completer --gocode-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --system-libclang --system-boost --clang-completer --tern-completer --gocode-completer' }
 Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/DirDiff.vim'
 Plug 'vim-scripts/matchit.zip'
@@ -179,6 +186,7 @@ let g:AutoPairsShortcutToggle = '<Leader>ap'
 let g:AutoPairsShortcutFastWrap = '<Leader>ae'
 let g:AutoPairsShortcutJump = '<Leader>an'
 let g:AutoPairsShortcutBackInsert = '<Leader>ab'
+let g:go_term_mode = "split"
 let g:less = { 'enabled' : 0, }
 let g:localvimrc_persistent = 1
 let g:localvimrc_reverse = 1
@@ -462,9 +470,6 @@ autocmd FileType css setlocal iskeyword+=.,#
 
 " Git commit messages
 autocmd BufRead,BufNewFile COMMIT_EDITMSG :DiffGitCached
-
-" Golang
-autocmd FileType go autocmd BufWritePre <buffer> Fmt
 
 " HTML
 autocmd BufNewFile *.html 0r ~/dotfiles/lang/html/index.html
