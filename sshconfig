@@ -5,7 +5,6 @@ Host *
   ServerAliveInterval 20
   ServerAliveCountMax 20
   Compression yes
-  CompressionLevel 9
   IdentityFile ~/.ssh/id_rsa
   ControlMaster auto
   ControlPath ~/.ssh/socket-%r@%h:%p
@@ -61,14 +60,13 @@ Host vagrant
   UserKnownHostsFile /dev/null
   StrictHostKeyChecking no
   PasswordAuthentication no
-  IdentityFile ~/.vagrant.d/insecure_private_key
   IdentitiesOnly yes
   LogLevel FATAL
   ForwardAgent yes
-  IdentityFile ~/contrib/vvv/.vagrant/machines/default/virtualbox/private_key
+  IdentityFile C:/Users/david.arceneaux/workspace/vagrant-fork/.vagrant/machines/default/virtualbox/private_key
 
 Host staging
-  HostName 10.5.101.20
+  HostName 10.5.23.77
   User ec2-user
   IdentityFile ~/.ssh/ten-staging.pem
 
