@@ -69,7 +69,7 @@ dir() {
     echo "${LL}" | grep -E "^d"
     echo "${LL}" | grep -E -v "^d|^total"
     echo "${LL}" | grep -E "^total"
-  } | ${PAGER}
+  } | ${PAGER:-less}
 }
 
 dosass() {
@@ -114,7 +114,7 @@ superupdate() {
       \apt -y upgrade && \
       \apt -y full-upgrade && \
       \apt-get -y autoclean && \
-      \apt-get -y autoremove && \
+      \apt -y autoremove && \
       \apt-get -y clean"
   elif [ -z $(apt-get >/dev/null 2>&1) ]; then
     \sudo \sh -c " \

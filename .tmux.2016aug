@@ -7,6 +7,11 @@ tmux has-session -t "${SESSION}"
 if [ $? -eq 0 ]; then
   echo "Session ${SESSION} already exists, attaching"
 else
+  sudo -v
+  sudo service nginx start
+  sudo service mysql start
+  sudo service php7.1-fpm start
+
   WP_DIR="/srv/www/ten/wordpress/wp-content/"
   . ~/dotfiles/helpers/project_pane.sh
 
