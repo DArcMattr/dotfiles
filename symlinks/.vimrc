@@ -11,9 +11,15 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 if system('uname -o') =~ '^GNU/'
-  let g:make = 'make'
+  let b:make = 'make'
 else
-  let g:make = 'gmake'
+  let b:make = 'gmake'
+endif
+
+if filereadable("/etc/debian_version")
+  let b:pager_install = ' install-deb'
+else
+  let b:pager_install = ' install'
 endif
 
 call plug#begin('~/.config/nvim/plugged')
@@ -24,13 +30,14 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'DArcMattr/wordpress.vim', { 'branch' : 'develop' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
+Plug 'fatih/vim-go', { 'for': [ 'go' ] }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jiangmiao/auto-pairs'
 Plug 'joonty/vdebug'
 Plug 'joonty/vim-taggatron'
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'reedes/vim-wheel'
-Plug 'rkitover/vimpager', { 'do': 'sudo ' . g:make . ' install-deb' }
+Plug 'rkitover/vimpager', { 'do': 'sudo ' . b:make . b:pager_install }
 Plug 'shawncplus/phpcomplete.vim', { 'for': [ 'php', 'php.wordpress' ] }
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
@@ -41,7 +48,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vividchalk'
 Plug 'tristen/vim-sparkup', { 'for': [ 'html', 'php' ] }
 Plug 'Valloric/MatchTagAlways'
-Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --clang-completer --system-libclang --tern-completer --gocode-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --system-libclang --system-boost --clang-completer --tern-completer --gocode-completer' }
 Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/DirDiff.vim'
 Plug 'vim-scripts/matchit.zip'
@@ -215,16 +222,16 @@ let g:ale_lint_on_text_changed = 0
 let g:ale_linters = {
   \ 'php': ['php -l', 'phpcs'],
   \}
+let g:ale_open_list = 1
 let g:ale_sign_error = '⨉'
 let g:ale_sign_warning = '⚠'
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
-let g:ale_open_list = 1
-let g:ale_keep_list_window_open = 1
+let g:ale_set_loclist = 1
+let g:ale_set_quickfix = 0
 let g:AutoPairsShortcutToggle = '<Leader>ap'
 let g:AutoPairsShortcutFastWrap = '<Leader>ae'
 let g:AutoPairsShortcutJump = '<Leader>an'
 let g:AutoPairsShortcutBackInsert = '<Leader>ab'
+let g:go_term_mode = "split"
 let g:less = { 'enabled' : 0, }
 let g:localvimrc_persistent = 1
 let g:localvimrc_reverse = 1
@@ -242,11 +249,13 @@ let g:session_autosave = 'no'
 let g:sparkupExecuteMapping = '<Leader>se'
 let g:sparkupNextMapping = '<Leader>sn'
 let g:tagcommands = { 'php': { 'args': '-R' } }
-let g:UltiSnipsExpandTrigger = "<M-x>"
-let g:UltiSnipsJumpBackwardTrigger = "<M-h>"
-let g:UltiSnipsJumpForwardTrigger = "<M-l>"
+let g:UltiSnipsExpandTrigger = "<Leader>u"
+let g:UltiSnipsJumpBackwardTrigger = "<C-j>"
+let g:UltiSnipsJumpForwardTrigger = "<C-k>"
 let g:VCSCommandSplit = 'vertical'
 let g:vimpager = {}
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
 imap <C-c>       <CR><ESC>O
