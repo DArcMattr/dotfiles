@@ -25,17 +25,18 @@ Some of these will be installed via the install scripts or apt-get below.
     sudo add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.2/ubuntu xenial main'
     sudo add-apt-repository 'deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-4.0 xenial main'
     sudo apt update
-    sudo apt install autossh build-essential cmake git golang mariadb-server \
-      neovim nodejs nodejs php7.1-cli php7.1-common php7.1-curl php7.1-dev \
-      php7.1-fpm php7.1-gd php7.1-imap php7.1-json php7.1-mbstring php7.1-mcrypt \
-      php7.1-mysql php7.1-opcache php7.1-readline php7.1-soap php7.1-xml \
-      php-common php-imagick php-memcache php-pear php-xml pv python3-dev \
-      python3-pip python-dev python-pip s3cmd tmux vim-nox xsel zsh zsh-lovers \
-      libboost-system-dev libboost-filesystem-dev libboost-python-dev clang-4.0 \
-      clang-4.0-doc libclang-common-4.0-dev libclang-4.0-dev libclang1-4.0 \
-      libclang1-4.0-dbg libllvm-4.0-ocaml-dev libllvm4.0 libllvm4.0-dbg lldb-4.0 \
-      llvm-4.0 llvm-4.0-dev llvm-4.0-doc llvm-4.0-examples llvm-4.0-runtime \
-      clang-format-4.0 python-clang-4.0 lldb-4.0-dev lld-4.0 libfuzzer-4.0-dev
+    sudo apt install autossh build-essential clang-4.0 clang-4.0-doc \
+      clang-format-4.0 cmake git golang libboost-filesystem-dev \
+      libboost-python-dev libboost-system-dev libclang1-4.0 libclang1-4.0-dbg \
+      libclang-4.0-dev libclang-common-4.0-dev libfuzzer-4.0-dev libllvm4.0 \
+      libllvm4.0-dbg libllvm-4.0-ocaml-dev liblzma-dev libpcre3-dev lld-4.0 \
+      lldb-4.0 liblldb-4.0-dev llvm-4.0 llvm-4.0-dev llvm-4.0-doc \
+      llvm-4.0-examples llvm-4.0-runtime mariadb-server neovim nodejs nodejs \
+      php7.1-cli php7.1-common php7.1-curl php7.1-dev php7.1-fpm php7.1-gd \
+      php7.1-imap php7.1-json php7.1-mbstring php7.1-mcrypt php7.1-mysql \
+      php7.1-opcache php7.1-readline php7.1-soap php7.1-xml php-common php-imagick \
+      php-memcache php-pear php-xml pv python3-dev python3-pip python-clang-4.0 \
+      python-dev python-pip s3cmd tmux vim-nox xsel zlib1g-dev zsh zsh-lovers
     sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-4.0 10
     sudo update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
     sudo npm -g install gulp eslint eslint_d js-beautify cssbeautify minify \
