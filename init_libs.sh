@@ -149,6 +149,6 @@ grab_sassc() {
 
     cd "${SASSC_PATH}" && \
       SASS_LIBSASS_PATH="${SASS_LIBSASS_PATH}" PREFIX="${HOME}/.local" \
-      make install
+      make install clean
   )
 }
