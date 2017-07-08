@@ -471,6 +471,9 @@ autocmd FileType css setlocal iskeyword+=.,#
 " Git commit messages
 autocmd BufRead,BufNewFile COMMIT_EDITMSG :DiffGitCached
 
+" Golang
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
+
 " HTML
 autocmd BufNewFile *.html 0r ~/dotfiles/lang/html/index.html
 
