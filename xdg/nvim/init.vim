@@ -22,6 +22,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
+Plug 'brookhong/DBGPavim'
 Plug 'DArcMattr/wordpress.vim', { 'branch' : 'develop' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
@@ -29,7 +30,6 @@ Plug 'equalsraf/neovim-gui-shim'
 Plug 'fatih/vim-go', { 'for': [ 'go' ] }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jiangmiao/auto-pairs'
-Plug 'joonty/vdebug'
 Plug 'joonty/vim-taggatron'
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'reedes/vim-wheel'
@@ -234,7 +234,7 @@ noremap <C-u>     <C-u>zz
 noremap <Leader>t :enew<CR>
 
 nnoremap <C-e>     3<C-e>
-nnoremap <C-p>     :Denite file_rec/async<CR>
+nnoremap <C-p>     :Denite file_rec<CR>
 nnoremap <C-y>     3<C-y>
 nnoremap <Leader>/ :Denite grep:.<CR>
 nnoremap <Leader>o :Denite outline<CR>
@@ -266,34 +266,40 @@ vnoremap p "_dP`]
 
 xnoremap c "xc
 
-"in case of derp-sudo
+" in case of derp-sudo
 cmap w!! w !sudo tee % >/dev/null
 command! W w !sudo tee % >/dev/null
 
 " Denite
 
-call denite#custom#option( 'default', 'vertical_preview', 1 )
-call denite#custom#option( 'list', 'mode', 'normal' )
-call denite#custom#option( 'grep', 'vertical_preview', 1 )
+call denite#custom#option( 'default', {
+\  'prompt': '>',
+\  'short_source_names': 1,
+\  'split': 'vertical',
+\  'vertical_preview': 1,
+\  'winwidth': 40,
+\})
+call denite#custom#option( 'list', { 'mode': 'normal' } )
+call denite#custom#option( 'grep', { 'vertical_preview': 1 } )
 
 if executable('ag')
   " Use ag in denite grep source.
-  call denite#custom#var('grep', 'command',      ['ag'])
-  call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
-  call denite#custom#var('grep', 'recursive_opts', [])
-  call denite#custom#var('grep', 'pattern_opt', [])
-  call denite#custom#var('grep', 'separator', ['--'])
-  call denite#custom#var('grep', 'final_opts', [])
+  call denite#custom#var( 'grep', 'command',      ['ag'] )
+  call denite#custom#var( 'grep', 'default_opts', ['-i', '--vimgrep'] )
+  call denite#custom#var( 'grep', 'recursive_opts', [] )
+  call denite#custom#var( 'grep', 'pattern_opt', [] )
+  call denite#custom#var( 'grep', 'separator', ['--'] )
+  call denite#custom#var( 'grep', 'final_opts', [] )
 elseif executable('ack-grep')
   " Use ack in denite grep source.
-  call denite#custom#var('grep', 'command', ['ack'])
-  call denite#custom#var('grep', 'default_opts',
+  call denite#custom#var( 'grep', 'command', ['ack'] )
+  call denite#custom#var( 'grep', 'default_opts',
       \ ['--ackrc', $HOME.'/.ackrc', '-H',
-      \  '--nopager', '--nocolor', '--nogroup', '--column'])
-  call denite#custom#var('grep', 'recursive_opts', [])
-  call denite#custom#var('grep', 'pattern_opt', ['--match'])
-  call denite#custom#var('grep', 'separator', ['--'])
-  call denite#custom#var('grep', 'final_opts', [])
+      \  '--nopager', '--nocolor', '--nogroup', '--column'] )
+  call denite#custom#var( 'grep', 'recursive_opts', [] )
+  call denite#custom#var( 'grep', 'pattern_opt', ['--match'] )
+  call denite#custom#var( 'grep', 'separator', ['--'] )
+  call denite#custom#var( 'grep', 'final_opts', [] )
 endif
 
 command! -nargs=1 Silent |
@@ -470,9 +476,6 @@ autocmd FileType css setlocal iskeyword+=.,#
 
 " Git commit messages
 autocmd BufRead,BufNewFile COMMIT_EDITMSG :DiffGitCached
-
-" Golang
-autocmd FileType go autocmd BufWritePre <buffer> Fmt
 
 " HTML
 autocmd BufNewFile *.html 0r ~/dotfiles/lang/html/index.html
