@@ -20,3 +20,4 @@ PATH=~/contrib/android-sdk/sdk/platform-tools:${PATH}
 PATH=${GOPATH}/bin:${PATH}
 PATH="/home/darc/perl5/bin${PATH+:}${PATH}"
 export PATH=/home/darc/.local/share/umake/swift/swift-lang/usr/bin:${PATH}
+export PATH="$HOME/.cargo/bin:$PATH"
