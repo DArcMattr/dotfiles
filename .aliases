@@ -18,6 +18,7 @@ alias sicp='racket -i -p neil/sicp -l xrepl'
 alias agp='ag --pager=less'
 #shellcheck disable=SC2139
 alias tmuxt="sh ~/dotfiles/.tmux.${HOST:-$HOSTNAME}"
+alias svim='nvim -u ~/contrib/SpaceVim/init.vim'
 
 # Suffix aliases
 
@@ -66,9 +67,9 @@ catmd() {
 dir() {
   {
     LL=$(ll "${@}")
-    echo "${LL}" | grep -E "^d"
-    echo "${LL}" | grep -E -v "^d|^total"
-    echo "${LL}" | grep -E "^total"
+    echo "${LL}" | awk '/^d/ {print $0}'
+    echo "${LL}" | awk '! /^(d|total)/ {print $0}'
+    echo "${LL}" | awk '/^total/ {print $0}'
   } | ${PAGER:-less}
 }
 
