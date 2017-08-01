@@ -38,8 +38,8 @@ Some of these will be installed via the install scripts or apt-get below.
       php7.1-dev php7.1-fpm php7.1-gd php7.1-imap php7.1-json php7.1-mbstring \
       php7.1-mcrypt php7.1-mysql php7.1-opcache php7.1-readline php7.1-soap \
       php7.1-xml php-common php-imagick php-memcache php-pear php-xml pv \
-      python3-dev python3-pip python-clang-4.0 python-dev python-pip s3cmd \
-      vim-nox xsel zlib1g-dev zsh zsh-lovers
+      python3-dev python3-pip python-clang-4.0 ruby-dev s3cmd vim-nox xsel \
+      zlib1g-dev zsh zsh-lovers
     sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-4.0 10
     sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-4.0 10
     sudo update-alternatives --install /usr/bin/lldb lldb /usr/bin/lldb-4.0 10
