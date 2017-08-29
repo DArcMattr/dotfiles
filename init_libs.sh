@@ -53,7 +53,7 @@ grab_pips() {
 grab_composer() {
   if ! command -v composer >/dev/null 2>&1 ; then
     (
-      cd ${TMP}; \
+      cd "${TMP}" || exit
       curl -sS https://getcomposer.org/installer | php -d "allow_url_fopen=On"; \
       mv composer.phar ~/.local/bin/composer
       cd ~
@@ -142,10 +142,10 @@ grab_git() {
 grab_sassc() {
   (
     SASS_LIBSASS_PATH="${HOME}/contrib/libsass"
-    grab_git -d ${SASS_LIBSASS_PATH} -r https://github.com/hcatlin/libsass -n
+    grab_git -d "${SASS_LIBSASS_PATH}" -r https://github.com/hcatlin/libsass -n
 
     SASSC_PATH="${HOME}/contrib/sassc"
-    grab_git -d ${SASSC_PATH} -r https://github.com/hcatlin/sassc -n
+    grab_git -d "${SASSC_PATH}" -r https://github.com/hcatlin/sassc -n
 
     cd "${SASSC_PATH}" && \
       SASS_LIBSASS_PATH="${SASS_LIBSASS_PATH}" PREFIX="${HOME}/.local" \
