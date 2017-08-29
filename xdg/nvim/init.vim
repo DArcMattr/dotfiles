@@ -44,7 +44,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vividchalk'
 Plug 'tristen/vim-sparkup', { 'for': [ 'html', 'php' ] }
 Plug 'Valloric/MatchTagAlways'
-Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --system-libclang --system-boost --clang-completer --tern-completer --gocode-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --system-libclang --clang-completer --tern-completer --gocode-completer' }
 Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/DirDiff.vim'
 Plug 'vim-scripts/matchit.zip'
