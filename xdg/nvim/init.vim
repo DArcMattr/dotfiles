@@ -483,6 +483,9 @@ autocmd BufNewFile *.html 0r ~/dotfiles/lang/html/index.html
 " JavaScript
 autocmd FileType javascript setlocal iskeyword+=$
 
+" JSON
+autocmd FileType json setlocal foldmarker={,} foldmethod=marker foldlevelstart=2
+
 " LaTeX
 autocmd BufNewFile *.tex 0r ~/dotfiles/lang/latex/template.tex
 
@@ -512,8 +515,6 @@ autocmd FileType perl setlocal makeprg=perl keywordprg=perldoc\ -f |
 autocmd FileType php setlocal keywordprg=pman |
   \ setlocal iskeyword+=$
 " \ setlocal foldmarker={,} foldmethod=marker foldlevelstart=1 |
-
-" autocmd BufWritePost *.php silent !phpcbf --standard=WordPress %
 
 " PostgreSQL
 autocmd BufNewFile,BufRead,BufEnter *.psql setfiletype postgresql
