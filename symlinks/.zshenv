@@ -29,7 +29,7 @@ if which go >/dev/null; then
   go_bin="${go_path}/bin"
 fi
 
-if which cargo >/dev/null; then
+if which "${HOME}/.cargo/bin/cargo" >/dev/null; then
   cargo_path="${HOME}/.cargo/bin"
 fi
 
