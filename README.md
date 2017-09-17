@@ -31,15 +31,16 @@ Some of these will be installed via the install scripts or apt-get below.
       clang-format-4.0 cmake git golang htop libboost-filesystem-dev \
       libboost-python-dev libboost-regex-dev libboost-system-dev libclang1-4.0 \
       libclang1-4.0-dbg libclang-4.0-dev libclang-common-4.0-dev libevent-dev \
-      libfuzzer-4.0-dev libllvm4.0 libllvm4.0-dbg libllvm-4.0-ocaml-dev \
-      liblzma-dev libncurses5-dev libpcre3-dev lld-4.0 lldb-4.0 liblldb-4.0-dev \
-      llvm-4.0 llvm-4.0-dev llvm-4.0-doc llvm-4.0-examples llvm-4.0-runtime \
-      mariadb-server neovim nodejs nodejs php7.1-cli php7.1-common php7.1-curl \
-      php7.1-dev php7.1-fpm php7.1-gd php7.1-imap php7.1-json php7.1-mbstring \
-      php7.1-mcrypt php7.1-mysql php7.1-opcache php7.1-readline php7.1-soap \
-      php7.1-xml php-common php-imagick php-memcache php-pear php-xml pv \
-      python3-dev python3-pip python-clang-4.0 ruby-dev s3cmd vim-nox xsel \
+      libfuzzer-4.0-dev liblldb-4.0-dev libllvm4.0 libllvm4.0-dbg \
+      libllvm-4.0-ocaml-dev liblzma-dev libncurses5-dev libpcre3-dev lld-4.0 \
+      lldb-4.0 llvm-4.0 llvm-4.0-dev llvm-4.0-doc llvm-4.0-examples \
+      llvm-4.0-runtime mariadb-server neovim nodejs php7.1-cli php7.1-curl \
+      php7.1-dev php7.1-fpm php7.1-imap php7.1-json php7.1-mcrypt \
+      php7.1-mysql php7.1-opcache php7.1-readline php7.1-soap php-common php-gd \
+      php-imagick php-mbstring php-memcache php-pear php-xml pv python3-dev \
+      python3-docutils python3-pip python-clang-4.0 ruby-dev s3cmd vim-nox xsel \
       zlib1g-dev zsh zsh-lovers
+
     sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-4.0 10
     sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-4.0 10
     sudo update-alternatives --install /usr/bin/lldb lldb /usr/bin/lldb-4.0 10
