@@ -1,4 +1,5 @@
 # darc prompt theme
+# vim:ft=zsh:
 
 prompt_darc_help () {
   cat <<'EOF'
@@ -45,7 +46,7 @@ prompt_darc_build () {
   setopt noxtrace noksharrays localoptions
   local -a pcc
   local -A pc
-  local p_date p_tty p_plat p_ver p_userpwd p_apm p_shlvlhist p_rc p_end p_win p_vcs
+  local p_date p_userpwd p_shlvlhist p_rc p_end p_vcs
 
   pcc[1]=${1:-${${SSH_CLIENT+'yellow'}:-'red'}}
   pcc[2]=${2:-'yellow'}
@@ -75,7 +76,6 @@ $p_shlvlhist$p_rc$p_vcs$p_end "
 prompt_darc_precmd () {
   setopt noxtrace noksharrays localoptions
   local exitstatus=$?
-  local git_dir git_ref
 
   psvar=()
   [[ $exitstatus -ge 128 ]] && psvar[1]=" $signals[$exitstatus-127]" ||
