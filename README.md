@@ -77,6 +77,22 @@ For running `st` under KDE:
 
     kstart --maximize --windowclass "st-256color" st -e tmux attach
 
+### Self-signed certificates
+
+Every dev machine should have its own Certificate Authority certificate to sign
+its own certs, so the CA can be accepted, allowing all the local certs generated
+with it to pass through without challenge. To do so:
+
+  mkdir -p "${HOME}/.config/ssl"
+  openssl genrsa -out "$HOME/.config/ssl/rootCA.key" 2048
+  sudo openssl req -x509 -new -nodes -days 3563 -sha256 \
+    -subj "/CN=localhost/O=DavidTheMachine/C=US/ST=California/L=Anaheim" \
+    -key "${HOME}/.config/ssl/rootCA.key" \
+    -out "/usr/share/ca-certificates/localhost-rootCA.pem"
+  sudo openssl x509 -in "/usr/share/ca-certificates/localhost-rootCA.pem" \
+    -out "/usr/share/ca-certificates/localhost-rootCA.crt" -inform PEM
+  sudo dpkg-reconfigure ca-certificates
+
 [Mercurial SCM]: http://mercurial.selenic.com
 [Git]: http://git-scm.com
 
