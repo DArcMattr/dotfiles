@@ -48,6 +48,8 @@ Thumbs.db
 .lvimrc
 *.vim
 wp-cli.local.yml
+yarn.lock
+package-json.lock
 
 # tool-generated files #
 ########################

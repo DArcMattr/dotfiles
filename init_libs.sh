@@ -61,7 +61,8 @@ grab_composer() {
         'squizlabs/php_codesniffer=*' \
         'phing/phing=*' \
         'psy/psysh=*' \
-        'phpunit/phpunit=6.*'
+        'sloanlance/pman-php-manual' \
+        'phpunit/phpunit=*'
     )
   else
     composer self-update
