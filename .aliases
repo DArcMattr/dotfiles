@@ -1,5 +1,5 @@
 # .aliases
-# vim:ft=sh:
+# vim:ft=zsh:
 
 if ls --color=always -d . >/dev/null 2>&1; then
   alias ls='\ls --color=always'
@@ -55,9 +55,9 @@ catmd() {
   pandoc -s -S --self-contained -c ~/.pandoc/buttondown.css \
     -t html5 -f markdown_phpextra "${@}" -o "${TMPFILE}"
 
-  if command -v "${BROWSER}" &>/dev/null; then
+  if command -v "${BROWSER}" >/dev/null 2>&1; then
     ${BROWSER} "${TMPFILE}"
-  elif command -v "elinks" &>/dev/null; then
+  elif command -v "elinks" >/dev/null 2>&1; then
     elinks -force-html "file://${TMPFILE}"
   else
     lynx -force_html "file://${TMPFILE}"
@@ -100,16 +100,47 @@ pushterms() {
   infocmp -x | ssh -t "${@}" 'cat > "~/nuterm.info" && tic -x "~/$nuterm.info"'
 }
 
+# Given a domain name, make a wildcard certificate for all its subdomains.
+#
+# @param string Domain Name
 sscerts() {
-  openssl req -new -newkey rsa:4096 -days 3653 -nodes -x509 -subj "/CN=${1}/O=DavidTheMachine/C=US/ST=California/L=Anaheim" -keyout "${1}.key" -out "${1}.cert"
+  ME=$(whoami)
+  TMPFILE="$(mktemp -d)/v3.ext"
+  DOMAIN=${1}
+  COMMON_NAME="*.${1}"
+
+  cat <<-EOL > "${TMPFILE}"
+authorityKeyIdentifier=keyid,issuer
+basicConstraints=CA:FALSE
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = ${COMMON_NAME}
+EOL
+
+  if [ -f "./${1}.key" ]; then
+    KEY_OPT='-key'
+  else
+    KEY_OPT='-keyout'
+  fi
+
+  \openssl req -new -newkey rsa:4096 -sha256 -nodes ${KEY_OPT} "./${1}.key" -out "./${1}.csr" \
+    -subj "/CN=${COMMON_NAME}/O=DavidTheMachine/OU=None/C=US/ST=California/L=Anaheim"
+  echo ${ext3} > "${TMPFILE}"
+  \sudo \openssl x509 -days 3653 -sha256 -req -in "./${1}.csr" \
+    -CA "/usr/share/ca-certificates/localhost-rootCA.pem" \
+    -CAkey "${HOME}/.config/ssl/rootCA.key" -CAcreateserial \
+    -out "./${1}.pem" -extfile "${TMPFILE}"
+  \sudo \chown ${ME}:${ME} "./${1}.pem"
 }
 
 sssh() {
-  (autossh -t "${@}" 'if tmux has; then tmux -2u attach; else tmux -2u new; fi') 2>/dev/null
+  (autossh -t "${1}" 'if tmux has; then tmux -2u attach; else tmux -2u new; fi') 2>/dev/null
 }
 
 superupdate() {
-  if [ -z $(apt >/dev/null 2>&1) ]; then
+  if [ -z "$(apt >/dev/null 2>&1)" ]; then
     \sudo \sh -c " \
       \apt update && \
       \apt -y upgrade && \
@@ -117,7 +148,7 @@ superupdate() {
       \apt-get -y autoclean && \
       \apt -y autoremove && \
       \apt-get -y clean"
-  elif [ -z $(apt-get >/dev/null 2>&1) ]; then
+  elif [ -z "$(apt-get >/dev/null 2>&1)" ]; then
     \sudo \sh -c " \
       \apt-get update && \
       \apt-get -y upgrade && \
@@ -125,7 +156,7 @@ superupdate() {
       \apt-get -y autoclean && \
       \apt-get -y autoremove && \
       \apt-get -y clean"
-  elif [ -z $(portsnap >/dev/null 2>&1) ]; then # XXX rewrite as pkg
+  elif [ -z "$(portsnap >/dev/null 2>&1)" ]; then # XXX rewrite as pkg
     \sudo \sh -c " \
       \portsnap fetch update && \
       \sudo \portmaster -aD && \
