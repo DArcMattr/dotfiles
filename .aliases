@@ -107,16 +107,15 @@ sscerts() {
   ME=$(whoami)
   TMPFILE="$(mktemp -d)/v3.ext"
   DOMAIN=${1}
-  COMMON_NAME="*.${1}"
 
   cat <<-EOL > "${TMPFILE}"
 authorityKeyIdentifier=keyid,issuer
-basicConstraints=CA:FALSE
 keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
 subjectAltName = @alt_names
 
 [alt_names]
-DNS.1 = ${COMMON_NAME}
+DNS.1 = ${1}
+DNS.2 = *.${1}
 EOL
 
   if [ -f "./${1}.key" ]; then
@@ -126,8 +125,8 @@ EOL
   fi
 
   \openssl req -new -newkey rsa:4096 -sha256 -nodes ${KEY_OPT} "./${1}.key" -out "./${1}.csr" \
-    -subj "/CN=${COMMON_NAME}/O=DavidTheMachine/OU=None/C=US/ST=California/L=Anaheim"
-  echo ${ext3} > "${TMPFILE}"
+    -subj "/CN=*.${1}/O=DavidTheMachine/OU=None/C=US/ST=California/L=Anaheim"
+  echo ${ext3} >> "${TMPFILE}"
   \sudo \openssl x509 -days 3653 -sha256 -req -in "./${1}.csr" \
     -CA "/usr/share/ca-certificates/localhost-rootCA.pem" \
     -CAkey "${HOME}/.config/ssl/rootCA.key" -CAcreateserial \
