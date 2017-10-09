@@ -1,7 +1,25 @@
 # .aliases
 # vim:ft=zsh:
 
-if ls --color=always -d . >/dev/null 2>&1; then
+alias ll='LC_COLLATE=C ls -AalFh'
+
+dir() {
+  {
+    LL=$(ll "${@}")
+    echo "${LL}" | awk '/^d/ {print $0}'
+    echo "${LL}" | awk '! /^(d|total)/ {print $0}'
+    echo "${LL}" | awk '/^total/ {print $0}'
+  } | ${PAGER:-less}
+}
+
+if $HOME/.cargo/bin/exa >/dev/null 2>&1; then
+  alias ls='$HOME/.cargo/bin/exa --color=always'
+  alias ll='LC_COLLATE=C ls -lFh --all --all --color-scale --git --time-style=long-iso'
+  dir() {
+    LL=$(ll --group-directories-first "${@}")
+    echo "${LL}" | ${PAGER:-less}
+  }
+elif ls --color=always -d . >/dev/null 2>&1; then
   alias ls='\ls --color=always'
 elif ls -G -d . >/dev/null 2>&1; then # colorls is main system ls already
   alias ls='\ls -G'
@@ -11,7 +29,6 @@ else # Solaris or other *NIX
   alias ls='\ls'
 fi
 
-alias ll='LC_COLLATE=C ls -AalFh'
 alias key='\man -k'
 alias info='info --vi-keys'
 alias sicp='racket -i -p neil/sicp -l xrepl'
@@ -62,15 +79,6 @@ catmd() {
   else
     lynx -force_html "file://${TMPFILE}"
   fi
-}
-
-dir() {
-  {
-    LL=$(ll "${@}")
-    echo "${LL}" | awk '/^d/ {print $0}'
-    echo "${LL}" | awk '! /^(d|total)/ {print $0}'
-    echo "${LL}" | awk '/^total/ {print $0}'
-  } | ${PAGER:-less}
 }
 
 dosass() {
