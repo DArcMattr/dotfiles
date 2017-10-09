@@ -48,7 +48,7 @@ Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --system-libclang --clang-
 Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/DirDiff.vim'
 Plug 'vim-scripts/matchit.zip'
-Plug 'w0rp/ale'
+Plug 'w0rp/ale', { 'tag' : 'v1.4.1' }
 call plug#end()
 
 set autoindent
@@ -455,7 +455,7 @@ augroup CenteringReadOnly
   autocmd BufEnter * if !&modifiable | setl scrolloff=999 | endif
 augroup END
 
-"autocmd BufRead * try | execute "compiler ".&FileType | catch /./ | endtry
+autocmd BufRead * try | execute "compiler ".&FileType | catch /./ | endtry
 
 " common FileTypes below
 " any project-specific settings should be included in the .lvimrc file placed
