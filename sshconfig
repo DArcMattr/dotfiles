@@ -10,7 +10,6 @@ Host *
   ControlPath ~/.ssh/socket-%r@%h:%p
   AddressFamily inet
   CheckHostIP no
-  # LocalCommand if [[ $TERM == screen* ]]; then printf "\033k%h\033\\"; fi
   PermitLocalCommand no
   ForwardAgent yes
 
@@ -66,7 +65,7 @@ Host vagrant
   IdentityFile C:/Users/david.arceneaux/workspace/vagrant-fork/.vagrant/machines/default/virtualbox/private_key
 
 Host staging
-  HostName 10.5.32.174
+  HostName 10.5.32.72
   User ec2-user
   IdentityFile ~/.ssh/ten-staging.pem
 
