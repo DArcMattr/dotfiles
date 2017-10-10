@@ -516,6 +516,8 @@ autocmd FileType php setlocal keywordprg=pman |
   \ setlocal iskeyword+=$
 " \ setlocal foldmarker={,} foldmethod=marker foldlevelstart=1 |
 
+" autocmd BufWritePost *.php silent !phpcbf --standard=WordPress %
+
 " PostgreSQL
 autocmd BufNewFile,BufRead,BufEnter *.psql setfiletype postgresql
 
