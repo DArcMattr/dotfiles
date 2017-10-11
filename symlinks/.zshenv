@@ -7,6 +7,7 @@ export HGEDITOR=~/dotfiles/helpers/hgeditor
 export TMP=/tmp
 export AUTOENV_IN_FILE=".in"
 export ZSH_CUSTOM="${HOME}/dotfiles/zsh-custom"
+export TMUX_SESSION="$(echo "${USER}" | sed -e 's/[\. ]/_/g')"
 
 if which ruby >/dev/null && which gem >/dev/null; then
   gem_path="$(ruby -rubygems -e 'puts Gem.user_dir')/bin"
