@@ -12,8 +12,8 @@ dir() {
   } | ${PAGER:-less}
 }
 
-if $HOME/.cargo/bin/exa >/dev/null 2>&1; then
-  alias ls='$HOME/.cargo/bin/exa --color=always'
+if exa >/dev/null 2>&1; then
+  alias ls='\exa --color=always'
   alias ll='LC_COLLATE=C ls -lFh --all --all --color-scale --git --time-style=long-iso'
   dir() {
     LL=$(ll --group-directories-first "${@}")
