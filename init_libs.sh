@@ -32,7 +32,8 @@ grab_pips() {
   config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
 
   pip  install -U --user neovim mercurial s3cmd
-  pip3 install -U --user doge flake8 gustil httpie icdiff neovim psutil powerline-status
+  pip3 install -U --user doge flake8 gustil httpie icdiff neovim psutil \
+    powerline-status pyemojify
 
   if [ ! -d "${config_home}/powerline" ]; then
     mkdir -p "${config_home}/powerline"
