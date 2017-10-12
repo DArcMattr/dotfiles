@@ -34,7 +34,6 @@ alias info='info --vi-keys'
 alias sicp='racket -i -p neil/sicp -l xrepl'
 alias agp='ag --pager=less'
 #shellcheck disable=SC2139
-alias tmuxt="sh ~/dotfiles/.tmux.${HOST:-$HOSTNAME}"
 alias svim='nvim -u ~/contrib/SpaceVim/init.vim'
 
 # Suffix aliases
@@ -185,6 +184,30 @@ vman() {
   else
     /usr/bin/man "${@}"
   fi
+}
+
+tmuxt() {
+  SESSION="$(echo "${USER}" | sed -e 's/[\. ]/_/g')"
+
+  tmux has-session -t "${SESSION}"
+
+  if [ $? -eq 0 ]; then
+    echo "Session ${SESSION} already exists, attaching"
+  else
+    source ~/dotfiles/helpers/project_pane.sh
+    tmux new-session -d -s "${SESSION}" -x "$(tput cols)" -y "$(tput lines)"
+
+    tmux set-option -t "${SESSION}" -g default-terminal "tmux-256color" \; \
+      set-option -t "${SESSION}" status-position top
+
+    tmux new-window -t "${SESSION}":0 -k
+
+    source "${HOME}/dotfiles/.tmux.${HOST}"
+
+    tmux select-window -t "${SESSION}":0
+  fi
+
+  tmux attach-session -t "${SESSION}"
 }
 
 # I'm keeping the following around for historical reference
