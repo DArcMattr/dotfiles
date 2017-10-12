@@ -6,17 +6,21 @@ merge = nvim -d
 [extensions]
 bookmarks=
 color=
-config=~/contrib/hgcfg/hgext/hgcfg.py
+#config=~/contrib/hgcfg/hgext/hgcfg.py
 convert=
 eol=
 extdiff=
 fetch=
 graphlog=
+histedit=
 largefiles=
 pager=
 record=
 rebase=
 record=
+shelve=
+strip=
+transplant=
 
 [alias]
 log=glog
@@ -24,6 +28,14 @@ up=pull -u
 
 [config]
 delete_on_replace = True
+
+[defaults]
+commit = -v
+
+[diff]
+git = 1
+showfunc = 1
+unified = 8
 
 [pager]
 ignore= version, help, update, serve, record
