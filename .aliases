@@ -194,7 +194,6 @@ tmuxt() {
   if [ $? -eq 0 ]; then
     echo "Session ${SESSION} already exists, attaching"
   else
-    source ~/dotfiles/helpers/project_pane.sh
     tmux new-session -d -s "${SESSION}" -x "$(tput cols)" -y "$(tput lines)"
 
     tmux set-option -t "${SESSION}" -g default-terminal "tmux-256color" \; \
@@ -202,7 +201,7 @@ tmuxt() {
 
     tmux new-window -t "${SESSION}":0 -k
 
-    source "${HOME}/dotfiles/.tmux.${HOST}"
+    . "${HOME}/dotfiles/.tmux.${HOST}"
 
     tmux select-window -t "${SESSION}":0
   fi
