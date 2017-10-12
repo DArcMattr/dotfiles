@@ -1,48 +1,24 @@
 #!/bin/sh
 # vim:ft=sh:
 
-SESSION="$(echo "${USER}" | sed -e 's/[\. ]/_/g')"
+tmux new-window -t "${SESSION}:1" "htop"
 
-tmux has-session -t "${SESSION}"
+tmux new-window -t "${SESSION}:2" -c "${HOME}/contrib/vvv" \; \
+  split-window -t "${SESSION}:2.0" -v \; \
+  split-window -t "${SESSION}:2.0" -v "# sssh cor" \; \
+  split-window -t "${SESSION}:2.0" -v "# sssh demo" \; \
+  split-window -t "${SESSION}:2.0" -v \; \
+  select-layout -t "${SESSION}:2" even-vertical
+tmux send-keys -t "${SESSION}:2.0" "# vagrant up; sssh vagrant" C-m \; \
+  send-keys -t "${SESSION}:2.1" "sssh aynrand" C-m \; \
+  send-keys -t "${SESSION}:2.4" "sssh centuria" C-m
+tmux select-pane -t "${SESSION}:2.0"
+tmux rename-window -t "${SESSION}:2" "Remotes"
 
-if [ $? -eq 0 ]; then
-  echo "Session ${SESSION} already exists, attaching"
-  sleep 1
-  tmux attach -t "${SESSION}"
-  exit 0;
-else
-  eval "$(ssh-agent -s)"
-  ssh-add ~/.ssh/id_ed25519
-fi
-
-tmux new-session -d -s "${SESSION}" -x "$(tput cols)" -y "$(tput lines)"
-
-tmux set-option -t "${SESSION}" -g default-terminal "tmux-256color"
-tmux set-option -t "${SESSION}" status-position top
-
-tmux new-window -t "${SESSION}":0 -k
-
-tmux new-window -t "${SESSION}":1 -c ~/contrib/vvv "# sudo -v; vagrant up; sssh vagrant"
-tmux split-window -t "${SESSION}":1.0 -v -p 20 "sssh aynrand"
-tmux split-window -t "${SESSION}":1.0 -v -p 25 "sssh cor"
-tmux split-window -t "${SESSION}":1.0 -v -p 33 "sssh demo"
-tmux split-window -t "${SESSION}":1.0 -v -p 50 "sssh centuria"
-tmux select-pane -t "${SESSION}":1.0
-tmux rename-window -t "${SESSION}":1 "Remotes"
-
-tmux new-window -t "${SESSION}":2 "htop"
-
-tmux new-window -t "${SESSION}":3 -c /var/www/vhosts/startups-uncensored
-tmux select-window -t "${SESSION}":3
-tmux split-window -h -l 112 -t "${SESSION}":3.0 -c "#{pane_current_path}"
-tmux split-window -v -p 66 -t "${SESSION}":3.1 -c "#{pane_current_path}"
-tmux split-window -v -p 50 -t "${SESSION}":3.2 -c "#{pane_current_path}" "tail -F /var/log/apache2/error.log | sed -r s#\\\\n#\\n#g"
-tmux send-keys -t "${SESSION}":3.3 "_t" C-m
-tmux select-pane -t "${SESSION}":3.0
-tmux rename-window -t "${SESSION}":3 "Projects"
-
-sleep 2
-
-tmux select-window -t "${SESSION}":0
-
-tmux attach-session -t "${SESSION}"
+CURRENT_PATH="/var/www/vhosts/startups-uncensored"
+tmux new-window -t "${SESSION}:3" -c "${CURRENT_PATH}"
+tmux split-window -h -l 112 -t "${SESSION}:3.0" -c "${CURRENT_PATH}" "tail -F /var/log/apache2/error.log | sed -r s#\\\\n#\\n#g" \; \
+  split-window -v -p 66 -t "${SESSION}:3.1" -c "${CURRENT_PATH}" \; \
+  split-window -v -p 50 -t "${SESSION}:3.2" -c "${CURRENT_PATH}"
+tmux select-pane -t "${SESSION}:3.0"
+tmux rename-window -t "${SESSION}:3" "Projects"
