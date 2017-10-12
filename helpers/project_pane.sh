@@ -10,7 +10,7 @@ project_pane() {
       d) DIRECTORY=${OPTARG}
         ;;
 
-      g) GRUNT=${OPTARG:-local}
+      g) GRUNT=${OPTARG:-grunt local}
         ;;
 
       l) LOG=${OPTARG}
@@ -47,8 +47,8 @@ project_pane() {
 
   tmux select-pane -t "${SESSION}:${WIN_NUM}.0"
 
-  if [ ! -z ${GRUNT} ]; then
-    tmux send-keys -t "${SESSION}:${WIN_NUM}.3" "grunt ${GRUNT}" C-m
+  if [ ! -z "${GRUNT}" ]; then
+    tmux send-keys -t "${SESSION}:${WIN_NUM}.3" "${GRUNT}" C-m
   fi
 
   tmux rename-window -t "${SESSION}:${WIN_NUM}" "${NAME}"

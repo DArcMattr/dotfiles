@@ -14,7 +14,7 @@ dir() {
 
 if exa >/dev/null 2>&1; then
   alias ls='\exa --color=always'
-  alias ll='LC_COLLATE=C ls -lFh --all --all --color-scale --git --time-style=long-iso'
+  alias ll='LC_COLLATE=C ls -lFhg --all --all --color-scale --git --time-style=long-iso'
   dir() {
     LL=$(ll --group-directories-first "${@}")
     echo "${LL}" | ${PAGER:-less}
