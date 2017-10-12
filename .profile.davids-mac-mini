@@ -1,6 +1,0 @@
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-
-export PATH="$(brew --prefix homebrew/php/php56)/bin":/usr/local/bin:$PATH
-export HOMEBREW_GITHUB_API_TOKEN="47968cb7f6d5d97d101e49f4deafcc85ac8dafbe"
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"

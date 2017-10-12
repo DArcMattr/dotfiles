@@ -25,25 +25,22 @@ Some of these will be installed via the install scripts or apt-get below.
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
     wget -O - http://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
     sudo add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.2/ubuntu xenial main'
-    sudo add-apt-repository 'deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-4.0 xenial main'
+    sudo add-apt-repository 'deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-5.0 xenial main'
     sudo apt update
-    sudo apt install autossh build-essential clang-4.0 clang-4.0-doc \
-      clang-format-4.0 cmake git golang htop libboost-filesystem-dev \
-      libboost-python-dev libboost-regex-dev libboost-system-dev libclang1-4.0 \
-      libclang1-4.0-dbg libclang-4.0-dev libclang-common-4.0-dev libevent-dev \
-      libfuzzer-4.0-dev liblldb-4.0-dev libllvm4.0 libllvm4.0-dbg \
-      libllvm-4.0-ocaml-dev liblzma-dev libncurses5-dev libpcre3-dev lld-4.0 \
-      lldb-4.0 llvm-4.0 llvm-4.0-dev llvm-4.0-doc llvm-4.0-examples \
-      llvm-4.0-runtime mariadb-server neovim nodejs php7.1-cli php7.1-curl \
+    sudo apt install autossh build-essential clang-5.0 clang-5.0-doc \
+      clang-format-5.0 cmake git golang htop libboost-filesystem-dev \
+      libboost-python-dev libboost-regex-dev libboost-system-dev libclang1-5.0 \
+      libclang1-5.0-dbg libclang-5.0-dev libclang-common-5.0-dev libevent-dev \
+      libfuzzer-5.0-dev liblldb-5.0-dev libllvm5.0 libllvm5.0-dbg \
+      libllvm-5.0-ocaml-dev liblzma-dev libncurses5-dev libpcre3-dev lld-5.0 \
+      lldb-5.0 llvm-5.0 llvm-5.0-dev llvm-5.0-doc llvm-5.0-examples \
+      llvm-5.0-runtime mariadb-server neovim nodejs php7.1-cli php7.1-curl \
       php7.1-dev php7.1-fpm php7.1-imap php7.1-json php7.1-mcrypt \
       php7.1-mysql php7.1-opcache php7.1-readline php7.1-soap php-common php-gd \
       php-imagick php-mbstring php-memcache php-pear php-xml pv python3-dev \
-      python3-docutils python3-pip python-clang-4.0 ruby-dev s3cmd vim-nox xsel \
+      python3-docutils python3-pip python-clang-5.0 ruby-dev s3cmd vim-nox xsel \
       zlib1g-dev zsh zsh-lovers
 
-    sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-4.0 10
-    sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-4.0 10
-    sudo update-alternatives --install /usr/bin/lldb lldb /usr/bin/lldb-4.0 10
     sudo npm -g install gulp eslint eslint_d js-beautify cssbeautify minify \
       node-sass tern grunt
 
