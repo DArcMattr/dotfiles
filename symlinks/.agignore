@@ -1,7 +1,8 @@
 tags
-*.css.map
-*.js.map
-*.min.css
-*.min.js
-*.min.css.map
-*.min.js.map
+/vendor
+**.css.map
+**.js.map
+**.min.css
+**.min.js
+**.min.css.map
+**.min.js.map
