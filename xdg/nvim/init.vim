@@ -118,10 +118,8 @@ set termguicolors
 set textwidth=80
 set title
 set titlestring=%t%(\ [%R%M]%)
-set timeout
-set timeoutlen=750
+set notimeout
 set ttimeout
-set ttimeoutlen=0
 set undofile
 set virtualedit=all
 set visualbell
