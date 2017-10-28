@@ -41,6 +41,8 @@ Some of these will be installed via the install scripts or apt-get below.
       python3-docutils python3-pip python-clang-5.0 ruby-dev s3cmd vim-nox xsel \
       zlib1g-dev zsh zsh-lovers
 
+The `helpers/llvm-update-alternatives.sh` will make LLVM usable on Ubuntu.
+
     sudo npm -g install gulp eslint eslint_d js-beautify cssbeautify minify \
       node-sass tern grunt
 
@@ -89,6 +91,20 @@ with it to pass through without challenge. To do so:
   sudo openssl x509 -in "/usr/share/ca-certificates/localhost-rootCA.pem" \
     -out "/usr/share/ca-certificates/localhost-rootCA.crt" -inform PEM
   sudo dpkg-reconfigure ca-certificates
+
+I'm trying GNOME-under-Wayland now, which means the `.Xmodmap` file does nothing
+anymore, so the alternative as I see it is to edit system files to get what
+I had before. The `speshul` file has my interventions, there, and I had to copy
+it to `/usr/share/X11/xkb/symbols/speshul`, append
+  speshul:speshul = +speshul(speshul)
+to the
+  ! option = symbols
+section in the file `/usr/share/X11/xkb/rules/evdev`, and append
+  speshul:speshul      Caps -> Ctrl, Ctrl -> Esc, Esc -> Caps
+to the end of `/usr/share/X11/xkb/symbols/evdev.lst`, then using `dconf editor`,
+I had to add `'speshul:speshul'` to the **Custom value** field array to
+`/org/gnome/desktop/input-sources/xkb-options`. (ugh).
+
 
 [Mercurial SCM]: http://mercurial.selenic.com
 [Git]: http://git-scm.com
