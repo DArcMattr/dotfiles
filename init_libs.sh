@@ -41,8 +41,7 @@ grab_pips() {
 
   powerline_path="$(dirname "$(python3 -c 'import powerline; print (powerline.__file__)')")"
 
-  rsync -a --prune-empty-dirs --include '*/' "${powerline_path}/config_files/" \
-    "${config_home}/powerline"
+  rsync -a "${powerline_path}/config_files/" "${config_home}/powerline"
 
   if [ ! -f "${config_home}/powerline/powerline.conf" ]; then
     ln -s \
