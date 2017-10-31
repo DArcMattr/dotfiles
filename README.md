@@ -31,15 +31,14 @@ Some of these will be installed via the install scripts or apt-get below.
       clang-format-5.0 cmake git golang htop libboost-filesystem-dev \
       libboost-python-dev libboost-regex-dev libboost-system-dev libclang1-5.0 \
       libclang1-5.0-dbg libclang-5.0-dev libclang-common-5.0-dev libevent-dev \
-      libfuzzer-5.0-dev liblldb-5.0-dev libllvm5.0 libllvm5.0-dbg \
-      libllvm-5.0-ocaml-dev liblzma-dev libncurses5-dev libpcre3-dev lld-5.0 \
-      lldb-5.0 llvm-5.0 llvm-5.0-dev llvm-5.0-doc llvm-5.0-examples \
-      llvm-5.0-runtime mariadb-server neovim nodejs php7.1-cli php7.1-curl \
-      php7.1-dev php7.1-fpm php7.1-imap php7.1-json php7.1-mcrypt \
-      php7.1-mysql php7.1-opcache php7.1-readline php7.1-soap php-common php-gd \
-      php-imagick php-mbstring php-memcache php-pear php-xml pv python3-dev \
-      python3-docutils python3-pip python-clang-5.0 ruby-dev s3cmd vim-nox xsel \
-      zlib1g-dev zsh zsh-lovers
+      libfuzzer-5.0-dev liblldb-5.0-dev libllvm5.0 libllvm5.0-dbg liblzma-dev \
+      libncurses5-dev libpcre3-dev lld-5.0 lldb-5.0 llvm-5.0 llvm-5.0-dev \
+      llvm-5.0-doc llvm-5.0-examples llvm-5.0-runtime mariadb-server neovim \
+      nodejs php7.1-cli php7.1-curl php7.1-dev php7.1-fpm php7.1-imap \
+      php7.1-json php7.1-mcrypt php7.1-mysql php7.1-opcache php7.1-readline \
+      php7.1-soap php-common php-gd php-imagick php-mbstring php-memcache \
+      php-pear php-xml pv python3-dev python3-docutils python3-pip \
+      python-clang-5.0 ruby-dev s3cmd vim-nox xsel zlib1g-dev zsh zsh-lovers
 
     sudo npm -g install gulp eslint eslint_d js-beautify cssbeautify minify \
       node-sass tern grunt
