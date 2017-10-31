@@ -26,7 +26,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
-Plug 'brookhong/DBGPavim'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'DArcMattr/wordpress.vim', { 'branch' : 'develop' }
 Plug 'editorconfig/editorconfig-vim'
@@ -34,6 +33,7 @@ Plug 'embear/vim-localvimrc'
 Plug 'fatih/vim-go', { 'for': [ 'go' ] }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jiangmiao/auto-pairs'
+Plug 'joonty/vdebug', { 'branch': 'v2-integration' }
 Plug 'joonty/vim-taggatron'
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'reedes/vim-wheel'
@@ -48,7 +48,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vividchalk'
 Plug 'tristen/vim-sparkup', { 'for': [ 'html', 'php' ] }
 Plug 'Valloric/MatchTagAlways'
-Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --system-libclang --system-boost --clang-completer --tern-completer --gocode-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --system-libclang --clang-completer --tern-completer --gocode-completer' }
 Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/DirDiff.vim'
 Plug 'vim-scripts/matchit.zip'
@@ -217,6 +217,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline#extensions#ycm#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:ale_css_stylelint_use_global = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_linters = {
@@ -234,6 +235,7 @@ let g:AutoPairsShortcutBackInsert = '<Leader>ab'
 let g:go_term_mode = "split"
 let g:less = { 'enabled' : 0, }
 let g:localvimrc_persistent = 1
+let g:localvimrc_event = ['BufNewFile', 'BufRead']
 let g:localvimrc_reverse = 1
 let g:localvimrc_sandbox = 0
 let g:mta_filetypes = {
@@ -258,28 +260,27 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
-imap <C-c>       <CR><ESC>O
+map <C-PageDown> :bp<Cr>
+map <C-PageUp>   :bn<Cr>
+map <Leader><F7> :setlocal spell! spell? spelllang=en_us<Cr>
+map <Leader>gc   :Gcommit<Cr>
+map <Leader>gd   :Gdiff<Cr>
+map <Leader>gl   :Glog<Cr>
+map <Leader>gp   :Gpush<Cr>
+map <Leader>gs   :Gstatus<Cr>
 
-map <Leader>gs   :Gstatus<CR>
-map <Leader>gd   :Gdiff<CR>
-map <Leader>gc   :Gcommit<CR>
-map <Leader>gl   :Glog<CR>
-map <Leader>gp   :Gpush<CR>
-map <C-PageUp>   :bn<CR>
-map <C-PageDown> :bp<CR>
-map <Leader><F7> :setlocal spell! spell? spelllang=en_us<CR>
-
-nmap . .'[
-nmap <C-i>       i<SPACE><ESC>
+nmap .     .'[
+nmap <C-o> i<Cr><Esc>
+nmap <C-i> i<Space><Esc>
 
 noremap n         nzz
 noremap N         Nzz
 noremap <C-d>     <C-d>zz
 noremap <C-u>     <C-u>zz
-noremap <Leader>t :enew<CR>
+noremap <Leader>t :enew<Cr>
 
 nnoremap <C-e>     3<C-e>
-nnoremap <C-p>     :Denite file_rec/async<CR>
+nnoremap <C-p>     :Denite file_rec<CR>
 nnoremap <C-y>     3<C-y>
 nnoremap <Leader>/ :Denite grep:.<CR>
 nnoremap <Leader>o :Denite outline<CR>
@@ -292,8 +293,8 @@ nnoremap Y y$
 nnoremap c "xc
 nnoremap gj j
 nnoremap gk k
-nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
-nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
+nnoremap <Expr> k (v:count == 0 ? 'gk' : 'k')
+nnoremap <Expr> j (v:count == 0 ? 'gj' : 'j')
 nnoremap { {zz
 nnoremap } }zz
 nnoremap ' `
@@ -302,9 +303,9 @@ nnoremap ; :
 nnoremap : ;
 
 inoremap <C-u>      <C-g>u<C-u>
-inoremap <C-x><C-k> <nop>
-inoremap <expr>     <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr>     <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <C-x><C-k> <Nop>
+inoremap <Expr>     <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <Expr>     <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 vnoremap y y`]
 vnoremap p "_dP`]
@@ -500,7 +501,7 @@ augroup CenteringReadOnly
   autocmd BufEnter * if !&modifiable | setl scrolloff=999 | endif
 augroup END
 
-"autocmd BufRead * try | execute "compiler ".&FileType | catch /./ | endtry
+autocmd BufRead * try | execute "compiler ".&FileType | catch /./ | endtry
 
 " common FileTypes below
 " any project-specific settings should be included in the .lvimrc file placed

@@ -1,0 +1,6 @@
+partial modifier_keys
+xkb_symbols "speshul" {
+  override key <ESC>  { [ Caps_Lock ] };
+  override key <LCTL> { [ Escape    ] };
+  override key <CAPS> { [ Control_L ] };
+};
