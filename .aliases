@@ -189,7 +189,7 @@ vman() {
 tmuxt() {
   SESSION="$(echo "${USER}" | sed -e 's/[\. ]/_/g')"
 
-  tmux has-session -t "${SESSION}"
+  tmux has-session -t "${SESSION}" > /dev/null
 
   if [ $? -eq 0 ]; then
     echo "Session ${SESSION} already exists, attaching"
