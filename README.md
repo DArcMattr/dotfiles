@@ -18,7 +18,7 @@ Some of these will be installed via the install scripts or apt-get below.
     sudo apt install -y python-pip python-dev curl software-properties-common
     pip install -U --user mercurial
     ~/.local/bin/hg clone https://bitbucket.org/darceneaux/dotfiles
-    curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - # argh, I hate this
+    curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash - # argh, I hate this
     sudo add-apt-repository -y ppa:neovim-ppa/unstable
     sudo add-apt-repository -y ppa:ondrej/php
     sudo add-apt-repository -y ppa:jonathonf/vim
