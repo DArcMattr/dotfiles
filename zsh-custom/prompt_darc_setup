@@ -20,6 +20,7 @@ prompt_darc_setup () {
   autoload -Uz vcs_info add-zsh-hook
 
   add-zsh-hook precmd prompt_darc_precmd
+  add-zsh-hook preexec prompt_darc_preexec
 
   pcc[1]=${1:-${${SSH_CLIENT+'yellow'}:-'red'}}
   pcc[2]=${2:-'yellow'}
@@ -76,6 +77,7 @@ $p_shlvlhist$p_rc$p_vcs$p_end "
 prompt_darc_precmd () {
   setopt noxtrace noksharrays localoptions
   local exitstatus=$?
+  local -a pcc
 
   psvar=()
   [[ $exitstatus -ge 128 ]] && psvar[1]=" $signals[$exitstatus-127]" ||
@@ -85,6 +87,16 @@ prompt_darc_precmd () {
 
   vcs_info
   [[ -n $vcs_info_msg_0_ ]] && psvar[2]="$vcs_info_msg_0_"
+
+  if [ $timer ]; then
+    timer_show=$(($SECONDS - $timer))
+    export RPROMPT="%F{$pcc[3]}${timershow}s %s%f"
+    unset timer
+  fi
+}
+
+prompt_darc_preexec () {
+  timer=${timer:-$SECONDS}
 }
 
 prompt_darc_setup "$@"

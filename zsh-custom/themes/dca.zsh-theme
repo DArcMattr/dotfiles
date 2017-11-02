@@ -41,4 +41,4 @@ PROMPT=$'
 PS2=$'$fg[blue]%}%B>%{\e[0m%}%b '
 
 # RPROMPT='$(vi_mode_prompt_info)'
-RPROMPT=''
+RPROMPT=$'%F{$pcc[3]}${timershow}s %s%f'
