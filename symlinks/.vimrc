@@ -125,10 +125,8 @@ set tabstop=2
 set textwidth=80
 set title
 set titlestring=%t%(\ [%R%M]%)
-set timeout
-set timeoutlen=750
+set notimeout
 set ttimeout
-set ttimeoutlen=0
 set undodir=$TEMP,$TMP,.
 set undofile
 set virtualedit=all
@@ -239,21 +237,21 @@ let g:localvimrc_event = ['BufNewFile', 'BufRead']
 let g:localvimrc_reverse = 1
 let g:localvimrc_sandbox = 0
 let g:mta_filetypes = {
-  \ 'html' : 1,
-  \ 'xhtml' : 1,
-  \ 'xml' : 1,
-  \ 'php' : 1,
-  \}
+\   'html' : 1,
+\   'xhtml' : 1,
+\   'xml' : 1,
+\   'php' : 1,
+\ }
 let g:netrw_silent = 1
 let g:NumberToggleTrigger = '<Leader>l'
 let g:session_autoload = 'no'
 let g:session_autosave = 'no'
 let g:sparkupExecuteMapping = '<Leader>se'
 let g:sparkupNextMapping = '<Leader>sn'
-let g:tagcommands = { 'php': { 'args': '-R' } }
+let g:tagcommand_defaults = { 'cmd': 'ctags' }
 let g:UltiSnipsExpandTrigger = "<Leader>u"
-let g:UltiSnipsJumpBackwardTrigger = "<C-j>"
-let g:UltiSnipsJumpForwardTrigger = "<C-k>"
+let g:UltiSnipsJumpBackwardTrigger = "<C-n>"
+let g:UltiSnipsJumpForwardTrigger = "<C-p>"
 let g:VCSCommandSplit = 'vertical'
 let g:vimpager = {}
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -323,7 +321,7 @@ call denite#custom#option( 'default', {
 \  'short_source_names': 1,
 \  'split': 'vertical',
 \  'vertical_preview': 1,
-\  'winwidth': 40,
+\  'auto_resize': 1,
 \})
 call denite#custom#option( 'list', { 'mode': 'normal' } )
 call denite#custom#option( 'grep', { 'vertical_preview': 1 } )
@@ -340,8 +338,8 @@ elseif executable('ack-grep')
   " Use ack in denite grep source.
   call denite#custom#var( 'grep', 'command', ['ack'] )
   call denite#custom#var( 'grep', 'default_opts',
-      \ ['--ackrc', $HOME.'/.ackrc', '-H',
-      \  '--nopager', '--nocolor', '--nogroup', '--column'] )
+  \     ['--ackrc', $HOME.'/.ackrc', '-H',
+  \      '--nopager', '--nocolor', '--nogroup', '--column'] )
   call denite#custom#var( 'grep', 'recursive_opts', [] )
   call denite#custom#var( 'grep', 'pattern_opt', ['--match'] )
   call denite#custom#var( 'grep', 'separator', ['--'] )
@@ -349,8 +347,8 @@ elseif executable('ack-grep')
 endif
 
 command! -nargs=1 Silent |
-  \ execute ':silent !'.<q-args> |
-  \ execute ':redraw!'
+\   execute ':silent !'.<q-args> |
+\   execute ':redraw!'
 
 command! -nargs=* -complete=help Help vertical belowright help <args>
 
@@ -359,7 +357,7 @@ command! -nargs=* -complete=help Help vertical belowright help <args>
 " Only define it when not defined already.
 if !exists(":DiffOrig")
   command DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_ | diffthis
-    \ | wincmd p | diffthis
+  \   | wincmd p | diffthis
 endif
 
 " from https://gist.github.com/tarruda/5158535
@@ -433,9 +431,9 @@ autocmd FilterWritePre * call SetDiffColors()
 augroup OmniFunc
   autocmd!
   autocmd FileType *
-    \  if &omnifunc == "" |
-    \    setlocal omnifunc=syntaxcomplete#Complete |
-    \  endif
+  \    if &omnifunc == "" |
+  \      setlocal omnifunc=syntaxcomplete#Complete |
+  \    endif
 augroup END
 
 augroup FastEscape
@@ -447,9 +445,9 @@ augroup END
 augroup TrimWhitespace
   autocmd!
   autocmd BufRead,BufWrite *
-    \ if ! &bin |
-    \   silent! %s/\s\+$//ge |
-    \ endif
+  \   if ! &bin |
+  \     silent! %s/\s\+$//ge |
+  \   endif
 augroup END
 
 " update diffs aggressively
@@ -457,15 +455,15 @@ augroup END
 augroup AutoDiffUpdate
   autocmd!
   autocmd InsertLeave *
-    \ if &diff |
-    \   diffupdate |
-    \   let b:old_changedtick = b:changedtick |
-    \ endif
+  \   if &diff |
+  \     diffupdate |
+  \     let b:old_changedtick = b:changedtick |
+  \   endif
   autocmd CursorHold *
-    \ if &diff &&
-    \     (!exists('b:old_changedtick') || b:old_changedtick != b:changedtick) |
-    \   let b:old_changedtick = b:changedtick | diffupdate |
-    \ endif
+  \   if &diff &&
+  \       (!exists('b:old_changedtick') || b:old_changedtick != b:changedtick) |
+  \     let b:old_changedtick = b:changedtick | diffupdate |
+  \   endif
 augroup END
 
 augroup CursorColumn
@@ -491,9 +489,9 @@ augroup END
 augroup cursor_position
   autocmd!
   autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   execute "normal! g`\""                       |
-    \ endif                                          |
+  \   if line("'\"") > 1 && line("'\"") <= line("$") |
+  \     execute "normal! g`\""                       |
+  \   endif                                          |
 augroup END
 
 augroup CenteringReadOnly
@@ -540,7 +538,7 @@ autocmd FileType lisp,scheme,art setlocal equalprg=~/dotfiles/helpers/scmindent.
 
 " Lua
 autocmd FileType lua setlocal shiftwidth=4 tabstop=4 softtabstop=4 smarttab
-  \ noexpandtab formatoptions=croql
+\   noexpandtab formatoptions=croql
 
 " Markdown
 autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown setfiletype markdown
@@ -555,12 +553,12 @@ autocmd BufNewFile,BufRead,BufEnter *.mysql setfiletype mysql
 
 " Perl
 autocmd FileType perl setlocal makeprg=perl keywordprg=perldoc\ -f |
-  \ compiler perl
+\   compiler perl
 
 " PHP
 autocmd FileType php setlocal keywordprg=pman |
-  \ setlocal iskeyword+=$
-" \ setlocal foldmarker={,} foldmethod=marker foldlevelstart=1 |
+\   setlocal iskeyword+=$
+"\   setlocal foldmarker={,} foldmethod=marker foldlevelstart=1 |
 
 " autocmd BufWritePost *.php silent !phpcbf --standard=WordPress %
 
@@ -569,7 +567,7 @@ autocmd BufNewFile,BufRead,BufEnter *.psql setfiletype postgresql
 
 " Python
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 smarttab
-  \ expandtab formatoptions=croql keywordprg=pydoc
+\   expandtab formatoptions=croql keywordprg=pydoc
 
 " Ruby
 autocmd BufNewFile,BufRead Vagrantfile setfiletype ruby
@@ -583,16 +581,16 @@ autocmd BufNewFile,BufRead,BufEnter .tmux.*,.tmux.conf* setfiletype tmux
 
 " WordPress
 autocmd FileType php.wordpress setlocal shiftwidth=4 tabstop=4 softtabstop=4
-  \ smarttab noexpandtab smartindent textwidth=85
+\   smarttab noexpandtab smartindent textwidth=85
 autocmd FileType javascript.wordpress setlocal shiftwidth=4 tabstop=4
-  \ softtabstop=4 smarttab noexpandtab smartindent textwidth=85
+\   softtabstop=4 smarttab noexpandtab smartindent textwidth=85
 autocmd FileType css.wordpress setlocal shiftwidth=2 tabstop=2 softtabstop=2
-  \ smarttab noexpandtab smartindent textwidth=85
+\   smarttab noexpandtab smartindent textwidth=85
 autocmd FileType scss.wordpress setlocal shiftwidth=2 tabstop=2 softtabstop=2
-  \ smarttab noexpandtab smartindent textwidth=85
+\   smarttab noexpandtab smartindent textwidth=85
 
 autocmd FileType php.wordpress match OverLength /%86v.\+/ |
-  \ let g:ale_php_phpcs_standard = 'WordPress'
+\   let g:ale_php_phpcs_standard = 'WordPress'
 autocmd FileType javascript.wordpress match OverLength /%86v.\+/
 autocmd FileType css.wordpress match OverLength /%86v.\+/
 autocmd FileType scss.wordpress match OverLength /%86v.\+/
