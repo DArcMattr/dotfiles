@@ -1,4 +1,4 @@
-fpath=(~/dotfiles/zsh-custom $fpath)
+fpath=(~/dotfiles/zsh-custom ~/.local/share/zsh/site-functions $fpath)
 
 COMPLETION_WAITING_DOTS="true"
 DISABLE_CORRECTION="true"
