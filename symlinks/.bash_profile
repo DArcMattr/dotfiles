@@ -1,4 +1,5 @@
 # .bash_profile
+exec "$(getent passwd $LOGNAME | cut -d: -f7)"
 
 # Get the aliases and functions
 if [ -f "${HOME}/.bashrc" ]; then
