@@ -213,18 +213,19 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
-map <C-PageDown> :bp<Cr>
-map <C-PageUp>   :bn<Cr>
-map <Leader><F7> :setlocal spell! spell? spelllang=en_us<Cr>
-map <Leader>gc   :Gcommit<Cr>
-map <Leader>gd   :Gdiff<Cr>
-map <Leader>gl   :Glog<Cr>
-map <Leader>gp   :Gpush<Cr>
-map <Leader>gs   :Gstatus<Cr>
+map <F7> :execute ":vsplit %"<Cr>
 
-nmap .     .'[
-nmap <C-o> i<Cr><Esc>
-nmap <C-i> i<Space><Esc>
+nmap .            .'[
+nmap <C-i>        i<Space><Esc>
+nmap <C-o>        i<Cr><Esc>
+nmap <C-PageDown> :bp<Cr>
+nmap <C-PageUp>   :bn<Cr>
+nmap <Leader><F7> :execute ":setlocal spell! spell? spelllang=en_us"<Cr>
+nmap <Leader>gc   :Gcommit<cr>
+nmap <Leader>gd   :Gdiff<Cr>
+nmap <Leader>gl   :Glog<Cr>
+nmap <Leader>gp   :Gpush<Cr>
+nmap <Leader>gs   :execute ":Gstatus"<Cr>
 
 noremap n         nzz
 noremap N         Nzz
@@ -257,8 +258,8 @@ nnoremap : ;
 
 inoremap <C-u>      <C-g>u<C-u>
 inoremap <C-x><C-k> <Nop>
-inoremap <Expr>     <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <Expr>     <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <Expr> <Tab>   pumvisible() ? '\<C-n>' : '\<Tab>'
+inoremap <Expr> <S-Tab> pumvisible() ? '\<C-p>' : '\<S-Tab>'
 
 vnoremap y y`]
 vnoremap p "_dP`]
