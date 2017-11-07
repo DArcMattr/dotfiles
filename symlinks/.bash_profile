@@ -1,4 +1,8 @@
 # .bash_profile
+default_shell="$(getent passwd $LOGNAME | cut -d: -f7)"
+if [ "${default_shell}" != "${SHELL}" ]; then
+  exec "${default_shell}"
+fi
 
 # Get the aliases and functions
 if [ -f "${HOME}/.bashrc" ]; then

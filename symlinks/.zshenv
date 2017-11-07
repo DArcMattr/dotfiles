@@ -27,6 +27,8 @@ fi
 if which go >/dev/null; then
   go_path="${HOME}/go"
   go_bin="${go_path}/bin"
+
+  export GOPATH=${go_path}
 fi
 
 if which rustc >/dev/null; then
