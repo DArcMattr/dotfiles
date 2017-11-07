@@ -65,7 +65,7 @@ Host vagrant
 
 Host staging
   CheckHostIP no
-  HostName 10.5.32.72
+  HostName 10.5.23.230
   User ec2-user
   IdentityFile ~/.ssh/ten-staging.pem
 
