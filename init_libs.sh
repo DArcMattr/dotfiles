@@ -57,12 +57,14 @@ grab_composer() {
       curl -sS https://getcomposer.org/installer | php -d "allow_url_fopen=On"; \
       mv composer.phar ~/.local/bin/composer
       cd ~
-      composer global require 'phpmd/phpmd=*' \
-        'squizlabs/php_codesniffer=*' \
-        'phing/phing=*' \
-        'psy/psysh=*' \
+      composer global require 'phpmd/phpmd' \
+        'squizlabs/php_codesniffer' \
+        'phing/phing' \
+        'psy/psysh' \
         'sloanlance/pman-php-manual' \
-        'phpunit/phpunit=*'
+        'd11wtq/boris' \
+        'laravel/installer' \
+        'phpunit/phpunit'
     )
   else
     composer self-update
