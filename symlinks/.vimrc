@@ -145,8 +145,7 @@ highlight CursorLine term=underline cterm=underline ctermbg=NONE gui=underline g
 highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
 highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
 highlight NonText ctermfg=235 guifg=#262626
-highlight OverLength ctermbg=234 ctermfg=249
-highlight OverLength guibg=#1c1c1c guifg=#b2b2b2
+highlight OverLength ctermbg=234 ctermfg=249 guibg=#1c1c1c guifg=#b2b2b2
 highlight Search ctermfg=222 guifg=#ffdf87
 highlight SpecialKey ctermfg=235 guifg=#262626
 
@@ -219,8 +218,8 @@ let g:ale_css_stylelint_use_global = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_linters = {
-  \ 'php': ['php -l', 'phpcs'],
-  \}
+\    'php': ['php -l', 'phpcs'],
+\  }
 let g:ale_open_list = 1
 let g:ale_sign_error = '⨉'
 let g:ale_sign_warning = '⚠'
@@ -231,6 +230,7 @@ let g:AutoPairsShortcutFastWrap = '<Leader>ae'
 let g:AutoPairsShortcutJump = '<Leader>an'
 let g:AutoPairsShortcutBackInsert = '<Leader>ab'
 let g:go_term_mode = "split"
+let g:jsx_ext_required = 1
 let g:less = { 'enabled' : 0, }
 let g:localvimrc_persistent = 1
 let g:localvimrc_event = ['BufNewFile', 'BufRead']
@@ -243,7 +243,6 @@ let g:mta_filetypes = {
 \   'php' : 1,
 \ }
 let g:netrw_silent = 1
-let g:NumberToggleTrigger = '<Leader>l'
 let g:session_autoload = 'no'
 let g:session_autosave = 'no'
 let g:sparkupExecuteMapping = '<Leader>se'
@@ -258,23 +257,25 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
-map <C-PageDown> :bp<Cr>
-map <C-PageUp>   :bn<Cr>
-map <Leader><F7> :setlocal spell! spell? spelllang=en_us<Cr>
-map <Leader>gc   :Gcommit<Cr>
-map <Leader>gd   :Gdiff<Cr>
-map <Leader>gl   :Glog<Cr>
-map <Leader>gp   :Gpush<Cr>
-map <Leader>gs   :Gstatus<Cr>
+map <F7> :execute ":vsplit %"<Cr>
 
-nmap .     .'[
-nmap <C-o> i<Cr><Esc>
-nmap <C-i> i<Space><Esc>
+nmap .            .'[
+nmap <C-i>        i<Space><Esc>
+nmap <C-o>        i<Cr><Esc>
+nmap <C-PageDown> :bp<Cr>
+nmap <C-PageUp>   :bn<Cr>
+nmap <Leader><F7> :execute ":setlocal spell! spell? spelllang=en_us"<Cr>
+nmap <Leader>gc   :Gcommit<cr>
+nmap <Leader>gd   :Gdiff<Cr>
+nmap <Leader>gl   :Glog<Cr>
+nmap <Leader>gp   :Gpush<Cr>
+nmap <Leader>gs   :execute ":Gstatus"<Cr>
 
 noremap n         nzz
 noremap N         Nzz
 noremap <C-d>     <C-d>zz
 noremap <C-u>     <C-u>zz
+noremap <Leader>l :set rnu!<Cr>
 noremap <Leader>t :enew<Cr>
 
 nnoremap <C-e>     3<C-e>
@@ -302,8 +303,8 @@ nnoremap : ;
 
 inoremap <C-u>      <C-g>u<C-u>
 inoremap <C-x><C-k> <Nop>
-inoremap <Expr>     <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <Expr>     <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <Expr> <Tab>   pumvisible() ? '\<C-n>' : '\<Tab>'
+inoremap <Expr> <S-Tab> pumvisible() ? '\<C-p>' : '\<S-Tab>'
 
 vnoremap y y`]
 vnoremap p "_dP`]
@@ -386,27 +387,6 @@ if $TMUX != ''
     end
   endfunction
 
-  function! TmuxSharedYank()
-    " Send the contents of the 't' register to a temporary file, invoke
-    " copy to tmux using load-buffer, and then to xclip
-    " FIXME for some reason, the 'tmux load-buffer -' form will hang
-    " when used with 'system()' which takes a second argument as stdin.
-    let tmpfile = tempname()
-    call writefile(split(@t, '\n'), tmpfile, 'b')
-    call system('tmux load-buffer '.shellescape(tmpfile).';tmux show-buffer | xclip -i -selection clipboard')
-    call delete(tmpfile)
-  endfunction
-
-  function! TmuxSharedPaste()
-    " put tmux copy buffer into the t register, the mapping will handle
-    " pasting into the buffer
-    let @t = system('xclip -o -selection clipboard | tmux load-buffer -;tmux show-buffer')
-  endfunction
-
-  vnoremap <silent> <ESC>y "ty:call TmuxSharedYank()<cr>
-  vnoremap <silent> <ESC>d "td:call TmuxSharedYank()<cr>
-  nnoremap <silent> <ESC>p :call TmuxSharedPaste()<cr>"tp
-  vnoremap <silent> <ESC>p d:call TmuxSharedPaste()<cr>h"tp
   set clipboard= " Use this or vim will automatically put deleted text into x11 selection('*' register) which breaks the above map
 
   nnoremap <silent> <C-w>j :silent call TmuxMove('j')<cr>
@@ -421,10 +401,10 @@ if $TMUX != ''
 endif
 
 function! SetDiffColors()
-  highlight DiffAdd cterm=bold ctermfg=white ctermbg=DarkGreen
-  highlight DiffDelete cterm=bold ctermfg=white ctermbg=DarkGrey
-  highlight DiffChange cterm=bold ctermfg=white ctermbg=DarkBlue
-  highlight DiffText cterm=bold ctermfg=white ctermbg=DarkRed
+  highlight DiffAdd cterm=bold ctermfg=white ctermbg=DarkGreen guifg=#ffffff guibg=#005f00
+  highlight DiffDelete cterm=bold ctermfg=white ctermbg=DarkGrey guifg=#ffffff guibg=#a9a9a9
+  highlight DiffChange cterm=bold ctermfg=white ctermbg=DarkBlue guifg=#ffffff guibg=#00008b
+  highlight DiffText cterm=bold ctermfg=white ctermbg=DarkRed guifg=#ffffff guibg=#8b0000
 endfunction
 autocmd FilterWritePre * call SetDiffColors()
 

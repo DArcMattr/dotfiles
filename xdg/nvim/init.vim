@@ -198,7 +198,6 @@ let g:mta_filetypes = {
 \   'php' : 1,
 \ }
 let g:netrw_silent = 1
-let g:NumberToggleTrigger = '<Leader>l'
 let g:session_autoload = 'no'
 let g:session_autosave = 'no'
 let g:sparkupExecuteMapping = '<Leader>se'
@@ -231,6 +230,7 @@ noremap n         nzz
 noremap N         Nzz
 noremap <C-d>     <C-d>zz
 noremap <C-u>     <C-u>zz
+noremap <Leader>l :set rnu!<Cr>
 noremap <Leader>t :enew<Cr>
 
 nnoremap <C-e>     3<C-e>
