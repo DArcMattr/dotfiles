@@ -43,8 +43,8 @@ Some of these will be installed via the install scripts or apt-get below.
 
 The `helpers/llvm-update-alternatives.sh` will make LLVM usable on Ubuntu.
 
-    sudo npm -g install gulp eslint eslint_d js-beautify cssbeautify minify \
-      node-sass tern grunt
+    sudo npm -g install cssbeautify doctoc eslint eslint_d grunt gulp \
+      js-beautify minify npm-check-updates stylelint tern yarn
 
 ## Installation Steps
 
