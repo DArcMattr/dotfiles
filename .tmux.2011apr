@@ -22,3 +22,7 @@ tmux split-window -h -l 112 -t "${SESSION}:3.0" -c "${CURRENT_PATH}" "tail -F /v
   split-window -v -p 50 -t "${SESSION}:3.2" -c "${CURRENT_PATH}"
 tmux select-pane -t "${SESSION}:3.0"
 tmux rename-window -t "${SESSION}:3" "Projects"
+
+CURRENT_PATH="/var/www/vhosts/nkp-form.local"
+tmux new-window -t "${SESSION}:4" -c "${CURRENT_PATH}" \; \
+  rename-window -t "${SESSION}:4" "Intake Form"
