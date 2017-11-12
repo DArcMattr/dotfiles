@@ -3,13 +3,13 @@ grab_wp_cli() {
   (
     INSTALL_PATH="${HOME}/contrib/wp-cli"
     if [ ! -d "${INSTALL_PATH}" ]; then
-      mkdir -p "${INSTALL_PATH}" && cd "${INSTALL_PATH}"
+      mkdir -p "${INSTALL_PATH}" && cd "${INSTALL_PATH}" || exit
       curl -O \
         https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
       chmod +x "${INSTALL_PATH}/wp-cli.phar"
       ln -s "${INSTALL_PATH}/wp-cli.phar" "${HOME}/.local/bin/wp"
     else
-      cd "${INSTALL_PATH}"
+      cd "${INSTALL_PATH}" || exit
       curl -O \
         https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
     fi
@@ -56,7 +56,7 @@ grab_composer() {
       cd "${TMP}" || exit
       curl -sS https://getcomposer.org/installer | php -d "allow_url_fopen=On"; \
       mv composer.phar ~/.local/bin/composer
-      cd ~
+      cd "${HOME}" || exit
       composer global require 'phpmd/phpmd' \
         'squizlabs/php_codesniffer' \
         'phing/phing' \
@@ -144,14 +144,11 @@ grab_git() {
 
 grab_sassc() {
   (
-    SASS_LIBSASS_PATH="${HOME}/contrib/libsass"
-    grab_git -d "${SASS_LIBSASS_PATH}" -r https://github.com/hcatlin/libsass -n
-
     SASSC_PATH="${HOME}/contrib/sassc"
     grab_git -d "${SASSC_PATH}" -r https://github.com/hcatlin/sassc -n
 
-    cd "${SASSC_PATH}" && \
-      SASS_LIBSASS_PATH="${SASS_LIBSASS_PATH}" PREFIX="${HOME}/.local" \
-      make install clean
+    cd "${HOME}/contrib" && \
+      make -C sassc -j4 \
+      PREFIX="${HOME}/.local" make -C sassc install
   )
 }
