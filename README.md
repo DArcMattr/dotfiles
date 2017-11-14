@@ -39,7 +39,8 @@ Some of these will be installed via the install scripts or apt-get below.
       php7.1-json php7.1-mcrypt php7.1-mysql php7.1-opcache php7.1-readline \
       php7.1-soap php-common php-gd php-imagick php-mbstring php-memcache \
       php-pear php-xml pv python3-dev python3-docutils python3-pip \
-      python-clang-5.0 ruby-dev s3cmd vim-nox xsel zlib1g-dev zsh zsh-lovers
+      python-clang-5.0 ruby-dev shellcheck vim-nox xsel zlib1g-dev zsh \
+      zsh-lovers
 
 The `helpers/llvm-update-alternatives.sh` will make LLVM usable on Ubuntu.
 
