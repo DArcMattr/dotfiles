@@ -90,7 +90,7 @@ grab_composer() {
 
 grab_gems() {
   if which ruby >/dev/null && which gem >/dev/null; then
-    gem install --user-install neovim sass lolcat
+    gem install --user-install neovim lolcat
   fi
 }
 

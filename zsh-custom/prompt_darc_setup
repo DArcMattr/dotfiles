@@ -90,7 +90,7 @@ prompt_darc_precmd () {
 
   if [ $timer ]; then
     timer_show=$(($SECONDS - $timer))
-    export RPROMPT="%F{$pcc[3]}${timershow}s %s%f"
+    export RPROMPT="%F{$pcc[2]}${timershow}s %s%f"
     unset timer
   fi
 }

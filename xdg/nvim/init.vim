@@ -169,7 +169,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline#extensions#ycm#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:ale_css_stylelint_use_global = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_linters = {
