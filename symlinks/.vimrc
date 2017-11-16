@@ -508,7 +508,8 @@ autocmd BufNewFile *.html 0r ~/dotfiles/lang/html/index.html
 autocmd FileType javascript setlocal iskeyword+=$
 
 " JSON
-autocmd FileType json setlocal foldmarker={,} foldmethod=marker foldlevelstart=2
+autocmd FileType json setlocal foldmarker={,} foldmethod=marker foldlevel=1
+\   expandtab
 
 " LaTeX
 autocmd BufNewFile *.tex 0r ~/dotfiles/lang/latex/template.tex
@@ -536,9 +537,8 @@ autocmd FileType perl setlocal makeprg=perl keywordprg=perldoc\ -f |
 \   compiler perl
 
 " PHP
-autocmd FileType php setlocal keywordprg=pman |
-\   setlocal iskeyword+=$
-"\   setlocal foldmarker={,} foldmethod=marker foldlevelstart=1 |
+autocmd FileType php setlocal keywordprg=pman iskeyword+=$
+"\   setlocal foldmarker={,} foldmethod=marker foldlevel=1 |
 
 " autocmd BufWritePost *.php silent !phpcbf --standard=WordPress %
 

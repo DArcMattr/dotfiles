@@ -2,7 +2,7 @@ if !1 | finish | endif
 
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-  \   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
@@ -169,6 +169,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline#extensions#ycm#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:ale_css_stylelint_use_global = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_linters = {
@@ -462,7 +463,8 @@ autocmd BufNewFile *.html 0r ~/dotfiles/lang/html/index.html
 autocmd FileType javascript setlocal iskeyword+=$
 
 " JSON
-autocmd FileType json setlocal foldmarker={,} foldmethod=marker foldlevelstart=2
+autocmd FileType json setlocal foldmarker={,} foldmethod=marker foldlevel=1
+\   expandtab
 
 " LaTeX
 autocmd BufNewFile *.tex 0r ~/dotfiles/lang/latex/template.tex
@@ -490,9 +492,8 @@ autocmd FileType perl setlocal makeprg=perl keywordprg=perldoc\ -f |
 \   compiler perl
 
 " PHP
-autocmd FileType php setlocal keywordprg=pman |
-\   setlocal iskeyword+=$
-"\   setlocal foldmarker={,} foldmethod=marker foldlevelstart=1 |
+autocmd FileType php setlocal keywordprg=pman iskeyword+=$
+"\   setlocal foldmarker={,} foldmethod=marker foldlevel=1 |
 
 " autocmd BufWritePost *.php silent !phpcbf --standard=WordPress %
 
