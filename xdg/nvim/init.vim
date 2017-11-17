@@ -55,7 +55,6 @@ set autoindent
 set autoread
 set backspace=indent,eol,start
 set colorcolumn=+1
-set complete-=i
 set completeopt=menuone,longest
 set diffopt=filler,vertical
 set display+=lastline
