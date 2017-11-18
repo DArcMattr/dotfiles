@@ -6,13 +6,15 @@ export MANWIDTH=80
 export HGEDITOR=~/dotfiles/helpers/hgeditor
 export TMP=/tmp
 export AUTOENV_IN_FILE=".in"
-export ZSH_CUSTOM="${HOME}/dotfiles/zsh-custom"
 
 if which ruby >/dev/null && which gem >/dev/null; then
   gem_path="$(ruby -rubygems -e 'puts Gem.user_dir')/bin"
 fi
 
-if which python >/dev/null && [ "$(python -c 'import platform; print(platform.python_version_tuple()[0]);')" -eq 2 ]; then
+if \
+  which python >/dev/null && \
+  [ "$(python -c 'import platform; print(platform.python_version_tuple()[0]);')" -eq 2 ];
+then
   python2_path=$(python -c $'import sys\nfor x in sys.path:\n  print(x)')
 fi
 
