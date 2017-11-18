@@ -39,6 +39,9 @@ zstyle ':prezto:load' pmodule \
   'syntax-highlighting' \
   'prompt'
 
+zstyle ':prezto:load' pmodule-dirs $HOME/dotfiles/zsh-custom \
+  ~/.local/share/zsh/site-functions
+
 #
 # Editor
 #
