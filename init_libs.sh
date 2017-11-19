@@ -144,11 +144,13 @@ grab_git() {
 
 grab_sassc() {
   (
+    PATH=$(/usr/bin/printenv PATH | /usr/bin/perl -ne 'print join(":", grep { !/\/mnt\/[a-z]/ } split(/:/));')
+    SASS_LIBSASS_PATH="${HOME}/contrib/libsass"
     SASSC_PATH="${HOME}/contrib/sassc"
+    grab_git -d "${SASS_LIBSASS_PATH}" -r https://github.com/hcatlin/libsass -n
     grab_git -d "${SASSC_PATH}" -r https://github.com/hcatlin/sassc -n
 
     cd "${HOME}/contrib" && \
-      make -C sassc -j4 \
-      PREFIX="${HOME}/.local" make -C sassc install
+      SASS_LIBSASS_PATH="${SASS_LIBSASS_PATH}" PREFIX="${HOME}/.local" make -C sassc -j4 install
   )
 }
