@@ -90,7 +90,7 @@ grab_composer() {
 
 grab_gems() {
   if which ruby >/dev/null && which gem >/dev/null; then
-    gem install --user-install neovim lolcat
+    gem install --user-install lolcat neovim sass
   fi
 }
 
@@ -144,6 +144,7 @@ grab_git() {
 
 grab_sassc() {
   (
+    # sassc itself seems to be b0rken
     PATH=$(/usr/bin/printenv PATH | /usr/bin/perl -ne 'print join(":", grep { !/\/mnt\/[a-z]/ } split(/:/));')
     SASS_LIBSASS_PATH="${HOME}/contrib/libsass"
     SASSC_PATH="${HOME}/contrib/sassc"

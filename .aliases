@@ -87,7 +87,7 @@ dosass() {
     OUT_FILE="${2}"
   fi
 
-  sassc -mlt nested "${1}" "${OUT_FILE}"
+  sass -t nested "${1}" "${OUT_FILE}"
 }
 
 hgdiff() {
