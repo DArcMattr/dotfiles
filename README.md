@@ -83,30 +83,34 @@ Every dev machine should have its own Certificate Authority certificate to sign
 its own certs, so the CA can be accepted, allowing all the local certs generated
 with it to pass through without challenge. To do so:
 
-  mkdir -p "${HOME}/.config/ssl"
-  openssl genrsa -out "$HOME/.config/ssl/rootCA.key" 2048
-  sudo openssl req -x509 -new -nodes -days 3563 -sha256 \
-    -subj "/CN=localhost/O=DavidTheMachine/C=US/ST=California/L=Anaheim" \
-    -key "${HOME}/.config/ssl/rootCA.key" \
-    -out "/usr/share/ca-certificates/localhost-rootCA.pem"
-  sudo openssl x509 -in "/usr/share/ca-certificates/localhost-rootCA.pem" \
-    -out "/usr/share/ca-certificates/localhost-rootCA.crt" -inform PEM
-  sudo dpkg-reconfigure ca-certificates
+    mkdir -p "${HOME}/.config/ssl"
+    openssl genrsa -out "$HOME/.config/ssl/rootCA.key" 2048
+    sudo openssl req -x509 -new -nodes -days 3563 -sha256 \
+      -subj "/CN=localhost/O=DavidTheMachine/C=US/ST=California/L=Anaheim" \
+      -key "${HOME}/.config/ssl/rootCA.key" \
+      -out "/usr/share/ca-certificates/localhost-rootCA.pem"
+    sudo openssl x509 -in "/usr/share/ca-certificates/localhost-rootCA.pem" \
+      -out "/usr/share/ca-certificates/localhost-rootCA.crt" -inform PEM
+    sudo dpkg-reconfigure ca-certificates
 
 I'm trying GNOME-under-Wayland now, which means the `.Xmodmap` file does nothing
 anymore, so the alternative as I see it is to edit system files to get what
 I had before. The `speshul` file has my interventions, there, and I had to copy
 it to `/usr/share/X11/xkb/symbols/speshul`, append
-  speshul:speshul = +speshul(speshul)
+
+    speshul:speshul = +speshul(speshul)
+
 to the
-  ! option = symbols
+
+    ! option = symbols
+
 section in the file `/usr/share/X11/xkb/rules/evdev`, and append
-  speshul:speshul      Caps -> Ctrl, Ctrl -> Esc, Esc -> Caps
+
+    speshul:speshul      Caps -> Ctrl, Ctrl -> Esc, Esc -> Caps
+
 to the end of `/usr/share/X11/xkb/symbols/evdev.lst`, then using `dconf editor`,
 I had to add `'speshul:speshul'` to the **Custom value** field array to
 `/org/gnome/desktop/input-sources/xkb-options`. (ugh).
 
-
 [Mercurial SCM]: http://mercurial.selenic.com
 [Git]: http://git-scm.com
-
