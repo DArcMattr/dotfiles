@@ -1,33 +1,38 @@
-#!/usr/bin/php
-<?php
-// vim:set ft=php
-// @link http://webadvent.org/2008/dont-commit-that-error-by-travis-swicegood.html
+#!/bin/sh
+# vim:ft=sh
+# Adapted from PHP via
+# @link http://webadvent.org/2008/dont-commit-that-error-by-travis-swicegood.html
 
-$output = array();
-$return = 0;
-exec( 'git rev-parse --verify HEAD 2> /dev/null', $output, $return );
-$against = ( 0 === $return ) ?
-	'HEAD' :
-	'4b825dc642cb6eb9a060e54bf8d69288fbee4904';
+git rev-parse --verify HEAD > /dev/null 2>&1
 
-exec( "git diff-index --cached --name-only {$against}", $output );
+if [ $? -ne 0 ]; then
+	AGAINST='4b825dc642cb6eb9a060e54bf8d69288fbee4904' # hash of empty repo
+else
+	AGAINST='HEAD'
+fi
 
-$filename_pattern = '/\.php$/';
-$exit_status = 0;
+FILES="$(git diff-index --cached --name-only ${AGAINST})"
 
-foreach ( $output as $file ) {
-	if ( ! ( preg_match( $filename_pattern, $file ) && file_exists( $file ) ) ) {
-		// don't check files that aren't PHP
-		continue;
-	}
+for FILE in ${FILES}; do
+	F="$(echo "${FILE}" | awk -F . '{print $NF}')"
 
-	$lint_output = array();
-	exec( 'php -l ' . escapeshellarg( $file ), $lint_output, $return );
-	if ( 0 === $return ) {
-		continue;
-	}
-	echo implode( "\n", $lint_output ), "\n";
-	$exit_status = 1;
-}
+	case ${F} in
+		php)
+			if [ -e "${FILE}" ] && [ -f "${FILE}" ]; then
+				ERROR="$(php -l "${FILE}")"
+				STATUS=$?
+			fi
+		;;
 
-exit( $exit_status );
+		*)
+			# no-op
+			ERROR=''
+			STATUS=0
+		;;
+	esac
+
+	if [ ${STATUS} -ne 0 ]; then
+		echo "${ERROR}" >&2
+		exit ${STATUS}
+	fi
+done
