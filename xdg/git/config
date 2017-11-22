@@ -45,6 +45,9 @@
 [merge]
   tool = vimdiff
   ff = false
+[merge "ours"]
+  name = "Keep ours merge"
+  driver = true
 [mergetool]
   prompt = false
   stat = true
