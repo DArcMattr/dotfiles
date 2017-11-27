@@ -22,14 +22,14 @@ Some of these will be installed via the install scripts or apt-get below.
     sudo add-apt-repository -y ppa:neovim-ppa/unstable
     sudo add-apt-repository -y ppa:ondrej/php
     sudo add-apt-repository -y ppa:jonathonf/vim
-    sudo add-apt-repository -y ppa:longsleep/golang-backports
+    sudo add-apt-repository -y ppa:gophers/archive
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
     wget -O - http://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
     sudo add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.2/ubuntu xenial main'
     sudo add-apt-repository 'deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-5.0 xenial main'
     sudo apt update
     sudo apt install autossh build-essential clang-5.0 clang-5.0-doc \
-      clang-format-5.0 cmake git golang htop libboost-filesystem-dev \
+      clang-format-5.0 cmake git golang-1.9-go htop libboost-filesystem-dev \
       libboost-python-dev libboost-regex-dev libboost-system-dev libclang1-5.0 \
       libclang1-5.0-dbg libclang-5.0-dev libclang-common-5.0-dev libevent-dev \
       libfuzzer-5.0-dev liblldb-5.0-dev libllvm5.0 libllvm5.0-dbg liblzma-dev \
@@ -41,11 +41,11 @@ Some of these will be installed via the install scripts or apt-get below.
       php-pear php-xml pv python3-dev python3-docutils python3-pip \
       python-clang-5.0 ruby-dev shellcheck vim-nox xsel zlib1g-dev zsh \
       zsh-lovers
-
-The `helpers/llvm-update-alternatives.sh` will make LLVM usable on Ubuntu.
-
     sudo npm -g install cssbeautify doctoc eslint eslint_d grunt gulp \
       js-beautify minify npm-check-updates stylelint tern yarn
+
+The `helpers/debianish-update-alternatives.sh` will make LLVM and Go usable on
+Ubuntu.
 
 ## Installation Steps
 
@@ -92,6 +92,8 @@ with it to pass through without challenge. To do so:
     sudo openssl x509 -in "/usr/share/ca-certificates/localhost-rootCA.pem" \
       -out "/usr/share/ca-certificates/localhost-rootCA.crt" -inform PEM
     sudo dpkg-reconfigure ca-certificates
+
+### Keyboard Mapping Under GNOME/Wayland
 
 I'm trying GNOME-under-Wayland now, which means the `.Xmodmap` file does nothing
 anymore, so the alternative as I see it is to edit system files to get what
