@@ -63,6 +63,7 @@ set backupdir=$TEMP,$TMP,.
 set colorcolumn=+1
 set complete-=i
 set completeopt=menuone,longest
+set copyindent
 set diffopt=filler,vertical
 set display+=lastline
 set encoding=utf-8

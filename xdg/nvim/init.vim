@@ -56,6 +56,7 @@ set autoread
 set backspace=indent,eol,start
 set colorcolumn=+1
 set completeopt=menuone,longest
+set copyindent
 set diffopt=filler,vertical
 set display+=lastline
 set encoding=utf-8
