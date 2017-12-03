@@ -19,6 +19,8 @@ Some of these will be installed via the install scripts or apt-get below.
     pip install -U --user mercurial
     ~/.local/bin/hg clone https://bitbucket.org/darceneaux/dotfiles
     curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash - # argh, I hate this
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
     sudo add-apt-repository -y ppa:neovim-ppa/unstable
     sudo add-apt-repository -y ppa:ondrej/php
     sudo add-apt-repository -y ppa:jonathonf/vim
@@ -39,10 +41,10 @@ Some of these will be installed via the install scripts or apt-get below.
       php7.1-json php7.1-mcrypt php7.1-mysql php7.1-opcache php7.1-readline \
       php7.1-soap php-common php-gd php-imagick php-mbstring php-memcache \
       php-pear php-xml pv python3-dev python3-docutils python3-pip \
-      python-clang-5.0 ruby-dev shellcheck vim-nox xsel zlib1g-dev zsh \
+      python-clang-5.0 ruby-dev shellcheck vim-nox xsel yarn zlib1g-dev zsh \
       zsh-lovers
     sudo npm -g install cssbeautify doctoc eslint eslint_d grunt gulp \
-      js-beautify minify npm-check-updates stylelint tern yarn
+      js-beautify minify npm-check-updates stylelint tern
 
 The `helpers/debianish-update-alternatives.sh` will make LLVM and Go usable on
 Ubuntu.
