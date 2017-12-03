@@ -64,6 +64,7 @@ grab_composer() {
         'sloanlance/pman-php-manual' \
         'd11wtq/boris' \
         'laravel/installer' \
+        'phpstan/phpstan' \
         'phpunit/phpunit'
     )
   else
@@ -147,11 +148,12 @@ grab_sassc() {
     # sassc itself seems to be b0rken
     PATH=$(/usr/bin/printenv PATH | /usr/bin/perl -ne 'print join(":", grep { !/\/mnt\/[a-z]/ } split(/:/));')
     SASS_LIBSASS_PATH="${HOME}/contrib/libsass"
+    SASS_VERSION='3.4.7'
     SASSC_PATH="${HOME}/contrib/sassc"
-    grab_git -d "${SASS_LIBSASS_PATH}" -r https://github.com/hcatlin/libsass -n
-    grab_git -d "${SASSC_PATH}" -r https://github.com/hcatlin/sassc -n
+    grab_git -d "${SASS_LIBSASS_PATH}" -r https://github.com/hcatlin/libsass -b "${SASS_VERSION}" -n
+    grab_git -d "${SASSC_PATH}" -r https://github.com/hcatlin/sassc -b "${SASS_VERSION}" -n
 
-    cd "${HOME}/contrib" && \
-      SASS_LIBSASS_PATH="${SASS_LIBSASS_PATH}" PREFIX="${HOME}/.local" make -C sassc -j4 install
+    cd "${SASSC_PATH}" && \
+      SASS_LIBSASS_PATH="${SASS_LIBSASS_PATH}" PREFIX="${HOME}/.local" make -j4 install
   )
 }
