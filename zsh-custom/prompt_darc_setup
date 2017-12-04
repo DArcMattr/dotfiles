@@ -29,6 +29,7 @@ prompt_darc_setup () {
   pcc[5]=${5:-'white'}
 
   typeset -ga zle_highlight
+
   zle_highlight[(r)default:*]=default:$pcc[2]
 
   # Set editor-info parameters.
@@ -41,6 +42,7 @@ prompt_darc_setup () {
 ${(e)$(prompt_darc_build)}${editor_info[keymap]} '
   PS2='%(4_.\.)%3_> %E'
   SPROMPT='zsh: correct %F{$pcc[2]}%R%f to %F{$pcc[3]}%r%f [nyae]? '
+  RPROMPT='BAR'
 }
 
 prompt_darc_build () {
@@ -81,7 +83,7 @@ prompt_darc_precmd () {
 
   psvar=()
   [[ $exitstatus -ge 128 ]] && psvar[1]=" $signals[$exitstatus-127]" ||
-	psvar[1]=""
+    psvar[1]=""
 
   [[ -o interactive ]] && jobs -l
 
@@ -89,14 +91,16 @@ prompt_darc_precmd () {
   [[ -n $vcs_info_msg_0_ ]] && psvar[2]="$vcs_info_msg_0_"
 
   if [ $timer ]; then
-    timer_show=$(($SECONDS - $timer))
-    export RPROMPT="%F{$pcc[2]}${timershow}s %s%f"
+    timer_show=$((${SECONDS} - $timer))
+    RPROMPT="${timer_show}s"
     unset timer
+  else
+    RPROMPT=""
   fi
 }
 
 prompt_darc_preexec () {
-  timer=${timer:-$SECONDS}
+  timer=${timer:-${SECONDS}}
 }
 
 prompt_darc_setup "$@"
