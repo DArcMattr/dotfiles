@@ -5,6 +5,7 @@ DISABLE_CORRECTION="true"
 KEYTIMEOUT=1
 
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  zstyle ':completion:*' accept-exact '*(N)'
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
