@@ -37,6 +37,10 @@ if which rustc >/dev/null; then
   cargo_path="${HOME}/.cargo/bin"
 fi
 
+if which yarn >/dev/null; then
+  yarn_path="$(yarn global bin)"
+fi
+
 #
 # Paths
 #
@@ -56,6 +60,7 @@ cdpath=(
 # Set the list of directories that Zsh searches for programs.
 path=(
   $go_bin
+  $yarn_path
   $cargo_path
   $php_path
   $gem_path
