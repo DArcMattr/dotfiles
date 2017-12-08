@@ -74,3 +74,8 @@ Host preprod
   HostName 10.21.21.40
   User ec2-user
   IdentityFile ~/.ssh/ten-preprod.pem
+
+Host jupiter
+  Port 9236
+  User jupiter
+  HostName jupiter.nkpadmin.com
