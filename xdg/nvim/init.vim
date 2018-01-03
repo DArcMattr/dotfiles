@@ -62,7 +62,7 @@ set display+=lastline
 set encoding=utf-8
 set expandtab
 set fillchars+=stl:\ ,stlnc:\
-set formatoptions=nqr12
+set formatoptions=nqr12j
 set gdefault
 if executable("ag")
   set grepprg=ag\ --nogroup\ --nocolor
@@ -140,6 +140,7 @@ highlight NonText ctermfg=235 guifg=#262626
 highlight OverLength ctermbg=234 ctermfg=249 guibg=#1c1c1c guifg=#b2b2b2
 highlight Search ctermfg=222 guifg=#ffdf87
 highlight SpecialKey ctermfg=235 guifg=#262626
+highlight TermCursor ctermfg=yellow guifg=yellow
 
 highlight clear SpellBad
 highlight clear SpellCap
@@ -233,6 +234,11 @@ noremap <C-u>     <C-u>zz
 noremap <Leader>l :set rnu!<Cr>
 noremap <Leader>t :enew<Cr>
 
+inoremap <C-u>      <C-g>u<C-u>
+inoremap <C-x><C-k> <Nop>
+inoremap <Expr> <Tab>   pumvisible() ? '\<C-n>' : '\<Tab>'
+inoremap <Expr> <S-Tab> pumvisible() ? '\<C-p>' : '\<S-Tab>'
+
 nnoremap <C-e>     3<C-e>
 nnoremap <C-p>     :Denite file_rec<CR>
 nnoremap <C-y>     3<C-y>
@@ -256,10 +262,7 @@ nnoremap ` '
 nnoremap ; :
 nnoremap : ;
 
-inoremap <C-u>      <C-g>u<C-u>
-inoremap <C-x><C-k> <Nop>
-inoremap <Expr> <Tab>   pumvisible() ? '\<C-n>' : '\<Tab>'
-inoremap <Expr> <S-Tab> pumvisible() ? '\<C-p>' : '\<S-Tab>'
+tnoremap <Leader><Esc> <C-\><C-n>
 
 vnoremap y y`]
 vnoremap p "_dP`]
@@ -361,6 +364,7 @@ function! SetDiffColors()
   highlight DiffChange cterm=bold ctermfg=white ctermbg=DarkBlue guifg=#ffffff guibg=#00008b
   highlight DiffText cterm=bold ctermfg=white ctermbg=DarkRed guifg=#ffffff guibg=#8b0000
 endfunction
+
 autocmd FilterWritePre * call SetDiffColors()
 
 augroup OmniFunc
@@ -421,20 +425,18 @@ augroup ShowListChars
   autocmd InsertLeave * set list
 augroup END
 
-augroup cursor_position
+augroup StartupStuffs
   autocmd!
   autocmd BufReadPost *
   \   if line("'\"") > 1 && line("'\"") <= line("$") |
   \     execute "normal! g`\""                       |
   \   endif                                          |
-augroup END
-
-augroup CenteringReadOnly
-  autocmd!
   autocmd BufEnter * if !&modifiable | setl scrolloff=999 | endif
+  autocmd TermOpen * setlocal nonumber norelativenumber
+  autocmd BufEnter,BufNew * if &buftype == 'terminal' | :startinsert | endif
+  autocmd BufRead * try | execute "compiler ".&FileType | catch /./ | endtry
+  autocmd VimResized * execute 'normal! \<C-w>='
 augroup END
-
-autocmd BufRead * try | execute "compiler ".&FileType | catch /./ | endtry
 
 " common FileTypes below
 " any project-specific settings should be included in the .lvimrc file placed
