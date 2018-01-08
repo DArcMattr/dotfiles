@@ -43,8 +43,8 @@ Some of these will be installed via the install scripts or apt-get below.
       php-pear php-xml php-zip pv python3-dev python3-docutils python3-pip \
       python-clang-5.0 ruby-dev shellcheck vim-nox xsel yarn zlib1g-dev zsh \
       zsh-lovers
-    yarn global add doctoc eslint eslint_d grunt gulp minify npm-check-updates \
-      prettier stylelint svgo tern
+    yarn global add doctoc eslint eslint_d grunt gulp minify neovim \
+      npm-check-updates prettier stylelint svgo tern
 
 The `helpers/debianish-update-alternatives.sh` will make LLVM and Go usable on
 Ubuntu.
