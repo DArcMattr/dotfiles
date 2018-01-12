@@ -9,7 +9,9 @@ chmod 600 ~/dotfiles/sshconfig
 mv ~/.ssh/config ~/.ssh/config.orig
 ln -s ~/dotfiles/sshconfig ~/.ssh/config
 ln -s ~/dotfiles/xdg/git "${DOT_CONFIG}/git"
-ln -s ~/dotfiles/xdg/nvim/init.vim "${DOT_CONFIG}/nvim/init.vim"
+ln -s ~/dotfiles/xdg/nvim/init.vim "${DOT_CONFIG}/nvim/"
+ln -s ~/dotfiles/xdg/nvim/ftdetect "${DOT_CONFIG}/nvim/"
+ln -s ~/dotfiles/xdg/nvim/ftplugin "${DOT_CONFIG}/nvim/"
 tic -x ~/dotfiles/tmux-256color.terminfo
 
 find ~/dotfiles/symlinks/ -name ".*" -exec ln -sf "{}" "${HOME}" \;
