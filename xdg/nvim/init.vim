@@ -217,19 +217,20 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
-map <F7> :execute ":vsplit %"<Cr>
+map <F7> execute ";vsplit %"<Cr>
 
 nmap .            .'[
 nmap <C-i>        i<Space><Esc>
 nmap <C-o>        i<Cr><Esc>
-nmap <C-PageDown> :bp<Cr>
-nmap <C-PageUp>   :bn<Cr>
-nmap <Leader><F7> :execute ":setlocal spell! spell? spelllang=en_us"<Cr>
-nmap <Leader>gc   :Gcommit<cr>
-nmap <Leader>gd   :Gdiff<Cr>
-nmap <Leader>gl   :Glog<Cr>
-nmap <Leader>gp   :Gpush<Cr>
-nmap <Leader>gs   :execute ":Gstatus"<Cr>
+nmap <C-PageDown> ;bp<Cr>
+nmap <C-PageUp>   ;bn<Cr>
+nmap <Leader><F7> ;execute ":setlocal spell! spell? spelllang=en_us"<Cr>
+nmap <Leader>gb   ;Gblame<Cr>
+nmap <Leader>gc   ;Gcommit<Cr>
+nmap <Leader>gd   ;Gdiff<Cr>
+nmap <Leader>gl   ;Glog -- %<Cr>
+nmap <Leader>gp   ;Gpush<Cr>
+nmap <Leader>gs   ;execute ":Gstatus"<Cr>
 
 noremap n         nzz
 noremap N         Nzz
@@ -270,6 +271,8 @@ tnoremap <Leader><Esc> <C-\><C-n>
 
 vnoremap y y`]
 vnoremap p "_dP`]
+vnoremap ; :
+vnoremap : ;
 
 xnoremap c "xc
 
@@ -310,8 +313,8 @@ elseif executable('ack-grep')
 endif
 
 command! -nargs=1 Silent |
-\   execute ':silent !'.<q-args> |
-\   execute ':redraw!'
+\   execute ';silent !'.<q-args> |
+\   execute ';redraw!'
 
 command! -nargs=* -complete=help Help vertical belowright help <args>
 
@@ -349,7 +352,7 @@ if $TMUX != ''
     end
   endfunction
 
-  set clipboard= " Use this or vim will automatically put deleted text into x11 selection('*' register) which breaks the above map
+  set clipboard=unnamed " Use this or vim will automatically put deleted text into x11 selection('*' register) which breaks the above map
 
   nnoremap <silent> <C-w>j :silent call TmuxMove('j')<cr>
   nnoremap <silent> <C-w>j :silent call TmuxMove('j')<cr>
@@ -370,6 +373,8 @@ function! SetDiffColors()
 endfunction
 
 autocmd FilterWritePre * call SetDiffColors()
+autocmd QuickFixCmdPost *grep* cwindow
+autocmd QuickFixCmdPost *log* cwindow
 
 augroup OmniFunc
   autocmd!
@@ -446,9 +451,6 @@ augroup END
 " any project-specific settings should be included in the .lvimrc file placed
 " in the root folder of that project
 
-" Apache
-autocmd BufNewFile,BufRead,BufEnter httpd.conf setfiletype apache
-
 " C
 autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8 softtabstop=8
 autocmd FileType c set keywordprg=man
@@ -458,9 +460,6 @@ autocmd BufNewFile *.cob 0r ~/dotfiles/lang/cobol/header.cob
 
 " CSS
 autocmd FileType css setlocal iskeyword+=.,#
-
-" Git commit messages
-autocmd BufRead,BufNewFile COMMIT_EDITMSG :DiffGitCached
 
 " HTML
 autocmd BufNewFile *.html 0r ~/dotfiles/lang/html/index.html
@@ -481,9 +480,6 @@ autocmd FileType lisp,scheme,art setlocal equalprg=~/dotfiles/helpers/scmindent.
 " Lua
 autocmd FileType lua setlocal shiftwidth=4 tabstop=4 softtabstop=4 smarttab
 \   noexpandtab formatoptions=croql
-
-" Markdown
-autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown setfiletype markdown
 
 " Mercurial commit messages
 autocmd BufNewFile,BufRead,BufEnter msg setfiletype hgcommit
@@ -516,9 +512,6 @@ autocmd FileType ruby setlocal keywordprg=ri
 
 " SCSS
 autocmd FileType scss setlocal iskeyword+=.,#
-
-" tmux
-autocmd BufNewFile,BufRead,BufEnter .tmux.*,.tmux.conf* setfiletype tmux
 
 " WordPress
 autocmd FileType php.wordpress setlocal shiftwidth=4 tabstop=4 softtabstop=4
