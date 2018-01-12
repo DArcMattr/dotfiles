@@ -372,9 +372,12 @@ function! SetDiffColors()
   highlight DiffText cterm=bold ctermfg=white ctermbg=DarkRed guifg=#ffffff guibg=#8b0000
 endfunction
 
-autocmd FilterWritePre * call SetDiffColors()
-autocmd QuickFixCmdPost *grep* cwindow
-autocmd QuickFixCmdPost *log* cwindow
+augroup FugitiveStuffs
+  autocmd QuickFixCmdPost *grep* cwindow
+  autocmd QuickFixCmdPost *log* cwindow
+  autocmd QuickFixCmdPost *llog* lwindow
+  autocmd BufReadPost fugitive://* set bufhidden=delete
+augroup END
 
 augroup OmniFunc
   autocmd!
@@ -402,6 +405,7 @@ augroup END
 " https://groups.google.com/forum/?fromgroups=#!topic/vim_use/ZNZcBAABDgE
 augroup AutoDiffUpdate
   autocmd!
+  autocmd FilterWritePre * call SetDiffColors()
   autocmd InsertLeave *
   \   if &diff |
   \     diffupdate |
