@@ -108,7 +108,6 @@ set showcmd
 set showmatch
 set sidescrolloff=5
 set smartcase
-set smartindent
 set smarttab
 set softtabstop=2
 set splitbelow
@@ -217,7 +216,7 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
-map <F7> execute ";vsplit %"<Cr>
+map <F7> ;execute ";vsplit %"<Cr>
 
 nmap .            .'[
 nmap <C-i>        i<Space><Esc>
@@ -352,7 +351,7 @@ if $TMUX != ''
     end
   endfunction
 
-  set clipboard=unnamed " Use this or vim will automatically put deleted text into x11 selection('*' register) which breaks the above map
+  "set clipboard=unnamed " Use this or vim will automatically put deleted text into x11 selection('*' register) which breaks the above map
 
   nnoremap <silent> <C-w>j :silent call TmuxMove('j')<cr>
   nnoremap <silent> <C-w>j :silent call TmuxMove('j')<cr>
