@@ -11,6 +11,7 @@ tmux new-window -t "${SESSION}:2" -c "${HOME}/contrib/vvv" \; \
   select-layout -t "${SESSION}:2" even-vertical
 tmux send-keys -t "${SESSION}:2.0" "# vagrant up; sssh vagrant" C-m \; \
   send-keys -t "${SESSION}:2.1" "sssh aynrand" C-m \; \
+  send-keys -t "${SESSION}:2.3" "ssh jupiter" C-m \; \
   send-keys -t "${SESSION}:2.4" "sssh centuria" C-m
 tmux select-pane -t "${SESSION}:2.0"
 tmux rename-window -t "${SESSION}:2" "Remotes"
