@@ -454,10 +454,6 @@ augroup END
 " any project-specific settings should be included in the .lvimrc file placed
 " in the root folder of that project
 
-" C
-autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8 softtabstop=8
-autocmd FileType c set keywordprg=man
-
 " COBOL
 autocmd BufNewFile *.cob 0r ~/dotfiles/lang/cobol/header.cob
 
