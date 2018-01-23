@@ -1,0 +1,36 @@
+augroup WordPress
+  autocmd BufNewFile,BufRead,BufEnter *.php set syn=wordpress
+  autocmd FileType php setlocal shiftwidth=4 tabstop=4 softtabstop=4 smarttab noexpandtab textwidth=85
+  autocmd FileType php match OverLength /%86v.\+/
+  autocmd FileType php let g:ale_php_phpcs_standard = 'WordPress'
+
+  autocmd BufNewFile,BufRead,BufEnter .gruntjshintrc setfiletype json
+
+  autocmd FileType javascript setlocal shiftwidth=4 tabstop=4 softtabstop=4 smarttab noexpandtab textwidth=85
+  autocmd FileType javascript match OverLength /%86v.\+/
+
+  autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2 smarttab noexpandtab textwidth=85
+  autocmd FileType css match OverLength /%86v.\+/
+
+  autocmd FileType scss setlocal shiftwidth=2 tabstop=2 softtabstop=2 smarttab noexpandtab textwidth=85
+  autocmd FileType scss match OverLength /%86v.\+/
+augroup END
+
+if exists( "g:vdebug_options" )
+  let g:vdebug_options['server'] = "192.168.50.1"
+  let g:vdebug_options['debug_file'] = "~/vdebug_log"
+  let g:vdebug_options['debug_file_level'] = 2
+endif
+
+let g:tagcommands = {
+\    'php': { 'tagfile': '/srv/www/ten/php.tags', 'args': '-R' },
+\    'javascript': { 'tagfile': '/srv/www/ten/js.tags', 'args': '-R' }
+\  }
+
+let g:ale_scss_stylelint_executable = '/usr/bin/stylelint --config=/usr/lib/node_modules/stylelint-config-wordpress'
+let g:ale_scss_stylelint_use_global = 1
+let g:ale_fixers = {
+\   'javascript': [
+\   'eslint'
+\  ]
+\ }
