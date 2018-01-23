@@ -1,21 +1,3 @@
-augroup WordPress
-  autocmd BufNewFile,BufRead,BufEnter *.php set syn=wordpress
-  autocmd FileType php setlocal shiftwidth=4 tabstop=4 softtabstop=4 smarttab noexpandtab textwidth=85
-  autocmd FileType php match OverLength /%86v.\+/
-  autocmd FileType php let g:ale_php_phpcs_standard = 'WordPress'
-
-  autocmd BufNewFile,BufRead,BufEnter .gruntjshintrc setfiletype json
-
-  autocmd FileType javascript setlocal shiftwidth=4 tabstop=4 softtabstop=4 smarttab noexpandtab textwidth=85
-  autocmd FileType javascript match OverLength /%86v.\+/
-
-  autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2 smarttab noexpandtab textwidth=85
-  autocmd FileType css match OverLength /%86v.\+/
-
-  autocmd FileType scss setlocal shiftwidth=2 tabstop=2 softtabstop=2 smarttab noexpandtab textwidth=85
-  autocmd FileType scss match OverLength /%86v.\+/
-augroup END
-
 if exists( "g:vdebug_options" )
   let g:vdebug_options['server'] = "192.168.50.1"
   let g:vdebug_options['debug_file'] = "~/vdebug_log"
@@ -34,3 +16,34 @@ let g:ale_fixers = {
 \   'eslint'
 \  ]
 \ }
+
+augroup WordPress
+  autocmd! BufNewFile,BufRead,BufEnter *.php set syn=wordpress
+
+  autocmd! FileType php let g:ale_php_phpcs_standard = 'WordPress'
+  autocmd! FileType php set shiftwidth=4
+  autocmd! FileType php set tabstop=4
+  autocmd! FileType php set softtabstop=4
+  autocmd! FileType php set noexpandtab
+
+  autocmd! BufNewFile,BufRead,BufEnter .gruntjshintrc setfiletype json
+
+  autocmd! FileType javascript set shiftwidth=4
+  autocmd! FileType javascript set tabstop=4
+  autocmd! FileType javascript set softtabstop=4
+  autocmd! FileType javascript set smarttab
+  autocmd! FileType javascript set noexpandtab
+
+  autocmd! FileType css set shiftwidth=2
+  autocmd! FileType css set softtabstop=2
+  autocmd! FileType css set smarttab
+  autocmd! FileType css set noexpandtab
+
+  autocmd! FileType scss set shiftwidth=2
+  autocmd! FileType scss set tabstop=2
+  autocmd! FileType scss set softtabstop=2
+  autocmd! FileType scss set smarttab
+  autocmd! FileType scss set noexpandtab
+
+  autocmd! BufNewFile,BufRead,BufEnter * set textwidth=120
+augroup END
