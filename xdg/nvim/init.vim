@@ -22,7 +22,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
-Plug 'DArcMattr/wordpress.vim', { 'branch' : 'develop' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'equalsraf/neovim-gui-shim'
@@ -34,7 +33,7 @@ Plug 'joonty/vim-taggatron'
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'reedes/vim-wheel'
 Plug 'rkitover/vimpager', { 'do': 'sudo ' . b:make . b:pager_install }
-Plug 'shawncplus/phpcomplete.vim', { 'for': [ 'php', 'php.wordpress' ] }
+Plug 'shawncplus/phpcomplete.vim', { 'for': [ 'php', 'wordpress' ] }
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -130,13 +129,13 @@ set wildignore+=vendor/*,docs/*,node_modules/*,components/*,build/*,dist/*
 
 colorscheme vividchalk
 
+
 highlight Comment ctermfg=105 guifg=#8787ff
 highlight CursorColumn cterm=NONE ctermbg=237 guibg=#3a3a3a
 highlight CursorLine term=underline cterm=underline ctermbg=NONE gui=underline guibg=NONE
 highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
 highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
 highlight NonText ctermfg=235 guifg=#262626
-highlight OverLength ctermbg=234 ctermfg=249 guibg=#1c1c1c guifg=#b2b2b2
 highlight Search ctermfg=222 guifg=#ffdf87
 highlight SpecialKey ctermfg=235 guifg=#262626
 highlight TermCursor ctermfg=yellow guifg=yellow
@@ -151,7 +150,6 @@ highlight SpellCap term=underline cterm=underline gui=undercurl
 highlight SpellLocal term=underline cterm=underline gui=undercurl
 highlight SpellRare term=underline cterm=underline gui=undercurl
 
-match OverLength /\%81v.\+/
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 let mapleader = ","
@@ -448,6 +446,8 @@ augroup StartupStuffs
   autocmd BufEnter,BufNew * if &buftype == 'terminal' | :startinsert | endif
   autocmd BufRead * try | execute "compiler ".&FileType | catch /./ | endtry
   autocmd VimResized * execute 'normal! \<C-w>='
+  autocmd BufEnter * highlight OverLength ctermbg=234 ctermfg=249 guibg=#1c1c1c guifg=#b2b2b2
+  autocmd BufEnter * execute 'match OverLength /\%'. (&textwidth + 1) .'v.*/'
 augroup END
 
 " common FileTypes below
@@ -466,10 +466,6 @@ autocmd BufNewFile *.html 0r ~/dotfiles/lang/html/index.html
 " JavaScript
 autocmd FileType javascript setlocal iskeyword+=$
 
-" JSON
-autocmd FileType json setlocal foldmarker={,} foldmethod=marker foldlevel=1
-\   expandtab
-
 " LaTeX
 autocmd BufNewFile *.tex 0r ~/dotfiles/lang/latex/template.tex
 
@@ -483,7 +479,6 @@ autocmd FileType lua setlocal shiftwidth=4 tabstop=4 softtabstop=4 smarttab
 " Mercurial commit messages
 autocmd BufNewFile,BufRead,BufEnter msg setfiletype hgcommit
 autocmd FileType hgcommit setlocal textwidth=72
-autocmd FileType hgcommit match OverLength /\%73v.\+/
 
 " MySQL
 autocmd BufNewFile,BufRead,BufEnter *.mysql setfiletype mysql
@@ -491,12 +486,6 @@ autocmd BufNewFile,BufRead,BufEnter *.mysql setfiletype mysql
 " Perl
 autocmd FileType perl setlocal makeprg=perl keywordprg=perldoc\ -f |
 \   compiler perl
-
-" PHP
-autocmd FileType php setlocal keywordprg=pman iskeyword+=$
-"\   setlocal foldmarker={,} foldmethod=marker foldlevel=1 |
-
-" autocmd BufWritePost *.php silent !phpcbf --standard=WordPress %
 
 " PostgreSQL
 autocmd BufNewFile,BufRead,BufEnter *.psql setfiletype postgresql
@@ -511,22 +500,6 @@ autocmd FileType ruby setlocal keywordprg=ri
 
 " SCSS
 autocmd FileType scss setlocal iskeyword+=.,#
-
-" WordPress
-autocmd FileType php.wordpress setlocal shiftwidth=4 tabstop=4 softtabstop=4
-\   smarttab noexpandtab smartindent textwidth=85
-autocmd FileType javascript.wordpress setlocal shiftwidth=4 tabstop=4
-\   softtabstop=4 smarttab noexpandtab smartindent textwidth=85
-autocmd FileType css.wordpress setlocal shiftwidth=2 tabstop=2 softtabstop=2
-\   smarttab noexpandtab smartindent textwidth=85
-autocmd FileType scss.wordpress setlocal shiftwidth=2 tabstop=2 softtabstop=2
-\   smarttab noexpandtab smartindent textwidth=85
-
-autocmd FileType php.wordpress match OverLength /%86v.\+/ |
-\   let g:ale_php_phpcs_standard = 'WordPress'
-autocmd FileType javascript.wordpress match OverLength /%86v.\+/
-autocmd FileType css.wordpress match OverLength /%86v.\+/
-autocmd FileType scss.wordpress match OverLength /%86v.\+/
 
 " Vim
 autocmd FileType vim setlocal keywordprg=:Help
