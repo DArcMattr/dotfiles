@@ -1,0 +1,14 @@
+--recurse
+--exclude=.svn
+--exclude=.git
+--exclude=.hg
+--exclude="*/_*cache/*"
+--exclude="*/_*logs{0,1}/*"
+--exclude="*/_*data/*"
+--exclude=vendor
+--exclude=dist
+--exclude=build
+--exclude=node_modules
+--exclude=bower_components
+--totals=yes
+--tag-relative=yes
