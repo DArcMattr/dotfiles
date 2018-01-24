@@ -5,53 +5,50 @@ if exists( "g:vdebug_options" )
 endif
 
 let g:tagcommands = {
-\    'php': {
-\      'tagfile': '/srv/www/ten/php.tags',
-\      'files': '/srv/www/ten/htdocs/',
-\      'args': '-R'
-\    },
-\    'javascript': {
-\      'tagfile': '/srv/www/ten/js.tags',
-\      'files': '/srv/www/ten/htdocs/',
-\      'args': '-R'
-\     }
-\  }
+\   'php':  {
+\     'tagfile': '/srv/www/ten/php.tags',
+\     'files': '/srv/www/ten/htdocs/'
+\   },
+\   'javasript': {
+\     'tagfile': '/srv/www/ten/js.tags',
+\     'files': '/srv/www/ten/htdocs/'
+\   }
+\ }
 
 let g:ale_scss_stylelint_executable = '/usr/bin/stylelint --config=/usr/lib/node_modules/stylelint-config-wordpress'
 let g:ale_scss_stylelint_use_global = 1
-let g:ale_fixers = {
-\   'javascript': [
-\   'eslint'
-\  ]
-\ }
 
 augroup WordPress
-  autocmd! BufNewFile,BufRead,BufEnter *.php set syn=wordpress
+  autocmd!
+  autocmd BufNewFile,BufRead,BufEnter *.php set syn=wordpress
 
-  autocmd! FileType php let g:ale_php_phpcs_standard = 'WordPress'
-  autocmd! FileType php set shiftwidth=4
-  autocmd! FileType php set tabstop=4
-  autocmd! FileType php set softtabstop=4
-  autocmd! FileType php set noexpandtab
+  autocmd FileType php let g:ale_php_phpcs_standard = 'WordPress'
+  autocmd FileType php set shiftwidth=4
+  autocmd FileType php set tabstop=4
+  autocmd FileType php set softtabstop=4
+  autocmd FileType php set noexpandtab
+  autocmd FileType php setlocal tags='/srv/www/ten/php.tags'
 
-  autocmd! BufNewFile,BufRead,BufEnter .gruntjshintrc setfiletype json
+  autocmd BufNewFile,BufRead,BufEnter .gruntjshintrc setfiletype json
 
-  autocmd! FileType javascript set shiftwidth=4
-  autocmd! FileType javascript set tabstop=4
-  autocmd! FileType javascript set softtabstop=4
-  autocmd! FileType javascript set smarttab
-  autocmd! FileType javascript set noexpandtab
+  autocmd FileType javascript set shiftwidth=4
+  autocmd FileType javascript set tabstop=4
+  autocmd FileType javascript set softtabstop=4
+  autocmd FileType javascript set smarttab
+  autocmd FileType javascript set noexpandtab
+  autocmd FileType javascript setlocal tags='/srv/www/ten/js.tags'
 
-  autocmd! FileType css set shiftwidth=2
-  autocmd! FileType css set softtabstop=2
-  autocmd! FileType css set smarttab
-  autocmd! FileType css set noexpandtab
+  autocmd FileType css set shiftwidth=2
+  autocmd FileType css set softtabstop=2
+  autocmd FileType css set smarttab
+  autocmd FileType css set noexpandtab
 
-  autocmd! FileType scss set shiftwidth=2
-  autocmd! FileType scss set tabstop=2
-  autocmd! FileType scss set softtabstop=2
-  autocmd! FileType scss set smarttab
-  autocmd! FileType scss set noexpandtab
+  autocmd FileType scss set shiftwidth=2
+  autocmd FileType scss set tabstop=2
+  autocmd FileType scss set softtabstop=2
+  autocmd FileType scss set smarttab
+  autocmd FileType scss set noexpandtab
 
-  autocmd! BufNewFile,BufRead,BufEnter * set textwidth=120
+  autocmd BufNewFile,BufRead,BufEnter * set textwidth=85
+  autocmd BufEnter * execute 'match OverLength /\%'. (&textwidth + 1) .'v.*/'
 augroup END
