@@ -5,8 +5,16 @@ if exists( "g:vdebug_options" )
 endif
 
 let g:tagcommands = {
-\    'php': { 'tagfile': '/srv/www/ten/php.tags', 'args': '-R' },
-\    'javascript': { 'tagfile': '/srv/www/ten/js.tags', 'args': '-R' }
+\    'php': {
+\      'tagfile': '/srv/www/ten/php.tags',
+\      'files': '/srv/www/ten/htdocs/',
+\      'args': '-R'
+\    },
+\    'javascript': {
+\      'tagfile': '/srv/www/ten/js.tags',
+\      'files': '/srv/www/ten/htdocs/',
+\      'args': '-R'
+\     }
 \  }
 
 let g:ale_scss_stylelint_executable = '/usr/bin/stylelint --config=/usr/lib/node_modules/stylelint-config-wordpress'
