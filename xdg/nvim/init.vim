@@ -171,12 +171,15 @@ let g:ale_cache_executable_check_failures = 1
 let g:ale_css_stylelint_use_global = 1
 let g:ale_javascript_eslint_executable = 'eslint_d'
 let g:ale_javascript_eslint_use_global = 1
+let g:ale_fixers = {
+\   'javascript': ['eslint']
+\ }
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_linters = {
-\    'php': ['php -l', 'phpcs'],
-\    'javascript': ['eslint'],
-\  }
+\   'php': ['php -l', 'phpcs'],
+\   'javascript': ['eslint'],
+\ }
 let g:ale_open_list = 1
 let g:ale_sign_error = '⨉'
 let g:ale_sign_warning = '⚠'
@@ -191,7 +194,6 @@ let g:jsx_ext_required = 1
 let g:less = { 'enabled' : 0, }
 let g:localvimrc_persistent = 1
 let g:localvimrc_event = ['BufNewFile', 'BufRead']
-let g:localvimrc_reverse = 1
 let g:localvimrc_sandbox = 0
 let g:mta_filetypes = {
 \   'html' : 1,
@@ -204,7 +206,11 @@ let g:session_autoload = 'no'
 let g:session_autosave = 'no'
 let g:sparkupExecuteMapping = '<Leader>se'
 let g:sparkupNextMapping = '<Leader>sn'
-let g:tagcommand_defaults = { 'cmd': 'ctags' }
+let g:tagcommand_defaults = {
+\   'cmd': 'ctags',
+\   'args': '-R -a',
+\  }
+let g:taggatron_run_in_background = 1
 let g:UltiSnipsExpandTrigger = "<Leader>u"
 let g:UltiSnipsJumpBackwardTrigger = "<C-n>"
 let g:UltiSnipsJumpForwardTrigger = "<C-p>"
