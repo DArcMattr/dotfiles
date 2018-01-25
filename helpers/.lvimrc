@@ -9,8 +9,8 @@ let g:tagcommands = {
 \     'tagfile': '/srv/www/ten/php.tags',
 \     'files': '/srv/www/ten/htdocs/'
 \   },
-\   'javasript': {
-\     'tagfile': '/srv/www/ten/js.tags',
+\   'javascript': {
+\     'tagfile': '/srv/www/ten/javascript.tags',
 \     'files': '/srv/www/ten/htdocs/'
 \   }
 \ }
@@ -27,7 +27,7 @@ augroup WordPress
   autocmd FileType php set tabstop=4
   autocmd FileType php set softtabstop=4
   autocmd FileType php set noexpandtab
-  autocmd FileType php setlocal tags='/srv/www/ten/php.tags'
+  autocmd BufRead,BufEnter FileType php setlocal tags+='/srv/www/ten/php.tags'
 
   autocmd BufNewFile,BufRead,BufEnter .gruntjshintrc setfiletype json
 
@@ -36,7 +36,7 @@ augroup WordPress
   autocmd FileType javascript set softtabstop=4
   autocmd FileType javascript set smarttab
   autocmd FileType javascript set noexpandtab
-  autocmd FileType javascript setlocal tags='/srv/www/ten/js.tags'
+  autocmd BufRead,BufEnter FileType javascript setlocal tags+='/srv/www/ten/javascript.tags'
 
   autocmd FileType css set shiftwidth=2
   autocmd FileType css set softtabstop=2
