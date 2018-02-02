@@ -108,6 +108,7 @@ set showmatch
 set sidescrolloff=5
 set smartcase
 set smarttab
+set smartindent
 set softtabstop=2
 set splitbelow
 set synmaxcol=512
@@ -209,6 +210,7 @@ let g:sparkupNextMapping = '<Leader>sn'
 let g:tagcommand_defaults = {
 \   'cmd': 'ctags',
 \   'args': '-R -a',
+\   'filesappend': '**',
 \  }
 let g:taggatron_run_in_background = 1
 let g:UltiSnipsExpandTrigger = "<Leader>u"
@@ -276,6 +278,8 @@ vnoremap y y`]
 vnoremap p "_dP`]
 vnoremap ; :
 vnoremap : ;
+vnoremap * y/<C-R>"<CR>
+vnoremap ? y?<C-R>"<CR>
 
 xnoremap c "xc
 
@@ -463,9 +467,6 @@ augroup END
 " COBOL
 autocmd BufNewFile *.cob 0r ~/dotfiles/lang/cobol/header.cob
 
-" CSS
-autocmd FileType css setlocal iskeyword+=.,#
-
 " HTML
 autocmd BufNewFile *.html 0r ~/dotfiles/lang/html/index.html
 
@@ -479,8 +480,8 @@ autocmd BufNewFile *.tex 0r ~/dotfiles/lang/latex/template.tex
 autocmd FileType lisp,scheme,art setlocal equalprg=~/dotfiles/helpers/scmindent.rkt
 
 " Lua
-autocmd FileType lua setlocal shiftwidth=4 tabstop=4 softtabstop=4 smarttab
-\   noexpandtab formatoptions=croql
+autocmd FileType lua setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
+\ formatoptions=croql
 
 " Mercurial commit messages
 autocmd BufNewFile,BufRead,BufEnter msg setfiletype hgcommit
@@ -497,15 +498,12 @@ autocmd FileType perl setlocal makeprg=perl keywordprg=perldoc\ -f |
 autocmd BufNewFile,BufRead,BufEnter *.psql setfiletype postgresql
 
 " Python
-autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 smarttab
+autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 \   expandtab formatoptions=croql keywordprg=pydoc
 
 " Ruby
 autocmd BufNewFile,BufRead Vagrantfile setfiletype ruby
 autocmd FileType ruby setlocal keywordprg=ri
-
-" SCSS
-autocmd FileType scss setlocal iskeyword+=.,#
 
 " Vim
 autocmd FileType vim setlocal keywordprg=:Help
