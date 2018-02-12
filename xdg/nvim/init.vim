@@ -173,7 +173,8 @@ let g:ale_css_stylelint_use_global = 1
 let g:ale_javascript_eslint_executable = 'eslint_d'
 let g:ale_javascript_eslint_use_global = 1
 let g:ale_fixers = {
-\   'javascript': ['eslint']
+\   'javascript': ['eslint'],
+\   'php': ['phpcbf']
 \ }
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
@@ -182,6 +183,7 @@ let g:ale_linters = {
 \   'javascript': ['eslint'],
 \ }
 let g:ale_open_list = 1
+let g:ale_php_phpcs_use_global = 1
 let g:ale_sign_error = '⨉'
 let g:ale_sign_warning = '⚠'
 let g:ale_set_loclist = 1
@@ -327,7 +329,6 @@ command! -nargs=* -complete=help Help vertical belowright help <args>
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
 if !exists(":DiffOrig")
   command DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_ | diffthis
   \   | wincmd p | diffthis
@@ -359,7 +360,7 @@ if $TMUX != ''
     end
   endfunction
 
-  "set clipboard=unnamed " Use this or vim will automatically put deleted text into x11 selection('*' register) which breaks the above map
+  "set clipboard=unnamed
 
   nnoremap <silent> <C-w>j :silent call TmuxMove('j')<cr>
   nnoremap <silent> <C-w>j :silent call TmuxMove('j')<cr>
