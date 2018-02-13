@@ -12,12 +12,6 @@ else
   let b:make = 'gmake'
 endif
 
-if filereadable("/etc/debian_version")
-  let b:pager_install = ' install-deb'
-else
-  let b:pager_install = ' install'
-endif
-
 call plug#begin('~/.config/nvim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
@@ -32,7 +26,7 @@ Plug 'joonty/vdebug', { 'branch': 'v2-integration' }
 Plug 'joonty/vim-taggatron'
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'reedes/vim-wheel'
-Plug 'rkitover/vimpager', { 'do': 'sudo ' . b:make . b:pager_install }
+Plug 'rkitover/vimpager', { 'do': 'PREFIX=$HOME/.local ' . b:make . ' install' }
 Plug 'shawncplus/phpcomplete.vim', { 'for': [ 'php', 'wordpress' ] }
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
@@ -181,6 +175,8 @@ let g:ale_lint_on_text_changed = 0
 let g:ale_linters = {
 \   'php': ['php -l', 'phpcs'],
 \   'javascript': ['eslint'],
+\   'css': ['stylelint'],
+\   'scss': ['stylelint'],
 \ }
 let g:ale_open_list = 1
 let g:ale_php_phpcs_use_global = 1
