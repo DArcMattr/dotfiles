@@ -102,7 +102,6 @@ set showmatch
 set sidescrolloff=5
 set smartcase
 set smarttab
-set smartindent
 set softtabstop=2
 set splitbelow
 set synmaxcol=512
