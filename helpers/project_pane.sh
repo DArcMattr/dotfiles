@@ -5,12 +5,12 @@
 #  - optional parameter for whether to run a command in a pane
 #  - check if no parameters given, exit, or use some fallbacks
 project_pane() {
-  while getopts "d:g?l:n:t:" opt; do
+  while getopts "d:g:l:n:t:" opt; do
     case "$opt" in
       d) DIRECTORY=${OPTARG}
         ;;
 
-      g) GRUNT=${OPTARG:-grunt local}
+      g) GRUNT=${OPTARG}
         ;;
 
       l) LOG=${OPTARG}
@@ -34,6 +34,10 @@ project_pane() {
 
   WIN_NUM=$(tmux display-message -p '#{session_windows}')
   LOG=${LOG:-"../../debug.log"}
+
+  if [ -z "${GRUNT+x}" ]; then
+    GRUNT=${GRUNT:='grunt local'}
+  fi
 
   if [ -z "${DIRECTORY}" ]; then
     echo "Directory not specified" >&2
