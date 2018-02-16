@@ -21,7 +21,6 @@ export FZF_DEFAULT_COMMAND='ag -l -g ""'
 # export LESS='-F -g -i -M -R -S -w -X -z-4'
 
 export LESS="-EFIMQRsX~ -x2"
-export LESSCHARSET="utf-8"
 
 # Set the Less input preprocessor.
 # Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
