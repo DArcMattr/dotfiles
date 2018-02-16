@@ -27,10 +27,7 @@ if which composer >/dev/null; then
 fi
 
 if which go >/dev/null; then
-  go_path="${HOME}/go"
-  go_bin="${go_path}/bin"
-
-  export GOPATH=${go_path}
+  go_bin="${HOME}/go/bin"
 fi
 
 if which rustc >/dev/null; then
@@ -45,7 +42,6 @@ fi
 # Paths
 #
 typeset -T PYTHONPATH pythonpath
-typeset -T GOPATH go_path
 
 pythonpath=(
   $python2_path
