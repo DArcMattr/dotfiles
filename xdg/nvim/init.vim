@@ -200,6 +200,8 @@ let g:mta_filetypes = {
 \   'php' : 1,
 \ }
 let g:netrw_silent = 1
+let g:phpcomplete_parse_docblock_comments = 1
+let g:phpcomplete_search_tags_for_variables = 1
 let g:session_autoload = 'no'
 let g:session_autosave = 'no'
 let g:sparkupExecuteMapping = '<Leader>se'
