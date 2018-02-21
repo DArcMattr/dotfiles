@@ -1,4 +1,11 @@
---mline-regex-PHP=/^do_action(_deprecated|_ref_array)?\s*\(\s*['"]([a-z_]+)['"]\s*.*$/4c710n_\1/A,action/
---mline-regex-PHP=/^add_action\s*\(\s*['"]([a-z_]+)['"]\s*.*$/4l1573n3r_\1/L,alistener/
---mline-regex-PHP=/^apply_filters(_deprecated|_ref_array)?\s*\(\s*['"]([a-z_]+)['"]\s*.*$/ph1l73r_\1/R,filter/
---mline-regex-PHP=/^add_filter\s*\(\s*['"]([a-z_]+)['"]\s*.*$/phl1573n3r_\1/E,flistener/
+--regex-PHP=/^do_action\s*\(\s*['"]([a-z_]+)['"]\s*.*$/4c710n_\1/A,action/
+--regex-PHP=/^do_action_ref_array\s*\(\s*['"]([a-z_]+)['"]\s*.*$/4c710n_\1/A,action/
+--regex-PHP=/^do_action_deprecated\s*\(\s*['"]([a-z_]+)['"]\s*.*$/4c710n_\1/A,action/
+
+--regex-PHP=/^add_action\s*\(\s*['"]([a-z_]+)['"]\s*.*$/4l1573n3r_\1/L,alistener/
+
+--regex-PHP=/^add_filter\s*\(\s*['"]([a-z_]+)['"]\s*.*$/phl1573n3r_\1/E,flistener/
+
+--regex-PHP=/^apply_filters\s*\(\s*['"]([a-z_]+)["']\s*.*$/ph1l73r_\1/R,ffilter/
+--regex-PHP=/^apply_filters_ref_array\s*\(\s*['"]([a-z_]+)["']\s*.*$/ph1l73r_\1/R,ffilter/
+--regex-PHP=/^apply_filters_deprecated\s*\(\s*['"]([a-z_]+)["']\s*.*$/ph1l73r_\1/R,ffilter/
