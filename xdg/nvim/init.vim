@@ -123,7 +123,6 @@ set wildignore+=vendor/*,docs/*,node_modules/*,components/*,build/*,dist/*
 
 colorscheme vividchalk
 
-
 highlight Comment ctermfg=105 guifg=#8787ff
 highlight CursorColumn cterm=NONE ctermbg=237 guibg=#3a3a3a
 highlight CursorLine term=underline cterm=underline ctermbg=NONE gui=underline guibg=NONE
@@ -382,6 +381,11 @@ augroup FugitiveStuffs
   autocmd QuickFixCmdPost *log* cwindow
   autocmd QuickFixCmdPost *llog* lwindow
   autocmd BufReadPost fugitive://* set bufhidden=delete
+augroup END
+
+augroup CloseLocListWindowGroup
+  autocmd!
+  autocmd QuitPre * if empty(&buftype) | lclose | endif
 augroup END
 
 augroup OmniFunc

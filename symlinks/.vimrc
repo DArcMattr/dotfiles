@@ -16,18 +16,11 @@ else
   let b:make = 'gmake'
 endif
 
-if filereadable("/etc/debian_version")
-  let b:pager_install = ' install-deb'
-else
-  let b:pager_install = ' install'
-endif
-
 call plug#begin('~/.config/nvim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
 Plug 'ConradIrwin/vim-bracketed-paste'
-Plug 'DArcMattr/wordpress.vim', { 'branch' : 'develop' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'fatih/vim-go', { 'for': [ 'go' ] }
@@ -37,8 +30,8 @@ Plug 'joonty/vdebug', { 'branch': 'v2-integration' }
 Plug 'joonty/vim-taggatron'
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'reedes/vim-wheel'
-Plug 'rkitover/vimpager', { 'do': 'sudo ' . b:make . b:pager_install }
-Plug 'shawncplus/phpcomplete.vim', { 'for': [ 'php', 'php.wordpress' ] }
+Plug 'rkitover/vimpager', { 'do': 'PREFIX=$HOME/.local ' . b:make . ' install' }
+Plug 'shawncplus/phpcomplete.vim', { 'for': [ 'php', 'wordpress' ] }
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -61,7 +54,6 @@ set backspace=indent,eol,start
 set backup
 set backupdir=$TEMP,$TMP,.
 set colorcolumn=+1
-set complete-=i
 set completeopt=menuone,longest
 set copyindent
 set diffopt=filler,vertical
@@ -117,7 +109,6 @@ set showcmd
 set showmatch
 set sidescrolloff=5
 set smartcase
-set smartindent
 set smarttab
 set softtabstop=2
 set splitbelow
@@ -146,7 +137,6 @@ highlight CursorLine term=underline cterm=underline ctermbg=NONE gui=underline g
 highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
 highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
 highlight NonText ctermfg=235 guifg=#262626
-highlight OverLength ctermbg=234 ctermfg=249 guibg=#1c1c1c guifg=#b2b2b2
 highlight Search ctermfg=222 guifg=#ffdf87
 highlight SpecialKey ctermfg=235 guifg=#262626
 
@@ -160,7 +150,6 @@ highlight SpellCap term=underline cterm=underline gui=undercurl
 highlight SpellLocal term=underline cterm=underline gui=undercurl
 highlight SpellRare term=underline cterm=underline gui=undercurl
 
-match OverLength /\%81v.\+/
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 if has('win32')
@@ -215,13 +204,24 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline#extensions#ycm#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:ale_cache_executable_check_failures = 1
 let g:ale_css_stylelint_use_global = 1
+let g:ale_javascript_eslint_executable = 'eslint_d'
+let g:ale_javascript_eslint_use_global = 1
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\   'php': ['phpcbf']
+\ }
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_linters = {
-\    'php': ['php -l', 'phpcs'],
-\  }
+\   'php': ['php -l', 'phpcs'],
+\   'javascript': ['eslint'],
+\   'css': ['stylelint'],
+\   'scss': ['stylelint'],
+\ }
 let g:ale_open_list = 1
+let g:ale_php_phpcs_use_global = 1
 let g:ale_sign_error = '⨉'
 let g:ale_sign_warning = '⚠'
 let g:ale_set_loclist = 1
@@ -235,7 +235,6 @@ let g:jsx_ext_required = 1
 let g:less = { 'enabled' : 0, }
 let g:localvimrc_persistent = 1
 let g:localvimrc_event = ['BufNewFile', 'BufRead']
-let g:localvimrc_reverse = 1
 let g:localvimrc_sandbox = 0
 let g:mta_filetypes = {
 \   'html' : 1,
@@ -244,11 +243,18 @@ let g:mta_filetypes = {
 \   'php' : 1,
 \ }
 let g:netrw_silent = 1
+let g:phpcomplete_parse_docblock_comments = 1
+let g:phpcomplete_search_tags_for_variables = 1
 let g:session_autoload = 'no'
 let g:session_autosave = 'no'
 let g:sparkupExecuteMapping = '<Leader>se'
 let g:sparkupNextMapping = '<Leader>sn'
-let g:tagcommand_defaults = { 'cmd': 'ctags' }
+let g:tagcommand_defaults = {
+\   'cmd': 'ctags',
+\   'args': '-R -a',
+\   'filesappend': '**',
+\  }
+let g:taggatron_run_in_background = 1
 let g:UltiSnipsExpandTrigger = "<Leader>u"
 let g:UltiSnipsJumpBackwardTrigger = "<C-n>"
 let g:UltiSnipsJumpForwardTrigger = "<C-p>"
@@ -258,19 +264,20 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
-map <F7> :execute ":vsplit %"<Cr>
+map <F7> ;execute ";vsplit %"<Cr>
 
 nmap .            .'[
 nmap <C-i>        i<Space><Esc>
 nmap <C-o>        i<Cr><Esc>
-nmap <C-PageDown> :bp<Cr>
-nmap <C-PageUp>   :bn<Cr>
-nmap <Leader><F7> :execute ":setlocal spell! spell? spelllang=en_us"<Cr>
-nmap <Leader>gc   :Gcommit<cr>
-nmap <Leader>gd   :Gdiff<Cr>
-nmap <Leader>gl   :Glog<Cr>
-nmap <Leader>gp   :Gpush<Cr>
-nmap <Leader>gs   :execute ":Gstatus"<Cr>
+nmap <C-PageDown> ;bp<Cr>
+nmap <C-PageUp>   ;bn<Cr>
+nmap <Leader><F7> ;execute ":setlocal spell! spell? spelllang=en_us"<Cr>
+nmap <Leader>gb   ;Gblame<Cr>
+nmap <Leader>gc   ;Gcommit<Cr>
+nmap <Leader>gd   ;Gdiff<Cr>
+nmap <Leader>gl   ;Glog -- %<Cr>
+nmap <Leader>gp   ;Gpush<Cr>
+nmap <Leader>gs   ;execute ":Gstatus"<Cr>
 
 noremap n         nzz
 noremap N         Nzz
@@ -278,6 +285,11 @@ noremap <C-d>     <C-d>zz
 noremap <C-u>     <C-u>zz
 noremap <Leader>l :set rnu!<Cr>
 noremap <Leader>t :enew<Cr>
+
+inoremap <C-u>      <C-g>u<C-u>
+inoremap <C-x><C-k> <Nop>
+inoremap <Expr> <Tab>   pumvisible() ? '\<C-n>' : '\<Tab>'
+inoremap <Expr> <S-Tab> pumvisible() ? '\<C-p>' : '\<S-Tab>'
 
 nnoremap <C-e>     3<C-e>
 nnoremap <C-p>     :Denite file_rec<CR>
@@ -302,13 +314,13 @@ nnoremap ` '
 nnoremap ; :
 nnoremap : ;
 
-inoremap <C-u>      <C-g>u<C-u>
-inoremap <C-x><C-k> <Nop>
-inoremap <Expr> <Tab>   pumvisible() ? '\<C-n>' : '\<Tab>'
-inoremap <Expr> <S-Tab> pumvisible() ? '\<C-p>' : '\<S-Tab>'
 
 vnoremap y y`]
 vnoremap p "_dP`]
+vnoremap ; :
+vnoremap : ;
+vnoremap * y/<C-R>"<CR>
+vnoremap ? y?<C-R>"<CR>
 
 xnoremap c "xc
 
@@ -349,14 +361,13 @@ elseif executable('ack-grep')
 endif
 
 command! -nargs=1 Silent |
-\   execute ':silent !'.<q-args> |
-\   execute ':redraw!'
+\   execute ';silent !'.<q-args> |
+\   execute ';redraw!'
 
 command! -nargs=* -complete=help Help vertical belowright help <args>
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
 if !exists(":DiffOrig")
   command DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_ | diffthis
   \   | wincmd p | diffthis
@@ -388,7 +399,7 @@ if $TMUX != ''
     end
   endfunction
 
-  set clipboard= " Use this or vim will automatically put deleted text into x11 selection('*' register) which breaks the above map
+  "set clipboard=unnamed
 
   nnoremap <silent> <C-w>j :silent call TmuxMove('j')<cr>
   nnoremap <silent> <C-w>j :silent call TmuxMove('j')<cr>
@@ -407,7 +418,18 @@ function! SetDiffColors()
   highlight DiffChange cterm=bold ctermfg=white ctermbg=DarkBlue guifg=#ffffff guibg=#00008b
   highlight DiffText cterm=bold ctermfg=white ctermbg=DarkRed guifg=#ffffff guibg=#8b0000
 endfunction
-autocmd FilterWritePre * call SetDiffColors()
+
+augroup FugitiveStuffs
+  autocmd QuickFixCmdPost *grep* cwindow
+  autocmd QuickFixCmdPost *log* cwindow
+  autocmd QuickFixCmdPost *llog* lwindow
+  autocmd BufReadPost fugitive://* set bufhidden=delete
+augroup END
+
+augroup CloseLocListWindowGroup
+  autocmd!
+  autocmd QuitPre * if empty(&buftype) | lclose | endif
+augroup END
 
 augroup OmniFunc
   autocmd!
@@ -435,6 +457,7 @@ augroup END
 " https://groups.google.com/forum/?fromgroups=#!topic/vim_use/ZNZcBAABDgE
 augroup AutoDiffUpdate
   autocmd!
+  autocmd FilterWritePre * call SetDiffColors()
   autocmd InsertLeave *
   \   if &diff |
   \     diffupdate |
@@ -467,50 +490,32 @@ augroup ShowListChars
   autocmd InsertLeave * set list
 augroup END
 
-augroup cursor_position
+augroup StartupStuffs
   autocmd!
   autocmd BufReadPost *
   \   if line("'\"") > 1 && line("'\"") <= line("$") |
   \     execute "normal! g`\""                       |
   \   endif                                          |
-augroup END
-
-augroup CenteringReadOnly
-  autocmd!
   autocmd BufEnter * if !&modifiable | setl scrolloff=999 | endif
+  autocmd BufEnter,BufNew * if &buftype == 'terminal' | :startinsert | endif
+  autocmd BufRead * try | execute "compiler ".&FileType | catch /./ | endtry
+  autocmd VimResized * execute 'normal! \<C-w>='
+  autocmd BufEnter * highlight OverLength ctermbg=234 ctermfg=249 guibg=#1c1c1c guifg=#b2b2b2
+  autocmd BufEnter * execute 'match OverLength /\%'. (&textwidth + 1) .'v.*/'
 augroup END
-
-autocmd BufRead * try | execute "compiler ".&FileType | catch /./ | endtry
 
 " common FileTypes below
 " any project-specific settings should be included in the .lvimrc file placed
 " in the root folder of that project
 
-" Apache
-autocmd BufNewFile,BufRead,BufEnter httpd.conf setfiletype apache
-
-" C
-autocmd FileType c set cinoptions=t0,+4,(4,u4,w1 shiftwidth=8 softtabstop=8
-autocmd FileType c set keywordprg=man
-
 " COBOL
 autocmd BufNewFile *.cob 0r ~/dotfiles/lang/cobol/header.cob
-
-" CSS
-autocmd FileType css setlocal iskeyword+=.,#
-
-" Git commit messages
-autocmd BufRead,BufNewFile COMMIT_EDITMSG :DiffGitCached
 
 " HTML
 autocmd BufNewFile *.html 0r ~/dotfiles/lang/html/index.html
 
 " JavaScript
 autocmd FileType javascript setlocal iskeyword+=$
-
-" JSON
-autocmd FileType json setlocal foldmarker={,} foldmethod=marker foldlevel=1
-\   expandtab
 
 " LaTeX
 autocmd BufNewFile *.tex 0r ~/dotfiles/lang/latex/template.tex
@@ -519,16 +524,12 @@ autocmd BufNewFile *.tex 0r ~/dotfiles/lang/latex/template.tex
 autocmd FileType lisp,scheme,art setlocal equalprg=~/dotfiles/helpers/scmindent.rkt
 
 " Lua
-autocmd FileType lua setlocal shiftwidth=4 tabstop=4 softtabstop=4 smarttab
-\   noexpandtab formatoptions=croql
-
-" Markdown
-autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown setfiletype markdown
+autocmd FileType lua setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
+\ formatoptions=croql
 
 " Mercurial commit messages
 autocmd BufNewFile,BufRead,BufEnter msg setfiletype hgcommit
 autocmd FileType hgcommit setlocal textwidth=72
-autocmd FileType hgcommit match OverLength /\%73v.\+/
 
 " MySQL
 autocmd BufNewFile,BufRead,BufEnter *.mysql setfiletype mysql
@@ -537,44 +538,16 @@ autocmd BufNewFile,BufRead,BufEnter *.mysql setfiletype mysql
 autocmd FileType perl setlocal makeprg=perl keywordprg=perldoc\ -f |
 \   compiler perl
 
-" PHP
-autocmd FileType php setlocal keywordprg=pman iskeyword+=$
-"\   setlocal foldmarker={,} foldmethod=marker foldlevel=1 |
-
-" autocmd BufWritePost *.php silent !phpcbf --standard=WordPress %
-
 " PostgreSQL
 autocmd BufNewFile,BufRead,BufEnter *.psql setfiletype postgresql
 
 " Python
-autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 smarttab
+autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 \   expandtab formatoptions=croql keywordprg=pydoc
 
 " Ruby
 autocmd BufNewFile,BufRead Vagrantfile setfiletype ruby
 autocmd FileType ruby setlocal keywordprg=ri
-
-" SCSS
-autocmd FileType scss setlocal iskeyword+=.,#
-
-" tmux
-autocmd BufNewFile,BufRead,BufEnter .tmux.*,.tmux.conf* setfiletype tmux
-
-" WordPress
-autocmd FileType php.wordpress setlocal shiftwidth=4 tabstop=4 softtabstop=4
-\   smarttab noexpandtab smartindent textwidth=85
-autocmd FileType javascript.wordpress setlocal shiftwidth=4 tabstop=4
-\   softtabstop=4 smarttab noexpandtab smartindent textwidth=85
-autocmd FileType css.wordpress setlocal shiftwidth=2 tabstop=2 softtabstop=2
-\   smarttab noexpandtab smartindent textwidth=85
-autocmd FileType scss.wordpress setlocal shiftwidth=2 tabstop=2 softtabstop=2
-\   smarttab noexpandtab smartindent textwidth=85
-
-autocmd FileType php.wordpress match OverLength /%86v.\+/ |
-\   let g:ale_php_phpcs_standard = 'WordPress'
-autocmd FileType javascript.wordpress match OverLength /%86v.\+/
-autocmd FileType css.wordpress match OverLength /%86v.\+/
-autocmd FileType scss.wordpress match OverLength /%86v.\+/
 
 " Vim
 autocmd FileType vim setlocal keywordprg=:Help
