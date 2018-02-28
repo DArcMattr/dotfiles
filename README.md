@@ -31,15 +31,15 @@ Some of these will be installed via the install scripts or apt-get below.
     sudo add-apt-repository 'deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-5.0 xenial main'
     sudo apt update
     sudo apt install autossh build-essential clang-5.0 clang-5.0-doc \
-      clang-format-5.0 cmake git golang-1.9-go htop libboost-filesystem-dev \
+      clang-format-5.0 cmake git golang-1.10-go htop libboost-filesystem-dev \
       libboost-python-dev libboost-regex-dev libboost-system-dev libclang1-5.0 \
       libclang1-5.0-dbg libclang-5.0-dev libclang-common-5.0-dev libevent-dev \
       libfuzzer-5.0-dev liblldb-5.0-dev libllvm5.0 libllvm5.0-dbg liblzma-dev \
       libncurses5-dev libpcre3-dev lld-5.0 lldb-5.0 llvm-5.0 llvm-5.0-dev \
       llvm-5.0-doc llvm-5.0-examples llvm-5.0-runtime mariadb-server neovim \
-      nodejs php7.1-cli php7.1-curl php7.1-dev php7.1-fpm php7.1-imap \
-      php7.1-json php7.1-mcrypt php7.1-mysql php7.1-opcache php7.1-readline \
-      php7.1-soap php-common php-gd php-imagick php-mbstring php-memcache \
+      nodejs php7.2-cli php7.2-curl php7.2-dev php7.2-fpm php7.2-imap \
+      php7.2-json php7.2-mcrypt php7.2-mysql php7.2-opcache php7.2-readline \
+      php7.2-soap php-common php-gd php-imagick php-mbstring php-memcache \
       php-pear php-xml php-zip pv python3-dev python3-docutils python3-pip \
       python-clang-5.0 ruby-dev shellcheck vim-nox xsel yarn zlib1g-dev zsh \
       zsh-lovers
