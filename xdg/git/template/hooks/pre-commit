@@ -36,3 +36,13 @@ for FILE in ${FILES}; do
 		exit ${STATUS}
 	fi
 done
+
+#if git status -s | grep 'assets/css/scss/.\+scss$'; then
+#	grunt css
+#	touch .csscommit
+#fi
+
+#if git status -s | grep 'assets/js/src/.\+js$'; then
+#	grunt js
+#	touch .jscommit
+#fi
