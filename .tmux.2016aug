@@ -1,5 +1,4 @@
 #!/bin/sh
-# vim:ft=sh:
 
 sudo -v
 sudo service nginx start
