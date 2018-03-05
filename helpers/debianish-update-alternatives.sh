@@ -24,11 +24,13 @@ sudo update-alternatives \
   --slave   /usr/bin/llvm-tblgen       llvm-tblgen      /usr/bin/llvm-tblgen-5.0
 
 sudo update-alternatives \
-  --install /usr/bin/clang       clang       /usr/bin/clang-5.0 50 \
-  --slave   /usr/bin/clang++     clang++     /usr/bin/clang++-5.0  \
-  --slave   /usr/bin/lldb        lldb        /usr/bin/lldb-5.0 \
-  --slave   /usr/bin/lldb-server lldb-server /usr/bin/lldb-server-5.0
+  --install /usr/bin/clang             clang             /usr/bin/clang-5.0 50 \
+  --slave   /usr/bin/clang++           clang++           /usr/bin/clang++-5.0 \
+  --slave   /usr/bin/clang-format      clang-format      /usr/bin/clang-format-5.0 \
+  --slave   /usr/bin/clang-format-diff clang-format-diff /usr/bin/clang-format-diff-5.0 \
+  --slave   /usr/bin/lldb              lldb              /usr/bin/lldb-5.0 \
+  --slave   /usr/bin/lldb-server       lldb-server       /usr/bin/lldb-server-5.0
 
 sudo update-alternatives \
-   --install /usr/bin/go  go    /usr/lib/go-1.9/bin/go 50 \
-   --slave /usr/bin/gofmt gofmt /usr/lib/go-1.9/bin/gofmt
+   --install /usr/bin/go  go    /usr/lib/go-1.10/bin/go 50 \
+   --slave /usr/bin/gofmt gofmt /usr/lib/go-1.10/bin/gofmt
