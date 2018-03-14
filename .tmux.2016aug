@@ -3,8 +3,13 @@
 sudo -v
 sudo service nginx start
 sudo service mysql start
-sudo service php7.1-fpm start
+sudo service postgresql start
+sudo service php7.2-fpm start
 
 tmux new-window -t "${SESSION}":1
 tmux send-keys -t "${SESSION}":1 "htop" C-m
 tmux rename-window -t "${SESSION}":1 "htop"
+
+tmux new-window -t "${SESSION}":2
+tmux send-keys -t "${SESSION}":2 "sssh centuria" C-m
+tmux rename-window -t "${SESSION}":2 "remotes"
