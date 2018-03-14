@@ -6,7 +6,6 @@ Host *
   Compression yes
   ControlMaster auto
   ControlPath ~/.ssh/socket-%r@%h:%p
-  ForwardAgent yes
   PermitLocalCommand no
   PreferredAuthentications publickey,keyboard-interactive,password
   ServerAliveCountMax 20
@@ -15,10 +14,12 @@ Host *
 Host live
   HostName cultureofreason.org
   User ariuser
+  ForwardAgent yes
 
 Host cor
   HostName cultureofreason.org
   User ariuser
+  ForwardAgent yes
 
 Host bb
   HostName bitbucket.org
@@ -31,10 +32,12 @@ Host github
 Host demo
   HostName demo.aynrand.org
   User darceneaux
+  ForwardAgent yes
 
 Host local
   User darc
   HostName localhost
+  ForwardAgent yes
 
 Host personal-git
   HostName centuria-guild.org
@@ -45,37 +48,16 @@ Host centuria
   HostName centuria-guild.org
   Port 23232
   User darc
+  ForwardAgent yes
 
 Host aynrand2
   HostName aynrand2.org
   Port 32323
   User darc
-
-Host vagrant
-  HostName 127.0.0.1
-  User vagrant
-  Port 2222
-  UserKnownHostsFile /dev/null
-  StrictHostKeyChecking no
-  PasswordAuthentication no
-  IdentitiesOnly yes
-  LogLevel FATAL
   ForwardAgent yes
-  IdentityFile C:/Users/david.arceneaux/workspace/vagrant-fork/.vagrant/machines/default/virtualbox/private_key
-
-Host staging
-  CheckHostIP no
-  HostName 10.5.23.230
-  User ec2-user
-  IdentityFile ~/.ssh/ten-staging.pem
-
-Host preprod
-  CheckHostIP no
-  HostName 10.21.21.40
-  User ec2-user
-  IdentityFile ~/.ssh/ten-preprod.pem
 
 Host jupiter
   Port 9236
   User jupiter
   HostName jupiter.nkpadmin.com
+  ForwardAgent yes
