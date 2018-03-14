@@ -26,23 +26,27 @@ Some of these will be installed via the install scripts or apt-get below.
     sudo add-apt-repository -y ppa:jonathonf/vim
     sudo add-apt-repository -y ppa:gophers/archive
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
-    wget -O - http://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
+    wget -O - http://apt.llvm.org/llvm-snapshot.gpg.key | \
+      sudo apt-key add -
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
+      sudo apt-key add -
     sudo add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.2/ubuntu xenial main'
-    sudo add-apt-repository 'deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-5.0 xenial main'
+    sudo add-apt-repository 'deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-6.0 xenial main'
+    sudo add-apt-repository 'deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main'
     sudo apt update
-    sudo apt install autossh build-essential clang-5.0 clang-5.0-doc \
-      clang-format-5.0 cmake git golang-1.10-go htop libboost-filesystem-dev \
-      libboost-python-dev libboost-regex-dev libboost-system-dev libclang1-5.0 \
-      libclang1-5.0-dbg libclang-5.0-dev libclang-common-5.0-dev libevent-dev \
-      libfuzzer-5.0-dev liblldb-5.0-dev libllvm5.0 libllvm5.0-dbg liblzma-dev \
-      libncurses5-dev libpcre3-dev lld-5.0 lldb-5.0 llvm-5.0 llvm-5.0-dev \
-      llvm-5.0-doc llvm-5.0-examples llvm-5.0-runtime mariadb-server neovim \
+    sudo apt install autossh build-essential clang-6.0 clang-6.0-doc \
+      clang-format-6.0 cmake git golang-1.10-go htop libboost-filesystem-dev \
+      libboost-python-dev libboost-regex-dev libboost-system-dev libclang1-6.0 \
+      libclang1-6.0-dbg libclang-6.0-dev libclang-common-6.0-dev libevent-dev \
+      libfuzzer-6.0-dev liblldb-6.0-dev libllvm6.0 libllvm6.0-dbg liblzma-dev \
+      libncurses5-dev libpcre3-dev lld-6.0 lldb-6.0 llvm-6.0 llvm-6.0-dev \
+      llvm-6.0-doc llvm-6.0-examples llvm-6.0-runtime mariadb-server neovim \
       nodejs php7.2-cli php7.2-curl php7.2-dev php7.2-fpm php7.2-imap \
       php7.2-json php7.2-mcrypt php7.2-mysql php7.2-opcache php7.2-readline \
       php7.2-soap php-common php-gd php-imagick php-mbstring php-memcache \
-      php-pear php-xml php-zip pv python3-dev python3-docutils python3-pip \
-      python-clang-5.0 ruby-dev shellcheck vim-nox xsel yarn zlib1g-dev zsh \
-      zsh-lovers
+      php-pear php-xdebug php-xml php-zip postgresql-10 pv python3-dev \
+      python3-docutils python3-pip python-clang-6.0 ruby-dev shellcheck vim-nox \
+      xsel yarn zlib1g-dev zsh zsh-lovers
     yarn global add doctoc eslint eslint_d grunt gulp minify neovim \
       npm-check-updates prettier stylelint svgo tern
 
