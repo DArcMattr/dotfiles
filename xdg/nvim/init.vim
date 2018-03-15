@@ -13,7 +13,6 @@ else
 endif
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
 Plug 'editorconfig/editorconfig-vim'
@@ -25,6 +24,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'joonty/vdebug', { 'branch': 'v2-integration' }
 Plug 'joonty/vim-taggatron'
 Plug 'ludovicchabant/vim-lawrencium'
+Plug 'mhinz/vim-signify'
 Plug 'reedes/vim-wheel'
 Plug 'rkitover/vimpager', { 'do': 'PREFIX=$HOME/.local ' . b:make . ' install' }
 Plug 'shawncplus/phpcomplete.vim', { 'for': [ 'php', 'wordpress' ] }
