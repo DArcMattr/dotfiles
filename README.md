@@ -42,11 +42,11 @@ Some of these will be installed via the install scripts or apt-get below.
       libncurses5-dev libpcre3-dev lld-6.0 lldb-6.0 llvm-6.0 llvm-6.0-dev \
       llvm-6.0-doc llvm-6.0-examples llvm-6.0-runtime mariadb-server neovim \
       nodejs php7.2-cli php7.2-curl php7.2-dev php7.2-fpm php7.2-imap \
-      php7.2-json php7.2-mcrypt php7.2-mysql php7.2-opcache php7.2-readline \
-      php7.2-soap php-common php-gd php-imagick php-mbstring php-memcache \
-      php-pear php-xdebug php-xml php-zip postgresql-10 pv python3-dev \
-      python3-docutils python3-pip python-clang-6.0 ruby-dev shellcheck vim-nox \
-      xsel yarn zlib1g-dev zsh zsh-lovers
+      php7.2-json php7.2-mysql php7.2-opcache php7.2-readline php7.2-soap \
+      php-common php-gd php-imagick php-mbstring php-memcache php-pear \
+      php-xdebug php-xml php-zip postgresql-10 pv python3-dev python3-docutils \
+      python3-pip python-clang-6.0 ruby-dev shellcheck vim-nox xsel yarn \
+      zlib1g-dev zsh zsh-lovers
     yarn global add doctoc eslint eslint_d grunt gulp minify neovim \
       npm-check-updates prettier stylelint svgo tern
 
