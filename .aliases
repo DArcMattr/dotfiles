@@ -142,7 +142,7 @@ EOL
 }
 
 sssh() {
-  (autossh -t "${1}" 'if tmux has; then tmux -2u attach; else tmux -2u new; fi') 2>/dev/null
+  (autossh -t "${1}" 'source ${HOME}/dotfiles/.aliases && tmuxt') 2>/dev/null
 }
 
 superupdate() {
