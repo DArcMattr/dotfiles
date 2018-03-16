@@ -24,15 +24,19 @@ Some of these will be installed via the install scripts or apt-get below.
     sudo add-apt-repository -y ppa:neovim-ppa/unstable
     sudo add-apt-repository -y ppa:ondrej/php
     sudo add-apt-repository -y ppa:jonathonf/vim
+    sudo add-apt-repository -y ppa:git-core/ppa
     sudo add-apt-repository -y ppa:gophers/archive
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
-    wget -O - http://apt.llvm.org/llvm-snapshot.gpg.key | \
+    wget --quiet -O - "http://apt.llvm.org/llvm-snapshot.gpg.key" | \
       sudo apt-key add -
-    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
+    wget --quiet -O - "http://nginx.org/keys/nginx_signing.key" | \
+      sudo apt-key add -
+    wget --quiet -O - "https://www.postgresql.org/media/keys/ACCC4CF8.asc" | \
       sudo apt-key add -
     sudo add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.2/ubuntu xenial main'
     sudo add-apt-repository 'deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-6.0 xenial main'
     sudo add-apt-repository 'deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main'
+    sudo add-apt-repository 'deb http://nginx.org/packages/mainline/ubuntu/ xenial nginx'
     sudo apt update
     sudo apt install autossh build-essential clang-6.0 clang-6.0-doc \
       clang-format-6.0 cmake git golang-1.10-go htop libboost-filesystem-dev \
