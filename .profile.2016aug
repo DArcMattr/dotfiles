@@ -3,6 +3,8 @@ export CC=clang
 export CXX=clang++
 export DISPLAY=localhost:0.0
 export BROWSER="/mnt/c/Program\ Files/Firefox\ Developer\ Edition/firefox.exe"
+export LAUNCHPAD_FIREFOX="/mnt/c/Program\ Files/Firefox\ Developer\ Edition/firefox.exe"
+export LAUNCHPAD_CHROME="/mnt/c/Program\ Files\ (x86)/Google/Chrome/Application/chrome.exe"
 
 start_web() {
   sudo sh -c " \
