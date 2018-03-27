@@ -1,4 +1,7 @@
 Syntax: glob
-symlinks/.pandoc/buttondown.css
+symlinks/.composer/.htaccess
+symlinks/.composer/composer.lock
+symlinks/.composer/vendor/
 symlinks/.pandoc/.sass-cache
+symlinks/.pandoc/buttondown.css
 zsh-custom/plugins/autoenv
