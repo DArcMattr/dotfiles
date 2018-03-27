@@ -49,10 +49,12 @@ Some of these will be installed via the install scripts or apt-get below.
       php7.2-json php7.2-mysql php7.2-opcache php7.2-readline php7.2-soap \
       php-common php-gd php-imagick php-mbstring php-memcache php-pear \
       php-xdebug php-xml php-zip postgresql-10 pv python3-dev python3-docutils \
-      python3-pip python-clang-6.0 ruby-dev shellcheck vim-nox xsel yarn \
+      python3-pip python-clang-6.0 ruby-dev shellcheck tidy vim-nox xsel yarn \
       zlib1g-dev zsh zsh-lovers
-    yarn global add doctoc eslint eslint_d grunt gulp minify neovim \
-      npm-check-updates prettier stylelint svgo tern
+    yarn global add bower doctoc eslint eslint_d grunt gulp minify neovim \
+      npm-check-updates polymer-cli prettier stylelint svgo tern
+    go get -u github.com/sourcegraph/go-langserver
+
 
 The `helpers/debianish-update-alternatives.sh` will make LLVM and Go usable on
 Ubuntu.
