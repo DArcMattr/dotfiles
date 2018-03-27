@@ -1,0 +1,16 @@
+{
+    "require": {
+        "phpmd/phpmd": "^2.6",
+        "squizlabs/php_codesniffer": "^3.2",
+        "phing/phing": "^2.16",
+        "psy/psysh": "^0.8.17",
+        "sloanlance/pman-php-manual": "^1.0",
+        "d11wtq/boris": "^1.0",
+        "laravel/installer": "^2.0",
+        "phpstan/phpstan": "^0.9.2",
+        "phpunit/phpunit": "^6.5",
+        "felixfbecker/language-server": "^5.4"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

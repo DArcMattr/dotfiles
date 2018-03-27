@@ -57,15 +57,7 @@ grab_composer() {
       curl -sS https://getcomposer.org/installer | php -d "allow_url_fopen=On"; \
       mv composer.phar ~/.local/bin/composer
       cd "${HOME}" || exit
-      composer global require 'phpmd/phpmd' \
-        'squizlabs/php_codesniffer' \
-        'phing/phing' \
-        'psy/psysh' \
-        'sloanlance/pman-php-manual' \
-        'd11wtq/boris' \
-        'laravel/installer' \
-        'phpstan/phpstan' \
-        'phpunit/phpunit'
+      composer global install
     )
   else
     composer self-update
