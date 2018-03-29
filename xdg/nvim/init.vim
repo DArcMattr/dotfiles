@@ -133,6 +133,7 @@ highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
 highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
 highlight NonText ctermfg=235 guifg=#262626
 highlight Search ctermfg=222 guifg=#ffdf87
+highlight SignColumn ctermfg=232 guifg=#080808
 highlight SpecialKey ctermfg=235 guifg=#262626
 highlight TermCursor ctermfg=yellow guifg=yellow
 
