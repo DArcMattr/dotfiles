@@ -13,31 +13,34 @@ else
 endif
 
 call plug#begin('~/.config/nvim/plugged')
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'equalsraf/neovim-gui-shim'
 Plug 'fatih/vim-go', { 'for': [ 'go' ] }
+Plug 'isRuslan/vim-es6', { 'for': [ 'js' ] }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jiangmiao/auto-pairs'
 Plug 'joonty/vdebug', { 'branch': 'v2-integration' }
 Plug 'joonty/vim-taggatron'
 Plug 'ludovicchabant/vim-lawrencium'
+Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-signify'
 Plug 'reedes/vim-wheel'
 Plug 'rkitover/vimpager', { 'do': 'PREFIX=$HOME/.local ' . b:make . ' install' }
 Plug 'shawncplus/phpcomplete.vim', { 'for': [ 'php', 'wordpress' ] }
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vividchalk'
-Plug 'tristen/vim-sparkup', { 'for': [ 'html', 'php' ] }
 Plug 'Valloric/MatchTagAlways'
-Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --system-libclang --clang-completer --tern-completer --gocode-completer' }
+"Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --system-libclang --clang-completer --tern-completer --gocode-completer' }
 Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/DirDiff.vim'
 Plug 'vim-scripts/matchit.zip'
@@ -165,15 +168,17 @@ let g:ale_css_stylelint_use_global = 1
 let g:ale_javascript_eslint_executable = 'eslint_d'
 let g:ale_javascript_eslint_use_global = 1
 let g:ale_fixers = {
+\   'html': ['tidy'],
 \   'javascript': ['eslint'],
 \   'php': ['phpcbf']
 \ }
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_linters = {
-\   'php': ['php -l', 'phpcs'],
-\   'javascript': ['eslint'],
 \   'css': ['stylelint'],
+\   'html': ['tidy'],
+\   'javascript': ['eslint'],
+\   'php': ['php -l', 'phpcs'],
 \   'scss': ['stylelint'],
 \ }
 let g:ale_open_list = 1
@@ -201,10 +206,7 @@ let g:mta_filetypes = {
 let g:netrw_silent = 1
 let g:phpcomplete_parse_docblock_comments = 1
 let g:phpcomplete_search_tags_for_variables = 1
-let g:session_autoload = 'no'
-let g:session_autosave = 'no'
-let g:sparkupExecuteMapping = '<Leader>se'
-let g:sparkupNextMapping = '<Leader>sn'
+let g:user_emmet_leader_key=','
 let g:tagcommand_defaults = {
 \   'cmd': 'ctags',
 \   'args': '-R -a',
