@@ -22,6 +22,7 @@ find ~/dotfiles/xdg/nvim/ -maxdepth 1 -mindepth 1 -exec ln -sf "{}" "${HOME}/${D
   grab_wp_cli
   grab_pips
   grab_gems
+  grab_yarns
   grab_sassc
   grab_git -d ~/contrib/the_silver_searcher -r https://github.com/ggreer/the_silver_searcher.git -b master
   grab_git -d ~/contrib/ctags               -r https://github.com/universal-ctags/ctags.git      -b master
