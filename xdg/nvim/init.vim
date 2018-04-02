@@ -178,7 +178,7 @@ let g:ale_lint_on_text_changed = 0
 let g:ale_linters = {
 \   'css': ['stylelint'],
 \   'html': ['tidy'],
-\   'javascript': ['eslint'],
+\   'javascript': ['eslint_d'],
 \   'php': ['php -l', 'phpcs'],
 \   'scss': ['stylelint'],
 \ }
@@ -194,6 +194,12 @@ let g:AutoPairsShortcutJump = '<Leader>an'
 let g:AutoPairsShortcutBackInsert = '<Leader>ab'
 let g:go_term_mode = "split"
 let g:jsx_ext_required = 1
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_serverCommands = {
+\   'go' : [ 'flow-language-server', '--stdio' ],
+\   'javascript' : [ 'flow-language-server', '--stdio' ],
+\   'php' : [ "${HOME}/.composer/vendor/felixfbecker/language-server/bin/php-language-server.php" ],
+\ }
 let g:less = { 'enabled' : 0, }
 let g:localvimrc_persistent = 1
 let g:localvimrc_event = ['BufNewFile', 'BufRead']
