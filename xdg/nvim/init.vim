@@ -282,9 +282,9 @@ nnoremap ' `
 nnoremap ` '
 nnoremap ; :
 nnoremap : ;
-nnoremap <silent> <Leader>K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+nnoremap <silent> <Leader>lk ;call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> <Leader>ld ;call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> ;call LanguageClient_textDocument_rename()<CR>
 
 tnoremap <Leader><Esc> <C-\><C-n>
 
@@ -497,10 +497,6 @@ autocmd BufNewFile *.tex 0r ~/dotfiles/lang/latex/template.tex
 " Lisp
 autocmd FileType lisp,scheme,art setlocal equalprg=~/dotfiles/helpers/scmindent.rkt
 
-" Lua
-autocmd FileType lua setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
-\ formatoptions=croql
-
 " Mercurial commit messages
 autocmd BufNewFile,BufRead,BufEnter msg setfiletype hgcommit
 autocmd FileType hgcommit setlocal textwidth=72
@@ -508,16 +504,8 @@ autocmd FileType hgcommit setlocal textwidth=72
 " MySQL
 autocmd BufNewFile,BufRead,BufEnter *.mysql setfiletype mysql
 
-" Perl
-autocmd FileType perl setlocal makeprg=perl keywordprg=perldoc\ -f |
-\   compiler perl
-
 " PostgreSQL
 autocmd BufNewFile,BufRead,BufEnter *.psql setfiletype postgresql
-
-" Python
-autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
-\   expandtab formatoptions=croql keywordprg=pydoc
 
 " Ruby
 autocmd BufNewFile,BufRead Vagrantfile setfiletype ruby

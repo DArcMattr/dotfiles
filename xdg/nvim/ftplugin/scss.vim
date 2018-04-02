@@ -1,1 +1,1 @@
-autocmd FileType scss setlocal iskeyword+=.,#
+setlocal iskeyword+=.,#

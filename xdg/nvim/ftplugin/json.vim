@@ -1,1 +1,4 @@
-autocmd FileType json setlocal foldmarker={,} foldmethod=marker foldlevel=1 expandtab
+setlocal foldmarker={,}
+setlocal foldmethod=marker
+setlocal foldlevel=1
+setlocal expandtab
