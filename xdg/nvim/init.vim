@@ -40,7 +40,6 @@ Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vividchalk'
 Plug 'Valloric/MatchTagAlways'
-"Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --system-libclang --clang-completer --tern-completer --gocode-completer' }
 Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/DirDiff.vim'
 Plug 'vim-scripts/matchit.zip'
@@ -166,39 +165,44 @@ let g:airline#extensions#ycm#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:ale_cache_executable_check_failures = 1
 let g:ale_css_stylelint_use_global = 1
-let g:ale_javascript_eslint_executable = 'eslint_d'
-let g:ale_javascript_eslint_use_global = 1
 let g:ale_fixers = {
 \   'html': ['tidy'],
 \   'javascript': ['eslint'],
 \   'php': ['phpcbf']
 \ }
+let g:ale_javascript_eslint_executable = 'eslint_d'
+let g:ale_javascript_eslint_use_global = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_linters = {
 \   'css': ['stylelint'],
 \   'html': ['tidy'],
-\   'javascript': ['eslint_d'],
+\   'javascript': ['eslint'],
 \   'php': ['php -l', 'phpcs'],
 \   'scss': ['stylelint'],
 \ }
 let g:ale_open_list = 1
 let g:ale_php_phpcs_use_global = 1
-let g:ale_sign_error = '⨉'
-let g:ale_sign_warning = '⚠'
+let g:ale_scss_stylelint_use_global = 1
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
+let g:ale_sign_error = '⨉'
+let g:ale_sign_warning = '⚠'
 let g:AutoPairsShortcutToggle = '<Leader>ap'
 let g:AutoPairsShortcutFastWrap = '<Leader>ae'
 let g:AutoPairsShortcutJump = '<Leader>an'
 let g:AutoPairsShortcutBackInsert = '<Leader>ab'
+let g:deoplete#enable_at_startup = 1
 let g:go_term_mode = "split"
 let g:jsx_ext_required = 1
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
-\   'go' : [ 'flow-language-server', '--stdio' ],
-\   'javascript' : [ 'flow-language-server', '--stdio' ],
-\   'php' : [ "${HOME}/.composer/vendor/felixfbecker/language-server/bin/php-language-server.php" ],
+\   'go' : [ 'go-langserver', '--stdio' ],
+\   'javascript' : [ 'javascript-typescript-stdio' ],
+\   'javascript.jsx' : [ 'javascript-typescript-stdio' ],
+\   'python' : [ 'python-language-server' ],
+\   'typescript' : [ 'javascript-typescript-stdio' ],
+\   'php' : [ 'php-language-server.php' ],
 \ }
 let g:less = { 'enabled' : 0, }
 let g:localvimrc_persistent = 1
@@ -278,6 +282,9 @@ nnoremap ' `
 nnoremap ` '
 nnoremap ; :
 nnoremap : ;
+nnoremap <silent> <Leader>K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 tnoremap <Leader><Esc> <C-\><C-n>
 
