@@ -50,12 +50,24 @@ grab_pips() {
   fi
 }
 
+grab_yarns() {
+  # import packages.json into source control and link it during install
+  config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
+
+  if [ -d "${HOME}/.yarn" ]; then
+    ln -s "${HOME}/dotfiles/xdg/yarn" "${config_home}"
+    yarn global add
+  else
+    yarn global upgrade
+  fi
+}
+
 grab_composer() {
   if ! command -v composer >/dev/null 2>&1 ; then
     (
       cd "${TMP}" || exit
       curl -sS https://getcomposer.org/installer | php -d "allow_url_fopen=On"; \
-      mv composer.phar ~/.local/bin/composer
+      mv composer.phar "${HOME}/.local/bin/composer"
       cd "${HOME}" || exit
       composer global install
     )
@@ -63,6 +75,9 @@ grab_composer() {
     composer self-update
     composer global update
   fi
+
+  composer run-script --working-dir \
+    "${HOME}/.composer/vendor/felixfbecker/language-server/" parse-stubs
 
   (
     INSTALL_PATH="${HOME}/contrib/wpcs"

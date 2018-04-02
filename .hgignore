@@ -4,4 +4,7 @@ symlinks/.composer/composer.lock
 symlinks/.composer/vendor/
 symlinks/.pandoc/.sass-cache
 symlinks/.pandoc/buttondown.css
+xdg/yarn/global/node_modules
+xdg/yarn/global/yarn.lock
+xdg/yarn/global/yarn-error.log
 zsh-custom/plugins/autoenv
