@@ -4,6 +4,8 @@ symlinks/.composer/composer.lock
 symlinks/.composer/vendor/
 symlinks/.pandoc/.sass-cache
 symlinks/.pandoc/buttondown.css
+symlinks/.composer/keys.dev.pub
+symlinks/.composer/keys.tags.pub
 xdg/yarn/global/node_modules
 xdg/yarn/global/yarn.lock
 xdg/yarn/global/yarn-error.log
