@@ -19,11 +19,11 @@ Plug 'bling/vim-airline'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'equalsraf/neovim-gui-shim'
-Plug 'fatih/vim-go', { 'for': [ 'go' ] }
+Plug 'fatih/vim-go', { 'for': [ 'go' ], 'do': ':GoUpdateBinaries' }
 Plug 'isRuslan/vim-es6', { 'for': [ 'js' ] }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jiangmiao/auto-pairs'
-Plug 'joonty/vdebug', { 'branch': 'v2-integration' }
+Plug 'joonty/vdebug'
 Plug 'joonty/vim-taggatron'
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'mattn/emmet-vim'
@@ -214,10 +214,16 @@ let g:mta_filetypes = {
 \   'xml' : 1,
 \   'php' : 1,
 \ }
+let g:netrw_altv = 1
+let g:netrw_banner = 0
+let g:netrw_browse_split = 4
+let g:netrw_list_hide= '.*\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\.\.\=/\=$'
+let g:netrw_liststyle = 3
+let g:netrw_preview = 1
 let g:netrw_silent = 1
+let g:netrw_winsize = 25
 let g:phpcomplete_parse_docblock_comments = 1
 let g:phpcomplete_search_tags_for_variables = 1
-let g:user_emmet_leader_key=','
 let g:tagcommand_defaults = {
 \   'cmd': 'ctags',
 \   'args': '-R -a',
@@ -282,6 +288,7 @@ nnoremap ' `
 nnoremap ` '
 nnoremap ; :
 nnoremap : ;
+nnoremap _ :Lex<CR>
 nnoremap <silent> <Leader>lk ;call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> <Leader>ld ;call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> ;call LanguageClient_textDocument_rename()<CR>
