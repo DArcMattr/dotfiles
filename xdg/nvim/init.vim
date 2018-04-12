@@ -233,6 +233,14 @@ let g:taggatron_run_in_background = 1
 let g:UltiSnipsExpandTrigger = "<Leader>u"
 let g:UltiSnipsJumpBackwardTrigger = "<C-n>"
 let g:UltiSnipsJumpForwardTrigger = "<C-p>"
+let g:user_emmet_settings = {
+\   'javascript.jsx' : {
+\     'extends': 'jsx',
+\     'default_attributes': {
+\       'label': [{'htmlFor': ''}],
+\      }
+\    }
+\  }
 let g:VCSCommandSplit = 'vertical'
 let g:vimpager = {}
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
