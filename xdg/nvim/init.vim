@@ -20,7 +20,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'equalsraf/neovim-gui-shim'
 Plug 'fatih/vim-go', { 'for': [ 'go' ], 'do': ':GoUpdateBinaries' }
-Plug 'isRuslan/vim-es6', { 'for': [ 'js' ] }
+Plug 'isRuslan/vim-es6', { 'for': [ 'js', 'jsx', 'javascript.jsx' ] }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jiangmiao/auto-pairs'
 Plug 'joonty/vdebug'
@@ -153,6 +153,7 @@ let maplocalleader = " "
 let c_space_errors = 1
 let php_sync_method = 1
 let $GIT_SSL_NO_VERIFY = 'true'
+
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#quickfix#location_text = 'Location'
 let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
@@ -178,9 +179,11 @@ let g:ale_linters = {
 \   'css': ['stylelint'],
 \   'html': ['tidy'],
 \   'javascript': ['eslint'],
-\   'php': ['php -l', 'phpcs'],
+\   'javascript.jsx': ['eslint'],
+\   'php': ['php -l', 'phpcs', 'phpstan'],
 \   'scss': ['stylelint'],
 \ }
+let g:ale_linter_aliases = {'jsx': 'css'}
 let g:ale_open_list = 1
 let g:ale_php_phpcs_use_global = 1
 let g:ale_scss_stylelint_use_global = 1
@@ -199,6 +202,7 @@ let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
 \   'go' : [ 'go-langserver', '--stdio' ],
 \   'javascript' : [ 'javascript-typescript-stdio' ],
+\   'jsx' : [ 'javascript-typescript-stdio' ],
 \   'javascript.jsx' : [ 'javascript-typescript-stdio' ],
 \   'python' : [ 'python-language-server' ],
 \   'typescript' : [ 'javascript-typescript-stdio' ],
