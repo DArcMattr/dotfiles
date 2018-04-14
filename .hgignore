@@ -1,12 +1,12 @@
 Syntax: glob
-symlinks/.composer/.htaccess
 symlinks/.composer/composer.lock
-symlinks/.composer/vendor/
-symlinks/.pandoc/.sass-cache
-symlinks/.pandoc/buttondown.css
+symlinks/.composer/.htaccess
 symlinks/.composer/keys.dev.pub
 symlinks/.composer/keys.tags.pub
+symlinks/.composer/vendor/
+symlinks/.pandoc/buttondown.css
+symlinks/.pandoc/.sass-cache
 xdg/yarn/global/node_modules
-xdg/yarn/global/yarn.lock
 xdg/yarn/global/yarn-error.log
+xdg/yarn/global/yarn.lock
 zsh-custom/plugins/autoenv
