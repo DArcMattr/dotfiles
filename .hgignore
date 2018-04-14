@@ -1,9 +1,9 @@
 Syntax: glob
-symlinks/.composer/composer.lock
-symlinks/.composer/.htaccess
-symlinks/.composer/keys.dev.pub
-symlinks/.composer/keys.tags.pub
-symlinks/.composer/vendor/
+xdg/composer/composer.lock
+xdg/composer/.htaccess
+xdg/composer/keys.dev.pub
+xdg/composer/keys.tags.pub
+xdg/composer/vendor/
 symlinks/.pandoc/buttondown.css
 symlinks/.pandoc/.sass-cache
 xdg/yarn/global/node_modules
