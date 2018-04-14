@@ -1,11 +1,14 @@
 Syntax: glob
+symlinks/.pandoc/buttondown.css
+symlinks/.pandoc/.sass-cache
 xdg/composer/composer.lock
 xdg/composer/.htaccess
 xdg/composer/keys.dev.pub
 xdg/composer/keys.tags.pub
 xdg/composer/vendor/
-symlinks/.pandoc/buttondown.css
-symlinks/.pandoc/.sass-cache
+xdg/nvim/autoload/
+xdg/nvim/.netrwhist
+xdg/nvim/plugged/
 xdg/yarn/global/node_modules
 xdg/yarn/global/yarn-error.log
 xdg/yarn/global/yarn.lock
