@@ -4,7 +4,7 @@
 
 DOT_CONFIG=${XDG_CONFIG_HOME:=$HOME/.config}
 
-mkdir -p ~/contrib ~/bin ~/.config/nvim
+mkdir -p ~/contrib ~/.local/bin
 chmod 600 ~/dotfiles/sshconfig
 mv ~/.ssh/config ~/.ssh/config.orig
 ln -s ~/dotfiles/sshconfig ~/.ssh/config
