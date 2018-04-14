@@ -10,6 +10,7 @@ mv ~/.ssh/config ~/.ssh/config.orig
 ln -s ~/dotfiles/sshconfig ~/.ssh/config
 ln -s ~/dotfiles/xdg/git "${DOT_CONFIG}/git"
 ln -s ~/dotfiles/xdg/htop "${DOT_CONFIG}/htop"
+ln -s ~/dotfiles/xdg/composer "${DOT_CONFIG}/composer"
 tic -x ~/dotfiles/tmux-256color.terminfo
 
 find ~/dotfiles/symlinks/ -name ".*" -exec ln -sf "{}" "${HOME}" \;

@@ -77,7 +77,7 @@ grab_composer() {
   fi
 
   composer run-script --working-dir \
-    "${HOME}/.composer/vendor/felixfbecker/language-server/" parse-stubs
+    "${HOME}/.config/composer/vendor/felixfbecker/language-server/" parse-stubs
 
   (
     INSTALL_PATH="${HOME}/contrib/wpcs"
