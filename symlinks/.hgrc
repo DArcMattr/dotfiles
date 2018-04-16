@@ -11,6 +11,7 @@ convert=
 eol=
 extdiff=
 fetch=
+fsmonitor=
 graphlog=
 histedit=
 largefiles=
