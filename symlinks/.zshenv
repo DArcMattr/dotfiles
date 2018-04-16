@@ -30,7 +30,7 @@ if which go >/dev/null; then
   go_bin="${HOME}/go/bin"
 fi
 
-if which rustc >/dev/null; then
+if [[ -x "${HOME}/.cargo/bin" || $(which rustc >/dev/null) ]]; then
   cargo_path="${HOME}/.cargo/bin"
 fi
 
