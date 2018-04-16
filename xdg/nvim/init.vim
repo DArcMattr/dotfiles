@@ -30,7 +30,6 @@ Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-signify'
 Plug 'reedes/vim-wheel'
 Plug 'rkitover/vimpager', { 'do': 'PREFIX=$HOME/.local ' . b:make . ' install' }
-Plug 'shawncplus/phpcomplete.vim', { 'for': [ 'php', 'wordpress' ] }
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
