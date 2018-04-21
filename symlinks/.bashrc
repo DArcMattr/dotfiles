@@ -1,4 +1,7 @@
 # .bashrc
+if [ -t 1 -a -x /usr/bin/zsh ]; then
+  exec /usr/bin/zsh
+fi
 
 # Source global definitions
 if [[ -f /etc/bashrc ]]; then
