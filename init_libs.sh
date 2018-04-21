@@ -75,25 +75,6 @@ grab_composer() {
     composer self-update
     composer global update
   fi
-
-  composer run-script --working-dir \
-    "${HOME}/.config/composer/vendor/felixfbecker/language-server/" parse-stubs
-
-  (
-    INSTALL_PATH="${HOME}/contrib/wpcs"
-    if [ ! -d "${INSTALL_PATH}/.git" ]; then
-      git clone \
-        https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git \
-        "${INSTALL_PATH}" &&
-        cd "${INSTALL_PATH}" &&
-        git checkout "$(git describe --abbrev=0 --tags)"
-        phpcs --config-set installed_paths "${INSTALL_PATH}"
-    else
-      cd "${INSTALL_PATH}" &&
-        git fetch &&
-        git checkout "$(git describe --abbrev=0 --tags)"
-    fi
-  )
 }
 
 grab_gems() {
