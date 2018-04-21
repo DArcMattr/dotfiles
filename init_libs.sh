@@ -1,24 +1,4 @@
 #!/bin/sh
-grab_wp_cli() {
-  (
-    INSTALL_PATH="${HOME}/contrib/wp-cli"
-    if [ ! -d "${INSTALL_PATH}" ]; then
-      mkdir -p "${INSTALL_PATH}" && cd "${INSTALL_PATH}" || exit
-      curl -O \
-        https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-      chmod +x "${INSTALL_PATH}/wp-cli.phar"
-      ln -s "${INSTALL_PATH}/wp-cli.phar" "${HOME}/.local/bin/wp"
-    else
-      cd "${INSTALL_PATH}" || exit
-      curl -O \
-        https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-    fi
-    curl -s \
-      https://raw.githubusercontent.com/wp-cli/wp-cli/master/utils/wp-completion.bash \
-      -o ~/contrib/wp-completion.bash
-  )
-}
-
 grab_hgcfg() {
   INSTALL_PATH="${HOME}/contrib/hgcfg"
   if [ ! -d "${INSTALL_PATH}/.hg/" ]; then
@@ -65,9 +45,14 @@ grab_yarns() {
 grab_composer() {
   if ! command -v composer >/dev/null 2>&1 ; then
     (
+      config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
+      mkdir -p "${HOME}/.local/bin"
+      if [ ! -d "${config_home}/composer" ]; then
+        ln -s "${HOME}/dotfiles/xdg/composer" "${config_home}/composer"
+      fi
       cd "${TMP}" || exit
       curl -sS https://getcomposer.org/installer | php -d "allow_url_fopen=On"; \
-      mv composer.phar "${HOME}/.local/bin/composer"
+        mv composer.phar "${HOME}/.local/bin/composer"
       cd "${HOME}" || exit
       composer global install
     )
