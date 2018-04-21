@@ -21,7 +21,6 @@ find ~/dotfiles/symlinks/ -name ".*" -exec ln -sf "{}" "${HOME}" \;
   . ~/dotfiles/init_libs.sh
 
   grab_composer
-  grab_wp_cli
   grab_pips
   grab_gems
   grab_yarns
