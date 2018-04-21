@@ -15,6 +15,7 @@ fi
 
 if [[ -n ${ZSH_VERSION-} ]]; then
   autoload -U +X bashcompinit && bashcompinit
+  wpcli_completion="$(wp cli info | awk -F: '$1 ~/^WP-CLI root dir/ {gsub(/^[ \t]+/, "", $2); print $2}')/utils/wp-completion.bash"
 
   have() {
     unset have
@@ -25,8 +26,8 @@ if [[ -n ${ZSH_VERSION-} ]]; then
     source /etc/bash_completion.d/*
   fi
 
-  if [[ -r ~/contrib/wp-completion.bash ]]; then
-    source ~/contrib/wp-completion.bash
+  if [[ -r $wpcli_completion ]]; then
+    source $wpcli_completion
   fi
 fi
 
