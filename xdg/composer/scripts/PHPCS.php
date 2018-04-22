@@ -82,16 +82,13 @@ class PHPCS
         $io->write('Configuring phpcs for project... ', false);
 
         $vendorDirs = [
-          'pragmarx/laravelcs/Standards',
-          'wp-coding-standards/wpcs',
+          "$vendorDir/pragmarx/laravelcs/Standards",
+          "$vendorDir/wp-coding-standards/wpcs",
         ];
-        $installedPaths = ltrim(implode($vendorDirs, ",$vendorDir/"), ',');
+        $installedPaths = implode(',', $vendorDirs);
 
         $executor = new ProcessExecutor(new NullIO());
-
-        $executor->
-          execute("$vendorDir/phpcs --config-set installed_paths $installedPaths");
-        $executor->execute("$vendorDir/phpcs --config-set show_progress 1");
+        $executor->execute("phpcs --config-set installed_paths $installedPaths");
 
         $io->write('done.');
     }
