@@ -8,7 +8,7 @@ export TMP=/tmp
 export AUTOENV_IN_FILE=".in"
 
 if which ruby >/dev/null && which gem >/dev/null; then
-  gem_path="$(ruby -rubygems -e 'puts Gem.user_dir')/bin"
+  gem_path="$(ruby -e 'puts Gem.user_dir')/bin"
 fi
 
 if \
