@@ -15,7 +15,10 @@ fi
 
 if [[ -n ${ZSH_VERSION-} ]]; then
   autoload -U +X bashcompinit && bashcompinit
-  wpcli_completion="$(wp cli info | awk -F: '$1 ~/^WP-CLI root dir/ {gsub(/^[ \t]+/, "", $2); print $2}')/utils/wp-completion.bash"
+
+  if (( $+commands[wp]  )); then
+    wpcli_completion="$(wp cli info | awk -F: '$1 ~/^WP-CLI root dir/ {gsub(/^[ \t]+/, "", $2); print $2}')/utils/wp-completion.bash"
+  fi
 
   have() {
     unset have
