@@ -22,7 +22,7 @@ if which python3 >/dev/null; then
   python3_path=$(python3 -c $'import sys\nfor x in sys.path:\n  print(x)')
 fi
 
-if which composer >/dev/null; then
+if (( $+commands[composer] )); then
   php_path="$(composer global config bin-dir --absolute 2>/dev/null)"
 fi
 
