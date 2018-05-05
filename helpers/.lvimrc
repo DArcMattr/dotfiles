@@ -1,12 +1,11 @@
-if exists( "g:vdebug_options" )
-  "let g:vdebug_options['server'] = "192.168.50.1"
-  let g:vdebug_options['debug_file'] = "~/vdebug_log"
-  let g:vdebug_options['debug_file_level'] = 2
+if g:localvimrc_sourced_once_for_file
+	finish
 endif
 
 let g:tagcommands = {
 \   'php':  {
 \     'tagfile': '/srv/www/ten/php.tags',
+\     'args': '-R -a --exclude=noop.php',
 \     'files': '/srv/www/ten/htdocs/'
 \   },
 \   'javascript': {
@@ -14,6 +13,18 @@ let g:tagcommands = {
 \     'files': '/srv/www/ten/htdocs/'
 \   }
 \ }
+
+let g:LanguageClient_rootMarkers = ['wp-config.php']
+
+if g:localvimrc_sourced_once
+	finish
+endif
+
+if exists( "g:vdebug_options" )
+  "let g:vdebug_options['server'] = "192.168.50.1"
+  let g:vdebug_options['debug_file'] = "~/vdebug_log"
+  let g:vdebug_options['debug_file_level'] = 2
+endif
 
 let g:ale_php_phpcs_standard = 'WordPress'
 let g:ale_php_phpcbf_standard = 'WordPress'
@@ -26,7 +37,9 @@ augroup WordPress
 
   autocmd FileType php let g:ale_php_phpcs_standard = 'WordPress'
   autocmd FileType php setlocal tags+='/srv/www/ten/php.tags'
+
   autocmd FileType javascript let g:ale_javascript_eslint_options = '{"config":"wordpress"}'
+
   autocmd FileType css let g:ale_css_stylelint_executable = 'stylelint'
   autocmd FileType css let g:ale_css_stylelint_use_global = 1
   autocmd FileType css let g:ale_css_stylelint_options = '--config ~/.config/yarn/global/node_modules/stylelint-config-wordpress/scss'
