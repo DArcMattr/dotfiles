@@ -7,6 +7,7 @@ xdg/composer/keys.dev.pub
 xdg/composer/keys.tags.pub
 xdg/composer/vendor/
 xdg/nvim/autoload/
+xdg/nvim/*.tags
 xdg/nvim/.netrwhist
 xdg/nvim/plugged/
 xdg/yarn/global/node_modules
