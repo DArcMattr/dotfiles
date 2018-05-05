@@ -151,7 +151,6 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 let mapleader = ","
 let maplocalleader = " "
 let c_space_errors = 1
-let php_sync_method = 1
 let $GIT_SSL_NO_VERIFY = 'true'
 
 let g:airline#extensions#branch#enabled = 1
@@ -180,7 +179,7 @@ let g:ale_linters = {
 \   'html': ['tidy'],
 \   'javascript': ['eslint'],
 \   'javascript.jsx': ['eslint'],
-\   'php': ['php -l', 'phpcs', 'phpstan'],
+\   'php': ['php -l', 'phpcs'],
 \   'scss': ['stylelint'],
 \ }
 let g:ale_linter_aliases = {'jsx': 'css'}
@@ -210,7 +209,7 @@ let g:LanguageClient_serverCommands = {
 \ }
 let g:less = { 'enabled' : 0, }
 let g:localvimrc_persistent = 1
-let g:localvimrc_event = ['BufNewFile', 'BufRead']
+let g:localvimrc_event = ['BufNewFile', 'BufReadPre', 'BufWinEnter', 'BufEnter']
 let g:localvimrc_sandbox = 0
 let g:mta_filetypes = {
 \   'html' : 1,
@@ -221,18 +220,21 @@ let g:mta_filetypes = {
 let g:netrw_altv = 1
 let g:netrw_banner = 0
 let g:netrw_browse_split = 4
-let g:netrw_list_hide= '.*\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\.\.\=/\=$'
+let g:netrw_list_hide= '.*\.swp$,\.DS_Store,*/tmp/*,*\.so,*\.swp,*\.zip,*\.git,^\.\.\=/\=,*\.log$'
 let g:netrw_liststyle = 3
 let g:netrw_preview = 1
 let g:netrw_silent = 1
 let g:netrw_winsize = 25
-let g:phpcomplete_parse_docblock_comments = 1
-let g:phpcomplete_search_tags_for_variables = 1
 let g:tagcommand_defaults = {
 \   'cmd': 'ctags',
 \   'args': '-R -a',
 \   'filesappend': '**',
 \  }
+let g:tagcommands = {
+\ "ruby" : {"tagfile":"$XDG_CONFIG_HOME/nvim/ruby.tags"},
+\ "javascript" : {"tagfile":"$XDG_CONFIG_HOME/nvim/js.tags"},
+\ "php" : {"tagfile":"$XDG_CONFIG_HOME/nvim/php.tags"}
+\}
 let g:taggatron_run_in_background = 1
 let g:UltiSnipsExpandTrigger = "<Leader>u"
 let g:UltiSnipsJumpBackwardTrigger = "<C-n>"
@@ -245,11 +247,7 @@ let g:user_emmet_settings = {
 \      }
 \    }
 \  }
-let g:VCSCommandSplit = 'vertical'
 let g:vimpager = {}
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
 map <F7> ;execute ";vsplit %"<Cr>
 
@@ -273,10 +271,14 @@ noremap <C-u>     <C-u>zz
 noremap <Leader>l :set rnu!<Cr>
 noremap <Leader>t :enew<Cr>
 
+"imap <Expr> <CR> (pumvisible() ? "\<C-Y>\<Plug>(expand_or_cr)" : "\<CR>")
+"imap <Expr> <Plug>(expand_or_cr) (cm#completed_is_snippet() ? "\<C-U>" : "\<CR>")
+
 inoremap <C-u>      <C-g>u<C-u>
 inoremap <C-x><C-k> <Nop>
 inoremap <Expr> <Tab>   pumvisible() ? '\<C-n>' : '\<Tab>'
 inoremap <Expr> <S-Tab> pumvisible() ? '\<C-p>' : '\<S-Tab>'
+inoremap <silent> <C-U> <C-R>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<CR>
 
 nnoremap <C-e>     3<C-e>
 nnoremap <C-p>     :Denite file_rec<CR>
@@ -301,9 +303,9 @@ nnoremap ` '
 nnoremap ; :
 nnoremap : ;
 nnoremap _ :Lex<CR>
-nnoremap <silent> <Leader>lk ;call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> <Leader>ld ;call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> ;call LanguageClient_textDocument_rename()<CR>
+nnoremap <silent> <Leader>lk :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> <Leader>ld :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 tnoremap <Leader><Esc> <C-\><C-n>
 
@@ -321,7 +323,6 @@ cmap w!! w !sudo tee % >/dev/null
 command! W w !sudo tee % >/dev/null
 
 " Denite
-
 call denite#custom#option( 'default', {
 \  'prompt': '>',
 \  'short_source_names': 1,
