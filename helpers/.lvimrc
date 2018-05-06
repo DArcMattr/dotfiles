@@ -1,5 +1,5 @@
 if g:localvimrc_sourced_once_for_file
-	finish
+  finish
 endif
 
 let g:tagcommands = {
@@ -17,7 +17,7 @@ let g:tagcommands = {
 let g:LanguageClient_rootMarkers = ['wp-config.php']
 
 if g:localvimrc_sourced_once
-	finish
+  finish
 endif
 
 if exists( "g:vdebug_options" )
@@ -34,9 +34,12 @@ let g:ale_scss_stylelint_options = '--config ~/.config/yarn/global/node_modules/
 augroup WordPress
   autocmd!
   autocmd BufNewFile,BufRead,BufEnter *.php set syn=wordpress
+  autocmd BufWritePost *.php silent !phpcbf --standard=WordPress %
 
   autocmd FileType php let g:ale_php_phpcs_standard = 'WordPress'
   autocmd FileType php setlocal tags+='/srv/www/ten/php.tags'
+  autocmd FileType php call taggatron#SetTags(taggatron#get('tagdefaults'))
+  autocmd FileType php call taggatron#CheckCommandList(0)
 
   autocmd FileType javascript let g:ale_javascript_eslint_options = '{"config":"wordpress"}'
 
@@ -49,6 +52,8 @@ augroup WordPress
   autocmd BufNewFile,BufRead,BufEnter .gruntjshintrc setfiletype json
 
   autocmd BufRead,BufEnter FileType javascript setlocal tags+='/srv/www/ten/javascript.tags'
+  autocmd FileType javascript call taggatron#SetTags(taggatron#get('tagdefaults'))
+  autocmd FileType javascript call taggatron#CheckCommandList(0)
 
   autocmd BufNewFile,BufRead,BufEnter * set textwidth=85
   autocmd BufEnter * execute 'match OverLength /\%'. (&textwidth + 1) .'v.*/'
