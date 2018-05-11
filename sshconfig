@@ -62,3 +62,11 @@ Host jupiter
   User jupiter
   HostName jupiter.nkpadmin.com
   ForwardAgent yes
+
+Host git-codecommit.us-west-1.amazonaws.com
+  User APKAJP7KDRJLVTNFYDPQ
+
+Host staging
+  User ec2-user
+  HostName stagessh.theofficeexpress.com
+  ForwardAgent yes
