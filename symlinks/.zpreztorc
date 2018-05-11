@@ -124,15 +124,16 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
    'main' \
    'brackets' \
    'pattern' \
+   'line' \
    'cursor' \
    'root'
 
 # Set syntax highlighting styles.
 zstyle ':prezto:module:syntax-highlighting' styles \
    'cursor' 'bold' \
-   'builtin' 'bg=blue' \
-   'command' 'bg=blue' \
-   'function' 'bg=blue'
+   'builtin' 'bg=blue,fg=white,bold' \
+   'command' 'bg=blue,fg=white,bold' \
+   'function' 'bg=blue,fg=white,bold'
 
 #
 # Terminal
