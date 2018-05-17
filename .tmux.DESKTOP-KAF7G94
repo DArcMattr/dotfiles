@@ -2,6 +2,7 @@
 sudo sh -c " \
   service nginx start && \
   service php5.6-fpm start && \
+  service php7.2-fpm start && \
   service mysql start"
 
 tmux new-window -t "${SESSION}":1
