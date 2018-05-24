@@ -17,21 +17,23 @@ else
 endif
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'airblade/vim-gitgutter'
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'fatih/vim-go', { 'for': [ 'go' ] }
+Plug 'isRuslan/vim-es6', { 'for': [ 'js', 'jsx', 'javascript.jsx' ] }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jiangmiao/auto-pairs'
-Plug 'joonty/vdebug', { 'branch': 'v2-integration' }
+Plug 'joonty/vdebug'
 Plug 'joonty/vim-taggatron'
 Plug 'ludovicchabant/vim-lawrencium'
+Plug 'mattn/emmet-vim'
+Plug 'mhinz/vim-signify'
 Plug 'reedes/vim-wheel'
 Plug 'rkitover/vimpager', { 'do': 'PREFIX=$HOME/.local ' . b:make . ' install' }
-Plug 'shawncplus/phpcomplete.vim', { 'for': [ 'php', 'wordpress' ] }
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -39,9 +41,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vividchalk'
-Plug 'tristen/vim-sparkup', { 'for': [ 'html', 'php' ] }
 Plug 'Valloric/MatchTagAlways'
-Plug 'Valloric/YouCompleteMe', { 'do' : './install.py --system-libclang --clang-completer --tern-completer --gocode-completer' }
 Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/DirDiff.vim'
 Plug 'vim-scripts/matchit.zip'
@@ -114,6 +114,7 @@ set softtabstop=2
 set splitbelow
 set synmaxcol=512
 set tabstop=2
+set termguicolors
 set textwidth=80
 set title
 set titlestring=%t%(\ [%R%M]%)
@@ -138,7 +139,9 @@ highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
 highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
 highlight NonText ctermfg=235 guifg=#262626
 highlight Search ctermfg=222 guifg=#ffdf87
+highlight SignColumn ctermfg=232 guifg=#080808
 highlight SpecialKey ctermfg=235 guifg=#262626
+highlight TermCursor ctermfg=yellow guifg=yellow
 
 highlight clear SpellBad
 highlight clear SpellCap
@@ -194,6 +197,7 @@ let maplocalleader = " "
 let c_space_errors = 1
 let php_sync_method = 1
 let $GIT_SSL_NO_VERIFY = 'true'
+
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#quickfix#location_text = 'Location'
 let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
@@ -206,35 +210,51 @@ let g:airline#extensions#ycm#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:ale_cache_executable_check_failures = 1
 let g:ale_css_stylelint_use_global = 1
-let g:ale_javascript_eslint_executable = 'eslint_d'
-let g:ale_javascript_eslint_use_global = 1
 let g:ale_fixers = {
+\   'html': ['tidy'],
 \   'javascript': ['eslint'],
 \   'php': ['phpcbf']
 \ }
+let g:ale_javascript_eslint_executable = 'eslint_d'
+let g:ale_javascript_eslint_use_global = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_linters = {
-\   'php': ['php -l', 'phpcs'],
-\   'javascript': ['eslint'],
 \   'css': ['stylelint'],
+\   'html': ['tidy'],
+\   'javascript': ['eslint'],
+\   'javascript.jsx': ['eslint'],
+\   'php': ['php -l', 'phpcs'],
 \   'scss': ['stylelint'],
 \ }
+let g:ale_linter_aliases = {'jsx': 'css'}
 let g:ale_open_list = 1
 let g:ale_php_phpcs_use_global = 1
-let g:ale_sign_error = '⨉'
-let g:ale_sign_warning = '⚠'
+let g:ale_scss_stylelint_use_global = 1
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
+let g:ale_sign_error = '⨉'
+let g:ale_sign_warning = '⚠'
 let g:AutoPairsShortcutToggle = '<Leader>ap'
 let g:AutoPairsShortcutFastWrap = '<Leader>ae'
 let g:AutoPairsShortcutJump = '<Leader>an'
 let g:AutoPairsShortcutBackInsert = '<Leader>ab'
+let g:deoplete#enable_at_startup = 1
 let g:go_term_mode = "split"
 let g:jsx_ext_required = 1
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_serverCommands = {
+\   'go' : [ 'go-langserver', '--stdio' ],
+\   'javascript' : [ 'javascript-typescript-stdio' ],
+\   'jsx' : [ 'javascript-typescript-stdio' ],
+\   'javascript.jsx' : [ 'javascript-typescript-stdio' ],
+\   'python' : [ 'python-language-server' ],
+\   'typescript' : [ 'javascript-typescript-stdio' ],
+\   'php' : [ 'php-language-server.php' ],
+\ }
 let g:less = { 'enabled' : 0, }
 let g:localvimrc_persistent = 1
-let g:localvimrc_event = ['BufNewFile', 'BufRead']
+let g:localvimrc_event = ['BufNewFile', 'BufReadPre', 'BufWinEnter', 'BufEnter']
 let g:localvimrc_sandbox = 0
 let g:mta_filetypes = {
 \   'html' : 1,
@@ -242,27 +262,37 @@ let g:mta_filetypes = {
 \   'xml' : 1,
 \   'php' : 1,
 \ }
+let g:netrw_altv = 1
+let g:netrw_banner = 0
+let g:netrw_browse_split = 4
+let g:netrw_list_hide= '.*\.swp$,\.DS_Store,*/tmp/*,*\.so,*\.swp,*\.zip,*\.git,^\.\.\=/\=,*\.log$'
+let g:netrw_liststyle = 3
+let g:netrw_preview = 1
 let g:netrw_silent = 1
-let g:phpcomplete_parse_docblock_comments = 1
-let g:phpcomplete_search_tags_for_variables = 1
-let g:session_autoload = 'no'
-let g:session_autosave = 'no'
-let g:sparkupExecuteMapping = '<Leader>se'
-let g:sparkupNextMapping = '<Leader>sn'
+let g:netrw_winsize = 25
 let g:tagcommand_defaults = {
 \   'cmd': 'ctags',
 \   'args': '-R -a',
 \   'filesappend': '**',
 \  }
+let g:tagcommands = {
+\ "ruby" : {"tagfile":"$XDG_CONFIG_HOME/nvim/ruby.tags"},
+\ "javascript" : {"tagfile":"$XDG_CONFIG_HOME/nvim/js.tags"},
+\ "php" : {"tagfile":"$XDG_CONFIG_HOME/nvim/php.tags"}
+\}
 let g:taggatron_run_in_background = 1
 let g:UltiSnipsExpandTrigger = "<Leader>u"
 let g:UltiSnipsJumpBackwardTrigger = "<C-n>"
 let g:UltiSnipsJumpForwardTrigger = "<C-p>"
-let g:VCSCommandSplit = 'vertical'
+let g:user_emmet_settings = {
+\   'javascript.jsx' : {
+\     'extends': 'jsx',
+\     'default_attributes': {
+\       'label': [{'htmlFor': ''}],
+\      }
+\    }
+\  }
 let g:vimpager = {}
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:ycm_filetype_blacklist = { 'markdown': 1, 'text': 1, }
 
 map <F7> ;execute ";vsplit %"<Cr>
 
@@ -286,10 +316,14 @@ noremap <C-u>     <C-u>zz
 noremap <Leader>l :set rnu!<Cr>
 noremap <Leader>t :enew<Cr>
 
+"imap <Expr> <CR> (pumvisible() ? "\<C-Y>\<Plug>(expand_or_cr)" : "\<CR>")
+"imap <Expr> <Plug>(expand_or_cr) (cm#completed_is_snippet() ? "\<C-U>" : "\<CR>")
+"
 inoremap <C-u>      <C-g>u<C-u>
 inoremap <C-x><C-k> <Nop>
 inoremap <Expr> <Tab>   pumvisible() ? '\<C-n>' : '\<Tab>'
 inoremap <Expr> <S-Tab> pumvisible() ? '\<C-p>' : '\<S-Tab>'
+inoremap <silent> <C-U> <C-R>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<CR>
 
 nnoremap <C-e>     3<C-e>
 nnoremap <C-p>     :Denite file_rec<CR>
@@ -313,7 +347,12 @@ nnoremap ' `
 nnoremap ` '
 nnoremap ; :
 nnoremap : ;
+nnoremap _ :Lex<CR>
+nnoremap <silent> <Leader>lk :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> <Leader>ld :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
+tnoremap <Leader><Esc> <C-\><C-n>
 
 vnoremap y y`]
 vnoremap p "_dP`]
@@ -329,7 +368,6 @@ cmap w!! w !sudo tee % >/dev/null
 command! W w !sudo tee % >/dev/null
 
 " Denite
-
 call denite#custom#option( 'default', {
 \  'prompt': '>',
 \  'short_source_names': 1,
@@ -497,6 +535,7 @@ augroup StartupStuffs
   \     execute "normal! g`\""                       |
   \   endif                                          |
   autocmd BufEnter * if !&modifiable | setl scrolloff=999 | endif
+  autocmd TermOpen * setlocal nonumber norelativenumber
   autocmd BufEnter,BufNew * if &buftype == 'terminal' | :startinsert | endif
   autocmd BufRead * try | execute "compiler ".&FileType | catch /./ | endtry
   autocmd VimResized * execute 'normal! \<C-w>='
@@ -523,10 +562,6 @@ autocmd BufNewFile *.tex 0r ~/dotfiles/lang/latex/template.tex
 " Lisp
 autocmd FileType lisp,scheme,art setlocal equalprg=~/dotfiles/helpers/scmindent.rkt
 
-" Lua
-autocmd FileType lua setlocal shiftwidth=4 tabstop=4 softtabstop=4 noexpandtab
-\ formatoptions=croql
-
 " Mercurial commit messages
 autocmd BufNewFile,BufRead,BufEnter msg setfiletype hgcommit
 autocmd FileType hgcommit setlocal textwidth=72
@@ -534,16 +569,8 @@ autocmd FileType hgcommit setlocal textwidth=72
 " MySQL
 autocmd BufNewFile,BufRead,BufEnter *.mysql setfiletype mysql
 
-" Perl
-autocmd FileType perl setlocal makeprg=perl keywordprg=perldoc\ -f |
-\   compiler perl
-
 " PostgreSQL
 autocmd BufNewFile,BufRead,BufEnter *.psql setfiletype postgresql
-
-" Python
-autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
-\   expandtab formatoptions=croql keywordprg=pydoc
 
 " Ruby
 autocmd BufNewFile,BufRead Vagrantfile setfiletype ruby
