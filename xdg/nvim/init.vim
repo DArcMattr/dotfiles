@@ -166,9 +166,11 @@ let g:airline_powerline_fonts = 1
 let g:ale_cache_executable_check_failures = 1
 let g:ale_css_stylelint_use_global = 1
 let g:ale_fixers = {
+\   'css': ['stylelint'],
 \   'html': ['tidy'],
 \   'javascript': ['eslint'],
-\   'php': ['phpcbf']
+\   'php': ['phpcbf'],
+\   'scss': ['stylelint'],
 \ }
 let g:ale_javascript_eslint_executable = 'eslint_d'
 let g:ale_javascript_eslint_use_global = 1
@@ -199,13 +201,16 @@ let g:go_term_mode = "split"
 let g:jsx_ext_required = 1
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
+\   'css' : [ 'vscode-css-languageservice', '--stdio' ],
 \   'go' : [ 'go-langserver', '--stdio' ],
+\   'html' : [ 'vscode-html-languageservice', '--stdio' ],
 \   'javascript' : [ 'javascript-typescript-stdio' ],
 \   'jsx' : [ 'javascript-typescript-stdio' ],
 \   'javascript.jsx' : [ 'javascript-typescript-stdio' ],
-\   'python' : [ 'python-language-server' ],
-\   'typescript' : [ 'javascript-typescript-stdio' ],
 \   'php' : [ 'php-language-server.php' ],
+\   'python' : [ 'python-language-server' ],
+\   'scss' : [ 'vscode-css-languageservice', '--stdio' ],
+\   'typescript' : [ 'javascript-typescript-stdio' ],
 \ }
 let g:less = { 'enabled' : 0, }
 let g:localvimrc_persistent = 1
