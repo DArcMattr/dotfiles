@@ -2,4 +2,12 @@
 
 export CC=clang
 export CXX=clang++
-export TERM=tmux-256color
+
+# Adding wsl-open as a browser for Bash for Windows
+if [[ $(uname -r) == *Microsoft  ]]; then
+  if [[ -z xdg-open  ]]; then
+    export BROWSER=wsl-open
+  else
+    export BROWSER=xdg-open:wsl-open
+  fi
+fi
