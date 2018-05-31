@@ -70,3 +70,8 @@ Host staging
   User ec2-user
   HostName stagessh.theofficeexpress.com
   ForwardAgent yes
+
+Host phoenix
+  User ec2-user
+  HostName phxssh.theofficeexpress.com
+  ForwardAgent yes
