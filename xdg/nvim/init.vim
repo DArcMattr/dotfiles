@@ -329,11 +329,12 @@ command! W w !sudo tee % >/dev/null
 
 " Denite
 call denite#custom#option( 'default', {
+\  'auto_resize': 1,
 \  'prompt': '>',
 \  'short_source_names': 1,
 \  'split': 'vertical',
 \  'vertical_preview': 1,
-\  'auto_resize': 1,
+\  'winheight': 999,
 \})
 call denite#custom#option( 'list', { 'mode': 'normal' } )
 call denite#custom#option( 'grep', { 'vertical_preview': 1 } )
