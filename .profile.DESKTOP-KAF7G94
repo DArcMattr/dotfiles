@@ -2,6 +2,7 @@
 
 export CC=clang
 export CXX=clang++
+export DISPLAY=:0.0
 
 # Adding wsl-open as a browser for Bash for Windows
 if [[ $(uname -r) == *Microsoft  ]]; then
