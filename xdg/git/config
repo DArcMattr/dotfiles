@@ -115,6 +115,7 @@
   ours = "!f() { git co --ours $@ && git add $@; }; f"
   precommit = diff --cached --diff-algorithm=minimal -w
   prune = fetch --prune
+  refresh = "!f() { git rm --cached -r . && git reset --hard }; f"
   remotes = remove -v
   ship = "!~/dotfiles/helpers/git-ship"
   st = status
