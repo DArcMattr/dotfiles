@@ -47,9 +47,9 @@ project_pane() {
   fi
 
   tmux new-window -t "${SESSION}:${WIN_NUM}" -c "${DIRECTORY}" \; \
-    split-window -v -p 15 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}" \; \
-    split-window -v -p 15 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}" "tail -F ${LOG}" \; \
-    split-window -v -p 15 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}"
+    split-window -v -p 12 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}" \; \
+    split-window -v -p 12 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}" "tail -F ${LOG}" \; \
+    split-window -v -p 12 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}"
 
   tmux select-pane -t "${SESSION}:${WIN_NUM}.0"
 
