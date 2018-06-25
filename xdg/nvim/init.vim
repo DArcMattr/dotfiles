@@ -207,7 +207,7 @@ let g:LanguageClient_serverCommands = {
 \   'javascript' : [ 'javascript-typescript-stdio' ],
 \   'jsx' : [ 'javascript-typescript-stdio' ],
 \   'javascript.jsx' : [ 'javascript-typescript-stdio' ],
-\   'php' : [ 'php-language-server.php' ],
+\   'php' : [ 'php /home/david/dotfiles/xdg/composer/vendor/bin/php-language-server.php' ],
 \   'python' : [ 'python-language-server' ],
 \   'scss' : [ 'vscode-css-languageservice', '--stdio' ],
 \   'typescript' : [ 'javascript-typescript-stdio' ],
@@ -254,43 +254,44 @@ let g:user_emmet_settings = {
 \  }
 let g:vimpager = {}
 
-map <F7> ;execute ";vsplit %"<Cr>
+map <F7> <Cmd>vsplit %<Cr>
+map <C-F7> <Cmd>split %<Cr>
 
 nmap .            .'[
 nmap <C-i>        i<Space><Esc>
 nmap <C-o>        i<Cr><Esc>
-nmap <C-PageDown> ;bp<Cr>
-nmap <C-PageUp>   ;bn<Cr>
-nmap <Leader><F7> ;execute ":setlocal spell! spell? spelllang=en_us"<Cr>
-nmap <Leader>gb   ;Gblame<Cr>
-nmap <Leader>gc   ;Gcommit<Cr>
-nmap <Leader>gd   ;Gdiff<Cr>
-nmap <Leader>gl   ;Glog -- %<Cr>
-nmap <Leader>gp   ;Gpush<Cr>
-nmap <Leader>gs   ;execute ":Gstatus"<Cr>
+nmap <C-PageDown> <Cmd>bp<Cr>
+nmap <C-PageUp>   <Cmd>bn<Cr>
+nmap <Leader><F7> <Cmd>setlocal spell! spell? spelllang=en_us<Cr>
+nmap <Leader>gb   <Cmd>Gblame<Cr>
+nmap <Leader>gc   <Cmd>Gcommit<Cr>
+nmap <Leader>gd   <Cmd>Gdiff<Cr>
+nmap <Leader>gl   <Cmd>Glog -- %<Cr>
+nmap <Leader>gp   <Cmd>Gpush<Cr>
+nmap <Leader>gs   <Cmd>Gstatus<Cr>
 
 noremap n         nzz
 noremap N         Nzz
 noremap <C-d>     <C-d>zz
 noremap <C-u>     <C-u>zz
-noremap <Leader>l :set rnu!<Cr>
-noremap <Leader>t :enew<Cr>
+noremap <Leader>l <Cmd>set rnu!<Cr>
+noremap <Leader>t <Cmd>enew<Cr>
 
-"imap <Expr> <CR> (pumvisible() ? "\<C-Y>\<Plug>(expand_or_cr)" : "\<CR>")
-"imap <Expr> <Plug>(expand_or_cr) (cm#completed_is_snippet() ? "\<C-U>" : "\<CR>")
+"imap <Expr> <Cr> (pumvisible() ? "\<C-Y>\<Plug>(expand_or_cr)" : "\<Cr>")
+"imap <Expr> <Plug>(expand_or_cr) (cm#completed_is_snippet() ? "\<C-U>" : "\<Cr>")
 
 inoremap <C-u>      <C-g>u<C-u>
 inoremap <C-x><C-k> <Nop>
 inoremap <Expr> <Tab>   pumvisible() ? '\<C-n>' : '\<Tab>'
 inoremap <Expr> <S-Tab> pumvisible() ? '\<C-p>' : '\<S-Tab>'
-inoremap <silent> <C-U> <C-R>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<CR>
+inoremap <silent> <C-U> <C-R>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<Cr>
 
 nnoremap <C-e>     3<C-e>
-nnoremap <C-p>     :Denite file_rec<CR>
+nnoremap <C-p>     <Cmd>Denite file_rec<Cr>
 nnoremap <C-y>     3<C-y>
-nnoremap <Leader>/ :Denite grep:.<CR>
-nnoremap <Leader>o :Denite outline<CR>
-nnoremap <Leader>q :nohlsearch<CR>
+nnoremap <Leader>/ <Cmd>Denite grep:.<Cr>
+nnoremap <Leader>o <Cmd>Denite outline<Cr>
+nnoremap <Leader>q <Cmd>nohlsearch<Cr>
 nnoremap H ^
 nnoremap J mzJ`z
 nnoremap L $
@@ -307,10 +308,10 @@ nnoremap ' `
 nnoremap ` '
 nnoremap ; :
 nnoremap : ;
-nnoremap _ :Lex<CR>
-nnoremap <silent> <Leader>lk :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> <Leader>ld :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+nnoremap _ :Lex<Cr>
+nnoremap <silent> <Leader>lk <Cmd>call LanguageClient_textDocument_hover()<Cr>
+nnoremap <silent> <Leader>ld <Cmd>call LanguageClient_textDocument_definition()<Cr>
+nnoremap <silent> <F2> <Cmd>call LanguageClient_textDocument_rename()<Cr>
 
 tnoremap <Leader><Esc> <C-\><C-n>
 
@@ -318,8 +319,8 @@ vnoremap y y`]
 vnoremap p "_dP`]
 vnoremap ; :
 vnoremap : ;
-vnoremap * y/<C-R>"<CR>
-vnoremap ? y?<C-R>"<CR>
+vnoremap * y/<C-R>"<Cr>
+vnoremap ? y?<C-R>"<Cr>
 
 xnoremap c "xc
 
@@ -360,8 +361,8 @@ elseif executable('ack-grep')
 endif
 
 command! -nargs=1 Silent |
-\   execute ';silent !'.<q-args> |
-\   execute ';redraw!'
+\   execute '<Cmd>silent !'.<q-args> |
+\   <Cmd>redraw!<Cr>
 
 command! -nargs=* -complete=help Help vertical belowright help <args>
 
@@ -400,15 +401,15 @@ if $TMUX != ''
 
   "set clipboard=unnamed
 
-  nnoremap <silent> <C-w>j :silent call TmuxMove('j')<cr>
-  nnoremap <silent> <C-w>j :silent call TmuxMove('j')<cr>
-  nnoremap <silent> <C-w>k :silent call TmuxMove('k')<cr>
-  nnoremap <silent> <C-w>h :silent call TmuxMove('h')<cr>
-  nnoremap <silent> <C-w>l :silent call TmuxMove('l')<cr>
-  nnoremap <silent> <C-w><down> :silent call TmuxMove('j')<cr>
-  nnoremap <silent> <C-w><up> :silent call TmuxMove('k')<cr>
-  nnoremap <silent> <C-w><left> :silent call TmuxMove('h')<cr>
-  nnoremap <silent> <C-w><right> :silent call TmuxMove('l')<cr>
+  nnoremap <silent> <C-w>j <Cmd>silent call TmuxMove('j')<Cr>
+  nnoremap <silent> <C-w>j <Cmd>silent call TmuxMove('j')<Cr>
+  nnoremap <silent> <C-w>k <Cmd>silent call TmuxMove('k')<Cr>
+  nnoremap <silent> <C-w>h <Cmd>silent call TmuxMove('h')<Cr>
+  nnoremap <silent> <C-w>l <Cmd>silent call TmuxMove('l')<Cr>
+  nnoremap <silent> <C-w><down> <Cmd>silent call TmuxMove('j')<Cr>
+  nnoremap <silent> <C-w><up> <Cmd>silent call TmuxMove('k')<Cr>
+  nnoremap <silent> <C-w><left> <Cmd>silent call TmuxMove('h')<Cr>
+  nnoremap <silent> <C-w><right> <Cmd>silent call TmuxMove('l')<Cr>
 endif
 
 function! SetDiffColors()
