@@ -12,7 +12,7 @@ project_pane() {
       d) DIRECTORY=${OPTARG}
         ;;
 
-      g) GRUNT=${OPTARG}
+      g) GULP=${OPTARG}
         ;;
 
       l) LOG=${OPTARG}
@@ -35,10 +35,10 @@ project_pane() {
   done
 
   WIN_NUM=$(tmux display-message -p '#{session_windows}')
-  LOG=${LOG:-"../../debug.log"}
+  LOG=${LOG:-"/var/log/fpm-php.www.log"}
 
-  if [ -z "${GRUNT+x}" ]; then
-    GRUNT=${GRUNT:='grunt local'}
+  if [ -z "${GULP+x}" ]; then
+    GULP=${GULP:='gulp local'}
   fi
 
   if [ -z "${DIRECTORY}" ]; then
@@ -62,6 +62,7 @@ sudo sh -c " \
   service php5.6-fpm start && \
   service php7.2-fpm start && \
   service mysql start"
+mailcatcher
 
 tmux new-window -t "${SESSION}":1
 tmux send-keys -t "${SESSION}":1 "htop" C-m
