@@ -199,6 +199,8 @@ let g:AutoPairsShortcutBackInsert = '<Leader>ab'
 let g:deoplete#enable_at_startup = 1
 let g:go_term_mode = "split"
 let g:jsx_ext_required = 1
+let g:LanguageClient_loggingFile = $HOME . '/lc.log'
+let g:LanguageClient_loggingLevel = 'DEBUG'
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
 \   'css' : [ 'vscode-css-languageservice', '--stdio' ],
@@ -207,7 +209,6 @@ let g:LanguageClient_serverCommands = {
 \   'javascript' : [ 'javascript-typescript-stdio' ],
 \   'jsx' : [ 'javascript-typescript-stdio' ],
 \   'javascript.jsx' : [ 'javascript-typescript-stdio' ],
-\   'php' : [ 'php /home/david/dotfiles/xdg/composer/vendor/bin/php-language-server.php' ],
 \   'python' : [ 'python-language-server' ],
 \   'scss' : [ 'vscode-css-languageservice', '--stdio' ],
 \   'typescript' : [ 'javascript-typescript-stdio' ],
@@ -241,6 +242,7 @@ let g:tagcommands = {
 \ "php" : {"tagfile":"$XDG_CONFIG_HOME/nvim/php.tags"}
 \}
 let g:taggatron_run_in_background = 1
+let g:ultisnips_php_scalar_types = 1
 let g:UltiSnipsExpandTrigger = "<Leader>u"
 let g:UltiSnipsJumpBackwardTrigger = "<C-n>"
 let g:UltiSnipsJumpForwardTrigger = "<C-p>"
@@ -309,8 +311,10 @@ nnoremap ` '
 nnoremap ; :
 nnoremap : ;
 nnoremap _ :Lex<Cr>
+nnoremap <silent> <Leader>lc <Cmd>call LanguageClient_contextMenu()<Cr>
 nnoremap <silent> <Leader>lk <Cmd>call LanguageClient_textDocument_hover()<Cr>
 nnoremap <silent> <Leader>ld <Cmd>call LanguageClient_textDocument_definition()<Cr>
+nnoremap <silent> <Leader>lr <Cmd>call LanguageClient_textDocument_references()<Cr>
 nnoremap <silent> <F2> <Cmd>call LanguageClient_textDocument_rename()<Cr>
 
 tnoremap <Leader><Esc> <C-\><C-n>
