@@ -4,7 +4,7 @@ setlocal keywordprg=pman iskeyword+=$
 " autocmd BufWritePost *.php silent !phpcbf --standard=WordPress %
 
 try
-	call LanguageClient_registerServerCommands({'php':[ 'php', 'php-language-server' ]})
+  call LanguageClient_registerServerCommands({'php': [ 'php-language-server' ]})
 catch
-	" do nothing
+  " do nothing
 endtry
