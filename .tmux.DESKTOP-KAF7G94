@@ -72,6 +72,6 @@ tmux new-window -t "${SESSION}":2
 tmux send-keys -t "${SESSION}":2 "TERM=screen-256color autossh -t staging" C-m
 tmux rename-window -t "${SESSION}":2 "remotes"
 
-project_pane -t "${SESSION}" -n "React" -d "/var/www/vhosts/toe-react.test/htdocs/"
-project_pane -t "${SESSION}" -n "Laravel" -d "/var/www/vhosts/toe-laravel.test/htdocs/"
-project_pane -t "${SESSION}" -n "TOE" -d "/var/www/vhosts/local.theofficeexpress.com/htdocs/"
+project_pane -t "${SESSION}" -n "React" -d "/var/www/vhosts/toe-react.test"
+project_pane -t "${SESSION}" -n "Laravel" -d "/var/www/vhosts/toe-laravel.test"
+project_pane -t "${SESSION}" -n "TOE" -d "/var/www/vhosts/local.theofficeexpress.com"
