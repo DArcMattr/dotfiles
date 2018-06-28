@@ -169,7 +169,6 @@ let g:ale_fixers = {
 \   'css': ['stylelint'],
 \   'html': ['tidy'],
 \   'javascript': ['eslint'],
-\   'php': ['phpcbf'],
 \   'scss': ['stylelint'],
 \ }
 let g:ale_javascript_eslint_executable = 'eslint_d'
@@ -181,17 +180,15 @@ let g:ale_linters = {
 \   'html': ['tidy'],
 \   'javascript': ['eslint'],
 \   'javascript.jsx': ['eslint'],
-\   'php': ['php -l', 'phpcs'],
 \   'scss': ['stylelint'],
 \ }
 let g:ale_linter_aliases = {'jsx': 'css'}
 let g:ale_open_list = 1
-let g:ale_php_phpcs_use_global = 1
 let g:ale_scss_stylelint_use_global = 1
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
-let g:ale_sign_error = '⨉'
-let g:ale_sign_warning = '⚠'
+let g:ale_sign_error = '💀'
+let g:ale_sign_warning = '⚠️'
 let g:AutoPairsShortcutToggle = '<Leader>ap'
 let g:AutoPairsShortcutFastWrap = '<Leader>ae'
 let g:AutoPairsShortcutJump = '<Leader>an'
