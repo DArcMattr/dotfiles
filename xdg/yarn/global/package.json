@@ -10,7 +10,6 @@
     "eslint-config-wordpress": "^2.0.0",
     "eslint_d": "^5.2.2",
     "grunt": "^1.0.2",
-    "gulp": "^3.9.1",
     "javascript-typescript-langserver": "^2.8.0",
     "minify": "^3.0.4",
     "neovim": "^3.5.2",
