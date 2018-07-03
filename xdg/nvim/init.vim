@@ -168,17 +168,13 @@ let g:ale_css_stylelint_use_global = 1
 let g:ale_fixers = {
 \   'css': ['stylelint'],
 \   'html': ['tidy'],
-\   'javascript': ['eslint'],
 \   'scss': ['stylelint'],
 \ }
-let g:ale_javascript_eslint_executable = 'eslint_d'
-let g:ale_javascript_eslint_use_global = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_linters = {
 \   'css': ['stylelint'],
 \   'html': ['tidy'],
-\   'javascript': ['eslint'],
 \   'javascript.jsx': ['eslint'],
 \   'scss': ['stylelint'],
 \ }
@@ -187,8 +183,8 @@ let g:ale_open_list = 1
 let g:ale_scss_stylelint_use_global = 1
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
-let g:ale_sign_error = '💀'
-let g:ale_sign_warning = '⚠️'
+let g:ale_sign_error = '×'
+let g:ale_sign_warning = '⚠'
 let g:AutoPairsShortcutToggle = '<Leader>ap'
 let g:AutoPairsShortcutFastWrap = '<Leader>ae'
 let g:AutoPairsShortcutJump = '<Leader>an'
@@ -214,12 +210,6 @@ let g:less = { 'enabled' : 0, }
 let g:localvimrc_persistent = 1
 let g:localvimrc_event = ['BufNewFile', 'BufReadPre', 'BufWinEnter', 'BufEnter']
 let g:localvimrc_sandbox = 0
-let g:mta_filetypes = {
-\   'html' : 1,
-\   'xhtml' : 1,
-\   'xml' : 1,
-\   'php' : 1,
-\ }
 let g:netrw_altv = 1
 let g:netrw_banner = 0
 let g:netrw_browse_split = 4
@@ -233,11 +223,6 @@ let g:tagcommand_defaults = {
 \   'args': '-R -a',
 \   'filesappend': '**',
 \  }
-let g:tagcommands = {
-\ "ruby" : {"tagfile":"$XDG_CONFIG_HOME/nvim/ruby.tags"},
-\ "javascript" : {"tagfile":"$XDG_CONFIG_HOME/nvim/js.tags"},
-\ "php" : {"tagfile":"$XDG_CONFIG_HOME/nvim/php.tags"}
-\}
 let g:taggatron_run_in_background = 1
 let g:ultisnips_php_scalar_types = 1
 let g:UltiSnipsExpandTrigger = "<Leader>u"
@@ -516,9 +501,6 @@ autocmd BufNewFile *.cob 0r ~/dotfiles/lang/cobol/header.cob
 " HTML
 autocmd BufNewFile *.html 0r ~/dotfiles/lang/html/index.html
 
-" JavaScript
-autocmd FileType javascript setlocal iskeyword+=$
-
 " LaTeX
 autocmd BufNewFile *.tex 0r ~/dotfiles/lang/latex/template.tex
 
@@ -534,10 +516,6 @@ autocmd BufNewFile,BufRead,BufEnter *.mysql setfiletype mysql
 
 " PostgreSQL
 autocmd BufNewFile,BufRead,BufEnter *.psql setfiletype postgresql
-
-" Ruby
-autocmd BufNewFile,BufRead Vagrantfile setfiletype ruby
-autocmd FileType ruby setlocal keywordprg=ri
 
 " Vim
 autocmd FileType vim setlocal keywordprg=:Help
