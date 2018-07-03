@@ -21,6 +21,7 @@
   changed = green
   untracked = cyan
 [core]
+  eol = lf
   excludesfile = ~/.gitignore_global
   autocrlf = input
   whitespace = trailing-space,space-before-tab,indent-with-non-tab
@@ -115,7 +116,7 @@
   ours = "!f() { git co --ours $@ && git add $@; }; f"
   precommit = diff --cached --diff-algorithm=minimal -w
   prune = fetch --prune
-  refresh = "!f() { git rm --cached -r . && git reset --hard }; f"
+  refresh = "!f() { git rm --cached -r . && git reset --hard; }; f"
   remotes = remove -v
   ship = "!~/dotfiles/helpers/git-ship"
   st = status
