@@ -15,8 +15,11 @@ Some of these will be installed via the install scripts or apt-get below.
 
     sudo -v
     sudo apt update
-    sudo apt install -y python-pip python-dev curl software-properties-common
-    pip install -U --user mercurial
+    sudo apt install -y python-dev python3-dev curl software-properties-common
+    curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
+    python2 /tmp/get-pip.py
+    python3 /tmp/get-pip.py
+    pip2 install -U --user mercurial
     ~/.local/bin/hg clone https://bitbucket.org/darceneaux/dotfiles
     curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash - # argh, I hate this
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
@@ -49,8 +52,8 @@ Some of these will be installed via the install scripts or apt-get below.
       php7.2-dev php7.2-fpm php7.2-imap php7.2-json php7.2-mysql php7.2-opcache \
       php7.2-readline php7.2-soap php-common php-gd php-imagick php-mbstring \
       php-memcache php-pear php-xdebug php-xml php-zip postgresql-10 pv \
-      python3-dev python3-docutils python3-pip python-clang-6.0 ruby-dev \
-      shellcheck tidy vim-nox xsel yarn zlib1g-dev zsh zsh-lovers
+      python3-docutils python-clang-6.0 ruby-dev shellcheck tidy vim-nox xsel \
+      yarn zlib1g-dev zsh zsh-lovers
     go get -u github.com/junegunn/fzf
     go get -u github.com/sourcegraph/go-langserver
 

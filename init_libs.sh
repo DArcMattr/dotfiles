@@ -11,7 +11,7 @@ grab_hgcfg() {
 grab_pips() {
   config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
 
-  pip  install -U --user neovim mercurial s3cmd
+  pip2 install -U --user neovim mercurial s3cmd
   pip3 install -U --user doge flake8 gsutil httpie icdiff neovim psutil \
     powerline-status pyemojify
 
@@ -53,6 +53,7 @@ grab_composer() {
       cd "${TMP}" || exit
       curl -sS https://getcomposer.org/installer | php -d "allow_url_fopen=On"; \
         mv composer.phar "${HOME}/.local/bin/composer"
+      # TODO: code around phpcs paths
       cd "${HOME}" || exit
       composer global install
     )
