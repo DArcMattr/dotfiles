@@ -10,16 +10,16 @@
   },
   "require": {
     "d11wtq/boris": "@stable",
-    "felixfbecker/language-server": "@stable",
+    "felixfbecker/language-server": "@dev",
     "laravel/installer": "@stable",
     "phpmd/phpmd": "@stable",
     "phpstan/phpstan": "@stable",
     "phpunit/phpunit": "@stable",
-    "pragmarx/laravelcs": "@stable",
     "sloanlance/pman-php-manual": "@stable",
-    "squizlabs/php_codesniffer": "@stable",
+    "squizlabs/php_codesniffer": "@dev",
     "wp-cli/wp-cli": "@stable",
-    "wp-coding-standards/wpcs": "@stable"
+    "wp-coding-standards/wpcs": "@stable",
+    "fig-r/psr2r-sniffer": "^0.5.0"
   },
   "scripts": {
     "post-install-cmd": [
