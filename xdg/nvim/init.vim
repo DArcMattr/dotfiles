@@ -380,7 +380,7 @@ if $TMUX != ''
     end
   endfunction
 
-  "set clipboard=unnamed
+  set clipboard+=unnamedplus
 
   nnoremap <silent> <C-w>j <Cmd>silent call TmuxMove('j')<Cr>
   nnoremap <silent> <C-w>j <Cmd>silent call TmuxMove('j')<Cr>
