@@ -21,15 +21,18 @@ Some of these will be installed via the install scripts or apt-get below.
     python3 /tmp/get-pip.py
     pip2 install -U --user mercurial
     ~/.local/bin/hg clone https://bitbucket.org/darceneaux/dotfiles
-    curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash - # argh, I hate this
+    curl -sL https://deb.nodesource.com/setup_9.x | \
+      sudo -E bash - # argh, I hate this
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | \
+      sudo tee /etc/apt/sources.list.d/yarn.list
     sudo add-apt-repository -y ppa:neovim-ppa/unstable
     sudo add-apt-repository -y ppa:ondrej/php
     sudo add-apt-repository -y ppa:jonathonf/vim
     sudo add-apt-repository -y ppa:git-core/ppa
     sudo add-apt-repository -y ppa:gophers/archive
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
+    sudo apt-key adv --recv-keys \
+      --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
     wget --quiet -O - "http://apt.llvm.org/llvm-snapshot.gpg.key" | \
       sudo apt-key add -
     wget --quiet -O - "http://nginx.org/keys/nginx_signing.key" | \
