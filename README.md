@@ -87,11 +87,25 @@ configuration file, because vimpager.
 
 ## Experimental notes
 
-### `st`
+### WSL stuffs
 
-For running `st` under KDE:
+#### Shortcut for VcXsrv
 
-    kstart --maximize --windowclass "st-256color" st -e tmux attach
+Save the configuration after first run, and an example of how to have it load up
+on subsequent restarts is:
+
+"C:\Program Files\VcXsrv\xlaunch.exe" -run "C:\Users\David\Documents\config.xlaunch"
+
+#### Shortcut for wsltty
+
+While I track my wsltty configuration in source control, an example of the
+shortcut for wsltty is:
+
+`%LOCALAPPDATA%\wsltty\bin\mintty.exe --WSL= --configdir="%APPDATA%\wsltty" -~ -B /usr/bin/zsh`
+
+The `-B` is for borderless, and until wslbridge gets fixed, I still need to pass
+in the login shell path, hence the `/usr/bin/zsh`.
+
 
 ### Self-signed certificates
 
