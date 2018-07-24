@@ -49,6 +49,7 @@ call plug#end()
 set autoindent
 set autoread
 set backspace=indent,eol,start
+set clipboard+=unnamedplus
 set colorcolumn=+1
 set completeopt=menuone,longest
 set copyindent
@@ -141,7 +142,7 @@ highlight clear SpellCap
 highlight clear SpellLocal
 highlight clear SpellRare
 
-highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline guifg=#800000 gui=underline
+highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline guifg=#800000 gui=undercurl
 highlight SpellCap term=underline cterm=underline gui=undercurl
 highlight SpellLocal term=underline cterm=underline gui=undercurl
 highlight SpellRare term=underline cterm=underline gui=undercurl
@@ -287,7 +288,7 @@ nnoremap ' `
 nnoremap ` '
 nnoremap ; :
 nnoremap : ;
-nnoremap _ :Lex<Cr>
+nnoremap _ <Cmd>Lex<Cr>
 nnoremap <silent> <Leader>lc <Cmd>call LanguageClient_contextMenu()<Cr>
 nnoremap <silent> <Leader>lk <Cmd>call LanguageClient_textDocument_hover()<Cr>
 nnoremap <silent> <Leader>ld <Cmd>call LanguageClient_textDocument_definition()<Cr>
@@ -349,13 +350,13 @@ command! -nargs=* -complete=help Help vertical belowright help <args>
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
-if !exists(":DiffOrig")
+if !exists(':DiffOrig')
   command DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_ | diffthis
   \   | wincmd p | diffthis
 endif
 
 " from https://gist.github.com/tarruda/5158535
-if $TMUX != ''
+if exists('$TMUX')
   function! TmuxMove(direction)
     " Check if we are currently focusing on a edge window.
     " To achieve that,  move to/from the requested window and
@@ -380,9 +381,7 @@ if $TMUX != ''
     end
   endfunction
 
-  set clipboard+=unnamedplus
 
-  nnoremap <silent> <C-w>j <Cmd>silent call TmuxMove('j')<Cr>
   nnoremap <silent> <C-w>j <Cmd>silent call TmuxMove('j')<Cr>
   nnoremap <silent> <C-w>k <Cmd>silent call TmuxMove('k')<Cr>
   nnoremap <silent> <C-w>h <Cmd>silent call TmuxMove('h')<Cr>
@@ -391,7 +390,18 @@ if $TMUX != ''
   nnoremap <silent> <C-w><up> <Cmd>silent call TmuxMove('k')<Cr>
   nnoremap <silent> <C-w><left> <Cmd>silent call TmuxMove('h')<Cr>
   nnoremap <silent> <C-w><right> <Cmd>silent call TmuxMove('l')<Cr>
+  tnoremap <silent> <C-\><C-N><C-w>j <Cmd>silent call TmuxMove('j')<Cr>
+  tnoremap <silent> <C-\><C-N><C-w>k <Cmd>silent call TmuxMove('k')<Cr>
+  tnoremap <silent> <C-\><C-N><C-w>h <Cmd>silent call TmuxMove('h')<Cr>
+  tnoremap <silent> <C-\><C-N><C-w>l <Cmd>silent call TmuxMove('l')<Cr>
+elseif exists('g:GuiLoaded')
+  Guifont DejaVu Sans Mono:h7
+  tnoremap <A-j> <C-\><C-N><C-w>j
+  tnoremap <A-k> <C-\><C-N><C-w>k
+  tnoremap <A-h> <C-\><C-N><C-w>h
+  tnoremap <A-l> <C-\><C-N><C-w>l
 endif
+
 
 function! SetDiffColors()
   highlight DiffAdd cterm=bold ctermfg=white ctermbg=DarkGreen guifg=#ffffff guibg=#005f00
@@ -455,14 +465,14 @@ augroup CursorColumn
   autocmd!
   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
   autocmd WinLeave * setlocal nocursorcolumn
-  set cursorcolumn
+  setlocal cursorcolumn
 augroup END
 
 augroup CursorLine
   autocmd!
   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   autocmd WinLeave * setlocal nocursorline
-  set cursorline
+  setlocal cursorline
 augroup END
 
 augroup ShowListChars
