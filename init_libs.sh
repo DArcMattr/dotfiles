@@ -8,11 +8,26 @@ grab_hgcfg() {
   fi
 }
 
+grab_rust() {
+  if [ ! -x "${HOME}/.cargo/bin" ] && [ ! "$(which rustc >/dev/null)" ]; then
+    curl https://sh.rustup.rs -sSf | sh
+    rehash
+  else
+    rustup self update
+  fi
+
+  mkdir -p "${HOME}/.zfunc" && \
+    rm "${HOME}/.zfunc/_rustup" && \
+    "${HOME}/.cargo/bin/rustup" completions zsh > "${HOME}/.zfunc/_rustup"
+
+  cd ~ && cargo install cargo-deb cargo-update exa
+}
+
 grab_pips() {
   config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
 
-  pip2 install -U --user neovim mercurial s3cmd
-  pip3 install -U --user doge flake8 gsutil httpie icdiff neovim psutil \
+  pip2 install -U --user neovim mercurial pip s3cmd
+  pip3 install -U --user doge flake8 gsutil httpie icdiff neovim pip psutil \
     powerline-status pyemojify
 
   if [ ! -d "${config_home}/powerline" ]; then
