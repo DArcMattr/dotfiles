@@ -11,16 +11,17 @@ grab_hgcfg() {
 grab_rust() {
   if [ ! -x "${HOME}/.cargo/bin" ] && [ ! "$(which rustc >/dev/null)" ]; then
     curl https://sh.rustup.rs -sSf | sh
+    ${HOME}/.cargo/env
     rehash
   else
     rustup self update
   fi
 
   mkdir -p "${HOME}/.zfunc" && \
-    rm "${HOME}/.zfunc/_rustup" && \
+    rm "${HOME}/.zfunc/_rustup"; \
     "${HOME}/.cargo/bin/rustup" completions zsh > "${HOME}/.zfunc/_rustup"
 
-  cd ~ && cargo install cargo-deb cargo-update exa
+  cd "${HOME}" && "${HOME}/.cargo/bin/cargo" install cargo-deb cargo-update exa
 }
 
 grab_pips() {
