@@ -7,11 +7,10 @@ Clone to `~/dotfiles`
 Some of these will be installed via the install scripts or apt-get below.
 
 * Root access via `sudo`
-* Python's `pip` and `pip3` are available
 * Z-shell, `zsh` is available and set as a shell, via `chsh`
 * [Mercurial SCM][], `hg`, and [Git][], `git`, source control programs
 
-### For Ubuntu flavors (I'm looking at you, 16.04):
+### For Ubuntu flavors (I'm looking at you, 18.04):
 
     sudo -v
     sudo apt update
@@ -19,9 +18,9 @@ Some of these will be installed via the install scripts or apt-get below.
     curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
     python2 /tmp/get-pip.py --user
     python3 /tmp/get-pip.py --user
-    pip2 install -U --user mercurial
+    ~/.local/bin/pip2 install -U --user mercurial
     ~/.local/bin/hg clone https://bitbucket.org/darceneaux/dotfiles
-    curl -sL https://deb.nodesource.com/setup_9.x | \
+    curl -sL https://deb.nodesource.com/setup_10.x | \
       sudo -E bash - # argh, I hate this
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | \
@@ -31,18 +30,15 @@ Some of these will be installed via the install scripts or apt-get below.
     sudo add-apt-repository -y ppa:jonathonf/vim
     sudo add-apt-repository -y ppa:git-core/ppa
     sudo add-apt-repository -y ppa:gophers/archive
-    sudo apt-key adv --recv-keys \
-      --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
     wget --quiet -O - "http://apt.llvm.org/llvm-snapshot.gpg.key" | \
       sudo apt-key add -
     wget --quiet -O - "http://nginx.org/keys/nginx_signing.key" | \
       sudo apt-key add -
     wget --quiet -O - "https://www.postgresql.org/media/keys/ACCC4CF8.asc" | \
       sudo apt-key add -
-    sudo add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.2/ubuntu xenial main'
-    sudo add-apt-repository 'deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-6.0 xenial main'
-    sudo add-apt-repository 'deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main'
-    sudo add-apt-repository 'deb http://nginx.org/packages/mainline/ubuntu/ xenial nginx'
+    sudo add-apt-repository 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-6.0 main'
+    sudo add-apt-repository 'deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main'
+    sudo add-apt-repository 'deb http://nginx.org/packages/mainline/ubuntu/ bionic nginx'
     sudo apt update
     sudo apt install autossh build-essential clang-6.0 clang-6.0-doc \
       clang-format-6.0 clang-tools-6.0 cmake git golang-1.10-go htop \
@@ -52,7 +48,7 @@ Some of these will be installed via the install scripts or apt-get below.
       liblldb-6.0-dev libllvm6.0 libllvm6.0-dbg liblzma-dev libncurses5-dev \
       libpcre3-dev libssh2-1-dev libssl-dev lld-6.0 lldb-6.0 llvm-6.0 \
       llvm-6.0-dev llvm-6.0-doc llvm-6.0-examples llvm-6.0-runtime \
-      mariadb-server neovim nginx nodejs php7.2-cli php7.2-curl php7.2-dev \
+      neovim nginx nodejs php7.2-cli php7.2-curl php7.2-dev \
       php7.2-fpm php7.2-imap php7.2-json php7.2-mysql php7.2-opcache \
       php7.2-readline php7.2-soap php-common php-gd php-imagick php-mbstring \
       php-memcache php-pear php-xdebug php-xml php-zip postgresql-10 pv \
