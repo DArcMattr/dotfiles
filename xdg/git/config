@@ -81,6 +81,7 @@
   branchlog = "!f() { git log $(git oldest-ancestor ${1:-master} ${2:-HEAD})..; }; f"
   ci = commit
   co = checkout
+  commandeer = "!f() { git push origin HEAD:${1} --force; }; f"
   d = difftool
   diffall = difftool --dir-diff
   diffr = "!f() { git diff "%1"^.."$1"; }; f"
