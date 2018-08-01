@@ -3,6 +3,7 @@ symlinks/.pandoc/buttondown.css
 symlinks/.pandoc/.sass-cache
 xdg/composer/composer.lock
 xdg/composer/.htaccess
+xdg/composer/auth.json
 xdg/composer/keys.dev.pub
 xdg/composer/keys.tags.pub
 xdg/composer/vendor/
