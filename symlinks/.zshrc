@@ -52,6 +52,7 @@ setopt auto_cd
 setopt auto_resume
 setopt complete_aliases
 setopt hist_ignore_dups
+setopt noflowcontrol
 setopt nohup
 setopt notify
 setopt pushd_ignore_dups
