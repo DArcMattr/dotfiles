@@ -11,7 +11,7 @@ grab_hgcfg() {
 grab_rust() {
   if [ ! -x "${HOME}/.cargo/bin" ] && [ ! "$(which rustc >/dev/null)" ]; then
     curl https://sh.rustup.rs -sSf | sh
-    ${HOME}/.cargo/env
+    "${HOME}/.cargo/env"
     rehash
   else
     rustup self update
@@ -74,8 +74,7 @@ grab_composer() {
       composer global install
     )
   else
-    composer self-update
-    composer global update
+    composer global upgrade
   fi
 }
 
