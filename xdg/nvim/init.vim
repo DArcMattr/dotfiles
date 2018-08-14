@@ -18,7 +18,6 @@ Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
-Plug 'equalsraf/neovim-gui-shim'
 Plug 'fatih/vim-go', { 'for': [ 'go' ], 'do': ':GoUpdateBinaries' }
 Plug 'isRuslan/vim-es6', { 'for': [ 'js', 'jsx', 'javascript.jsx' ] }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
@@ -27,6 +26,7 @@ Plug 'joonty/vdebug'
 Plug 'joonty/vim-taggatron'
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'mattn/emmet-vim'
+"Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'mhinz/vim-signify'
 Plug 'reedes/vim-wheel'
 Plug 'rkitover/vimpager', { 'do': 'PREFIX=$HOME/.local ' . b:make . ' install' }
@@ -34,6 +34,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-syntax'
+Plug 'Shougo/neco-vim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
@@ -81,6 +82,7 @@ set modeline
 set mouse=a
 set nobomb
 set nojoinspaces
+set noshowmode
 set nostartofline
 set noswapfile
 set nowrap
@@ -154,6 +156,7 @@ let maplocalleader = " "
 let c_space_errors = 1
 let $GIT_SSL_NO_VERIFY = 'true'
 
+"let g:coc_force_debug = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#quickfix#location_text = 'Location'
 let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
@@ -167,7 +170,6 @@ let g:airline_powerline_fonts = 1
 let g:ale_cache_executable_check_failures = 1
 let g:ale_fixers = {
 \   'html': ['tidy'],
-\   'scss': ['stylelint'],
 \ }
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
@@ -177,7 +179,6 @@ let g:ale_linters = {
 \ }
 let g:ale_linter_aliases = {'jsx': 'css'}
 let g:ale_open_list = 1
-let g:ale_scss_stylelint_use_global = 1
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
 let g:ale_sign_error = '×'
@@ -199,7 +200,6 @@ let g:LanguageClient_serverCommands = {
 \   'jsx' : [ 'javascript-typescript-stdio' ],
 \   'javascript.jsx' : [ 'javascript-typescript-stdio' ],
 \   'python' : [ 'python-language-server' ],
-\   'scss' : [ 'vscode-css-languageservice', '--stdio' ],
 \   'typescript' : [ 'javascript-typescript-stdio' ],
 \ }
 let g:less = { 'enabled' : 0, }
@@ -262,9 +262,17 @@ noremap <Leader>t <Cmd>enew<Cr>
 
 inoremap <C-u>      <C-g>u<C-u>
 inoremap <C-x><C-k> <Nop>
-inoremap <Expr> <Tab>   pumvisible() ? '\<C-n>' : '\<Tab>'
-inoremap <Expr> <S-Tab> pumvisible() ? '\<C-p>' : '\<S-Tab>'
+"inoremap <Expr> <Tab>   pumvisible() ? '\<C-n>' : '\<Tab>'
+"inoremap <Expr> <S-Tab> pumvisible() ? '\<C-p>' : '\<S-Tab>'
 inoremap <silent> <C-U> <C-R>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<Cr>
+inoremap <Silent> <C-U> <C-R>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<Cr>
+inoremap <Silent><Expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <Expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <Silent><Expr> <C-Space> coc#refresh()
+inoremap <Expr> <Cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<Cr>"
 
 nnoremap <C-e>     3<C-e>
 nnoremap <C-p>     <Cmd>Denite file_rec<Cr>
@@ -289,11 +297,11 @@ nnoremap ` '
 nnoremap ; :
 nnoremap : ;
 nnoremap _ <Cmd>Lex<Cr>
-nnoremap <silent> <Leader>lc <Cmd>call LanguageClient_contextMenu()<Cr>
-nnoremap <silent> <Leader>lk <Cmd>call LanguageClient_textDocument_hover()<Cr>
-nnoremap <silent> <Leader>ld <Cmd>call LanguageClient_textDocument_definition()<Cr>
-nnoremap <silent> <Leader>lr <Cmd>call LanguageClient_textDocument_references()<Cr>
-nnoremap <silent> <F2> <Cmd>call LanguageClient_textDocument_rename()<Cr>
+nnoremap <Silent> <Leader>lc <Cmd>call LanguageClient_contextMenu()<Cr>
+nnoremap <Silent> <Leader>lk <Cmd>call LanguageClient_textDocument_hover()<Cr>
+nnoremap <Silent> <Leader>ld <Cmd>call LanguageClient_textDocument_definition()<Cr>
+nnoremap <Silent> <Leader>lr <Cmd>call LanguageClient_textDocument_references()<Cr>
+nnoremap <Silent> <F2> <Cmd>call LanguageClient_textDocument_rename()<Cr>
 
 tnoremap <Leader><Esc> <C-\><C-n>
 
@@ -301,8 +309,8 @@ vnoremap y y`]
 vnoremap p "_dP`]
 vnoremap ; :
 vnoremap : ;
-vnoremap * y/<C-R>"<Cr>
-vnoremap ? y?<C-R>"<Cr>
+vnoremap * y/<C-r>"<Cr>
+vnoremap ? y?<C-r>"<Cr>
 
 xnoremap c "xc
 
@@ -381,7 +389,6 @@ if exists('$TMUX')
     end
   endfunction
 
-
   nnoremap <silent> <C-w>j <Cmd>silent call TmuxMove('j')<Cr>
   nnoremap <silent> <C-w>k <Cmd>silent call TmuxMove('k')<Cr>
   nnoremap <silent> <C-w>h <Cmd>silent call TmuxMove('h')<Cr>
@@ -394,14 +401,12 @@ if exists('$TMUX')
   tnoremap <silent> <C-\><C-N><C-w>k <Cmd>silent call TmuxMove('k')<Cr>
   tnoremap <silent> <C-\><C-N><C-w>h <Cmd>silent call TmuxMove('h')<Cr>
   tnoremap <silent> <C-\><C-N><C-w>l <Cmd>silent call TmuxMove('l')<Cr>
-elseif exists('g:GuiLoaded')
-  Guifont DejaVu Sans Mono:h7
-  tnoremap <A-j> <C-\><C-N><C-w>j
-  tnoremap <A-k> <C-\><C-N><C-w>k
-  tnoremap <A-h> <C-\><C-N><C-w>h
-  tnoremap <A-l> <C-\><C-N><C-w>l
 endif
 
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1] =~# '\s'
+endfunction
 
 function! SetDiffColors()
   highlight DiffAdd cterm=bold ctermfg=white ctermbg=DarkGreen guifg=#ffffff guibg=#005f00
@@ -494,6 +499,7 @@ augroup StartupStuffs
   autocmd VimResized * execute 'normal! \<C-w>='
   autocmd BufEnter * highlight OverLength ctermbg=234 ctermfg=249 guibg=#1c1c1c guifg=#b2b2b2
   autocmd BufEnter * execute 'match OverLength /\%'. (&textwidth + 1) .'v.*/'
+  autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
 augroup END
 
 " common FileTypes below
