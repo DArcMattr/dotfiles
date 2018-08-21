@@ -168,13 +168,9 @@ let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline#extensions#ycm#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:ale_cache_executable_check_failures = 1
-let g:ale_fixers = {
-\   'html': ['tidy'],
-\ }
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_linters = {
-\   'html': ['tidy'],
 \   'javascript.jsx': ['eslint'],
 \ }
 let g:ale_linter_aliases = {'jsx': 'css'}
@@ -195,7 +191,6 @@ let g:LanguageClient_loggingLevel = 'DEBUG'
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
 \   'go' : [ 'go-langserver', '--stdio' ],
-\   'html' : [ 'vscode-html-languageservice', '--stdio' ],
 \   'javascript' : [ 'javascript-typescript-stdio' ],
 \   'jsx' : [ 'javascript-typescript-stdio' ],
 \   'javascript.jsx' : [ 'javascript-typescript-stdio' ],
@@ -257,22 +252,22 @@ noremap <C-u>     <C-u>zz
 noremap <Leader>l <Cmd>set rnu!<Cr>
 noremap <Leader>t <Cmd>enew<Cr>
 
-"imap <Expr> <Cr> (pumvisible() ? "\<C-Y>\<Plug>(expand_or_cr)" : "\<Cr>")
-"imap <Expr> <Plug>(expand_or_cr) (cm#completed_is_snippet() ? "\<C-U>" : "\<Cr>")
+"imap <expr> <Cr> (pumvisible() ? "\<C-Y>\<Plug>(expand_or_cr)" : "\<Cr>")
+"imap <expr> <Plug>(expand_or_cr) (cm#completed_is_snippet() ? "\<C-U>" : "\<Cr>")
 
 inoremap <C-u>      <C-g>u<C-u>
 inoremap <C-x><C-k> <Nop>
-"inoremap <Expr> <Tab>   pumvisible() ? '\<C-n>' : '\<Tab>'
-"inoremap <Expr> <S-Tab> pumvisible() ? '\<C-p>' : '\<S-Tab>'
+"inoremap <expr> <Tab>   pumvisible() ? '\<C-n>' : '\<Tab>'
+"inoremap <expr> <S-Tab> pumvisible() ? '\<C-p>' : '\<S-Tab>'
 inoremap <silent> <C-U> <C-R>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<Cr>
-inoremap <Silent> <C-U> <C-R>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<Cr>
-inoremap <Silent><Expr> <Tab>
+inoremap <silent> <C-U> <C-R>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<Cr>
+inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <Expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <Silent><Expr> <C-Space> coc#refresh()
-inoremap <Expr> <Cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<Cr>"
+inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <silent><expr> <C-Space> coc#refresh()
+inoremap <expr> <Cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<Cr>"
 
 nnoremap <C-e>     3<C-e>
 nnoremap <C-p>     <Cmd>Denite file_rec<Cr>
@@ -288,8 +283,8 @@ nnoremap Y y$
 nnoremap c "xc
 nnoremap gj j
 nnoremap gk k
-nnoremap <Expr> k (v:count == 0 ? 'gk' : 'k')
-nnoremap <Expr> j (v:count == 0 ? 'gj' : 'j')
+nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 nnoremap { {zz
 nnoremap } }zz
 nnoremap ' `
@@ -297,11 +292,11 @@ nnoremap ` '
 nnoremap ; :
 nnoremap : ;
 nnoremap _ <Cmd>Lex<Cr>
-nnoremap <Silent> <Leader>lc <Cmd>call LanguageClient_contextMenu()<Cr>
-nnoremap <Silent> <Leader>lk <Cmd>call LanguageClient_textDocument_hover()<Cr>
-nnoremap <Silent> <Leader>ld <Cmd>call LanguageClient_textDocument_definition()<Cr>
-nnoremap <Silent> <Leader>lr <Cmd>call LanguageClient_textDocument_references()<Cr>
-nnoremap <Silent> <F2> <Cmd>call LanguageClient_textDocument_rename()<Cr>
+nnoremap <silent> <Leader>lc <Cmd>call LanguageClient_contextMenu()<Cr>
+nnoremap <silent> <Leader>lk <Cmd>call LanguageClient_textDocument_hover()<Cr>
+nnoremap <silent> <Leader>ld <Cmd>call LanguageClient_textDocument_definition()<Cr>
+nnoremap <silent> <Leader>lr <Cmd>call LanguageClient_textDocument_references()<Cr>
+nnoremap <silent> <F2> <Cmd>call LanguageClient_textDocument_rename()<Cr>
 
 tnoremap <Leader><Esc> <C-\><C-n>
 
@@ -389,10 +384,10 @@ if exists('$TMUX')
     end
   endfunction
 
-  nnoremap <silent> <C-w>j <Cmd>silent call TmuxMove('j')<Cr>
-  nnoremap <silent> <C-w>k <Cmd>silent call TmuxMove('k')<Cr>
-  nnoremap <silent> <C-w>h <Cmd>silent call TmuxMove('h')<Cr>
-  nnoremap <silent> <C-w>l <Cmd>silent call TmuxMove('l')<Cr>
+  nnoremap <silent> <C-w>j <Cmd>call TmuxMove('j')<Cr>
+  nnoremap <silent> <C-w>k <Cmd>call TmuxMove('k')<Cr>
+  nnoremap <silent> <C-w>h <Cmd>call TmuxMove('h')<Cr>
+  nnoremap <silent> <C-w>l <Cmd>call TmuxMove('l')<Cr>
   nnoremap <silent> <C-w><down> <Cmd>silent call TmuxMove('j')<Cr>
   nnoremap <silent> <C-w><up> <Cmd>silent call TmuxMove('k')<Cr>
   nnoremap <silent> <C-w><left> <Cmd>silent call TmuxMove('h')<Cr>
@@ -508,9 +503,6 @@ augroup END
 
 " COBOL
 autocmd BufNewFile *.cob 0r ~/dotfiles/lang/cobol/header.cob
-
-" HTML
-autocmd BufNewFile *.html 0r ~/dotfiles/lang/html/index.html
 
 " LaTeX
 autocmd BufNewFile *.tex 0r ~/dotfiles/lang/latex/template.tex
