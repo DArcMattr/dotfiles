@@ -47,8 +47,9 @@ project_pane() {
   fi
 
   tmux new-window -t "${SESSION}:${WIN_NUM}" -c "${DIRECTORY}" \; \
-    split-window -v -p 12 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}" \; \
     split-window -v -p 12 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}" "tail -F ${LOG}" \; \
+    split-window -h -p 50 -t "${SESSION}:${WIN_NUM}.1" -c "${DIRECTORY}" "tail -F ./htdocs/log/x-errors_php.txt" \; \
+    split-window -v -p 12 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}" \; \
     split-window -v -p 12 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}"
 
   tmux select-pane -t "${SESSION}:${WIN_NUM}.0"
