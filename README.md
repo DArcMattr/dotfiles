@@ -89,9 +89,12 @@ configuration file, because vimpager.
 #### Shortcut for VcXsrv
 
 Save the configuration after first run, and an example of how to have it load up
-on subsequent restarts is:
+on subsequent restarts is to create a Windows shortcut of:
 
-"C:\Program Files\VcXsrv\xlaunch.exe" -wgl -run "C:\Users\David\Documents\config.xlaunch"
+    vcxsrv.exe :0 -ac -terminate -lesspointer -multiwindow -clipboard -nowgl
+
+To make this load automatically at boot, run `shell:startup` via Win-R and copy
+the above shortcut into the startup folder.
 
 #### Shortcut for wsltty
 
