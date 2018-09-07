@@ -396,6 +396,19 @@ if exists('$TMUX')
   tnoremap <silent> <C-\><C-N><C-w>k <Cmd>silent call TmuxMove('k')<Cr>
   tnoremap <silent> <C-\><C-N><C-w>h <Cmd>silent call TmuxMove('h')<Cr>
   tnoremap <silent> <C-\><C-N><C-w>l <Cmd>silent call TmuxMove('l')<Cr>
+
+  "let g:clipboard = {
+  "     \   'name': 'tmux-override',
+  "     \   'copy': {
+  "     \      '+': 'tmux copy-pipe $copy_command -',
+  "     \      '*': 'tmux copy-pipe $copy_command -',
+  "     \    },
+  "     \   'paste': {
+  "     \      '+': 'tmux save-buffer -',
+  "     \      '*': 'tmux save-buffer -',
+  "     \   },
+  "     \   'cache_enabled': 1,
+  "     \ }
 endif
 
 function! s:check_back_space() abort
