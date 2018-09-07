@@ -33,6 +33,8 @@
 [difftool]
   prompt = false
   tool = vimdiff
+[difftool "icdiff"]
+  cmd = icdiff --line-numbers $LOCAL $REMOTE
 [difftool "vimdiff"]
   cmd = nvim -d $LOCAL $REMOTE
 [fetch]
