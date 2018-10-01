@@ -86,6 +86,8 @@ configuration file, because vimpager.
 
 ### WSL stuffs
 
+Install [wslu](https://github.com/wslutilities/wslu) for its `wslview` utility.
+
 #### Shortcut for VcXsrv
 
 Save the configuration after first run, and an example of how to have it load up
