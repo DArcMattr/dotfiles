@@ -95,6 +95,7 @@ set printheader=+{strftime(\"%c\"getftime(expand(\"%%\")))}%=Page\ %N
 set printoptions=formfeed:y,paper:letter,portrait:n,number:y,syntax:7
 set printoptions+=left:5mm,right:5mm,top:10mm,bottom:5mm
 set pumheight=15
+set regexpengine=1
 set relativenumber
 set scrolloff=3
 set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
@@ -183,7 +184,6 @@ let g:AutoPairsShortcutToggle = '<Leader>ap'
 let g:AutoPairsShortcutFastWrap = '<Leader>ae'
 let g:AutoPairsShortcutJump = '<Leader>an'
 let g:AutoPairsShortcutBackInsert = '<Leader>ab'
-let g:deoplete#enable_at_startup = 1
 let g:go_term_mode = "split"
 let g:jsx_ext_required = 1
 let g:LanguageClient_loggingFile = $HOME . '/lc.log'
@@ -324,6 +324,7 @@ call denite#custom#option( 'default', {
 \})
 call denite#custom#option( 'list', { 'mode': 'normal' } )
 call denite#custom#option( 'grep', { 'vertical_preview': 1 } )
+call deoplete#enable()
 
 if executable('ag')
   " Use ag in denite grep source.
