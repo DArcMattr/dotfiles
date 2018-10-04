@@ -12,25 +12,25 @@ if which ruby >/dev/null && which gem >/dev/null; then
 fi
 
 if \
-  which python >/dev/null && \
+  which python >/dev/null 2>&1 && \
   [ "$(python -c 'import platform; print(platform.python_version_tuple()[0]);')" -eq 2 ];
 then
   python2_path=$(python -c $'import sys\nfor x in sys.path:\n  print(x)')
 fi
 
-if which python3 >/dev/null; then
+if which python3 >/dev/null 2>&1; then
   python3_path=$(python3 -c $'import sys\nfor x in sys.path:\n  print(x)')
 fi
 
-if (( $+commands[composer] )); then
-  php_path="$(composer global config bin-dir --absolute 2>/dev/null)"
+if which composer >/dev/null 2>&1; then
+  php_path="${XDG_CONFIG_HOME}/composer/vendor/bin"
 fi
 
-if which go >/dev/null; then
+if which go >/dev/null 2>&1; then
   go_bin="${HOME}/go/bin"
 fi
 
-if [[ -x "${HOME}/.cargo/bin" || $(which rustc >/dev/null) ]]; then
+if [[ -x "${HOME}/.cargo/bin" || $(which rustc >/dev/null 2>&1) ]]; then
   cargo_path="${HOME}/.cargo/bin"
 fi
 
