@@ -103,7 +103,7 @@ the above shortcut into the startup folder.
 While I track my wsltty configuration in source control, an example of the
 shortcut for wsltty is:
 
-`%LOCALAPPDATA%\wsltty\bin\mintty.exe --WSL= --configdir="%APPDATA%\wsltty" -~ -B /usr/bin/zsh`
+`%LOCALAPPDATA%\wsltty\bin\mintty.exe --WSL= --configdir="%APPDATA%\wsltty" -~ -B thin
 
 The `-B` is for borderless, and until wslbridge gets fixed, I still need to pass
 in the login shell path, hence the `/usr/bin/zsh`.
