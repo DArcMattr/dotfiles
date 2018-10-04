@@ -44,7 +44,7 @@ class PHPCS
         $composer = $event->getComposer();
 
         if (self::_isInstalled($composer, 'squizlabs/php_codesniffer')
-            && self::_isInstalled($composer, 'pragmarx/laravelcs')
+            && self::_isInstalled($composer, 'fig-r/psr2r-sniffer')
             && self::_isInstalled($composer, 'wp-coding-standards/wpcs')
         ) {
             self::_setPhpCsConfig($composer, $event->getIO());
@@ -82,7 +82,7 @@ class PHPCS
         $io->write('Configuring phpcs for project... ', false);
 
         $vendorDirs = [
-          "$vendorDir/pragmarx/laravelcs/Standards",
+          "$vendorDir/fig-r/psr2r-sniffer",
           "$vendorDir/wp-coding-standards/wpcs",
         ];
         $installedPaths = implode(',', $vendorDirs);
