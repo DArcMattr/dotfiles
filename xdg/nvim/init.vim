@@ -28,6 +28,7 @@ Plug 'ludovicchabant/vim-lawrencium'
 Plug 'mattn/emmet-vim'
 "Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'mhinz/vim-signify'
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'reedes/vim-wheel'
 Plug 'rkitover/vimpager', { 'do': 'PREFIX=$HOME/.local ' . b:make . ' install' }
 Plug 'sheerun/vim-polyglot'
@@ -185,6 +186,7 @@ let g:AutoPairsShortcutFastWrap = '<Leader>ae'
 let g:AutoPairsShortcutJump = '<Leader>an'
 let g:AutoPairsShortcutBackInsert = '<Leader>ab'
 let g:go_term_mode = "split"
+let g:indent_guides_enable_on_vim_startup = 1
 let g:jsx_ext_required = 1
 let g:LanguageClient_loggingFile = $HOME . '/lc.log'
 let g:LanguageClient_loggingLevel = 'DEBUG'
