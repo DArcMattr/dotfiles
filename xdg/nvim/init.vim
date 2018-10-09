@@ -214,7 +214,7 @@ let g:netrw_silent = 1
 let g:netrw_winsize = 25
 let g:tagcommand_defaults = {
 \   'cmd': 'ctags',
-\   'args': '-R -a',
+\   'args': '-R -a --tag-relative=yes',
 \   'filesappend': '**',
 \  }
 let g:taggatron_run_in_background = 1
