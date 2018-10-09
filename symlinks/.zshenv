@@ -27,7 +27,8 @@ if which composer >/dev/null 2>&1; then
 fi
 
 if which go >/dev/null 2>&1; then
-  go_bin="${HOME}/go/bin"
+  export GOPATH=${HOME}/go
+  go_bin="${GOPATH}/go"
 fi
 
 if [[ -x "${HOME}/.cargo/bin" || $(which rustc >/dev/null 2>&1) ]]; then
