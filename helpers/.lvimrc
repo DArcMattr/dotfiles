@@ -2,59 +2,47 @@ if g:localvimrc_sourced_once_for_file
   finish
 endif
 
-let g:tagcommands = {
-\   'php':  {
-\     'tagfile': '/srv/www/ten/php.tags',
-\     'args': '-R -a --exclude=noop.php',
-\     'files': '/srv/www/ten/htdocs/'
-\   },
-\   'javascript': {
-\     'tagfile': '/srv/www/ten/javascript.tags',
-\     'files': '/srv/www/ten/htdocs/'
-\   }
-\ }
-
-let g:LanguageClient_rootMarkers = ['wp-config.php']
+let g:LanguageClient_rootMarkers = ['config.php']
 
 if g:localvimrc_sourced_once
   finish
 endif
 
 if exists( "g:vdebug_options" )
-  "let g:vdebug_options['server'] = "192.168.50.1"
-  let g:vdebug_options['debug_file'] = "~/vdebug_log"
+  let g:vdebug_options['debug_file'] = '~/vdebug_log'
   let g:vdebug_options['debug_file_level'] = 2
 endif
 
-let g:ale_php_phpcs_standard = 'WordPress'
-let g:ale_php_phpcbf_standard = 'WordPress'
-let g:ale_css_stylelint_options = '--config ~/.config/yarn/global/node_modules/stylelint-config-wordpress/scss'
-let g:ale_scss_stylelint_options = '--config ~/.config/yarn/global/node_modules/stylelint-config-wordpress/scss'
+let g:ale_php_phpcs_standard = 'PSR2R'
+let g:ale_php_phpcbf_standard = 'PSR2R'
 
-augroup WordPress
+augroup PROJECT
+  autocmd BufNewFile,BufRead,BufEnter * set textwidth=100
+  autocmd BufEnter * execute 'match OverLength /\%'. (&textwidth + 1) .'v.*/'
+augroup END
+
+augroup PHP
   autocmd!
-  autocmd BufNewFile,BufRead,BufEnter *.php set syn=wordpress
-  autocmd BufWritePost *.php silent !phpcbf --standard=WordPress %
+  "autocmd BufNewFile,BufRead,BufEnter *.php set syn=wordpress
+  "autocmd BufWritePost *.php silent !phpcbf --standard=PSR2R %
 
-  autocmd FileType php let g:ale_php_phpcs_standard = 'WordPress'
-  autocmd FileType php setlocal tags+='/srv/www/ten/php.tags'
   autocmd FileType php call taggatron#SetTags(taggatron#get('tagdefaults'))
   autocmd FileType php call taggatron#CheckCommandList(0)
+  autocmd FileType php let b:tagcommands['php'] = {
+\   'tagfile': '/var/www/vhosts/local.theofficeexpress.com/php.tags',
+\   'args': '--tag-relative=yes -R --fields=+aimlS --PHP-kinds=+cdfint-av',
+\   'files': '/var/www/vhosts/local.theofficeexpress.com/htdocs/'
+\ }
+augroup END
 
-  autocmd FileType javascript let g:ale_javascript_eslint_options = '{"config":"wordpress"}'
+augroup JS
+  autocmd!
 
-  autocmd FileType css let g:ale_css_stylelint_executable = 'stylelint'
-  autocmd FileType css let g:ale_css_stylelint_use_global = 1
-  autocmd FileType css let g:ale_css_stylelint_options = '--config ~/.config/yarn/global/node_modules/stylelint-config-wordpress/scss'
-  autocmd FileType scss let g:ale_scss_stylelint_executable = 'stylelint'
-  autocmd FileType scss let g:ale_scss_stylelint_use_global = 1
-
-  autocmd BufNewFile,BufRead,BufEnter .gruntjshintrc setfiletype json
-
-  autocmd BufRead,BufEnter FileType javascript setlocal tags+='/srv/www/ten/javascript.tags'
   autocmd FileType javascript call taggatron#SetTags(taggatron#get('tagdefaults'))
   autocmd FileType javascript call taggatron#CheckCommandList(0)
-
-  autocmd BufNewFile,BufRead,BufEnter * set textwidth=85
-  autocmd BufEnter * execute 'match OverLength /\%'. (&textwidth + 1) .'v.*/'
+  autocmd FileType javascript let b:tagcommands['javascript'] = {
+\   'tagfile': '/var/www/vhosts/local.theofficeexpress.com/javascript.tags',
+\   'args': '--tag-relative=yes -R --javascript-kinds=-c-f-m-p-v --langmap=javascript:.js.es6.es.jsx',
+\   'files': '/var/www/vhosts/local.theofficeexpress.com/htdocs/'
+\ }
 augroup END
