@@ -1,0 +1,4 @@
+-a
+--tag-relative=yes
+--recurse
+--sort=yes
