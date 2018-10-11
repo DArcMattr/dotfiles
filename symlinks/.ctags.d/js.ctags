@@ -1,9 +1,9 @@
---javascript-kinds=+F-c-m-p-v
+--javascript-kinds=+f-c-m-p-v
 --exclude=node_modules
 --exclude=vendor
 --exclude=min
 --exclude=\*.min.\*
---regex-javascript=/^[ \t]*const[ \t]?([a-zA-Z]\w*|\([a-zA-Z]\w*(,\s*[a-zA-Z]\w*)*\))[ \t]*=>/F,Function,Functions/
+--regex-javascript=/^[ \t]*(?:const|let|var)*[ \t]?([a-zA-Z]\w*|\([a-zA-Z]\w*(,\s*[a-zA-Z]\w*)*\))[ \t]*=>/\1/f,function,functions/
 --langmap=javascript:+.es6
 --langmap=javascript:+.jsx
 --langmap=javascript:+.es
