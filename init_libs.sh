@@ -21,7 +21,7 @@ grab_rust() {
     rm "${HOME}/.zfunc/_rustup"; \
     "${HOME}/.cargo/bin/rustup" completions zsh > "${HOME}/.zfunc/_rustup"
 
-  cd "${HOME}" && "${HOME}/.cargo/bin/cargo" install cargo-deb cargo-update exa
+  cd "${HOME}" && "${HOME}/.cargo/bin/cargo" install --force cargo-deb cargo-update exa
 }
 
 grab_pips() {
@@ -29,7 +29,14 @@ grab_pips() {
 
   pip2 install -U --user neovim mercurial pip s3cmd
   pip3 install -U --user doge flake8 gsutil httpie icdiff neovim mycli pip \
-    psutil powerline-status pyemojify
+    powerline-status psutil pyemojify 'python-language-server[all]'
+
+  ## redundant to force an update of specific packages, then to update all the
+  ## installed ones
+  #pip2 freeze --user | grep -v '^\-e' | cut -d = -f 1 | \
+  #  xargs -n1 pip2 install -U --user
+  #pip3 freeze --user | grep -v '^\-e' | cut -d = -f 1 | \
+  #  xargs -n1 pip3 install -U --user
 
   if [ ! -d "${config_home}/powerline" ]; then
     mkdir -p "${config_home}/powerline"
