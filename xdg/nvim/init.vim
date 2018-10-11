@@ -23,6 +23,7 @@ Plug 'isRuslan/vim-es6', { 'for': [ 'js', 'jsx', 'javascript.jsx' ] }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jiangmiao/auto-pairs'
 Plug 'joonty/vim-taggatron'
+Plug 'junegunn/vim-easy-align'
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'mattn/emmet-vim'
 "Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
@@ -214,7 +215,6 @@ let g:netrw_silent = 1
 let g:netrw_winsize = 25
 let g:tagcommand_defaults = {
 \   'cmd': 'ctags',
-\   'args': '-R -a --tag-relative=yes',
 \   'filesappend': '**',
 \  }
 let g:taggatron_run_in_background = 1
@@ -241,6 +241,7 @@ nmap <C-o>        i<Cr><Esc>
 nmap <C-PageDown> <Cmd>bp<Cr>
 nmap <C-PageUp>   <Cmd>bn<Cr>
 nmap <Leader><F7> <Cmd>setlocal spell! spell? spelllang=en_us<Cr>
+nmap <Leader>ea   <Plug>(EasyAlign)
 nmap <Leader>gb   <Cmd>Gblame<Cr>
 nmap <Leader>gc   <Cmd>Gcommit<Cr>
 nmap <Leader>gd   <Cmd>Gdiff<Cr>
@@ -310,6 +311,7 @@ vnoremap : ;
 vnoremap * y/<C-r>"<Cr>
 vnoremap ? y?<C-r>"<Cr>
 
+xmap <Leader>ea <Plug>(EasyAlign)
 xnoremap c "xc
 
 " in case of derp-sudo
