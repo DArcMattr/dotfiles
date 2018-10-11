@@ -42,7 +42,7 @@ augroup JS
   autocmd FileType javascript call taggatron#CheckCommandList(0)
   autocmd FileType javascript let b:tagcommands['javascript'] = {
 \   'tagfile': '/var/www/vhosts/local.theofficeexpress.com/javascript.tags',
-\   'args': '--tag-relative=yes -R --javascript-kinds=-c-f-m-p-v --langmap=javascript:.js.es6.es.jsx',
+\   'args': '',
 \   'files': '/var/www/vhosts/local.theofficeexpress.com/htdocs/'
 \ }
 augroup END
