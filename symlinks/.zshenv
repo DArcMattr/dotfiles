@@ -28,7 +28,7 @@ fi
 
 if which go >/dev/null 2>&1; then
   export GOPATH=${HOME}/go
-  go_bin="${GOPATH}/go"
+  go_bin="${GOPATH}/bin"
 fi
 
 if [[ -x "${HOME}/.cargo/bin" || $(which rustc >/dev/null 2>&1) ]]; then
