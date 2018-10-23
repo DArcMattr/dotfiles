@@ -3,7 +3,6 @@
 --exclude=vendor
 --exclude=min
 --exclude=\*.min.\*
---regex-javascript=/^[ \t]*(?:const|let|var)*[ \t]?([a-zA-Z]\w*|\([a-zA-Z]\w*(,\s*[a-zA-Z]\w*)*\))[ \t]*=>/\1/f,function,functions/
 --langmap=javascript:+.es6
 --langmap=javascript:+.jsx
 --langmap=javascript:+.es
