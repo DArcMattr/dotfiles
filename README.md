@@ -29,7 +29,6 @@ Some of these will be installed via the install scripts or apt-get below.
     sudo add-apt-repository -y ppa:ondrej/php
     sudo add-apt-repository -y ppa:jonathonf/vim
     sudo add-apt-repository -y ppa:git-core/ppa
-    sudo add-apt-repository -y ppa:gophers/archive
     wget --quiet -O - "http://apt.llvm.org/llvm-snapshot.gpg.key" | \
       sudo apt-key add -
     wget --quiet -O - "http://nginx.org/keys/nginx_signing.key" | \
@@ -41,14 +40,12 @@ Some of these will be installed via the install scripts or apt-get below.
     sudo add-apt-repository 'deb http://nginx.org/packages/mainline/ubuntu/ bionic nginx'
     sudo apt update
     sudo apt install autossh build-essential clang-6.0 clang-6.0-doc \
-      clang-format-6.0 clang-tools-6.0 cmake git golang-1.10-go htop \
-      libboost-filesystem-dev libboost-python-dev libboost-regex-dev \
-      libboost-system-dev libclang1-6.0 libclang1-6.0-dbg libclang-6.0-dev \
-      libclang-common-6.0-dev libevent-dev libfuzzer-6.0-dev libgit2-dev \
-      liblldb-6.0-dev libllvm6.0 libllvm6.0-dbg liblzma-dev libncurses5-dev \
-      libpcre3-dev libssh2-1-dev libssl-dev lld-6.0 lldb-6.0 llvm-6.0 \
-      llvm-6.0-dev llvm-6.0-doc llvm-6.0-examples llvm-6.0-runtime \
-      neovim nginx nodejs php7.2-cli php7.2-curl php7.2-dev \
+      clang-format-6.0 clang-tools-6.0 cmake git golang-go htop libclang1-6.0 \
+      libclang1-6.0-dbg libclang-6.0-dev libclang-common-6.0-dev libevent-dev \
+      libfuzzer-6.0-dev libgit2-dev liblldb-6.0-dev libllvm6.0 libllvm6.0-dbg \
+      liblzma-dev libncurses5-dev libpcre3-dev libssh2-1-dev libssl-dev lld-6.0 \
+      lldb-6.0 llvm-6.0 llvm-6.0-dev llvm-6.0-doc llvm-6.0-examples \
+      llvm-6.0-runtime neovim nginx nodejs php7.2-cli php7.2-curl php7.2-dev \
       php7.2-fpm php7.2-imap php7.2-json php7.2-mysql php7.2-opcache \
       php7.2-readline php7.2-soap php-common php-gd php-imagick php-mbstring \
       php-memcache php-pear php-xdebug php-xml php-zip postgresql-10 pv \
