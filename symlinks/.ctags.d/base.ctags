@@ -10,5 +10,8 @@
 --exclude=build
 --exclude=node_modules
 --exclude=bower_components
+--exclude=*.REMOTE.*
+--exclude=*.LOCAL.*
+--exclude=*.BASE.*
 --totals=yes
 --tag-relative=yes

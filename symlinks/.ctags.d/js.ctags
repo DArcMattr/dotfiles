@@ -1,9 +1,6 @@
 --javascript-kinds=+f-c-m-p-v
---exclude=node_modules
---exclude=vendor
---exclude=min
 --exclude=\*.min.\*
+--exclude=\*.map
 --langmap=javascript:+.es6
 --langmap=javascript:+.jsx
 --langmap=javascript:+.es
---exclude=\*.map
