@@ -30,7 +30,7 @@ Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-signify'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'reedes/vim-wheel'
-Plug 'rkitover/vimpager', { 'do': 'PREFIX=$HOME/.local ' . b:make . ' install' }
+Plug 'rkitover/vimpager', { 'do': 'PREFIX=$HOME/.local ' . b:make . ' install clean' }
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
@@ -265,10 +265,10 @@ inoremap <C-x><C-k> <Nop>
 "inoremap <expr> <S-Tab> pumvisible() ? '\<C-p>' : '\<S-Tab>'
 inoremap <silent> <C-U> <C-R>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<Cr>
 inoremap <silent> <C-U> <C-R>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<Cr>
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
+"inoremap <silent><expr> <Tab>
+"      \ pumvisible() ? "\<C-n>" :
+"      \ <SID>check_back_space() ? "\<Tab>" :
+"      \ coc#refresh()
 inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <silent><expr> <C-Space> coc#refresh()
 inoremap <expr> <Cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<Cr>"
@@ -513,7 +513,7 @@ augroup StartupStuffs
   autocmd VimResized * execute 'normal! \<C-w>='
   autocmd BufEnter * highlight OverLength ctermbg=234 ctermfg=249 guibg=#1c1c1c guifg=#b2b2b2
   autocmd BufEnter * execute 'match OverLength /\%'. (&textwidth + 1) .'v.*/'
-  autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
+  "autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
 augroup END
 
 " common FileTypes below
