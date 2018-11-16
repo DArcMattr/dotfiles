@@ -1,3 +1,4 @@
+" vim:et sw=2 ts=2
 if g:localvimrc_sourced_once_for_file
   finish
 endif
@@ -17,6 +18,8 @@ let g:ale_php_phpcs_standard = 'PSR2R'
 let g:ale_php_phpcbf_standard = 'PSR2R'
 
 augroup PROJECT
+  autocmd!
+
   autocmd BufNewFile,BufRead,BufEnter * set textwidth=100
   autocmd BufEnter * execute 'match OverLength /\%'. (&textwidth + 1) .'v.*/'
 augroup END
@@ -26,23 +29,19 @@ augroup PHP
   "autocmd BufNewFile,BufRead,BufEnter *.php set syn=wordpress
   "autocmd BufWritePost *.php silent !phpcbf --standard=PSR2R %
 
-  autocmd FileType php call taggatron#SetTags(taggatron#get('tagdefaults'))
-  autocmd FileType php call taggatron#CheckCommandList(0)
   autocmd FileType php let b:tagcommands['php'] = {
-\   'tagfile': '/var/www/vhosts/local.theofficeexpress.com/php.tags',
-\   'args': '--tag-relative=yes -R --fields=+aimlS --PHP-kinds=+cdfint-av',
-\   'files': '/var/www/vhosts/local.theofficeexpress.com/htdocs/'
-\ }
+  \   'tagfile': '/var/www/vhosts/local.theofficeexpress.com/php.tags',
+  \   'args': '--fields=+aimlS --PHP-kinds=+cdfint-av',
+  \   'files': '/var/www/vhosts/local.theofficeexpress.com/htdocs/'
+  \ }
 augroup END
 
 augroup JS
   autocmd!
 
-  autocmd FileType javascript call taggatron#SetTags(taggatron#get('tagdefaults'))
-  autocmd FileType javascript call taggatron#CheckCommandList(0)
   autocmd FileType javascript let b:tagcommands['javascript'] = {
-\   'tagfile': '/var/www/vhosts/local.theofficeexpress.com/javascript.tags',
-\   'args': '',
-\   'files': '/var/www/vhosts/local.theofficeexpress.com/htdocs/'
-\ }
+  \   'tagfile': '/var/www/vhosts/local.theofficeexpress.com/javascript.tags',
+  \   'args': '',
+  \   'files': '/var/www/vhosts/local.theofficeexpress.com/htdocs/'
+  \ }
 augroup END
