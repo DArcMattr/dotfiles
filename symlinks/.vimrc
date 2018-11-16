@@ -23,25 +23,30 @@ Plug 'bling/vim-airline'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
-Plug 'fatih/vim-go', { 'for': [ 'go' ] }
+Plug 'fatih/vim-go', { 'for': [ 'go' ], 'do': ':GoUpdateBinaries' }
 Plug 'isRuslan/vim-es6', { 'for': [ 'js', 'jsx', 'javascript.jsx' ] }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jiangmiao/auto-pairs'
-Plug 'joonty/vdebug'
 Plug 'joonty/vim-taggatron'
+Plug 'junegunn/vim-easy-align'
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-signify'
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'reedes/vim-wheel'
-Plug 'rkitover/vimpager', { 'do': 'PREFIX=$HOME/.local ' . b:make . ' install' }
+Plug 'rkitover/vimpager', { 'do': 'PREFIX=$HOME/.local ' . b:make . ' install clean' }
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
+Plug 'Shougo/neco-syntax'
+Plug 'Shougo/neco-vim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vividchalk'
 Plug 'Valloric/MatchTagAlways'
+Plug 'vim-vdebug/vdebug'
 Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/DirDiff.vim'
 Plug 'vim-scripts/matchit.zip'
@@ -50,9 +55,11 @@ call plug#end()
 
 set autoindent
 set autoread
+set background=dark
 set backspace=indent,eol,start
 set backup
 set backupdir=$TEMP,$TMP,.
+set clipboard+=unnamedplus
 set colorcolumn=+1
 set completeopt=menuone,longest
 set copyindent
@@ -62,7 +69,7 @@ set encoding=utf-8
 set esckeys
 set expandtab
 set fillchars+=stl:\ ,stlnc:\
-set formatoptions=nqr12
+set formatoptions=nqr12j
 set gdefault
 if executable("ag")
   set grepprg=ag\ --nogroup\ --nocolor
@@ -86,6 +93,7 @@ set modeline
 set mouse=a
 set nobomb
 set nojoinspaces
+set noshowmode
 set nostartofline
 set noswapfile
 set nowrap
@@ -98,6 +106,7 @@ set printheader=+{strftime(\"%c\"getftime(expand(\"%%\")))}%=Page\ %N
 set printoptions=formfeed:y,paper:letter,portrait:n,number:y,syntax:7
 set printoptions+=left:5mm,right:5mm,top:10mm,bottom:5mm
 set pumheight=15
+set regexpengine=1
 set relativenumber
 set scrolloff=3
 set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
@@ -148,7 +157,7 @@ highlight clear SpellCap
 highlight clear SpellLocal
 highlight clear SpellRare
 
-highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline guifg=#800000 gui=underline
+highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline guifg=#800000 gui=undercurl
 highlight SpellCap term=underline cterm=underline gui=undercurl
 highlight SpellLocal term=underline cterm=underline gui=undercurl
 highlight SpellRare term=underline cterm=underline gui=undercurl
@@ -195,7 +204,6 @@ endif
 let mapleader = ","
 let maplocalleader = " "
 let c_space_errors = 1
-let php_sync_method = 1
 let $GIT_SSL_NO_VERIFY = 'true'
 
 let g:airline#extensions#branch#enabled = 1
@@ -233,7 +241,7 @@ let g:ale_php_phpcs_use_global = 1
 let g:ale_scss_stylelint_use_global = 1
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
-let g:ale_sign_error = '⨉'
+let g:ale_sign_error = '×'
 let g:ale_sign_warning = '⚠'
 let g:AutoPairsShortcutToggle = '<Leader>ap'
 let g:AutoPairsShortcutFastWrap = '<Leader>ae'
@@ -272,7 +280,6 @@ let g:netrw_silent = 1
 let g:netrw_winsize = 25
 let g:tagcommand_defaults = {
 \   'cmd': 'ctags',
-\   'args': '-R -a',
 \   'filesappend': '**',
 \  }
 let g:tagcommands = {
@@ -281,6 +288,7 @@ let g:tagcommands = {
 \ "php" : {"tagfile":"$XDG_CONFIG_HOME/nvim/php.tags"}
 \}
 let g:taggatron_run_in_background = 1
+let g:ultisnips_php_scalar_types = 1
 let g:UltiSnipsExpandTrigger = "<Leader>u"
 let g:UltiSnipsJumpBackwardTrigger = "<C-n>"
 let g:UltiSnipsJumpForwardTrigger = "<C-p>"
@@ -295,6 +303,7 @@ let g:user_emmet_settings = {
 let g:vimpager = {}
 
 map <F7> ;execute ";vsplit %"<Cr>
+map <C-F7> ;execute ";split %"<Cr>
 
 nmap .            .'[
 nmap <C-i>        i<Space><Esc>
@@ -369,14 +378,16 @@ command! W w !sudo tee % >/dev/null
 
 " Denite
 call denite#custom#option( 'default', {
+\  'auto_resize': 1,
 \  'prompt': '>',
 \  'short_source_names': 1,
 \  'split': 'vertical',
 \  'vertical_preview': 1,
-\  'auto_resize': 1,
+\  'winheight': 999,
 \})
 call denite#custom#option( 'list', { 'mode': 'normal' } )
 call denite#custom#option( 'grep', { 'vertical_preview': 1 } )
+call deoplete#enable()
 
 if executable('ag')
   " Use ag in denite grep source.
@@ -400,19 +411,19 @@ endif
 
 command! -nargs=1 Silent |
 \   execute ';silent !'.<q-args> |
-\   execute ';redraw!'
+\   execute ';redraw!'<Cr>
 
 command! -nargs=* -complete=help Help vertical belowright help <args>
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
-if !exists(":DiffOrig")
+if !exists(':DiffOrig')
   command DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_ | diffthis
   \   | wincmd p | diffthis
 endif
 
 " from https://gist.github.com/tarruda/5158535
-if $TMUX != ''
+if exists('$TMUX')
   function! TmuxMove(direction)
     " Check if we are currently focusing on a edge window.
     " To achieve that,  move to/from the requested window and
@@ -437,7 +448,6 @@ if $TMUX != ''
     end
   endfunction
 
-  "set clipboard=unnamed
 
   nnoremap <silent> <C-w>j :silent call TmuxMove('j')<cr>
   nnoremap <silent> <C-w>j :silent call TmuxMove('j')<cr>
