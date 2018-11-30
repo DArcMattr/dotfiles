@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 grab_hgcfg() {
   INSTALL_PATH="${HOME}/contrib/hgcfg"
   if [ ! -d "${INSTALL_PATH}/.hg/" ]; then
@@ -87,7 +87,7 @@ grab_composer() {
 
 grab_gems() {
   if which ruby >/dev/null && which gem >/dev/null; then
-    gem install --user-install lolcat neovim sass
+    gem install --user-install lolcat neovim sass solargraph
   fi
 }
 
