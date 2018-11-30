@@ -19,7 +19,8 @@
     "squizlabs/php_codesniffer": "@dev",
     "wp-cli/wp-cli": "@stable",
     "wp-coding-standards/wpcs": "@stable",
-    "fig-r/psr2r-sniffer": "@stable"
+    "fig-r/psr2r-sniffer": "@stable",
+    "psy/psysh": "@stable"
   },
   "scripts": {
     "post-install-cmd": [
