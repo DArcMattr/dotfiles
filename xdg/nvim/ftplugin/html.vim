@@ -5,7 +5,7 @@ let g:ale_fixers['html'] = ['tidy']
 let g:ale_html_langserver_executable = 'vscode-html-languageservice'
 
 try
-  call LanguageClient_registerServerCommands({'html': [ 'vscode-html-languageservice', '--stdio' ]})
+  call LanguageClient_registerServerCommands({'html': [ 'html-languageserver', '--stdio' ]})
 catch
   " do nothing
 endtry
