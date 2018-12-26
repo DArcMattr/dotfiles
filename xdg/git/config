@@ -27,15 +27,17 @@
   whitespace = trailing-space,space-before-tab,indent-with-non-tab
 [diff]
   external = "~/dotfiles/helpers/diff"
+  algorithm = patience
   mnemonicprefix = true
 [diff "nodiff"]
   command = /bin/true
 [difftool]
   prompt = false
-  tool = vimdiff
+  tool = vim
 [difftool "icdiff"]
-  cmd = icdiff --line-numbers $LOCAL $REMOTE
-[difftool "vimdiff"]
+  cmd = icdiff $LOCAL $REMOTE
+  options = '--highlight --line-numbers'
+[difftool "vim"]
   cmd = nvim -d $LOCAL $REMOTE
 [fetch]
   fsckobjects = false
@@ -59,6 +61,8 @@
   keepBackup = false
 [mergetool "vimdiff"]
   cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c '$wincmd J'
+[mergetool "fugitive"]
+  cmd = nvim -f -c "Gdiff" "$MERGED"
 [pager]
   diff =
 [pull]
