@@ -20,7 +20,7 @@ Some of these will be installed via the install scripts or apt-get below.
     python3 /tmp/get-pip.py --user
     ~/.local/bin/pip2 install -U --user mercurial
     ~/.local/bin/hg clone https://bitbucket.org/darceneaux/dotfiles
-    curl -sL https://deb.nodesource.com/setup_10.x | \
+    curl -sL https://deb.nodesource.com/setup_11.x | \
       sudo -E bash - # argh, I hate this
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | \
@@ -35,7 +35,7 @@ Some of these will be installed via the install scripts or apt-get below.
       sudo apt-key add -
     wget --quiet -O - "https://www.postgresql.org/media/keys/ACCC4CF8.asc" | \
       sudo apt-key add -
-    sudo add-apt-repository 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-6.0 main'
+    sudo add-apt-repository 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-7 main'
     sudo add-apt-repository 'deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main'
     sudo add-apt-repository 'deb http://nginx.org/packages/mainline/ubuntu/ bionic nginx'
     sudo apt update
@@ -44,14 +44,12 @@ Some of these will be installed via the install scripts or apt-get below.
       libclang-7-dev libclang-common-7-dev libevent-dev libfuzzer-7-dev \
       libgit2-dev liblldb-7-dev libllvm7 liblzma-dev libncurses5-dev \
       libpcre3-dev libssh2-1-dev libssl-dev lld-7 lldb-7 llvm-7 llvm-7-dev \
-      llvm-7-doc llvm-7-examples llvm-7-runtime neovim nginx nodejs php7.2-cli \
-      php7.2-curl php7.2-dev php7.2-fpm php7.2-imap php7.2-json php7.2-mysql \
-      php7.2-opcache php7.2-readline php7.2-soap php-common php-gd php-imagick \
+      llvm-7-doc llvm-7-examples llvm-7-runtime neovim nginx nodejs php7.3-cli \
+      php7.3-curl php7.3-dev php7.3-fpm php7.3-imap php7.3-json php7.3-mysql \
+      php7.3-opcache php7.3-readline php7.3-soap php-common php-gd php-imagick \
       php-mbstring php-memcache php-pear php-xdebug php-xml php-zip \
       postgresql-10 pv python3-docutils python-clang-7 ruby-dev shellcheck tidy \
       vim-nox xsel yarn zlib1g-dev zsh
-    go get -u github.com/junegunn/fzf
-    go get -u github.com/sourcegraph/go-langserver
 
 The `helpers/debianish-update-alternatives.sh` will make LLVM and Go usable on
 Ubuntu.
@@ -99,11 +97,7 @@ the above shortcut into the startup folder.
 While I track my wsltty configuration in source control, an example of the
 shortcut for wsltty is:
 
-`%LOCALAPPDATA%\wsltty\bin\mintty.exe --WSL= --configdir="%APPDATA%\wsltty" -~ -B thin
-
-The `-B` is for borderless, and until wslbridge gets fixed, I still need to pass
-in the login shell path, hence the `/usr/bin/zsh`.
-
+    %LOCALAPPDATA%\wsltty\bin\mintty.exe --WSL= --configdir="%APPDATA%\wsltty" -~ -B thin
 
 ### Self-signed certificates
 
@@ -123,7 +117,7 @@ with it to pass through without challenge. To do so:
 
 ### Keyboard Mapping Under GNOME/Wayland
 
-I'm trying GNOME-under-Wayland now, which means the `.Xmodmap` file does nothing
+I tried GNOME-under-Wayland, which means the `.Xmodmap` file does nothing
 anymore, so the alternative as I see it is to edit system files to get what
 I had before. The `speshul` file has my interventions, there, and I had to copy
 it to `/usr/share/X11/xkb/symbols/speshul`, append
