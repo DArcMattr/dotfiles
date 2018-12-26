@@ -6,7 +6,7 @@ merge = nvim -d
 [extensions]
 bookmarks=
 color=
-#config=~/contrib/hgcfg/hgext/hgcfg.py
+config=~/contrib/hgcfg/hgext/hgcfg.py
 convert=
 eol=
 extdiff=
