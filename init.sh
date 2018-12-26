@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 # only idempotent commands here so far
 # TODO: translate to ansible
 
@@ -8,17 +8,17 @@ mkdir -p ~/contrib ~/.local/bin
 chmod 600 ~/dotfiles/sshconfig
 mv ~/.ssh/config ~/.ssh/config.orig
 ln -s ~/dotfiles/sshconfig ~/.ssh/config
-ln -s ~/dotfiles/xdg/git      "${DOT_CONFIG}/git"
-ln -s ~/dotfiles/xdg/htop     "${DOT_CONFIG}/htop"
 ln -s ~/dotfiles/xdg/composer "${DOT_CONFIG}/composer"
+ln -s ~/dotfiles/xdg/git      "${DOT_CONFIG}/git"
+ln -s ~/dotfiles/xdg/hg       "${DOT_CONFIG}/hg"
+ln -s ~/dotfiles/xdg/htop     "${DOT_CONFIG}/htop"
 ln -s ~/dotfiles/xdg/nvim     "${DOT_CONFIG}/nvim"
 tic -x ~/dotfiles/tmux-256color.terminfo
 
 find ~/dotfiles/symlinks/ -name ".*" -exec ln -sf "{}" "${HOME}" \;
-#find ~/dotfiles/xdg/nvim/ -maxdepth 1 -mindepth 1 -exec ln -sf "{}" "${HOME}/${DOT_CONFIG}/nvim" \;
 
 (
-  . ~/dotfiles/init_libs.sh
+  zsh ~/dotfiles/init_libs.sh
 
   grab_composer
   grab_pips
@@ -32,6 +32,7 @@ find ~/dotfiles/symlinks/ -name ".*" -exec ln -sf "{}" "${HOME}" \;
   grab_git -d ~/.tmux/plugins/tpm           -r https://github.com/tmux-plugins/tpm.git -n
   grab_git -d ~/contrib/autoenv             -r https://github.com/darcmattr/autoenv.git -n
 
-  # cd ~/dotfiles && \
-  #   hg config hooks.update "chmod 600 ~/dotfiles/sshconfig"
+  cd ~/dotfiles && \
+    hg config hooks.update "chmod 600 ~/dotfiles/sshconfig" && \
+    cd -
 )
