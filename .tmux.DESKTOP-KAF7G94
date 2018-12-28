@@ -12,7 +12,7 @@ project_pane() {
       d) DIRECTORY=${OPTARG}
         ;;
 
-      g) GULP=${OPTARG}
+      g) BUILD=${OPTARG}
         ;;
 
       l) LOG=${OPTARG}
@@ -24,11 +24,11 @@ project_pane() {
       t) SESSION=${OPTARG}
         ;;
 
-      *) echo "Invalid Option: -${OPTARG}" >&2
+      :) echo "Option -${OPTARG} requires an argument." >&2
         exit 1
         ;;
 
-      :) echo "Option -${OPTARG} requires an argument." >&2
+      *) echo "Invalid Option: -${OPTARG}" >&2
         exit 1
         ;;
     esac
@@ -37,8 +37,8 @@ project_pane() {
   WIN_NUM=$(tmux display-message -p '#{session_windows}')
   LOG=${LOG:-"/var/log/fpm-php.www.log"}
 
-  if [ -z "${GULP+x}" ]; then
-    GULP=${GULP:='gulp local'}
+  if [ -z "${BUILD+x}" ]; then
+    BUILD=${BUILD:='yarn watch'}
   fi
 
   if [ -z "${DIRECTORY}" ]; then
@@ -48,7 +48,7 @@ project_pane() {
 
   tmux new-window -t "${SESSION}:${WIN_NUM}" -c "${DIRECTORY}" \; \
     split-window -v -p 12 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}" "tail -F ${LOG}" \; \
-    split-window -h -p 50 -t "${SESSION}:${WIN_NUM}.1" -c "${DIRECTORY}" "tail -F ./htdocs/log/x-errors_php.txt" \; \
+    split-window -h -p 50 -t "${SESSION}:${WIN_NUM}.1" -c "${DIRECTORY}" "tail -F ./htdocs/log/locallog.txt" \; \
     split-window -v -p 12 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}" \; \
     split-window -v -p 12 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}"
 
@@ -62,7 +62,7 @@ sudo sh -c " \
   service dbus start && \
   service nginx start && \
   service php5.6-fpm start && \
-  service php7.2-fpm start && \
+  service php7.3-fpm start && \
   service mysql start"
 mailcatcher
 
