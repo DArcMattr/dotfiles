@@ -42,14 +42,14 @@ Some of these will be installed via the install scripts or apt-get below.
     sudo apt install autossh build-essential clang-7 clang-7-doc \
       clang-format-7 clang-tools-7 cmake git golang-go htop libclang1-7 \
       libclang-7-dev libclang-common-7-dev libevent-dev libfuzzer-7-dev \
-      libgit2-dev liblldb-7-dev libllvm7 liblzma-dev libncurses5-dev \
-      libpcre3-dev libssh2-1-dev libssl-dev lld-7 lldb-7 llvm-7 llvm-7-dev \
-      llvm-7-doc llvm-7-examples llvm-7-runtime neovim nginx nodejs php7.3-cli \
-      php7.3-curl php7.3-dev php7.3-fpm php7.3-imap php7.3-json php7.3-mysql \
-      php7.3-opcache php7.3-readline php7.3-soap php-common php-gd php-imagick \
-      php-mbstring php-memcache php-pear php-xdebug php-xml php-zip \
-      postgresql-10 pv python3-docutils python-clang-7 ruby-dev shellcheck tidy \
-      vim-nox xsel yarn zlib1g-dev zsh
+      libgit2-dev liblldb-7-dev libllvm7 liblzma-dev libnss3-tools \
+      libncurses5-dev libpcre3-dev libssh2-1-dev libssl-dev lld-7 lldb-7 llvm-7 \
+      llvm-7-dev llvm-7-doc llvm-7-examples llvm-7-runtime neovim nginx nodejs \
+      php7.3-cli php7.3-curl php7.3-dev php7.3-fpm php7.3-imap php7.3-json \
+      php7.3-mysql php7.3-opcache php7.3-readline php7.3-soap php-common \
+      php-gd php-imagick php-mbstring php-memcache php-pear php-xdebug php-xml \
+      php-zip postgresql-11 pv python3-docutils python-clang-7 ruby-dev \
+      shellcheck tidy vim-nox xsel yarn zlib1g-dev zsh
 
 The `helpers/debianish-update-alternatives.sh` will make LLVM and Go usable on
 Ubuntu.
