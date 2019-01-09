@@ -12,6 +12,7 @@ grab_hgcfg() {
 grab_go() {
   go get -u golang.org/dl/go1.11
   ${go_bin}/go1.11 download
+  ${go_bin}/go1.11 get -u github.com/FiloSottile/mkcert
   ${go_bin}/go1.11 get -u github.com/junegunn/fzf
   ${go_bin}/go1.11 get -u github.com/sourcegraph/go-langserver
 }
