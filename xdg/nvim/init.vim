@@ -139,6 +139,7 @@ highlight link ALEWarningLine WarningMsg
 highlight Comment ctermfg=105 guifg=#8787ff
 highlight CursorColumn cterm=NONE ctermbg=237 guibg=#3a3a3a
 highlight CursorLine term=underline cterm=underline ctermbg=NONE gui=underline guibg=NONE
+highlight ErrorMsg ctermbg=52 guibg=#5f0000
 highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
 highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
 highlight NonText ctermfg=235 guifg=#262626
@@ -245,6 +246,7 @@ noremap <Leader>l <Cmd>set rnu!<Cr>
 noremap <Leader>t <Cmd>enew<Cr>
 noremap N         Nzz
 noremap n         nzz
+noremap p         p`[
 
 "inoremap <expr> <Cr> (pumvisible() ? "\<C-Y>\<Plug>(expand_or_cr)" : "\<Cr>")
 "inoremap <expr> <Plug>(expand_or_cr) (cm#completed_is_snippet() ? "\<C-U>" : "\<Cr>")
