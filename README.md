@@ -44,12 +44,12 @@ Some of these will be installed via the install scripts or apt-get below.
       libclang-7-dev libclang-common-7-dev libevent-dev libfuzzer-7-dev \
       libgit2-dev liblldb-7-dev libllvm7 liblzma-dev libnss3-tools \
       libncurses5-dev libpcre3-dev libssh2-1-dev libssl-dev lld-7 lldb-7 llvm-7 \
-      llvm-7-dev llvm-7-doc llvm-7-examples llvm-7-runtime neovim nginx nodejs \
-      php7.3-cli php7.3-curl php7.3-dev php7.3-fpm php7.3-imap php7.3-json \
-      php7.3-mysql php7.3-opcache php7.3-readline php7.3-soap php-common \
-      php-gd php-imagick php-mbstring php-memcache php-pear php-xdebug php-xml \
-      php-zip postgresql-11 pv python3-docutils python-clang-7 ruby-dev \
-      shellcheck tidy vim-nox xsel yarn zlib1g-dev zsh
+      llvm-7-dev llvm-7-doc llvm-7-examples llvm-7-runtime neovim nginx \
+      nodejs php7.3-cli php7.3-curl php7.3-dev php7.3-fpm php7.3-imap \
+      php7.3-json php7.3-mysql php7.3-opcache php7.3-readline php7.3-soap \
+      php-common php-gd php-imagick php-mbstring php-memcache php-pear \
+      php-xdebug php-xml php-zip postgresql-11 pv python3-docutils \
+      python-clang-7 ruby-dev shellcheck tidy vim-nox xsel yarn zlib1g-dev zsh
 
 The `helpers/debianish-update-alternatives.sh` will make LLVM and Go usable on
 Ubuntu.
@@ -101,19 +101,10 @@ shortcut for wsltty is:
 
 ### Self-signed certificates
 
-Every dev machine should have its own Certificate Authority certificate to sign
-its own certs, so the CA can be accepted, allowing all the local certs generated
-with it to pass through without challenge. To do so:
-
-    mkdir -p "${HOME}/.config/ssl"
-    openssl genrsa -out "$HOME/.config/ssl/rootCA.key" 2048
-    sudo openssl req -x509 -new -nodes -days 3563 -sha256 \
-      -subj "/CN=localhost/O=DavidTheMachine/C=US/ST=California/L=Anaheim" \
-      -key "${HOME}/.config/ssl/rootCA.key" \
-      -out "/usr/share/ca-certificates/localhost-rootCA.pem"
-    sudo openssl x509 -in "/usr/share/ca-certificates/localhost-rootCA.pem" \
-      -out "/usr/share/ca-certificates/localhost-rootCA.crt" -inform PEM
-    sudo dpkg-reconfigure ca-certificates
+Once Golang is installed, `mkcert` will also be. Run `mkcert -install`. If
+running it in WSL, I found it's best to generate the certificate pairs on the
+WSL side, and to copy the generated root file to the Windows-side directory, and
+run `mkcert -install` there.
 
 ### Keyboard Mapping Under GNOME/Wayland
 
