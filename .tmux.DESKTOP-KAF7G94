@@ -62,7 +62,7 @@ sudo sh -c " \
   service dbus start && \
   service nginx start && \
   service php5.6-fpm start && \
-  service php7.3-fpm start && \
+  service php7.2-fpm start && \
   service mysql start"
 mailcatcher
 
