@@ -56,9 +56,10 @@
   name = "Keep ours merge"
   driver = true
 [mergetool]
+  keepBackup = false
   prompt = false
   stat = true
-  keepBackup = false
+  tool = fugitive
 [mergetool "vimdiff"]
   cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c '$wincmd J'
 [mergetool "fugitive"]
