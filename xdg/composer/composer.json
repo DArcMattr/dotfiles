@@ -9,7 +9,6 @@
     ]
   },
   "require": {
-    "d11wtq/boris": "@stable",
     "felixfbecker/language-server": "@dev",
     "laravel/installer": "@stable",
     "phpmd/phpmd": "@stable",
