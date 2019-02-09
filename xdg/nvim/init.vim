@@ -39,6 +39,7 @@ Plug 'Shougo/neco-vim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vividchalk'
 Plug 'Valloric/MatchTagAlways'
@@ -132,26 +133,24 @@ set wildignore+=vendor/*,docs/*,node_modules/*,components/*,build/*,dist/*
 
 colorscheme vividchalk
 
+highlight link ALEErrorLine ErrorMsg
+highlight link ALEWarningLine WarningMsg
+
 highlight Comment ctermfg=105 guifg=#8787ff
 highlight CursorColumn cterm=NONE ctermbg=237 guibg=#3a3a3a
 highlight CursorLine term=underline cterm=underline ctermbg=NONE gui=underline guibg=NONE
+highlight ErrorMsg ctermbg=52 guibg=#5f0000
 highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
 highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
 highlight NonText ctermfg=235 guifg=#262626
 highlight Search ctermfg=222 guifg=#ffdf87
 highlight SignColumn ctermfg=232 guifg=#080808
 highlight SpecialKey ctermfg=235 guifg=#262626
-highlight TermCursor ctermfg=yellow guifg=yellow
-
-highlight clear SpellBad
-highlight clear SpellCap
-highlight clear SpellLocal
-highlight clear SpellRare
-
 highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline guifg=#800000 gui=undercurl
 highlight SpellCap term=underline cterm=underline gui=undercurl
 highlight SpellLocal term=underline cterm=underline gui=undercurl
 highlight SpellRare term=underline cterm=underline gui=undercurl
+highlight TermCursor ctermfg=yellow guifg=yellow
 
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
@@ -172,8 +171,10 @@ let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline#extensions#ycm#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:ale_cache_executable_check_failures = 1
+let g:ale_lint_delay = 0
 let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
 let g:ale_linters = {
 \   'javascript.jsx': ['eslint'],
 \ }
@@ -215,6 +216,7 @@ let g:netrw_silent = 1
 let g:netrw_winsize = 25
 let g:tagcommand_defaults = {
 \   'cmd': 'ctags',
+\   'args': '',
 \   'filesappend': '**',
 \  }
 let g:taggatron_run_in_background = 1
@@ -230,34 +232,24 @@ let g:user_emmet_settings = {
 \      }
 \    }
 \  }
-let g:vimpager = {}
+"let g:vimpager = {}
 
-map <F7> <Cmd>vsplit %<Cr>
-map <C-F7> <Cmd>split %<Cr>
+" in case of derp-sudo
+cnoremap w!! w !sudo tee % >/dev/null
+command! W w !sudo tee % >/dev/null
 
-nmap .            .'[
-nmap <C-i>        i<Space><Esc>
-nmap <C-o>        i<Cr><Esc>
-nmap <C-PageDown> <Cmd>bp<Cr>
-nmap <C-PageUp>   <Cmd>bn<Cr>
-nmap <Leader><F7> <Cmd>setlocal spell! spell? spelllang=en_us<Cr>
-nmap <Leader>ea   <Plug>(EasyAlign)
-nmap <Leader>gb   <Cmd>Gblame<Cr>
-nmap <Leader>gc   <Cmd>Gcommit<Cr>
-nmap <Leader>gd   <Cmd>Gdiff<Cr>
-nmap <Leader>gl   <Cmd>Glog -- %<Cr>
-nmap <Leader>gp   <Cmd>Gpush<Cr>
-nmap <Leader>gs   <Cmd>Gstatus<Cr>
-
-noremap n         nzz
-noremap N         Nzz
+noremap <C-F7>    <Cmd>split %<Cr>
 noremap <C-d>     <C-d>zz
 noremap <C-u>     <C-u>zz
+noremap <F7>      <Cmd>vsplit %<Cr>
 noremap <Leader>l <Cmd>set rnu!<Cr>
 noremap <Leader>t <Cmd>enew<Cr>
+noremap N         Nzz
+noremap n         nzz
+noremap p         p`[
 
-"imap <expr> <Cr> (pumvisible() ? "\<C-Y>\<Plug>(expand_or_cr)" : "\<Cr>")
-"imap <expr> <Plug>(expand_or_cr) (cm#completed_is_snippet() ? "\<C-U>" : "\<Cr>")
+"inoremap <expr> <Cr> (pumvisible() ? "\<C-Y>\<Plug>(expand_or_cr)" : "\<Cr>")
+"inoremap <expr> <Plug>(expand_or_cr) (cm#completed_is_snippet() ? "\<C-U>" : "\<Cr>")
 
 inoremap <C-u>      <C-g>u<C-u>
 inoremap <C-x><C-k> <Nop>
@@ -273,34 +265,45 @@ inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <silent><expr> <C-Space> coc#refresh()
 inoremap <expr> <Cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<Cr>"
 
-nnoremap <C-e>     3<C-e>
-nnoremap <C-p>     <Cmd>Denite file_rec<Cr>
-nnoremap <C-y>     3<C-y>
-nnoremap <Leader>/ <Cmd>Denite grep:.<Cr>
-nnoremap <Leader>o <Cmd>Denite outline<Cr>
-nnoremap <Leader>q <Cmd>nohlsearch<Cr>
-nnoremap H ^
-nnoremap J mzJ`z
-nnoremap L $
-nnoremap Q gq
-nnoremap Y y$
-nnoremap c "xc
-nnoremap gj j
-nnoremap gk k
-nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
-nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
-nnoremap { {zz
-nnoremap } }zz
-nnoremap ' `
-nnoremap ` '
-nnoremap ; :
+nnoremap . .`[
 nnoremap : ;
-nnoremap _ <Cmd>Lex<Cr>
-nnoremap <silent> <Leader>lc <Cmd>call LanguageClient_contextMenu()<Cr>
-nnoremap <silent> <Leader>lk <Cmd>call LanguageClient_textDocument_hover()<Cr>
-nnoremap <silent> <Leader>ld <Cmd>call LanguageClient_textDocument_definition()<Cr>
-nnoremap <silent> <Leader>lr <Cmd>call LanguageClient_textDocument_references()<Cr>
-nnoremap <silent> <F2> <Cmd>call LanguageClient_textDocument_rename()<Cr>
+nnoremap ; :
+nnoremap <C-PageDown> <Cmd>bp<Cr>
+nnoremap <C-PageUp>   <Cmd>bn<Cr>
+nnoremap <C-e>        3<C-e>
+nnoremap <C-i>        i<Space><Esc>
+nnoremap <C-o>        i<Cr><Esc>
+nnoremap <C-p>        <Cmd>Denite file_rec<Cr>
+nnoremap <C-y>        3<C-y>
+nnoremap <Leader>/    <Cmd>Denite grep:.<Cr>
+nnoremap <Leader><F7> <Cmd>setlocal spell! spell? spelllang=en_us<Cr>
+nnoremap <Leader>ea   <Plug>(EasyAlign)
+nnoremap <Leader>gb   <Cmd>Gblame<Cr>
+nnoremap <Leader>gc   <Cmd>Gcommit<Cr>
+nnoremap <Leader>gd   <Cmd>Gdiff<Cr>
+nnoremap <Leader>gl   <Cmd>Glog -- %<Cr>
+nnoremap <Leader>gp   <Cmd>Gpush<Cr>
+nnoremap <Leader>gs   <Cmd>Gstatus<Cr>
+nnoremap <Leader>o    <Cmd>Denite outline<Cr>
+nnoremap <Leader>q    <Cmd>nohlsearch<Cr>
+nnoremap <expr> j     (v:count == 0 ? 'gj' : 'j')
+nnoremap <expr> k     (v:count == 0 ? 'gk' : 'k')
+nnoremap <silent>     <F2> <Cmd>call LanguageClient_textDocument_rename()<Cr>
+nnoremap <silent>     <Leader>lc <Cmd>call LanguageClient_contextMenu()<Cr>
+nnoremap <silent>     <Leader>ld <Cmd>call LanguageClient_textDocument_definition()<Cr>
+nnoremap <silent>     <Leader>lk <Cmd>call LanguageClient_textDocument_hover()<Cr>
+nnoremap <silent>     <Leader>lr <Cmd>call LanguageClient_textDocument_references()<Cr>
+nnoremap H            ^
+nnoremap J            mzJ`z
+nnoremap L            $
+nnoremap Q            gq
+nnoremap Y            y$
+nnoremap _            <Cmd>Lex<Cr>
+nnoremap c            "xc
+nnoremap gj           j
+nnoremap gk           k
+nnoremap {           {zz
+nnoremap }           }zz
 
 tnoremap <Leader><Esc> <C-\><C-n>
 
@@ -311,12 +314,8 @@ vnoremap : ;
 vnoremap * y/<C-r>"<Cr>
 vnoremap ? y?<C-r>"<Cr>
 
-xmap <Leader>ea <Plug>(EasyAlign)
-xnoremap c "xc
-
-" in case of derp-sudo
-cmap w!! w !sudo tee % >/dev/null
-command! W w !sudo tee % >/dev/null
+xnoremap <Leader>ea <Plug>(EasyAlign)
+xnoremap c          "xc
 
 " Denite
 call denite#custom#option( 'default', {
@@ -541,3 +540,8 @@ autocmd BufNewFile,BufRead,BufEnter *.psql setfiletype postgresql
 
 " Vim
 autocmd FileType vim setlocal keywordprg=:Help
+
+highlight clear SpellBad
+highlight clear SpellCap
+highlight clear SpellLocal
+highlight clear SpellRare

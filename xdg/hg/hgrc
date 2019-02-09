@@ -1,12 +1,12 @@
 # vim:ft=cfg:
 [ui]
 username = David Arceneaux <david@davidthemachine.org>
-merge = nvim -d
+merge = internal:merge3
 
 [extensions]
 bookmarks=
 color=
-#config=~/contrib/hgcfg/hgext/hgcfg.py
+config=~/contrib/hgcfg/hgext/hgcfg.py
 convert=
 eol=
 extdiff=

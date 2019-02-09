@@ -1,11 +1,20 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 grab_hgcfg() {
   INSTALL_PATH="${HOME}/contrib/hgcfg"
   if [ ! -d "${INSTALL_PATH}/.hg/" ]; then
-    hg clone https://bitbucket.org/bmearns/hgcfg "${INSTALL_PATH}"
+    hg clone https://bitbucket.org/whiro_/hgcfg "${INSTALL_PATH}"
   else
     ( cd "${INSTALL_PATH}" && hg pull -u )
   fi
+}
+
+# chicken & egg time here
+grab_go() {
+  go get -u golang.org/dl/go1.11
+  ${go_bin}/go1.11 download
+  ${go_bin}/go1.11 get -u github.com/FiloSottile/mkcert
+  ${go_bin}/go1.11 get -u github.com/junegunn/fzf
+  ${go_bin}/go1.11 get -u github.com/sourcegraph/go-langserver
 }
 
 grab_rust() {
@@ -29,7 +38,7 @@ grab_pips() {
 
   pip2 install -U --user pynvim mercurial pip s3cmd
   pip3 install -U --user doge flake8 gsutil httpie icdiff pynvim mycli pip \
-    powerline-status psutil pyemojify 'python-language-server[all]'
+    powerline-status psutil pyemojify 'python-language-server[all]' sphinx
 
   ## redundant to force an update of specific packages, then to update all the
   ## installed ones
@@ -87,7 +96,7 @@ grab_composer() {
 
 grab_gems() {
   if which ruby >/dev/null && which gem >/dev/null; then
-    gem install --user-install lolcat neovim sass
+    gem install --user-install lolcat neovim sass solargraph
   fi
 }
 
