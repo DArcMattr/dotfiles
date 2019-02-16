@@ -105,11 +105,12 @@ set scrolloff=3
 set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
 set shiftround
 set shiftwidth=2
-set shortmess=atIAoO
+set shortmess=acAIoOt
 set showbreak=>
 set showcmd
 set showmatch
 set sidescrolloff=5
+set signcolumn=yes
 set smartcase
 set smarttab
 set softtabstop=2
@@ -123,6 +124,7 @@ set titlestring=%t%(\ [%R%M]%)
 set notimeout
 set ttimeout
 set undofile
+set updatetime=300
 set virtualedit=all
 set visualbell
 set wildmenu
@@ -132,6 +134,8 @@ set wildignore+=*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc
 set wildignore+=vendor/*,docs/*,node_modules/*,components/*,build/*,dist/*
 
 colorscheme vividchalk
+
+highlight clear SignColumn
 
 highlight link ALEErrorLine ErrorMsg
 highlight link ALEWarningLine WarningMsg
@@ -144,7 +148,6 @@ highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
 highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
 highlight NonText ctermfg=235 guifg=#262626
 highlight Search ctermfg=222 guifg=#ffdf87
-highlight SignColumn ctermfg=232 guifg=#080808
 highlight SpecialKey ctermfg=235 guifg=#262626
 highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline guifg=#800000 gui=undercurl
 highlight SpellCap term=underline cterm=underline gui=undercurl
@@ -195,8 +198,6 @@ let g:LanguageClient_loggingFile = $HOME . '/lc.log'
 let g:LanguageClient_loggingLevel = 'DEBUG'
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
-\   'go' : [ 'go-langserver', '--stdio' ],
-\   'javascript' : [ 'javascript-typescript-stdio' ],
 \   'jsx' : [ 'javascript-typescript-stdio' ],
 \   'javascript.jsx' : [ 'javascript-typescript-stdio' ],
 \   'python' : [ 'python-language-server' ],
@@ -248,21 +249,11 @@ noremap N         Nzz
 noremap n         nzz
 noremap p         p`[
 
-"inoremap <expr> <Cr> (pumvisible() ? "\<C-Y>\<Plug>(expand_or_cr)" : "\<Cr>")
-"inoremap <expr> <Plug>(expand_or_cr) (cm#completed_is_snippet() ? "\<C-U>" : "\<Cr>")
-
 inoremap <C-u>      <C-g>u<C-u>
 inoremap <C-x><C-k> <Nop>
-"inoremap <expr> <Tab>   pumvisible() ? '\<C-n>' : '\<Tab>'
-"inoremap <expr> <S-Tab> pumvisible() ? '\<C-p>' : '\<S-Tab>'
 inoremap <silent> <C-U> <C-R>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<Cr>
 inoremap <silent> <C-U> <C-R>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<Cr>
-"inoremap <silent><expr> <Tab>
-"      \ pumvisible() ? "\<C-n>" :
-"      \ <SID>check_back_space() ? "\<Tab>" :
-"      \ coc#refresh()
 inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <silent><expr> <C-Space> coc#refresh()
 inoremap <expr> <Cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<Cr>"
 
 nnoremap . .`[
@@ -415,11 +406,6 @@ if exists('$TMUX')
   "     \   'cache_enabled': 1,
   "     \ }
 endif
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1] =~# '\s'
-endfunction
 
 function! SetDiffColors()
   highlight DiffAdd cterm=bold ctermfg=white ctermbg=DarkGreen guifg=#ffffff guibg=#005f00
