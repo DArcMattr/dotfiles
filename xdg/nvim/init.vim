@@ -13,7 +13,7 @@ else
 endif
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'future', 'do': 'bash install.sh' }
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
 Plug 'editorconfig/editorconfig-vim'
@@ -136,6 +136,10 @@ set wildignore+=vendor/*,docs/*,node_modules/*,components/*,build/*,dist/*
 colorscheme vividchalk
 
 highlight clear SignColumn
+highlight clear SpellBad
+highlight clear SpellCap
+highlight clear SpellLocal
+highlight clear SpellRare
 
 highlight link ALEErrorLine ErrorMsg
 highlight link ALEWarningLine WarningMsg
@@ -174,6 +178,9 @@ let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline#extensions#ycm#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:ale_cache_executable_check_failures = 1
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace']
+\ }
 let g:ale_lint_delay = 0
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 'normal'
@@ -233,7 +240,14 @@ let g:user_emmet_settings = {
 \      }
 \    }
 \  }
-"let g:vimpager = {}
+
+if exists( "g:vdebug_options" )
+  let g:vdebug_options['debug_file'] = '~/vdebug_log'
+  let g:vdebug_options['debug_file_level'] = 2
+  let g:vdebug_options['ide_key'] = 'VDEBUG'
+endif
+
+let g:vimpager = {}
 
 " in case of derp-sudo
 cnoremap w!! w !sudo tee % >/dev/null
@@ -392,19 +406,6 @@ if exists('$TMUX')
   tnoremap <silent> <C-\><C-N><C-w>k <Cmd>silent call TmuxMove('k')<Cr>
   tnoremap <silent> <C-\><C-N><C-w>h <Cmd>silent call TmuxMove('h')<Cr>
   tnoremap <silent> <C-\><C-N><C-w>l <Cmd>silent call TmuxMove('l')<Cr>
-
-  "let g:clipboard = {
-  "     \   'name': 'tmux-override',
-  "     \   'copy': {
-  "     \      '+': 'tmux copy-pipe $copy_command -',
-  "     \      '*': 'tmux copy-pipe $copy_command -',
-  "     \    },
-  "     \   'paste': {
-  "     \      '+': 'tmux save-buffer -',
-  "     \      '*': 'tmux save-buffer -',
-  "     \   },
-  "     \   'cache_enabled': 1,
-  "     \ }
 endif
 
 function! SetDiffColors()
@@ -438,14 +439,6 @@ augroup FastEscape
   autocmd!
   autocmd InsertEnter * set timeoutlen=0
   autocmd InsertLeave * set timeoutlen=200
-augroup END
-
-augroup TrimWhitespace
-  autocmd!
-  autocmd BufRead,BufWrite *
-  \   if ! &bin |
-  \     silent! %s/\s\+$//ge |
-  \   endif
 augroup END
 
 " update diffs aggressively
@@ -526,8 +519,3 @@ autocmd BufNewFile,BufRead,BufEnter *.psql setfiletype postgresql
 
 " Vim
 autocmd FileType vim setlocal keywordprg=:Help
-
-highlight clear SpellBad
-highlight clear SpellCap
-highlight clear SpellLocal
-highlight clear SpellRare
