@@ -10,11 +10,11 @@ grab_hgcfg() {
 
 # chicken & egg time here
 grab_go() {
-  go get -u golang.org/dl/go1.11
-  ${go_bin}/go1.11 download
-  ${go_bin}/go1.11 get -u github.com/FiloSottile/mkcert
-  ${go_bin}/go1.11 get -u github.com/junegunn/fzf
-  ${go_bin}/go1.11 get -u github.com/sourcegraph/go-langserver
+  go get -u golang.org/dl/go1.12
+  ${go_bin}/go1.12 download
+  ${go_bin}/go1.12 get -u github.com/FiloSottile/mkcert
+  ${go_bin}/go1.12 get -u github.com/junegunn/fzf
+  ${go_bin}/go1.12 get -u github.com/sourcegraph/go-langserver
 }
 
 grab_rust() {
@@ -24,10 +24,11 @@ grab_rust() {
     rehash
   else
     rustup self update
+    rustup update
   fi
 
   mkdir -p "${HOME}/.zfunc" && \
-    rm "${HOME}/.zfunc/_rustup"; \
+    rm -f "${HOME}/.zfunc/_rustup"; \
     "${HOME}/.cargo/bin/rustup" completions zsh > "${HOME}/.zfunc/_rustup"
 
   cd "${HOME}" && "${HOME}/.cargo/bin/cargo" install --force cargo-deb cargo-update exa
