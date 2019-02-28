@@ -96,7 +96,7 @@ grab_composer() {
 
 grab_gems() {
   if which ruby >/dev/null && which gem >/dev/null; then
-    gem install --user-install lolcat neovim sass solargraph
+    gem install --user-install lolcat mailcatcher neovim sass solargraph
   fi
 }
 
