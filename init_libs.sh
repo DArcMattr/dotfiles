@@ -24,10 +24,11 @@ grab_rust() {
     rehash
   else
     rustup self update
+    rustup update
   fi
 
   mkdir -p "${HOME}/.zfunc" && \
-    rm "${HOME}/.zfunc/_rustup"; \
+    rm -f "${HOME}/.zfunc/_rustup"; \
     "${HOME}/.cargo/bin/rustup" completions zsh > "${HOME}/.zfunc/_rustup"
 
   cd "${HOME}" && "${HOME}/.cargo/bin/cargo" install --force cargo-deb cargo-update exa
@@ -96,7 +97,7 @@ grab_composer() {
 
 grab_gems() {
   if which ruby >/dev/null && which gem >/dev/null; then
-    gem install --user-install lolcat neovim sass solargraph
+    gem install --user-install lolcat mailcatcher neovim sass solargraph
   fi
 }
 
