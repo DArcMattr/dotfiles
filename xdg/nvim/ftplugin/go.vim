@@ -1,7 +1,3 @@
 " Golang
 
-try
-  call LanguageClient_registerServerCommands({'go': [ 'go-langserver' ]})
-catch
-  " do nothing
-endtry
+let g:LanguageClient_serverCommands['go'] = ['go-langserver']

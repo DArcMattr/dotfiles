@@ -13,7 +13,7 @@ else
 endif
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'future', 'do': 'bash install.sh' }
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
 Plug 'editorconfig/editorconfig-vim'
@@ -30,7 +30,6 @@ Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-signify'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'reedes/vim-wheel'
-Plug 'rkitover/vimpager', { 'do': 'PREFIX=$HOME/.local ' . b:make . ' install clean' }
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
@@ -145,7 +144,7 @@ highlight link ALEErrorLine ErrorMsg
 highlight link ALEWarningLine WarningMsg
 
 highlight Comment ctermfg=105 guifg=#8787ff
-highlight CursorColumn cterm=NONE ctermbg=237 guibg=#3a3a3a
+highlight CursorColumn cterm=reverse gui=reverse ctermbg=237 guibg=#3a3a3a
 highlight CursorLine term=underline cterm=underline ctermbg=NONE gui=underline guibg=NONE
 highlight ErrorMsg ctermbg=52 guibg=#5f0000
 highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
@@ -185,10 +184,6 @@ let g:ale_lint_delay = 0
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
-let g:ale_linters = {
-\   'javascript.jsx': ['eslint'],
-\ }
-let g:ale_linter_aliases = {'jsx': 'css'}
 let g:ale_open_list = 1
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
@@ -201,18 +196,12 @@ let g:AutoPairsShortcutBackInsert = '<Leader>ab'
 let g:go_term_mode = "split"
 let g:indent_guides_enable_on_vim_startup = 1
 let g:jsx_ext_required = 1
-let g:LanguageClient_loggingFile = $HOME . '/lc.log'
-let g:LanguageClient_loggingLevel = 'DEBUG'
+"let g:LanguageClient_loggingFile = $HOME . '/lc.log'
+"let g:LanguageClient_loggingLevel = 'DEBUG'
 let g:LanguageClient_autoStart = 1
-let g:LanguageClient_serverCommands = {
-\   'jsx' : [ 'javascript-typescript-stdio' ],
-\   'javascript.jsx' : [ 'javascript-typescript-stdio' ],
-\   'python' : [ 'python-language-server' ],
-\   'typescript' : [ 'javascript-typescript-stdio' ],
-\ }
 let g:less = { 'enabled' : 0, }
 let g:localvimrc_persistent = 1
-let g:localvimrc_event = ['BufNewFile', 'BufReadPre', 'BufWinEnter', 'BufEnter']
+let g:localvimrc_reverse = 1
 let g:localvimrc_sandbox = 0
 let g:netrw_altv = 1
 let g:netrw_banner = 0
@@ -232,14 +221,6 @@ let g:ultisnips_php_scalar_types = 1
 let g:UltiSnipsExpandTrigger = "<Leader>u"
 let g:UltiSnipsJumpBackwardTrigger = "<C-n>"
 let g:UltiSnipsJumpForwardTrigger = "<C-p>"
-let g:user_emmet_settings = {
-\   'javascript.jsx' : {
-\     'extends': 'jsx',
-\     'default_attributes': {
-\       'label': [{'htmlFor': ''}],
-\      }
-\    }
-\  }
 
 if exists( "g:vdebug_options" )
   let g:vdebug_options['debug_file'] = '~/vdebug_log'
@@ -247,16 +228,12 @@ if exists( "g:vdebug_options" )
   let g:vdebug_options['ide_key'] = 'VDEBUG'
 endif
 
-let g:vimpager = {}
-
 " in case of derp-sudo
 cnoremap w!! w !sudo tee % >/dev/null
 command! W w !sudo tee % >/dev/null
 
-noremap <C-F7>    <Cmd>split %<Cr>
 noremap <C-d>     <C-d>zz
 noremap <C-u>     <C-u>zz
-noremap <F7>      <Cmd>vsplit %<Cr>
 noremap <Leader>l <Cmd>set rnu!<Cr>
 noremap <Leader>t <Cmd>enew<Cr>
 noremap N         Nzz
@@ -334,6 +311,7 @@ call denite#custom#option( 'default', {
 call denite#custom#option( 'list', { 'mode': 'normal' } )
 call denite#custom#option( 'grep', { 'vertical_preview': 1 } )
 call deoplete#enable()
+"call deoplete#enable_logging('DEBUG', $HOME . '/deoplete.log')
 
 if executable('ag')
   " Use ag in denite grep source.
