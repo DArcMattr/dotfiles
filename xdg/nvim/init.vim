@@ -199,6 +199,7 @@ let g:jsx_ext_required = 1
 "let g:LanguageClient_loggingFile = $HOME . '/lc.log'
 "let g:LanguageClient_loggingLevel = 'DEBUG'
 let g:LanguageClient_autoStart = 1
+let g:LanguageClient_rootMarkers = ['.editorconfig']
 let g:less = { 'enabled' : 0, }
 let g:localvimrc_persistent = 1
 let g:localvimrc_reverse = 1

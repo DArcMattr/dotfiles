@@ -3,7 +3,6 @@ if g:localvimrc_sourced_once_for_file
   finish
 endif
 
-let g:LanguageClient_rootMarkers = ['config.php']
 let g:ale_php_phpcs_standard = 'PSR2R'
 let g:ale_php_phpcbf_standard = 'PSR2R'
 
