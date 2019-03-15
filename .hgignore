@@ -14,5 +14,4 @@ xdg/nvim/.netrwhist
 xdg/nvim/plugged/
 xdg/yarn/global/node_modules
 xdg/yarn/global/yarn-error.log
-xdg/yarn/global/yarn.lock
 zsh-custom/plugins/autoenv
