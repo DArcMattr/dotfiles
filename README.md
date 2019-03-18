@@ -49,7 +49,8 @@ Some of these will be installed via the install scripts or apt-get below.
       php7.3-json php7.3-mysql php7.3-opcache php7.3-readline php7.3-soap \
       php-common php-gd php-imagick php-mbstring php-memcache php-pear \
       php-xdebug php-xml php-zip postgresql-11 pv python3-docutils \
-      python-clang-7 ruby-dev shellcheck tidy vim-nox xsel yarn zlib1g-dev zsh
+      python-clang-7 ruby-dev shellcheck tidy vim-nox xcape xsel yarn \ 
+      zlib1g-dev zsh
 
 The `helpers/debianish-update-alternatives.sh` will make LLVM and Go usable on
 Ubuntu.
@@ -98,6 +99,12 @@ While I track my wsltty configuration in source control, an example of the
 shortcut for wsltty is:
 
     %LOCALAPPDATA%\wsltty\bin\mintty.exe --WSL= --configdir="%APPDATA%\wsltty" -~ -B thin
+
+#### Configure CAPSLOCK
+
+Manually install `https://github.com/ililim/dual-key-remap` in order to get the
+same "tap CAPSLOCK for Escape, press for Control" behavior that exists in the
+Unix-like configuration. 
 
 ### Self-signed certificates
 
