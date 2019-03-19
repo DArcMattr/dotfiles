@@ -189,6 +189,7 @@ let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
 let g:ale_sign_error = '×'
 let g:ale_sign_warning = '⚠'
+let g:ale_statusline_format = ['× %d', '⚠ %d', '']
 let g:AutoPairsShortcutToggle = '<Leader>ap'
 let g:AutoPairsShortcutFastWrap = '<Leader>ae'
 let g:AutoPairsShortcutJump = '<Leader>an'
@@ -269,6 +270,7 @@ nnoremap <Leader>gp   <Cmd>Gpush<Cr>
 nnoremap <Leader>gs   <Cmd>Gstatus<Cr>
 nnoremap <Leader>o    <Cmd>Denite outline<Cr>
 nnoremap <Leader>q    <Cmd>nohlsearch<Cr>
+nnoremap <Leader>*    <Cmd>DeniteCursorWord grep:. -mode=normal<Cr>
 nnoremap <expr> j     (v:count == 0 ? 'gj' : 'j')
 nnoremap <expr> k     (v:count == 0 ? 'gk' : 'k')
 nnoremap <silent>     <F2> <Cmd>call LanguageClient_textDocument_rename()<Cr>
