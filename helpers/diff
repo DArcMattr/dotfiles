@@ -1,6 +1,7 @@
 #!/bin/sh
+ICDIFF_OPTIONS=$(git config --get icdiff.options)
 if command -v icdiff 2>/dev/null; then
-  icdiff --tabsize=2 --show-all-spaces "$2" "$5"
+  icdiff ${ICDIFF_OPTIONS} "$2" "$5"
 else
   diff -y "$2" "$5"
 fi
