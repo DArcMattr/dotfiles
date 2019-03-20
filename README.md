@@ -100,6 +100,13 @@ shortcut for wsltty is:
 
     %LOCALAPPDATA%\wsltty\bin\mintty.exe --WSL= --configdir="%APPDATA%\wsltty" -~ -B thin
 
+#### Shortcut for Alacritty
+
+If alacritty is installed on the WSL side, create a new shortcut and set its
+target to:
+
+    C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Start-Process -FilePath "C:\Windows\System32\bash.exe" -ArgumentList '-c','''cd $HOME; DISPLAY=localhost:0.0 alacritty''' -WindowStyle Hidden"
+
 #### Configure CAPSLOCK
 
 Manually install `https://github.com/ililim/dual-key-remap` in order to get the
