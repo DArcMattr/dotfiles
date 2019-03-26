@@ -12,7 +12,3 @@ if [[ $(uname -r) == *Microsoft  ]]; then
     export BROWSER=xdg-open:wsl-open
   fi
 fi
-
-nvim() {
-  (unset DISPLAY; /usr/bin/nvim ${@})
-}
