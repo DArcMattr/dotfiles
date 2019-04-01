@@ -1,4 +1,4 @@
-Syntax: glob
+syntax: glob
 symlinks/.pandoc/buttondown.css
 symlinks/.pandoc/.sass-cache
 xdg/composer/composer.lock
@@ -8,8 +8,7 @@ xdg/composer/keys.dev.pub
 xdg/composer/keys.tags.pub
 xdg/composer/vendor/
 xdg/nvim/autoload/
-xdg/nvim/js.tags
-xdg/nvim/php.tags
+xdg/nvim/*.tags
 xdg/nvim/.netrwhist
 xdg/nvim/plugged/
 xdg/yarn/global/node_modules
