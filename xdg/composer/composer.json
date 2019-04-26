@@ -16,10 +16,10 @@
     "phpunit/phpunit": "@stable",
     "sloanlance/pman-php-manual": "@stable",
     "squizlabs/php_codesniffer": "@dev",
-    "wp-cli/wp-cli": "@stable",
     "wp-coding-standards/wpcs": "@stable",
     "fig-r/psr2r-sniffer": "@stable",
-    "psy/psysh": "@stable"
+    "psy/psysh": "@stable",
+    "wp-cli/wp-cli-bundle": "@stable"
   },
   "scripts": {
     "post-install-cmd": [
