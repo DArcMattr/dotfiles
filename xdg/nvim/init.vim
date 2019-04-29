@@ -6,12 +6,6 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-if system('uname -o') =~ '^GNU/'
-  let b:make = 'make'
-else
-  let b:make = 'gmake'
-endif
-
 call plug#begin('~/.config/nvim/plugged')
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'benmills/vimux'
@@ -194,6 +188,7 @@ let g:AutoPairsShortcutToggle = '<Leader>ap'
 let g:AutoPairsShortcutFastWrap = '<Leader>ae'
 let g:AutoPairsShortcutJump = '<Leader>an'
 let g:AutoPairsShortcutBackInsert = '<Leader>ab'
+let g:deoplete#sources = {'_': ['ale']}
 let g:go_term_mode = "split"
 let g:indent_guides_enable_on_vim_startup = 1
 let g:jsx_ext_required = 1
@@ -201,9 +196,8 @@ let g:jsx_ext_required = 1
 "let g:LanguageClient_loggingLevel = 'DEBUG'
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_rootMarkers = ['.editorconfig']
-let g:less = { 'enabled' : 0, }
 let g:localvimrc_persistent = 1
-let g:localvimrc_reverse = 1
+let g:localvimrc_reverse = 0
 let g:localvimrc_sandbox = 0
 let g:netrw_altv = 1
 let g:netrw_banner = 0
@@ -249,9 +243,19 @@ inoremap <silent> <C-U> <C-R>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ult
 inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <expr> <Cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<Cr>"
 
-nnoremap . .`[
 nnoremap : ;
 nnoremap ; :
+nnoremap H ^
+nnoremap J mzJ`z
+nnoremap L $
+nnoremap Q gq
+nnoremap Y y$
+nnoremap _ <Cmd>Lex<Cr>
+nnoremap c "xc
+nnoremap gj j
+nnoremap gk k
+nnoremap { {zz
+nnoremap } }zz
 nnoremap <C-PageDown> <Cmd>bp<Cr>
 nnoremap <C-PageUp>   <Cmd>bn<Cr>
 nnoremap <C-e>        3<C-e>
@@ -271,24 +275,15 @@ nnoremap <Leader>gs   <Cmd>Gstatus<Cr>
 nnoremap <Leader>o    <Cmd>Denite outline<Cr>
 nnoremap <Leader>q    <Cmd>nohlsearch<Cr>
 nnoremap <Leader>*    <Cmd>DeniteCursorWord grep:. -mode=normal<Cr>
-nnoremap <expr> j     (v:count == 0 ? 'gj' : 'j')
-nnoremap <expr> k     (v:count == 0 ? 'gk' : 'k')
-nnoremap <silent>     <F2> <Cmd>call LanguageClient_textDocument_rename()<Cr>
-nnoremap <silent>     <Leader>lc <Cmd>call LanguageClient_contextMenu()<Cr>
-nnoremap <silent>     <Leader>ld <Cmd>call LanguageClient_textDocument_definition()<Cr>
-nnoremap <silent>     <Leader>lk <Cmd>call LanguageClient_textDocument_hover()<Cr>
-nnoremap <silent>     <Leader>lr <Cmd>call LanguageClient_textDocument_references()<Cr>
-nnoremap H            ^
-nnoremap J            mzJ`z
-nnoremap L            $
-nnoremap Q            gq
-nnoremap Y            y$
-nnoremap _            <Cmd>Lex<Cr>
-nnoremap c            "xc
-nnoremap gj           j
-nnoremap gk           k
-nnoremap {           {zz
-nnoremap }           }zz
+nnoremap <Expr>j     (v:count == 0 ? 'gj' : 'j')
+nnoremap <Expr>k     (v:count == 0 ? 'gk' : 'k')
+nnoremap <Right>      <Cmd>bn<Cr>
+nnoremap <Left>       <Cmd>bp<Cr>
+nnoremap <Silent><F2>       <Cmd>call LanguageClient_textDocument_rename()<Cr>
+nnoremap <Silent><Leader>lc <Cmd>call LanguageClient_contextMenu()<Cr>
+nnoremap <Silent><Leader>ld <Cmd>call LanguageClient_textDocument_definition()<Cr>
+nnoremap <Silent><Leader>lk <Cmd>call LanguageClient_textDocument_hover()<Cr>
+nnoremap <Silent><Leader>lr <Cmd>call LanguageClient_textDocument_references()<Cr>
 
 tnoremap <Leader><Esc> <C-\><C-n>
 
