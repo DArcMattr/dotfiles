@@ -92,18 +92,16 @@ export BROWSER
 
 # Editors
 if type "nvim" > /dev/null; then
-  EDITOR=`which nvim`
+  EDITOR=$(which nvim)
 elif type "vim" > /dev/null; then
-  EDITOR=`which vim`
+  EDITOR=$(which vim)
 else
-  EDITOR=`which vi`
+  EDITOR=$(which vi)
 fi
 export EDITOR
 export VISUAL=${EDITOR}
 
-#
 # Temporary Files
-#
 if [[ ! -d "$TMPDIR" ]]; then
   export TMPDIR="/tmp/${LOGNAME}"
   mkdir -p -m 700 "${TMPDIR}"
@@ -116,4 +114,9 @@ fi
 
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
+fi
+
+export SDKMAN_DIR="${HOME}/.sdkman"
+if [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]]; then
+  source "${SDKMAN_DIR}/bin/sdkman-init.sh"
 fi
