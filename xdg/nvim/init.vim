@@ -487,11 +487,5 @@ autocmd FileType lisp,scheme,art setlocal equalprg=~/dotfiles/helpers/scmindent.
 autocmd BufNewFile,BufRead,BufEnter msg setfiletype hgcommit
 autocmd FileType hgcommit setlocal textwidth=72
 
-" MySQL
-autocmd BufNewFile,BufRead,BufEnter *.mysql setfiletype mysql
-
-" PostgreSQL
-autocmd BufNewFile,BufRead,BufEnter *.psql setfiletype postgresql
-
 " Vim
 autocmd FileType vim setlocal keywordprg=:Help
