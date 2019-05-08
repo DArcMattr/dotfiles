@@ -79,6 +79,19 @@ configuration file, because vimpager.
 
 ## Experimental notes
 
+### Kotlin
+
+Experimenting with Kotlin now, it requires a Java compiler and the `sdk` script
+to be installed first:
+  
+  curl -s https://get.sdkman.io | bash
+  
+Reload shell session, then:
+
+  sdk install kotlin
+
+Which installs the `kotlinc` compiler and `kotlinc-jvm` REPL utility.
+
 ### WSL stuffs
 
 Install [wslu](https://github.com/wslutilities/wslu) for its `wslview` utility.
