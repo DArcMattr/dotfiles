@@ -1,0 +1,59 @@
+!! Colorscheme
+
+! special
+*.foreground:   #a8a8a8
+*.background:   #000000
+*.cursorColor:  #a8a8a8
+
+! black
+*.color0:       #000000
+*.color8:       #545054
+
+! red
+*.color1:       #a80000
+*.color9:       #f85450
+
+! green
+*.color2:       #00a800
+*.color10:      #50fc50
+
+! yellow
+*.color3:       #a85400
+*.color11:      #f8fc50
+
+! blue
+*.color4:       #0000a8
+*.color12:      #5054f8
+
+! magenta
+*.color5:       #a800a8
+*.color13:      #f854f8
+
+! cyan
+*.color6:       #00a8a8
+*.color14:      #50fcf8
+
+! white
+*.color7:       #a8a8a8
+*.color15:      #f8fcf8
+
+!! URxvt Appearance
+URxvt.cursorBlink: true
+URxvt.cursorUnderline: false
+URxvt.depth: 32
+URxvt.geometry: 92x24
+URxvt.internalBorder: 0
+URxvt.iso14755: false
+URxvt.letterSpace: 0
+URxvt.lineSpace: 0
+URxvt.loginShell: true
+URxvt.saveline: 0
+URxvt.scrollBar: false
+URxvt.scrollBar_right: false
+URxvt.urgentOnBell: true
+URxvt.urlLauncher: wsl-open
+
+*.font: xft:Hack:style=Regular:size=7.5,xft:Noto Emoji
+*.boldFont: xft:Hack:style=Bold:size=7.5
+*.italicFont: xft:Hack:style=Italic:size=7.5
+*.boldItalicFont: xft:Hack:style=Bold Italic:size=7.5
