@@ -42,6 +42,10 @@ if [[ -r ~/dotfiles/.aliases ]]; then
   source ~/dotfiles/.aliases
 fi
 
+if [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]]; then
+  source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+fi
+
 unsetopt correct
 unsetopt correct_all
 unsetopt inc_append_history
