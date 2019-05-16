@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 export CC=clang
 export CXX=clang++
@@ -12,3 +12,5 @@ if [[ $(uname -r) == *Microsoft  ]]; then
     export BROWSER=xdg-open:wsl-open
   fi
 fi
+
+xrdb ~/.Xresources
