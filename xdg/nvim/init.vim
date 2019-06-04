@@ -197,7 +197,6 @@ let g:jsx_ext_required = 1
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_rootMarkers = ['.editorconfig']
 let g:localvimrc_persistent = 1
-let g:localvimrc_reverse = 0
 let g:localvimrc_sandbox = 0
 let g:netrw_altv = 1
 let g:netrw_banner = 0
