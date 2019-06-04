@@ -39,8 +39,8 @@ Some of these will be installed via the install scripts or apt-get below.
     sudo add-apt-repository 'deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main'
     sudo add-apt-repository 'deb http://nginx.org/packages/mainline/ubuntu/ bionic nginx'
     sudo apt update
-    sudo apt install autossh build-essential clang-7 clang-7-doc \
-      clang-format-7 clang-tools-7 cmake git golang-go htop libclang1-7 \
+    sudo apt install autossh bison build-essential clang-7 clang-7-doc \
+      clang-format-7 clang-tools-7 cmake flex git golang-go htop libclang1-7 \
       libclang-7-dev libclang-common-7-dev libevent-dev libfuzzer-7-dev \
       libgit2-dev liblldb-7-dev libllvm7 liblzma-dev libnss3-tools \
       libncurses5-dev libpcre3-dev libssh2-1-dev libssl-dev lld-7 lldb-7 llvm-7 \
