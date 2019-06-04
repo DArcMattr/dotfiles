@@ -20,34 +20,27 @@
   added = yellow
   changed = green
   untracked = cyan
-[commit]
-  verbose = true
 [core]
   eol = lf
   excludesfile = ~/.gitignore_global
   autocrlf = input
   whitespace = trailing-space,space-before-tab,indent-with-non-tab
-  editor = nvim
 [diff]
+#  external = "~/dotfiles/helpers/diff"
+  tool = icdiff
   algorithm = patience
-  colorMoved = zebra
   mnemonicprefix = true
 [diff "nodiff"]
   command = /bin/true
-[diff "fugitive"]
-  command = nvim -f -c "Gdiff" $LOCAL $REMOTE
 [difftool]
   prompt = false
   tool = vim
-  trustExitCode = true
 [difftool "icdiff"]
-  command = icdiff $LOCAL $REMOTE
-  options = '--highlight --line-numbers'
+  cmd = icdiff --line-numbers --highlight $LOCAL $REMOTE
 [difftool "vim"]
-  command = nvim -d $LOCAL $REMOTE
+  cmd = nvim -d $LOCAL $REMOTE
 [fetch]
   fsckobjects = false
-  prune = true
 [format]
   pretty = oneline
 [fsck]
@@ -57,20 +50,19 @@
 [init]
   templatedir = "~/.config/git/template"
 [merge]
-  tool = fugitive
-  ff = only
+  tool = vimdiff
+  ff = false
 [merge "ours"]
   name = "Keep ours merge"
   driver = true
 [mergetool]
-  keepBackup = false
   prompt = false
   stat = true
-  tool = fugitive
+  keepBackup = false
 [mergetool "vimdiff"]
-  command = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c '$wincmd J'
+  cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c '$wincmd J'
 [mergetool "fugitive"]
-  command = nvim -f -c "Gdiff" "$MERGED"
+  cmd = nvim -f -c "Gdiff" "$MERGED"
 [pager]
   diff =
 [pull]
