@@ -37,9 +37,10 @@ grab_rust() {
 grab_pips() {
   config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
 
-  pip2 install -U --user pynvim mercurial pip 
-  pip3 install -U --user doge flake8 gsutil httpie icdiff pynvim mycli pip \
-    powerline-status psutil pyemojify 'python-language-server[all]' s3cmd sphinx
+  pip2 install -U --user mercurial pip pynvim  
+  pip3 install -U --user doge flake8 gsutil httpie icdiff litecli mycli pip \ 
+    powerline-status psutil pyemojify pynvim 'python-language-server[all]' \ 
+    s3cmd sphinx
 
   ## redundant to force an update of specific packages, then to update all the
   ## installed ones
