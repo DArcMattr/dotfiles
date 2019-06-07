@@ -73,6 +73,6 @@ tmux rename-window -t "${SESSION}":1 "htop"
 tmux new-window -t "${SESSION}":2
 tmux send-keys -t "${SESSION}":2 "TERM=screen-256color autossh -t staging" C-m
 tmux rename-window -t "${SESSION}":2 "remotes"
-tmux set-option -ga terminal-overrides ",screen-256color:Tc"
+tmux set-option -ga terminal-overrides ",tmux-256color:Tc"
 
 project_pane -t "${SESSION}" -n "TOE" -d "/var/www/vhosts/local.theofficeexpress.com"
