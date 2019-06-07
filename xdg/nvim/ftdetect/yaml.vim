@@ -1,1 +1,1 @@
-autocmd BufNewFile,BufRead,BufEnter */.ebextensions/*.config setfiletype yaml
+autocmd BufNewFile,BufRead */.ebextensions/*.config setfiletype yaml

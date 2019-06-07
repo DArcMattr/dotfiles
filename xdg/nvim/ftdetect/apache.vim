@@ -1,1 +1,1 @@
-autocmd BufNewFile,BufRead,BufEnter httpd.conf setfiletype apache
+autocmd BufNewFile,BufRead httpd.conf setfiletype apache

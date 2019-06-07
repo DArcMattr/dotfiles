@@ -211,8 +211,6 @@ let g:tagcommand_defaults = {
 \   'args': '',
 \   'filesappend': '**',
 \  }
-let g:taggatron_run_in_background = 1
-let g:ultisnips_php_scalar_types = 1
 let g:UltiSnipsExpandTrigger = "<Leader>u"
 let g:UltiSnipsJumpBackwardTrigger = "<C-n>"
 let g:UltiSnipsJumpForwardTrigger = "<C-p>"
@@ -485,6 +483,3 @@ autocmd FileType lisp,scheme,art setlocal equalprg=~/dotfiles/helpers/scmindent.
 " Mercurial commit messages
 autocmd BufNewFile,BufRead,BufEnter msg setfiletype hgcommit
 autocmd FileType hgcommit setlocal textwidth=72
-
-" Vim
-autocmd FileType vim setlocal keywordprg=:Help
