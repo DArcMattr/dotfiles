@@ -10,24 +10,26 @@ if g:localvimrc_sourced_once
   finish
 endif
 
-augroup PROJECT
+augroup oex_project
   autocmd!
 
-  autocmd FileType php setlocal tags=/var/www/vhosts/local.theofficeexpress.com/php.tags
-  autocmd FileType php let b:tagcommands = {
+  autocmd BufNewFile,BufEnter *.php setlocal tags=/var/www/vhosts/local.theofficeexpress.com/php.tags
+  autocmd BufNewFile,BufEnter *.php let b:tagcommands = {
   \ 'php': {
   \     'tagfile': '/var/www/vhosts/local.theofficeexpress.com/php.tags',
   \     'args': '--fields=+aimlS --PHP-kinds=+cdfint-av',
   \     'files': '/var/www/vhosts/local.theofficeexpress.com/htdocs/'
   \   }
   \ }
+  autocmd BufWritePost *.php TagUpdate
 
-  autocmd FileType javascript setlocal tags=/var/www/vhosts/local.theofficeexpress.com/js.tags
-  autocmd FileType javascript let b:tagcommands = {
+  autocmd BufNewFile,BufEnter *.js setlocal tags=/var/www/vhosts/local.theofficeexpress.com/js.tags
+  autocmd BufNewFile,BufEnter *.js let b:tagcommands = {
   \ 'javascript': {
   \     'tagfile': '/var/www/vhosts/local.theofficeexpress.com/js.tags',
   \     'args': '',
   \     'files': '/var/www/vhosts/local.theofficeexpress.com/htdocs/'
   \   }
   \ }
+  autocmd BufWritePost *.js TagUpdate
 augroup END
