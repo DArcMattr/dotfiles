@@ -10,11 +10,21 @@ grab_hgcfg() {
 
 # chicken & egg time here
 grab_go() {
-  go get -u golang.org/dl/go1.12.5
-  ${go_bin}/go1.12.5 download
-  ${go_bin}/go1.12.5 get -u github.com/FiloSottile/mkcert
-  ${go_bin}/go1.12.5 get -u github.com/junegunn/fzf
-  ${go_bin}/go1.12.5 get -u github.com/sourcegraph/go-langserver
+  version='1.12.6'
+  pkgs=(
+    'github.com/FiloSottile/mkcert' 
+    'github.com/canthefason/go-watcher' 
+    'github.com/junegunn/fzf' 
+    'github.com/sourcegraph/go-langserver'
+  )
+
+  go get -u golang.org/dl/go${version}
+  ${go_bin}/go${version} download
+
+  for i in $pkgs; do
+    ${go_bin}/go${version} get -u "${i}"
+    ${go_bin}/go${version} install "${i}"
+  done
 }
 
 grab_rust() {
@@ -36,11 +46,31 @@ grab_rust() {
 
 grab_pips() {
   config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
+  pip2pkgs=(
+    'mercurial' 
+    'pip' 
+    'pynvim'
+  )
+  pip3pkgs=(
+    'doge'
+    'flake8'
+    'gsutil'
+    'httpie'
+    'icdiff'
+    'litecli'
+    'mycli'
+    'pip'
+    'powerline-status'
+    'psutil'
+    'pyemojify'
+    'pynvim' 
+    'python-language-server[all]' 
+    's3cmd'
+    'sphinx'
+  )
 
-  pip2 install -U --user mercurial pip pynvim  
-  pip3 install -U --user doge flake8 gsutil httpie icdiff litecli mycli pip \ 
-    powerline-status psutil pyemojify pynvim 'python-language-server[all]' \ 
-    s3cmd sphinx
+  pip2 install -U --user $pip2pkgs
+  pip3 install -U --user $pip3pkgs
 
   ## redundant to force an update of specific packages, then to update all the
   ## installed ones
