@@ -58,13 +58,6 @@ set expandtab
 set fillchars+=stl:\ ,stlnc:\
 set formatoptions=nqr12j
 set gdefault
-if executable("ag")
-  set grepprg=ag\ --nogroup\ --nocolor
-elseif executable("ack")
-  set grepprg=ack\ -H\ --nogroup\ --nocolor
-else
-  set grepprg=grep\ -nH\ $*
-endif
 set hidden
 set hlsearch
 set ignorecase
@@ -308,6 +301,8 @@ call deoplete#enable()
 "call deoplete#enable_logging('DEBUG', $HOME . '/deoplete.log')
 
 if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+
   " Use ag in denite grep source.
   call denite#custom#var( 'grep', 'command',      ['ag'] )
   call denite#custom#var( 'grep', 'default_opts', ['-i', '--vimgrep'] )
@@ -315,7 +310,9 @@ if executable('ag')
   call denite#custom#var( 'grep', 'pattern_opt', [] )
   call denite#custom#var( 'grep', 'separator', ['--'] )
   call denite#custom#var( 'grep', 'final_opts', [] )
-elseif executable('ack-grep')
+elseif executable('ack')
+  set grepprg=ack\ -H\ --nogroup\ --nocolor
+
   " Use ack in denite grep source.
   call denite#custom#var( 'grep', 'command', ['ack'] )
   call denite#custom#var( 'grep', 'default_opts',
@@ -325,6 +322,8 @@ elseif executable('ack-grep')
   call denite#custom#var( 'grep', 'pattern_opt', ['--match'] )
   call denite#custom#var( 'grep', 'separator', ['--'] )
   call denite#custom#var( 'grep', 'final_opts', [] )
+else
+  set grepprg=grep\ -nH\ $*
 endif
 
 command! -nargs=1 Silent |
