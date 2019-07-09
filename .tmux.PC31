@@ -57,7 +57,6 @@ project_pane() {
   tmux rename-window -t "${SESSION}:${WIN_NUM}" "${NAME}"
 }
 
-
 sudo sh -c " \
   service nginx start && \
   service php5.6-fpm start && \
@@ -66,6 +65,9 @@ sudo sh -c " \
   service mysql start"
 mailcatcher
 
+tmux bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "clip.exe"
+tmux set-option -ga terminal-overrides ",*:Tc"
+
 tmux new-window -t "${SESSION}":1
 tmux send-keys -t "${SESSION}":1 "htop" C-m
 tmux rename-window -t "${SESSION}":1 "htop"
@@ -73,6 +75,5 @@ tmux rename-window -t "${SESSION}":1 "htop"
 tmux new-window -t "${SESSION}":2
 tmux send-keys -t "${SESSION}":2 "TERM=screen-256color autossh -t staging" C-m
 tmux rename-window -t "${SESSION}":2 "remotes"
-tmux set-option -ga terminal-overrides ",tmux-256color:Tc"
 
 project_pane -t "${SESSION}" -n "TOE" -d "/var/www/vhosts/local.theofficeexpress.com"
