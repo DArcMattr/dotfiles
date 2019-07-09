@@ -26,7 +26,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'reedes/vim-wheel'
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
-Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' } | Plug 'deoplete-plugins/deoplete-tag'
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -181,7 +181,6 @@ let g:AutoPairsShortcutToggle = '<Leader>ap'
 let g:AutoPairsShortcutFastWrap = '<Leader>ae'
 let g:AutoPairsShortcutJump = '<Leader>an'
 let g:AutoPairsShortcutBackInsert = '<Leader>ab'
-let g:deoplete#sources = {'_': ['ale']}
 let g:indent_guides_enable_on_vim_startup = 1
 "let g:LanguageClient_loggingFile = $HOME . '/lc.log'
 "let g:LanguageClient_loggingLevel = 'DEBUG'
@@ -245,29 +244,29 @@ nnoremap gj j
 nnoremap gk k
 nnoremap { {zz
 nnoremap } }zz
-nnoremap <C-PageDown> <Cmd>bp<Cr>
-nnoremap <C-PageUp>   <Cmd>bn<Cr>
-nnoremap <C-e>        3<C-e>
-nnoremap <C-i>        i<Space><Esc>
-nnoremap <C-o>        i<Cr><Esc>
-nnoremap <C-p>        <Cmd>Denite file_rec<Cr>
-nnoremap <C-y>        3<C-y>
-nnoremap <Leader>/    <Cmd>Denite grep:.<Cr>
-nnoremap <Leader><F7> <Cmd>setlocal spell! spell? spelllang=en_us<Cr>
-nnoremap <Leader>ea   <Plug>(EasyAlign)
-nnoremap <Leader>gb   <Cmd>Gblame<Cr>
-nnoremap <Leader>gc   <Cmd>Gcommit<Cr>
-nnoremap <Leader>gd   <Cmd>Gdiff<Cr>
-nnoremap <Leader>gl   <Cmd>Glog -- %<Cr>
-nnoremap <Leader>gp   <Cmd>Gpush<Cr>
-nnoremap <Leader>gs   <Cmd>Gstatus<Cr>
-nnoremap <Leader>o    <Cmd>Denite outline<Cr>
-nnoremap <Leader>q    <Cmd>nohlsearch<Cr>
-nnoremap <Leader>*    <Cmd>DeniteCursorWord grep:. -mode=normal<Cr>
-nnoremap <Expr>j     (v:count == 0 ? 'gj' : 'j')
-nnoremap <Expr>k     (v:count == 0 ? 'gk' : 'k')
-nnoremap <Right>      <Cmd>bn<Cr>
-nnoremap <Left>       <Cmd>bp<Cr>
+nnoremap <C-PageDown>       <Cmd>bp<Cr>
+nnoremap <C-PageUp>         <Cmd>bn<Cr>
+nnoremap <C-e>              3<C-e>
+nnoremap <C-i>              i<Space><Esc>
+nnoremap <C-o>              i<Cr><Esc>
+nnoremap <C-p>              <Cmd>Denite file/rec<Cr>
+nnoremap <C-y>              3<C-y>
+nnoremap <Leader>/          <Cmd>Denite grep:.<Cr>
+nnoremap <Leader><F7>       <Cmd>setlocal spell! spell? spelllang=en_us<Cr>
+nnoremap <Leader>ea         <Plug>(EasyAlign)
+nnoremap <Leader>gb         <Cmd>Gblame<Cr>
+nnoremap <Leader>gc         <Cmd>Gcommit<Cr>
+nnoremap <Leader>gd         <Cmd>Gdiff<Cr>
+nnoremap <Leader>gl         <Cmd>Glog -- %<Cr>
+nnoremap <Leader>gp         <Cmd>Gpush<Cr>
+nnoremap <Leader>gs         <Cmd>Gstatus<Cr>
+nnoremap <Leader>o          <Cmd>Denite outline<Cr>
+nnoremap <Leader>q          <Cmd>nohlsearch<Cr>
+nnoremap <Leader>*          <Cmd>DeniteCursorWord grep:.<Cr>
+nnoremap <Expr>j            (v:count == 0 ? 'gj' : 'j')
+nnoremap <Expr>k            (v:count == 0 ? 'gk' : 'k')
+nnoremap <Right>            <Cmd>bn<Cr>
+nnoremap <Left>             <Cmd>bp<Cr>
 nnoremap <Silent><F2>       <Cmd>call LanguageClient_textDocument_rename()<Cr>
 nnoremap <Silent><Leader>lc <Cmd>call LanguageClient_contextMenu()<Cr>
 nnoremap <Silent><Leader>ld <Cmd>call LanguageClient_textDocument_definition()<Cr>
@@ -297,8 +296,6 @@ call denite#custom#option( 'default', {
 \})
 call denite#custom#option( 'list', { 'mode': 'normal' } )
 call denite#custom#option( 'grep', { 'vertical_preview': 1 } )
-call deoplete#enable()
-"call deoplete#enable_logging('DEBUG', $HOME . '/deoplete.log')
 
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
@@ -325,6 +322,10 @@ elseif executable('ack')
 else
   set grepprg=grep\ -nH\ $*
 endif
+
+" Deoplete
+call deoplete#enable()
+"call deoplete#enable_logging('DEBUG', $HOME . '/deoplete.log')
 
 command! -nargs=1 Silent |
 \   execute '<Cmd>silent !'.<q-args> |
