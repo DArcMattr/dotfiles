@@ -10,7 +10,7 @@ grab_hgcfg() {
 
 # chicken & egg time here
 grab_go() {
-  version='1.12.6'
+  version='1.12.7'
   pkgs=(
     'github.com/FiloSottile/mkcert' 
     'github.com/canthefason/go-watcher' 
