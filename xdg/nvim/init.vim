@@ -40,7 +40,7 @@ Plug 'vim-vdebug/vdebug'
 Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/DirDiff.vim'
 Plug 'vim-scripts/matchit.zip'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 call plug#end()
 
 set autoindent
@@ -174,9 +174,9 @@ let g:ale_lint_on_insert_leave = 1
 let g:ale_open_list = 1
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
-let g:ale_sign_error = '×'
+let g:ale_sign_error = '⨉'
 let g:ale_sign_warning = '⚠'
-let g:ale_statusline_format = ['× %d', '⚠ %d', '']
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '']
 let g:AutoPairsShortcutToggle = '<Leader>ap'
 let g:AutoPairsShortcutFastWrap = '<Leader>ae'
 let g:AutoPairsShortcutJump = '<Leader>an'
@@ -228,6 +228,7 @@ inoremap <C-u>      <C-g>u<C-u>
 inoremap <C-x><C-k> <Nop>
 inoremap <silent> <C-U> <C-R>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<Cr>
 inoremap <silent> <C-U> <C-R>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<Cr>
+inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <expr> <Cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<Cr>"
 
@@ -267,11 +268,11 @@ nnoremap <Expr>j            (v:count == 0 ? 'gj' : 'j')
 nnoremap <Expr>k            (v:count == 0 ? 'gk' : 'k')
 nnoremap <Right>            <Cmd>bn<Cr>
 nnoremap <Left>             <Cmd>bp<Cr>
-nnoremap <Silent><F2>       <Cmd>call LanguageClient_textDocument_rename()<Cr>
-nnoremap <Silent><Leader>lc <Cmd>call LanguageClient_contextMenu()<Cr>
-nnoremap <Silent><Leader>ld <Cmd>call LanguageClient_textDocument_definition()<Cr>
-nnoremap <Silent><Leader>lk <Cmd>call LanguageClient_textDocument_hover()<Cr>
-nnoremap <Silent><Leader>lr <Cmd>call LanguageClient_textDocument_references()<Cr>
+nnoremap <silent><F2>       <Cmd>call LanguageClient_textDocument_rename()<Cr>
+nnoremap <silent><Leader>lc <Cmd>call LanguageClient_contextMenu()<Cr>
+nnoremap <silent><Leader>ld <Cmd>call LanguageClient_textDocument_definition()<Cr>
+nnoremap <silent><Leader>lk <Cmd>call LanguageClient_textDocument_hover()<Cr>
+nnoremap <silent><Leader>lr <Cmd>call LanguageClient_textDocument_references()<Cr>
 
 tnoremap <Leader><Esc> <C-\><C-n>
 
@@ -325,6 +326,9 @@ endif
 
 " Deoplete
 call deoplete#enable()
+call deoplete#custom#option('sources', {
+\     '_': []
+\   })
 "call deoplete#enable_logging('DEBUG', $HOME . '/deoplete.log')
 
 command! -nargs=1 Silent |
