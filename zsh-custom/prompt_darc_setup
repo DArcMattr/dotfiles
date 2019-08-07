@@ -22,6 +22,8 @@ prompt_darc_setup () {
   add-zsh-hook precmd prompt_darc_precmd
   add-zsh-hook preexec prompt_darc_preexec
 
+  zstyle ':prezto:module:prompt' managed 'yes'
+
   pcc[1]=${1:-${${SSH_CLIENT+'yellow'}:-'red'}}
   pcc[2]=${2:-'yellow'}
   pcc[3]=${3:-'green'}
@@ -34,12 +36,14 @@ prompt_darc_setup () {
 
   # Set editor-info parameters.
   zstyle ':prezto:module:editor:info:completing' format "%B%F{$pcc[1]}...%f%b"
+  zstyle ':prezto:module:editor:info:keymap:primary:insert' format '❱'
+  zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format '❰'
   zstyle ':prezto:module:editor:info:keymap:primary' format "%B%F{$pcc[1]}❯%f%b"
   zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format "%F{$pcc[1]}♺%f"
   zstyle ':prezto:module:editor:info:keymap:alternate' format "%B%F{$pcc[1]}❮%f%b"
 
   PROMPT='
-${(e)$(prompt_darc_build)}${editor_info[keymap]} '
+${(e)$(prompt_darc_build)}${editor_info[context]} '
   PS2='%(4_.\.)%3_> %E'
   SPROMPT='zsh: correct %F{$pcc[2]}%R%f to %F{$pcc[3]}%r%f [nyae]? '
   RPROMPT='BAR'
