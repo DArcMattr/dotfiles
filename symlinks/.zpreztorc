@@ -47,39 +47,19 @@ zstyle ':prezto:load' pmodule-dirs $HOME/dotfiles/zsh-custom \
 #
 
 # Set the key mapping style to 'emacs' or 'vi'.
+zstyle ':prezto:module:editor' dot-expansion 'yes' # Auto convert .... to ../..
 zstyle ':prezto:module:editor' key-bindings 'vi'
+zstyle ':prezto:module:editor' ps-context 'yes'
 
-# Auto convert .... to ../..
-zstyle ':prezto:module:editor' dot-expansion 'yes'
-
-#
-# GNU Utility
-#
-
-# Set the command prefix on non-GNU systems.
-zstyle ':prezto:module:gnu-utility' prefix 'g'
-
+zstyle ':prezto:module:gnu-utility' prefix 'g' # Set the command prefix on non-GNU systems.
 zstyle ':prezto:module:git:alias' skip 'yes'
 
 #
 # History Substring Search
 #
-
-# Set the query found color.
-zstyle ':prezto:module:history-substring-search:color' found ''
-
-# Set the query not found color.
-zstyle ':prezto:module:history-substring-search:color' not-found ''
-
-# Set the search globbing flags.
-zstyle ':prezto:module:history-substring-search' globbing-flags ''
-
-#
-# Pacman
-#
-
-# Set the Pacman frontend.
-# zstyle ':prezto:module:pacman' frontend 'yaourt'
+zstyle ':prezto:module:history-substring-search:color' found '' # Set the query found color.
+zstyle ':prezto:module:history-substring-search:color' not-found '' # Set the query not found color.
+zstyle ':prezto:module:history-substring-search' globbing-flags '' # Set the search globbing flags.
 
 #
 # Prompt
@@ -89,23 +69,6 @@ zstyle ':prezto:module:history-substring-search' globbing-flags ''
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
 zstyle ':prezto:module:prompt' theme 'darc'
-
-#
-# Ruby
-#
-
-# Auto switch the Ruby version on directory change.
-# zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
-
-#
-# Screen
-#
-
-# Auto start a session when Zsh is launched in a local terminal.
-# zstyle ':prezto:module:screen:auto-start' local 'yes'
-
-# Auto start a session when Zsh is launched in a SSH connection.
-# zstyle ':prezto:module:screen:auto-start' remote 'yes'
 
 #
 # SSH
@@ -134,29 +97,3 @@ zstyle ':prezto:module:syntax-highlighting' styles \
    'builtin' 'bg=blue,fg=white,bold' \
    'command' 'bg=blue,fg=white,bold' \
    'function' 'bg=blue,fg=white,bold'
-
-#
-# Terminal
-#
-
-# Auto set the tab and window titles.
-zstyle ':prezto:module:terminal' auto-title 'yes'
-
-# Set the window title format.
-zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'
-
-# Set the tab title format.
-zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
-
-#
-# Tmux
-#
-
-# Auto start a session when Zsh is launched in a local terminal.
-# zstyle ':prezto:module:tmux:auto-start' local 'yes'
-
-# Auto start a session when Zsh is launched in a SSH connection.
-# zstyle ':prezto:module:tmux:auto-start' remote 'yes'
-
-# Integrate with iTerm2.
-# zstyle ':prezto:module:tmux:iterm' integrate 'yes'
