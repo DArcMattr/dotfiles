@@ -475,10 +475,10 @@ augroup END
 " in the root folder of that project
 
 " COBOL
-autocmd BufNewFile *.cob 0r ~/dotfiles/lang/cobol/header.cob
+autocmd BufNewFile *.cob 0r ~/.config/nvim/templates/cobol/header.cob
 
 " LaTeX
-autocmd BufNewFile *.tex 0r ~/dotfiles/lang/latex/template.tex
+autocmd BufNewFile *.tex 0r ~/.config/nvim/templates/latex/template.tex
 
 " Lisp
 autocmd FileType lisp,scheme,art setlocal equalprg=~/dotfiles/helpers/scmindent.rkt
