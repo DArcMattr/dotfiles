@@ -1,6 +1,4 @@
-syntax: glob
 symlinks/.pandoc/buttondown.css
-symlinks/.pandoc/.sass-cache
 xdg/composer/composer.lock
 xdg/composer/.htaccess
 xdg/composer/auth.json
