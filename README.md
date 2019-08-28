@@ -8,19 +8,18 @@ Some of these will be installed via the install scripts or apt-get below.
 
 * Root access via `sudo`
 * Z-shell, `zsh` is available and set as a shell, via `chsh`
-* [Mercurial SCM][], `hg`, and [Git][], `git`, source control programs
+* [Git][] for source control
 
 ### For Ubuntu flavors (I'm looking at you, 18.04):
 
     sudo -v
     sudo apt update
-    sudo apt install -y python-dev python3-dev curl software-properties-common
+    sudo apt install -y python-dev python3-dev curl software-properties-common git
     curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
     python2 /tmp/get-pip.py --user
     python3 /tmp/get-pip.py --user
-    ~/.local/bin/pip2 install -U --user mercurial
-    ~/.local/bin/hg clone https://bitbucket.org/darceneaux/dotfiles
-    curl -sL https://deb.nodesource.com/setup_11.x | \
+    git clone https://github.com/darcmattr/dotfiles ~/dotfiles
+    curl -sL https://deb.nodesource.com/setup_12.x | \
       sudo -E bash - # argh, I hate this
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | \
