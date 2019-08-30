@@ -335,8 +335,6 @@ command! -nargs=1 Silent |
 \   execute '<Cmd>silent !'.<q-args> |
 \   <Cmd>redraw!<Cr>
 
-command! -nargs=* -complete=help Help vertical belowright help <args>
-
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 if !exists(':DiffOrig')
