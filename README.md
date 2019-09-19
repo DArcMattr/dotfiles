@@ -38,18 +38,21 @@ Some of these will be installed via the install scripts or apt-get below.
     sudo add-apt-repository 'deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main'
     sudo add-apt-repository 'deb http://nginx.org/packages/mainline/ubuntu/ bionic nginx'
     sudo apt update
-    sudo apt install autossh bison build-essential clang-7 clang-7-doc \
-      clang-format-7 clang-tools-7 cmake flex git golang-go htop libclang1-7 \
-      libclang-7-dev libclang-common-7-dev libevent-dev libfuzzer-7-dev \
-      libgit2-dev liblldb-7-dev libllvm7 liblzma-dev libnss3-tools \
-      libncurses5-dev libpcre3-dev libssh2-1-dev libssl-dev lld-7 lldb-7 llvm-7 \
-      llvm-7-dev llvm-7-doc llvm-7-examples llvm-7-runtime neovim nginx \
-      nodejs php7.3-cli php7.3-curl php7.3-dev php7.3-fpm php7.3-imap \
+    sudo apt install autossh bison build-essential clang-9 clang-9-doc \
+      clang-format-9 clang-tools-9 clangd-9 cmake flex git golang-go htop \
+      libc++-9-dev libc++abi-9-dev libclang-9-dev libclang-common-9-dev \
+      libclang1-9 libevent-dev libfuzzer-9-dev libgit2-dev libllvm-9-ocaml-dev \
+      libllvm9 liblzma-dev libncurses5-dev libnss3-tools libomp-9-dev \
+      libpcre3-dev libssh2-1-dev libssl-dev lld-9 lldb-9 llvm-9 llvm-9-dev \
+      llvm-9-doc llvm-9-examples llvm-9-runtime neovim nginx nodejs php-common \
+      php-gd php-imagick php-mbstring php-memcache php-pear php-xdebug php-xml \
+      php-zip php7.3-cli php7.3-curl php7.3-dev php7.3-fpm php7.3-imap \
       php7.3-json php7.3-mysql php7.3-opcache php7.3-readline php7.3-soap \
-      php-common php-gd php-imagick php-mbstring php-memcache php-pear \
-      php-xdebug php-xml php-zip postgresql-11 pv python3-docutils \
-      python-clang-7 ruby-dev shellcheck tidy vim-nox xcape xsel yarn \
-      zlib1g-dev zsh
+      postgresql-11 pv python-clang-9 python3-docutils ruby-dev shellcheck tidy \
+      vim-nox xcape xsel yarn zlib1g-dev zsh              
+
+# LLVM
+apt-get install libllvm-9-ocaml-dev libllvm9 llvm-9 llvm-9-dev llvm-9-doc llvm-9-examples llvm-9-runtime clang-9 clang-tools-9 clang-9-doc libclang-common-9-dev libclang-9-dev libclang1-9 clang-format-9 python-clang-9 clangd-9 libfuzzer-9-dev lldb-9 lld-9 libc++-9-dev libc++abi-9-dev libomp-9-dev 
 
 The `helpers/debianish-update-alternatives.sh` will make LLVM and Go usable on
 Ubuntu.
