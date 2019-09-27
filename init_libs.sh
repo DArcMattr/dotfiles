@@ -107,23 +107,37 @@ grab_yarns() {
 }
 
 grab_composer() {
-  if ! command -v composer >/dev/null 2>&1 ; then
-    (
-      config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
-      mkdir -p "${HOME}/.local/bin"
-      if [ ! -d "${config_home}/composer" ]; then
-        ln -s "${HOME}/dotfiles/xdg/composer" "${config_home}/composer"
-      fi
-      cd "${TMP}" || exit
-      curl -sS https://getcomposer.org/installer | php -d "allow_url_fopen=On"; \
-        mv composer.phar "${HOME}/.local/bin/composer"
-      # TODO: code around phpcs paths
-      cd "${HOME}" || exit
-      composer global install
-    )
-  else
-    composer global upgrade
-  fi
+  (
+    cd /tmp
+    if ! command -v composer >/dev/null 2>&1 ; then
+      (
+        config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
+        mkdir -p "${HOME}/.local/bin"
+        if [ ! -d "${config_home}/composer" ]; then
+          ln -s "${HOME}/dotfiles/xdg/composer" "${config_home}/composer"
+        fi
+        cd "${TMP}" || exit
+        EXPECTED_SIGNATURE="$(wget -q -O - https://composer.github.io/installer.sig)"
+        php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+        ACTUAL_SIGNATURE="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
+
+        if [ "$EXPECTED_SIGNATURE" != "$ACTUAL_SIGNATURE" ] ; then
+          >&2 echo 'ERROR: Invalid installer signature'
+          rm composer-setup.php
+          exit 1
+        fi
+
+        php composer-setup.php --quiet --install-dir="${HOME}/.local/bin"
+
+        curl -sS https://getcomposer.org/installer | php -d "allow_url_fopen=On"; \
+          mv composer.phar "${HOME}/.local/bin/composer"
+        cd "${HOME}" || exit
+        composer global install
+      )
+    else
+      composer global upgrade
+    fi
+  )
 }
 
 grab_gems() {
