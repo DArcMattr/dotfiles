@@ -212,25 +212,24 @@ if exists( "g:vdebug_options" )
   let g:vdebug_options['ide_key'] = 'VDEBUG'
 endif
 
+
 " in case of derp-sudo
 cnoremap w!! w !sudo tee % >/dev/null
 command! W w !sudo tee % >/dev/null
 
 noremap <C-d>     <C-d>zz
 noremap <C-u>     <C-u>zz
+noremap <C-t>     gUiw
 noremap <Leader>l <Cmd>set rnu!<Cr>
 noremap <Leader>t <Cmd>enew<Cr>
 noremap N         Nzz
 noremap n         nzz
 noremap p         p`[
 
-inoremap <C-u>      <C-g>u<C-u>
-inoremap <C-x><C-k> <Nop>
-inoremap <silent> <C-U> <C-R>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<Cr>
-inoremap <silent> <C-U> <C-R>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<Cr>
-inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <expr> <Cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<Cr>"
+inoremap <C-t>         <Esc>gUiw
+inoremap <Expr><Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <Expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <Expr><Cr>    pumvisible() ? "\<C-y>" : "\<C-g>u\<Cr>"
 
 nnoremap : ;
 nnoremap ; :
