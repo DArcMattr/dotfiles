@@ -62,8 +62,6 @@ setopt notify
 setopt pushd_ignore_dups
 
 bindkey -v
-bindkey '\e[1~' beginning-of-line
-bindkey '\e[4~' end-of-line
 
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 autoload -Uz compinit
