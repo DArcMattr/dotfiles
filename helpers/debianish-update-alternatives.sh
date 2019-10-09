@@ -29,7 +29,7 @@ sudo update-alternatives \
   --slave   /usr/bin/clang-cl                 clang-cl                 /usr/bin/clang-cl-9 \
   --slave   /usr/bin/clang-query              clang-query              /usr/bin/clang-query-9 \
   --slave   /usr/bin/clang-check              clang-check              /usr/bin/clang-check-9 \
-  --slave   /usr/bin/clang-include-fixer      clang-include-fixer      /usr/bin/clang-include-fixer \
+  --slave   /usr/bin/clang-include-fixer      clang-include-fixer      /usr/bin/clang-include-fixer-9 \
   --slave   /usr/bin/clang-offload-bundler    clang-offload-bundler    /usr/bin/clang-offload-bundler-9 \
   --slave   /usr/bin/clang-refactor           clang-refactor           /usr/bin/clang-refactor-9 \
   --slave   /usr/bin/clang-import-test        clang-import-test        /usr/bin/clang-import-test-9 \
