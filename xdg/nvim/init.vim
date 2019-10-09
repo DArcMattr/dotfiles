@@ -219,14 +219,13 @@ command! W w !sudo tee % >/dev/null
 
 noremap <C-d>     <C-d>zz
 noremap <C-u>     <C-u>zz
-noremap <C-t>     gUiw
 noremap <Leader>l <Cmd>set rnu!<Cr>
 noremap <Leader>t <Cmd>enew<Cr>
 noremap N         Nzz
 noremap n         nzz
 noremap p         p`[
 
-inoremap <C-t>         <Esc>gUiw
+inoremap <C-b>         <Esc>gUiw
 inoremap <Expr><Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <Expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <Expr><Cr>    pumvisible() ? "\<C-y>" : "\<C-g>u\<Cr>"
@@ -246,6 +245,7 @@ nnoremap { {zz
 nnoremap } }zz
 nnoremap <C-PageDown>       <Cmd>bp<Cr>
 nnoremap <C-PageUp>         <Cmd>bn<Cr>
+nnoremap <C-b>              gUiw
 nnoremap <C-e>              3<C-e>
 nnoremap <C-i>              i<Space><Esc>
 nnoremap <C-o>              i<Cr><Esc>
