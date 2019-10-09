@@ -245,7 +245,6 @@ nnoremap { {zz
 nnoremap } }zz
 nnoremap <C-PageDown>       <Cmd>bp<Cr>
 nnoremap <C-PageUp>         <Cmd>bn<Cr>
-nnoremap <C-b>              gUiw
 nnoremap <C-e>              3<C-e>
 nnoremap <C-i>              i<Space><Esc>
 nnoremap <C-o>              i<Cr><Esc>
@@ -260,6 +259,8 @@ nnoremap <Leader>gd         <Cmd>Gdiff<Cr>
 nnoremap <Leader>gl         <Cmd>Glog -- %<Cr>
 nnoremap <Leader>gp         <Cmd>Gpush<Cr>
 nnoremap <Leader>gs         <Cmd>Gstatus<Cr>
+nnoremap <Leader>b          gUiw
+nnoremap <Leader><S-b>      guiw
 nnoremap <Leader>o          <Cmd>Denite outline<Cr>
 nnoremap <Leader>q          <Cmd>nohlsearch<Cr>
 nnoremap <Leader>*          <Cmd>DeniteCursorWord grep:.<Cr>
