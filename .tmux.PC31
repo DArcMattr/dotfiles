@@ -59,10 +59,8 @@ project_pane() {
 
 sudo sh -c " \
   service nginx start && \
-  service php5.6-fpm start && \
   service php7.2-fpm start && \
-  service php7.3-fpm start && \
-  service mysql start"
+  service php7.3-fpm start"
 mailcatcher
 
 tmux bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "clip.exe"
