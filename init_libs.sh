@@ -10,7 +10,7 @@ grab_hgcfg() {
 
 # chicken & egg time here
 grab_go() {
-  version='1.13'
+  version='1.13.3'
   pkgs=(
     'github.com/FiloSottile/mkcert' 
     'github.com/canthefason/go-watcher' 
@@ -25,6 +25,8 @@ grab_go() {
     ${go_bin}/go${version} get -u "${i}"
     ${go_bin}/go${version} install "${i}"
   done
+
+  ln -sf "${HOME}/go/bin/go${version}" "${HOME}/.local/bin/go"
 }
 
 grab_rust() {
