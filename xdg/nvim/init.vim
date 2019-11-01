@@ -51,7 +51,7 @@ set clipboard+=unnamedplus
 set colorcolumn=+1
 set completeopt=menuone,longest
 set copyindent
-set diffopt=filler,vertical
+set diffopt=filler,vertical,internal,indent-heuristic,algorithm:patience
 set display+=lastline
 set encoding=utf-8
 set expandtab
