@@ -19,7 +19,7 @@ Some of these will be installed via the install scripts or apt-get below.
     python2 /tmp/get-pip.py --user
     python3 /tmp/get-pip.py --user
     git clone https://github.com/darcmattr/dotfiles ~/dotfiles
-    curl -sL https://deb.nodesource.com/setup_12.x | \
+    curl -sL https://deb.nodesource.com/setup_13.x | \
       sudo -E bash - # argh, I hate this
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | \
@@ -34,9 +34,9 @@ Some of these will be installed via the install scripts or apt-get below.
       sudo apt-key add -
     wget --quiet -O - "https://www.postgresql.org/media/keys/ACCC4CF8.asc" | \
       sudo apt-key add -
-    sudo add-apt-repository 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-7 main'
+    sudo add-apt-repository 'deb http://apt.llvm.org/eoan/ llvm-toolchain-oean-9 main'
     sudo add-apt-repository 'deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main'
-    sudo add-apt-repository 'deb http://nginx.org/packages/mainline/ubuntu/ bionic nginx'
+    sudo add-apt-repository 'deb http://nginx.org/packages/mainline/ubuntu/ eoan nginx'
     sudo apt update
     sudo apt install autossh bison build-essential clang-9 clang-9-doc \
       clang-format-9 clang-tools-9 clangd-9 cmake flex git golang-go htop \
@@ -49,7 +49,8 @@ Some of these will be installed via the install scripts or apt-get below.
       php-zip php7.3-cli php7.3-curl php7.3-dev php7.3-fpm php7.3-imap \
       php7.3-json php7.3-mysql php7.3-opcache php7.3-readline php7.3-soap \
       postgresql-11 pv python-clang-9 python3-docutils ruby-dev shellcheck tidy \
-      vim-nox xcape xsel yarn zlib1g-dev zsh              
+      vim-nox wslu xcape xsel yarn zlib1g-dev zsh
+
 
 # LLVM
 apt-get install libllvm-9-ocaml-dev libllvm9 llvm-9 llvm-9-dev llvm-9-doc llvm-9-examples llvm-9-runtime clang-9 clang-tools-9 clang-9-doc libclang-common-9-dev libclang-9-dev libclang1-9 clang-format-9 python-clang-9 clangd-9 libfuzzer-9-dev lldb-9 lld-9 libc++-9-dev libc++abi-9-dev libomp-9-dev 
