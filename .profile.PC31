@@ -4,12 +4,12 @@ export CC=clang
 export CXX=clang++
 export DISPLAY=:0.0
 
-# Adding wsl-open as a browser for Bash for Windows
+# Adding wslview via xdg-open as a browser for WSL
 if [[ $(uname -r) == *Microsoft  ]]; then
   if [[ -z xdg-open  ]]; then
-    export BROWSER=wsl-open
+    export BROWSER=wslview
   else
-    export BROWSER=xdg-open:wsl-open
+    export BROWSER=xdg-open:wslview
   fi
 fi
 
