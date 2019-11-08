@@ -51,9 +51,7 @@ Some of these will be installed via the install scripts or apt-get below.
       postgresql-11 pv python-clang-9 python3-docutils ruby-dev shellcheck tidy \
       vim-nox wslu xcape xsel yarn zlib1g-dev zsh
 
-
 # LLVM
-apt-get install libllvm-9-ocaml-dev libllvm9 llvm-9 llvm-9-dev llvm-9-doc llvm-9-examples llvm-9-runtime clang-9 clang-tools-9 clang-9-doc libclang-common-9-dev libclang-9-dev libclang1-9 clang-format-9 python-clang-9 clangd-9 libfuzzer-9-dev lldb-9 lld-9 libc++-9-dev libc++abi-9-dev libomp-9-dev 
 
 The `helpers/debianish-update-alternatives.sh` will make LLVM and Go usable on
 Ubuntu.
