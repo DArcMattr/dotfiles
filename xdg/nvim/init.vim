@@ -85,7 +85,6 @@ set printheader=+{strftime(\"%c\"getftime(expand(\"%%\")))}%=Page\ %N
 set printoptions=formfeed:y,paper:letter,portrait:n,number:y,syntax:7
 set printoptions+=left:5mm,right:5mm,top:10mm,bottom:5mm
 set pumheight=15
-set regexpengine=1
 set relativenumber
 set scrolloff=3
 set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
