@@ -49,7 +49,6 @@ grab_rust() {
 grab_pips() {
   config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
   pip2pkgs=(
-    'mercurial' 
     'pip' 
     'pynvim'
   )
@@ -59,7 +58,7 @@ grab_pips() {
     'gsutil'
     'httpie'
     'icdiff'
-    'litecli'
+    'mercurial'
     'mycli'
     'pip'
     'powerline-status'
@@ -76,8 +75,6 @@ grab_pips() {
 
   ## redundant to force an update of specific packages, then to update all the
   ## installed ones
-  #pip2 freeze --user | grep -v '^\-e' | cut -d = -f 1 | \
-  #  xargs -n1 pip2 install -U --user
   #pip3 freeze --user | grep -v '^\-e' | cut -d = -f 1 | \
   #  xargs -n1 pip3 install -U --user
 
