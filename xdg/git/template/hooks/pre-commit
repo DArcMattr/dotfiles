@@ -3,9 +3,7 @@
 # Adapted from PHP via
 # @link http://webadvent.org/2008/dont-commit-that-error-by-travis-swicegood.html
 
-git rev-parse --verify HEAD > /dev/null 2>&1
-
-if [ $? -ne 0 ]; then
+if [ "$(git rev-parse --verify HEAD > /dev/null 2>&1)" = 0 ]; then
 	AGAINST='4b825dc642cb6eb9a060e54bf8d69288fbee4904' # hash of empty repo
 else
 	AGAINST='HEAD'
@@ -18,7 +16,7 @@ for FILE in ${FILES}; do
 
 	case ${F} in
 		php)
-			if [ -e "${FILE}" ] && [ -f "${FILE}" ]; then
+			if [ -f "${FILE}" ]; then
 				ERROR="$(php -l "${FILE}")"
 				STATUS=$?
 			fi
@@ -36,13 +34,3 @@ for FILE in ${FILES}; do
 		exit ${STATUS}
 	fi
 done
-
-#if git status -s | grep 'assets/css/scss/.\+scss$'; then
-#	grunt css
-#	touch .csscommit
-#fi
-
-#if git status -s | grep 'assets/js/src/.\+js$'; then
-#	grunt js
-#	touch .jscommit
-#fi
