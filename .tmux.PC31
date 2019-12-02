@@ -35,7 +35,6 @@ project_pane() {
   done
 
   WIN_NUM=$(tmux display-message -p '#{session_windows}')
-  LOG=${LOG:-"/var/log/fpm-php.www.log"}
 
   if [ -z "${BUILD+x}" ]; then
     BUILD=${BUILD:='yarn watch'}
@@ -47,7 +46,7 @@ project_pane() {
   fi
 
   tmux new-window -t "${SESSION}:${WIN_NUM}" -c "${DIRECTORY}" \; \
-    split-window -v -p 12 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}" "tail -F ${LOG}" \; \
+    split-window -v -p 12 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}" "tail -F ./htdocs/log/x-errors_php.txt" \; \
     split-window -h -p 50 -t "${SESSION}:${WIN_NUM}.1" -c "${DIRECTORY}" "tail -F ./htdocs/log/locallog.txt" \; \
     split-window -v -p 12 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}" \; \
     split-window -v -p 12 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}"
