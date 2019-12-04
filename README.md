@@ -155,5 +155,4 @@ to the end of `/usr/share/X11/xkb/symbols/evdev.lst`, then using `dconf editor`,
 I had to add `'speshul:speshul'` to the **Custom value** field array to
 `/org/gnome/desktop/input-sources/xkb-options`. (ugh).
 
-[Mercurial SCM]: http://mercurial.selenic.com
 [Git]: http://git-scm.com
