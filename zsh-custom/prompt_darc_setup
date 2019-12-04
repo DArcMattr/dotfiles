@@ -59,12 +59,12 @@ prompt_darc_build () {
   pcc[4]=${4:-'blue'}
   pcc[5]=${5:-'white'}
 
-  pc['\[']="%F{$pcc[1]}%S["
-  pc['\]']="%F{$pcc[1]}]%s"
   pc['<']="%F{$pcc[1]}%B<"
   pc['>']="%F{$pcc[1]}>%b"
+  pc['lb']="%F{$pcc[1]}%S["
+  pc['rb']="%F{$pcc[1]}]%s"
 
-  p_date="$pc['\[']%F{$pcc[2]}%D{%A %F %T %Z}$pc['\]']"
+  p_date="$pc['lb']%F{$pcc[2]}%D{%A %F %T %Z}$pc['rb']"
 
   p_userpwd="$pc['<']%F{$pcc[3]}%n@%m%F{$pcc[5]}:%F{$pcc[4]}%d$pc['>']"
   p_vcs="%(2v.%U%2v%u.)"
