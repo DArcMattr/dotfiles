@@ -1,6 +1,6 @@
 Plug 'equalsraf/neovim-gui-shim'
 
-Guifont DejaVu Sans Mono:h7
+set guifont=hack:h10
 
 tnoremap <A-j> <C-\><C-N><C-w>j
 tnoremap <A-k> <C-\><C-N><C-w>k
