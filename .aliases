@@ -33,6 +33,7 @@ alias key='\man -k'
 alias info='info --vi-keys'
 alias sicp='racket -i -p neil/sicp -l xrepl'
 alias agp='ag --pager=less'
+alias venv='python -m venv'
 #shellcheck disable=SC2139
 alias svim='nvim -u ~/contrib/SpaceVim/init.vim'
 
