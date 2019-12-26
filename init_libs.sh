@@ -1,16 +1,8 @@
 #!/usr/bin/env zsh
-grab_hgcfg() {
-  INSTALL_PATH="${HOME}/contrib/hgcfg"
-  if [ ! -d "${INSTALL_PATH}/.hg/" ]; then
-    hg clone https://bitbucket.org/whiro_/hgcfg "${INSTALL_PATH}"
-  else
-    ( cd "${INSTALL_PATH}" && hg pull -u )
-  fi
-}
 
 # chicken & egg time here
 grab_go() {
-  version='1.13.3'
+  version='1.13.5'
   pkgs=(
     'github.com/FiloSottile/mkcert' 
     'github.com/canthefason/go-watcher' 
