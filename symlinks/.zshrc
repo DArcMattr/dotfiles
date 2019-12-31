@@ -3,6 +3,7 @@ fpath=($fpath ~/dotfiles/zsh-custom ~/.local/share/zsh/site-functions)
 COMPLETION_WAITING_DOTS="true"
 DISABLE_CORRECTION="true"
 KEYTIMEOUT=1
+export PYTHONSTARTUP="${HOME}/dotfiles/helpers/pythonstartup.py"
 
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   zstyle ':completion:*' accept-exact '*(N)'
