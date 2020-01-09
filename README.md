@@ -10,11 +10,15 @@ Some of these will be installed via the install scripts or apt-get below.
 * Z-shell, `zsh` is available and set as a shell, via `chsh`
 * [Git][] for source control
 
-### For Ubuntu flavors (I'm looking at you, 18.04):
+### For Ubuntu flavors (I'm looking at you, 19.10):
 
     sudo -v
     sudo apt update
-    sudo apt install -y python-dev python3-dev curl software-properties-common git
+    sudo apt install -y software-properties-common
+    sudo add-apt-repository -y universe
+    sudo add-apt-repository -y multiverse
+    sudo apt update
+    sudo apt install -y curl python-dev python3-dev 
     curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
     python2 /tmp/get-pip.py --user
     python3 /tmp/get-pip.py --user
@@ -26,7 +30,6 @@ Some of these will be installed via the install scripts or apt-get below.
       sudo tee /etc/apt/sources.list.d/yarn.list
     sudo add-apt-repository -y ppa:neovim-ppa/unstable
     sudo add-apt-repository -y ppa:ondrej/php
-    sudo add-apt-repository -y ppa:jonathonf/vim
     sudo add-apt-repository -y ppa:git-core/ppa
     wget --quiet -O - "http://apt.llvm.org/llvm-snapshot.gpg.key" | \
       sudo apt-key add -
@@ -35,7 +38,6 @@ Some of these will be installed via the install scripts or apt-get below.
     wget --quiet -O - "https://www.postgresql.org/media/keys/ACCC4CF8.asc" | \
       sudo apt-key add -
     sudo add-apt-repository 'deb http://apt.llvm.org/eoan/ llvm-toolchain-oean-9 main'
-    sudo add-apt-repository 'deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main'
     sudo add-apt-repository 'deb http://nginx.org/packages/mainline/ubuntu/ eoan nginx'
     sudo apt update
     sudo apt install autossh bison build-essential clang-9 clang-9-doc \
@@ -43,13 +45,13 @@ Some of these will be installed via the install scripts or apt-get below.
       libc++-9-dev libc++abi-9-dev libclang-9-dev libclang-common-9-dev \
       libclang1-9 libevent-dev libfuzzer-9-dev libgit2-dev libllvm-9-ocaml-dev \
       libllvm9 liblzma-dev libncurses5-dev libnss3-tools libomp-9-dev \
-      libpcre3-dev libssh2-1-dev libssl-dev lld-9 lldb-9 llvm-9 llvm-9-dev \
+      libpcre3-dev libssh2-1-dev libssl-dev lsyncd lld-9 lldb-9 llvm-9 llvm-9-dev \
       llvm-9-doc llvm-9-examples llvm-9-runtime neovim nginx nodejs php-common \
       php-gd php-imagick php-mbstring php-memcache php-pear php-xdebug php-xml \
       php-zip php7.3-cli php7.3-curl php7.3-dev php7.3-fpm php7.3-imap \
       php7.3-json php7.3-mysql php7.3-opcache php7.3-readline php7.3-soap \
-      postgresql-11 pv python-clang-9 python3-docutils ruby-dev shellcheck tidy \
-      vim-nox wslu xcape xsel yarn zlib1g-dev zsh
+      pv python-clang-9 python3-docutils ruby-dev shellcheck tidy wslu xcape \ 
+      xsel yarn zlib1g-dev zsh
 
 # LLVM
 
