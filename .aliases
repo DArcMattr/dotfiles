@@ -109,41 +109,6 @@ pushterms() {
   infocmp -x | ssh -t "${@}" 'cat > "~/nuterm.info" && tic -x "~/$nuterm.info"'
 }
 
-# Given a domain name, make a wildcard certificate for all its subdomains.
-#
-# @param string Domain Name
-sscerts() {
-  ME=$(whoami)
-  TMPFILE="$(mktemp -d)/v3.ext"
-  DOMAIN=${1}
-
-  cat <<-EOL > "${TMPFILE}"
-authorityKeyIdentifier=keyid,issuer
-basicConstraints=CA:FALSE
-keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
-subjectAltName = @alt_names
-
-[alt_names]
-DNS.1 = ${1}
-DNS.2 = *.${1}
-EOL
-
-  if [ -f "./${1}.key" ]; then
-    KEY_OPT='-key'
-  else
-    KEY_OPT='-keyout'
-  fi
-
-  \openssl req -new -newkey rsa:4096 -sha256 -nodes ${KEY_OPT} "./${1}.key" -out "./${1}.csr" \
-    -subj "/CN=*.${1}/O=DavidTheMachine/OU=None/C=US/ST=California/L=Anaheim"
-  echo ${ext3} >> "${TMPFILE}"
-  \sudo \openssl x509 -days 3653 -sha256 -req -in "./${1}.csr" \
-    -CA "/usr/share/ca-certificates/localhost-rootCA.pem" \
-    -CAkey "${HOME}/.config/ssl/rootCA.key" -CAcreateserial \
-    -out "./${1}.pem" -extfile "${TMPFILE}"
-  \sudo \chown ${ME}:${ME} "./${1}.pem"
-}
-
 sssh() {
   (autossh -t "${1}" 'source ${HOME}/dotfiles/.aliases && tmuxt') 2>/dev/null
 }
