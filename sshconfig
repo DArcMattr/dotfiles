@@ -58,10 +58,12 @@ Host git-codecommit.us-west-1.amazonaws.com
   User APKAJP7KDRJLVTNFYDPQ
   ForwardAgent no
 
-Host staging
+Host davidssh
   User ec2-user
-  HostName stagessh.theofficeexpress.com
+  HostName davidssh.theofficeexpress.com
+  Localforward 3306 stagealb.cvzsvhbcyanq.us-west-1.rds.amazonaws.com:3306
 
-Host phoenix
-  User ec2-user
-  HostName phxssh.theofficeexpress.com
+Host old
+  User david
+  HostName 192.168.128.130
+  Port 32323

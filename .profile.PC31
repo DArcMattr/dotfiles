@@ -2,7 +2,8 @@
 
 export CC=clang
 export CXX=clang++
-export DISPLAY=:0.0
+export HOSTIP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
+export DISPLAY=${HOSTIP}:0
 
 # Adding wslview via xdg-open as a browser for WSL
 if [[ $(uname -r) == *Microsoft  ]]; then
