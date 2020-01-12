@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+export CC=clang
+export CXX=clang++
+export HOSTIP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
+export DISPLAY=${HOSTIP}:0
+export BROWSER=xdg-open
+
+xrdb ~/.Xresources
