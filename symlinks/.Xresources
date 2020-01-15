@@ -51,7 +51,7 @@ URxvt.saveline: 0
 URxvt.scrollBar: false
 URxvt.scrollBar_right: false
 URxvt.urgentOnBell: true
-URxvt.urlLauncher: wsl-open
+URxvt.urlLauncher: xdg-open
 
 *.font: xft:Hack:style=Regular:size=7.5
 *.boldFont: xft:Hack:style=Bold:size=7.5
