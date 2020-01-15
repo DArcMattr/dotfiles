@@ -56,6 +56,7 @@ project_pane() {
 ssh davidssh 'ls'
 sudo sh -c " \
   service nginx start && \
+  service php7.2-fpm start && \
   service php7.3-fpm start"
 lsyncd -rsyncssh /var/www/vhosts/local.theofficeexpress.com/htdocs/ davidssh /var/app/current/
 mailcatcher
