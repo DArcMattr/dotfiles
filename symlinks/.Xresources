@@ -53,7 +53,9 @@ URxvt.scrollBar_right: false
 URxvt.urgentOnBell: true
 URxvt.urlLauncher: wsl-open
 
-*.font: xft:Hack:style=Regular:size=7.5,xft:Noto Color Emoji
-*.boldFont: xft:Hack:style=Bold:size=7.5,xft:Noto Color Emoji
-*.italicFont: xft:Hack:style=Italic:size=7.5,xft:Noto Color Emoji
-*.boldItalicFont: xft:Hack:style=Bold Italic:size=7.5,xft:Noto Color Emoji
+*.font: xft:Hack:style=Regular:size=7.5
+*.boldFont: xft:Hack:style=Bold:size=7.5
+*.italicFont: xft:Hack:style=Italic:size=7.5
+*.boldItalicFont: xft:Hack:style=Bold Italic:size=7.5
+
+Xft.antialias: true
