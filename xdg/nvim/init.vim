@@ -183,6 +183,7 @@ let g:indent_guides_enable_on_vim_startup = 1
 "let g:LanguageClient_loggingFile = $HOME . '/lc.log'
 "let g:LanguageClient_loggingLevel = 'DEBUG'
 let g:LanguageClient_autoStart = 1
+let g:LanguageClient_echoProjectRoot = 0
 let g:LanguageClient_rootMarkers = ['.editorconfig']
 let g:localvimrc_persistent = 1
 let g:localvimrc_sandbox = 0
