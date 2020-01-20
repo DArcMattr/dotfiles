@@ -8,15 +8,8 @@
       "scripts"
     ]
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/AdamMarton/php-stubs-generator"
-    } 
-  ],
   "require": {
     "felixfbecker/language-server": "@dev",
-    "laravel/installer": "@stable",
     "phpmd/phpmd": "@stable",
     "phpstan/phpstan": "@dev",
     "phpunit/phpunit": "@stable",
@@ -25,8 +18,7 @@
     "wp-coding-standards/wpcs": "@stable",
     "fig-r/psr2r-sniffer": "@stable",
     "psy/psysh": "@stable",
-    "wp-cli/wp-cli-bundle": "@stable",
-    "giacocorsiglia/stubs-generator": "dev-master"
+    "wp-cli/wp-cli-bundle": "@stable"
   },
   "scripts": {
     "post-install-cmd": [
