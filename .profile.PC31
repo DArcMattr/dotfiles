@@ -2,16 +2,14 @@
 
 export CC=clang
 export CXX=clang++
-export HOSTIP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
-export DISPLAY=${HOSTIP}:0
+if [[ $(uname -r | sed -n 's/.*\( *Microsoft *\).*/\1/p') == "Microsoft" ]]; then
+  export DISPLAY=:0
+else 
+  export HOSTIP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
+  export DISPLAY=${HOSTIP}:0
+fi
 
 # Adding wslview via xdg-open as a browser for WSL
-if [[ $(uname -r) == *Microsoft  ]]; then
-  if [[ -z xdg-open  ]]; then
-    export BROWSER=wslview
-  else
-    export BROWSER=xdg-open:wslview
-  fi
-fi
+export BROWSER=xdg-open
 
 xrdb ~/.Xresources

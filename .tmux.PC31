@@ -58,7 +58,8 @@ sudo sh -c " \
   service nginx start && \
   service php7.2-fpm start && \
   service php7.3-fpm start"
-lsyncd -rsyncssh /var/www/vhosts/local.theofficeexpress.com/htdocs/ davidssh /var/app/current/
+#lsyncd -rsyncssh /var/www/vhosts/local.theofficeexpress.com/htdocs/ davidssh /var/app/current/
+lsyncd /var/www/vhosts/local.theofficeexpress.com/lsyncd.conf
 mailcatcher
 
 tmux bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "clip.exe"
