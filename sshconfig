@@ -58,6 +58,10 @@ Host git-codecommit.us-west-1.amazonaws.com
   User APKAJP7KDRJLVTNFYDPQ
   ForwardAgent no
 
+Host indigo
+  User ec2-user
+  HostName indigossh.theofficeexpress.com
+
 Host davidssh
   User ec2-user
   HostName davidssh.theofficeexpress.com
