@@ -205,13 +205,6 @@ let g:UltiSnipsExpandTrigger = "<Leader>u"
 let g:UltiSnipsJumpBackwardTrigger = "<C-n>"
 let g:UltiSnipsJumpForwardTrigger = "<C-p>"
 
-if exists( "g:vdebug_options" )
-  let g:vdebug_options['debug_file'] = '~/vdebug_log'
-  let g:vdebug_options['debug_file_level'] = 2
-  let g:vdebug_options['ide_key'] = 'VDEBUG'
-endif
-
-
 " in case of derp-sudo
 cnoremap w!! w !sudo tee % >/dev/null
 command! W w !sudo tee % >/dev/null

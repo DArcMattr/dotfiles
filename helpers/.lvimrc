@@ -3,6 +3,11 @@ if g:localvimrc_sourced_once_for_file
   finish
 endif
 
+let g:vdebug_options.debug_file = '~/vdebug.log'
+let g:vdebug_options.debug_file_level = 2
+
+let g:ale_css_stylelint_options = ""
+let g:ale_scss_stylelint_options = ""
 let g:ale_php_phpcs_standard = 'PSR2R'
 let g:ale_php_phpcbf_standard = 'PSR2R'
 
@@ -13,7 +18,9 @@ endif
 augroup oex_project
   autocmd!
 
+  autocmd BufNewFile,BufEnter * setlocal path=/var/www/vhosts/local.theofficeexpress.com/htdocs/
   autocmd BufNewFile,BufEnter *.php setlocal tags=/var/www/vhosts/local.theofficeexpress.com/php.tags
+  autocmd BufNewFile,BufEnter *.php setlocal includeexpr='.'.v:fname
   autocmd BufNewFile,BufEnter *.php let b:tagcommands = {
   \ 'php': {
   \     'tagfile': '/var/www/vhosts/local.theofficeexpress.com/php.tags',
