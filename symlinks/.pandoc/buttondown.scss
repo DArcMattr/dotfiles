@@ -138,25 +138,51 @@ em > em {
   font-style: normal;
 }
 
-strong {}
+strong {
+  font-weight: 700;
+}
 
-/* ---- Links (anchors) ---- */
+/* ---- Links (anchors) and footnotes ---- */
 
 a {
+  $color: blue;
+
   font-weight: 700;
   text-decoration: none;
   @include pseudo-text-stroke( color-contrast( $color-body-background ), 1px );
-  &:link {
+
+  &:link { 
+    color: $color; 
   }
-  &:visited {
+
+  &:visited { 
+    color: desaturate( $color, 50% );
   }
-  &:hover {
+
+  &:hover { 
+    color: lighten( $color, 50% );
   }
-  &:focus {
+
+  &:focus { 
+    color: lighten( $color, 50% );
   }
-  &:active {
+
+  &:active { 
+    background-color: hsla( 0, 0%, 0%, 10% );
+  }
+
+  &.footnote, &.footnoteRef {
+    /* Pandoc, MultiMarkdown footnote links */
+    font-size: small;
+    vertical-align: text-top;
+  }
+
+  &[href^="#fnref"], 
+  &.reversefootnote {
+    text-decoration: underline;
   }
 }
+
 
 @media screen {
   a:hover {
@@ -303,10 +329,17 @@ tr.header, tbody {}
 /* Table body rows */
 
 tr {
-  &.odd:hover, &.even:hover {
-    background-color: #eee;
+  &:nth-of-type(odd) {
+    background-color: hsla( 240, 100%, 50%, 10% );
   }
-  &.odd, &.even {}
+
+  &:nth-of-type(even) {
+    background-color: transparent;
+  }
+
+  &:hover > * {
+    background-color: hsla( 0, 0%, 0%, 10% );
+  }
 }
 
 /* Odd and even rows */
@@ -383,17 +416,6 @@ dd {
     }
   }
   margin-bottom: .5 * $lh;
-}
-
-/* ---- Footnotes ---- */
-
-a {
-  &.footnote, &.footnoteRef {
-    /* Pandoc, MultiMarkdown footnote links */
-    font-size: small;
-    vertical-align: text-top;
-  }
-  &[href^="#fnref"], &.reversefootnote {}
 }
 
 @media print {
