@@ -26,7 +26,7 @@ if [[ -x "${HOME}/.local/bin/composer" || $(which composer >/dev/null 2>&1) ]]; 
   php_path="${XDG_CONFIG_HOME}/composer/vendor/bin"
 fi
 
-if which go >/dev/null 2>&1; then
+if [[ -x "${HOME}/go/bin" ]]; then
   export GOPATH=${HOME}/go
   go_bin="${GOPATH}/bin"
 fi
