@@ -69,3 +69,5 @@ autoload -Uz compinit
 compinit
 
 umask 002
+
+source ~/dotfiles/helpers/.p10k.zsh
