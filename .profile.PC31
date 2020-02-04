@@ -13,3 +13,5 @@ fi
 export BROWSER=xdg-open
 
 xrdb ~/.Xresources
+
+alias fvim="/mnt/c/Users/David/Desktop/fvim-win-x64/FVim.exe --wsl"
