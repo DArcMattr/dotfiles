@@ -1,4 +1,4 @@
-fpath=($fpath ~/dotfiles/zsh-custom ~/.local/share/zsh/site-functions)
+fpath=($fpath ~/.local/share/zsh/site-functions)
 
 COMPLETION_WAITING_DOTS="true"
 DISABLE_CORRECTION="true"
@@ -19,6 +19,10 @@ if [[ -n ${ZSH_VERSION-} ]]; then
 
   if (( $+commands[wp]  )); then
     wpcli_completion="$(wp cli info | awk -F: '$1 ~/^WP-CLI root dir/ {gsub(/^[ \t]+/, "", $2); print $2}')/utils/wp-completion.bash"
+
+    if [[ -r $wpcli_completion ]]; then
+      source $wpcli_completion
+    fi
   fi
 
   have() {
@@ -28,10 +32,6 @@ if [[ -n ${ZSH_VERSION-} ]]; then
 
   if [[ -d /etc/bash_completion.d/ ]]; then
     source /etc/bash_completion.d/*
-  fi
-
-  if [[ -r $wpcli_completion ]]; then
-    source $wpcli_completion
   fi
 fi
 
