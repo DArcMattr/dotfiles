@@ -2,6 +2,9 @@
   "name": "darceneaux/dotfiles",
   "description": "David Arceneaux global php utilities",
   "license": "MIT",
+  "config": {
+    "sort-packages": true
+  },
   "type": "library",
   "autoload": {
     "classmap": [
@@ -10,15 +13,16 @@
   },
   "require": {
     "felixfbecker/language-server": "@dev",
+    "fig-r/psr2r-sniffer": "@stable",
     "phpmd/phpmd": "@stable",
     "phpstan/phpstan": "@dev",
     "phpunit/phpunit": "@stable",
+    "psy/psysh": "@dev",
+    "slevomat/coding-standard": "@stable",
     "sloanlance/pman-php-manual": "@stable",
     "squizlabs/php_codesniffer": "@dev",
-    "wp-coding-standards/wpcs": "@stable",
-    "fig-r/psr2r-sniffer": "@stable",
-    "psy/psysh": "@stable",
-    "wp-cli/wp-cli-bundle": "@stable"
+    "wp-cli/wp-cli-bundle": "@stable",
+    "wp-coding-standards/wpcs": "@stable"
   },
   "scripts": {
     "post-install-cmd": [

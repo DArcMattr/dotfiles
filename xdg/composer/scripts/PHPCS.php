@@ -84,6 +84,7 @@ class PHPCS
         $vendorDirs = [
           "$vendorDir/fig-r/psr2r-sniffer",
           "$vendorDir/wp-coding-standards/wpcs",
+          "$vendorDir/slevomat/coding-standard",
         ];
         $installedPaths = implode(',', $vendorDirs);
 
