@@ -43,8 +43,8 @@ project_pane() {
   fi
 
   tmux new-window -t "${SESSION}:${WIN_NUM}" -c "${DIRECTORY}" \; \
-    split-window -v -p 12 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}" "ssh davidssh 'tail -F /var/app/current/log/x-errors_php.txt'" \; \
-    split-window -h -p 50 -t "${SESSION}:${WIN_NUM}.1" -c "${DIRECTORY}" "ssh davidssh 'tail -F /var/app/current/log/locallog.txt'" \; \
+    split-window -v -p 12 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}" "tail -F ./log/x-errors_php.txt" \; \
+    split-window -h -p 50 -t "${SESSION}:${WIN_NUM}.1" -c "${DIRECTORY}" "tail -F ./log/locallog.txt" \; \
     split-window -v -p 12 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}" \; \
     split-window -v -p 12 -t "${SESSION}:${WIN_NUM}.0" -c "${DIRECTORY}"
 
