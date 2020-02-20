@@ -2,7 +2,7 @@
 
 # chicken & egg time here
 grab_go() {
-  version='1.13.7'
+  version='1.13.8'
   pkgs=(
     'github.com/FiloSottile/mkcert' 
     'github.com/canthefason/go-watcher' 
@@ -51,6 +51,7 @@ grab_pips() {
     'httpie'
     'icdiff'
     'mercurial'
+    'msgpack'
     'mycli'
     'pip'
     'powerline-status'
