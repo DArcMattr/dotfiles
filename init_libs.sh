@@ -2,7 +2,7 @@
 
 # chicken & egg time here
 grab_go() {
-  version='1.13.8'
+  version='1.14'
   pkgs=(
     'github.com/FiloSottile/mkcert' 
     'github.com/canthefason/go-watcher' 

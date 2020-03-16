@@ -25,6 +25,7 @@ Some of these will be installed via the install scripts or apt-get below.
       sudo tee /etc/apt/sources.list.d/yarn.list
     sudo add-apt-repository -y ppa:neovim-ppa/unstable
     sudo add-apt-repository -y ppa:ondrej/php
+    sudo add-apt-repository ppa:longsleep/golang-backports
     wget --quiet -O - "http://apt.llvm.org/llvm-snapshot.gpg.key" | \
       sudo apt-key add -
     sudo add-apt-repository 'deb http://apt.llvm.org/eoan/ llvm-toolchain-oean-9 main'
