@@ -166,7 +166,7 @@ tmuxt() {
       tmux set-option -t "${SESSION}" status-position top
     fi
 
-    . "${HOME}/dotfiles/.tmux.${HOST}"
+    . "${XDG_CONFIG_HOME}/tmux/.tmux.${HOST}.conf"
 
     tmux select-window -t "${SESSION}":0
   fi
