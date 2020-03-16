@@ -101,7 +101,7 @@
   fpush = push --force-with-lease
   gr = grep -Ii
   gra = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In ${1:-'@'} | xargs -0 -I{} echo $TOPLEVEL/{} && cd "${A}"; }; f"
-  graph = log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
+  graph = log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %ar) %Cred%d' --date-order
   grep = grep -Ii
   integrate = "!~/dotfiles/helpers/git-integrate"
   la = "!f() { git config -l | grep alias | cut -c 7-; }; f"
@@ -110,7 +110,7 @@
   lc = "!f() { git ll "${1:-'@'}"^.."${1:-'@'}"; }; f"
   ld = log --pretty=format:'%C(bold yellow)%h %C(bold white)%ad%C(red)%d %Creset%s%C(bold blue) [%cn]' --date=relative --decorate
   lds = log --pretty=format:'%C(bold yellow)%h %C(bold white)%ad%C(red)%d %Creset%s%C(bold blue) [%cn]' --date=short --decorate
-  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit
   ll = log --pretty=format:'%C(yellow)%h%C(red)%d %Creset%s%C(blue) [%cn]' --decorate --numstat
   lnc = log --pretty=format:'%h %s [%cn]'
   lol = log --graph --decorate --oneline --all
