@@ -4,8 +4,8 @@ export ANSIBLE_NOCOWS=1
 export AUTOSSH_PORT=0
 export MANWIDTH=80
 export HGEDITOR=~/dotfiles/helpers/hgeditor
-export TMP=/tmp
 export AUTOENV_IN_FILE=".in"
+export LOCAL="${HOME}/.local"
 
 if which ruby >/dev/null && which gem >/dev/null; then
   gem_path="$(ruby -e 'puts Gem.user_dir')/bin"
@@ -61,8 +61,7 @@ path=(
   $cargo_path
   $php_path
   $gem_path
-  ~/.local/bin
-  ~/bin
+  $LOCAL/bin
   /usr/local/{,s}bin
   /usr/{,s}bin
   /{,s}bin
@@ -116,4 +115,6 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
-export SDKMAN_DIR="${HOME}/.sdkman"
+if [[ -d ${HOME}/.sdkman ]]; then
+  export SDKMAN_DIR="${HOME}/.sdkman"
+fi

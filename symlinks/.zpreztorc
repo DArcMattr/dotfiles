@@ -33,6 +33,7 @@ zstyle ':prezto:load' pmodule \
   'node' \
   'history' \
   'history-substring-search' \
+  'autosuggestions' \
   'directory' \
   'spectrum' \
   'ssh' \
@@ -41,41 +42,21 @@ zstyle ':prezto:load' pmodule \
 
 zstyle ':prezto:load' pmodule-dirs ~/.local/share/zsh/site-functions
 
-#
 # Editor
-#
-
-# Set the key mapping style to 'emacs' or 'vi'.
-zstyle ':prezto:module:editor' dot-expansion 'yes' # Auto convert .... to ../..
+zstyle ':prezto:module:autosuggestions' color 'yes'
+zstyle ':prezto:module:autosuggestions:color' found ''
+zstyle ':prezto:module:editor' dot-expansion 'yes'
 zstyle ':prezto:module:editor' key-bindings 'vi'
 zstyle ':prezto:module:editor' ps-context 'yes'
-
-zstyle ':prezto:module:gnu-utility' prefix 'g' # Set the command prefix on non-GNU systems.
 zstyle ':prezto:module:git:alias' skip 'yes'
-
-#
-# History Substring Search
-#
-zstyle ':prezto:module:history-substring-search:color' found '' # Set the query found color.
-zstyle ':prezto:module:history-substring-search:color' not-found '' # Set the query not found color.
-zstyle ':prezto:module:history-substring-search' globbing-flags '' # Set the search globbing flags.
-
-# Prompt
+zstyle ':prezto:module:gnu-utility' prefix 'g'
+zstyle ':prezto:module:history-substring-search' globbing-flags ''
+zstyle ':prezto:module:history-substring-search:color' found ''
+zstyle ':prezto:module:history-substring-search:color' not-found ''
 zstyle ':prezto:module:prompt' theme powerlevel10k
-
-#
-# SSH
-#
-
-# Set the SSH identities to load into the agent.
 zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_ed25519'
 
-#
 # Syntax Highlighting
-#
-
-# Set syntax highlighters.
-# By default, only the main highlighter is enabled.
 zstyle ':prezto:module:syntax-highlighting' highlighters \
    'main' \
    'brackets' \
@@ -84,7 +65,6 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
    'cursor' \
    'root'
 
-# Set syntax highlighting styles.
 zstyle ':prezto:module:syntax-highlighting' styles \
    'cursor' 'bold' \
    'builtin' 'bg=blue,fg=white,bold' \
