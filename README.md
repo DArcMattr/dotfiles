@@ -35,14 +35,14 @@ Some of these will be installed via the install scripts or apt-get below.
     sudo apt install autossh bison build-essential clang-9 clang-9-doc \
       clang-format-9 clang-tools-9 clangd-9 cmake flex git golang-go htop \
       libc++-9-dev libc++abi-9-dev libclang-9-dev libclang-common-9-dev \
-      libclang1-9 libevent-dev libfuzzer-9-dev libgit2-dev libllvm-9-ocaml-dev \
-      libllvm9 liblzma-dev libncurses5-dev libnss3-tools libomp-9-dev \
-      libpcre3-dev libssh2-1-dev libssl-dev lsyncd lld-9 lldb-9 llvm-9 \ 
-      llvm-9-dev llvm-9-doc llvm-9-examples llvm-9-runtime neovim nginx nodejs \
-      php-common php-gd php-imagick php-mbstring php-memcache php-pear \ 
+      libclang1-9 libevent-dev libfuzzer-9-dev libgit2-dev libjansson-dev \
+      libllvm-9-ocaml-dev libllvm9 liblzma-dev libncurses5-dev libnss3-tools \
+      libomp-9-dev libpcre3-dev libssh2-1-dev libssl-dev lsyncd lld-9 lldb-9 \
+      llvm-9 llvm-9-dev llvm-9-doc llvm-9-examples llvm-9-runtime neovim nginx \
+      nodejs php-common php-gd php-imagick php-mbstring php-memcache php-pear \
       php-xdebug php-xml php-zip php7.3-cli php7.3-curl php7.3-dev php7.3-fpm \
-      php7.3-imap php7.3-json php7.3-mysql php7.3-opcache php7.3-readline \ 
-      php7.3-soap pv python-clang-9 python-dev python3-dev python3-docutils \ 
+      php7.3-imap php7.3-json php7.3-mysql php7.3-opcache php7.3-readline \
+      php7.3-soap pv python-clang-9 python-dev python3-dev python3-docutils \
       ruby-dev shellcheck tidy wslu xcape xsel yarn zlib1g-dev zsh
     curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
     python2 /tmp/get-pip.py --user
