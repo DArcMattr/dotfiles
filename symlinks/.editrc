@@ -1,5 +1,6 @@
 bind -v
-set keymap vi-insert
+bind \\t rl_complete
+set bell-style
 set editing-mode vi
 set expand-tilde off
-set bell-style
+set keymap vi-insert
