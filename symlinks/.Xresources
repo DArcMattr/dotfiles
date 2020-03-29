@@ -37,6 +37,11 @@
 *.color7:       #a8a8a8
 *.color15:      #f8fcf8
 
+*.font: xft:Hack:style=Regular:size=7.5
+*.boldFont: xft:Hack:style=Bold:size=7.5
+*.italicFont: xft:Hack:style=Italic:size=7.5
+*.boldItalicFont: xft:Hack:style=Bold Italic:size=7.5
+
 !! URxvt Appearance
 URxvt.cursorBlink: true
 URxvt.cursorUnderline: false
@@ -53,9 +58,12 @@ URxvt.scrollBar_right: false
 URxvt.urgentOnBell: true
 URxvt.urlLauncher: xdg-open
 
-*.font: xft:Hack:style=Regular:size=7.5
-*.boldFont: xft:Hack:style=Bold:size=7.5
-*.italicFont: xft:Hack:style=Italic:size=7.5
-*.boldItalicFont: xft:Hack:style=Bold Italic:size=7.5
+XTerm*metaSendsEscape: true
 
+Xft.dpi: 96
 Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
