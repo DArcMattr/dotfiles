@@ -4,9 +4,9 @@
 grab_go() {
   version='1.14'
   pkgs=(
-    'github.com/FiloSottile/mkcert' 
-    'github.com/canthefason/go-watcher' 
-    'github.com/junegunn/fzf' 
+    'github.com/FiloSottile/mkcert'
+    'github.com/canthefason/go-watcher'
+    'github.com/junegunn/fzf'
     'github.com/sourcegraph/go-langserver'
   )
 
@@ -41,7 +41,7 @@ grab_rust() {
 grab_pips() {
   config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
   pip2pkgs=(
-    'pip' 
+    'pip'
     'pynvim'
   )
   pip3pkgs=(
@@ -57,14 +57,14 @@ grab_pips() {
     'powerline-status'
     'psutil'
     'pyemojify'
-    'pynvim' 
-    'python-language-server[all]' 
+    'pynvim'
+    'python-language-server[all]'
     's3cmd'
     'sphinx'
   )
 
-  pip2 install -U --user $pip2pkgs
-  pip3 install -U --user $pip3pkgs
+  pip2 install -U --user ${pip2pkgs}
+  pip3 install -U --user ${pip3pkgs}
 
   ## redundant to force an update of specific packages, then to update all the
   ## installed ones
