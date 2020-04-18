@@ -74,11 +74,6 @@ Refresh the session, then run the following:
 I have transitioned to using NeoVim, but still keep Vim around with its own
 configuration file, because vimpager.
 
-### `.hgrc`
-
-    [hooks]
-    update="chmod 600 ~/dotfiles/sshconfig"
-
 ## Experimental notes
 
 ### Kotlin
