@@ -71,3 +71,7 @@ Host old
   User david
   HostName 192.168.128.130
   Port 32323
+
+Host limstest
+  User limsadmin
+  HostName 172.16.3.32
