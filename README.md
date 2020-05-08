@@ -89,35 +89,11 @@ Reload shell session, then:
 
 Which installs the `kotlinc` compiler and `kotlinc-jvm` REPL utility.
 
-### WSL stuffs
-
-#### Shortcut for VcXsrv
-
-Save the configuration after first run, and an example of how to have it load up
-on subsequent restarts is to create a Windows shortcut of:
-
-    vcxsrv.exe :0 -ac -terminate -lesspointer -multiwindow -clipboard -nowgl
-
-To make this load automatically at boot, run `shell:startup` via Win-R and copy
-the above shortcut into the startup folder.
-
-#### Shortcut for wsltty
-
-While I track my wsltty configuration in source control, an example of the
-shortcut for wsltty is:
-
-    %LOCALAPPDATA%\wsltty\bin\mintty.exe --WSL= --configdir="%APPDATA%\wsltty" -~ -B thin
-
-#### Shortcut for Alacritty
-
-If alacritty is installed on the WSL side, create a new shortcut and set its
-target to:
-
-    C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Start-Process -FilePath "C:\Windows\System32\bash.exe" -ArgumentList '-c','''cd $HOME; DISPLAY=localhost:0.0 alacritty''' -WindowStyle Hidden"
+### WSL/Windows stuffs
 
 #### Configure CAPSLOCK
 
-Manually install `https://github.com/ililim/dual-key-remap` in order to get the
+Manually install (`https://github.com/ililim/dual-key-remap`)[] in order to get the
 same "tap CAPSLOCK for Escape, press for Control" behavior that exists in the
 Unix-like configuration. 
 
