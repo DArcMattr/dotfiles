@@ -62,8 +62,6 @@ Ubuntu.
     cd ~
     git clone --recursive https://github.com/sorin-ionescu/prezto.git \
       "${ZDOTDIR:-$HOME}/.zprezto"
-    ln -s "${ZDOTDIR:-$HOME}/.zprezto/modules/prompt/external/async/async.zsh" \
-      "${HOME}/.zfunc/async"
 
 ### All the rest
 

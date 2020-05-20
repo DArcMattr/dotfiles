@@ -2,12 +2,29 @@
 
 # chicken & egg time here, relies on an older version of go
 grab_go() {
-  #version='1.14.2'
-  #
-  #go get -u golang.org/dl/go${version}
-  #${go_bin}/go${version} download
-  #
-  #ln -sf "${HOME}/go/bin/go${version}" "${HOME}/.local/bin/go"
+  version='1.14.3'
+  while getopts "v:" opt; do
+    case "$opt" in
+      v) VERSION=${OPTARG:-${version}}
+        ;;
+
+      :) echo "Option -${OPTARG} requires an argument." >&2
+        exit 1
+        ;;
+
+      *) echo "Invalid Option: -${OPTARG}" >&2
+        exit 1
+        ;;
+    esac
+  done
+  
+  if [ -v $VERSION ]; then
+    go get -u golang.org/dl/go${VERSION}
+    ${go_bin}/go${VERSION} download
+
+    ln -sf "${HOME}/go/bin/go${version}" "${HOME}/.local/bin/go"
+  fi
+
   pkgs=(
     'github.com/canthefason/go-watcher'
     'github.com/FiloSottile/mkcert'
