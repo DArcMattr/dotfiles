@@ -2,30 +2,9 @@
 
 # chicken & egg time here, relies on an older version of go
 grab_go() {
-  version='1.14.3'
-  while getopts "v:" opt; do
-    case "$opt" in
-      v) VERSION=${OPTARG:-${version}}
-        ;;
+  private version='1.14.3'
 
-      :) echo "Option -${OPTARG} requires an argument." >&2
-        exit 1
-        ;;
-
-      *) echo "Invalid Option: -${OPTARG}" >&2
-        exit 1
-        ;;
-    esac
-  done
-  
-  if [ -v $VERSION ]; then
-    go get -u golang.org/dl/go${VERSION}
-    ${go_bin}/go${VERSION} download
-
-    ln -sf "${HOME}/go/bin/go${version}" "${HOME}/.local/bin/go"
-  fi
-
-  pkgs=(
+  private pkgs=(
     'github.com/canthefason/go-watcher'
     'github.com/FiloSottile/mkcert'
     'github.com/junegunn/fzf'
@@ -33,8 +12,39 @@ grab_go() {
     'github.com/sourcegraph/go-langserver'
   )
 
+  printf "0 version %1s %2s %3b\n" $version $VERSION $pkgs
+  while getopts "v:" opt; do
+    printf "a version %1s %2s\n" $version $VERSION 
+    case "$opt" in
+      v) private VERSION=${OPTARG:-${version}}
+        printf "b version %1s %2s\n" $version $VERSION 
+        ;;
+
+      :) echo "Option -${opt} requires an argument." >&2
+        return 1
+        ;;
+
+      *) echo "Invalid Option: -${opt}" >&2
+        return 1
+        ;;
+    esac
+  done
+  printf "d version %1s %2s\n" $version $VERSION 
+  
+  if [[ -v $VERSION ]]; then
+    printf "f version %1s %2s\n" $version $VERSION 
+    go get -v -u "golang.org/dl/go${VERSION}"
+    "${go_bin}/go${VERSION}" download
+
+    ln -sf "${HOME}/go/bin/go${VERSION}" "${HOME}/.local/bin/go"
+  else 
+    printf "c version %1s %2s\n" $version $VERSION 
+    return 1
+  fi
+  printf "e version %1s %2s %3s\n" $version $VERSION $pkgs
+
   for i in $pkgs; do
-    go get -u "${i}"
+    go get -v -u "${i}"
     go install "${i}"
   done
 }
