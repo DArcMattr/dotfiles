@@ -8,7 +8,6 @@ grab_go() {
     'github.com/canthefason/go-watcher'
     'github.com/FiloSottile/mkcert'
     'github.com/junegunn/fzf'
-    'github.com/mailhog/MailHog'
     'github.com/sourcegraph/go-langserver'
   )
 
@@ -163,7 +162,7 @@ grab_composer() {
 
 grab_gems() {
   if which ruby >/dev/null && which gem >/dev/null; then
-    gem install --user-install lolcat neovim solargraph
+    gem install --user-install lolcat neovim mailcatcher solargraph
   fi
 }
 
