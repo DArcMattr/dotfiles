@@ -118,3 +118,13 @@ fi
 if [[ -d ${HOME}/.sdkman ]]; then
   export SDKMAN_DIR="${HOME}/.sdkman"
 fi
+
+PERL5LIB="${HOME}/.local/lib/perl5${PERL5LIB:+:${PERL5LIB}}";
+PERL_LOCAL_LIB_ROOT="${HOME}/.local${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}";
+PERL_MB_OPT="--install_base '${HOME}/.local'";
+PERL_MM_OPT="INSTALL_BASE='${HOME}/.local'";
+
+export PERL5LIB;
+export PERL_MB_OPT;
+export PERL_MM_OPT;
+export PERL_LOCAL_LIB_ROOT;

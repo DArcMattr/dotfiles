@@ -33,8 +33,8 @@ Some of these will be installed via the install scripts or apt-get below.
       sudo apt-key add -
     sudo add-apt-repository 'deb http://nginx.org/packages/mainline/ubuntu/ focal nginx'
     sudo apt install autossh bison build-essential clang-10 clang-10-doc \
-      clang-format-10 clang-tools-10 clangd-10 cmake flex git golang-go htop \
-      libc++-10-dev libc++abi-10-dev libclang-10-dev libclang-common-10-dev \
+      clang-format-10 clang-tools-10 clangd-10 cmake cpanm flex git golang-go \
+      htop libc++-10-dev libc++abi-10-dev libclang-10-dev libclang-common-10-dev \
       libclang1-10 libevent-dev libfuzzer-10-dev libgit2-dev libjansson-dev \
       libllvm-10-ocaml-dev libllvm9 liblzma-dev libncurses5-dev libnss3-tools \
       libomp-10-dev libpcre3-dev libssh2-1-dev libssl-dev libxml2-dev \

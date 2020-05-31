@@ -24,4 +24,5 @@ find "${HOME}/dotfiles/xdg/" -mindepth 1 -maxdepth 1 -type d -exec ln -sf "{}" "
   grab_git -d ~/contrib/ctags               -r https://github.com/universal-ctags/ctags.git      -b master
   grab_git -d ~/contrib/tmux                -r https://github.com/tmux/tmux.git
   grab_git -d ~/contrib/autoenv             -r https://github.com/zpm-zsh/autoenv.git -n
+  cpanm -l ${HOME}/.local Neovim::Ext
 )
