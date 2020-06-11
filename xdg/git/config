@@ -89,12 +89,13 @@
   ci = commit
   co = checkout
   commandeer = "!f() { git push origin HEAD:${1:-'@'} --force; }; f"
-  d = difftool
+  dt = difftool
   diffall = difftool --dir-diff
   diffr = "!f() { git diff "%1"^.."${1:-'@'}"; }; f"
   discard = checkout --
   dl = "!f() { git ll -1; }; f"
   dlc = diff --cached @^
+  dno = diff --name-only
   dr = "!f() { git diff "${1:-'@'}"^.."${1:-'@'}"; }; f"
   filelog = log -u
   fl = log -u
