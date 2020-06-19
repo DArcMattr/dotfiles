@@ -10,6 +10,7 @@
     "javascript-typescript-langserver": "^2.11.3",
     "minify": "^5.1.0",
     "neovim": "^4.8.0",
+    "npm-check-updates": "^7.0.1",
     "stylelint": "^13.0.0",
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-config-recommended-scss": "^4.2.0",
