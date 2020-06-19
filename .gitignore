@@ -1,4 +1,5 @@
 symlinks/.pandoc/buttondown.css
+symlinks/.pandoc/buttondown.css.map
 xdg/composer/composer.lock
 xdg/composer/.htaccess
 xdg/composer/auth.json
