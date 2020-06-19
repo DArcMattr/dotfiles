@@ -37,14 +37,14 @@ Some of these will be installed via the install scripts or apt-get below.
       htop libc++-10-dev libc++abi-10-dev libclang-10-dev libclang-common-10-dev \
       libclang1-10 libevent-dev libfuzzer-10-dev libgit2-dev libjansson-dev \
       libllvm-10-ocaml-dev libllvm9 liblzma-dev libncurses5-dev libnss3-tools \
-      libomp-10-dev libpcre3-dev libssh2-1-dev libssl-dev libxml2-dev \
-      libyaml-dev lsyncd lld-10 lldb-10 llvm-10 llvm-10-dev llvm-10-doc \
-      llvm-10-examples llvm-10-runtime neovim nginx nodejs php-common php-gd \
-      php-imagick php-mbstring php-memcache php-pear php-xdebug php-xml \
-      php-zip php7.4-cli php7.4-curl php7.4-dev php7.4-fpm php7.4-imap \
-      php7.4-json php7.4-mysql php7.4-opcache php7.4-readline php7.4-soap pv \
-      python-dev python3-dev python3-docutils ruby-dev shellcheck tidy wslu \ 
-      xcape xsel yarn zlib1g-dev zsh
+      libomp-10-dev libpcre3-dev libssh2-1-dev libsqlite3-dev libssl-dev \
+      libxml2-dev libyaml-dev lsyncd lld-10 lldb-10 llvm-10 llvm-10-dev \
+      llvm-10-doc llvm-10-examples llvm-10-runtime neovim nginx nodejs \
+      php-common php-gd php-imagick php-mbstring php-memcache php-pear \
+      php-xdebug php-xml php-zip php7.4-cli php7.4-curl php7.4-dev php7.4-fpm \
+      php7.4-imap php7.4-json php7.4-mysql php7.4-opcache php7.4-readline \
+      php7.4-soap pv python-dev python3-dev python3-docutils ruby-dev \
+      shellcheck tidy wslu xcape xsel yarn zlib1g-dev zsh
     curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
     python2 /tmp/get-pip.py --user
     python3 /tmp/get-pip.py --user
@@ -78,9 +78,9 @@ configuration file, because vimpager.
 
 Experimenting with Kotlin now, it requires a Java compiler and the `sdk` script
 to be installed first:
-  
+
   curl -s https://get.sdkman.io | bash
-  
+
 Reload shell session, then:
 
   sdk install kotlin
@@ -93,7 +93,7 @@ Which installs the `kotlinc` compiler and `kotlinc-jvm` REPL utility.
 
 Manually install (`https://github.com/ililim/dual-key-remap`)[] in order to get the
 same "tap CAPSLOCK for Escape, press for Control" behavior that exists in the
-Unix-like configuration. 
+Unix-like configuration.
 
 ### Self-signed certificates
 
