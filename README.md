@@ -11,8 +11,9 @@ Some of these will be installed via the install scripts or apt-get below.
     defined in the machine's global environment variables, and corresponding
     user directories are created for them
 
-### For Ubuntu flavors (I'm looking at you, 19.10):
+### For Ubuntu flavors
 
+    REL="$(lsb_release -cs)"
     sudo -v
     sudo apt update
     sudo apt install -y curl software-properties-common wget
@@ -28,10 +29,12 @@ Some of these will be installed via the install scripts or apt-get below.
     sudo add-apt-repository -y ppa:longsleep/golang-backports
     wget --quiet -O - "http://apt.llvm.org/llvm-snapshot.gpg.key" | \
       sudo apt-key add -
-    sudo add-apt-repository 'deb http://apt.llvm.org/focal/ llvm-toolchain-oean-10 main'
+    sudo add-apt-repository \
+      "deb http://apt.llvm.org/${REL}/ llvm-toolchain-${REL}-10 main"
     wget --quiet -O - "http://nginx.org/keys/nginx_signing.key" | \
       sudo apt-key add -
-    sudo add-apt-repository 'deb http://nginx.org/packages/mainline/ubuntu/ focal nginx'
+    sudo add-apt-repository \
+      "deb http://nginx.org/packages/mainline/ubuntu ${REL} nginx"
     sudo apt install autossh bison build-essential clang-10 clang-10-doc \
       clang-format-10 clang-tools-10 clangd-10 cmake cpanm flex git golang-go \
       htop libc++-10-dev libc++abi-10-dev libclang-10-dev libclang-common-10-dev \
