@@ -19,7 +19,7 @@ Some of these will be installed via the install scripts or apt-get below.
     sudo apt install -y curl software-properties-common wget
     sudo add-apt-repository -y universe
     sudo add-apt-repository -y multiverse
-    curl -sL https://deb.nodesource.com/setup_13.x | \
+    curl -sL https://deb.nodesource.com/setup_14.x | \
       sudo -E bash - # argh, I hate this
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | \
