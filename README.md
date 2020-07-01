@@ -36,18 +36,18 @@ Some of these will be installed via the install scripts or apt-get below.
     sudo add-apt-repository \
       "deb http://nginx.org/packages/mainline/ubuntu ${REL} nginx"
     sudo apt install autossh bison build-essential clang-10 clang-10-doc \
-      clang-format-10 clang-tools-10 clangd-10 cmake cpanm flex git golang-go \
-      htop libc++-10-dev libc++abi-10-dev libclang-10-dev libclang-common-10-dev \
-      libclang1-10 libevent-dev libfuzzer-10-dev libgit2-dev libjansson-dev \
-      libllvm-10-ocaml-dev libllvm9 liblzma-dev libncurses5-dev libnss3-tools \
-      libomp-10-dev libpcre3-dev libssh2-1-dev libsqlite3-dev libssl-dev \
-      libxml2-dev libyaml-dev lsyncd lld-10 lldb-10 llvm-10 llvm-10-dev \
-      llvm-10-doc llvm-10-examples llvm-10-runtime neovim nginx nodejs \
-      php-common php-gd php-imagick php-mbstring php-memcache php-pear \
-      php-xdebug php-xml php-zip php7.4-cli php7.4-curl php7.4-dev php7.4-fpm \
-      php7.4-imap php7.4-json php7.4-mysql php7.4-opcache php7.4-readline \
-      php7.4-soap pv python-dev python3-dev python3-docutils ruby-dev \
-      shellcheck tidy wslu xcape xsel yarn zlib1g-dev zsh
+      clang-format-10 clang-tools-10 clangd-10 cmake cpanminus flex git \
+      golang-go htop libc++-10-dev libc++abi-10-dev libclang-10-dev \
+      libclang-common-10-dev libclang1-10 libevent-dev libfuzzer-10-dev \
+      libgit2-dev libjansson-dev libllvm-10-ocaml-dev libllvm9 liblzma-dev \
+      libncurses5-dev libnss3-tools libomp-10-dev libpcre3-dev libssh2-1-dev \
+      libsqlite3-dev libssl-dev libxml2-dev libyaml-dev lsyncd lld-10 lldb-10 \
+      llvm-10 llvm-10-dev llvm-10-doc llvm-10-examples llvm-10-runtime neovim \
+      nginx nodejs php-common php-gd php-imagick php-mbstring php-memcache \
+      php-pear php-xdebug php-xml php-zip php7.4-cli php7.4-curl php7.4-dev \
+      php7.4-fpm php7.4-imap php7.4-json php7.4-mysql php7.4-opcache \
+      php7.4-readline php7.4-soap pv python-dev python3-dev python3-docutils \
+      ruby-dev shellcheck tidy wslu xcape xsel yarn zlib1g-dev zsh
     curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
     python2 /tmp/get-pip.py --user
     python3 /tmp/get-pip.py --user
