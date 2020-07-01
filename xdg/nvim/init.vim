@@ -234,6 +234,7 @@ nnoremap _ <Cmd>Lex<Cr>
 nnoremap c "xc
 nnoremap gj j
 nnoremap gk k
+nnoremap i zzi
 nnoremap { {zz
 nnoremap } }zz
 nnoremap <C-PageDown>       <Cmd>bp<Cr>
