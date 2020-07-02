@@ -225,12 +225,15 @@ inoremap <Expr><Cr>    pumvisible() ? "\<C-y>" : "\<C-g>u\<Cr>"
 
 nnoremap : ;
 nnoremap ; :
+nnoremap A zzA
 nnoremap H ^
+nnoremap I zzI
 nnoremap J mzJ`z
 nnoremap L $
 nnoremap Q gq
 nnoremap Y y$
 nnoremap _ <Cmd>Lex<Cr>
+nnoremap a zza
 nnoremap c "xc
 nnoremap gj j
 nnoremap gk k
