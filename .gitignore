@@ -6,6 +6,7 @@ xdg/composer/auth.json
 xdg/composer/keys.dev.pub
 xdg/composer/keys.tags.pub
 xdg/composer/vendor/
+xdg/git/gitk
 xdg/nvim/autoload/
 xdg/nvim/*.tags
 xdg/nvim/.netrwhist
