@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "@wordpress/eslint-plugin": "^3.4.1",
-    "dart-sass": "1.25.0",
+    "dart-sass": "^1.25.0",
     "doctoc": "^1.4.0",
     "eslint-config-jquery": "^2.0.0",
     "eslint_d": "^8.0.0",
