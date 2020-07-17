@@ -287,15 +287,13 @@ call denite#custom#option( 'default', {
 \  'auto_resize': 1,
 \  'prompt': '>',
 \  'short_source_names': 1,
-\  'split': 'vertical',
+\  'split': 'floating_relative',
 \  'vertical_preview': 1,
-\  'winheight': 999,
 \})
 call denite#custom#option( 'list', { 'mode': 'normal' } )
-call denite#custom#option( 'grep', { 'vertical_preview': 1 } )
 
 if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
+  set grepprg=ag\ --nogroup\ --nocolor\ --vimgrep
 
   " Use ag in denite grep source.
   call denite#custom#var( 'grep', 'command',      ['ag'] )
