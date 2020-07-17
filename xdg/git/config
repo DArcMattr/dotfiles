@@ -57,7 +57,7 @@
   name = "Keep ours merge"
   driver = true
 [mergetool]
-  prompt = false
+  prompt = true
   stat = true
   keepBackup = false
 [mergetool "vimdiff"]
