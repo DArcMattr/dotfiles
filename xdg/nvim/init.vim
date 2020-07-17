@@ -39,7 +39,6 @@ Plug 'Valloric/MatchTagAlways'
 Plug 'vim-vdebug/vdebug'
 Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/DirDiff.vim'
-Plug 'vim-scripts/matchit.zip'
 Plug 'dense-analysis/ale'
 call plug#end()
 
