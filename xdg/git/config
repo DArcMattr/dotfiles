@@ -21,9 +21,10 @@
   changed = green
   untracked = cyan
 [core]
-  eol = lf
-  excludesfile = ~/.gitignore_global
+  attributesfile = ~/.config/git/attributes
   autocrlf = input
+  eol = lf
+  safecrlf = warn
   whitespace = trailing-space,space-before-tab,indent-with-non-tab
 [diff]
 #  external = "~/dotfiles/helpers/diff"
@@ -51,13 +52,14 @@
 [init]
   templatedir = "~/.config/git/template"
 [merge]
-  tool = vimdiff
   ff = false
+  renormalize = true
+  tool = vimdiff
 [merge "ours"]
   name = "Keep ours merge"
   driver = true
 [mergetool]
-  prompt = true
+  prompt = false
   stat = true
   keepBackup = false
 [mergetool "vimdiff"]
