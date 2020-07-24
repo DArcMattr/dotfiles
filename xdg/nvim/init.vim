@@ -128,12 +128,14 @@ highlight link ALEErrorLine ErrorMsg
 highlight link ALEWarningLine WarningMsg
 
 highlight Comment ctermfg=105 guifg=#8787ff
-highlight CursorColumn cterm=reverse gui=reverse ctermbg=237 guibg=#3a3a3a
-highlight CursorLine term=underline cterm=underline ctermbg=NONE gui=underline guibg=NONE
-highlight ErrorMsg ctermbg=52 guibg=#5f0000
+highlight CursorColumn cterm=reverse gui=reverse
+highlight CursorLine cterm=underline gui=underline ctermbg=NONE guibg=NONE
+highlight ErrorMsg cterm=reverse gui=reverse
 highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
 highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
 highlight NonText ctermfg=235 guifg=#262626
+highlight Normal ctermbg=NONE guibg=NONE
+highlight OverLength ctermbg=234 ctermfg=249 guibg=#1c1c1c guifg=#b2b2b2
 highlight Search ctermfg=222 guifg=#ffdf87
 highlight SpecialKey ctermfg=235 guifg=#262626
 highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline guifg=#800000 gui=undercurl
@@ -455,14 +457,19 @@ augroup StartupStuffs
   autocmd BufEnter * if !&modifiable | setl scrolloff=999 | endif
   autocmd TermOpen * setlocal nonumber norelativenumber
   autocmd BufEnter,BufNew * if &buftype == 'terminal' | :startinsert | endif
-  autocmd BufRead * try | execute "compiler ".&FileType | catch /./ | endtry
   autocmd VimResized * execute 'normal! \<C-w>='
-  autocmd BufEnter * highlight OverLength ctermbg=234 ctermfg=249 guibg=#1c1c1c guifg=#b2b2b2
   autocmd BufEnter * execute 'match OverLength /\%'. (&textwidth + 1) .'v.*/'
   "autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
 augroup END
 
-" common FileTypes below
+if system('uname -r') =~ 'Microsoft'
+  augroup WSL
+    autocmd!
+    autocmd TextYankPost * :call system('clip.exe ', @")
+  augroup END
+endif
+
+" left over FileType config below
 " any project-specific settings should be included in the .lvimrc file placed
 " in the root folder of that project
 
