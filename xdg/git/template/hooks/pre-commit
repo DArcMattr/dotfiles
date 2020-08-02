@@ -23,7 +23,7 @@ for FILE in ${FILES}; do
             STATUS=$?
 		;;
 
-        js)
+        js|mjs)
             ERROR="$(node --check "${FILE}")"
             STATUS=$?
         ;;
