@@ -70,6 +70,7 @@
   diff =
 [pull]
   ff = only
+  rebase = true
 [push]
   default = current
   ff = only
