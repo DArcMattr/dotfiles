@@ -12,14 +12,6 @@ Host *
   ServerAliveCountMax 20
   ServerAliveInterval 20
 
-Host live
-  HostName cultureofreason.org
-  User ariuser
-
-Host cor
-  HostName cultureofreason.org
-  User ariuser
-
 Host bb
   HostName bitbucket.org
   User hg
@@ -29,10 +21,6 @@ Host github
   HostName github.com
   User git
   ForwardAgent no
-
-Host demo
-  HostName demo.aynrand.org
-  User darceneaux
 
 Host local
   User darc
@@ -47,11 +35,6 @@ Host personal-git
 Host centuria
   HostName centuria-guild.org
   Port 23232
-  User darc
-
-Host aynrand2
-  HostName aynrand2.org
-  Port 32323
   User darc
 
 Host limstest
