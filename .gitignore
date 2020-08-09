@@ -7,7 +7,8 @@ xdg/composer/keys.dev.pub
 xdg/composer/keys.tags.pub
 xdg/composer/vendor/
 xdg/git/gitk
-xdg/nvim/autoload/
+xdg/nvim/autoload/plug.vim
+xdg/nvim/autoload/plug.vim.old
 xdg/nvim/*.tags
 xdg/nvim/.netrwhist
 xdg/nvim/plugged/
