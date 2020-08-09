@@ -5,9 +5,6 @@
 DOT_CONFIG=${XDG_CONFIG_HOME:=$HOME/.config}
 
 mkdir -p "${HOME}/contrib" "${HOME}/.local/bin" "${DOT_CONFIG}"
-chmod 600 ~/dotfiles/sshconfig
-mv ~/.ssh/config ~/.ssh/config.orig
-ln -s ~/dotfiles/sshconfig ~/.ssh/config
 tic -x ~/dotfiles/tmux-256color.terminfo
 
 find ~/dotfiles/symlinks/ -name ".*" -exec ln -sf "{}" "${HOME}" \;
