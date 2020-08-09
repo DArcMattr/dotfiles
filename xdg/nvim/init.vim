@@ -421,7 +421,7 @@ augroup StartupStuffs
   \   if line("'\"") > 1 && line("'\"") <= line("$") |
   \     execute "normal! g`\""                       |
   \   endif
-  autocmd BufEnter *
+  autocmd WinEnter,BufEnter,BufRead,FileType *
   \   if !&modifiable             |
   \     setlocal scrolloff=999    |
   \   endif                       |
@@ -443,9 +443,6 @@ endif
 " left over FileType config below
 " any project-specific settings should be included in the .lvimrc file placed
 " in the root folder of that project
-
-" LaTeX
-autocmd BufNewFile *.tex 0r ~/.config/nvim/templates/latex/template.tex
 
 " Lisp
 autocmd FileType lisp,scheme,art setlocal equalprg=~/dotfiles/helpers/scmindent.rkt
