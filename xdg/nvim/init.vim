@@ -10,13 +10,14 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
+Plug 'DArcMattr/vim-taggatron'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'fatih/vim-go', { 'for': [ 'go' ], 'do': ':GoUpdateBinaries' }
-Plug 'isRuslan/vim-es6', { 'for': [ 'js', 'jsx', 'javascript.jsx' ] }
+Plug 'hrsh7th/vim-vsnip' | Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'isRuslan/vim-es6', { 'for': [ 'js', 'jsx', 'javascript.jsx', 'mjs' ] }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jiangmiao/auto-pairs'
-Plug 'DArcMattr/vim-taggatron'
 Plug 'junegunn/vim-easy-align'
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'mattn/emmet-vim'
@@ -29,7 +30,6 @@ Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' } | Plug 'deoplete-plugins/deoplete-tag'
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim'
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-repeat'
@@ -181,6 +181,7 @@ let g:AutoPairsShortcutFastWrap = '<Leader>ae'
 let g:AutoPairsShortcutJump = '<Leader>an'
 let g:AutoPairsShortcutBackInsert = '<Leader>ab'
 let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_exclude_filetypes = ['help', 'man', 'netrw']
 "let g:LanguageClient_loggingFile = $HOME . '/lc.log'
 "let g:LanguageClient_loggingLevel = 'DEBUG'
 let g:LanguageClient_autoStart = 1
@@ -203,9 +204,6 @@ let g:tagcommand_defaults = {
 \   'filesappend': '**',
 \  }
 let g:taggatron_run_in_background = 1
-let g:UltiSnipsExpandTrigger = "<Leader>u"
-let g:UltiSnipsJumpBackwardTrigger = "<C-n>"
-let g:UltiSnipsJumpForwardTrigger = "<C-p>"
 
 " in case of derp-sudo
 cnoremap w!! w !sudo tee % >/dev/null
@@ -340,50 +338,19 @@ endif
 
 " from https://gist.github.com/tarruda/5158535
 if exists('$TMUX')
-  function! TmuxMove(direction)
-    " Check if we are currently focusing on a edge window.
-    " To achieve that,  move to/from the requested window and
-    " see if the window number changed
-    let oldw = winnr()
-    silent! exe 'wincmd ' . a:direction
-    let neww = winnr()
-    silent! exe oldw . 'wincmd'
-    if oldw == neww
-      " The focused window is at an edge, so ask tmux to switch panes
-      if a:direction == 'j'
-        call system("tmux select-pane -D")
-      elseif a:direction == 'k'
-        call system("tmux select-pane -U")
-      elseif a:direction == 'h'
-        call system("tmux select-pane -L")
-      elseif a:direction == 'l'
-        call system("tmux select-pane -R")
-      endif
-    else
-      exe 'wincmd ' . a:direction
-    end
-  endfunction
-
-  nnoremap <silent> <C-w>j <Cmd>call TmuxMove('j')<Cr>
-  nnoremap <silent> <C-w>k <Cmd>call TmuxMove('k')<Cr>
-  nnoremap <silent> <C-w>h <Cmd>call TmuxMove('h')<Cr>
-  nnoremap <silent> <C-w>l <Cmd>call TmuxMove('l')<Cr>
-  nnoremap <silent> <C-w><down> <Cmd>silent call TmuxMove('j')<Cr>
-  nnoremap <silent> <C-w><up> <Cmd>silent call TmuxMove('k')<Cr>
-  nnoremap <silent> <C-w><left> <Cmd>silent call TmuxMove('h')<Cr>
-  nnoremap <silent> <C-w><right> <Cmd>silent call TmuxMove('l')<Cr>
-  tnoremap <silent> <C-\><C-N><C-w>j <Cmd>silent call TmuxMove('j')<Cr>
-  tnoremap <silent> <C-\><C-N><C-w>k <Cmd>silent call TmuxMove('k')<Cr>
-  tnoremap <silent> <C-\><C-N><C-w>h <Cmd>silent call TmuxMove('h')<Cr>
-  tnoremap <silent> <C-\><C-N><C-w>l <Cmd>silent call TmuxMove('l')<Cr>
+  nnoremap <silent> <C-w>j <Cmd>call funcs#TmuxMove('j')<Cr>
+  nnoremap <silent> <C-w>k <Cmd>call funcs#TmuxMove('k')<Cr>
+  nnoremap <silent> <C-w>h <Cmd>call funcs#TmuxMove('h')<Cr>
+  nnoremap <silent> <C-w>l <Cmd>call funcs#TmuxMove('l')<Cr>
+  nnoremap <silent> <C-w><down> <Cmd>silent call funcs#TmuxMove('j')<Cr>
+  nnoremap <silent> <C-w><up> <Cmd>silent call funcs#TmuxMove('k')<Cr>
+  nnoremap <silent> <C-w><left> <Cmd>silent call funcs#TmuxMove('h')<Cr>
+  nnoremap <silent> <C-w><right> <Cmd>silent call funcs#TmuxMove('l')<Cr>
+  tnoremap <silent> <C-\><C-N><C-w>j <Cmd>silent call funcs#TmuxMove('j')<Cr>
+  tnoremap <silent> <C-\><C-N><C-w>k <Cmd>silent call funcs#TmuxMove('k')<Cr>
+  tnoremap <silent> <C-\><C-N><C-w>h <Cmd>silent call funcs#TmuxMove('h')<Cr>
+  tnoremap <silent> <C-\><C-N><C-w>l <Cmd>silent call funcs#TmuxMove('l')<Cr>
 endif
-
-function! SetDiffColors()
-  highlight DiffAdd cterm=bold ctermfg=white ctermbg=DarkGreen guifg=#ffffff guibg=#005f00
-  highlight DiffDelete cterm=bold ctermfg=white ctermbg=DarkGrey guifg=#ffffff guibg=#a9a9a9
-  highlight DiffChange cterm=bold ctermfg=white ctermbg=DarkBlue guifg=#ffffff guibg=#00008b
-  highlight DiffText cterm=bold ctermfg=white ctermbg=DarkRed guifg=#ffffff guibg=#8b0000
-endfunction
 
 augroup FugitiveStuffs
   autocmd QuickFixCmdPost *grep* cwindow
@@ -415,7 +382,7 @@ augroup END
 " https://groups.google.com/forum/?fromgroups=#!topic/vim_use/ZNZcBAABDgE
 augroup AutoDiffUpdate
   autocmd!
-  autocmd FilterWritePre * call SetDiffColors()
+  autocmd FilterWritePre * call funcs#SetDiffColors()
   autocmd InsertLeave *
   \   if &diff |
   \     diffupdate |
@@ -453,12 +420,16 @@ augroup StartupStuffs
   autocmd BufReadPost *
   \   if line("'\"") > 1 && line("'\"") <= line("$") |
   \     execute "normal! g`\""                       |
-  \   endif                                          |
-  autocmd BufEnter * if !&modifiable | setl scrolloff=999 | endif
-  autocmd TermOpen * setlocal nonumber norelativenumber
-  autocmd BufEnter,BufNew * if &buftype == 'terminal' | :startinsert | endif
+  \   endif
+  autocmd BufEnter *
+  \   if !&modifiable             |
+  \     setlocal scrolloff=999    |
+  \   endif                       |
+  \   call funcs#SetColorColumn()
+  autocmd TermOpen *
+  \   setlocal nonumber norelativenumber |
+  \   startinsert
   autocmd VimResized * execute 'normal! \<C-w>='
-  autocmd BufEnter * execute 'match OverLength /\%'. (&textwidth + 1) .'v.*/'
   "autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
 augroup END
 
@@ -472,9 +443,6 @@ endif
 " left over FileType config below
 " any project-specific settings should be included in the .lvimrc file placed
 " in the root folder of that project
-
-" COBOL
-autocmd BufNewFile *.cob 0r ~/.config/nvim/templates/cobol/header.cob
 
 " LaTeX
 autocmd BufNewFile *.tex 0r ~/.config/nvim/templates/latex/template.tex
