@@ -28,7 +28,7 @@ declare -x PAGER='less'
 declare -x EDITOR='vim'
 declare -x VISUAL="${EDITOR}"
 declare -x LESS="-EFIMQRsX~ -x2"
-declare -x MANWIDTH=72
+declare -x MANWIDTH=96
 
 declare -x HGEDITOR=~/dotfiles/helpers/hgeditor
 

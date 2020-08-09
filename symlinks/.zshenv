@@ -2,7 +2,7 @@ skip_global_compinit=1
 
 export ANSIBLE_NOCOWS=1
 export AUTOSSH_PORT=0
-export MANWIDTH=80
+export MANWIDTH=96
 export HGEDITOR=~/dotfiles/helpers/hgeditor
 export AUTOENV_IN_FILE=".in"
 export LOCAL="${HOME}/.local"
