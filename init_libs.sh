@@ -72,6 +72,7 @@ grab_pips() {
     'pynvim'
   )
   pip3pkgs=(
+    'docutils'
     'doge'
     'flake8'
     'gsutil'
@@ -87,7 +88,6 @@ grab_pips() {
     'pynvim'
     'python-language-server[all]'
     's3cmd'
-    'sphinx'
   )
 
   pip2 install -U --user ${pip2pkgs}
