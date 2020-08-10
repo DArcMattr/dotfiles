@@ -2,7 +2,7 @@
 
 # chicken & egg time here, relies on an older version of go
 grab_go() {
-  private version='1.14.3'
+  private version='1.14.7'
 
   private pkgs=(
     'github.com/canthefason/go-watcher'
@@ -13,10 +13,10 @@ grab_go() {
 
   printf "0 version %1s %2s %3b\n" $version $VERSION $pkgs
   while getopts "v:" opt; do
-    printf "a version %1s %2s\n" $version $VERSION 
+    printf "a version %1s %2s\n" $version $VERSION
     case "$opt" in
       v) private VERSION=${OPTARG:-${version}}
-        printf "b version %1s %2s\n" $version $VERSION 
+        printf "b version %1s %2s\n" $version $VERSION
         ;;
 
       :) echo "Option -${opt} requires an argument." >&2
@@ -28,16 +28,16 @@ grab_go() {
         ;;
     esac
   done
-  printf "d version %1s %2s\n" $version $VERSION 
-  
+  printf "d version %1s %2s\n" $version $VERSION
+
   if [[ -v $VERSION ]]; then
-    printf "f version %1s %2s\n" $version $VERSION 
+    printf "f version %1s %2s\n" $version $VERSION
     go get -v -u "golang.org/dl/go${VERSION}"
     "${go_bin}/go${VERSION}" download
 
     ln -sf "${HOME}/go/bin/go${VERSION}" "${HOME}/.local/bin/go"
-  else 
-    printf "c version %1s %2s\n" $version $VERSION 
+  else
+    printf "c version %1s %2s\n" $version $VERSION
     return 1
   fi
   printf "e version %1s %2s %3s\n" $version $VERSION $pkgs
