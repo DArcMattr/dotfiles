@@ -10,6 +10,10 @@ tic -x ~/dotfiles/tmux-256color.terminfo
 find ~/dotfiles/symlinks/ -name ".*" -exec ln -sf "{}" "${HOME}" \;
 find "${HOME}/dotfiles/xdg/" -mindepth 1 -maxdepth 1 -type d -exec ln -sf "{}" "${DOT_CONFIG}/" \;
 
+cd ~
+git clone --recursive https://github.com/sorin-ionescu/prezto.git \
+	"${ZDOTDIR:-$HOME}/.zprezto"
+
 (
   zsh ~/dotfiles/init_libs.sh
 

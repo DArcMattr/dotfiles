@@ -47,29 +47,16 @@ Some of these will be installed via the install scripts or apt-get below.
       nginx nodejs php-common php-gd php-imagick php-mbstring php-memcache \
       php-pear php-xdebug php-xml php-zip php7.4-cli php7.4-curl php7.4-dev \
       php7.4-fpm php7.4-imap php7.4-json php7.4-mysql php7.4-opcache \
-      php7.4-readline php7.4-soap pv python-dev python3-dev python3-docutils \
-      ruby-dev shellcheck tidy wslu xcape xsel yarn zlib1g-dev zsh
+      php7.4-readline php7.4-soap pv python-dev python3-dev ruby-dev shellcheck \
+      tidy wslu xcape xsel yarn zlib1g-dev zsh
     curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
     python2 /tmp/get-pip.py --user
     python3 /tmp/get-pip.py --user
     git clone https://github.com/darcmattr/dotfiles ~/dotfiles
+    sh ~/dotfiles/helpers/debianish-update-alternatives.sh
+    chsh -s $(which zsh)
 
-# LLVM
-
-The `helpers/debianish-update-alternatives.sh` will make LLVM and Go usable on
-Ubuntu.
-
-## Installation Steps
-
-### for prezto
-
-    cd ~
-    git clone --recursive https://github.com/sorin-ionescu/prezto.git \
-      "${ZDOTDIR:-$HOME}/.zprezto"
-
-### All the rest
-
-Refresh the session, then run the following:
+Refresh the shell session, then run the following:
 
     ~/dotfiles/init.sh
 
