@@ -367,9 +367,9 @@ augroup END
 augroup OmniFunc
   autocmd!
   autocmd FileType *
-  \    if &omnifunc == "" |
-  \      setlocal omnifunc=syntaxcomplete#Complete |
-  \    endif
+  \ if &omnifunc == "" |
+  \   setlocal omnifunc=syntaxcomplete#Complete |
+  \ endif
 augroup END
 
 augroup FastEscape
@@ -384,15 +384,16 @@ augroup AutoDiffUpdate
   autocmd!
   autocmd FilterWritePre * call funcs#SetDiffColors()
   autocmd InsertLeave *
-  \   if &diff |
-  \     diffupdate |
-  \     let b:old_changedtick = b:changedtick |
-  \   endif
+  \ if &diff |
+  \   diffupdate |
+  \   let b:old_changedtick = b:changedtick |
+  \ endif
   autocmd CursorHold *
-  \   if &diff &&
-  \       (!exists('b:old_changedtick') || b:old_changedtick != b:changedtick) |
-  \     let b:old_changedtick = b:changedtick | diffupdate |
-  \   endif
+  \ if &diff &&
+  \     (!exists('b:old_changedtick') || b:old_changedtick != b:changedtick) |
+  \   let b:old_changedtick = b:changedtick |
+  \     diffupdate |
+  \ endif
 augroup END
 
 augroup CursorColumn
@@ -418,17 +419,17 @@ augroup END
 augroup StartupStuffs
   autocmd!
   autocmd BufReadPost *
-  \   if line("'\"") > 1 && line("'\"") <= line("$") |
-  \     execute "normal! g`\""                       |
-  \   endif
+  \ if line("'\"") > 1 && line("'\"") <= line("$") |
+  \   execute "normal! g`\""                       |
+  \ endif
   autocmd WinEnter,BufEnter,BufRead,FileType *
-  \   if !&modifiable             |
-  \     setlocal scrolloff=999    |
-  \   endif                       |
-  \   call funcs#SetColorColumn()
+  \ if !&modifiable |
+  \   setlocal scrolloff=999 |
+  \ endif |
+  \ call funcs#SetColorColumn()
   autocmd TermOpen *
-  \   setlocal nonumber norelativenumber |
-  \   startinsert
+  \ setlocal nonumber norelativenumber |
+  \ startinsert
   autocmd VimResized * execute 'normal! \<C-w>='
   "autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
 augroup END
@@ -450,3 +451,9 @@ autocmd FileType lisp,scheme,art setlocal equalprg=~/dotfiles/helpers/scmindent.
 " Mercurial commit messages
 autocmd BufNewFile,BufRead,BufEnter msg setfiletype hgcommit
 autocmd FileType hgcommit setlocal textwidth=72
+
+augroup QF
+  autocmd!
+  autocmd FileType qf set nobuflisted |
+  \ set hidden
+augroup END
