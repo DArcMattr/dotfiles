@@ -1,6 +1,10 @@
 symlinks/.pandoc/buttondown.css
 symlinks/.pandoc/buttondown.css.map
-symlinks/.ssh/
+symlinks/.ssh/authorized_keys
+symlinks/.ssh/known_hosts
+symlinks/.ssh/id_ed25519
+symlinks/.ssh/id_ed25519.pub
+symlinks/.ssh/sockets/
 xdg/composer/composer.lock
 xdg/composer/.htaccess
 xdg/composer/auth.json
