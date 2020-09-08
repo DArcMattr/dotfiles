@@ -244,7 +244,6 @@ nnoremap <C-p>              <Cmd>Denite file/rec<Cr>
 nnoremap <C-y>              3<C-y>
 nnoremap <Leader>/          <Cmd>Denite grep:.<Cr>
 nnoremap <Leader><F7>       <Cmd>setlocal spell! spell? spelllang=en_us<Cr>
-nnoremap <Leader>ea         <Plug>(EasyAlign)
 nnoremap <Leader>gb         <Cmd>Gblame<Cr>
 nnoremap <Leader>gc         <Cmd>Gcommit<Cr>
 nnoremap <Leader>gd         <Cmd>Gdiff<Cr>
@@ -275,8 +274,7 @@ vnoremap : ;
 vnoremap * y/<C-r>"<Cr>
 vnoremap ? y?<C-r>"<Cr>
 
-xnoremap <Leader>ea <Plug>(EasyAlign)
-xnoremap c          "xc
+xnoremap c "xc
 
 " Denite
 call denite#custom#option( 'default', {
