@@ -205,10 +205,6 @@ let g:tagcommand_defaults = {
 \  }
 let g:taggatron_run_in_background = 1
 
-" in case of derp-sudo
-cnoremap w!! w !sudo tee % >/dev/null
-command! W w !sudo tee % >/dev/null
-
 noremap <C-d>     <C-d>zz
 noremap <C-u>     <C-u>zz
 noremap <Leader>l <Cmd>set rnu!<Cr>
