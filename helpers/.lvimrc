@@ -7,7 +7,6 @@ let g:vdebug_options.debug_file = '~/vdebug.log'
 let g:vdebug_options.debug_file_level = 2
 
 let g:ale_css_stylelint_options = ""
-let g:ale_scss_stylelint_options = ""
 let g:ale_php_phpcs_standard = 'PSR2R'
 let g:ale_php_phpcbf_standard = 'PSR2R'
 
@@ -15,28 +14,11 @@ if g:localvimrc_sourced_once
   finish
 endif
 
-augroup oex_project
+augroup project
   autocmd!
 
-  autocmd BufNewFile,BufEnter * setlocal path=/var/www/vhosts/local.theofficeexpress.com/htdocs/
-  autocmd BufNewFile,BufEnter *.php setlocal tags=/var/www/vhosts/local.theofficeexpress.com/php.tags
-  autocmd BufNewFile,BufEnter *.php setlocal includeexpr='.'.v:fname
-  autocmd BufNewFile,BufEnter *.php let b:tagcommands = {
-  \ 'php': {
-  \     'tagfile': '/var/www/vhosts/local.theofficeexpress.com/php.tags',
-  \     'args': '--fields=+aimlS --PHP-kinds=+cdfint-av',
-  \     'files': '/var/www/vhosts/local.theofficeexpress.com/htdocs/'
-  \   }
-  \ }
-  autocmd BufWritePost *.php TagUpdate
+  autocmd BufNewFile,BufEnter * setlocal path=/var/www/vhosts/lims.test/htdocs/
+  autocmd BufNewFile,BufEnter *.php setlocal tags=/var/www/vhosts/lims.test/php.tags
 
-  autocmd BufNewFile,BufEnter *.js setlocal tags=/var/www/vhosts/local.theofficeexpress.com/js.tags
-  autocmd BufNewFile,BufEnter *.js let b:tagcommands = {
-  \ 'javascript': {
-  \     'tagfile': '/var/www/vhosts/local.theofficeexpress.com/js.tags',
-  \     'args': '',
-  \     'files': '/var/www/vhosts/local.theofficeexpress.com/htdocs/'
-  \   }
-  \ }
-  autocmd BufWritePost *.js TagUpdate
+  autocmd BufNewFile,BufEnter *.js setlocal tags=/var/www/vhosts/lims.test/js.tags
 augroup END
