@@ -13,26 +13,26 @@ FILES="$(git diff-index --cached --name-only ${AGAINST})"
 
 for FILE in ${FILES}; do
 	F="$(echo "${FILE}" | awk -F . '{print $NF}')"
-    if [ ! -f "${FILE}" ]; then
-        break;
-    fi
+	if [ ! -f "${FILE}" ]; then
+		break;
+	fi
 
 	case ${F} in
 		php)
-            ERROR="$(php -l "${FILE}")"
-            STATUS=$?
-		;;
+			ERROR="$(php -l "${FILE}")"
+			STATUS=$?
+			;;
 
-        js|mjs)
-            ERROR="$(node --check "${FILE}")"
-            STATUS=$?
-        ;;
+		js|mjs)
+			ERROR="$(node --check "${FILE}")"
+			STATUS=$?
+			;;
 
 		*)
 			# no-op
 			ERROR=''
 			STATUS=0
-		;;
+			;;
 	esac
 
 	if [ ${STATUS} -ne 0 ]; then
