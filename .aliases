@@ -43,6 +43,7 @@ alias svim='nvim -u ~/contrib/SpaceVim/init.vim'
 if alias -s >/dev/null 2>&1; then
   alias -s css=nvim
   alias -s md=nvim
+  alias -s rst=nvim
   alias -s scss=nvim
   alias -s txt=nvim
 fi
@@ -82,26 +83,8 @@ catmd() {
   fi
 }
 
-dosass() {
-  if [ "${#}" -eq 1 ]; then
-    OUT_FILE="$(dirname "${1}")/$(basename -s .scss "${1}").css"
-  else
-    OUT_FILE="${2}"
-  fi
-
-  sass -t nested "${1}" "${OUT_FILE}"
-}
-
 hgdiff() {
   nvim -d -c 'map q :qa!<CR>' <(hg cat "$1") "$1"
-}
-
-playtime() {
-  if [ -x /usr/local/bin/soxi ]; then
-    soxi -d "${@}" 2>&1
-  else
-    echo "soxi is not installed"
-  fi
 }
 
 # from https://unix.stackexchange.com/a/67541
@@ -173,43 +156,3 @@ tmuxt() {
 
   tmux attach-session -t "${SESSION}"
 }
-
-# I'm keeping the following around for historical reference
-# mountpub() {
-#   sudo mount -t cifs -o username=ARI/darceneaux,rw,file_mode=0666,dir_mode=0777 \\\\10.10.10.12\\Public /mnt/Public
-# }
-#
-# mountfr() {
-#   sudo mount -t cifs -o username=ARI/darceneaux,rw,file_mode=0666,dir_mode=0777 \\\\10.10.10.12\\Fundraising /mnt/Fundraising
-# }
-#
-# mountvbox() {
-#   ssh -fNg -L 3306:127.0.0.1:3306 vbox # mysql tunnel
-#   ssh -fNg -L 5432:127.0.0.1:5432 vbox # postgres tunnel
-#   sshfs -C -o idmap=user,nonempty,transform_symlinks,allow_other,BatchMode=yes vbox:/var/www /var/www
-# }
-#
-# # delete grep cache, not sure how to generalize it
-# dgc() {
-#   rm -rf $(grep -l '<!-- http://aynrandlexicon.com/lexicon/quote_of_the_day.html' /var/www/libraries/cache/*.cache)
-#   curl -I -s http://aynrandlexicon.com/lexicon/quote_of_the_day.html > /dev/null
-# }
-#
-# tarlm() {
-#   if [ ! -f $1.access.$2.tgz ]; then
-#     sudo tar -zvcf $1.access.$2.tgz $1.access.$2*.log && sudo rm $1.access.$2*.log
-#   fi
-#   if [ ! -f $1.error.$2.tgz ]; then
-#     sudo tar -zvcf $1.error.$2.tgz $1.error.$2*.log && sudo rm $1.error.$2*.log
-#   fi
-# }
-#
-# movetrash() {
-#   if [ ! -d ~/.Trash ]; then
-#     mkdir ~/.Trash
-#   fi
-#   mv "${*}" ~/.Trash
-# }
-#
-# alias cycapache='/usr/bin/sudo /usr/bin/pkill -SIGQUIT -U www; /bin/sleep 2; /usr/bin/sudo /usr/sbin/apachectl start'
-# alias rm='movetrash'
