@@ -19,6 +19,7 @@ for FILE in ${FILES}; do
 
 	case ${F} in
 		php)
+			project-tags
 			ERROR="$(php -l "${FILE}")"
 			STATUS=$?
 			;;
@@ -40,3 +41,5 @@ for FILE in ${FILES}; do
 		exit ${STATUS}
 	fi
 done
+
+project-ctags ${FILES} >/dev/null 2>&1 &
