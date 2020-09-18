@@ -10,7 +10,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
-Plug 'DArcMattr/vim-taggatron'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'fatih/vim-go', { 'for': [ 'go' ], 'do': ':GoUpdateBinaries' }
@@ -164,7 +163,7 @@ let g:airline#extensions#ycm#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:ale_cache_executable_check_failures = 1
 let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace']
+\   '*': []
 \ }
 let g:ale_lint_delay = 0
 let g:ale_lint_on_save = 1
@@ -198,12 +197,6 @@ let g:netrw_liststyle = 3
 let g:netrw_preview = 1
 let g:netrw_silent = 1
 let g:netrw_winsize = 25
-let g:tagcommand_defaults = {
-\   'cmd': 'ctags',
-\   'args': '',
-\   'filesappend': '**',
-\  }
-let g:taggatron_run_in_background = 1
 
 noremap <C-d>     <C-d>zz
 noremap <C-u>     <C-u>zz
