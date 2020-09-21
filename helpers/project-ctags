@@ -1,0 +1,35 @@
+#!/bin/sh
+
+project_ctags() {
+  FILEPATH="$(while [ ! -f '.editorconfig' ] && [ '/' != "${PWD}" ]; do cd .. ;done; [ / != "${PWD}"  ] && echo "${PWD}" || echo .)"
+
+  for FILE in "$@"; do
+    F="$(echo "${FILE}" | awk -F . '{print $NF}')"
+    if [ ! -f "${FILE}" ]; then
+      exit 0;
+    fi
+
+    case ${F} in
+      php)
+        TAG="${FILEPATH}/php.tags"
+        ctags -a --fields=+aimlS --PHP-kinds=+cdfint-av -f "${TAG}" "${FILE}"
+        STATUS=$?
+        ;;
+
+      js|mjs)
+        TAG="${FILEPATH}/js.tags"
+        ctags -a -f "${TAG}" "${FILE}"
+        STATUS=$?
+        ;;
+
+      *)
+        # no-op
+        STATUS=0
+        ;;
+    esac
+
+    if [ ${STATUS} -ne 0 ]; then
+      exit ${STATUS}
+    fi
+  done
+}
