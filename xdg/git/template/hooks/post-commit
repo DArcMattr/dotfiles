@@ -9,4 +9,4 @@ fi
 
 FILES="$(git diff-index --cached --name-only ${AGAINST})"
 
-project-ctags ${FILES} >/dev/null 2>&1 &
+project_ctags ${FILES} >/dev/null 2>&1 &
