@@ -20,7 +20,6 @@ for FILE in ${FILES}; do
 
 	case ${F} in
 		php)
-			project-tags
 			ERROR="$(php -l "${FILE}")"
 			STATUS=$?
 			;;
