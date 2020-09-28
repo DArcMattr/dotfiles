@@ -16,7 +16,11 @@
 zstyle ':prezto:*:*' color 'yes'
 
 # Set the Zsh modules to load (man zshmodules).
-zstyle ':prezto:load' zmodule 'attr' 'stat'
+if [[ $(uname -a | awk '{ printf $1 }') == "FreeBSD" ]]; then
+	zstyle ':prezto:load' zmodule 'stat'
+else
+	zstyle ':prezto:load' zmodule 'attr' 'stat'
+fi
 
 # Set the Zsh functions to load (man zshcontrib).
 zstyle ':prezto:load' zfunction 'zargs' 'zmv'
