@@ -265,9 +265,8 @@ xnoremap c "xc
 call denite#custom#option( 'default', {
 \  'auto_resize': 1,
 \  'prompt': '>',
-\  'short_source_names': 1,
-\  'split': 'floating_relative',
-\  'vertical_preview': 1,
+\  'short': 1,
+\  'split': 'floating_relative_cursor',
 \})
 call denite#custom#option( 'list', { 'mode': 'normal' } )
 
