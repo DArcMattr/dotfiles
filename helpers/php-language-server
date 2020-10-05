@@ -1,7 +1,0 @@
-#!/bin/sh
-
-pls() {
-  php "$(composer global config bin-dir --absolute 2>/dev/null)/php-language-server.php" "$@"
-}
-
-pls "$@"
