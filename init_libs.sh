@@ -62,7 +62,7 @@ grab_rust() {
     rm -f "${HOME}/.zfunc/_rustup"; \
     "${HOME}/.cargo/bin/rustup" completions zsh > "${HOME}/.zfunc/_rustup"
 
-  cd "${HOME}" && "${HOME}/.cargo/bin/cargo" install --force cargo-deb cargo-update exa starship
+  cd "${HOME}" && "${HOME}/.cargo/bin/cargo" install --force bat cargo-deb cargo-update exa starship
 }
 
 grab_pips() {
