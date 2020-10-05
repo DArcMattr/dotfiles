@@ -4,6 +4,5 @@ let g:ale_html_langserver_executable = 'html-languageservice'
 let g:ale_html_tidy_options = '-config ~/dotfiles/helpers/htmltidy.cfg'
 
 lua <<EOF
-local nvim_lsp = require'nvim_lsp'
-nvim_lsp.html.setup{}
+require'nvim_lsp'.html.setup{}
 EOF

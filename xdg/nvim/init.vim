@@ -244,11 +244,14 @@ nnoremap <Expr>j            (v:count == 0 ? 'gj' : 'j')
 nnoremap <Expr>k            (v:count == 0 ? 'gk' : 'k')
 nnoremap <Right>            <Cmd>bn<Cr>
 nnoremap <Left>             <Cmd>bp<Cr>
-nnoremap <silent><F2>       <Cmd>call LanguageClient_textDocument_rename()<Cr>
-nnoremap <silent><Leader>lc <Cmd>call LanguageClient_contextMenu()<Cr>
-nnoremap <silent><Leader>ld <Cmd>call LanguageClient_textDocument_definition()<Cr>
-nnoremap <silent><Leader>lk <Cmd>call LanguageClient_textDocument_hover()<Cr>
-nnoremap <silent><Leader>lr <Cmd>call LanguageClient_textDocument_references()<Cr>
+nnoremap <Silent><Leader>lk <Cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <Silent>gD         <Cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <Silent><c-k>      <Cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <Silent>1gD        <Cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <Silent>gr         <Cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <Silent>g0         <Cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <Silent>gW         <Cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <Silent>gd         <Cmd>lua vim.lsp.buf.declaration()<CR>
 
 tnoremap <Leader><Esc> <C-\><C-n>
 

@@ -7,6 +7,5 @@ let g:ale_linters['typescript'] = ['eslint']
 let b:tagcommands = { 'typescript' : { 'tagfile' : $XDG_CONFIG_HOME . '/nvim/ts.tags' } }
 
 lua <<EOF
-local nvim_lsp = require'nvim_lsp'
-nvim_lsp.tsserver.setup{}
+require'nvim_lsp'.tsserver.setup{}
 EOF
