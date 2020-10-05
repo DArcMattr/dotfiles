@@ -93,6 +93,15 @@ running it in WSL, I found it's best to generate the certificate pairs on the
 WSL side, and to copy the generated root file to the Windows-side directory, and
 run `mkcert -install` there.
 
+### MySQL safe password storage
+
+The utility `mysql_config_editor` is essential to keeping plaintext passwords
+out of local configuration files.
+
+An example
+
+    mysql_config_editor set --login-path=local --host=127.0.0.1 --user=db_user --password
+
 ### Keyboard Mapping Under GNOME/Wayland
 
 I tried GNOME-under-Wayland, which means the `.Xmodmap` file does nothing
