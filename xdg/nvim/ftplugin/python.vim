@@ -5,4 +5,7 @@ setlocal expandtab
 setlocal formatoptions=croql
 setlocal keywordprg=pydoc
 
-let g:LanguageClient_serverCommands['python'] = ['python-language-server']
+lua <<EOF
+local nvim_lsp = require'nvim_lsp'
+nvim_lsp.pyls.setup{}
+EOF

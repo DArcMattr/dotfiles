@@ -7,7 +7,6 @@ let g:ale_linter_aliases = {'jsx': 'css'}
 let g:ale_jsx_eslint_executable = 'eslint_d'
 let g:ale_jsx_eslint_use_global = 1
 let g:ale_linters['jsx'] = ['eslint']
-let g:LanguageClient_serverCommands['jsx'] = ['javascript-typescript-stdio']
 let g:user_emmet_settings = {
 \   'javascript.jsx' : {
 \     'extends': 'jsx',
@@ -16,3 +15,8 @@ let g:user_emmet_settings = {
 \      }
 \    }
 \  }
+
+lua <<EOF
+local nvim_lsp = require'nvim_lsp'
+nvim_lsp.tsserver.setup{}
+EOF

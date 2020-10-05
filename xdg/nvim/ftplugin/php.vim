@@ -4,8 +4,12 @@ setlocal suffixesadd+=.php
 
 let g:ale_fixers['php'] = ['phpcbf']
 let g:ale_linters['php'] = ['php', 'phpcs']
-let g:ale_php_langserver_executable = 'php-language-server.php'
+let g:ale_php_langserver_executable = 'intelephense'
 let g:mta_filetypes['php'] = 1
-let g:LanguageClient_serverCommands['php'] = ['php-language-server.php']
+
+lua <<EOF
+local nvim_lsp = require'nvim_lsp'
+nvim_lsp.intelephense.setup{}
+EOF
 
 " setlocal foldmarker={,} foldmethod=marker foldlevel=1 |

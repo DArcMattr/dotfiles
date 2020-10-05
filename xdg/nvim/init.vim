@@ -7,7 +7,6 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
 Plug 'editorconfig/editorconfig-vim'
@@ -20,9 +19,9 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'mattn/emmet-vim'
-"Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'mhinz/vim-signify'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'neovim/nvim-lspconfig'
 Plug 'reedes/vim-wheel'
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
@@ -150,7 +149,6 @@ let maplocalleader = " "
 let c_space_errors = 1
 let $GIT_SSL_NO_VERIFY = 'true'
 
-"let g:coc_force_debug = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#quickfix#location_text = 'Location'
 let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
@@ -181,12 +179,6 @@ let g:AutoPairsShortcutJump = '<Leader>an'
 let g:AutoPairsShortcutBackInsert = '<Leader>ab'
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_exclude_filetypes = ['help', 'man', 'netrw']
-"let g:LanguageClient_loggingFile = $HOME . '/lc.log'
-"let g:LanguageClient_loggingLevel = 'DEBUG'
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_echoProjectRoot = 0
-let g:LanguageClient_rootMarkers = ['.editorconfig']
-let g:LanguageClient_serverCommands = {}
 let g:localvimrc_persistent = 1
 let g:localvimrc_sandbox = 0
 let g:netrw_altv = 1
@@ -418,7 +410,6 @@ augroup StartupStuffs
   \ setlocal nonumber norelativenumber |
   \ startinsert
   autocmd VimResized * execute 'normal! \<C-w>='
-  "autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
 augroup END
 
 if system('uname -r') =~ 'Microsoft'
