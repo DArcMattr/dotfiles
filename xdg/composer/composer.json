@@ -6,11 +6,6 @@
     "sort-packages": true
   },
   "type": "library",
-  "autoload": {
-    "classmap": [
-      "scripts"
-    ]
-  },
   "require": {
     "fig-r/psr2r-sniffer": "@stable",
     "phpmd/phpmd": "@stable",
@@ -20,6 +15,7 @@
     "slevomat/coding-standard": "@stable",
     "sloanlance/pman-php-manual": "@stable",
     "squizlabs/php_codesniffer": "@dev",
+    "vimeo/psalm": "@stable",
     "wp-cli/wp-cli-bundle": "@stable",
     "wp-coding-standards/wpcs": "@stable"
   },
