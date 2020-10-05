@@ -12,7 +12,6 @@
     ]
   },
   "require": {
-    "felixfbecker/language-server": "@dev",
     "fig-r/psr2r-sniffer": "@stable",
     "phpmd/phpmd": "@stable",
     "phpstan/phpstan": "@dev",
@@ -23,16 +22,6 @@
     "squizlabs/php_codesniffer": "@dev",
     "wp-cli/wp-cli-bundle": "@stable",
     "wp-coding-standards/wpcs": "@stable"
-  },
-  "scripts": {
-    "post-install-cmd": [
-      "DArceneaux\\PHPInstallScripts\\PHPCS::postUpdate",
-      "@composer --working-dir=vendor/felixfbecker/language-server parse-stubs"
-    ],
-    "post-update-cmd": [
-      "DArceneaux\\PHPInstallScripts\\PHPCS::postUpdate",
-      "@composer --working-dir=vendor/felixfbecker/language-server parse-stubs"
-    ]
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
