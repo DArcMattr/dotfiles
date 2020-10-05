@@ -1,3 +1,10 @@
 map <buffer> q ;q<Cr>
 
-autocmd FileType gitcommit if ! &previewwindow && expand('%:t') !~# 'index' | :DiffGitCached | ;resize 20 | exec 'wincmd P | setlocal ft=diff | wincmd t' | endif | exec 'autocmd VimEnter * startinsert'
+autocmd VimEnter * exec 'normal gg0' |
+  \ startinsert
+
+autocmd FileType gitcommit |
+  \ if ! &previewwindow && expand('%:t') !~# 'index' |
+  \   exec 'DiffGitCached | setlocal ft=diff | wincmd t | resize 25' |
+  \ endif
+
