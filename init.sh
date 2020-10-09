@@ -25,5 +25,14 @@ git clone --recursive https://github.com/sorin-ionescu/prezto.git \
   grab_git -d ~/contrib/ctags               -r https://github.com/universal-ctags/ctags.git      -b master
   grab_git -d ~/contrib/tmux                -r https://github.com/tmux/tmux.git
   grab_git -d ~/contrib/autoenv             -r https://github.com/zpm-zsh/autoenv.git -n
+  # @link https://stackoverflow.com/a/21736287/910401
+  perl -MCPAN -Mlocal::lib="${HOME}/.local" -e"<<PERL
+my $c = "CPAN::HandleConfig";
+$c->load(doit => 1, autoconfig => 1);
+$c->edit(prerequisites_policy => "follow");
+$c->edit(build_requires_install_policy => "yes");
+$c->commit;
+PERL
+"
   cpanm -l ${HOME}/.local Neovim::Ext
 )
