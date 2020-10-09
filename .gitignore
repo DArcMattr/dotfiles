@@ -12,6 +12,7 @@ xdg/composer/auth.json
 xdg/composer/keys.dev.pub
 xdg/composer/keys.tags.pub
 xdg/composer/vendor/
+xdg/fish/fishd.*
 xdg/git/gitk
 xdg/nvim/autoload/plug.vim
 xdg/nvim/autoload/plug.vim.old
