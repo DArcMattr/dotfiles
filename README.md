@@ -19,7 +19,7 @@ Some of these will be installed via the install scripts or apt-get below.
     sudo apt install -y curl software-properties-common wget
     sudo add-apt-repository -y universe
     sudo add-apt-repository -y multiverse
-    curl -sL https://deb.nodesource.com/setup_14.x | \
+    curl -sL https://deb.nodesource.com/setup_current.x | \
       sudo -E bash - # argh, I hate this
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | \
@@ -31,19 +31,19 @@ Some of these will be installed via the install scripts or apt-get below.
     wget --quiet -O - "http://apt.llvm.org/llvm-snapshot.gpg.key" | \
       sudo apt-key add -
     sudo add-apt-repository \
-      "deb http://apt.llvm.org/${REL}/ llvm-toolchain-${REL}-10 main"
+      "deb http://apt.llvm.org/${REL}/ llvm-toolchain-${REL}-11 main"
     wget --quiet -O - "http://nginx.org/keys/nginx_signing.key" | \
       sudo apt-key add -
     sudo add-apt-repository \
       "deb http://nginx.org/packages/mainline/ubuntu ${REL} nginx"
-    sudo apt install autossh bison build-essential clang-10 clang-10-doc \
-      clang-format-10 clang-tools-10 clangd-10 cmake cpanminus flex git \
-      golang-go htop libc++-10-dev libc++abi-10-dev libclang-10-dev \
-      libclang-common-10-dev libclang1-10 libevent-dev libfuzzer-10-dev \
-      libgit2-dev libjansson-dev libllvm-10-ocaml-dev libllvm9 liblzma-dev \
-      libncurses5-dev libnss3-tools libomp-10-dev libpcre3-dev libssh2-1-dev \
-      libsqlite3-dev libssl-dev libxml2-dev libyaml-dev lsyncd lld-10 lldb-10 \
-      llvm-10 llvm-10-dev llvm-10-doc llvm-10-examples llvm-10-runtime neovim \
+    sudo apt install autossh bison build-essential clang-11 clang-11-doc \
+      clang-format-11 clang-tools-11 clangd-11 cmake cpanminus flex git \
+      golang-go htop libc++-11-dev libc++abi-11-dev libclang-11-dev \
+      libclang-common-11-dev libclang1-11 libevent-dev libfuzzer-11-dev \
+      libgit2-dev libjansson-dev libllvm-11-ocaml-dev libllvm9 liblzma-dev \
+      libncurses5-dev libnss3-tools libomp-11-dev libpcre3-dev libssh2-1-dev \
+      libsqlite3-dev libssl-dev libxml2-dev libyaml-dev lsyncd lld-11 lldb-11 \
+      llvm-11 llvm-11-dev llvm-11-doc llvm-11-examples llvm-11-runtime neovim \
       nginx nodejs php-common php-gd php-imagick php-mbstring php-memcache \
       php-pear php-xdebug php-xml php-zip php7.4-cli php7.4-curl php7.4-dev \
       php7.4-fpm php7.4-imap php7.4-json php7.4-mysql php7.4-opcache \

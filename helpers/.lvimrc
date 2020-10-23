@@ -8,11 +8,25 @@ let g:vdebug_options.debug_file_level = 2
 
 let g:ale_css_stylelint_options = ""
 let g:ale_php_phpcs_standard = 'PSR2R'
+let g:ale_php_phpcs_options = '--runtime-set php_version 50640'
 let g:ale_php_phpcbf_standard = 'PSR2R'
+let g:php_version_id = 50640
 
 if g:localvimrc_sourced_once
   finish
 endif
+
+lua <<LUA
+require'nvim_lsp'.intelephense.setup{
+  settings = {
+    intelephense = {
+        environment = {
+          version = "5.6.0";
+        };
+      };
+    }
+  }
+LUA
 
 augroup project
   autocmd!
@@ -21,4 +35,6 @@ augroup project
   autocmd BufNewFile,BufEnter *.php setlocal tags=/var/www/vhosts/lims.test/php.tags
 
   autocmd BufNewFile,BufEnter *.js setlocal tags=/var/www/vhosts/lims.test/js.tags
+
+  autocmd BufNewFile,BufEnter *.yml setlocal path=/var/www/vhosts/lims.test/htdocs/src/LIMS/
 augroup END

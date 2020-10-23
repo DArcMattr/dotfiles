@@ -1,7 +1,7 @@
 # .bashrc
-if [[ -t 1 && -x /usr/bin/zsh && $- == *i* ]]; then
-  exec /usr/bin/zsh -l
-fi
+#if [[ -t 1 && -x /usr/bin/zsh && $- == *i* ]]; then
+#  exec /usr/bin/zsh -l
+#fi
 
 # Source global definitions
 if [[ -f /etc/bashrc ]]; then
