@@ -20,6 +20,8 @@
   added = yellow
   changed = green
   untracked = cyan
+[commit]
+  verbose = true
 [core]
   attributesfile = ~/.config/git/attributes
   autocrlf = input
