@@ -329,6 +329,19 @@ if exists('$TMUX')
   tnoremap <silent> <C-\><C-N><C-w>k <Cmd>silent call funcs#TmuxMove('k')<Cr>
   tnoremap <silent> <C-\><C-N><C-w>h <Cmd>silent call funcs#TmuxMove('h')<Cr>
   tnoremap <silent> <C-\><C-N><C-w>l <Cmd>silent call funcs#TmuxMove('l')<Cr>
+
+  let g:clipboard = {
+        \   'name': 'tmux override',
+        \   'copy': {
+        \      '+': ['tmux', 'load-buffer', '-'],
+        \      '*': ['tmux', 'load-buffer', '-'],
+        \    },
+        \   'paste': {
+        \      '+': ['tmux', 'save-buffer', '-'],
+        \      '*': ['tmux', 'save-buffer', '-'],
+        \   },
+        \   'cache_enabled': 1,
+        \ }
 endif
 
 augroup FugitiveStuffs
@@ -412,7 +425,7 @@ augroup StartupStuffs
   autocmd VimResized * execute 'normal! \<C-w>='
 augroup END
 
-if system('uname -r') =~ 'Microsoft'
+if system('uname -r') =~? 'microsoft'
   augroup WSL
     autocmd!
     autocmd TextYankPost * :call system('clip.exe ', @")
