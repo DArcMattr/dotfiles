@@ -6,5 +6,5 @@ let g:ale_javascript_eslint_use_global = 1
 let g:ale_linters['javascript'] = ['eslint']
 
 lua <<EOF
-require'nvim_lsp'.tsserver.setup{}
+require'lspconfig'.tsserver.setup{}
 EOF

@@ -6,5 +6,5 @@ setlocal formatoptions=croql
 setlocal keywordprg=pydoc
 
 lua <<EOF
-require'nvim_lsp'.pyls.setup{}
+require'lspconfig'.pyls.setup{}
 EOF

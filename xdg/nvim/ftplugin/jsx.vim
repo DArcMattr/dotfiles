@@ -17,5 +17,5 @@ let g:user_emmet_settings = {
 \  }
 
 lua <<EOF
-require'nvim_lsp'.tsserver.setup{}
+require'lspconfig'.tsserver.setup{}
 EOF

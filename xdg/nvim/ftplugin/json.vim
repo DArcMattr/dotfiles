@@ -4,5 +4,5 @@ setlocal foldlevel=1
 setlocal expandtab
 
 lua <<EOF
-require'nvim_lsp'.jsonls.setup{}
+require'lspconfig'.jsonls.setup{}
 EOF

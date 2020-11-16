@@ -6,5 +6,5 @@ let g:go_info_mode='gopls'
 let g:go_metalinter_command='golangci-lint'
 
 lua <<EOF
-require'nvim_lsp'.gopls.setup{}
+require'lspconfig'.gopls.setup{}
 EOF

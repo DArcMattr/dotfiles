@@ -6,5 +6,5 @@ let g:ale_scss_stylelint_options = '--config ~/.config/yarn/global/package.json'
 let g:ale_scss_stylelint_use_global = 1
 
 lua <<EOF
-require'nvim_lsp'.cssls.setup{}
+require'lspconfig'.cssls.setup{}
 EOF

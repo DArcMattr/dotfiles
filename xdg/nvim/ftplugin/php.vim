@@ -9,7 +9,7 @@ let g:ale_php_langserver_use_global = 1
 let g:mta_filetypes['php'] = 1
 
 lua <<LUA
-require'nvim_lsp'.intelephense.setup{
+require'lspconfig'.intelephense.setup{
 --[==[ not sure how settings are supposed to translate
   settings = [[{
     intelephense = {
