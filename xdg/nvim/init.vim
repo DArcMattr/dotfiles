@@ -218,38 +218,38 @@ nnoremap gk k
 nnoremap i zzi
 nnoremap { {zz
 nnoremap } }zz
-nnoremap <C-PageDown>       <Cmd>bp<Cr>
-nnoremap <C-PageUp>         <Cmd>bn<Cr>
-nnoremap <C-e>              3<C-e>
-nnoremap <C-p>              <Cmd>Denite file/rec<Cr>
-nnoremap <C-y>              3<C-y>
-nnoremap <C-S-i>            i<Space><Esc>
-nnoremap <Leader><F7>       <Cmd>setlocal spell! spell? spelllang=en_us<Cr>
-nnoremap <Leader><S-b>      guiw
-nnoremap <Leader>b          gUiw
-nnoremap <Leader>d*         <Cmd>DeniteCursorWord grep:.<Cr>
-nnoremap <Leader>d/         <Cmd>Denite grep:.<Cr>
-nnoremap <Leader>do         <Cmd>Denite outline<Cr>
-nnoremap <Leader>gb         <Cmd>Gblame<Cr>
-nnoremap <Leader>gc         <Cmd>Gcommit<Cr>
-nnoremap <Leader>gd         <Cmd>Gdiff<Cr>
-nnoremap <Leader>gl         <Cmd>Glog -- %<Cr>
-nnoremap <Leader>gp         <Cmd>Gpush<Cr>
-nnoremap <Leader>gs         <Cmd>Gstatus<Cr>
-nnoremap <Leader>lk         <Cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <Leader>o          i<Cr><Esc>
-nnoremap <Leader>q          <Cmd>nohlsearch<Cr>
-nnoremap <Expr>j            (v:count == 0 ? 'gj' : 'j')
-nnoremap <Expr>k            (v:count == 0 ? 'gk' : 'k')
-nnoremap <Right>            <Cmd>bn<Cr>
-nnoremap <Left>             <Cmd>bp<Cr>
-nnoremap <Silent>gD         <Cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <Silent><C-k>      <Cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <Silent>1gD        <Cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <Silent>gr         <Cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <Silent>g0         <Cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <Silent>gW         <Cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <Silent>gd         <Cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <C-PageDown>  <Cmd>bp<Cr>
+nnoremap <C-PageUp>    <Cmd>bn<Cr>
+nnoremap <C-e>         3<C-e>
+nnoremap <C-p>         <Cmd>Denite file/rec<Cr>
+nnoremap <C-y>         3<C-y>
+nnoremap <Leader><F7>  <Cmd>setlocal spell! spell? spelllang=en_us<Cr>
+nnoremap <Leader><S-b> guiw
+nnoremap <Leader>b     gUiw
+nnoremap <Leader>d*    <Cmd>DeniteCursorWord grep:.<Cr>
+nnoremap <Leader>d/    <Cmd>Denite grep:.<Cr>
+nnoremap <Leader>do    <Cmd>Denite outline<Cr>
+nnoremap <Leader>gb    <Cmd>Gblame<Cr>
+nnoremap <Leader>gc    <Cmd>Gcommit<Cr>
+nnoremap <Leader>gd    <Cmd>Gdiff<Cr>
+nnoremap <Leader>gl    <Cmd>Glog -- %<Cr>
+nnoremap <Leader>gp    <Cmd>Gpush<Cr>
+nnoremap <Leader>gs    <Cmd>Gstatus<Cr>
+nnoremap <Leader>lk    <Cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <Leader>o     i<Cr><Esc>
+nnoremap <Leader>q     <Cmd>nohlsearch<Cr>
+nnoremap <M-i>         i<Space><Esc>
+nnoremap <Expr>j       (v:count == 0 ? 'gj' : 'j')
+nnoremap <Expr>k       (v:count == 0 ? 'gk' : 'k')
+nnoremap <Right>       <Cmd>bn<Cr>
+nnoremap <Left>        <Cmd>bp<Cr>
+nnoremap <Silent>gD    <Cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <Silent><C-k> <Cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <Silent>1gD   <Cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <Silent>gr    <Cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <Silent>g0    <Cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <Silent>gW    <Cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <Silent>gd    <Cmd>lua vim.lsp.buf.declaration()<CR>
 
 tnoremap <Leader><Esc> <C-\><C-n>
 
