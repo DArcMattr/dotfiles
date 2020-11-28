@@ -29,6 +29,11 @@ for FILE in ${FILES}; do
 			STATUS=$?
 			;;
 
+		lua)
+			ERROR="$(luac -p "${FILE}")"
+			STATUS=$?
+			;;
+
 		*)
 			# no-op
 			ERROR=''

@@ -43,12 +43,12 @@ Some of these will be installed via the install scripts or apt-get below.
       libgit2-dev libjansson-dev libllvm-11-ocaml-dev libllvm9 liblzma-dev \
       libncurses5-dev libnss3-tools libomp-11-dev libpcre3-dev libssh2-1-dev \
       libsqlite3-dev libssl-dev libxml2-dev libyaml-dev lsyncd lld-11 lldb-11 \
-      llvm-11 llvm-11-dev llvm-11-doc llvm-11-examples llvm-11-runtime neovim \
-      nginx nodejs php-common php-gd php-imagick php-mbstring php-memcache \
-      php-pear php-xdebug php-xml php-zip php7.4-cli php7.4-curl php7.4-dev \
-      php7.4-fpm php7.4-imap php7.4-json php7.4-mysql php7.4-opcache \
-      php7.4-readline php7.4-soap pv python-dev python3-dev ruby-dev shellcheck \
-      tidy wslu xcape xsel yarn zlib1g-dev zsh
+      llvm-11 llvm-11-dev llvm-11-doc llvm-11-examples llvm-11-runtime \
+      liblua5.3-dev neovim nginx nodejs php-common php-gd php-imagick \ 
+      php-mbstring php-memcache php-pear php-xdebug php-xml php-zip php8.0-cli \
+      php8.0-curl php8.0-dev php8.0-fpm php8.0-imap php8.0-json php8.0-mysql \
+      php8.0-opcache php8.0-readline php8.0-soap pv python-dev python3-dev \
+      ruby-dev shellcheck tidy wslu xcape xsel yarn zlib1g-dev zsh
     curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
     python2 /tmp/get-pip.py --user
     python3 /tmp/get-pip.py --user

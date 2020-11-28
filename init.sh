@@ -25,6 +25,12 @@ git clone --recursive https://github.com/sorin-ionescu/prezto.git \
   grab_git -d ~/contrib/ctags               -r https://github.com/universal-ctags/ctags.git      -b master
   grab_git -d ~/contrib/tmux                -r https://github.com/tmux/tmux.git
   grab_git -d ~/contrib/autoenv             -r https://github.com/zpm-zsh/autoenv.git -n
+  grab_git -d ~/contrib/luarocks            -r https://github.com/luarocks/luarocks -n
 
   cpanm -n -l ${HOME}/.local Neovim::Ext
+
+	cd ~/dotfiles/luarocks && \
+		git lasttagcheckout && \
+		./configure --prefix=${HOME}/.local --with-lua-include=/usr/include &&
+		make install clean
 )
