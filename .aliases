@@ -35,17 +35,18 @@ alias sicp='racket -i -p neil/sicp -l xrepl'
 alias agp='ag --pager=less'
 alias venv='python -m venv'
 alias python='python3'
-#shellcheck disable=SC2139
-alias svim='nvim -u ~/contrib/SpaceVim/init.vim'
+alias jsonize='python -m json.tool'
+alias composer="${HOME}/.local/bin/composer"
 
 # Suffix aliases
 
 if alias -s >/dev/null 2>&1; then
-  alias -s css=nvim
-  alias -s md=nvim
-  alias -s rst=nvim
-  alias -s scss=nvim
-  alias -s txt=nvim
+	alias -s css=nvim
+	alias -s md=nvim
+	alias -s rst=nvim
+	alias -s scss=nvim
+	alias -s txt=nvim
+	alias -s json=jsonize
 fi
 
 # Functions, used where aliases would break

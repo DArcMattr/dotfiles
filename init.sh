@@ -1,36 +1,39 @@
 #!/usr/bin/env zsh
+# vim:ft=zsh
 # only idempotent commands here so far
 # TODO: translate to ansible
 
-DOT_CONFIG=${XDG_CONFIG_HOME:=$HOME/.config}
+DOT_CONFIG=${XDG_CONFIG_HOME:=${HOME}/.config}
+CONTRIB="${HOME}${CONTRIB}"
+DOTFILES="${HOME}/dotfiles"
 
-mkdir -p "${HOME}/contrib" "${HOME}/.local/bin" "${DOT_CONFIG}"
-tic -x ~/dotfiles/tmux-256color.terminfo
+mkdir -p ${CONTRIB} "${HOME}/.local/bin" "${DOT_CONFIG}"
+tic -x "${DOTFILES}/tmux-256color.terminfo"
 
-find ~/dotfiles/symlinks/ -name ".*" -exec ln -sf "{}" "${HOME}" \;
-find "${HOME}/dotfiles/xdg/" -mindepth 1 -maxdepth 1 -type d -exec ln -sf "{}" "${DOT_CONFIG}/" \;
+find "${DOTFILES}/symlinks/" -name ".*" -exec ln -sf "{}" "${HOME}" \;
+find "${DOTFILES}/xdg/" -mindepth 1 -maxdepth 1 -type d -exec ln -sf "{}" "${DOT_CONFIG}/" \;
 
 cd ~
 git clone --recursive https://github.com/sorin-ionescu/prezto.git \
-	"${ZDOTDIR:-$HOME}/.zprezto"
+	"${ZDOTDIR:-${HOME}}/.zprezto"
 
 (
-  zsh ~/dotfiles/init_libs.sh
+	zsh ${DOTFILES}/init_libs.sh
 
-  grab_composer
-  grab_pips
-  grab_gems
-  grab_yarns
-  grab_git -d ~/contrib/the_silver_searcher -r https://github.com/ggreer/the_silver_searcher.git -b master
-  grab_git -d ~/contrib/ctags               -r https://github.com/universal-ctags/ctags.git      -b master
-  grab_git -d ~/contrib/tmux                -r https://github.com/tmux/tmux.git
-  grab_git -d ~/contrib/autoenv             -r https://github.com/zpm-zsh/autoenv.git -n
-  grab_git -d ~/contrib/luarocks            -r https://github.com/luarocks/luarocks -n
+	grab_composer
+	grab_pips
+	grab_gems
+	grab_yarns
+	grab_git -d "${CONTRIB}/the_silver_searcher" -r https://github.com/ggreer/the_silver_searcher.git -b master
+	grab_git -d "${CONTRIB}/ctags"               -r https://github.com/universal-ctags/ctags.git      -b master
+	grab_git -d "${CONTRIB}/tmux"                -r https://github.com/tmux/tmux.git
+	grab_git -d "${CONTRIB}/autoenv"             -r https://github.com/zpm-zsh/autoenv.git -n
+	grab_git -d "${CONTRIB}/luarocks"            -r https://github.com/luarocks/luarocks -n
 
-  cpanm -n -l ${HOME}/.local Neovim::Ext
+	cpanm -n -l ${HOME}/.local Neovim::Ext
 
-	cd ~/dotfiles/luarocks && \
+	cd "${CONTRIB}/luarocks" && \
 		git lasttagcheckout && \
-		./configure --prefix=${HOME}/.local --with-lua-include=/usr/include &&
+		./configure --prefix="${HOME}/.local" --with-lua-include=/usr/include &&
 		make install clean
 )
