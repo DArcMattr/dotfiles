@@ -3,20 +3,22 @@
   "description": "David Arceneaux global php utilities",
   "license": "MIT",
   "config": {
+		"platform": {
+			"php": "8.0"
+		},
     "sort-packages": true
   },
   "type": "library",
   "require": {
-    "fig-r/psr2r-sniffer": "@stable",
+    "fig-r/psr2r-sniffer": "@dev",
     "phpmd/phpmd": "@stable",
     "phpstan/phpstan": "@dev",
-    "phpunit/phpunit": "@stable",
+    "phpunit/phpunit": "@dev",
     "psy/psysh": "@dev",
-    "slevomat/coding-standard": "@stable",
     "sloanlance/pman-php-manual": "@stable",
     "squizlabs/php_codesniffer": "@dev",
     "vimeo/psalm": "@stable",
-    "wp-cli/wp-cli-bundle": "@stable",
+    "wp-cli/wp-cli-bundle": "@dev",
     "wp-coding-standards/wpcs": "@stable"
   },
   "minimum-stability": "dev",
