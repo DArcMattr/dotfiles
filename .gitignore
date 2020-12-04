@@ -4,6 +4,7 @@ symlinks/.ssh/authorized_keys
 symlinks/.ssh/known_hosts
 symlinks/.ssh/id_rsa*
 symlinks/.ssh/id_ed25519*
+symlinks/.ssh/vagrant_*
 symlinks/.ssh/*.pem
 symlinks/.ssh/sockets/
 xdg/composer/composer.lock
