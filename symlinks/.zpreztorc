@@ -1,4 +1,4 @@
-#
+# vim:ft=zsh
 # Sets Prezto options.
 #
 # Authors:
@@ -41,8 +41,7 @@ zstyle ':prezto:load' pmodule \
   'directory' \
   'spectrum' \
   'ssh' \
-  'syntax-highlighting' \
-  'prompt'
+  'syntax-highlighting'
 
 zstyle ':prezto:load' pmodule-dirs ~/.local/share/zsh/site-functions
 
@@ -57,7 +56,6 @@ zstyle ':prezto:module:gnu-utility' prefix 'g'
 zstyle ':prezto:module:history-substring-search' globbing-flags ''
 zstyle ':prezto:module:history-substring-search:color' found ''
 zstyle ':prezto:module:history-substring-search:color' not-found ''
-zstyle ':prezto:module:prompt' theme 'powerlevel10k'
 zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_ed25519'
 
 # Syntax Highlighting
