@@ -19,6 +19,11 @@ for FILE in ${FILES}; do
 	fi
 
 	case ${F} in
+		cs)
+			ERROR="$(mscs --check ${FILE})"
+			STATUS=$?
+			;;
+
 		php)
 			ERROR="$(php -l "${FILE}")"
 			STATUS=$?
