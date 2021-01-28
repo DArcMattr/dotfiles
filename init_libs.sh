@@ -67,10 +67,6 @@ grab_rust() {
 
 grab_pips() {
   config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
-  pip2pkgs=(
-    'pip'
-    'pynvim'
-  )
   pip3pkgs=(
     'docutils'
     'doge'
@@ -90,7 +86,6 @@ grab_pips() {
     's3cmd'
   )
 
-  pip2 install -U --user ${pip2pkgs}
   pip3 install -U --user ${pip3pkgs}
 
   ## redundant to force an update of specific packages, then to update all the

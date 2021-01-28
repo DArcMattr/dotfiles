@@ -11,13 +11,6 @@ if which ruby >/dev/null && which gem >/dev/null; then
   gem_path="$(ruby -e 'puts Gem.user_dir')/bin"
 fi
 
-if \
-  which python >/dev/null 2>&1 && \
-  [ "$(python -c 'import platform; print(platform.python_version_tuple()[0]);')" -eq 2 ];
-then
-  python2_path=$(python -c $'import sys\nfor x in sys.path:\n  print(x)')
-fi
-
 if which python3 >/dev/null 2>&1; then
   python3_path=$(python3 -c $'import sys\nfor x in sys.path:\n  print(x)')
 fi
@@ -42,12 +35,7 @@ fi
 #
 # Paths
 #
-typeset -T PYTHONPATH pythonpath
-
-pythonpath=(
-  $python2_path
-  $python3_path
-)
+typeset -T PYTHONPATH python3_path
 
 # Set the the list of directories that cd searches.
 cdpath=(
@@ -74,7 +62,7 @@ manpath=(
 )
 
 # Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path pythonpath
+typeset -gU cdpath fpath mailpath path python3_path
 
 # Language
 if [[ -z "$LANG" ]]; then

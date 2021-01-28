@@ -50,7 +50,6 @@ Some of these will be installed via the install scripts or apt-get below.
       php8.0-opcache php8.0-readline php8.0-soap pv python-dev python3-dev \
       ruby-dev shellcheck tidy wslu xcape xsel yarn zlib1g-dev zsh
     curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
-    python2 /tmp/get-pip.py --user
     python3 /tmp/get-pip.py --user
     git clone https://github.com/darcmattr/dotfiles ~/dotfiles
     sh ~/dotfiles/helpers/debianish-update-alternatives.sh
