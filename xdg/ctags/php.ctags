@@ -1,3 +1,7 @@
+--fields=+aimlS
+
+--PHP-kinds=+cdfint-av
+
 --regex-PHP=/^do_action\s*\(\s*['"]([a-z_]+)['"]\s*.*$/4listener_\1/A,actionListener/
 --regex-PHP=/^do_action_ref_array\s*\(\s*['"]([a-z_]+)['"]\s*.*$/4listener_\1/A,actionListener/
 --regex-PHP=/^do_action_deprecated\s*\(\s*['"]([a-z_]+)['"]\s*.*$/4listener_\1/A,actionListener/

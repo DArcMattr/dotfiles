@@ -12,7 +12,7 @@ project_ctags() {
     case ${F} in
       php)
         TAG="${PROJECT_ROOT}/php.tags"
-        ctags -a --fields=+aimlS --PHP-kinds=+cdfint-av -f "${TAG}" "${FILE}"
+        ctags -a -f "${TAG}" "${FILE}"
         STATUS=$?
         ;;
 
