@@ -4,21 +4,20 @@ project_ctags() {
   PROJECT_ROOT="$(while [ ! -f '.editorconfig' ] && [ '/' != "${PWD}" ]; do cd .. ;done; [ / != "${PWD}"  ] && echo "${PWD}" || echo .)"
 
   for FILE in "$@"; do
-    F="$(echo "${FILE}" | awk -F . '{print $NF}')"
     if [ ! -f "${FILE}" ]; then
       exit 0;
     fi
 
-    case ${F} in
+    EXT="$(echo "${FILE}" | awk -F . '{print $NF}')"
+
+    case ${EXT} in
       php)
         TAG="${PROJECT_ROOT}/php.tags"
-        ctags -a -f "${TAG}" "${FILE}"
         STATUS=$?
         ;;
 
       js|mjs)
         TAG="${PROJECT_ROOT}/js.tags"
-        ctags -a -f "${TAG}" "${FILE}"
         STATUS=$?
         ;;
 
@@ -29,7 +28,9 @@ project_ctags() {
     esac
 
     if [ ${STATUS} -ne 0 ]; then
-      exit ${STATUS}
+      return ${STATUS}
+    else
+      ctags -a -f "${TAG}" "${FILE}"
     fi
   done
 }
