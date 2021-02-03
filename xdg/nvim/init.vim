@@ -147,15 +147,11 @@ let maplocalleader = " "
 let c_space_errors = 1
 let $GIT_SSL_NO_VERIFY = 'true'
 
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#quickfix#location_text = 'Location'
-let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
-let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#nvimlsp#enabled = 0
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
-let g:airline#extensions#ycm#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:ale_cache_executable_check_failures = 1
 let g:ale_fixers = {
