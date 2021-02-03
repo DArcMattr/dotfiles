@@ -1,7 +1,7 @@
 #!/bin/sh
 
 project_ctags() {
-  FILEPATH="$(while [ ! -f '.editorconfig' ] && [ '/' != "${PWD}" ]; do cd .. ;done; [ / != "${PWD}"  ] && echo "${PWD}" || echo .)"
+  PROJECT_ROOT="$(while [ ! -f '.editorconfig' ] && [ '/' != "${PWD}" ]; do cd .. ;done; [ / != "${PWD}"  ] && echo "${PWD}" || echo .)"
 
   for FILE in "$@"; do
     F="$(echo "${FILE}" | awk -F . '{print $NF}')"
@@ -11,13 +11,13 @@ project_ctags() {
 
     case ${F} in
       php)
-        TAG="${FILEPATH}/php.tags"
+        TAG="${PROJECT_ROOT}/php.tags"
         ctags -a --fields=+aimlS --PHP-kinds=+cdfint-av -f "${TAG}" "${FILE}"
         STATUS=$?
         ;;
 
       js|mjs)
-        TAG="${FILEPATH}/js.tags"
+        TAG="${PROJECT_ROOT}/js.tags"
         ctags -a -f "${TAG}" "${FILE}"
         STATUS=$?
         ;;
@@ -33,3 +33,5 @@ project_ctags() {
     fi
   done
 }
+
+project_ctags ${@}
