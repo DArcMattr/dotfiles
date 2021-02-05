@@ -147,7 +147,6 @@ let maplocalleader = " "
 let c_space_errors = 1
 let $GIT_SSL_NO_VERIFY = 'true'
 
-let g:airline#extensions#nvimlsp#enabled = 0
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
