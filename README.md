@@ -38,7 +38,7 @@ Some of these will be installed via the install scripts or apt-get below.
       "deb http://nginx.org/packages/mainline/ubuntu ${REL} nginx"
     sudo apt install autossh bison build-essential clang-11 clang-11-doc \
       clang-format-11 clang-tools-11 clangd-11 cmake cpanminus flex git \
-      golang-go htop libc++-11-dev libc++abi-11-dev libclang-11-dev \
+      git-extras golang-go htop libc++-11-dev libc++abi-11-dev libclang-11-dev \
       libclang-common-11-dev libclang1-11 libevent-dev libfuzzer-11-dev \
       libgit2-dev libjansson-dev libllvm-11-ocaml-dev libllvm9 liblzma-dev \
       libncurses5-dev libnss3-tools libomp-11-dev libpcre3-dev libssh2-1-dev \
