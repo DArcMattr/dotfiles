@@ -1,1 +1,1 @@
-autocmd FileType vim setlocal keywordprg=:Help
+autocmd FileType vim setlocal keywordprg=:help
