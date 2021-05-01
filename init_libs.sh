@@ -1,8 +1,9 @@
 #!/usr/bin/env zsh
 
 # chicken & egg time here, relies on an older version of go
+# also doesn't work the way I think it will, keeping it around for documentation
 grab_go() {
-  private version='1.14.7'
+  private version='1.16.2'
 
   private pkgs=(
     'github.com/canthefason/go-watcher'
