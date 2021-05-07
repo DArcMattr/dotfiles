@@ -7,9 +7,10 @@ grab_go() {
 
   private pkgs=(
     'github.com/canthefason/go-watcher'
-    'github.com/FiloSottile/mkcert'
+    'fillipo.io/mkcert'
     'github.com/junegunn/fzf'
     'github.com/sourcegraph/go-langserver'
+    'golang.org/x/tools/cmd/guru'
   )
 
   printf "0 version %1s %2s %3b\n" $version $VERSION $pkgs
@@ -45,7 +46,7 @@ grab_go() {
 
   for i in $pkgs; do
     go get -v -u "${i}"
-    go install "${i}"
+    go install "${i}@latest"
   done
 }
 
@@ -73,6 +74,7 @@ grab_pips() {
     'doge'
     'flake8'
     'gsutil'
+    'hg-git'
     'httpie'
     'icdiff'
     'mercurial'
