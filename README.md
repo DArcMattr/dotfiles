@@ -4,7 +4,7 @@ Clone to `~/dotfiles`
 
 ## Requirements & Assumptions
 
-Some of these will be installed via the install scripts or apt-get below.
+Some of these will be installed via the install scripts or `apt` below.
 
 * Root access via `sudo`
 * The variables `$XDG_CONFIG_HOME`, `$XDG_CACHE_HOME`, `$XDG_DATA_HOME` are
@@ -69,11 +69,11 @@ configuration file, because vimpager.
 Experimenting with Kotlin now, it requires a Java compiler and the `sdk` script
 to be installed first:
 
-  curl -s https://get.sdkman.io | bash
+    curl -s https://get.sdkman.io | bash
 
 Reload shell session, then:
 
-  sdk install kotlin
+    sdk install kotlin
 
 Which installs the `kotlinc` compiler and `kotlinc-jvm` REPL utility.
 
@@ -121,5 +121,3 @@ section in the file `/usr/share/X11/xkb/rules/evdev`, and append
 to the end of `/usr/share/X11/xkb/symbols/evdev.lst`, then using `dconf editor`,
 I had to add `'speshul:speshul'` to the **Custom value** field array to
 `/org/gnome/desktop/input-sources/xkb-options`. (ugh).
-
-[Git]: http://git-scm.com
