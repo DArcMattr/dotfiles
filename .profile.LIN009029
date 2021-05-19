@@ -1,8 +1,7 @@
 CC=clang
 CXX=clang++
 DISPLAY=$(ip addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}'):0
-LIBGL_ALWAYS_INDIRECT=1
 
-export CC CXX DISPLAY LIBGL_ALWAYS_INDIRECT
+export CC CXX DISPLAY
 
 alias fvim='fvim.exe --wsl'
