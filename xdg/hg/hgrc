@@ -6,7 +6,6 @@ merge = internal:merge3
 [extensions]
 bookmarks=
 color=
-config=~/contrib/hgcfg/hgext/hgcfg.py
 convert=
 eol=
 extdiff=
@@ -20,6 +19,7 @@ rebase=
 record=
 shelve=
 strip=
+hggit=
 transplant=
 
 [alias]
