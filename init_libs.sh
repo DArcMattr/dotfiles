@@ -3,21 +3,20 @@
 # chicken & egg time here, relies on an older version of go
 # also doesn't work the way I think it will, keeping it around for documentation
 grab_go() {
-  private version='1.16.2'
-
-  private pkgs=(
+  pkgs=(
     'github.com/canthefason/go-watcher'
-    'fillipo.io/mkcert'
+    'filippo.io/mkcert'
     'github.com/junegunn/fzf'
     'github.com/sourcegraph/go-langserver'
     'golang.org/x/tools/cmd/guru'
   )
+  version='1.16.2'
 
   printf "0 version %1s %2s %3b\n" $version $VERSION $pkgs
   while getopts "v:" opt; do
     printf "a version %1s %2s\n" $version $VERSION
     case "$opt" in
-      v) private VERSION=${OPTARG:-${version}}
+      v) VERSION=${OPTARG:-${version}}
         printf "b version %1s %2s\n" $version $VERSION
         ;;
 
@@ -32,7 +31,7 @@ grab_go() {
   done
   printf "d version %1s %2s\n" $version $VERSION
 
-  if [[ -v $VERSION ]]; then
+  if (( ${+VERSION} )); then
     printf "f version %1s %2s\n" $version $VERSION
     go get -v -u "golang.org/dl/go${VERSION}"
     "${go_bin}/go${VERSION}" download
@@ -40,13 +39,13 @@ grab_go() {
     ln -sf "${HOME}/go/bin/go${VERSION}" "${HOME}/.local/bin/go"
   else
     printf "c version %1s %2s\n" $version $VERSION
-    return 1
   fi
-  printf "e version %1s %2s %3s\n" $version $VERSION $pkgs
+  printf "e version %1s %2s\n" $version $VERSION $pkgs
 
   for i in $pkgs; do
     go get -v -u "${i}"
     go install "${i}@latest"
+    printf "g version %1s\n" $i
   done
 }
 
