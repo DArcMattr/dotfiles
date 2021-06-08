@@ -10,6 +10,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'bling/vim-airline'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
+Plug 'dense-analysis/ale'
 Plug 'fatih/vim-go', { 'for': [ 'go' ], 'do': ':GoUpdateBinaries' }
 Plug 'isRuslan/vim-es6', { 'for': [ 'js', 'jsx', 'javascript.jsx', 'mjs' ] }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
@@ -34,7 +35,6 @@ Plug 'Valloric/MatchTagAlways'
 Plug 'vim-vdebug/vdebug'
 Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/DirDiff.vim'
-Plug 'dense-analysis/ale'
 call plug#end()
 
 set autoindent
