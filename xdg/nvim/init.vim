@@ -123,7 +123,7 @@ highlight link ALEWarningLine WarningMsg
 
 highlight Comment ctermfg=105 guifg=#8787ff
 highlight CursorColumn cterm=reverse gui=reverse
-highlight CursorLine cterm=underline gui=underline ctermbg=NONE guibg=NONE
+highlight CursorLine cterm=underline gui=underline ctermbg=NONE guibg=NONE guisp=#888888
 highlight ErrorMsg ctermbg=NONE guibg=NONE
 highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
 highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
