@@ -12,6 +12,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'dense-analysis/ale'
 Plug 'fatih/vim-go', { 'for': [ 'go' ], 'do': ':GoUpdateBinaries' }
+Plug 'hhvm/vim-hack', { 'for': ['hack'] }
 Plug 'isRuslan/vim-es6', { 'for': [ 'js', 'jsx', 'javascript.jsx', 'mjs' ] }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jiangmiao/auto-pairs'
@@ -151,15 +152,16 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline_powerline_fonts = 1
 let g:ale_cache_executable_check_failures = 1
+let g:ale_echo_msg_format = '[%linter%]% [code]% %s'
 let g:ale_fixers = {
 \   '*': []
 \ }
+let g:ale_floating_preview = 1
 let g:ale_lint_delay = 0
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_open_list = 1
-let g:ale_set_balloons = 1
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
 let g:ale_sign_error = '⨉'
