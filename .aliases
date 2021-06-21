@@ -72,8 +72,8 @@ catmd() {
 
   echo "${TMPFILE}"
 
-  pandoc -s -S --self-contained -c ~/.pandoc/buttondown.css \
-    -t html5 -f markdown_phpextra "${@}" -o "${TMPFILE}"
+  pandoc -s --self-contained -c ~/.pandoc/buttondown.css \
+    -t html5 -f markdown_phpextra+smart "${@}" -o "${TMPFILE}"
 
   if command -v "${BROWSER}" >/dev/null 2>&1; then
     ${BROWSER} "${TMPFILE}"
