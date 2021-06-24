@@ -37,10 +37,10 @@
 *.color7:       #a8a8a8
 *.color15:      #f8fcf8
 
-*.font: xft:Hack:style=Regular:size=7.5
-*.boldFont: xft:Hack:style=Bold:size=7.5
-*.italicFont: xft:Hack:style=Italic:size=7.5
-*.boldItalicFont: xft:Hack:style=Bold Italic:size=7.5
+*.font: xft:Hack:style=Regular:size=9
+*.boldFont: xft:Hack:style=Bold:size=9
+*.italicFont: xft:Hack:style=Italic:size=9
+*.boldItalicFont: xft:Hack:style=Bold Italic:size=9
 
 !! URxvt Appearance
 URxvt.cursorBlink: true
