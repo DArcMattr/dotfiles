@@ -79,6 +79,23 @@ Which installs the `kotlinc` compiler and `kotlinc-jvm` REPL utility.
 
 ### WSL/Windows stuffs
 
+#### Powershell on Windows [TODO]
+
+Install Chocolatey [TODO]
+
+Install PowerShell 7 through Chocolatey [TODO]
+
+Contents of `$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`
+```
+Import-Module posh-git
+Import-Module oh-my-posh
+Set-PoshPrompt -Theme Paradox
+if ($host.Name -eq 'ConsoleHost') {
+  Import-Module PSReadline 
+  Set-PSReadlineOption -EditMode vi -BellStyle None
+}
+```
+
 #### Configure CAPSLOCK
 
 Manually install (`https://github.com/ililim/dual-key-remap`)[] in order to get the
