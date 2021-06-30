@@ -87,10 +87,10 @@
   afetch = fetch --all --prune
   amend = commit --amend
   br = branch
-  branchdiff = "!f() { git diff $(git oldest-ancestor ${1:-master} ${2:-HEAD})..; }; f"
-  branchdifftool = "!f() { git difftool $(git oldest-ancestor ${1:-master} ${2:-HEAD})..; }; f"
+  branchdiff = "!f() { git diff $(git oldest-ancestor ${1:-${GIT_DEFAULT_BRANCH}} ${2:-HEAD})..; }; f"
+  branchdifftool = "!f() { git difftool $(git oldest-ancestor ${1:-${GIT_DEFAULT_BRANCH}} ${2:-HEAD})..; }; f"
   branches = branch -a
-  branchlog = "!f() { git log $(git oldest-ancestor ${1:-master} ${2:-HEAD})..; }; f"
+  branchlog = "!f() { git log $(git oldest-ancestor ${1:-${GIT_DEFAULT_BRANCH}} ${2:-HEAD})..; }; f"
   ci = commit
   co = checkout
   commandeer = "!f() { git push origin HEAD:${1:-'@'} --force; }; f"
@@ -137,6 +137,7 @@
   st = status
   stash-all = stash save --include-untracked
   stashes = stash list
+  sw = switch
   tags = tag
   theirs = "!f() { git co --theirs $@ && git add $@; }; f"
   undo = reset --soft HEAD^

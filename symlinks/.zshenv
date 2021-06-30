@@ -6,6 +6,7 @@ export MANWIDTH=96
 export HGEDITOR=~/dotfiles/helpers/hgeditor
 export AUTOENV_IN_FILE=".in"
 export LOCAL="${HOME}/.local"
+export GIT_DEFAULT_BRANCH='origin/master'
 
 if which ruby >/dev/null && which gem >/dev/null; then
   gem_path="$(ruby -e 'puts Gem.user_dir')/bin"
