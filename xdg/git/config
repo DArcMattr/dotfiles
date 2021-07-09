@@ -54,7 +54,7 @@
 [merge]
   ff = false
   renormalize = true
-  tool = vimdiff
+  tool = fugitive
 [merge "ours"]
   name = "Keep ours merge"
   driver = true
@@ -65,7 +65,7 @@
 [mergetool "vimdiff"]
   cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c '$wincmd J'
 [mergetool "fugitive"]
-  cmd = nvim -f -c "Gdiff" "$MERGED"
+  cmd = nvim -f -c "Gvdiffsplit!" "$MERGED"
 [pager]
   diff =
 [pull]
