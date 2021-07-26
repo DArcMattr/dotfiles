@@ -94,7 +94,7 @@ pushterms() {
 }
 
 sssh() {
-  (autossh -t "${1}" 'source ${HOME}/dotfiles/.aliases && tmuxt') 2>/dev/null
+  (TERM=screen-256color autossh -t "${1}" 'source ${HOME}/dotfiles/.aliases && tmuxt') 2>/dev/null
 }
 
 superupdate() {

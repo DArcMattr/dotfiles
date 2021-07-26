@@ -1,0 +1,10 @@
+# vim:ft=zsh:
+
+alias fvim='fvim.exe --wsl'
+
+unfunction sssh
+
+sssh() {
+	(TERM=screen-256color autossh -t "${1}" 'tmux attach || tmux new') 2>/dev/null
+}
+

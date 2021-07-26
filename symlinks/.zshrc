@@ -7,6 +7,7 @@ fpath=($fpath ~/.local/share/zsh/site-functions)
 COMPLETION_WAITING_DOTS="true"
 DISABLE_CORRECTION="true"
 KEYTIMEOUT=1
+LOCALRC="$(printf "${HOME}/dotfiles/.rc.${HOSTNAME:=$HOST}")"
 export PYTHONSTARTUP="${HOME}/dotfiles/helpers/pythonstartup.py"
 
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -39,18 +40,6 @@ if [[ -n ${ZSH_VERSION-} ]]; then
   fi
 fi
 
-if [[ -r /etc/aliases.sh ]]; then
-  source /etc/aliases.sh
-fi
-
-if [[ -r ~/dotfiles/.aliases ]]; then
-  source ~/dotfiles/.aliases
-fi
-
-if [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]]; then
-  source "${SDKMAN_DIR}/bin/sdkman-init.sh"
-fi
-
 unsetopt correct
 unsetopt correct_all
 unsetopt inc_append_history
@@ -75,3 +64,19 @@ compinit
 umask 002
 
 eval "$(starship init zsh)"
+
+if [[ -r /etc/aliases.sh ]]; then
+  source /etc/aliases.sh
+fi
+
+if [[ -r ~/dotfiles/.aliases ]]; then
+  source ~/dotfiles/.aliases
+fi
+
+if [ -r "${LOCALRC}" ]; then
+  source "${LOCALRC}"
+fi
+
+if [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]]; then
+  source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+fi

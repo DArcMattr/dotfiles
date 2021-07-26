@@ -1,7 +1,6 @@
+# vim:ft=zsh:
 CC=clang
 CXX=clang++
 DISPLAY=$(ip addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}'):0
 
 export CC CXX DISPLAY
-
-alias fvim='fvim.exe --wsl'
