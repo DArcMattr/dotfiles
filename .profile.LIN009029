@@ -1,4 +1,5 @@
 # vim:ft=zsh:
+CABAL_DIR="${HOME}/.cabal/"
 CC=clang
 CXX=clang++
 DISPLAY=$(ip addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}'):0

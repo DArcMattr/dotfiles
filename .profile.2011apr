@@ -1,7 +1,9 @@
-#!/bin/sh
+# vim:ft=zsh:
 
-if [ -r "${HOME}/.rvm/scripts/rvm" ]; then
-  . "${HOME}/.rvm/scripts/rvm"
+RVMSCRIPT="$(printf "%1s/.rvm/scripts/rvm" "${HOME}")"
+
+if [ -r "${RVMSCRIPT}" ]; then
+  . "${RVMSCRIPT}"
   PATH="${HOME}/.rvm/bin:${PATH}" # Add RVM to PATH for scripting
 fi
 

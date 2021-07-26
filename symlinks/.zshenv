@@ -33,6 +33,10 @@ if which yarn >/dev/null; then
   yarn_path="$(yarn global bin)"
 fi
 
+if [[ -x "${HOME}/.cabal/bin" ]]; then
+  haskell_path="${HOME}/.cabal/bin"
+fi
+
 #
 # Paths
 #
@@ -50,6 +54,7 @@ path=(
   $cargo_path
   $php_path
   $gem_path
+  $haskell_path
   $LOCAL/bin
   /usr/local/{,s}bin
   /usr/{,s}bin
