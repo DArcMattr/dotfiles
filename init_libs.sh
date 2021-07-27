@@ -4,11 +4,11 @@
 # also doesn't work the way I think it will, keeping it around for documentation
 grab_go() {
   pkgs=(
-    'github.com/canthefason/go-watcher'
     'filippo.io/mkcert'
+    'github.com/cosmtrek/air'
     'github.com/junegunn/fzf'
-    'github.com/sourcegraph/go-langserver'
     'golang.org/x/tools/cmd/guru'
+    'golang.org/x/tools/gopls'
   )
   version='1.16.2'
 
@@ -43,7 +43,6 @@ grab_go() {
   printf "e version %1s %2s\n" $version $VERSION $pkgs
 
   for i in $pkgs; do
-    go get -v -u "${i}"
     go install "${i}@latest"
     printf "g version %1s\n" $i
   done
