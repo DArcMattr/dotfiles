@@ -1,0 +1,8 @@
+# vim:ft=zsh:
+
+start_web() {
+    sudo sh -c " \
+      service nginx start && \
+      service mysql start && \
+      service php8.0-fpm start"
+}

@@ -1,19 +1,7 @@
+# vim:ft=zsh:
+
 CC=clang
 CXX=clang++
-if [ -d /run/WSL ]; then
-  HOSTIP=$(awk '/nameserver/ {print $2}' /etc/resolv.conf)
-else
-  HOSTIP=127.0.0.1
-fi
+DISPLAY=$(awk '/nameserver/ {print $2}' /etc/resolv.conf):0.0
 
-DISPLAY=${HOSTIP}:0.0
-
-export CC CXX HOSTIP DISPLAY
-
-start_web() {
-    sudo sh -c " \
-      service nginx start && \
-      service mysql start && \
-      service php7.4-fpm start"
-}
-
+export CC CXX DISPLAY
