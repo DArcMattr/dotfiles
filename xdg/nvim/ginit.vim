@@ -1,6 +1,6 @@
 Plug 'equalsraf/neovim-gui-shim'
 
-set guifont=CaskaydiaCove\ Nerd\ Font:h13
+set guifont=Cascadia\ Code\ PL:h13
 
 tnoremap <A-j> <C-\><C-N><C-w>j
 tnoremap <A-k> <C-\><C-N><C-w>k

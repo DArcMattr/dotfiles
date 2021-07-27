@@ -11,9 +11,9 @@ Plug 'bling/vim-airline'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'dense-analysis/ale'
-"Plug 'fatih/vim-go', { 'for': [ 'go' ], 'do': ':GoUpdateBinaries' }
-"Plug 'hhvm/vim-hack', { 'for': ['hack'] }
-"Plug 'isRuslan/vim-es6', { 'for': [ 'js', 'jsx', 'javascript.jsx', 'mjs' ] }
+Plug 'fatih/vim-go', { 'for': [ 'go' ], 'do': ':GoUpdateBinaries' }
+Plug 'hhvm/vim-hack', { 'for': ['hack'] }
+Plug 'isRuslan/vim-es6', { 'for': [ 'js', 'jsx', 'javascript.jsx', 'mjs' ] }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ludovicchabant/vim-lawrencium'
@@ -21,13 +21,12 @@ Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-signify'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'OmniSharp/omnisharp-vim', { 'for': [ 'cs' ], 'do': ':OmniSharpInstall' }
 Plug 'reedes/vim-wheel'
-"Plug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' } | Plug 'deoplete-plugins/deoplete-tag' | Plug 'Shougo/deoplete-lsp'
-"Plug 'Shougo/neco-syntax'
+Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -260,28 +259,6 @@ vnoremap * y/<C-r>"<Cr>
 vnoremap ? y?<C-r>"<Cr>
 
 xnoremap c "xc
-
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
-    },
-  },
-  indent = {
-    enable = true,
-  },
-}
-EOF
 
 " Denite
 call denite#custom#option( 'default', {
