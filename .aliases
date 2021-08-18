@@ -2,6 +2,7 @@
 # vim:ft=zsh:
 
 alias ll='LC_COLLATE=C ls -AalFh'
+alias expected_install='./autogen.sh && ./configure --prefix=$HOME/.local && make install clean'
 
 dir() {
   {
