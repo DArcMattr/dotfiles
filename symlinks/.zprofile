@@ -3,7 +3,7 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 
-LOCALPROFILE="$(printf "${HOME}/dotfiles/profile.${HOSTNAME:=$HOST}")"
+LOCALPROFILE="$(printf "${HOME}/dotfiles/.profile.${HOST}")"
 
 export PAGER='less'
 export MANPAGER="nvim -c 'set ft=man' -"

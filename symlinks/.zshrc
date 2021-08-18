@@ -69,8 +69,8 @@ if [[ -r /etc/aliases.sh ]]; then
   source /etc/aliases.sh
 fi
 
-if [[ -r ~/dotfiles/.aliases ]]; then
-  source ~/dotfiles/.aliases
+if [[ -r "${HOME}/dotfiles/.aliases" ]]; then
+  source "${HOME}/dotfiles/.aliases"
 fi
 
 if [ -r "${LOCALRC}" ]; then
