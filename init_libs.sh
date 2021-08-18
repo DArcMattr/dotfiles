@@ -109,17 +109,10 @@ grab_pips() {
   fi
 }
 
-grab_yarns() {
-  # import packages.json into source control and link it during install
-  config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
-
-  if [ -d "${HOME}/.yarn" ]; then
-    ln -s "${HOME}/dotfiles/xdg/yarn" "${config_home}"
-    cd "${config_home}/yarn/global"
-    yarn global install
-  else
-    yarn global upgrade
-  fi
+grab_npms() {
+  cd "${LOCAL}"
+  ncu -u
+  npm install
 }
 
 grab_composer() {

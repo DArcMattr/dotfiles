@@ -1,12 +1,6 @@
 skip_global_compinit=1
 
-export ANSIBLE_NOCOWS=1
-export AUTOSSH_PORT=0
-export MANWIDTH=96
-export HGEDITOR=~/dotfiles/helpers/hgeditor
-export AUTOENV_IN_FILE=".in"
 export LOCAL="${HOME}/.local"
-export GIT_DEFAULT_BRANCH='origin/master'
 
 if which ruby >/dev/null && which gem >/dev/null; then
   gem_path="$(ruby -e 'puts Gem.user_dir')/bin"
@@ -16,7 +10,7 @@ if which python3 >/dev/null 2>&1; then
   python3_path=$(python3 -c $'import sys\nfor x in sys.path:\n  print(x)')
 fi
 
-if [[ -x "${HOME}/.local/bin/composer" || $(which composer >/dev/null 2>&1) ]]; then
+if [[ -x "${LOCAL}/composer" || $(which composer >/dev/null 2>&1) ]]; then
   php_path="${XDG_CONFIG_HOME}/composer/vendor/bin"
 fi
 
@@ -29,46 +23,9 @@ if [[ -x "${HOME}/.cargo/bin" || $(which rustc >/dev/null 2>&1) ]]; then
   cargo_path="${HOME}/.cargo/bin"
 fi
 
-if which yarn >/dev/null; then
-  yarn_path="$(yarn global bin)"
-fi
-
 if [[ -x "${HOME}/.cabal/bin" ]]; then
   haskell_path="${HOME}/.cabal/bin"
 fi
-
-#
-# Paths
-#
-typeset -T PYTHONPATH python3_path
-
-# Set the the list of directories that cd searches.
-cdpath=(
-  $cdpath
-)
-
-# Set the list of directories that Zsh searches for programs.
-path=(
-  $go_bin
-  $yarn_path
-  $cargo_path
-  $php_path
-  $gem_path
-  $haskell_path
-  $LOCAL/bin
-  /usr/local/{,s}bin
-  /usr/{,s}bin
-  /{,s}bin
-  $path
-)
-
-manpath=(
-  ~/.local/share/man
-  $manpath
-)
-
-# Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path python3_path
 
 # Language
 if [[ -z "$LANG" ]]; then
@@ -100,10 +57,50 @@ if [[ ! -d "$TMPDIR" ]]; then
   mkdir -p -m 700 "${TMPDIR}"
 fi
 
-TMPPREFIX="${TMPDIR%/}/zsh"
-if [[ ! -d "${TMPPREFIX}" ]]; then
-  mkdir -p "${TMPPREFIX}"
+if [[ -x "${LOCAL}/node_modules/.bin" ]]; then
+  export NPM_PACKAGES="${LOCAL}/node_modules"
 fi
+
+export ANSIBLE_NOCOWS=1
+export AUTOENV_IN_FILE=".in"
+export AUTOSSH_PORT=0
+export MANWIDTH="$(( 96 > $(tput cols) ? $(tput cols) : 96 ))"
+export GIT_DEFAULT_BRANCH='origin/master'
+
+export HGEDITOR="${HOME}/dotfiles/helpers/hgeditor"
+export PERL5LIB="${LOCAL}/lib/perl5${PERL5LIB:+:${PERL5LIB}}";
+export PERL_LOCAL_LIB_ROOT="${HOME}/.local${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}";
+export PERL_MB_OPT="--install_base '${LOCAL}'";
+export PERL_MM_OPT="INSTALL_BASE='${LOCAL}'";
+
+# Set the the list of directories that cd searches.
+cdpath=(
+  $cdpath
+)
+
+# Set the list of directories that Zsh searches for programs.
+path=(
+  $go_bin
+  $cargo_path
+  $php_path
+  $gem_path
+  $haskell_path
+  ${LOCAL}/bin
+  ${NPM_PACKAGES}/.bin
+  /usr/local/{,s}bin
+  /usr/{,s}bin
+  /{,s}bin
+  $path
+)
+
+manpath=(
+  ${LOCAL}/share/man
+  $manpath
+)
+
+# Ensure path arrays do not contain duplicates.
+typeset -T PYTHONPATH python3_path
+typeset -gU cdpath fpath mailpath manpath path python3_path
 
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
@@ -112,13 +109,3 @@ fi
 if [[ -d ${HOME}/.sdkman ]]; then
   export SDKMAN_DIR="${HOME}/.sdkman"
 fi
-
-PERL5LIB="${HOME}/.local/lib/perl5${PERL5LIB:+:${PERL5LIB}}";
-PERL_LOCAL_LIB_ROOT="${HOME}/.local${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}";
-PERL_MB_OPT="--install_base '${HOME}/.local'";
-PERL_MM_OPT="INSTALL_BASE='${HOME}/.local'";
-
-export PERL5LIB;
-export PERL_MB_OPT;
-export PERL_MM_OPT;
-export PERL_LOCAL_LIB_ROOT;
