@@ -4,4 +4,6 @@ CC=clang
 CXX=clang++
 DISPLAY=$(ip addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}'):0
 
+cdpath=($cdpath /var/www/vhosts/lims.test/)
+
 export CC CXX DISPLAY
