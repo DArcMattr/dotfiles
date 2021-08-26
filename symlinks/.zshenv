@@ -10,7 +10,7 @@ if which python3 >/dev/null 2>&1; then
   python3_path=$(python3 -c $'import sys\nfor x in sys.path:\n  print(x)')
 fi
 
-if [[ -x "${LOCAL}/composer" || $(which composer >/dev/null 2>&1) ]]; then
+if [[ -x "${LOCAL}/bin/composer" || $(which composer >/dev/null 2>&1) ]]; then
   php_path="${XDG_CONFIG_HOME}/composer/vendor/bin"
 fi
 
