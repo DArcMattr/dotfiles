@@ -223,6 +223,7 @@ nnoremap <C-p>         <Cmd>Denite file/rec<Cr>
 nnoremap <C-y>         3<C-y>
 nnoremap <Leader><F7>  <Cmd>setlocal spell! spell? spelllang=en_us<Cr>
 nnoremap <Leader><S-b> guiw
+nnoremap <Leader>af    <Cmd>ALEFix<Cr>
 nnoremap <Leader>b     gUiw
 nnoremap <Leader>d*    <Cmd>DeniteCursorWord grep:.<Cr>
 nnoremap <Leader>d/    <Cmd>Denite grep:.<Cr>
