@@ -40,20 +40,13 @@
 */
 $lh: 1.2rem;
 
-@mixin pseudo-text-stroke( $color, $radius ) {
-  text-shadow: $color $radius 0 0,
-    $color 0 $radius 0,
-    $color (-$radius) 0 0,
-    $color 0 (-$radius) 0;
-}
-
 $color-html-background: #d1d1d1;
 $dark-text-default: #080808 !default;
 $light-text-default: #f8f8f8 !default;
 $color-body-background: invert( $color-html-background);
 $color-aside-background: lighten( $color-body-background, 20% );
 
-$color-link-bright: #0080ff;
+$color-link-bright: hsla(240deg, 100%, 85%, 1);
 $color-link-dark: invert( $color-link-bright );
 
 @import "color_contrast";
@@ -66,7 +59,7 @@ html {
 }
 
 body {
-  max-width: 37.5 * $lh;
+  max-width: 40 * $lh;
   background-color: $color-body-background;
   color: color-contrast( $color-body-background );
   margin: 0 auto;
@@ -99,6 +92,33 @@ div#TOC, nav#TOC {
   div#TOC, nav#TOC {
     /* Don't display TOC in print */
     display: none;
+  }
+
+  body {
+    color: black;
+  }
+
+  p {
+    orphans: 3;
+  }
+
+  a {
+    /* In print, a colored link is useless, so un-style it. */
+    color: color-contrast( $color-body-background );
+    background: transparent;
+    &[href^="http://"]:after, &[href^="https://"]:after {
+      /* However, links that go somewhere else, might be useful to the reader,
+         so for http and https links, print the URL after what was the link
+         text in parens
+      */
+      content: " (" attr(href) ") ";
+      font-size: 90%;
+    }
+
+    &[href^="#fnref"], &.reversefootnote {
+      /* Don't display these at all in print since the arrow is only something to click on */
+      display: none;
+    }
   }
 }
 
@@ -145,29 +165,28 @@ strong {
 /* ---- Links (anchors) and footnotes ---- */
 
 a {
-  $color: blue;
+  $color: $color-link-bright;
 
   font-weight: 700;
   text-decoration: none;
-  @include pseudo-text-stroke( color-contrast( $color-body-background ), 1px );
 
-  &:link { 
-    color: $color; 
+  &:link {
+    color: $color;
   }
 
-  &:visited { 
+  &:visited {
     color: desaturate( $color, 50% );
   }
 
-  &:hover { 
+  &:hover {
     color: lighten( $color, 50% );
   }
 
-  &:focus { 
+  &:focus {
     color: lighten( $color, 50% );
   }
 
-  &:active { 
+  &:active {
     background-color: hsla( 0, 0%, 0%, 10% );
   }
 
@@ -177,7 +196,7 @@ a {
     vertical-align: text-top;
   }
 
-  &[href^="#fnref"], 
+  &[href^="#fnref"],
   &.reversefootnote {
     text-decoration: underline;
   }
@@ -203,6 +222,18 @@ a {
       content: " (" attr(href) ") ";
       font-size: 90%;
     }
+
+    &[href^="#fnref"], &.reversefootnote {
+      /* Don't display these at all in print since the arrow is only something to click on */
+      display: none;
+    }
+  }
+
+  pre {
+    break-inside: avoid;
+  }
+  pre, code {
+    color: inherit;
   }
 }
 
@@ -214,6 +245,7 @@ img {
      paragraph, it might not be so great.
   */
   vertical-align: middle;
+  max-width: 100%;
 }
 
 div.figure {
@@ -419,12 +451,6 @@ dd {
 }
 
 @media print {
-  a {
-    &[href^="#fnref"], &.reversefootnote {
-      /* Don't display these at all in print since the arrow is only something to click on */
-      display: none;
-    }
-  }
 }
 
 div.footnotes li[id^="fn"] {}
