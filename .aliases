@@ -40,7 +40,6 @@ alias jsonize='python -m json.tool'
 alias composer="${HOME}/.local/bin/composer"
 
 # Suffix aliases
-
 if alias -s >/dev/null 2>&1; then
 	alias -s css=nvim
 	alias -s md=nvim
@@ -51,7 +50,6 @@ if alias -s >/dev/null 2>&1; then
 fi
 
 # Functions, used where aliases would break
-
 cdl() {
   cd "${@}" && ll .
 }
@@ -61,7 +59,7 @@ cdd() {
 }
 
 echoerr() {
-  printf "%s\n" "$*" >&2;
+  printf "%s\n" "${*}" >&2;
 }
 
 path() {
@@ -71,12 +69,15 @@ path() {
 catmd() {
   TMPFILE="$(mktemp -d)/index.html"
 
-  echo "${TMPFILE}"
+  printf "${TMPFILE}\n"
 
   pandoc -s --self-contained -c ~/.pandoc/buttondown.css \
-    -t html5 -f markdown_phpextra+smart "${@}" -o "${TMPFILE}"
+    --metadata title="${@}" \
+    -t html5 -f gfm+smart "${@}" -o "${TMPFILE}"
 
-  if command -v "${BROWSER}" >/dev/null 2>&1; then
+  if command -v "wslview" >/dev/null 2>&1; then
+    wslview $(wslpath -w "${TMPFILE}")
+  elif command -v "${BROWSER}" >/dev/null 2>&1; then
     ${BROWSER} "${TMPFILE}"
   elif command -v "elinks" >/dev/null 2>&1; then
     elinks -force-html "file://${TMPFILE}"
@@ -167,5 +168,5 @@ no input blah blah
     return 1
   fi
   cat "${1}" | \
-    ssh "${2}" "mkdir -p ~/.ssh ; cat >> ~/.ssh/authorized_keys ; chmod 600 ~/.ssh/authorized_keys"
+    ssh "${2}" "mkdir -p ~/.ssh ; cat >> ~/.ssh/authorized_keys ; chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys"
 }
