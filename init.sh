@@ -13,7 +13,7 @@ tic -x "${DOTFILES}/tmux-256color.terminfo"
 
 find "${DOTFILES}/symlinks/" -type f -printf '%p %P\n' | \
 	while read source link; do \
-		ln -sf $source $link \
+		ln -sf $source $link; \
 	done
 find "${DOTFILES}/xdg/" -mindepth 1 -maxdepth 1 -type d -exec ln -sf "{}" "${DOT_CONFIG}/" \;
 
