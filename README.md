@@ -98,7 +98,7 @@ if ($host.Name -eq 'ConsoleHost') {
 
 #### Configure CAPSLOCK
 
-Manually install (`https://github.com/ililim/dual-key-remap`)[] in order to get the
+Manually install https://github.com/ililim/dual-key-remap in order to get the
 same "tap CAPSLOCK for Escape, press for Control" behavior that exists in the
 Unix-like configuration.
 
