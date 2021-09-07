@@ -3,10 +3,10 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 
-LOCALPROFILE="$(printf "${HOME}/dotfiles/.profile.${HOST}")"
+LOCALPROFILE="${HOME}/dotfiles/.profile.${HOST}"
 
 export PAGER='less'
-export MANPAGER="nvim -c 'set ft=man' -"
+export MANPAGER='nvim +Man!'
 export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
 export CLICOLOR=YES
 export CLICOLOR_FORCE=YES
