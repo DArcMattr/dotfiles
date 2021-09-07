@@ -158,3 +158,14 @@ tmuxt() {
 
   tmux attach-session -t "${SESSION}"
 }
+
+pushkey() {
+  if [ $# -eq 0 ]; then
+    printf "
+no input blah blah
+" 1>&2
+    return 1
+  fi
+  cat "${1}" | \
+    ssh "${2}" "mkdir -p ~/.ssh ; cat >> ~/.ssh/authorized_keys ; chmod 600 ~/.ssh/authorized_keys"
+}
