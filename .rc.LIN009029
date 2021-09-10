@@ -1,6 +1,7 @@
 # vim:ft=zsh:
 
 alias fvim='fvim.exe --wsl'
+alias fixtime='sudo hwclock -s'
 
 unfunction sssh
 
