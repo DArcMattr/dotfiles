@@ -63,7 +63,12 @@ compinit
 
 umask 002
 
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+[[ ! -f ~/dotfiles/helpers/.p10k.zsh ]] || source ~/dotfiles/helpers/.p10k.zsh
 
 if [[ -r /etc/aliases.sh ]]; then
   source /etc/aliases.sh
