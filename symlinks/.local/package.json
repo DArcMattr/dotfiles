@@ -9,17 +9,17 @@
     "eslint-config-jquery": "^3.0.0",
     "eslint_d": "^11.0.0",
     "intelephense": "^1.7.1",
-    "minify": "^8.0.2",
+    "minify": "^8.0.3",
     "neovim": "^4.10.0",
-    "npm-check-updates": "^11.8.5",
-    "stylelint": "^13.13.1",
-    "stylelint-config-recommended": "^5.0.0",
-    "svgo": "^2.7.0",
+    "npm-check-updates": "^12.0.2",
+    "stylelint": "^14.0.1",
+    "stylelint-config-recommended": "^6.0.0",
+    "svgo": "^2.8.0",
     "tree-sitter-cli": "^0.20.0",
     "typescript": "^4.4.4",
-    "typescript-language-server": "^0.6.4",
+    "typescript-language-server": "^0.7.1",
     "uncss": "^0.17.3",
-    "vscode-langservers-extracted": "^3.0.0"
+    "vscode-langservers-extracted": "^3.0.1"
   },
   "stylelint": {
     "extends": [
