@@ -85,6 +85,7 @@ grab_pips() {
     'pynvim'
     'python-language-server[all]'
     's3cmd'
+    'sphinx'
   )
 
   pip3 install -U --user ${pip3pkgs}
