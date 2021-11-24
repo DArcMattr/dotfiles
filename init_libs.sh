@@ -111,9 +111,11 @@ grab_pips() {
 }
 
 grab_npms() {
-  cd "${LOCAL}"
-  ncu -u
-  npm install
+  (
+    cd "${LOCAL}"
+    ncu -u
+    npm install
+  )
 }
 
 grab_composer() {
