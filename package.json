@@ -12,6 +12,7 @@
     "minify": "^8.0.3",
     "neovim": "^4.10.0",
     "npm-check-updates": "^12.0.2",
+    "sql-language-server": "^1.1.0",
     "stylelint": "^14.1.0",
     "stylelint-config-recommended": "^6.0.0",
     "svgo": "^2.8.0",
