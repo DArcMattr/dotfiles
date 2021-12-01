@@ -9,6 +9,7 @@ DOTFILES="${HOME}/dotfiles"
 
 mkdir -p ${CONTRIB} "${HOME}/.local/bin" "${DOT_CONFIG}" \
 	"${HOME}/.ssh/{hosts,sockets}" "${HOME}/.pandoc"
+
 tic -x "${DOTFILES}/tmux-256color.terminfo"
 
 find "${DOTFILES}/symlinks/" -type f -printf '%p %P\n' | \
@@ -16,6 +17,12 @@ find "${DOTFILES}/symlinks/" -type f -printf '%p %P\n' | \
 		ln -sf $source $link; \
 	done
 find "${DOTFILES}/xdg/" -mindepth 1 -maxdepth 1 -type d -exec ln -sf "{}" "${DOT_CONFIG}/" \;
+
+(
+	cd "${DOTFILES}"
+	npm install
+	ln -s "${DOTFILES}/node_modules" "${LOCAL}/bin"
+)
 
 cd ~
 git clone --recursive https://github.com/sorin-ionescu/prezto.git \
@@ -40,8 +47,4 @@ git clone --recursive https://github.com/sorin-ionescu/prezto.git \
 		./configure --prefix="${LOCAL}" --with-lua-include=/usr/include &&
 		make install clean
 
-	NPM_PACKAGES= "${LOCAL}/node_modules"
-	mkdir -p "${NPM_PACKAGES}"
-	cd "${LOCAL}"
-	npm install
 )

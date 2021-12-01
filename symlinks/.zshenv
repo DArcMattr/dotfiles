@@ -57,10 +57,6 @@ if [[ ! -d "$TMPDIR" ]]; then
   mkdir -p -m 700 "${TMPDIR}"
 fi
 
-if [[ -x "${LOCAL}/node_modules/.bin" ]]; then
-  export NPM_PACKAGES="${LOCAL}/node_modules"
-fi
-
 export ANSIBLE_NOCOWS=1
 export AUTOENV_IN_FILE=".in"
 export AUTOSSH_PORT=0
@@ -86,7 +82,7 @@ path=(
   $gem_path
   $haskell_path
   ${LOCAL}/bin
-  ${NPM_PACKAGES}/.bin
+  ${LOCAL}/lib/node_modules/.bin
   /usr/local/{,s}bin
   /usr/{,s}bin
   /{,s}bin

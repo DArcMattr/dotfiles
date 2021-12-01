@@ -112,7 +112,7 @@ grab_pips() {
 
 grab_npms() {
   (
-    cd "${LOCAL}"
+    cd "${HOME}/dotfiles"
     ncu -u
     npm install
   )

@@ -20,4 +20,4 @@ xdg/nvim/autoload/plug.vim.old
 xdg/nvim/*.tags
 xdg/nvim/.netrwhist
 xdg/nvim/plugged/
-xdg/yarn/node_modules/.yarn-integrity
+node_modules/
