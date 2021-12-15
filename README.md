@@ -31,23 +31,23 @@ Some of these will be installed via the install scripts or `apt` below.
     wget --quiet -O - "http://apt.llvm.org/llvm-snapshot.gpg.key" | \
       sudo apt-key add -
     sudo add-apt-repository \
-      "deb http://apt.llvm.org/${REL}/ llvm-toolchain-${REL}-12 main"
+      "deb http://apt.llvm.org/${REL}/ llvm-toolchain-${REL}-13 main"
     wget --quiet -O - "http://nginx.org/keys/nginx_signing.key" | \
       sudo apt-key add -
     sudo add-apt-repository \
       "deb http://nginx.org/packages/mainline/ubuntu ${REL} nginx"
-    sudo apt install autossh bison build-essential clang-12 clang-12-doc \
-      clang-format-12 clang-tools-12 clangd-12 cmake cpanminus flex git \
-      git-extras golang-go htop libc++-12-dev libc++abi-12-dev libclang-12-dev \
-      libclang-common-12-dev libclang1-12 libevent-dev libfuzzer-12-dev \
-      libgit2-dev libjansson-dev libllvm-12-ocaml-dev libllvm12 liblzma-dev \
-      libncurses5-dev libnss3-tools libomp-12-dev libpcre3-dev libssh2-1-dev \
-      libsqlite3-dev libssl-dev libxml2-dev libyaml-dev lsyncd lld-12 lldb-12 \
-      llvm-12 llvm-12-dev llvm-12-doc llvm-12-examples llvm-12-runtime \
+    sudo apt install autossh bison build-essential clang-13 clang-13-doc \
+      clang-format-13 clang-tools-13 clangd-13 cmake cpanminus flex git \
+      git-extras golang-go htop libc++-13-dev libc++abi-13-dev libclang-13-dev \
+      libclang-common-13-dev libclang1-13 libevent-dev libfuzzer-13-dev \
+      libgit2-dev libjansson-dev libllvm-13-ocaml-dev libllvm12 liblzma-dev \
+      libncurses5-dev libnss3-tools libomp-13-dev libpcre3-dev libssh2-1-dev \
+      libsqlite3-dev libssl-dev libxml2-dev libyaml-dev lsyncd lld-13 lldb-13 \
+      llvm-13 llvm-13-dev llvm-13-doc llvm-13-examples llvm-13-runtime \
       liblua5.3-dev neovim nginx nodejs php-common php-gd php-imagick \
-      php-mbstring php-memcache php-pear php-xdebug php-xml php-zip php8.0-cli \
-      php8.0-curl php8.0-dev php8.0-fpm php8.0-imap php8.0-mysql \
-      php8.0-opcache php8.0-readline php8.0-soap pv python3-dev \
+      php-mbstring php-memcache php-pear php-xdebug php-xml php-zip php8.1-cli \
+      php8.1-curl php8.1-dev php8.1-fpm php8.1-imap php8.1-mysql \
+      php8.1-opcache php8.1-readline php8.1-soap pv python3-dev \
       ruby-dev shellcheck tidy wslu xcape xsel yarn zlib1g-dev zsh
     curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
     python3 /tmp/get-pip.py --user
