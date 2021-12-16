@@ -4,7 +4,7 @@
   "license": "MIT",
   "config": {
 		"platform": {
-			"php": "8.0"
+			"php": "8.1"
 		},
     "sort-packages": true
   },
@@ -12,7 +12,6 @@
   "require": {
     "fig-r/psr2r-sniffer": "@dev",
     "phpmd/phpmd": "@stable",
-    "phpstan/phpstan": "@dev",
     "phpunit/phpunit": "@dev",
     "psy/psysh": "@dev",
     "sloanlance/pman-php-manual": "@stable",
