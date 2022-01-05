@@ -1,4 +1,7 @@
 " vim:et sw=2 ts=2
+
+let $PROJECT_ROOT='/var/www/vhosts/lims.test'
+
 if g:localvimrc_sourced_once_for_file
   finish
 endif
@@ -17,6 +20,21 @@ if g:localvimrc_sourced_once
   finish
 endif
 
+augroup project
+  autocmd!
+
+  autocmd BufNewFile,BufEnter * setlocal path=$PROJECT_ROOT/htdocs/web,$PROJECT_ROOT/htdocs/,.
+
+  autocmd BufNewFile,BufEnter *.php setlocal tags=$PROJECT_ROOT/php.tags
+  autocmd BufNewFile,BufEnter *.php setlocal foldmarker='-[[[-,-]]]-'
+
+  autocmd BufNewFile,BufEnter *.js setlocal tags=$PROJECT_ROOT/js.tags
+
+  autocmd BufNewFile,BufEnter *.yml setlocal path+=$PROJECT_ROOT/htdocs/src/LIMS/
+augroup END
+
+set includeexpr=substitute(v:fname,'^/','','')
+
 lua <<LUA
 require'lspconfig'.intelephense.setup{
   settings = {
@@ -26,14 +44,3 @@ require'lspconfig'.intelephense.setup{
   }
 }
 LUA
-
-augroup project
-  autocmd!
-
-  autocmd BufNewFile,BufEnter * setlocal path=/var/www/vhosts/lims.test/htdocs/
-  autocmd BufNewFile,BufEnter *.php setlocal tags=/var/www/vhosts/lims.test/php.tags
-
-  autocmd BufNewFile,BufEnter *.js setlocal tags=/var/www/vhosts/lims.test/js.tags
-
-  autocmd BufNewFile,BufEnter *.yml setlocal path=/var/www/vhosts/lims.test/htdocs/src/LIMS/
-augroup END
