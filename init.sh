@@ -6,9 +6,11 @@
 DOT_CONFIG=${XDG_CONFIG_HOME:=${HOME}/.config}
 CONTRIB="${HOME}${CONTRIB}"
 DOTFILES="${HOME}/dotfiles"
+LOCAL="${HOME}/.local"
 
+xdg-user-dirs-update
 mkdir -p ${CONTRIB} "${HOME}/.local/bin" "${DOT_CONFIG}" \
-	"${HOME}/.ssh/{hosts,sockets}" "${HOME}/.pandoc"
+	"${HOME}/.ssh/hosts" "${HOME}/.ssh/sockets" "${HOME}/.pandoc"
 
 tic -x "${DOTFILES}/tmux-256color.terminfo"
 
@@ -46,5 +48,4 @@ git clone --recursive https://github.com/sorin-ionescu/prezto.git \
 		git lasttagcheckout && \
 		./configure --prefix="${LOCAL}" --with-lua-include=/usr/include &&
 		make install clean
-
 )

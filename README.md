@@ -47,8 +47,9 @@ Some of these will be installed via the install scripts or `apt` below.
       liblua5.3-dev neovim nginx nodejs php-common php-gd php-imagick \
       php-mbstring php-memcache php-pear php-xdebug php-xml php-zip php8.1-cli \
       php8.1-curl php8.1-dev php8.1-fpm php8.1-imap php8.1-mysql \
-      php8.1-opcache php8.1-readline php8.1-soap pv python3-dev \
-      ruby-dev shellcheck tidy wslu xcape xsel yarn zlib1g-dev zsh
+      php8.1-opcache php8.1-readline php8.1-soap php8.1-xml pv \ 
+      python3-dev python-is-python3 ruby-dev shellcheck tidy wslu xcape xsel \ 
+      yarn zlib1g-dev zsh
     curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
     python3 /tmp/get-pip.py --user
     git clone https://github.com/darcmattr/dotfiles ~/dotfiles
