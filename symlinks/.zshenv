@@ -1,3 +1,5 @@
+[ -f /etc/environment ] && . /etc/environment
+
 skip_global_compinit=1
 
 export LOCAL="${HOME}/.local"
