@@ -42,7 +42,7 @@ git clone --recursive https://github.com/sorin-ionescu/prezto.git \
 	grab_git -d "${CONTRIB}/autoenv"             -r https://github.com/zpm-zsh/autoenv.git -n
 	grab_git -d "${CONTRIB}/luarocks"            -r https://github.com/luarocks/luarocks -n
 
-	cpanm -n -l ${LOCAL} Neovim::Ext
+	cpanm -n --installdeps -l ${LOCAL} Neovim::Ext
 
 	cd "${CONTRIB}/luarocks" && \
 		git lasttagcheckout && \
