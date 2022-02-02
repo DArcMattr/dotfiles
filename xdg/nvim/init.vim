@@ -174,7 +174,6 @@ let g:AutoPairsShortcutJump = '<Leader>an'
 let g:AutoPairsShortcutBackInsert = '<Leader>ab'
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_exclude_filetypes = ['help', 'man', 'netrw']
-let g:loaded_python_provider = 0
 let g:localvimrc_persistent = 1
 let g:localvimrc_sandbox = 0
 let g:netrw_altv = 1
