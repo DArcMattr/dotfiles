@@ -426,7 +426,7 @@ augroup END
 if system('uname -r') =~? 'microsoft'
   augroup WSL
     autocmd!
-    autocmd TextYankPost * :call system('clip.exe ', @")
+    autocmd TextYankPost * :call system('/mnt/c/Windows/System32/clip.exe ', @")
   augroup END
 endif
 
