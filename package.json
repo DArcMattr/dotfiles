@@ -5,7 +5,6 @@
     "create-catalyst": "^1.0.3",
     "create-react-app": "^5.0.0",
     "dart-sass": "^1.25.0",
-    "doctoc": "^2.1.0",
     "eslint_d": "^11.1.1",
     "eslint-config-jquery": "^3.0.0",
     "intelephense": "^1.8.1",
