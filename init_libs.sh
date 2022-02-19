@@ -33,7 +33,7 @@ grab_go() {
 
   if (( ${+VERSION} )); then
     printf "f version %1s %2s\n" $version $VERSION
-    go get -v -u "golang.org/dl/go${VERSION}"
+    go get -d -v -u "golang.org/dl/go${VERSION}"
     "${go_bin}/go${VERSION}" download
 
     ln -sf "${HOME}/go/bin/go${VERSION}" "${HOME}/.local/bin/go"
