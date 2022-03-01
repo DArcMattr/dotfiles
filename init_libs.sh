@@ -9,6 +9,7 @@ grab_go() {
     'github.com/junegunn/fzf'
     'golang.org/x/tools/cmd/guru'
     'golang.org/x/tools/gopls'
+    'github.com/tdewolff/minify/cmd/minify'
   )
   version='1.16.2'
 
@@ -31,9 +32,10 @@ grab_go() {
   done
   printf "d version %1s %2s\n" $version $VERSION
 
+  # bootstrap
   if (( ${+VERSION} )); then
     printf "f version %1s %2s\n" $version $VERSION
-    go get -d -v -u "golang.org/dl/go${VERSION}"
+    go install "golang.org/dl/go${VERSION}@latest"
     "${go_bin}/go${VERSION}" download
 
     ln -sf "${HOME}/go/bin/go${VERSION}" "${HOME}/.local/bin/go"
