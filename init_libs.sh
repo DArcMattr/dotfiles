@@ -13,12 +13,9 @@ grab_go() {
   )
   version='1.16.2'
 
-  printf "0 version %1s %2s %3b\n" $version $VERSION $pkgs
   while getopts "v:" opt; do
-    printf "a version %1s %2s\n" $version $VERSION
     case "$opt" in
       v) VERSION=${OPTARG:-${version}}
-        printf "b version %1s %2s\n" $version $VERSION
         ;;
 
       :) echo "Option -${opt} requires an argument." >&2
@@ -30,23 +27,17 @@ grab_go() {
         ;;
     esac
   done
-  printf "d version %1s %2s\n" $version $VERSION
 
   # bootstrap
   if (( ${+VERSION} )); then
-    printf "f version %1s %2s\n" $version $VERSION
     go install "golang.org/dl/go${VERSION}@latest"
     "${go_bin}/go${VERSION}" download
 
     ln -sf "${HOME}/go/bin/go${VERSION}" "${HOME}/.local/bin/go"
-  else
-    printf "c version %1s %2s\n" $version $VERSION
   fi
-  printf "e version %1s %2s\n" $version $VERSION $pkgs
 
   for i in $pkgs; do
     go install "${i}@latest"
-    printf "g version %1s\n" $i
   done
 }
 
