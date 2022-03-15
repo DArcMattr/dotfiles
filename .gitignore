@@ -7,7 +7,6 @@ symlinks/.ssh/id_ed25519*
 symlinks/.ssh/vagrant_*
 symlinks/.ssh/*.pem
 symlinks/.ssh/sockets/
-xdg/composer/composer.lock
 xdg/composer/.htaccess
 xdg/composer/auth.json
 xdg/composer/keys.dev.pub

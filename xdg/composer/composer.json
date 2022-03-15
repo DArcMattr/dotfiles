@@ -15,6 +15,7 @@
   "type": "library",
   "require": {
     "fig-r/psr2r-sniffer": "@dev",
+    "phpcompatibility/php-compatibility": "@dev",
     "phpmd/phpmd": "@stable",
     "phpunit/phpunit": "@dev",
     "psy/psysh": "@dev",
