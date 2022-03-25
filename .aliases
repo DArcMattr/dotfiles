@@ -170,3 +170,8 @@ no input blah blah
   cat "${1}" | \
     ssh "${2}" "mkdir -p ~/.ssh ; cat >> ~/.ssh/authorized_keys ; chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys"
 }
+
+# compare to the output of `git ls-tree -r @`
+git_id() {
+  printf 'blob %s\0' "$(ls -l "$1" | awk '{print $5;}')" | cat - "$1" | sha1sum | awk '{print $1}'
+}
