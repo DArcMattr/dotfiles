@@ -36,11 +36,13 @@
   command = /bin/true
 [difftool]
   prompt = false
-  tool = vim
+  tool = difft
 [difftool "icdiff"]
   cmd = icdiff --line-numbers --highlight $LOCAL $REMOTE
 [difftool "vim"]
   cmd = nvim -d $LOCAL $REMOTE
+[difftool "difft"]
+  cmd = difft "$LOCAL" "$REMOTE"
 [fetch]
   fsckobjects = false
 [format]
@@ -62,8 +64,6 @@
   prompt = false
   stat = true
   keepBackup = false
-[mergetool "vimdiff"]
-  cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c '$wincmd J'
 [mergetool "fugitive"]
   cmd = nvim -f -c "Gvdiffsplit!" "$MERGED"
 [pager]
