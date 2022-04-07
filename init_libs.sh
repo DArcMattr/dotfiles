@@ -51,11 +51,10 @@ grab_rust() {
     rustup update
   fi
 
-  mkdir -p "${HOME}/.zfunc" && \
-    rm -f "${HOME}/.zfunc/_rustup"; \
-    "${HOME}/.cargo/bin/rustup" completions zsh > "${HOME}/.zfunc/_rustup"
+  "${HOME}/.cargo/bin/rustup" completions zsh >! "${HOME}/.local/share/zsh/site-functions/_rustup"
 
-  cd "${HOME}" && "${HOME}/.cargo/bin/cargo" install --force bat cargo-deb cargo-update exa
+  cd "${HOME}" && "${HOME}/.cargo/bin/cargo" install --force \
+    bat cargo-deb cargo-update difftastic exa
 }
 
 grab_pips() {
