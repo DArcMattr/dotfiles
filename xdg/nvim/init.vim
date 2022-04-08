@@ -125,6 +125,10 @@ highlight link ALEWarningLine WarningMsg
 highlight Comment ctermfg=105 guifg=#8787ff
 highlight CursorColumn cterm=reverse gui=reverse
 highlight CursorLine cterm=underline gui=underline ctermbg=NONE guibg=NONE guisp=#888888
+" highlight DiffAdd cterm=none ctermfg=fg ctermbg=Blue gui=none guifg=fg guibg=Blue
+" highlight DiffChange cterm=none ctermfg=fg ctermbg=Blue gui=none guifg=fg guibg=Blue
+" highlight DiffDelete cterm=none ctermfg=fg ctermbg=Blue gui=none guifg=fg guibg=Blue
+" highlight DiffText cterm=none ctermfg=fg ctermbg=White gui=none guifg=fg guibg=White
 highlight ErrorMsg ctermbg=NONE guibg=NONE
 highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
 highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
