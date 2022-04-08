@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 project_ctags() {
   PROJECT_ROOT="$(while [ ! -f '.editorconfig' ] && [ '/' != "${PWD}" ]; do cd .. ;done; [ / != "${PWD}"  ] && echo "${PWD}" || echo .)"
@@ -34,5 +34,16 @@ project_ctags() {
     fi
   done
 }
+
+#compdef project_ctags
+
+#_project_ctags() {
+#  local arguments
+#
+#  arguments=(
+#    '*: :_files'
+#  )
+#}
+
 
 project_ctags ${@}
