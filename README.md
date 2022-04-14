@@ -97,6 +97,18 @@ if ($host.Name -eq 'ConsoleHost') {
 }
 ```
 
+#### fvim.exe cmd shortcut
+
+Assumes FVim installed through Chocolatey.
+
+Make file named `fvim.cmd`:
+
+```
+@echo off
+wsl /mnt/c/tools/fvim/fvim.exe --wsl "$(wslpath %1)" &
+```
+
+
 #### Configure CAPSLOCK
 
 Manually install https://github.com/ililim/dual-key-remap in order to get the
