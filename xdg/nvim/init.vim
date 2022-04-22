@@ -20,6 +20,7 @@ Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-signify'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'neovim/nvim-lspconfig'
+"Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'OmniSharp/omnisharp-vim', { 'for': [ 'cs' ], 'do': ':OmniSharpInstall' }
 Plug 'reedes/vim-wheel'
 Plug 'sheerun/vim-polyglot'
@@ -450,3 +451,43 @@ augroup QF
   autocmd FileType qf set nobuflisted |
   \ set hidden
 augroup END
+
+lua <<LUA
+local treesitter = package.loaded['nvim-treesitter']
+
+if ( treesitter ~= nil ) then
+  local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
+
+  parser_config.sql = {
+    install_info = {
+      url = "~/contrib/tree-sitter-sql",
+      files = { "src/parser.c" },
+      generate_requires_npm = true,
+    },
+    filetype = "sql",
+  }
+
+  require'nvim-treesitter.configs'.setup {
+    highlight = {
+      additional_vim_regex_highlighting = false,
+      disabled = {},
+      enable = true,
+    },
+    ensure_installed = {
+      "c_sharp",
+      "css",
+      "html",
+      "javascript",
+      "jsdoc",
+      "json",
+      "lua",
+      "markdown",
+      "php",
+      "phpdoc",
+      "python",
+      "sql",
+      "vim",
+    },
+  }
+end
+LUA
