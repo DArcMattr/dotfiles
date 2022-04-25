@@ -19,23 +19,24 @@ Some of these will be installed via the install scripts or `apt` below.
     sudo apt install -y curl software-properties-common wget
     sudo add-apt-repository -y universe
     sudo add-apt-repository -y multiverse
-    curl -sL https://deb.nodesource.com/setup_current.x | \
-      sudo -E bash - # argh, I hate this
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | \
-      sudo tee /etc/apt/sources.list.d/yarn.list
     sudo add-apt-repository -y ppa:git-core/ppa
     sudo add-apt-repository -y ppa:longsleep/golang-backports
     sudo add-apt-repository -y ppa:neovim-ppa/unstable
     sudo add-apt-repository -y ppa:ondrej/php
-    wget --quiet -O - "http://apt.llvm.org/llvm-snapshot.gpg.key" | \
-      sudo apt-key add -
-    sudo add-apt-repository \
-      "deb http://apt.llvm.org/${REL}/ llvm-toolchain-${REL}-13 main"
-    wget --quiet -O - "http://nginx.org/keys/nginx_signing.key" | \
-      sudo apt-key add -
+    curl -sL https://deb.nodesource.com/setup_current.x | \
+      sudo -E bash - # argh, I hate this
+    curl -sS "https://apt.llvm.org/llvm-snapshot.gpg.key" | \
+      sudo tee /etc/apt/trusted.gpg.d/llvm.asc
+    curl -sS "http://nginx.org/keys/nginx_signing.key" | \
+      sudo tee /etc/apt/trusted.gpg.d/nginx.asc
+    curl -sS "https://dl.yarnpkg.com/debian/pubkey.gpg" | \
+      sudo tee /etc/apt/trusted.gpg.d/yarn.asc
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | \
+      sudo tee /etc/apt/sources.list.d/yarn.list
     sudo add-apt-repository \
       "deb http://nginx.org/packages/mainline/ubuntu ${REL} nginx"
+    sudo add-apt-repository \
+      "deb http://apt.llvm.org/${REL}/ llvm-toolchain-${REL}-13 main"
     sudo apt install autossh bison build-essential clang-13 clang-13-doc \
       clang-format-13 clang-tools-13 clangd-13 cmake cpanminus flex git \
       git-extras golang-go htop libc++-13-dev libc++abi-13-dev libclang-13-dev \
@@ -48,8 +49,8 @@ Some of these will be installed via the install scripts or `apt` below.
       php-mbstring php-memcache php-pear php-xdebug php-xml php-zip php8.1-cli \
       php8.1-curl php8.1-dev php8.1-fpm php8.1-imap php8.1-mysql \
       php8.1-opcache php8.1-readline php8.1-soap php8.1-xml pv \ 
-      python3-dev python-is-python3 ruby-dev shellcheck tidy wslu xcape xsel \ 
-      yarn zlib1g-dev zsh
+      python3-dev python-is-python3 ruby-dev shellcheck tidy wget wslu xcape \ 
+      xsel yarn zlib1g-dev zsh
     curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
     python3 /tmp/get-pip.py --user
     git clone https://github.com/darcmattr/dotfiles ~/dotfiles
@@ -59,9 +60,6 @@ Some of these will be installed via the install scripts or `apt` below.
 Refresh the shell session, then run the following:
 
     ~/dotfiles/init.sh
-
-I have transitioned to using NeoVim, but still keep Vim around with its own
-configuration file, because vimpager.
 
 ## Experimental notes
 
@@ -108,12 +106,13 @@ Make file named `fvim.cmd`:
 wsl /mnt/c/tools/fvim/fvim.exe --wsl "$(wslpath %1)" &
 ```
 
-
 #### Configure CAPSLOCK
 
 Manually install https://github.com/ililim/dual-key-remap in order to get the
 same "tap CAPSLOCK for Escape, press for Control" behavior that exists in the
-Unix-like configuration.
+Unix-like configuration. Use Winaero Tweaker to make an "Elevated Shortcut" for
+the program and place it in the Startup folder so the remapping can work in
+Admin mode shells. 
 
 ### Self-signed certificates
 
