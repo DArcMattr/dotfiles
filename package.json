@@ -8,7 +8,7 @@
     "intelephense": "latest",
     "neovim": "latest",
     "npm-check-updates": "latest",
-    "sql-language-server": "^1.2.1",
+    "sql-language-server": "latest",
     "stylelint": "latest",
     "stylelint-config-recommended": "latest",
     "svgo": "latest",
