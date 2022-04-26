@@ -63,7 +63,6 @@ export ANSIBLE_NOCOWS=1
 export AUTOENV_IN_FILE=".in"
 export AUTOSSH_PORT=0
 export MANWIDTH="$(( 96 > $(tput cols) ? $(tput cols) : 96 ))"
-export GIT_DEFAULT_BRANCH='origin/master'
 
 export HGEDITOR="${HOME}/dotfiles/helpers/hgeditor"
 export PERL5LIB="${LOCAL}/lib/perl5${PERL5LIB:+:${PERL5LIB}}";
