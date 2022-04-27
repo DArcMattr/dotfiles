@@ -78,22 +78,33 @@ Which installs the `kotlinc` compiler and `kotlinc-jvm` REPL utility.
 
 ### WSL/Windows stuffs
 
-#### Powershell on Windows [TODO]
+#### Powershell on Windows
 
-Install Chocolatey [TODO]
+Install Chocolatey and activate winget [TODO]
 
-Install PowerShell 7 through Chocolatey [TODO]
+Install current Powershell v7 through Windows Store
 
-Contents of `$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`
+Contents of `$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`, can edit it by `notepad $PROFILE`.
+
 ```
-Import-Module posh-git
-Import-Module oh-my-posh
-Set-PoshPrompt -Theme Paradox
+oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\atomicBit.omp.json | Invoke-Expression
+Enable-PoshTooltips
 if ($host.Name -eq 'ConsoleHost') {
   Import-Module PSReadline 
   Set-PSReadlineOption -EditMode vi -BellStyle None
 }
 ```
+Once the profile is set up, run the following commands in a Powershell prompt:
+
+```
+winget install JanDeDobbeleer.OhMyPosh
+Get-PoshThemes
+Install-Module PSReadline
+. $PROFILE
+```
+
+Update by `Update-Module` for PSReadline, and
+`winget upgrade JanDeDobbeleer.OhMyPosh`
 
 #### fvim.exe cmd shortcut
 
