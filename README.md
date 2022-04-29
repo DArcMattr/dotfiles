@@ -29,10 +29,6 @@ Some of these will be installed via the install scripts or `apt` below.
       sudo tee /etc/apt/trusted.gpg.d/llvm.asc
     curl -sS "http://nginx.org/keys/nginx_signing.key" | \
       sudo tee /etc/apt/trusted.gpg.d/nginx.asc
-    curl -sS "https://dl.yarnpkg.com/debian/pubkey.gpg" | \
-      sudo tee /etc/apt/trusted.gpg.d/yarn.asc
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | \
-      sudo tee /etc/apt/sources.list.d/yarn.list
     sudo add-apt-repository \
       "deb http://nginx.org/packages/mainline/ubuntu ${REL} nginx"
     sudo add-apt-repository \
@@ -50,7 +46,7 @@ Some of these will be installed via the install scripts or `apt` below.
       php8.1-curl php8.1-dev php8.1-fpm php8.1-imap php8.1-mysql \
       php8.1-opcache php8.1-readline php8.1-soap php8.1-xml pv \ 
       python3-dev python-is-python3 ruby-dev shellcheck tidy wget wslu xcape \ 
-      xsel yarn zlib1g-dev zsh
+      xsel zlib1g-dev zsh
     curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
     python3 /tmp/get-pip.py --user
     git clone https://github.com/darcmattr/dotfiles ~/dotfiles
