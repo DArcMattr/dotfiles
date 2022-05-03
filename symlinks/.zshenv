@@ -4,12 +4,11 @@ skip_global_compinit=1
 
 export LOCAL="${HOME}/.local"
 
+# Ensure path arrays do not contain duplicates.
+typeset -gU cdpath fpath mailpath manpath path
+
 if which ruby >/dev/null && which gem >/dev/null; then
   gem_path="$(ruby -e 'puts Gem.user_dir')/bin"
-fi
-
-if which python3 >/dev/null 2>&1; then
-  python3_path=$(python3 -c $'import sys\nfor x in sys.path:\n  print(x)')
 fi
 
 if [[ -x "${LOCAL}/bin/composer" || $(which composer >/dev/null 2>&1) ]]; then
@@ -95,10 +94,6 @@ manpath=(
   $manpath
 )
 
-# Ensure path arrays do not contain duplicates.
-typeset -T PYTHONPATH python3_path
-typeset -gU cdpath fpath mailpath manpath path python3_path
-
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
@@ -106,4 +101,3 @@ fi
 if [[ -d ${HOME}/.sdkman ]]; then
   export SDKMAN_DIR="${HOME}/.sdkman"
 fi
-. "$HOME/.cargo/env"
