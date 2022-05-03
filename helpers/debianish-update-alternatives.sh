@@ -38,3 +38,6 @@ sudo update-alternatives \
   --slave   /usr/bin/clang-format-diff        clang-format-diff        /usr/bin/clang-format-diff-13 \
   --slave   /usr/bin/lldb                     lldb                     /usr/bin/lldb-13 \
   --slave   /usr/bin/lldb-server              lldb-server              /usr/bin/lldb-server-13
+
+sudo update-alternatives \
+	--install /usr/bin/python python /usr/bin/python3 50
