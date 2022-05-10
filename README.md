@@ -19,7 +19,6 @@ sudo apt install -y curl software-properties-common
 sudo add-apt-repository -y universe
 sudo add-apt-repository -y multiverse
 sudo add-apt-repository -y ppa:git-core/ppa
-sudo add-apt-repository -y ppa:longsleep/golang-backports
 sudo add-apt-repository -y ppa:neovim-ppa/unstable
 sudo add-apt-repository -y ppa:ondrej/php
 curl -sL https://deb.nodesource.com/setup_current.x | \
@@ -33,12 +32,12 @@ sudo add-apt-repository \
 sudo add-apt-repository \
   "deb http://apt.llvm.org/${REL}/ llvm-toolchain-${REL}-13 main"
 sudo apt install autossh bison build-essential clang-13 clang-13-doc \
-  clang-format-13 clang-tools-13 clangd-13 cmake cpanminus flex git git-extras \
-  golang-go htop libc++-13-dev libc++abi-13-dev libclang-13-dev \
-  libclang-common-13-dev libclang1-13 libevent-dev libfuzzer-13-dev libgit2-dev \
-  libjansson-dev libllvm-13-ocaml-dev libllvm13 liblzma-dev libncurses5-dev \
-  libnss3-tools libomp-13-dev libpcre3-dev libssh2-1-dev libsqlite3-dev \
-  libssl-dev libxml2-dev libyaml-dev lsyncd lld-13 lldb-13 llvm-13 llvm-13-dev \
+  clang-format-13 clang-tools-13 clangd-13 cmake flex git git-extras golang \
+  htop libc++-13-dev libc++abi-13-dev libclang-13-dev libclang-common-13-dev \
+  libclang1-13 libevent-dev libfuzzer-13-dev libgit2-dev libjansson-dev \
+  libllvm-13-ocaml-dev libllvm13 liblzma-dev libncurses5-dev libnss3-tools \
+  libomp-13-dev libpcre3-dev libssh2-1-dev libsqlite3-dev libssl-dev \
+  libxml2-dev libyaml-dev lsyncd lld-13 lldb-13 llvm-13 llvm-13-dev \
   llvm-13-doc llvm-13-examples llvm-13-runtime liblua5.3-dev neovim nginx nodejs \
   php-common php-gd php-imagick php-mbstring php-memcache php-pear php-xdebug \
   php-xml php-zip php8.1-cli php8.1-curl php8.1-dev php8.1-fpm php8.1-imap \

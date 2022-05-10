@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 
-# chicken & egg time here, relies on an older version of go
-# also doesn't work the way I think it will, keeping it around for documentation
+# chicken & egg time here, relies on system version of go to bootstrap
 grab_go() {
   pkgs=(
     'filippo.io/mkcert'

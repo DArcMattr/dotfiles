@@ -30,6 +30,8 @@ cd ~
 git clone --recursive https://github.com/sorin-ionescu/prezto.git \
 	"${ZDOTDIR:-${HOME}}/.zprezto"
 
+curl -L https://cpanmin.us | perl - App::cpanminus
+
 (
 	zsh ${DOTFILES}/init_libs.sh
 
