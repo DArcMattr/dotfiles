@@ -20,7 +20,7 @@ Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-signify'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'neovim/nvim-lspconfig'
-"Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'OmniSharp/omnisharp-vim', { 'for': [ 'cs' ], 'do': ':OmniSharpInstall' }
 Plug 'reedes/vim-wheel'
 Plug 'sheerun/vim-polyglot'
@@ -469,7 +469,7 @@ if ( treesitter ~= nil ) then
 
   require'nvim-treesitter.configs'.setup {
     highlight = {
-      additional_vim_regex_highlighting = false,
+      additional_vim_regex_highlighting = true,
       disabled = {},
       enable = true,
     },
