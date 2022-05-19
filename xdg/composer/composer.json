@@ -14,17 +14,16 @@
   },
   "type": "library",
   "require": {
-    "fig-r/psr2r-sniffer": "@dev",
     "phpcompatibility/php-compatibility": "@dev",
     "phpmd/phpmd": "@stable",
     "phpunit/phpunit": "@dev",
     "psy/psysh": "@dev",
     "sloanlance/pman-php-manual": "@stable",
     "squizlabs/php_codesniffer": "@dev",
+    "tacnoman/dephpugger": "@dev",
     "vimeo/psalm": "@stable",
     "wp-cli/wp-cli-bundle": "@dev",
-    "wp-coding-standards/wpcs": "@stable",
-    "tacnoman/dephpugger": "@dev"
+    "wp-coding-standards/wpcs": "@stable"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
