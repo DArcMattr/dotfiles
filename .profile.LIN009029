@@ -2,7 +2,7 @@
 CABAL_DIR="${HOME}/.cabal/"
 CC=clang
 CXX=clang++
-DISPLAY=$(ip addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}'):0
+DISPLAY=$(ip route | grep default | awk '{print $3; exit;}'):0.0
 
 cdpath=($cdpath /var/www/vhosts/lims.test/)
 
