@@ -458,15 +458,6 @@ local treesitter = package.loaded['nvim-treesitter']
 if ( treesitter ~= nil ) then
   local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
 
-  parser_config.sql = {
-    install_info = {
-      url = "~/contrib/tree-sitter-sql",
-      files = { "src/parser.c" },
-      generate_requires_npm = true,
-    },
-    filetype = "sql",
-  }
-
   require'nvim-treesitter.configs'.setup {
     highlight = {
       additional_vim_regex_highlighting = true,
