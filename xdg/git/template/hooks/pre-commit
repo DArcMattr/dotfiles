@@ -35,7 +35,7 @@ for FILE in ${FILES}; do
 			;;
 
 		ts)
-			ERROR="$(tsc --noEmit "${FILE}")"
+			ERROR="$(tsc --target es2019 --noEmit "${FILE}")"
 			STATUS=$?
 			;;
 
