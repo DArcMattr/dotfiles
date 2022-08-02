@@ -1,0 +1,6 @@
+# vim:ft=zsh:
+
+CC=clang
+CXX=clang++
+
+export CC CXX
