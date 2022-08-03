@@ -2,5 +2,9 @@
 
 CC=clang
 CXX=clang++
+path=(
+  /opt/mssql-tools18/bin
+	$path
+)
 
 export CC CXX
