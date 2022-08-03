@@ -14,6 +14,7 @@
   },
   "type": "library",
   "require": {
+    "cakephp/cakephp-codesniffer": "^4.6",
     "phpcompatibility/php-compatibility": "@dev",
     "phpmd/phpmd": "@stable",
     "phpstan/phpstan": "^1.7",
