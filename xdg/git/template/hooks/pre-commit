@@ -2,6 +2,8 @@
 # vim:ft=sh
 # Adapted from PHP via
 # @link http://webadvent.org/2008/dont-commit-that-error-by-travis-swicegood.html
+
+# shellcheck source=/home/darc/dotfiles/helpers/project-ctags
 . "${HOME}/dotfiles/helpers/project-ctags"
 
 if [ "$(git rev-parse --verify HEAD > /dev/null 2>&1)" = 0 ]; then
@@ -57,4 +59,5 @@ for FILE in ${FILES}; do
 	fi
 done
 
-project_ctags ${FILES} >/dev/null 2>&1 &
+# shellcheck disable=SC2086
+project_ctags ${FILES} >/dev/null 2>&1 & 
