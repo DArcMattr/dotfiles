@@ -14,7 +14,7 @@
     "svgo": "^2.8.0",
     "tree-sitter-cli": "^0.20.6",
     "typescript": "^4.7.4",
-    "typescript-language-server": "^0.11.2",
+    "typescript-language-server": "^1.0.0",
     "vscode-langservers-extracted": "^4.4.0"
   },
   "stylelint": {
