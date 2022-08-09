@@ -12,6 +12,7 @@ Plug 'embear/vim-localvimrc'
 Plug 'dense-analysis/ale'
 Plug 'fatih/vim-go', { 'for': [ 'go' ], 'do': ':GoUpdateBinaries' }
 Plug 'hhvm/vim-hack', { 'for': ['hack'] }
+Plug 'hilojack/vim-xt'
 Plug 'isRuslan/vim-es6', { 'for': [ 'js', 'jsx', 'javascript.jsx', 'mjs' ] }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jiangmiao/auto-pairs'
