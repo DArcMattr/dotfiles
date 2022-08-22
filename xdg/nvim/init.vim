@@ -29,6 +29,7 @@ Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' } | Plug 'deoplete-plugins/deoplete-tag' | Plug 'Shougo/deoplete-lsp'
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim'
+Plug 'StanAngeloff/php.vim', {'for': 'php'}
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
