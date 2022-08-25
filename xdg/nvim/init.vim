@@ -192,6 +192,14 @@ let g:netrw_preview = 1
 let g:netrw_silent = 1
 let g:netrw_winsize = 25
 
+if !exists('g:vdebug_options')
+  let g:vdebug_options = {}
+endif
+let g:vdebug_options.break_on_open = 0
+let g:vdebug_options.debug_file = '/tmp/vdebug.log'
+let g:vdebug_options.debug_file_level = 1
+let g:vdebug_options.simplified_status = 0
+
 noremap <C-d>     <C-d>zz
 noremap <C-u>     <C-u>zz
 noremap <Leader>l <Cmd>set rnu!<Cr>
