@@ -69,6 +69,7 @@ grab_pips() {
     'mercurial'
     'msgpack'
     'mycli'
+    'neovim-remote'
     'pip'
     'powerline-status'
     'psutil'
