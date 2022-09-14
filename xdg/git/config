@@ -147,4 +147,4 @@
   unstage = reset -q HEAD
   up = "!f() { git remote update -p origin; git merge --ff-only @{u}; }; f"
   upr = "!f() { git pull && git submodule update --init --recursive; }; f"
-  workprofile = "config user.email 'david@theofficeexpress.com'"
+  workprofile = "config user.email 'darceneaux@databank.com'"
