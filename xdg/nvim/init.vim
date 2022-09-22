@@ -33,7 +33,6 @@ Plug 'StanAngeloff/php.vim', {'for': 'php'}
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-vividchalk'
 Plug 'Valloric/MatchTagAlways'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-vdebug/vdebug'
@@ -114,7 +113,7 @@ set wildignore+=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg
 set wildignore+=*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc
 set wildignore+=vendor/*,docs/*,node_modules/*,components/*,build/*,dist/*
 
-colorscheme vividchalk
+colorscheme koehler
 
 highlight clear SignColumn
 highlight clear SpellBad
@@ -125,21 +124,21 @@ highlight clear SpellRare
 highlight link ALEErrorLine ErrorMsg
 highlight link ALEWarningLine WarningMsg
 
-highlight Comment ctermfg=105 guifg=#8787ff
-highlight CursorColumn cterm=reverse gui=reverse
-highlight CursorLine cterm=underline gui=underline ctermbg=NONE guibg=NONE guisp=#888888
-" highlight DiffAdd cterm=none ctermfg=fg ctermbg=Blue gui=none guifg=fg guibg=Blue
-" highlight DiffChange cterm=none ctermfg=fg ctermbg=Blue gui=none guifg=fg guibg=Blue
-" highlight DiffDelete cterm=none ctermfg=fg ctermbg=Blue gui=none guifg=fg guibg=Blue
-" highlight DiffText cterm=none ctermfg=fg ctermbg=White gui=none guifg=fg guibg=White
-highlight ErrorMsg ctermbg=NONE guibg=NONE
+" highlight Comment ctermfg=105 guifg=#8787ff
+" highlight CursorColumn cterm=reverse gui=reverse
+" highlight CursorLine cterm=underline gui=underline ctermbg=NONE guibg=NONE guisp=#888888
+" " highlight DiffAdd cterm=none ctermfg=fg ctermbg=Blue gui=none guifg=fg guibg=Blue
+" " highlight DiffChange cterm=none ctermfg=fg ctermbg=Blue gui=none guifg=fg guibg=Blue
+" " highlight DiffDelete cterm=none ctermfg=fg ctermbg=Blue gui=none guifg=fg guibg=Blue
+" " highlight DiffText cterm=none ctermfg=fg ctermbg=White gui=none guifg=fg guibg=White
+" highlight ErrorMsg ctermbg=NONE guibg=NONE
 highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
 highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
 highlight NonText ctermfg=235 guifg=#262626
-highlight Normal ctermbg=NONE guibg=NONE
+" highlight Normal ctermbg=NONE guibg=NONE
 highlight OverLength ctermbg=234 ctermfg=249 guibg=#1c1c1c guifg=#b2b2b2
-highlight Search ctermfg=222 guifg=#ffdf87
-highlight SpecialKey ctermfg=235 guifg=#262626
+" highlight Search ctermfg=222 guifg=#ffdf87
+" highlight SpecialKey ctermfg=235 guifg=#262626
 highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline guifg=#800000 gui=undercurl
 highlight SpellCap term=underline cterm=underline gui=undercurl
 highlight SpellLocal term=underline cterm=underline gui=undercurl
@@ -202,7 +201,7 @@ let g:vdebug_options.simplified_status = 0
 
 noremap <C-d>     <C-d>zz
 noremap <C-u>     <C-u>zz
-noremap <Leader>l <Cmd>set rnu!<Cr>
+noremap <Leader>l <Cmd>set relativenumber!<Cr>
 noremap <Leader>t <Cmd>enew<Cr>
 noremap N         Nzz
 noremap n         nzz
