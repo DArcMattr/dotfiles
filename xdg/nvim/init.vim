@@ -421,8 +421,8 @@ augroup END
 
 augroup FocusEvents
   autocmd!
-  autocmd FocusGained * highlight Normal ctermbg=none guibg=none
-  autocmd FocusLost * highlight NonText ctermbg=darkgrey guibg=#101010
+  autocmd FocusGained * highlight Normal ctermbg=none     guibg=none
+  autocmd FocusLost   * highlight Normal ctermbg=darkgrey guibg=#181818
 augroup END
 
 augroup StartupStuffs
