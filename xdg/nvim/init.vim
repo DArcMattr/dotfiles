@@ -70,14 +70,15 @@ set nojoinspaces
 set noshowmode
 set nostartofline
 set noswapfile
+set notimeout
 set nowrap
 set nrformats-=octal
 set number
 set previewheight=20
 set printheader=%<%f%h%m\ %40
 set printheader=+{strftime(\"%c\"getftime(expand(\"%%\")))}%=Page\ %N
-set printoptions=formfeed:y,paper:letter,portrait:n,number:y,syntax:7
 set printoptions+=left:5mm,right:5mm,top:10mm,bottom:5mm
+set printoptions=formfeed:y,paper:letter,portrait:n,number:y,syntax:7
 set pumheight=15
 set relativenumber
 set scrolloff=3
@@ -100,21 +101,22 @@ set termguicolors
 set textwidth=80
 set title
 set titlestring=%t%(\ [%R%M]%)
-set notimeout
 set ttimeout
 set undofile
 set updatetime=300
 set virtualedit=all
 set visualbell
+set wildignore+=*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc
+set wildignore+=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg
+set wildignore+=vendor/*,docs/*,node_modules/*,components/*,build/*,dist/*
 set wildmenu
 set wildmode=list:longest,list:full
-set wildignore+=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg
-set wildignore+=*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc
-set wildignore+=vendor/*,docs/*,node_modules/*,components/*,build/*,dist/*
+
+setlocal cursorcolumn
+setlocal cursorline
 
 colorscheme koehler
 
-highlight clear SignColumn
 highlight clear SpellBad
 highlight clear SpellCap
 highlight clear SpellLocal
@@ -123,26 +125,23 @@ highlight clear SpellRare
 highlight link ALEErrorLine ErrorMsg
 highlight link ALEWarningLine WarningMsg
 
-" highlight Comment ctermfg=105 guifg=#8787ff
-" highlight CursorColumn cterm=reverse gui=reverse
-" highlight CursorLine cterm=underline gui=underline ctermbg=NONE guibg=NONE guisp=#888888
-" " highlight DiffAdd cterm=none ctermfg=fg ctermbg=Blue gui=none guifg=fg guibg=Blue
-" " highlight DiffChange cterm=none ctermfg=fg ctermbg=Blue gui=none guifg=fg guibg=Blue
-" " highlight DiffDelete cterm=none ctermfg=fg ctermbg=Blue gui=none guifg=fg guibg=Blue
-" " highlight DiffText cterm=none ctermfg=fg ctermbg=White gui=none guifg=fg guibg=White
-" highlight ErrorMsg ctermbg=NONE guibg=NONE
-highlight LineNr gui=bold guifg=#c6c6c6 guibg=#00005f
-highlight LineNr term=reverse cterm=bold ctermfg=251 ctermbg=17
-highlight NonText ctermfg=235 guifg=#262626
-" highlight Normal ctermbg=NONE guibg=NONE
-highlight OverLength ctermbg=234 ctermfg=249 guibg=#1c1c1c guifg=#b2b2b2
-" highlight Search ctermfg=222 guifg=#ffdf87
-" highlight SpecialKey ctermfg=235 guifg=#262626
-highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline guifg=#800000 gui=undercurl
-highlight SpellCap term=underline cterm=underline gui=undercurl
+highlight LineNr     gui=bold       guifg=#c6c6c6   guibg=#00005f
+highlight LineNr     term=reverse   cterm=bold      ctermfg=251    ctermbg=17
+highlight NonText    ctermfg=235    guifg=#262626
+highlight OverLength ctermbg=234    ctermfg=249     guibg=#1c1c1c  guifg=#b2b2b2
+highlight SpellBad   term=standout,underline        cterm=underline ctermfg=1 guifg=#800000 gui=undercurl
+highlight SpellCap   term=underline cterm=underline gui=undercurl
 highlight SpellLocal term=underline cterm=underline gui=undercurl
-highlight SpellRare term=underline cterm=underline gui=undercurl
+highlight SpellRare  term=underline cterm=underline gui=undercurl
 highlight TermCursor ctermfg=yellow guifg=yellow
+
+augroup FocusEvents
+  autocmd!
+  autocmd FocusGained * highlight Normal ctermbg=none     guibg=none
+  autocmd FocusGained * setlocal cursorcolumn cursorline
+  autocmd FocusLost   * highlight Normal ctermbg=darkgrey guibg=#181818
+  autocmd FocusLost   * setlocal nocursorcolumn nocursorline
+augroup END
 
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
@@ -375,10 +374,10 @@ augroup OmniFunc
   \ endif
 augroup END
 
-augroup FastEscape
+augroup InsertOutsert
   autocmd!
-  autocmd InsertEnter * set timeoutlen=0
-  autocmd InsertLeave * set timeoutlen=200
+  autocmd InsertEnter * set nolist timeoutlen=0
+  autocmd InsertLeave * set list   timeoutlen=200
 augroup END
 
 " update diffs aggressively
@@ -397,32 +396,6 @@ augroup AutoDiffUpdate
   \   let b:old_changedtick = b:changedtick |
   \     diffupdate |
   \ endif
-augroup END
-
-augroup CursorColumn
-  autocmd!
-  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
-  autocmd WinLeave * setlocal nocursorcolumn
-  setlocal cursorcolumn
-augroup END
-
-augroup CursorLine
-  autocmd!
-  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  autocmd WinLeave * setlocal nocursorline
-  setlocal cursorline
-augroup END
-
-augroup ShowListChars
-  autocmd!
-  autocmd InsertEnter * set nolist
-  autocmd InsertLeave * set list
-augroup END
-
-augroup FocusEvents
-  autocmd!
-  autocmd FocusGained * highlight Normal ctermbg=none     guibg=none
-  autocmd FocusLost   * highlight Normal ctermbg=darkgrey guibg=#181818
 augroup END
 
 augroup StartupStuffs
