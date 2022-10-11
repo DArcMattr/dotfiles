@@ -419,6 +419,12 @@ augroup ShowListChars
   autocmd InsertLeave * set list
 augroup END
 
+augroup FocusEvents
+  autocmd!
+  autocmd FocusGained * highlight Normal ctermbg=none guibg=none
+  autocmd FocusLost * highlight NonText ctermbg=darkgrey guibg=#101010
+augroup END
+
 augroup StartupStuffs
   autocmd!
   autocmd BufReadPost *
@@ -462,31 +468,31 @@ augroup END
 
 lua <<LUA
 local treesitter = package.loaded['nvim-treesitter']
+local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
 
-if ( treesitter ~= nil ) then
-  local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
-
-  require'nvim-treesitter.configs'.setup {
-    highlight = {
-      additional_vim_regex_highlighting = true,
-      disabled = {},
-      enable = true,
-    },
-    ensure_installed = {
-      "c_sharp",
-      "css",
-      "html",
-      "javascript",
-      "jsdoc",
-      "json",
-      "lua",
-      "markdown",
-      "php",
-      "phpdoc",
-      "python",
-      "sql",
-      "vim",
-    },
-  }
-end
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    -- additional_vim_regex_highlighting = true,
+    disabled = {},
+    enable = true,
+  },
+  indent = {
+    enable = true,
+  },
+  ensure_installed = {
+    "c_sharp",
+    "css",
+    "html",
+    "javascript",
+    "jsdoc",
+    "json",
+    "lua",
+    "markdown",
+    "php",
+    "phpdoc",
+    "python",
+    "sql",
+    "vim",
+  },
+}
 LUA
