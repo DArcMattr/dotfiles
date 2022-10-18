@@ -193,9 +193,6 @@ if !exists('g:vdebug_options')
   let g:vdebug_options = {}
 endif
 let g:vdebug_options.break_on_open = 0
-let g:vdebug_options.debug_file = '/tmp/vdebug.log'
-let g:vdebug_options.debug_file_level = 1
-let g:vdebug_options.simplified_status = 0
 
 noremap <C-d>     <C-d>zz
 noremap <C-u>     <C-u>zz
@@ -234,8 +231,8 @@ nnoremap <C-p>         <Cmd>Denite file/rec<Cr>
 nnoremap <C-y>         3<C-y>
 nnoremap <Expr>j       (v:count == 0 ? 'gj' : 'j')
 nnoremap <Expr>k       (v:count == 0 ? 'gk' : 'k')
-nnoremap <Leader>1gD   <Cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <Leader><C-k> <Cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <Leader>1gD   <Cmd>lua vim.lsp.buf.type_definition()<Cr>
+nnoremap <Leader><C-k> <Cmd>lua vim.lsp.buf.signature_help()<Cr>
 nnoremap <Leader><F7>  <Cmd>setlocal spell! spell? spelllang=en_us<Cr>
 nnoremap <Leader><S-b> guiw
 nnoremap <Leader>af    <Cmd>ALEFix<Cr>
@@ -243,18 +240,18 @@ nnoremap <Leader>b     gUiw
 nnoremap <Leader>d*    <Cmd>DeniteCursorWord grep:.<Cr>
 nnoremap <Leader>d/    <Cmd>Denite grep:.<Cr>
 nnoremap <Leader>do    <Cmd>Denite outline<Cr>
-nnoremap <Leader>gD    <Cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <Leader>gD    <Cmd>lua vim.lsp.buf.implementation()<Cr>
 nnoremap <Leader>gb    <Cmd>Git blame<Cr>
 nnoremap <Leader>gc    <Cmd>Git commit<Cr>
 nnoremap <Leader>gd    <Cmd>GdiffSplit<Cr>
 nnoremap <Leader>gl    <Cmd>Git log -- %<Cr>
 nnoremap <Leader>gp    <Cmd>Git push<Cr>
 nnoremap <Leader>gs    <Cmd>Git<Cr>
-nnoremap <Leader>l0    <Cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <Leader>lW    <Cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <Leader>ld    <Cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <Leader>lk    <Cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <Leader>lr    <Cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <Leader>l0    <Cmd>lua vim.lsp.buf.document_symbol()<Cr>
+nnoremap <Leader>lW    <Cmd>lua vim.lsp.buf.workspace_symbol()<Cr>
+nnoremap <Leader>ld    <Cmd>lua vim.lsp.buf.declaration()<Cr>
+nnoremap <Leader>lk    <Cmd>lua vim.lsp.buf.hover()<Cr>
+nnoremap <Leader>lr    <Cmd>lua vim.lsp.buf.references()<Cr>
 nnoremap <Leader>o     i<Cr><Esc>
 nnoremap <Leader>q     <Cmd>nohlsearch<Cr>
 nnoremap <Left>        <Cmd>bp<Cr>
@@ -281,28 +278,18 @@ call denite#custom#option( 'default', {
 \})
 call denite#custom#option( 'list', { 'mode': 'normal' } )
 
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor\ --vimgrep
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
 
-  " Use ag in denite grep source.
-  call denite#custom#var( 'grep', 'command',      ['ag'] )
-  call denite#custom#var( 'grep', 'default_opts', ['-i', '--vimgrep'] )
-  call denite#custom#var( 'grep', 'recursive_opts', [] )
-  call denite#custom#var( 'grep', 'pattern_opt', [] )
-  call denite#custom#var( 'grep', 'separator', ['--'] )
-  call denite#custom#var( 'grep', 'final_opts', [] )
-elseif executable('ack')
-  set grepprg=ack\ -H\ --nogroup\ --nocolor
-
-  " Use ack in denite grep source.
-  call denite#custom#var( 'grep', 'command', ['ack'] )
-  call denite#custom#var( 'grep', 'default_opts',
-  \     ['--ackrc', $HOME.'/.ackrc', '-H',
-  \      '--nopager', '--nocolor', '--nogroup', '--column'] )
-  call denite#custom#var( 'grep', 'recursive_opts', [] )
-  call denite#custom#var( 'grep', 'pattern_opt', ['--match'] )
-  call denite#custom#var( 'grep', 'separator', ['--'] )
-  call denite#custom#var( 'grep', 'final_opts', [] )
+	call denite#custom#var('grep', {
+		\ 'command': ['rg'],
+		\ 'default_opts': ['-i', '--vimgrep', '--no-heading'],
+		\ 'recursive_opts': [],
+		\ 'pattern_opt': ['--regexp'],
+		\ 'separator': ['--'],
+		\ 'final_opts': [],
+		\ })
 else
   set grepprg=grep\ -nH\ $*
 endif

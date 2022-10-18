@@ -38,7 +38,6 @@ curl -L https://cpanmin.us | perl - App::cpanminus
 	grab_composer
 	grab_pips
 	grab_gems
-	grab_git -d "${CONTRIB}/the_silver_searcher" -r https://github.com/ggreer/the_silver_searcher.git -b master
 	grab_git -d "${CONTRIB}/ctags"               -r https://github.com/universal-ctags/ctags.git      -b master
 	grab_git -d "${CONTRIB}/tmux"                -r https://github.com/tmux/tmux.git
 	grab_git -d "${CONTRIB}/autoenv"             -r https://github.com/zpm-zsh/autoenv.git -n
