@@ -11,7 +11,7 @@ export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
 export CLICOLOR=YES
 export CLICOLOR_FORCE=YES
 export XDG_CONFIG_HOME="${HOME}/.config"
-export FZF_DEFAULT_COMMAND='ag -l -g ""'
+export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 
 #
 # Less
