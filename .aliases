@@ -3,6 +3,7 @@
 
 alias ll='LC_COLLATE=C ls -AalFh'
 alias expected_install='./autogen.sh && ./configure --prefix=$HOME/.local && make install clean'
+alias nf='nvim $(fzf)'
 
 dir() {
   {
