@@ -39,83 +39,38 @@ Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/DirDiff.vim'
 call plug#end()
 
-set autoindent
-set autoread
-set background=dark
 set backspace=indent,eol,start
 set clipboard+=unnamedplus
 set colorcolumn=+1
 set completeopt=menuone,longest
-set copyindent
 set diffopt=filler,vertical,internal,indent-heuristic,algorithm:patience
-set display+=lastline
-set encoding=utf-8
-set expandtab
 set fillchars+=stl:\ ,stlnc:\
 set formatoptions=nqr12j
-set gdefault
-set hidden
-set hlsearch
-set ignorecase
-set incsearch
-set laststatus=2
-set lazyredraw
-set list
 set listchars=eol:↲,precedes:«,extends:»,trail:·,tab:▸·,nbsp:¯
-set matchtime=5
-set modeline
-set mouse=a
-set nobomb
-set nojoinspaces
-set noshowmode
-set nostartofline
-set noswapfile
-set notimeout
-set nowrap
 set nrformats-=octal
-set number
 set previewheight=20
-set printheader=%<%f%h%m\ %40
-set printheader=+{strftime(\"%c\"getftime(expand(\"%%\")))}%=Page\ %N
-set printoptions+=left:5mm,right:5mm,top:10mm,bottom:5mm
-set printoptions=formfeed:y,paper:letter,portrait:n,number:y,syntax:7
 set pumheight=15
-set relativenumber
 set scrolloff=3
 set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
-set shiftround
 set shiftwidth=2
 set shortmess=acAIoOt
 set showbreak=>
-set showcmd
-set showmatch
 set sidescrolloff=5
 set signcolumn=yes
-set smartcase
-set smarttab
 set softtabstop=2
-set splitbelow
 set synmaxcol=512
 set tabstop=2
-set termguicolors
 set textwidth=80
-set title
 set titlestring=%t%(\ [%R%M]%)
-set ttimeout
-set undofile
 set updatetime=300
 set virtualedit=all
-set visualbell
 set wildignore+=*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc
 set wildignore+=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg
 set wildignore+=vendor/*,docs/*,node_modules/*,components/*,build/*,dist/*
-set wildmenu
 set wildmode=list:longest,list:full
 
 setlocal cursorcolumn
 setlocal cursorline
-
-colorscheme koehler
 
 highlight clear SpellBad
 highlight clear SpellCap
@@ -432,7 +387,7 @@ local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
 
 require'nvim-treesitter.configs'.setup {
   highlight = {
-    -- additional_vim_regex_highlighting = true,
+    additional_vim_regex_highlighting = true,
     disabled = {},
     enable = true,
   },
@@ -455,4 +410,46 @@ require'nvim-treesitter.configs'.setup {
     "vim",
   },
 }
+
+vim.cmd.colorscheme("koehler")
+
+vim.o.autoindent      = true
+vim.o.autoread        = true
+vim.o.background      = "dark"
+vim.o.bomb            = false
+vim.o.copyindent      = true
+vim.o.display         = "lastline"
+vim.o.encoding        = "utf-8"
+vim.o.expandtab       = true
+vim.o.gdefault        = true
+vim.o.hidden          = true
+vim.o.hlsearch        = true
+vim.o.ignorecase      = true
+vim.o.incsearch       = true
+vim.o.joinspaces      = false
+vim.o.laststatus      = 2
+vim.o.lazyredraw      = true
+vim.o.list            = true
+vim.o.matchtime       = 5
+vim.o.modeline        = true
+vim.o.mouse           = "a"
+vim.o.number          = true
+vim.o.relativenumber  = true
+vim.o.shiftround      = true
+vim.o.showcmd         = true
+vim.o.showmatch       = true
+vim.o.showmode        = false
+vim.o.smartcase       = true
+vim.o.smarttab        = true
+vim.o.splitbelow      = true
+vim.o.startofline     = false
+vim.o.swapfile        = false
+vim.o.termguicolors   = true
+vim.o.timeout         = false
+vim.o.title           = true
+vim.o.ttimeout        = true
+vim.o.undofile        = true
+vim.o.visualbell      = true
+vim.o.wildmenu        = true
+vim.o.wrap            = false
 LUA
