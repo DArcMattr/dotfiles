@@ -4,7 +4,7 @@
   "dependencies": {
     "eslint_d": "^12.2.1",
     "eslint-config-jquery": "^3.0.0",
-    "intelephense": "^1.9.0",
+    "intelephense": "^1.9.1",
     "neovim": "^4.10.1",
     "npm-check-updates": "^16.6.2",
     "sass": "^1.57.1",
