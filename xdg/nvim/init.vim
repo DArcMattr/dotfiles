@@ -7,7 +7,6 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'dense-analysis/ale'
 Plug 'fatih/vim-go', { 'for': [ 'go' ], 'do': ':GoUpdateBinaries' }
@@ -52,15 +51,11 @@ set previewheight=20
 set pumheight=15
 set scrolloff=3
 set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
-set shiftwidth=2
 set shortmess=acAIoOt
 set showbreak=>
 set sidescrolloff=5
 set signcolumn=yes
-set softtabstop=2
 set synmaxcol=512
-set tabstop=2
-set textwidth=80
 set titlestring=%t%(\ [%R%M]%)
 set updatetime=300
 set virtualedit=all
@@ -436,15 +431,19 @@ vim.o.mouse           = "a"
 vim.o.number          = true
 vim.o.relativenumber  = true
 vim.o.shiftround      = true
+vim.o.shiftwidth      = 2
 vim.o.showcmd         = true
 vim.o.showmatch       = true
 vim.o.showmode        = false
 vim.o.smartcase       = true
 vim.o.smarttab        = true
+vim.o.softtabstop     = 2
 vim.o.splitbelow      = true
 vim.o.startofline     = false
 vim.o.swapfile        = false
+vim.o.tabstop         = 2
 vim.o.termguicolors   = true
+vim.o.textwidth       = 80
 vim.o.timeout         = false
 vim.o.title           = true
 vim.o.ttimeout        = true
@@ -452,4 +451,6 @@ vim.o.undofile        = true
 vim.o.visualbell      = true
 vim.o.wildmenu        = true
 vim.o.wrap            = false
+
+vim.g.editorconfig_enable = true
 LUA
