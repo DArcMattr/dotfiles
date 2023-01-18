@@ -3,7 +3,12 @@
 
 alias ll='LC_COLLATE=C ls -AalFh'
 alias expected_install='./autogen.sh && ./configure --prefix=$HOME/.local && make install clean'
-alias nf='nvim $(fzf)'
+alias nvf='nvim $(fzf)'
+alias nvdno='nvim $(git dno @~1)'
+
+nvrg() {
+  nvim $(rg -l "${@}")
+}
 
 dir() {
   {
@@ -47,6 +52,7 @@ if alias -s >/dev/null 2>&1; then
 	alias -s rst=nvim
 	alias -s scss=nvim
 	alias -s txt=nvim
+	alias -s php=nvim
 	alias -s json=jsonize
 fi
 
