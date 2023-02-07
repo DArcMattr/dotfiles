@@ -4,18 +4,18 @@
   "dependencies": {
     "eslint_d": "^12.2.1",
     "eslint-config-jquery": "^3.0.0",
-    "intelephense": "^1.9.4",
+    "intelephense": "^1.9.5",
     "neovim": "^4.10.1",
-    "npm-check-updates": "^16.6.2",
-    "sass": "^1.57.1",
+    "npm-check-updates": "^16.6.5",
+    "sass": "^1.58.0",
     "sql-language-server": "^1.2.1",
     "stylelint": "^14.16.1",
     "stylelint-config-recommended": "^9.0.0",
     "svgo": "^3.0.2",
     "tree-sitter-cli": "^0.20.7",
-    "typescript": "^4.9.4",
-    "typescript-language-server": "^3.0.2",
-    "vscode-langservers-extracted": "^4.5.0"
+    "typescript": "^4.9.5",
+    "typescript-language-server": "^3.1.0",
+    "vscode-langservers-extracted": "^4.6.0"
   },
   "stylelint": {
     "extends": [
