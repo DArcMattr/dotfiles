@@ -9,7 +9,7 @@
     "npm-check-updates": "^16.7.4",
     "sass": "^1.58.0",
     "sql-language-server": "^1.2.1",
-    "stylelint": "^15.0.0",
+    "stylelint": "^15.1.0",
     "stylelint-config-recommended": "^10.0.1",
     "svgo": "^3.0.2",
     "tree-sitter-cli": "^0.20.7",
