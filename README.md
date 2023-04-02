@@ -30,20 +30,23 @@ curl -sS "http://nginx.org/keys/nginx_signing.key" | \
 sudo add-apt-repository \
   "deb http://nginx.org/packages/mainline/ubuntu ${REL} nginx"
 sudo add-apt-repository \
-  "deb http://apt.llvm.org/${REL}/ llvm-toolchain-${REL}-15 main"
-sudo apt install autossh bison build-essential clang-15 clang-15-doc \
-  clang-format-15 clang-tools-15 clangd-15 cmake flex git git-extras golang \
-  htop libc++-15-dev libc++abi-15-dev libclang-15-dev libclang-common-15-dev \
-  libclang1-15 libevent-dev libfuzzer-15-dev libgit2-dev libjansson-dev \
-  libllvm-15-ocaml-dev libllvm13 liblzma-dev libncurses5-dev libnss3-tools \
-  libomp-15-dev libpcre3-dev libssh2-1-dev libsqlite3-dev libssl-dev \
-  libxml2-dev libyaml-dev lsyncd lld-15 lldb-15 llvm-15 llvm-15-dev \
-  llvm-15-doc llvm-15-examples llvm-15-runtime liblua5.3-dev neovim nginx nodejs \
-  php-common php-gd php-imagick php-mbstring php-memcache php-pear php-xdebug \
-  php-xml php-zip php8.1-cli php8.1-curl php8.1-dev php8.1-fpm php8.1-imap \
-  php8.1-mysql php8.1-opcache php8.1-readline php8.1-soap php8.1-xml pv \
-  python3-dev python-is-python3 ruby-dev shellcheck tidy wget wslu xcape xsel \
-  zlib1g-dev zsh
+  "deb http://apt.llvm.org/${REL}/ llvm-toolchain-${REL}-16 main"
+sudo apt install autossh bison build-essential clang-16 clang-16-doc \
+  clang-format-16 clang-tidy-16 clang-tools-16 clangd-16 cmake flex git \
+  git-extras golang htop jq libc++-16-dev-wasm32 libc++abi-16-dev-wasm32 \
+  libclang-16-dev libclang-common-16-dev libclang-rt-16-dev \
+  libclang-rt-16-dev-wasm32 libclang-rt-16-dev-wasm32 libclang-rt-16-dev-wasm64 \
+  libclang-rt-16-dev-wasm64 libclang1-16 libevent-dev libfuzzer-16-dev \
+  libgit2-dev libjansson-dev libllvm-16-ocaml-dev libllvm16 liblua5.3-dev \
+  liblzma-dev libncurses5-dev libnss3-tools libomp-16-dev libpcre3-dev \
+  libsqlite3-dev libssh2-1-dev libssl-dev libxml2-dev libyaml-dev lld-16 \
+  lldb-16 llvm-16 llvm-16-dev llvm-16-doc llvm-16-examples llvm-16-runtime \
+  lsyncd neovim nginx nodejs php-common php-gd php-imagick php-mbstring \
+  php-memcache php-pear php-xdebug php-xml php-zip php8.1-cli php8.1-curl \
+  php8.1-dev php8.1-fpm php8.1-imap php8.1-mysql php8.1-opcache php8.1-readline \
+  php8.1-soap php8.1-xml pv python-is-python3 python3-clang-16 python3-dev \
+  ruby-dev shellcheck tidy wget wslu xcape xsel zlib1g-dev zsh
+
 git clone https://github.com/darcmattr/dotfiles ~/dotfiles
 sh ~/dotfiles/helpers/debianish-update-alternatives.sh
 curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
