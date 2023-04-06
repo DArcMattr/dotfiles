@@ -6,7 +6,7 @@
     "eslint-config-jquery": "^3.0.0",
     "intelephense": "^1.9.5",
     "neovim": "^4.10.1",
-    "npm-check-updates": "^16.9.0",
+    "npm-check-updates": "^16.10.2",
     "sass": "^1.60.0",
     "stylelint": "^15.4.0",
     "stylelint-config-recommended": "^11.0.0",
