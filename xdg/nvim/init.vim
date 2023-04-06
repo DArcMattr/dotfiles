@@ -17,11 +17,13 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
 Plug 'mfukar/robotframework-vim'
+Plug 'mfussenegger/nvim-dap'
 Plug 'mhinz/vim-signify'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'OmniSharp/omnisharp-vim', { 'for': [ 'cs' ], 'do': ':OmniSharpInstall' }
+Plug 'rcarriga/nvim-dap-ui'
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' } | Plug 'deoplete-plugins/deoplete-tag' | Plug 'Shougo/deoplete-lsp'
@@ -33,7 +35,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'Valloric/MatchTagAlways'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-vdebug/vdebug'
 Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/DirDiff.vim'
 call plug#end()
@@ -207,6 +208,15 @@ nnoremap <Leader>q     <Cmd>nohlsearch<Cr>
 nnoremap <Left>        <Cmd>bp<Cr>
 nnoremap <M-i>         i<Space><Esc>
 nnoremap <Right>       <Cmd>bn<Cr>
+nnoremap <silent> <F5> <Cmd>lua require'dap'.continue()<CR>
+nnoremap <silent> <F2> <Cmd>lua require'dap'.step_over()<CR>
+nnoremap <silent> <F3> <Cmd>lua require'dap'.step_into()<CR>
+nnoremap <silent> <F4> <Cmd>lua require'dap'.step_out()<CR>
+nnoremap <silent> <F10> <Cmd>lua require'dap'.toggle_breakpoint()<CR>
+nnoremap <silent> <Leader>B <Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
+nnoremap <silent> <Leader>lp <Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
+nnoremap <silent> <Leader>dr <Cmd>lua require'dap'.repl.open()<CR>
+nnoremap <silent> <Leader>dl <Cmd>lua require'dap'.run_last()<CR>
 
 tnoremap <Leader><Esc> <C-\><C-n>
 
@@ -377,6 +387,7 @@ augroup QF
 augroup END
 
 lua <<LUA
+local dap = require('dap')
 local treesitter = package.loaded['nvim-treesitter']
 local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
 
@@ -453,4 +464,19 @@ vim.o.wildmenu        = true
 vim.o.wrap            = false
 
 vim.g.editorconfig_enable = true
+
+dap.adapters.php = {
+  type = 'executable',
+  command = 'node',
+  args = { '/home/darc/contrib/vscode-php-debug/out/phpDebug.js' }
+}
+
+dap.configurations.php = {
+  {
+      type = 'php',
+      request = 'launch',
+      name = 'Listen for Xdebug',
+      port = 9000
+  }
+}
 LUA
