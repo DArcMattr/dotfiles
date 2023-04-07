@@ -10,6 +10,7 @@ let g:mta_filetypes['php'] = 1
 
 lua <<LUA
 require'lspconfig'.intelephense.setup{}
+--[[
 local dap = require('dap')
 
 dap.adapters.php = {
@@ -26,4 +27,5 @@ dap.configurations.php = {
       port = 9003
   }
 }
+]]
 LUA

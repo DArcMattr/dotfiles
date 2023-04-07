@@ -17,13 +17,13 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
 Plug 'mfukar/robotframework-vim'
-Plug 'mfussenegger/nvim-dap'
+" Plug 'mfussenegger/nvim-dap'
 Plug 'mhinz/vim-signify'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'OmniSharp/omnisharp-vim', { 'for': [ 'cs' ], 'do': ':OmniSharpInstall' }
-Plug 'rcarriga/nvim-dap-ui'
+" Plug 'rcarriga/nvim-dap-ui'
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' } | Plug 'deoplete-plugins/deoplete-tag' | Plug 'Shougo/deoplete-lsp'
@@ -35,6 +35,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'Valloric/MatchTagAlways'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-vdebug/vdebug'
 Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/DirDiff.vim'
 call plug#end()
@@ -234,8 +235,8 @@ let g:vdebug_options.break_on_open = 0
 
 noremap <C-d>     <C-d>zz
 noremap <C-u>     <C-u>zz
-noremap <Leader>l <Cmd>set relativenumber!<Cr>
-noremap <Leader>t <Cmd>enew<Cr>
+noremap <Leader>l :set relativenumber!<Cr>
+noremap <Leader>t :enew<Cr>
 noremap N         Nzz
 noremap n         nzz
 noremap p         p`[
@@ -254,7 +255,7 @@ nnoremap J mzJ`z
 nnoremap L $
 nnoremap Q gq
 nnoremap Y y$
-nnoremap _ <Cmd>Lex<Cr>
+nnoremap _ :Lex<Cr>
 nnoremap a zza
 nnoremap c "xc
 nnoremap gj j
@@ -262,48 +263,48 @@ nnoremap gk k
 nnoremap i zzi
 nnoremap { {zz
 nnoremap } }zz
-nnoremap <C-PageDown>  <Cmd>bp<Cr>
-nnoremap <C-PageUp>    <Cmd>bn<Cr>
+nnoremap <C-PageDown>  :bp<Cr>
+nnoremap <C-PageUp>    :bn<Cr>
 nnoremap <C-e>         3<C-e>
-nnoremap <C-p>         <Cmd>Denite file/rec<Cr>
+nnoremap <C-p>         :Denite file/rec<Cr>
 nnoremap <C-y>         3<C-y>
 nnoremap <Expr>j       (v:count == 0 ? 'gj' : 'j')
 nnoremap <Expr>k       (v:count == 0 ? 'gk' : 'k')
-nnoremap <Leader>1gD   <Cmd>lua vim.lsp.buf.type_definition()<Cr>
-nnoremap <Leader><C-k> <Cmd>lua vim.lsp.buf.signature_help()<Cr>
-nnoremap <Leader><F7>  <Cmd>setlocal spell! spell? spelllang=en_us<Cr>
+nnoremap <Leader>1gD   :lua vim.lsp.buf.type_definition()<Cr>
+nnoremap <Leader><C-k> :lua vim.lsp.buf.signature_help()<Cr>
+nnoremap <Leader><F7>  :setlocal spell! spell? spelllang=en_us<Cr>
 nnoremap <Leader><S-b> guiw
-nnoremap <Leader>af    <Cmd>ALEFix<Cr>
+nnoremap <Leader>af    :ALEFix<Cr>
 nnoremap <Leader>b     gUiw
-nnoremap <Leader>d*    <Cmd>DeniteCursorWord grep:.<Cr>
-nnoremap <Leader>d/    <Cmd>Denite grep:.<Cr>
-nnoremap <Leader>do    <Cmd>Denite outline<Cr>
-nnoremap <Leader>gD    <Cmd>lua vim.lsp.buf.implementation()<Cr>
-nnoremap <Leader>gb    <Cmd>Git blame<Cr>
-nnoremap <Leader>gc    <Cmd>Git commit<Cr>
-nnoremap <Leader>gd    <Cmd>GdiffSplit<Cr>
-nnoremap <Leader>gl    <Cmd>Git log -- %<Cr>
-nnoremap <Leader>gp    <Cmd>Git push<Cr>
-nnoremap <Leader>gs    <Cmd>Git<Cr>
-nnoremap <Leader>l0    <Cmd>lua vim.lsp.buf.document_symbol()<Cr>
-nnoremap <Leader>lW    <Cmd>lua vim.lsp.buf.workspace_symbol()<Cr>
-nnoremap <Leader>ld    <Cmd>lua vim.lsp.buf.declaration()<Cr>
-nnoremap <Leader>lk    <Cmd>lua vim.lsp.buf.hover()<Cr>
-nnoremap <Leader>lr    <Cmd>lua vim.lsp.buf.references()<Cr>
+nnoremap <Leader>d*    :DeniteCursorWord grep:.<Cr>
+nnoremap <Leader>d/    :Denite grep:.<Cr>
+nnoremap <Leader>do    :Denite outline<Cr>
+nnoremap <Leader>gD    :lua vim.lsp.buf.implementation()<Cr>
+nnoremap <Leader>gb    :Git blame<Cr>
+nnoremap <Leader>gc    :Git commit<Cr>
+nnoremap <Leader>gd    :GdiffSplit<Cr>
+nnoremap <Leader>gl    :Git log -- %<Cr>
+nnoremap <Leader>gp    :Git push<Cr>
+nnoremap <Leader>gs    :Git<Cr>
+nnoremap <Leader>l0    :lua vim.lsp.buf.document_symbol()<Cr>
+nnoremap <Leader>lW    :lua vim.lsp.buf.workspace_symbol()<Cr>
+nnoremap <Leader>ld    :lua vim.lsp.buf.declaration()<Cr>
+nnoremap <Leader>lk    :lua vim.lsp.buf.hover()<Cr>
+nnoremap <Leader>lr    :lua vim.lsp.buf.references()<Cr>
 nnoremap <Leader>o     i<Cr><Esc>
-nnoremap <Leader>q     <Cmd>nohlsearch<Cr>
-nnoremap <Left>        <Cmd>bp<Cr>
+nnoremap <Leader>q     :nohlsearch<Cr>
+nnoremap <Left>        :bp<Cr>
 nnoremap <M-i>         i<Space><Esc>
-nnoremap <Right>       <Cmd>bn<Cr>
-nnoremap <silent> <F5> <Cmd>lua require'dap'.continue()<CR>
-nnoremap <silent> <F2> <Cmd>lua require'dap'.step_over()<CR>
-nnoremap <silent> <F3> <Cmd>lua require'dap'.step_into()<CR>
-nnoremap <silent> <F4> <Cmd>lua require'dap'.step_out()<CR>
-nnoremap <silent> <F10> <Cmd>lua require'dap'.toggle_breakpoint()<CR>
-nnoremap <silent> <Leader>B <Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
-nnoremap <silent> <Leader>lp <Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
-nnoremap <silent> <Leader>dr <Cmd>lua require'dap'.repl.open()<CR>
-nnoremap <silent> <Leader>dl <Cmd>lua require'dap'.run_last()<CR>
+nnoremap <Right>       :bn<Cr>
+" nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
+" nnoremap <silent> <F2> :lua require'dap'.step_over()<CR>
+" nnoremap <silent> <F3> :lua require'dap'.step_into()<CR>
+" nnoremap <silent> <F4> :lua require'dap'.step_out()<CR>
+" nnoremap <silent> <F10> :lua require'dap'.toggle_breakpoint()<CR>
+" nnoremap <silent> <Leader>B :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
+" nnoremap <silent> <Leader>lp :lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
+" nnoremap <silent> <Leader>dr :lua require'dap'.repl.open()<CR>
+" nnoremap <silent> <Leader>dl :lua require'dap'.run_last()<CR>
 
 tnoremap <Leader><Esc> <C-\><C-n>
 
@@ -349,8 +350,8 @@ call deoplete#custom#option('sources', {
 "call deoplete#enable_logging('DEBUG', $HOME . '/deoplete.log')
 
 command! -nargs=1 Silent |
-\   execute '<Cmd>silent !'.<q-args> |
-\   <Cmd>redraw!<Cr>
+\   execute ':silent !'.<q-args> |
+\   :redraw!<Cr>
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -361,18 +362,18 @@ endif
 
 " from https://gist.github.com/tarruda/5158535
 if exists('$TMUX')
-  nnoremap <silent> <C-w>j <Cmd>call funcs#TmuxMove('j')<Cr>
-  nnoremap <silent> <C-w>k <Cmd>call funcs#TmuxMove('k')<Cr>
-  nnoremap <silent> <C-w>h <Cmd>call funcs#TmuxMove('h')<Cr>
-  nnoremap <silent> <C-w>l <Cmd>call funcs#TmuxMove('l')<Cr>
-  nnoremap <silent> <C-w><down> <Cmd>silent call funcs#TmuxMove('j')<Cr>
-  nnoremap <silent> <C-w><up> <Cmd>silent call funcs#TmuxMove('k')<Cr>
-  nnoremap <silent> <C-w><left> <Cmd>silent call funcs#TmuxMove('h')<Cr>
-  nnoremap <silent> <C-w><right> <Cmd>silent call funcs#TmuxMove('l')<Cr>
-  tnoremap <silent> <C-\><C-N><C-w>j <Cmd>silent call funcs#TmuxMove('j')<Cr>
-  tnoremap <silent> <C-\><C-N><C-w>k <Cmd>silent call funcs#TmuxMove('k')<Cr>
-  tnoremap <silent> <C-\><C-N><C-w>h <Cmd>silent call funcs#TmuxMove('h')<Cr>
-  tnoremap <silent> <C-\><C-N><C-w>l <Cmd>silent call funcs#TmuxMove('l')<Cr>
+  nnoremap <silent> <C-w>j :call funcs#TmuxMove('j')<Cr>
+  nnoremap <silent> <C-w>k :call funcs#TmuxMove('k')<Cr>
+  nnoremap <silent> <C-w>h :call funcs#TmuxMove('h')<Cr>
+  nnoremap <silent> <C-w>l :call funcs#TmuxMove('l')<Cr>
+  nnoremap <silent> <C-w><down> :silent call funcs#TmuxMove('j')<Cr>
+  nnoremap <silent> <C-w><up> :silent call funcs#TmuxMove('k')<Cr>
+  nnoremap <silent> <C-w><left> :silent call funcs#TmuxMove('h')<Cr>
+  nnoremap <silent> <C-w><right> :silent call funcs#TmuxMove('l')<Cr>
+  tnoremap <silent> <C-\><C-N><C-w>j :silent call funcs#TmuxMove('j')<Cr>
+  tnoremap <silent> <C-\><C-N><C-w>k :silent call funcs#TmuxMove('k')<Cr>
+  tnoremap <silent> <C-\><C-N><C-w>h :silent call funcs#TmuxMove('h')<Cr>
+  tnoremap <silent> <C-\><C-N><C-w>l :silent call funcs#TmuxMove('l')<Cr>
 
   let g:clipboard = {
         \   'name': 'tmux override',
