@@ -54,7 +54,13 @@ grab_rust() {
   "${HOME}/.cargo/bin/rustup" completions zsh >! "${HOME}/.local/share/zsh/site-functions/_rustup"
 
   cd "${HOME}" && "${HOME}/.cargo/bin/cargo" install --force \
-    bat cargo-deb cargo-update difftastic exa ripgrep
+    bat \
+    cargo-deb \
+    cargo-update \
+    difftastic \
+    exa \
+    ripgrep \
+    tree-sitter-cli
 }
 
 grab_pips() {
