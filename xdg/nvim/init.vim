@@ -148,6 +148,8 @@ vim.opt.wildignore:append("vendor/*,docs/*,node_modules/*,components/*,build/*,d
 
 vim.g.editorconfig_enable = true
 
+vim.cmd.highlight("TermCursor", "ctermfg=yellow guifg=yellow")
+
 local FocusEvents = vim.api.nvim_create_augroup('FocusEvents', {clear = true})
 vim.api.nvim_create_autocmd({ 'FocusGained' }, {
   pattern = '*',
@@ -169,11 +171,6 @@ vim.api.nvim_create_autocmd({ 'FocusLost' }, {
 })
 LUA
 
-highlight clear SpellBad
-highlight clear SpellCap
-highlight clear SpellLocal
-highlight clear SpellRare
-
 highlight link ALEErrorLine ErrorMsg
 highlight link ALEWarningLine WarningMsg
 
@@ -185,7 +182,6 @@ highlight SpellBad   term=standout,underline        cterm=underline ctermfg=1 gu
 highlight SpellCap   term=underline cterm=underline gui=undercurl
 highlight SpellLocal term=underline cterm=underline gui=undercurl
 highlight SpellRare  term=underline cterm=underline gui=undercurl
-highlight TermCursor ctermfg=yellow guifg=yellow
 
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
