@@ -39,35 +39,6 @@ Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/DirDiff.vim'
 call plug#end()
 
-set backspace=indent,eol,start
-set clipboard+=unnamedplus
-set colorcolumn=+1
-set completeopt=menuone,longest
-set diffopt=filler,vertical,internal,indent-heuristic,algorithm:patience
-set fillchars+=stl:\ ,stlnc:\
-set formatoptions=nqr12j
-set listchars=eol:↲,precedes:«,extends:»,trail:·,tab:▸·,nbsp:¯
-set nrformats-=octal
-set previewheight=20
-set pumheight=15
-set scrolloff=3
-set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
-set shortmess=acAIoOt
-set showbreak=>
-set sidescrolloff=5
-set signcolumn=yes
-set synmaxcol=512
-set titlestring=%t%(\ [%R%M]%)
-set updatetime=300
-set virtualedit=all
-set wildignore+=*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc
-set wildignore+=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg
-set wildignore+=vendor/*,docs/*,node_modules/*,components/*,build/*,dist/*
-set wildmode=list:longest,list:full
-
-setlocal cursorcolumn
-setlocal cursorline
-
 highlight clear SpellBad
 highlight clear SpellCap
 highlight clear SpellLocal
@@ -86,18 +57,8 @@ highlight SpellLocal term=underline cterm=underline gui=undercurl
 highlight SpellRare  term=underline cterm=underline gui=undercurl
 highlight TermCursor ctermfg=yellow guifg=yellow
 
-augroup FocusEvents
-  autocmd!
-  autocmd FocusGained * highlight Normal ctermbg=none     guibg=none
-  autocmd FocusGained * setlocal cursorcolumn cursorline
-  autocmd FocusLost   * highlight Normal ctermbg=darkgrey guibg=#181818
-  autocmd FocusLost   * setlocal nocursorcolumn nocursorline
-augroup END
-
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
-let mapleader = ","
-let maplocalleader = " "
 let c_space_errors = 1
 let $GIT_SSL_NO_VERIFY = 'true'
 
@@ -387,7 +348,6 @@ augroup QF
 augroup END
 
 lua <<LUA
-local dap = require('dap')
 local treesitter = package.loaded['nvim-treesitter']
 local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
 
@@ -419,64 +379,100 @@ require'nvim-treesitter.configs'.setup {
 
 vim.cmd.colorscheme("koehler")
 
-vim.o.autoindent      = true
-vim.o.autoread        = true
-vim.o.background      = "dark"
-vim.o.bomb            = false
-vim.o.copyindent      = true
-vim.o.display         = "lastline"
-vim.o.encoding        = "utf-8"
-vim.o.expandtab       = true
-vim.o.gdefault        = true
-vim.o.hidden          = true
-vim.o.hlsearch        = true
-vim.o.ignorecase      = true
-vim.o.incsearch       = true
-vim.o.joinspaces      = false
-vim.o.laststatus      = 2
-vim.o.lazyredraw      = true
-vim.o.list            = true
-vim.o.matchtime       = 5
-vim.o.modeline        = true
-vim.o.mouse           = "a"
-vim.o.number          = true
-vim.o.relativenumber  = true
-vim.o.shiftround      = true
-vim.o.shiftwidth      = 2
-vim.o.showcmd         = true
-vim.o.showmatch       = true
-vim.o.showmode        = false
-vim.o.smartcase       = true
-vim.o.smarttab        = true
-vim.o.softtabstop     = 2
-vim.o.splitbelow      = true
-vim.o.startofline     = false
-vim.o.swapfile        = false
-vim.o.tabstop         = 2
-vim.o.termguicolors   = true
-vim.o.textwidth       = 80
-vim.o.timeout         = false
-vim.o.title           = true
-vim.o.ttimeout        = true
-vim.o.undofile        = true
-vim.o.visualbell      = true
-vim.o.wildmenu        = true
-vim.o.wrap            = false
+vim.g.mapleader = ","
+vim.g.maplocalleader = " "
+
+vim.opt.autoindent      = true
+vim.opt.autoread        = true
+vim.opt.background      = "dark"
+vim.opt.backspace       = "indent,eol,start"
+vim.opt.bomb            = false
+vim.opt.colorcolumn     = "+1"
+vim.opt.completeopt     = "menuone,longest"
+vim.opt.copyindent      = true
+vim.opt.cursorcolumn    = true
+vim.opt.cursorline      = true
+vim.opt.diffopt         = "filler,vertical,internal,indent-heuristic,algorithm:patience"
+vim.opt.display         = "lastline"
+vim.opt.encoding        = "utf-8"
+vim.opt.expandtab       = true
+vim.opt.formatoptions   = "nqr12j"
+vim.opt.gdefault        = true
+vim.opt.hidden          = true
+vim.opt.hlsearch        = true
+vim.opt.ignorecase      = true
+vim.opt.incsearch       = true
+vim.opt.joinspaces      = false
+vim.opt.laststatus      = 2
+vim.opt.lazyredraw      = true
+vim.opt.list            = true
+vim.opt.matchtime       = 5
+vim.opt.modeline        = true
+vim.opt.mouse           = "a"
+vim.opt.number          = true
+vim.opt.previewheight   = 20
+vim.opt.pumheight       = 15
+vim.opt.relativenumber  = true
+vim.opt.scrolloff       = 3
+vim.opt.sessionoptions  = "blank,buffers,curdir,folds,help,tabpages,winsize"
+vim.opt.shiftround      = true
+vim.opt.shiftwidth      = 2
+vim.opt.shortmess       = "acAIoOt"
+vim.opt.showbreak       = ">"
+vim.opt.showcmd         = true
+vim.opt.showmatch       = true
+vim.opt.showmode        = false
+vim.opt.sidescrolloff   = 5
+vim.opt.signcolumn      = "yes"
+vim.opt.smartcase       = true
+vim.opt.smarttab        = true
+vim.opt.softtabstop     = 2
+vim.opt.splitbelow      = true
+vim.opt.startofline     = false
+vim.opt.swapfile        = false
+vim.opt.synmaxcol       = 512
+vim.opt.tabstop         = 2
+vim.opt.termguicolors   = true
+vim.opt.textwidth       = 80
+vim.opt.timeout         = false
+vim.opt.title           = true
+vim.opt.ttimeout        = true
+vim.opt.undofile        = true
+vim.opt.updatetime      = 300
+vim.opt.virtualedit     = all
+vim.opt.visualbell      = true
+vim.opt.wildmenu        = true
+vim.opt.wildmode        = "list:longest,list:full"
+vim.opt.wrap            = false
+vim.opt.listchars       = "eol:↲,precedes:«,extends:»,trail:·,tab:▸·,nbsp:¯"
+vim.opt.titlestring     = [[%t%(\ [%R%M]%)]]
+
+vim.opt.clipboard:append("unnamedplus")
+vim.opt.fillchars:append { stl = " ", stlnc = "\"" }
+vim.opt.nrformats:remove("octal")
+vim.opt.wildignore:append("*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc")
+vim.opt.wildignore:append(".svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg")
+vim.opt.wildignore:append("vendor/*,docs/*,node_modules/*,components/*,build/*,dist/*")
 
 vim.g.editorconfig_enable = true
 
-dap.adapters.php = {
-  type = 'executable',
-  command = 'node',
-  args = { '/home/darc/contrib/vscode-php-debug/out/phpDebug.js' }
-}
-
-dap.configurations.php = {
-  {
-      type = 'php',
-      request = 'launch',
-      name = 'Listen for Xdebug',
-      port = 9000
-  }
-}
+local FocusEvents = vim.api.nvim_create_augroup('FocusEvents', {clear = true})
+vim.api.nvim_create_autocmd({ 'FocusGained' }, {
+  pattern = '*',
+  group = FocusEvents,
+  callback = function(buf)
+    vim.cmd.highlight('Normal', 'ctermbg=none guibg=none')
+    vim.opt.cursorcolumn = true
+    vim.opt.cursorline = true
+  end
+})
+vim.api.nvim_create_autocmd({ 'FocusLost' }, {
+  pattern = '*',
+  group = FocusEvents,
+  callback = function(buf)
+    vim.cmd.highlight('Normal', 'ctermbg=darkgrey guibg=#181818')
+    vim.opt.cursorcolumn = false
+    vim.opt.cursorline = false
+  end
+})
 LUA
