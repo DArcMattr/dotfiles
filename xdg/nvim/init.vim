@@ -1,5 +1,3 @@
-if !1 | finish | endif
-
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -7,14 +5,12 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'embear/vim-localvimrc'
 Plug 'dense-analysis/ale'
 Plug 'fatih/vim-go', { 'for': [ 'go' ], 'do': ':GoUpdateBinaries' }
 Plug 'hhvm/vim-hack', { 'for': ['hack'] }
 Plug 'hilojack/vim-xt'
 Plug 'isRuslan/vim-es6', { 'for': [ 'js', 'jsx', 'javascript.jsx', 'mjs' ] }
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
 Plug 'mfukar/robotframework-vim'
 " Plug 'mfussenegger/nvim-dap'
@@ -38,13 +34,19 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-vdebug/vdebug'
 Plug 'vim-scripts/csv.vim'
 Plug 'vim-scripts/DirDiff.vim'
+Plug 'windwp/nvim-autopairs'
+Plug 'windwp/nvim-ts-autotag'
 call plug#end()
 
 lua <<LUA
 local treesitter = package.loaded['nvim-treesitter']
 local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
 
+require("nvim-autopairs").setup {}
 require'nvim-treesitter.configs'.setup {
+  autotag = {
+    enable = true,
+  },
   highlight = {
     additional_vim_regex_highlighting = true,
     disabled = {},
@@ -74,6 +76,7 @@ vim.cmd.colorscheme("koehler")
 
 vim.g.mapleader = ","
 vim.g.maplocalleader = " "
+vim.g.c_space_errors = 1
 
 vim.opt.autoindent      = true
 vim.opt.autoread        = true
@@ -89,6 +92,7 @@ vim.opt.diffopt         = "filler,vertical,internal,indent-heuristic,algorithm:p
 vim.opt.display         = "lastline"
 vim.opt.encoding        = "utf-8"
 vim.opt.expandtab       = true
+vim.opt.exrc            = true
 vim.opt.formatoptions   = "nqr12j"
 vim.opt.gdefault        = true
 vim.opt.hidden          = true
@@ -148,9 +152,45 @@ vim.opt.wildignore:append(".svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.
 vim.opt.wildignore:append("vendor/*,docs/*,node_modules/*,components/*,build/*,dist/*")
 
 vim.g.editorconfig_enable = true
+vim.g.netrw_altv = 1
+vim.g.netrw_banner = 0
+vim.g.netrw_browse_split = 4
+-- vim.g.netrw_list_hide= '.*\.swp$,\.DS_Store,*/tmp/*,*\.so,*\.swp,*\.zip,*\.git,^\.\.\=/\=,*\.log$'
+vim.g.netrw_liststyle = 3
+vim.g.netrw_preview = 1
+vim.g.netrw_silent = 1
+vim.g.netrw_winsize = 25
 
 vim.cmd.highlight("TermCursor", "ctermfg=yellow guifg=yellow")
+vim.cmd.highlight("LineNr", "gui=bold guifg=#c6c6c6 guibg=#00005f")
+vim.cmd.highlight("LineNr", "gui=bold guifg=#c6c6c6 guibg=#00005f")
+vim.cmd.highlight("LineNr", "term=reverse cterm=bold ctermfg=251 ctermbg=17")
+vim.cmd.highlight("NonText", "ctermfg=235 guifg=#262626")
+vim.cmd.highlight("OverLength", "ctermbg=234 ctermfg=249 guibg=#1c1c1c guifg=#b2b2b2")
+vim.cmd.highlight("SpellBad", "term=standout,underline cterm=underline ctermfg=1 guifg=#800000 gui=undercurl")
+vim.cmd.highlight("SpellCap", "term=underline cterm=underline gui=undercurl")
+vim.cmd.highlight("SpellLocal", "term=underline cterm=underline gui=undercurl")
+vim.cmd.highlight("SpellRare", "term=underline cterm=underline gui=undercurl")
+vim.cmd.highlight("link", "ALEErrorLine", "ErrorMsg")
+vim.cmd.highlight("link", "ALEWarningLine", "WarningMsg")
 
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "<Leader>l", ":set relativenumber!<Cr>")
+vim.keymap.set("n", "<Leader>t", ":enew<Cr>")
+vim.keymap.set("n", "N", "Nzz")
+vim.keymap.set("n", "n", "nzz")
+vim.keymap.set("n", "p", "p`[")
+vim.keymap.set("i", "<C-b>", "<Esc>gUiwi")
+vim.keymap.set("i", "<Tab>", function()
+  return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
+end, { expr = true })
+vim.keymap.set("i", "<S-Tab>", function()
+  return vim.fn.pumvisible() == 1 and "<C-p>" or "<C-h>"
+end, { expr = true })
+vim.keymap.set("i", "<Cr>", function()
+  return vim.fn.pumvisible() == 1 and "<C-y>" or "<C-g>u<Cr>"
+end, { expr = true })
 local FocusEvents = vim.api.nvim_create_augroup('FocusEvents', {clear = true})
 vim.api.nvim_create_autocmd({ 'FocusGained' }, {
   pattern = '*',
@@ -172,21 +212,8 @@ vim.api.nvim_create_autocmd({ 'FocusLost' }, {
 })
 LUA
 
-highlight link ALEErrorLine ErrorMsg
-highlight link ALEWarningLine WarningMsg
-
-highlight LineNr     gui=bold       guifg=#c6c6c6   guibg=#00005f
-highlight LineNr     term=reverse   cterm=bold      ctermfg=251    ctermbg=17
-highlight NonText    ctermfg=235    guifg=#262626
-highlight OverLength ctermbg=234    ctermfg=249     guibg=#1c1c1c  guifg=#b2b2b2
-highlight SpellBad   term=standout,underline        cterm=underline ctermfg=1 guifg=#800000 gui=undercurl
-highlight SpellCap   term=underline cterm=underline gui=undercurl
-highlight SpellLocal term=underline cterm=underline gui=undercurl
-highlight SpellRare  term=underline cterm=underline gui=undercurl
-
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
-let c_space_errors = 1
 let $GIT_SSL_NO_VERIFY = 'true'
 
 let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -211,40 +238,13 @@ let g:ale_sign_error = '⨉'
 let g:ale_sign_warning = '⚠'
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '']
 let g:ale_use_global_executables = 1
-let g:AutoPairsShortcutToggle = '<Leader>ap'
-let g:AutoPairsShortcutFastWrap = '<Leader>ae'
-let g:AutoPairsShortcutJump = '<Leader>an'
-let g:AutoPairsShortcutBackInsert = '<Leader>ab'
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_exclude_filetypes = ['help', 'man', 'netrw']
-let g:localvimrc_persistent = 1
-let g:localvimrc_sandbox = 0
-let g:netrw_altv = 1
-let g:netrw_banner = 0
-let g:netrw_browse_split = 4
-let g:netrw_list_hide= '.*\.swp$,\.DS_Store,*/tmp/*,*\.so,*\.swp,*\.zip,*\.git,^\.\.\=/\=,*\.log$'
-let g:netrw_liststyle = 3
-let g:netrw_preview = 1
-let g:netrw_silent = 1
-let g:netrw_winsize = 25
 
 if !exists('g:vdebug_options')
   let g:vdebug_options = {}
 endif
 let g:vdebug_options.break_on_open = 0
-
-noremap <C-d>     <C-d>zz
-noremap <C-u>     <C-u>zz
-noremap <Leader>l :set relativenumber!<Cr>
-noremap <Leader>t :enew<Cr>
-noremap N         Nzz
-noremap n         nzz
-noremap p         p`[
-
-inoremap <C-b>         <Esc>gUiw
-inoremap <Expr><Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <Expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <Expr><Cr>    pumvisible() ? "\<C-y>" : "\<C-g>u\<Cr>"
 
 nnoremap : ;
 nnoremap ; :
@@ -290,6 +290,7 @@ nnoremap <Leader>l0    :lua vim.lsp.buf.document_symbol()<Cr>
 nnoremap <Leader>lW    :lua vim.lsp.buf.workspace_symbol()<Cr>
 nnoremap <Leader>ld    :lua vim.lsp.buf.declaration()<Cr>
 nnoremap <Leader>lk    :lua vim.lsp.buf.hover()<Cr>
+
 nnoremap <Leader>lr    :lua vim.lsp.buf.references()<Cr>
 nnoremap <Leader>o     i<Cr><Esc>
 nnoremap <Leader>q     :nohlsearch<Cr>
@@ -458,7 +459,7 @@ if system('uname -r') =~? 'microsoft'
 endif
 
 " left over FileType config below
-" any project-specific settings should be included in the .lvimrc file placed
+" any project-specific settings should be included in the local config file placed
 " in the root folder of that project
 
 " Lisp

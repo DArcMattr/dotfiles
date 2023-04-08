@@ -1,24 +1,23 @@
 " vim:et sw=2 ts=2
 
-let $PROJECT_ROOT='/var/www/vhosts/lims.test'
+lua <<LUA
+vim.fn.setenv('PROJECT_ROOT', '/var/www/vhosts/local.test')
 
-if g:localvimrc_sourced_once_for_file
-  finish
-endif
-
-let g:vdebug_options.debug_file = '~/vdebug.log'
-let g:vdebug_options.debug_file_level = 2
+require'lspconfig'.intelephense.setup{
+  settings = {
+    intelephense = {
+      environment = { version = "8.1.0" },
+    }
+  }
+}
+LUA
 
 let g:ale_css_stylelint_options = ""
 let g:ale_php_phpcs_standard = 'PSR2R'
-let g:ale_php_phpcs_options = '--runtime-set php_version 50640'
+let g:ale_php_phpcs_options = '--runtime-set php_version 80100'
 let g:ale_php_phpcbf_standard = 'PSR2R'
 let g:ale_javascript_eslint_use_global = 0
-let g:php_version_id = 50640
-
-if g:localvimrc_sourced_once
-  finish
-endif
+let g:php_version_id = 80100
 
 augroup project
   autocmd!
@@ -34,13 +33,3 @@ augroup project
 augroup END
 
 set includeexpr=substitute(v:fname,'^/','','')
-
-lua <<LUA
-require'lspconfig'.intelephense.setup{
-  settings = {
-    intelephense = {
-      environment = { version = "5.6.0" },
-    }
-  }
-}
-LUA
