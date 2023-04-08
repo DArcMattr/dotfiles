@@ -1,48 +1,53 @@
+lua <<LUA
+vim.cmd([[
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
+]])
 
-call plug#begin('~/.config/nvim/plugged')
-Plug 'dense-analysis/ale'
-Plug 'fatih/vim-go', { 'for': [ 'go' ], 'do': ':GoUpdateBinaries' }
-Plug 'hhvm/vim-hack', { 'for': ['hack'] }
-Plug 'hilojack/vim-xt'
-Plug 'isRuslan/vim-es6', { 'for': [ 'js', 'jsx', 'javascript.jsx', 'mjs' ] }
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'mattn/emmet-vim'
-Plug 'mfukar/robotframework-vim'
-Plug 'mfussenegger/nvim-dap'
-Plug 'mhinz/vim-signify'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-Plug 'OmniSharp/omnisharp-vim', { 'for': [ 'cs' ], 'do': ':OmniSharpInstall' }
-" Plug 'rcarriga/nvim-dap-ui'
-Plug 'sheerun/vim-polyglot'
-Plug 'Shougo/denite.nvim', { 'do' : ':UpdateRemotePlugins' }
-Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' } | Plug 'deoplete-plugins/deoplete-tag' | Plug 'Shougo/deoplete-lsp'
-Plug 'Shougo/neco-syntax'
-Plug 'Shougo/neco-vim'
-Plug 'StanAngeloff/php.vim', {'for': 'php'}
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'Valloric/MatchTagAlways'
-Plug 'vim-airline/vim-airline'
-" Plug 'vim-vdebug/vdebug'
-Plug 'vim-scripts/csv.vim'
-Plug 'vim-scripts/DirDiff.vim'
-Plug 'windwp/nvim-autopairs'
-Plug 'windwp/nvim-ts-autotag'
-call plug#end()
-
-lua <<LUA
 local treesitter = package.loaded['nvim-treesitter']
 local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
+local Plug = vim.fn['plug#']
 
-require("nvim-autopairs").setup {}
+-- TODO: switch to pure lua plugin loader
+vim.call('plug#begin', '~/.config/nvim/plugged')
+Plug('fatih/vim-go', { ['for'] = 'go', ['do'] = ':GoUpdateBinaries' })
+Plug('hhvm/vim-hack', { ['for'] = 'hack' })
+Plug('hilojack/vim-xt')
+Plug('isRuslan/vim-es6', { ['for'] = { 'js', 'jsx', 'javascript.jsx', 'mjs' } })
+Plug('jeffkreeftmeijer/vim-numbertoggle')
+Plug('mattn/emmet-vim')
+Plug('mfukar/robotframework-vim')
+Plug('mfussenegger/nvim-dap')
+Plug('mhinz/vim-signify')
+Plug('nathanaelkane/vim-indent-guides')
+Plug('neovim/nvim-lspconfig')
+Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
+Plug('OmniSharp/omnisharp-vim', { ['for'] = { 'cs' }, ['do'] = ':OmniSharpInstall' })
+Plug('rcarriga/nvim-dap-ui')
+Plug('sheerun/vim-polyglot')
+Plug('Shougo/denite.nvim', { ['do'] = ':UpdateRemotePlugins' })
+Plug('Shougo/deoplete.nvim', { ['do'] = ':UpdateRemotePlugins' })
+Plug('deoplete-plugins/deoplete-tag')
+Plug('Shougo/deoplete-lsp')
+Plug('Shougo/neco-syntax')
+Plug('Shougo/neco-vim')
+Plug('StanAngeloff/php.vim', {['for'] = 'php'})
+Plug('tpope/vim-fugitive')
+Plug('tpope/vim-repeat')
+Plug('tpope/vim-surround')
+Plug('Valloric/MatchTagAlways')
+Plug('vim-airline/vim-airline')
+Plug('vim-scripts/csv.vim')
+Plug('vim-scripts/DirDiff.vim')
+Plug('windwp/nvim-autopairs')
+Plug('windwp/nvim-ts-autotag')
+vim.call('plug#end')
+
+require'nvim-dap-ui'.setup {}
+require'nvim-autopairs'.setup {}
 require'nvim-treesitter.configs'.setup {
   autotag = {
     enable = true,
@@ -150,12 +155,15 @@ vim.opt.wildmenu        = true
 vim.opt.wildmode        = 'list:longest,list:full'
 vim.opt.wrap            = false
 
-vim.opt.clipboard:append('unnamedplus')
+vim.opt.clipboard:append { 'unnamedplus' }
 vim.opt.fillchars:append { stl = ' ', stlnc = '"' }
-vim.opt.nrformats:remove('octal')
-vim.opt.wildignore:append('*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc')
-vim.opt.wildignore:append('.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg')
-vim.opt.wildignore:append('vendor/*,docs/*,node_modules/*,components/*,build/*,dist/*')
+vim.opt.nrformats:remove { 'octal' }
+vim.opt.wildignore:append {
+  '*.png', '*.xpm', '*.gif', '*.pdf', '*.bak', '*.beam', '*.pyc',
+  '.svn', 'CVS', '.git', '*.o', '*.a', '*.class', '*.mo', '*.la',
+  '*.so', '*.obj', '*.swp', '*.jpg', 'vendor/*', 'docs/*',
+  'node_modules/*', 'components/*', 'build/*', 'dist/*'
+}
 
 vim.cmd.highlight('TermCursor', 'ctermfg=yellow guifg=yellow')
 vim.cmd.highlight('LineNr',     'gui=bold guifg=#c6c6c6 guibg=#00005f')
@@ -167,9 +175,6 @@ vim.cmd.highlight('SpellBad',   'term=standout,underline cterm=underline ctermfg
 vim.cmd.highlight('SpellCap',   'term=underline cterm=underline gui=undercurl')
 vim.cmd.highlight('SpellLocal', 'term=underline cterm=underline gui=undercurl')
 vim.cmd.highlight('SpellRare',  'term=underline cterm=underline gui=undercurl')
-
-vim.cmd.highlight('link',       'ALEErrorLine', 'ErrorMsg')
-vim.cmd.highlight('link',       'ALEWarningLine', 'WarningMsg')
 
 vim.keymap.set('i', '<C-b>',   '<Esc>gUiwi')
 vim.keymap.set('i', '<Cr>',    function() return vim.fn.pumvisible() == 1 and '<C-y>' or '<C-g>u<Cr>' end, { expr = true })
@@ -188,19 +193,17 @@ vim.keymap.set('n', '<F2>',           function() require'dap'.step_over() end)
 vim.keymap.set('n', '<F3>',           function() require'dap'.step_into() end)
 vim.keymap.set('n', '<F4>',           function() require'dap'.step_out() end)
 vim.keymap.set('n', '<F5>',           function() require'dap'.continue() end)
-vim.keymap.set('n', '<Leader>1gD',    vim.lsp.buf.type_definition)
-vim.keymap.set('n', '<Leader><C-k>',  vim.lsp.buf.signature_help)
+vim.keymap.set('n', '<Leader><C-k>',  function() vim.lsp.buf.signature_help() end)
 vim.keymap.set('n', '<Leader><S-F5>', function() require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end)
 vim.keymap.set('n', '<Leader><S-b>',  'gUiw')
 vim.keymap.set('n', '<Leader>a',      function() vim.opt.relativenumber = not(vim.opt.relativenumber:get()) end)
-vim.keymap.set('n', '<Leader>af',     ':ALEFix<Cr>')
 vim.keymap.set('n', '<Leader>b',      'guiw')
 vim.keymap.set('n', '<Leader>d*',     ':DeniteCursorWord grep:.<Cr>')
 vim.keymap.set('n', '<Leader>d/',     ':Denite grep:.<Cr>')
 vim.keymap.set('n', '<Leader>dl',     function() require'dap'.run_last() end)
 vim.keymap.set('n', '<Leader>do',     ':Denite outline<Cr>')
+vim.keymap.set('n', '<Leader>dp',     function() require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { silent = true})
 vim.keymap.set('n', '<Leader>dr',     function() require'dap'.repl.open() end)
-vim.keymap.set('n', '<Leader>gD',     vim.lsp.buf.implementation)
 vim.keymap.set('n', '<Leader>gb',     ':Git blame<Cr>')
 vim.keymap.set('n', '<Leader>gc',     ':Git commit<Cr>')
 vim.keymap.set('n', '<Leader>gd',     ':Gdiffsplit<Cr>')
@@ -208,18 +211,20 @@ vim.keymap.set('n', '<Leader>gl',     ':Git log -- %<Cr>')
 vim.keymap.set('n', '<Leader>gp',     ':Git push<Cr>')
 vim.keymap.set('n', '<Leader>gs',     ':Git<Cr>')
 vim.keymap.set('n', '<Leader>l0',     function() vim.lsp.buf.document_symbol() end)
+vim.keymap.set('n', '<Leader>lD',     function() vim.lsp.buf.implementation() end)
 vim.keymap.set('n', '<Leader>lW',     function() vim.lsp.buf.workspace_symbol() end)
 vim.keymap.set('n', '<Leader>ld',     function() vim.lsp.buf.declaration() end)
+vim.keymap.set('n', '<Leader>lf',     function() vim.lsp.buf.format() end)
+vim.keymap.set('n', '<Leader>lg',     function() vim.lsp.buf.type_definition() end)
 vim.keymap.set('n', '<Leader>lk',     function() vim.lsp.buf.hover() end)
-vim.keymap.set('n', '<Leader>lp',     function() require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
-vim.keymap.set('n', '<Leader>lr',     vim.lsp.buf.references)
+vim.keymap.set('n', '<Leader>lr',     function() vim.lsp.buf.references() end)
 vim.keymap.set('n', '<Leader>o',      'i<Cr><Esc>')
 vim.keymap.set('n', '<Leader>q',      ':nohlsearch<Cr>')
 vim.keymap.set('n', '<Leader>t',      ':enew<Cr>')
+vim.keymap.set('n', '<Leader><F7>',   function() vim.opt.spell = not(vim.opt.spell:get())  end, { silent = true })
 vim.keymap.set('n', '<Left>',         ':bp<Cr>')
 vim.keymap.set('n', '<M-i>',          'i<Space><Esc>')
 vim.keymap.set('n', '<Right>',        ':bn<Cr>')
-vim.keymap.set('n', '<leader><F7>',   function() vim.opt.spell = not(vim.opt.spell:get())  end)
 vim.keymap.set('n', 'A',              'zzA')
 vim.keymap.set('n', 'H',              '^')
 vim.keymap.set('n', 'I',              'zzI')
@@ -239,8 +244,8 @@ vim.keymap.set('v', '*',              'y/<C-r>"<Cr>')
 vim.keymap.set('v', '?',              'y?<C-r>"<Cr>')
 vim.keymap.set('v', 'p',              '"_dP`]')
 vim.keymap.set('v', 'y',              'y`]')
-vim.keymap.set({'n', 'v'}, ':',              ';')
-vim.keymap.set({'n', 'v'}, ';',              ':')
+vim.keymap.set({'n', 'v'}, ':',       ';')
+vim.keymap.set({'n', 'v'}, ';',       ':')
 vim.keymap.set({'n', 'x'}, 'c',       '"xc')
 
 local FocusEvents = vim.api.nvim_create_augroup('FocusEvents', {clear = true})
@@ -298,23 +303,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline_powerline_fonts = 1
-let g:ale_cache_executable_check_failures = 1
-let g:ale_echo_msg_format = '[%linter%]% [code]% %s'
-let g:ale_fixers = {
-\   '*': []
-\ }
-let g:ale_floating_preview = 1
-let g:ale_lint_delay = 0
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 'normal'
-let g:ale_lint_on_insert_leave = 1
-let g:ale_open_list = 1
-let g:ale_set_loclist = 1
-let g:ale_set_quickfix = 0
-let g:ale_sign_error = '⨉'
-let g:ale_sign_warning = '⚠'
-let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '']
-let g:ale_use_global_executables = 1
 
 " Denite
 call denite#custom#option( 'default', {
