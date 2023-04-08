@@ -2,6 +2,7 @@
 
 lua <<LUA
 vim.fn.setenv('PROJECT_ROOT', '/var/www/vhosts/local.test')
+vim.g.php_version_id = 80100
 
 require'lspconfig'.intelephense.setup{
   settings = {
@@ -10,6 +11,8 @@ require'lspconfig'.intelephense.setup{
     }
   }
 }
+
+
 LUA
 
 let g:ale_css_stylelint_options = ""
@@ -17,7 +20,6 @@ let g:ale_php_phpcs_standard = 'PSR2R'
 let g:ale_php_phpcs_options = '--runtime-set php_version 80100'
 let g:ale_php_phpcbf_standard = 'PSR2R'
 let g:ale_javascript_eslint_use_global = 0
-let g:php_version_id = 80100
 
 augroup project
   autocmd!
