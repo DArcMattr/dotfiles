@@ -1,4 +1,6 @@
-require'lspconfig'.intelephense.setup{}
+require'lspconfig'.intelephense.setup{
+	capabilities = U.capabilities
+}
 local dap = require('dap')
 
 vim.opt_local.keywordprg = 'pman'

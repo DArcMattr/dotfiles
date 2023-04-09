@@ -1,3 +1,4 @@
+U = {}
 vim.cmd([[
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -23,6 +24,8 @@ Plug('akinsho/bufferline.nvim')
 Plug('fatih/vim-go', { ['for'] = 'go', ['do'] = ':GoUpdateBinaries' })
 Plug('hhvm/vim-hack', { ['for'] = 'hack' })
 Plug('hilojack/vim-xt')
+Plug('hrsh7th/cmp-nvim-lsp')
+Plug('hrsh7th/nvim-cmp')
 Plug('isRuslan/vim-es6', { ['for'] = { 'js', 'jsx', 'javascript.jsx', 'mjs' } })
 Plug('jeffkreeftmeijer/vim-numbertoggle')
 Plug('mattn/emmet-vim')
@@ -44,9 +47,11 @@ Plug('windwp/nvim-autopairs')
 Plug('windwp/nvim-ts-autotag')
 vim.call('plug#end')
 
-local lspconfig = require('lspconfig')
-local treesitter = package.loaded['nvim-treesitter']
+local cmp = require'cmp'
+local lspconfig = require'lspconfig'
 local parser_config = require 'nvim-treesitter.parsers'.get_parser_configs()
+local treesitter = package.loaded['nvim-treesitter']
+
 require'bufferline'.setup {}
 require'dapui'.setup {}
 require'lualine'.setup {
@@ -273,6 +278,24 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end
 })
 
+cmp.setup({
+	window = {
+		completion = cmp.config.window.bordered()
+	},
+	mapping = {
+		['<C-b>']     = cmp.mapping.scroll_docs(-4),
+		['<C-f>']     = cmp.mapping.scroll_docs(4),
+		['<C-Space>'] = cmp.mapping.complete(),
+		['<C-e>']     = cmp.mapping.abort(),
+		['<CR>']      = cmp.mapping.confirm({ select = true }),
+	},
+	sources = {
+		{ name = 'nvim_lsp'},
+		{ name = 'buffer'},
+	}
+})
+U.capabilities = require'cmp_nvim_lsp'.default_capabilities()
+
 local FocusEvents = vim.api.nvim_create_augroup('FocusEvents', { clear = true })
 vim.api.nvim_create_autocmd({ 'FocusGained' }, {
   pattern = '*',
@@ -348,13 +371,6 @@ if executable('rg')
 else
   set grepprg=grep\ -nH\ $*
 endif
-
-" Deoplete
-" call deoplete#enable()
-" call deoplete#custom#option('sources', {
-" \     '_': []
-" \   })
-" "call deoplete#enable_logging('DEBUG', $HOME . '/deoplete.log')
 
 command! -nargs=1 Silent |
 \   execute ':silent !'.<q-args> |
