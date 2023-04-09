@@ -7,8 +7,6 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 ]])
 
-local treesitter = package.loaded['nvim-treesitter']
-local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
 local Plug = vim.fn['plug#']
 
 -- TODO: switch to pure lua plugin loader
@@ -29,9 +27,9 @@ Plug('OmniSharp/omnisharp-vim', { ['for'] = { 'cs' }, ['do'] = ':OmniSharpInstal
 Plug('rcarriga/nvim-dap-ui')
 Plug('sheerun/vim-polyglot')
 Plug('Shougo/denite.nvim', { ['do'] = ':UpdateRemotePlugins' })
-Plug('Shougo/deoplete.nvim', { ['do'] = ':UpdateRemotePlugins' })
-Plug('deoplete-plugins/deoplete-tag')
-Plug('Shougo/deoplete-lsp')
+-- Plug('Shougo/deoplete.nvim', { ['do'] = ':UpdateRemotePlugins' })
+-- Plug('deoplete-plugins/deoplete-tag')
+-- Plug('Shougo/deoplete-lsp')
 Plug('Shougo/neco-syntax')
 Plug('Shougo/neco-vim')
 Plug('StanAngeloff/php.vim', {['for'] = 'php'})
@@ -46,8 +44,9 @@ Plug('windwp/nvim-autopairs')
 Plug('windwp/nvim-ts-autotag')
 vim.call('plug#end')
 
-require'nvim-dap-ui'.setup {}
-require'nvim-autopairs'.setup {}
+local treesitter = package.loaded['nvim-treesitter']
+local parser_config = require 'nvim-treesitter.parsers'.get_parser_configs()
+
 require'nvim-treesitter.configs'.setup {
   autotag = {
     enable = true,
@@ -76,6 +75,8 @@ require'nvim-treesitter.configs'.setup {
     "vim",
   },
 }
+require'dapui'.setup {}
+require'nvim-autopairs'.setup {}
 
 vim.cmd.colorscheme('koehler')
 
@@ -92,10 +93,10 @@ vim.fn.setenv('GIT_SSL_NO_VERIFY', 'true')
 vim.opt.autoindent      = true
 vim.opt.autoread        = true
 vim.opt.background      = 'dark'
-vim.opt.backspace       = 'indent,eol,start'
+vim.opt.backspace       = { 'indent', 'eol', 'start' }
 vim.opt.bomb            = false
 vim.opt.colorcolumn     = '+1'
-vim.opt.completeopt     = 'menuone,longest'
+vim.opt.completeopt     = { 'menuone', 'longest' }
 vim.opt.copyindent      = true
 vim.opt.cursorcolumn    = true
 vim.opt.cursorline      = true
@@ -123,7 +124,7 @@ vim.opt.previewheight   = 20
 vim.opt.pumheight       = 15
 vim.opt.relativenumber  = true
 vim.opt.scrolloff       = 3
-vim.opt.sessionoptions  = 'blank,buffers,curdir,folds,help,tabpages,winsize'
+vim.opt.sessionoptions  = { 'blank', 'buffers', 'curdir', 'folds', 'help', 'tabpages', 'winsize' }
 vim.opt.shiftround      = true
 vim.opt.shiftwidth      = 2
 vim.opt.shortmess       = 'acAIoOt'
@@ -152,17 +153,17 @@ vim.opt.updatetime      = 300
 vim.opt.virtualedit     = 'all'
 vim.opt.visualbell      = true
 vim.opt.wildmenu        = true
-vim.opt.wildmode        = 'list:longest,list:full'
+vim.opt.wildmode        = { 'list:longest', 'list:full' }
 vim.opt.wrap            = false
 
 vim.opt.clipboard:append { 'unnamedplus' }
 vim.opt.fillchars:append { stl = ' ', stlnc = '"' }
 vim.opt.nrformats:remove { 'octal' }
 vim.opt.wildignore:append {
-  '*.png', '*.xpm', '*.gif', '*.pdf', '*.bak', '*.beam', '*.pyc',
-  '.svn', 'CVS', '.git', '*.o', '*.a', '*.class', '*.mo', '*.la',
-  '*.so', '*.obj', '*.swp', '*.jpg', 'vendor/*', 'docs/*',
-  'node_modules/*', 'components/*', 'build/*', 'dist/*'
+  '*.png', '*.xpm', '*.gif', '*.pdf', '*.bak', '*.beam', '*.pyc', '.svn',
+  'CVS', '.git', '*.o', '*.a', '*.class', '*.mo', '*.la', '*.so', '*.obj',
+  '*.swp', '*.jpg', 'vendor/*', 'docs/*', 'node_modules/*', 'components/*',
+  'build/*', 'dist/*'
 }
 
 vim.cmd.highlight('TermCursor', 'ctermfg=yellow guifg=yellow')
@@ -248,9 +249,7 @@ vim.keymap.set({'n', 'v'}, ':',       ';')
 vim.keymap.set({'n', 'v'}, ';',       ':')
 vim.keymap.set({'n', 'x'}, 'c',       '"xc')
 
-local FocusEvents = vim.api.nvim_create_augroup('FocusEvents', {clear = true})
-local QF = vim.api.nvim_create_augroup('QF', {clear = true})
-local InsertOutsert = vim.api.nvim_create_augroup('InsertOutsert', {clear = true})
+local FocusEvents = vim.api.nvim_create_augroup('FocusEvents', { clear = true })
 vim.api.nvim_create_autocmd({ 'FocusGained' }, {
   pattern = '*',
   group = FocusEvents,
@@ -269,6 +268,8 @@ vim.api.nvim_create_autocmd({ 'FocusLost' }, {
     vim.opt.cursorline = false
   end
 })
+
+local QF = vim.api.nvim_create_augroup('QF', { clear = true })
 vim.api.nvim_create_autocmd({ 'FileType'}, {
   pattern = 'qf',
   group = QF,
@@ -278,6 +279,7 @@ vim.api.nvim_create_autocmd({ 'FileType'}, {
   end
 })
 
+local InsertOutsert = vim.api.nvim_create_augroup('InsertOutsert', { clear = true })
 vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
   pattern = '*',
   group = InsertOutsert,
@@ -330,11 +332,11 @@ else
 endif
 
 " Deoplete
-call deoplete#enable()
-call deoplete#custom#option('sources', {
-\     '_': []
-\   })
-"call deoplete#enable_logging('DEBUG', $HOME . '/deoplete.log')
+" call deoplete#enable()
+" call deoplete#custom#option('sources', {
+" \     '_': []
+" \   })
+" "call deoplete#enable_logging('DEBUG', $HOME . '/deoplete.log')
 
 command! -nargs=1 Silent |
 \   execute ':silent !'.<q-args> |
@@ -431,19 +433,9 @@ augroup StartupStuffs
   autocmd VimResized * execute 'normal! \<C-w>='
 augroup END
 
-if system('uname -r') =~? 'microsoft'
-  augroup WSL
-    autocmd!
-    autocmd TextYankPost * :call system('/mnt/c/Windows/System32/clip.exe ', @")
-  augroup END
-endif
-
 " left over FileType config below
 " any project-specific settings should be included in the local config file placed
 " in the root folder of that project
-
-" Lisp
-autocmd FileType lisp,scheme,art setlocal equalprg=~/dotfiles/helpers/scmindent.rkt
 
 " Mercurial commit messages
 autocmd BufNewFile,BufRead,BufEnter msg setfiletype hgcommit
