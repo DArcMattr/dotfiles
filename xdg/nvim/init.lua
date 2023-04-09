@@ -1,4 +1,3 @@
-lua <<LUA
 vim.cmd([[
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -296,8 +295,8 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
     vim.opt.timeoutlen = 200
   end
 })
-LUA
 
+vim.cmd([[
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -432,11 +431,4 @@ augroup StartupStuffs
   \ startinsert
   autocmd VimResized * execute 'normal! \<C-w>='
 augroup END
-
-" left over FileType config below
-" any project-specific settings should be included in the local config file placed
-" in the root folder of that project
-
-" Mercurial commit messages
-autocmd BufNewFile,BufRead,BufEnter msg setfiletype hgcommit
-autocmd FileType hgcommit setlocal textwidth=72
+]])
