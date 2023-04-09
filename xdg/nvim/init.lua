@@ -10,6 +10,16 @@ local Plug = vim.fn['plug#']
 
 -- TODO: switch to pure lua plugin loader
 vim.call('plug#begin', '~/.config/nvim/plugged')
+-- Plug('Shougo/deoplete-lsp')
+-- Plug('Shougo/deoplete.nvim', { ['do'] = ':UpdateRemotePlugins' })
+-- Plug('deoplete-plugins/deoplete-tag')
+Plug('OmniSharp/omnisharp-vim', { ['for'] = { 'cs' }, ['do'] = ':OmniSharpInstall' })
+Plug('Shougo/denite.nvim', { ['do'] = ':UpdateRemotePlugins' })
+Plug('Shougo/neco-syntax')
+Plug('Shougo/neco-vim')
+Plug('StanAngeloff/php.vim', {['for'] = 'php'})
+Plug('Valloric/MatchTagAlways')
+Plug('akinsho/bufferline.nvim')
 Plug('fatih/vim-go', { ['for'] = 'go', ['do'] = ':GoUpdateBinaries' })
 Plug('hhvm/vim-hack', { ['for'] = 'hack' })
 Plug('hilojack/vim-xt')
@@ -23,34 +33,25 @@ Plug('nathanaelkane/vim-indent-guides')
 Plug('neovim/nvim-lspconfig')
 Plug('nvim-lualine/lualine.nvim')
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
-Plug('OmniSharp/omnisharp-vim', { ['for'] = { 'cs' }, ['do'] = ':OmniSharpInstall' })
 Plug('rcarriga/nvim-dap-ui')
 Plug('sheerun/vim-polyglot')
-Plug('Shougo/denite.nvim', { ['do'] = ':UpdateRemotePlugins' })
--- Plug('Shougo/deoplete.nvim', { ['do'] = ':UpdateRemotePlugins' })
--- Plug('deoplete-plugins/deoplete-tag')
--- Plug('Shougo/deoplete-lsp')
-Plug('Shougo/neco-syntax')
-Plug('Shougo/neco-vim')
-Plug('StanAngeloff/php.vim', {['for'] = 'php'})
 Plug('tpope/vim-fugitive')
 Plug('tpope/vim-repeat')
 Plug('tpope/vim-surround')
-Plug('Valloric/MatchTagAlways')
-Plug('vim-scripts/csv.vim')
 Plug('vim-scripts/DirDiff.vim')
+Plug('vim-scripts/csv.vim')
 Plug('windwp/nvim-autopairs')
 Plug('windwp/nvim-ts-autotag')
 vim.call('plug#end')
 
 local treesitter = package.loaded['nvim-treesitter']
 local parser_config = require 'nvim-treesitter.parsers'.get_parser_configs()
+require'bufferline'.setup {}
 require'dapui'.setup {}
-require'nvim-autopairs'.setup {}
 require'lualine'.setup {
   options = { theme = 'powerline' }
 }
-
+require'nvim-autopairs'.setup {}
 require'nvim-treesitter.configs'.setup {
   autotag = {
     enable = true,
