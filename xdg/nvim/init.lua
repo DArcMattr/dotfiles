@@ -31,6 +31,7 @@ Plug('jeffkreeftmeijer/vim-numbertoggle')
 Plug('mattn/emmet-vim')
 Plug('mfukar/robotframework-vim')
 Plug('mfussenegger/nvim-dap')
+Plug('theHamsta/nvim-dap-virtual-text')
 Plug('mhinz/vim-signify')
 Plug('nathanaelkane/vim-indent-guides')
 Plug('neovim/nvim-lspconfig')
@@ -47,13 +48,23 @@ Plug('windwp/nvim-autopairs')
 Plug('windwp/nvim-ts-autotag')
 vim.call('plug#end')
 
-local cmp = require'cmp'
-local lspconfig = require'lspconfig'
-local parser_config = require 'nvim-treesitter.parsers'.get_parser_configs()
+local cmp, dap, dapui, lspconfig = require'cmp', require'dap', require'dapui', require'lspconfig'
+local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
 local treesitter = package.loaded['nvim-treesitter']
 
 require'bufferline'.setup {}
-require'dapui'.setup {}
+dapui.setup {}
+-- dapui.config.layouts[position] = 'right'
+dap.listeners.after.event_initialized['dapui_config'] = function()
+  dapui.open()
+end
+dap.listeners.after.event_terminated['dapui_config'] = function()
+  dapui.close()
+end
+dap.listeners.after.event_exited['dapui_config'] = function()
+  dapui.close()
+end
+require'nvim-dap-virtual-text'.setup()
 require'lualine'.setup {
   options = { theme = 'powerline' }
 }
@@ -155,7 +166,7 @@ vim.opt.termguicolors   = true
 vim.opt.textwidth       = 80
 vim.opt.timeout         = false
 vim.opt.title           = true
-vim.opt.titlestring     = [[%t%( [%R%M]%)]]
+vim.opt.titlestring     = '%t%( [%R%M]%)'
 vim.opt.ttimeout        = true
 vim.opt.undofile        = true
 vim.opt.updatetime      = 300
@@ -198,21 +209,22 @@ vim.keymap.set('n', '<C-e>',          '3<C-e>')
 vim.keymap.set('n', '<C-p>',          ':Denite file/rec<Cr>')
 vim.keymap.set('n', '<C-u>',          '<C-u>zz')
 vim.keymap.set('n', '<C-y>',          '3<C-y>')
-vim.keymap.set('n', '<F10>',          require'dap'.toggle_breakpoint)
-vim.keymap.set('n', '<F2>',           require'dap'.step_over)
-vim.keymap.set('n', '<F3>',           require'dap'.step_into)
-vim.keymap.set('n', '<F4>',           require'dap'.step_out)
-vim.keymap.set('n', '<F5>',           require'dap'.continue)
-vim.keymap.set('n', '<Leader><S-F5>', function() require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end)
+vim.keymap.set('n', '<F10>',          dap.toggle_breakpoint)
+vim.keymap.set('n', '<F2>',           dap.step_over)
+vim.keymap.set('n', '<F3>',           dap.step_into)
+vim.keymap.set('n', '<F4>',           dap.step_out)
+vim.keymap.set('n', '<F5>',           dap.continue)
+vim.keymap.set('n', '<F6>',           function() dap.terminate(); dapui.close() end)
+vim.keymap.set('n', '<Leader><S-F5>', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end)
 vim.keymap.set('n', '<Leader><S-b>',  'gUiw')
 vim.keymap.set('n', '<Leader>a',      function() vim.opt.relativenumber = not(vim.opt.relativenumber:get()) end)
 vim.keymap.set('n', '<Leader>b',      'guiw')
 vim.keymap.set('n', '<Leader>d*',     ':DeniteCursorWord grep:.<Cr>')
 vim.keymap.set('n', '<Leader>d/',     ':Denite grep:.<Cr>')
-vim.keymap.set('n', '<Leader>dl',     require'dap'.run_last)
+vim.keymap.set('n', '<Leader>dl',     dap.run_last)
 vim.keymap.set('n', '<Leader>do',     ':Denite outline<Cr>')
-vim.keymap.set('n', '<Leader>dp',     function() require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { silent = true})
-vim.keymap.set('n', '<Leader>dr',     require'dap'.repl.open)
+vim.keymap.set('n', '<Leader>dp',     function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { silent = true})
+vim.keymap.set('n', '<Leader>dr',     dap.repl.open)
 vim.keymap.set('n', '<Leader>gb',     ':Git blame<Cr>')
 vim.keymap.set('n', '<Leader>gc',     ':Git commit<Cr>')
 vim.keymap.set('n', '<Leader>gd',     ':Gdiffsplit<Cr>')
@@ -295,6 +307,7 @@ cmp.setup({
 	}
 })
 U.capabilities = require'cmp_nvim_lsp'.default_capabilities()
+U.dap = dap
 
 local FocusEvents = vim.api.nvim_create_augroup('FocusEvents', { clear = true })
 vim.api.nvim_create_autocmd({ 'FocusGained' }, {
