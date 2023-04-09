@@ -21,6 +21,7 @@ Plug('mfussenegger/nvim-dap')
 Plug('mhinz/vim-signify')
 Plug('nathanaelkane/vim-indent-guides')
 Plug('neovim/nvim-lspconfig')
+Plug('nvim-lualine/lualine.nvim')
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
 Plug('OmniSharp/omnisharp-vim', { ['for'] = { 'cs' }, ['do'] = ':OmniSharpInstall' })
 Plug('rcarriga/nvim-dap-ui')
@@ -36,7 +37,6 @@ Plug('tpope/vim-fugitive')
 Plug('tpope/vim-repeat')
 Plug('tpope/vim-surround')
 Plug('Valloric/MatchTagAlways')
-Plug('vim-airline/vim-airline')
 Plug('vim-scripts/csv.vim')
 Plug('vim-scripts/DirDiff.vim')
 Plug('windwp/nvim-autopairs')
@@ -45,6 +45,11 @@ vim.call('plug#end')
 
 local treesitter = package.loaded['nvim-treesitter']
 local parser_config = require 'nvim-treesitter.parsers'.get_parser_configs()
+require'dapui'.setup {}
+require'nvim-autopairs'.setup {}
+require'lualine'.setup {
+  options = { theme = 'powerline' }
+}
 
 require'nvim-treesitter.configs'.setup {
   autotag = {
@@ -74,8 +79,6 @@ require'nvim-treesitter.configs'.setup {
     "vim",
   },
 }
-require'dapui'.setup {}
-require'nvim-autopairs'.setup {}
 
 vim.cmd.colorscheme('koehler')
 
@@ -298,12 +301,6 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
 
 vim.cmd([[
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#whitespace#mixed_indent_algo = 1
-let g:airline_powerline_fonts = 1
 
 " Denite
 call denite#custom#option( 'default', {
