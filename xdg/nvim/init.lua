@@ -48,26 +48,54 @@ Plug('windwp/nvim-autopairs')
 Plug('windwp/nvim-ts-autotag')
 vim.call('plug#end')
 
-local cmp, dap, dapui, lspconfig = require'cmp', require'dap', require'dapui', require'lspconfig'
+local cmp = require'cmp'
+local dap = require'dap'
+local dapui = require'dapui'
+local lspconfig = require'lspconfig'
 local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
 local treesitter = package.loaded['nvim-treesitter']
 
 require'bufferline'.setup {}
-dapui.setup {}
--- dapui.config.layouts[position] = 'right'
-dap.listeners.after.event_initialized['dapui_config'] = function()
-  dapui.open()
-end
-dap.listeners.after.event_terminated['dapui_config'] = function()
-  dapui.close()
-end
-dap.listeners.after.event_exited['dapui_config'] = function()
-  dapui.close()
-end
+dapui.setup({
+    layouts = {
+        {
+            elements = {
+                'watches',
+                { id = 'scopes', size = 0.5 },
+                { id = 'repl', size = 0.15 },
+            },
+            size = 79,
+            position = 'right',
+        },
+        {
+            elements = {
+                'console',
+            },
+            size = 0.25,
+            position = 'bottom',
+        },
+    },
+    controls = {
+        enabled = true,
+        element = 'repl',
+        icons = {
+            pause = '',
+            play = '',
+            step_into = '',
+            step_over = '',
+            step_out = '',
+            step_back = '',
+            run_last = '↻',
+            terminate = '□',
+        },
+    },
+})
+-- dapui.setup[sidebar][position] = 'right'
+dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+dap.listeners.after.event_terminated['dapui_config'] = dapui.close
+dap.listeners.after.event_exited['dapui_config'] = dapui.close
 require'nvim-dap-virtual-text'.setup()
-require'lualine'.setup {
-  options = { theme = 'powerline' }
-}
+require'lualine'.setup { options = { theme = 'powerline' } }
 require'nvim-autopairs'.setup {}
 require'nvim-treesitter.configs'.setup {
   autotag = {
@@ -109,6 +137,13 @@ vim.g.mapleader = ','
 vim.g.maplocalleader = ' '
 
 vim.fn.setenv('GIT_SSL_NO_VERIFY', 'true')
+vim.fn.sign_define('DapBreakpoint',
+    { text = '●', texthl = '', linehl = 'debugBreakpoint', numhl = 'debugBreakpoint' }
+)
+vim.fn.sign_define('DapBreakpointCondition',
+    { text = '◆', texthl = '', linehl = 'debugBreakpoint', numhl = 'debugBreakpoint' }
+)
+vim.fn.sign_define('DapStopped', { text = '▶', texthl = '', linehl = 'debugPC', numhl = 'debugPC' })
 
 vim.opt.autoindent      = true
 vim.opt.autoread        = true
