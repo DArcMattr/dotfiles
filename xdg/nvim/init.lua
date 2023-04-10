@@ -307,7 +307,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-    vim.keymap.set('n', '<Leader>l0',     vim.lsp.buf.document_symbol,      opts)
     vim.keymap.set('n', '<Leader>l<C-k>', vim.lsp.buf.signature_help,       opts)
     vim.keymap.set('n', '<Leader>l<S-d>', vim.lsp.buf.implementation,       opts)
     vim.keymap.set('n', '<Leader>l<S-w>', vim.lsp.buf.workspace_symbol,     opts)
@@ -315,10 +314,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<Leader>lf',     vim.lsp.buf.format,               opts)
     vim.keymap.set('n', '<Leader>lg',     vim.lsp.buf.type_definition,      opts)
     vim.keymap.set('n', '<Leader>lk',     vim.lsp.buf.hover,                opts)
+    vim.keymap.set('n', '<Leader>lo',     vim.lsp.buf.document_symbol,      opts)
     vim.keymap.set('n', '<Leader>lr',     vim.lsp.buf.references,           opts)
     vim.keymap.set('n', '<Leader>le',     vim.lsp.buf.definition,           opts)
     vim.keymap.set('n', '<Leader>l1',     vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set('n', '<Leader>l2',    function()
+    vim.keymap.set('n', '<Leader>l2',     function()
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, opts)
     vim.keymap.set('n', '<Leader>l3',     vim.lsp.buf.rename, opts)
