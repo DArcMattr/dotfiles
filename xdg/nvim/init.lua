@@ -11,9 +11,6 @@ local Plug = vim.fn['plug#']
 
 -- TODO: switch to pure lua plugin loader
 vim.call('plug#begin', '~/.config/nvim/plugged')
--- Plug('Shougo/deoplete-lsp')
--- Plug('Shougo/deoplete.nvim', { ['do'] = ':UpdateRemotePlugins' })
--- Plug('deoplete-plugins/deoplete-tag')
 Plug('OmniSharp/omnisharp-vim', { ['for'] = { 'cs' }, ['do'] = ':OmniSharpInstall' })
 Plug('Shougo/denite.nvim', { ['do'] = ':UpdateRemotePlugins' })
 Plug('Shougo/neco-syntax')
@@ -48,12 +45,12 @@ Plug('windwp/nvim-autopairs')
 Plug('windwp/nvim-ts-autotag')
 vim.call('plug#end')
 
-local cmp = require'cmp'
-local dap = require'dap'
-local dapui = require'dapui'
-local lspconfig = require'lspconfig'
+local cmp           = require'cmp'
+local dap           = require'dap'
+local dapui         = require'dapui'
+local lspconfig     = require'lspconfig'
 local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
-local treesitter = package.loaded['nvim-treesitter']
+local treesitter    = package.loaded['nvim-treesitter']
 
 require'bufferline'.setup {}
 dapui.setup({
@@ -61,17 +58,18 @@ dapui.setup({
         {
             elements = {
                 'watches',
-                { id = 'scopes', size = 0.5 },
-                { id = 'repl', size = 0.15 },
+                { id = 'scopes', size = 0.6 },
+                { id = 'stacks', size = 0.25 },
+                { id = 'console', size = 0.15 },
             },
             size = 79,
             position = 'right',
         },
         {
             elements = {
-                'console',
+                'repl',
             },
-            size = 0.25,
+            size = 0.15,
             position = 'bottom',
         },
     },
@@ -90,10 +88,9 @@ dapui.setup({
         },
     },
 })
--- dapui.setup[sidebar][position] = 'right'
 dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-dap.listeners.after.event_terminated['dapui_config'] = dapui.close
-dap.listeners.after.event_exited['dapui_config'] = dapui.close
+dap.listeners.after.event_terminated['dapui_config']  = dapui.close
+dap.listeners.after.event_exited['dapui_config']      = dapui.close
 require'nvim-dap-virtual-text'.setup()
 require'lualine'.setup { options = { theme = 'powerline' } }
 require'nvim-autopairs'.setup {}
