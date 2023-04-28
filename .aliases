@@ -41,7 +41,6 @@ alias info='info --vi-keys'
 alias sicp='racket -i -p neil/sicp -l xrepl'
 alias agp='ag --pager=less'
 alias venv='python -m venv'
-alias python='python3'
 alias jsonize='python -m json.tool'
 alias composer="${HOME}/.local/bin/composer"
 
