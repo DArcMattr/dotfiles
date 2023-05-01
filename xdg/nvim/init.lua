@@ -9,7 +9,7 @@ endif
 
 local Plug = vim.fn['plug#']
 
--- TODO: switch to pure lua plugin loader
+-- TODO: switch to Packer plugin
 vim.call('plug#begin', '~/.config/nvim/plugged')
 Plug('OmniSharp/omnisharp-vim', { ['for'] = { 'cs' }, ['do'] = ':OmniSharpInstall' })
 Plug('Shougo/denite.nvim', { ['do'] = ':UpdateRemotePlugins' })
@@ -242,13 +242,14 @@ vim.keymap.set('n', '<C-e>',          '3<C-e>')
 vim.keymap.set('n', '<C-p>',          ':Denite file/rec<Cr>')
 vim.keymap.set('n', '<C-u>',          '<C-u>zz')
 vim.keymap.set('n', '<C-y>',          '3<C-y>')
-vim.keymap.set('n', '<F10>',          dap.toggle_breakpoint)
 vim.keymap.set('n', '<F2>',           dap.step_over)
 vim.keymap.set('n', '<F3>',           dap.step_into)
 vim.keymap.set('n', '<F4>',           dap.step_out)
 vim.keymap.set('n', '<F5>',           dap.continue)
 vim.keymap.set('n', '<F6>',           function() dap.terminate(); dapui.close() end)
-vim.keymap.set('n', '<C-F10>',        function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end)
+vim.keymap.set('n', '<F10>',          dap.toggle_breakpoint)
+vim.keymap.set('n', '<F11>',          function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end)
+vim.keymap.set('n', '<F12>',          function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
 vim.keymap.set('n', '<Leader><S-b>',  'gUiw')
 vim.keymap.set('n', '<Leader>a',      function() vim.opt.relativenumber = not(vim.opt.relativenumber:get()) end)
 vim.keymap.set('n', '<Leader>b',      'guiw')
@@ -322,6 +323,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<Leader>l3',     vim.lsp.buf.rename, opts)
   end
 })
+--[[
+TODO:
+  dap_scopes - keymap for 'send variable to repl'
+  dap-repl - config to make easier to use
+]]
 
 cmp.setup({
 	window = {
