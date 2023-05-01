@@ -50,7 +50,7 @@ sudo apt install autossh bison build-essential clang-16 clang-16-doc \
 git clone https://github.com/darcmattr/dotfiles ~/dotfiles
 sh ~/dotfiles/helpers/debianish-update-alternatives.sh
 curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
-python /tmp/get-pip.py --user
+python /tmp/get-pip.py --user --break-system-packages
 chsh -s $(which zsh)
 ```
 

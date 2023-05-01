@@ -87,7 +87,7 @@ grab_pips() {
     'sphinx'
   )
 
-  pip3 install -U --user ${pip3pkgs}
+  pip install -U --user --break-system-packages ${pip3pkgs}
 
   ## redundant to force an update of specific packages, then to update all the
   ## installed ones
