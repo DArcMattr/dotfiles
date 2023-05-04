@@ -100,7 +100,6 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
   },
   highlight = {
-    additional_vim_regex_highlighting = true,
     disabled = {},
     enable = true,
   },
@@ -248,7 +247,7 @@ vim.keymap.set('n', '<F4>',           dap.step_out)
 vim.keymap.set('n', '<F5>',           dap.continue)
 vim.keymap.set('n', '<F6>',           function() dap.terminate(); dapui.close() end)
 vim.keymap.set('n', '<F10>',          dap.toggle_breakpoint)
-vim.keymap.set('n', '<F11>',          function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end)
+vim.keymap.set('n', '<F11>',          function() dap.set_exception_breakpoints('Exception') end)
 vim.keymap.set('n', '<F12>',          function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
 vim.keymap.set('n', '<Leader><S-b>',  'gUiw')
 vim.keymap.set('n', '<Leader>a',      function() vim.opt.relativenumber = not(vim.opt.relativenumber:get()) end)
