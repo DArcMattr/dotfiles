@@ -15,7 +15,6 @@ Plug('OmniSharp/omnisharp-vim', { ['for'] = { 'cs' }, ['do'] = ':OmniSharpInstal
 Plug('Shougo/denite.nvim', { ['do'] = ':UpdateRemotePlugins' })
 Plug('Shougo/neco-syntax')
 Plug('Shougo/neco-vim')
-Plug('StanAngeloff/php.vim', {['for'] = 'php'})
 Plug('Valloric/MatchTagAlways')
 Plug('akinsho/bufferline.nvim')
 Plug('fatih/vim-go', { ['for'] = 'go', ['do'] = ':GoUpdateBinaries' })
@@ -107,25 +106,24 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
   },
   ensure_installed = {
-    "c_sharp",
-    "css",
-    "html",
-    "javascript",
-    "jsdoc",
-    "json",
-    "lua",
-    "markdown",
-    "php",
-    "phpdoc",
-    "python",
-    "sql",
-    "vim",
+    'c_sharp',
+    'css',
+    'html',
+    'javascript',
+    'jsdoc',
+    'json',
+    'lua',
+    'markdown',
+    'php',
+    'phpdoc',
+    'python',
+    'sql',
+    'vim',
   },
 }
 
-vim.cmd.colorscheme('koehler')
-
 vim.g.c_space_errors = 1
+vim.g.colors_name = 'industry'
 vim.g.editorconfig_enable = true
 vim.g.indent_guides_enable_on_vim_startup = 1
 vim.g.indent_guides_exclude_filetypes = {'help', 'man', 'netrw'}
@@ -152,6 +150,7 @@ vim.opt.completeopt     = { 'menuone', 'longest' }
 vim.opt.copyindent      = true
 vim.opt.cursorcolumn    = true
 vim.opt.cursorline      = true
+vim.opt.cursorlineopt   = 'number,screenline'
 vim.opt.diffopt         = 'filler,vertical,internal,indent-heuristic,algorithm:patience'
 vim.opt.display         = 'lastline'
 vim.opt.encoding        = 'utf-8'
@@ -354,7 +353,7 @@ vim.api.nvim_create_autocmd({ 'FocusGained' }, {
   pattern = '*',
   group = FocusEvents,
   callback = function(buf)
-    vim.cmd.highlight('Normal', 'ctermbg=none guibg=none')
+    -- vim.cmd.highlight('Normal', 'ctermbg=none guibg=none')
     vim.opt.cursorcolumn = true
     vim.opt.cursorline = true
   end
@@ -363,7 +362,7 @@ vim.api.nvim_create_autocmd({ 'FocusLost' }, {
   pattern = '*',
   group = FocusEvents,
   callback = function(buf)
-    vim.cmd.highlight('Normal', 'ctermbg=darkgrey guibg=#181818')
+    -- vim.cmd.highlight('Normal', 'ctermbg=darkgrey guibg=#181818')
     vim.opt.cursorcolumn = false
     vim.opt.cursorline = false
   end
@@ -396,9 +395,11 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
     vim.opt.timeoutlen = 200
   end
 })
+vim.api.nvim_set_hl(0, 'CursorLine', { underline = true })
 
 vim.cmd([[
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+" mark scm conflict markers as errors
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$' "
 
 " Denite
 call denite#custom#option( 'default', {
