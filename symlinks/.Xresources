@@ -37,10 +37,11 @@
 *.color7:       #a8a8a8
 *.color15:      #f8fcf8
 
-*.font: xft:Hack:style=Regular:size=9
-*.boldFont: xft:Hack:style=Bold:size=9
-*.italicFont: xft:Hack:style=Italic:size=9
-*.boldItalicFont: xft:Hack:style=Bold Italic:size=9
+*.font: xft:Delugia:style=Regular:size=9
+*.boldFont: xft:Delugia:style=Bold:size=9
+*.italicFont: xft:Delugia:style=Italic:size=9
+*.boldItalicFont: xft:Delugia:style=Bold Italic:size=9
+*customization: -color
 
 !! URxvt Appearance
 URxvt.cursorBlink: true
@@ -59,6 +60,7 @@ URxvt.urgentOnBell: true
 URxvt.urlLauncher: xdg-open
 
 XTerm*metaSendsEscape: true
+XTerm*termName: xterm-256color
 
 Xft.dpi: 96
 Xft.antialias: true
