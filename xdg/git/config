@@ -68,6 +68,7 @@
   cmd = nvim -f -c "Gvdiffsplit!" "$MERGED"
 [pager]
   diff =
+  difftool = true
 [pull]
   ff = only
   rebase = true
