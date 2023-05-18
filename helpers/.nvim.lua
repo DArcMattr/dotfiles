@@ -1,11 +1,31 @@
 local LocalPHP = vim.api.nvim_create_augroup('LocalPHP', { clear = true })
 
-require'lspconfig'.intelephense.setup{
+U.lspconfig.intelephense.setup {
     settings = {
         intelephense = {
             environment = { version = "8.1.0" },
         }
     }
+}
+--[[
+vim.lsp.start({
+    name = 'php',
+    cmd =
+})
+--]]
+
+U.dap.configurations.php = {
+  {
+    name = 'Listen for Xdebug',
+    type = 'php',
+    request = 'launch',
+    port = 9003,
+    -- log = true,
+    hostname = "0.0.0.0",
+    pathMappings = {
+      ["/var/www/html/"] = "${workspaceFolder}/",
+    }
+  }
 }
 
 vim.env.PROJECT_ROOT = vim.fs.dirname(

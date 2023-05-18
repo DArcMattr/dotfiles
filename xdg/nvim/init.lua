@@ -44,10 +44,13 @@ Plug('windwp/nvim-autopairs')
 Plug('windwp/nvim-ts-autotag')
 vim.call('plug#end')
 
+-- Globals live in U namespace
+U.capabilities = require'cmp_nvim_lsp'.default_capabilities()
+U.dap          = require'dap'
+U.lspconfig    = require'lspconfig'
+
 local cmp           = require'cmp'
-local dap           = require'dap'
 local dapui         = require'dapui'
-local lspconfig     = require'lspconfig'
 local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
 local treesitter    = package.loaded['nvim-treesitter']
 
@@ -88,9 +91,9 @@ dapui.setup({
         },
     },
 })
-dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-dap.listeners.after.event_terminated['dapui_config']  = dapui.close
-dap.listeners.after.event_exited['dapui_config']      = dapui.close
+U.dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+U.dap.listeners.after.event_terminated['dapui_config']  = dapui.close
+U.dap.listeners.after.event_exited['dapui_config']      = dapui.close
 require'nvim-dap-virtual-text'.setup()
 require'lualine'.setup { options = { theme = 'powerline' } }
 require'nvim-autopairs'.setup {}
@@ -240,23 +243,23 @@ vim.keymap.set('n', '<C-e>',          '3<C-e>')
 vim.keymap.set('n', '<C-p>',          ':Denite file/rec<Cr>')
 vim.keymap.set('n', '<C-u>',          '<C-u>zz')
 vim.keymap.set('n', '<C-y>',          '3<C-y>')
-vim.keymap.set('n', '<F2>',           dap.step_over)
-vim.keymap.set('n', '<F3>',           dap.step_into)
-vim.keymap.set('n', '<F4>',           dap.step_out)
-vim.keymap.set('n', '<F5>',           dap.continue)
-vim.keymap.set('n', '<F6>',           function() dap.terminate(); dapui.close() end)
-vim.keymap.set('n', '<F10>',          dap.toggle_breakpoint)
-vim.keymap.set('n', '<F11>',          function() dap.set_exception_breakpoints('Exception') end)
-vim.keymap.set('n', '<F12>',          function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
+vim.keymap.set('n', '<F2>',           U.dap.step_over)
+vim.keymap.set('n', '<F3>',           U.dap.step_into)
+vim.keymap.set('n', '<F4>',           U.dap.step_out)
+vim.keymap.set('n', '<F5>',           U.dap.continue)
+vim.keymap.set('n', '<F6>',           function() U.dap.terminate(); dapui.close() end)
+vim.keymap.set('n', '<F10>',          U.dap.toggle_breakpoint)
+vim.keymap.set('n', '<F11>',          function() U.dap.set_exception_breakpoints('Exception') end)
+vim.keymap.set('n', '<F12>',          function() U.dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
 vim.keymap.set('n', '<Leader><S-b>',  'gUiw')
 vim.keymap.set('n', '<Leader>a',      function() vim.opt.relativenumber = not(vim.opt.relativenumber:get()) end)
 vim.keymap.set('n', '<Leader>b',      'guiw')
 vim.keymap.set('n', '<Leader>d*',     ':DeniteCursorWord grep:.<Cr>')
 vim.keymap.set('n', '<Leader>d/',     ':Denite grep:.<Cr>')
-vim.keymap.set('n', '<Leader>dl',     dap.run_last)
+vim.keymap.set('n', '<Leader>dl',     U.dap.run_last)
 vim.keymap.set('n', '<Leader>do',     ':Denite outline<Cr>')
-vim.keymap.set('n', '<Leader>dp',     function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { silent = true})
-vim.keymap.set('n', '<Leader>dr',     dap.repl.open)
+vim.keymap.set('n', '<Leader>dp',     function() U.dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { silent = true})
+vim.keymap.set('n', '<Leader>dr',     U.dap.repl.open)
 vim.keymap.set('n', '<Leader>gb',     ':Git blame<Cr>')
 vim.keymap.set('n', '<Leader>gc',     ':Git commit<Cr>')
 vim.keymap.set('n', '<Leader>gd',     ':Gdiffsplit<Cr>')
@@ -345,8 +348,6 @@ cmp.setup({
 		{ name = 'buffer'},
 	}
 })
-U.capabilities = require'cmp_nvim_lsp'.default_capabilities()
-U.dap = dap
 
 local FocusEvents = vim.api.nvim_create_augroup('FocusEvents', { clear = true })
 vim.api.nvim_create_autocmd({ 'FocusGained' }, {
