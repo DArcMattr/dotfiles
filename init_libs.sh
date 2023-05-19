@@ -4,6 +4,7 @@
 grab_go() {
   pkgs=(
     'filippo.io/mkcert'
+    'github.com/antonmedv/fx'
     'github.com/cosmtrek/air'
     'github.com/junegunn/fzf'
     'github.com/lighttiger2505/sqls'
@@ -11,7 +12,7 @@ grab_go() {
     'golang.org/x/tools/cmd/guru'
     'golang.org/x/tools/gopls'
   )
-  version='1.16.2'
+  version='1.20.4'
 
   while getopts "v:" opt; do
     case "$opt" in
