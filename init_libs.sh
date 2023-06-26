@@ -58,10 +58,9 @@ grab_rust() {
     bat \
     cargo-deb \
     cargo-update \
-    difftastic \
     exa \
     ripgrep \
-    tree-sitter-cli
+    difftastic
 }
 
 grab_pips() {
