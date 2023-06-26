@@ -1,7 +1,7 @@
 U.lspconfig.intelephense.setup {
-	capabilities = U.capabilities,
-	autostart = true,
-	root_dir = U.lspconfig.util.find_git_ancestor,
+  capabilities = U.capabilities,
+  autostart = true,
+  root_dir = U.lspconfig.util.find_git_ancestor,
 }
 
 vim.opt_local.keywordprg = 'pman'
@@ -14,3 +14,4 @@ U.dap.adapters.php = {
   command = 'node',
   args = { os.getenv('HOME') .. '/contrib/vscode-php-debug/out/phpDebug.js' }
 }
+

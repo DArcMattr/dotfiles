@@ -11,21 +11,17 @@ local Plug = vim.fn['plug#']
 
 -- TODO: switch to Packer plugin
 vim.call('plug#begin', '~/.config/nvim/plugged')
-Plug('OmniSharp/omnisharp-vim', { ['for'] = { 'cs' }, ['do'] = ':OmniSharpInstall' })
+-- Plug('OmniSharp/omnisharp-vim', { ['for'] = { 'cs' }, ['do'] = ':OmniSharpInstall' })
 Plug('Shougo/denite.nvim', { ['do'] = ':UpdateRemotePlugins' })
-Plug('Shougo/neco-syntax')
-Plug('Shougo/neco-vim')
 Plug('Valloric/MatchTagAlways')
 Plug('akinsho/bufferline.nvim')
 Plug('fatih/vim-go', { ['for'] = 'go', ['do'] = ':GoUpdateBinaries' })
-Plug('hhvm/vim-hack', { ['for'] = 'hack' })
-Plug('hilojack/vim-xt')
+Plug('hilojack/vim-xt') -- xdebug trace output syntax
 Plug('hrsh7th/cmp-nvim-lsp')
 Plug('hrsh7th/nvim-cmp')
 Plug('isRuslan/vim-es6', { ['for'] = { 'js', 'jsx', 'javascript.jsx', 'mjs' } })
 Plug('jeffkreeftmeijer/vim-numbertoggle')
 Plug('mattn/emmet-vim')
-Plug('mfukar/robotframework-vim')
 Plug('mfussenegger/nvim-dap')
 Plug('theHamsta/nvim-dap-virtual-text')
 Plug('mhinz/vim-signify')
@@ -34,7 +30,6 @@ Plug('neovim/nvim-lspconfig')
 Plug('nvim-lualine/lualine.nvim')
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
 Plug('rcarriga/nvim-dap-ui')
-Plug('sheerun/vim-polyglot')
 Plug('tpope/vim-fugitive')
 Plug('tpope/vim-repeat')
 Plug('tpope/vim-surround')
@@ -55,6 +50,7 @@ local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
 local treesitter    = package.loaded['nvim-treesitter']
 
 require'bufferline'.setup {}
+
 dapui.setup({
     layouts = {
         {
@@ -346,6 +342,7 @@ cmp.setup({
 	sources = {
 		{ name = 'nvim_lsp'},
 		{ name = 'buffer'},
+		{ name = 'path'},
 	}
 })
 
@@ -415,14 +412,14 @@ if executable('rg')
   set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
   set grepformat=%f:%l:%c:%m,%f:%l:%m
 
-	call denite#custom#var('grep', {
-		\ 'command': ['rg'],
-		\ 'default_opts': ['-i', '--vimgrep', '--no-heading'],
-		\ 'recursive_opts': [],
-		\ 'pattern_opt': ['--regexp'],
-		\ 'separator': ['--'],
-		\ 'final_opts': [],
-		\ })
+  call denite#custom#var('grep', {
+    \ 'command': ['rg'],
+    \ 'default_opts': ['-i', '--vimgrep', '--no-heading'],
+    \ 'recursive_opts': [],
+    \ 'pattern_opt': ['--regexp'],
+    \ 'separator': ['--'],
+    \ 'final_opts': [],
+    \ })
 else
   set grepprg=grep\ -nH\ $*
 endif
