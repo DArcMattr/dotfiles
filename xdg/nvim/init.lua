@@ -1,43 +1,51 @@
 U = {}
-vim.cmd([[
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
-endif
-]])
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
+end
 
-local Plug = vim.fn['plug#']
+local packer_bootstrap = ensure_packer()
 
--- TODO: switch to Packer plugin
-vim.call('plug#begin', '~/.config/nvim/plugged')
--- Plug('OmniSharp/omnisharp-vim', { ['for'] = { 'cs' }, ['do'] = ':OmniSharpInstall' })
-Plug('Shougo/denite.nvim', { ['do'] = ':UpdateRemotePlugins' })
-Plug('Valloric/MatchTagAlways')
-Plug('akinsho/bufferline.nvim')
-Plug('fatih/vim-go', { ['for'] = 'go', ['do'] = ':GoUpdateBinaries' })
-Plug('hilojack/vim-xt') -- xdebug trace output syntax
-Plug('hrsh7th/cmp-nvim-lsp')
-Plug('hrsh7th/nvim-cmp')
-Plug('isRuslan/vim-es6', { ['for'] = { 'js', 'jsx', 'javascript.jsx', 'mjs' } })
-Plug('jeffkreeftmeijer/vim-numbertoggle')
-Plug('mattn/emmet-vim')
-Plug('mfussenegger/nvim-dap')
-Plug('theHamsta/nvim-dap-virtual-text')
-Plug('mhinz/vim-signify')
-Plug('nathanaelkane/vim-indent-guides')
-Plug('neovim/nvim-lspconfig')
-Plug('nvim-lualine/lualine.nvim')
-Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
-Plug('rcarriga/nvim-dap-ui')
-Plug('tpope/vim-fugitive')
-Plug('tpope/vim-repeat')
-Plug('tpope/vim-surround')
-Plug('vim-scripts/DirDiff.vim')
-Plug('vim-scripts/csv.vim')
-Plug('windwp/nvim-autopairs')
-Plug('windwp/nvim-ts-autotag')
-vim.call('plug#end')
+require('packer').startup(function(use)
+    use 'wbthomason/packer.nvim'
+
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    use { 'hrsh7th/cmp-nvim-lsp' }
+    use { 'hrsh7th/nvim-cmp' }
+    use { 'Shougo/denite.nvim', run = ':UpdateRemotePlugins' }
+    use { 'Valloric/MatchTagAlways' }
+    use { 'akinsho/bufferline.nvim' }
+    use { 'fatih/vim-go', ft = { 'go' }, run = ':GoUpdateBinaries' }
+    use { 'hilojack/vim-xt' } -- xdebug trace output syntax
+    use { 'isRuslan/vim-es6', ft = { 'js', 'jsx', 'javascript.jsx', 'mjs' } }
+    use { 'jeffkreeftmeijer/vim-numbertoggle' }
+    use { 'mattn/emmet-vim' }
+    use { 'mfussenegger/nvim-dap' }
+    use { 'theHamsta/nvim-dap-virtual-text' }
+    use { 'mhinz/vim-signify' }
+    use { 'nathanaelkane/vim-indent-guides' }
+    use { 'neovim/nvim-lspconfig' }
+    use { 'nvim-lualine/lualine.nvim' }
+    use { 'rcarriga/nvim-dap-ui' }
+    use { 'tpope/vim-fugitive' }
+    use { 'tpope/vim-repeat' }
+    use { 'tpope/vim-surround' }
+    use { 'vim-scripts/DirDiff.vim' }
+    use { 'vim-scripts/csv.vim' }
+    use { 'windwp/nvim-autopairs' }
+    use { 'windwp/nvim-ts-autotag' }
+    use { 'OmniSharp/omnisharp-vim', ft = { 'cs' }, run = ':OmniSharpInstall' }
+
+    if packer_bootstrap then
+      require('packer').sync()
+    end
+end)
 
 -- Globals live in U namespace
 U.capabilities = require'cmp_nvim_lsp'.default_capabilities()
@@ -90,6 +98,7 @@ dapui.setup({
 U.dap.listeners.after.event_initialized['dapui_config'] = dapui.open
 U.dap.listeners.after.event_terminated['dapui_config']  = dapui.close
 U.dap.listeners.after.event_exited['dapui_config']      = dapui.close
+
 require'nvim-dap-virtual-text'.setup()
 require'lualine'.setup { options = { theme = 'powerline' } }
 require'nvim-autopairs'.setup {}
