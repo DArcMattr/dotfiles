@@ -1,10 +1,10 @@
 U = {}
 local ensure_packer = function()
   local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
   if fn.empty(fn.glob(install_path)) > 0 then
     fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
+    vim.api.nvim_cmd({ cmd = 'packadd', args = { 'packer.nvim' } }, {})
     return true
   end
   return false
@@ -15,9 +15,18 @@ local packer_bootstrap = ensure_packer()
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-    use { 'hrsh7th/cmp-nvim-lsp' }
-    use { 'hrsh7th/nvim-cmp' }
+    use { 'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate' ,
+        requires = {
+            'windwp/nvim-ts-autotag'
+        },
+    }
+    use {
+        'hrsh7th/nvim-cmp',
+        requires = {
+            { 'hrsh7th/cmp-nvim-lsp' },
+        },
+    }
     use { 'Shougo/denite.nvim', run = ':UpdateRemotePlugins' }
     use { 'Valloric/MatchTagAlways' }
     use { 'akinsho/bufferline.nvim' }
@@ -26,20 +35,23 @@ require('packer').startup(function(use)
     use { 'isRuslan/vim-es6', ft = { 'js', 'jsx', 'javascript.jsx', 'mjs' } }
     use { 'jeffkreeftmeijer/vim-numbertoggle' }
     use { 'mattn/emmet-vim' }
-    use { 'mfussenegger/nvim-dap' }
-    use { 'theHamsta/nvim-dap-virtual-text' }
+    use {
+        'rcarriga/nvim-dap-ui',
+        requires = {
+            'mfussenegger/nvim-dap',
+            'theHamsta/nvim-dap-virtual-text',
+        }
+    }
     use { 'mhinz/vim-signify' }
     use { 'nathanaelkane/vim-indent-guides' }
     use { 'neovim/nvim-lspconfig' }
     use { 'nvim-lualine/lualine.nvim' }
-    use { 'rcarriga/nvim-dap-ui' }
     use { 'tpope/vim-fugitive' }
     use { 'tpope/vim-repeat' }
     use { 'tpope/vim-surround' }
     use { 'vim-scripts/DirDiff.vim' }
     use { 'vim-scripts/csv.vim' }
     use { 'windwp/nvim-autopairs' }
-    use { 'windwp/nvim-ts-autotag' }
     use { 'OmniSharp/omnisharp-vim', ft = { 'cs' }, run = ':OmniSharpInstall' }
 
     if packer_bootstrap then
