@@ -13,50 +13,50 @@ end
 local packer_bootstrap = ensure_packer()
 
 require('packer').startup(function(use)
-    use 'wbthomason/packer.nvim'
+  use 'wbthomason/packer.nvim'
 
-    use { 'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate' ,
-        requires = {
-            'windwp/nvim-ts-autotag'
-        },
+  use { 'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate' ,
+    requires = {
+      'windwp/nvim-ts-autotag'
+    },
+  }
+  use {
+    'hrsh7th/nvim-cmp',
+    requires = {
+      { 'hrsh7th/cmp-nvim-lsp' },
+    },
+  }
+  use { 'Shougo/denite.nvim', run = ':UpdateRemotePlugins' }
+  use { 'Valloric/MatchTagAlways' }
+  use { 'akinsho/bufferline.nvim' }
+  use { 'fatih/vim-go', ft = { 'go' }, run = ':GoUpdateBinaries' }
+  use { 'hilojack/vim-xt' } -- xdebug trace output syntax
+  use { 'isRuslan/vim-es6', ft = { 'js', 'jsx', 'javascript.jsx', 'mjs' } }
+  use { 'jeffkreeftmeijer/vim-numbertoggle' }
+  use { 'mattn/emmet-vim' }
+  use {
+    'rcarriga/nvim-dap-ui',
+    requires = {
+      'mfussenegger/nvim-dap',
+      'theHamsta/nvim-dap-virtual-text',
     }
-    use {
-        'hrsh7th/nvim-cmp',
-        requires = {
-            { 'hrsh7th/cmp-nvim-lsp' },
-        },
-    }
-    use { 'Shougo/denite.nvim', run = ':UpdateRemotePlugins' }
-    use { 'Valloric/MatchTagAlways' }
-    use { 'akinsho/bufferline.nvim' }
-    use { 'fatih/vim-go', ft = { 'go' }, run = ':GoUpdateBinaries' }
-    use { 'hilojack/vim-xt' } -- xdebug trace output syntax
-    use { 'isRuslan/vim-es6', ft = { 'js', 'jsx', 'javascript.jsx', 'mjs' } }
-    use { 'jeffkreeftmeijer/vim-numbertoggle' }
-    use { 'mattn/emmet-vim' }
-    use {
-        'rcarriga/nvim-dap-ui',
-        requires = {
-            'mfussenegger/nvim-dap',
-            'theHamsta/nvim-dap-virtual-text',
-        }
-    }
-    use { 'mhinz/vim-signify' }
-    use { 'nathanaelkane/vim-indent-guides' }
-    use { 'neovim/nvim-lspconfig' }
-    use { 'nvim-lualine/lualine.nvim' }
-    use { 'tpope/vim-fugitive' }
-    use { 'tpope/vim-repeat' }
-    use { 'tpope/vim-surround' }
-    use { 'vim-scripts/DirDiff.vim' }
-    use { 'vim-scripts/csv.vim' }
-    use { 'windwp/nvim-autopairs' }
-    use { 'OmniSharp/omnisharp-vim', ft = { 'cs' }, run = ':OmniSharpInstall' }
+  }
+  use { 'mhinz/vim-signify' }
+  use { 'nathanaelkane/vim-indent-guides' }
+  use { 'neovim/nvim-lspconfig' }
+  use { 'nvim-lualine/lualine.nvim' }
+  use { 'tpope/vim-fugitive' }
+  use { 'tpope/vim-repeat' }
+  use { 'tpope/vim-surround' }
+  use { 'vim-scripts/DirDiff.vim' }
+  use { 'vim-scripts/csv.vim' }
+  use { 'windwp/nvim-autopairs' }
+  use { 'OmniSharp/omnisharp-vim', ft = { 'cs' }, run = ':OmniSharpInstall' }
 
-    if packer_bootstrap then
-      require('packer').sync()
-    end
+  if packer_bootstrap then
+    require('packer').sync()
+  end
 end)
 
 -- Globals live in U namespace
@@ -72,40 +72,40 @@ local treesitter    = package.loaded['nvim-treesitter']
 require'bufferline'.setup {}
 
 dapui.setup({
-    layouts = {
-        {
-            elements = {
-                'watches',
-                { id = 'scopes', size = 0.5 },
-                { id = 'stacks', size = 0.25 },
-                { id = 'breakpoints', size = 0.1 },
-                { id = 'console', size = 0.15 },
-            },
-            size = 79,
-            position = 'right',
+  layouts = {
+      {
+        elements = {
+          'watches',
+          { id = 'scopes', size = 0.5 },
+          { id = 'stacks', size = 0.25 },
+          { id = 'breakpoints', size = 0.1 },
+          { id = 'console', size = 0.15 },
         },
-        {
-            elements = {
-                'repl',
-            },
-            size = 0.15,
-            position = 'bottom',
-        },
+        size = 79,
+        position = 'right',
     },
-    controls = {
-        enabled = true,
-        element = 'repl',
-        icons = {
-            pause = '',
-            play = '',
-            step_into = '',
-            step_over = '',
-            step_out = '',
-            step_back = '',
-            run_last = '↻',
-            terminate = '□',
-        },
+    {
+      elements = {
+        'repl',
+      },
+      size = 0.15,
+      position = 'bottom',
     },
+  },
+  controls = {
+    enabled = true,
+    element = 'repl',
+    icons = {
+      pause = '',
+      play = '',
+      step_into = '',
+      step_over = '',
+      step_out = '',
+      step_back = '',
+      run_last = '↻',
+      terminate = '□',
+    },
+  },
 })
 U.dap.listeners.after.event_initialized['dapui_config'] = dapui.open
 U.dap.listeners.after.event_terminated['dapui_config']  = dapui.close
@@ -269,6 +269,9 @@ vim.keymap.set('n', '<F10>',          U.dap.toggle_breakpoint)
 vim.keymap.set('n', '<F11>',          function() U.dap.set_exception_breakpoints('Exception') end)
 vim.keymap.set('n', '<F12>',          function() U.dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
 vim.keymap.set('n', '<Leader><S-b>',  'gUiw')
+vim.keymap.set('n', '<Leader><F7>',   function() vim.opt.spell = not(vim.opt.spell:get())  end, { silent = true })
+vim.keymap.set('n', '<Leader>[',      vim.diagnostic.goto_prev)
+vim.keymap.set('n', '<Leader>]',      vim.diagnostic.goto_next)
 vim.keymap.set('n', '<Leader>a',      function() vim.opt.relativenumber = not(vim.opt.relativenumber:get()) end)
 vim.keymap.set('n', '<Leader>b',      'guiw')
 vim.keymap.set('n', '<Leader>d*',     ':DeniteCursorWord grep:.<Cr>')
@@ -285,12 +288,10 @@ vim.keymap.set('n', '<Leader>gp',     ':Git push<Cr>')
 vim.keymap.set('n', '<Leader>gs',     ':Git<Cr>')
 vim.keymap.set('n', '<Leader>il',     vim.diagnostic.setloclist)
 vim.keymap.set('n', '<Leader>io',     vim.diagnostic.open_float)
-vim.keymap.set('n', '<Leader>[',      vim.diagnostic.goto_prev)
-vim.keymap.set('n', '<Leader>]',      vim.diagnostic.goto_next)
+vim.keymap.set('n', '<Leader>ls',     ':Denite buffer<Cr>')
 vim.keymap.set('n', '<Leader>o',      'i<Cr><Esc>')
 vim.keymap.set('n', '<Leader>q',      ':nohlsearch<Cr>')
 vim.keymap.set('n', '<Leader>t',      ':enew<Cr>')
-vim.keymap.set('n', '<Leader><F7>',   function() vim.opt.spell = not(vim.opt.spell:get())  end, { silent = true })
 vim.keymap.set('n', '<Left>',         ':bp<Cr>')
 vim.keymap.set('n', '<M-i>',          'i<Space><Esc>')
 vim.keymap.set('n', '<Right>',        ':bn<Cr>')
@@ -317,6 +318,7 @@ vim.keymap.set({'n', 'v'}, ':',       ';')
 vim.keymap.set({'n', 'v'}, ';',       ':')
 vim.keymap.set({'n', 'x'}, 'c',       '"xc')
 
+
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
@@ -336,8 +338,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<Leader>le',     vim.lsp.buf.definition,           opts)
     vim.keymap.set('n', '<Leader>l1',     vim.lsp.buf.add_workspace_folder, opts)
     vim.keymap.set('n', '<Leader>l2',     function()
-		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-	end, opts)
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, opts)
     vim.keymap.set('n', '<Leader>l3',     vim.lsp.buf.rename, opts)
   end
 })
@@ -348,23 +350,23 @@ TODO:
 ]]
 
 cmp.setup({
-	window = {
-		completion = cmp.config.window.bordered()
-	},
-	mapping = {
-		['<C-b>']     = cmp.mapping.scroll_docs(-4),
-		['<C-f>']     = cmp.mapping.scroll_docs(4),
-		['<C-n>']     = cmp.mapping.select_next_item(),
-		['<C-p>']     = cmp.mapping.select_prev_item(),
-		['<C-Space>'] = cmp.mapping.complete(),
-		['<C-e>']     = cmp.mapping.abort(),
-		['<CR>']      = cmp.mapping.confirm({ select = true }),
-	},
-	sources = {
-		{ name = 'nvim_lsp'},
-		{ name = 'buffer'},
-		{ name = 'path'},
-	}
+  window = {
+    completion = cmp.config.window.bordered()
+  },
+  mapping = {
+    ['<C-b>']     = cmp.mapping.scroll_docs(-4),
+    ['<C-f>']     = cmp.mapping.scroll_docs(4),
+    ['<C-n>']     = cmp.mapping.select_next_item(),
+    ['<C-p>']     = cmp.mapping.select_prev_item(),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>']     = cmp.mapping.abort(),
+    ['<CR>']      = cmp.mapping.confirm({ select = true }),
+  },
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'buffer' },
+    { name = 'path' },
+  }
 })
 
 local FocusEvents = vim.api.nvim_create_augroup('FocusEvents', { clear = true })
@@ -457,6 +459,7 @@ if !exists(':DiffOrig')
 endif
 
 " from https://gist.github.com/tarruda/5158535
+" TODO: check if vim.env.TMUX != nil
 if exists('$TMUX')
   nnoremap <silent> <C-w>j :call funcs#TmuxMove('j')<Cr>
   nnoremap <silent> <C-w>k :call funcs#TmuxMove('k')<Cr>
@@ -472,17 +475,17 @@ if exists('$TMUX')
   tnoremap <silent> <C-\><C-N><C-w>l :silent call funcs#TmuxMove('l')<Cr>
 
   let g:clipboard = {
-        \   'name': 'tmux override',
-        \   'copy': {
-        \      '+': ['tmux', 'load-buffer', '-'],
-        \      '*': ['tmux', 'load-buffer', '-'],
-        \    },
-        \   'paste': {
-        \      '+': ['tmux', 'save-buffer', '-'],
-        \      '*': ['tmux', 'save-buffer', '-'],
-        \   },
-        \   'cache_enabled': 1,
-        \ }
+  \   'name': 'tmux override',
+  \   'copy': {
+  \      '+': ['tmux', 'load-buffer', '-'],
+  \      '*': ['tmux', 'load-buffer', '-'],
+  \    },
+  \   'paste': {
+  \      '+': ['tmux', 'save-buffer', '-'],
+  \      '*': ['tmux', 'save-buffer', '-'],
+  \   },
+  \   'cache_enabled': 1,
+  \ }
 endif
 
 augroup FugitiveStuffs

@@ -14,9 +14,8 @@ xdg/composer/keys.tags.pub
 xdg/composer/vendor/
 xdg/fish/fishd.*
 xdg/git/gitk
-xdg/nvim/autoload/plug.vim
-xdg/nvim/autoload/plug.vim.old
 xdg/nvim/*.tags
 xdg/nvim/.netrwhist
 xdg/nvim/plugged/
+xdg/nvim/plugin/packer_compiled.lua
 node_modules/
