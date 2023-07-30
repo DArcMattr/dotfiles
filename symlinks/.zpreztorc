@@ -31,6 +31,7 @@ zstyle ':prezto:load' pmodule \
   'environment' \
   'gnu-utility' \
   'utility' \
+  'node' \
   'completion' \
   'editor' \
   'git' \
@@ -59,6 +60,7 @@ zstyle ':prezto:module:history-substring-search:color' found ''
 zstyle ':prezto:module:history-substring-search:color' not-found ''
 zstyle ':prezto:module:prompt' theme 'powerlevel10k'
 zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_ed25519'
+zstyle ':prezto:module:node:alias' skip 'yes'
 
 # Syntax Highlighting
 zstyle ':prezto:module:syntax-highlighting' highlighters \
