@@ -27,10 +27,14 @@ curl -sS "https://apt.llvm.org/llvm-snapshot.gpg.key" | \
   sudo tee /etc/apt/trusted.gpg.d/llvm.asc
 curl -sS "http://nginx.org/keys/nginx_signing.key" | \
   sudo tee /etc/apt/trusted.gpg.d/nginx.asc
+curl -sS "https://packages.microsoft.com/keys/microsoft.asc" | \
+  sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
 sudo add-apt-repository \
   "deb http://nginx.org/packages/mainline/ubuntu ${REL} nginx"
 sudo add-apt-repository \
   "deb http://apt.llvm.org/${REL}/ llvm-toolchain-${REL}-16 main"
+sudo add-apt-repository \
+    "$(wget -qO- https://packages.microsoft.com/config/ubuntu/22.04/prod.list)" # XXX
 sudo apt install autossh bison build-essential clang-16 clang-16-doc \
   clang-format-16 clang-tidy-16 clang-tools-16 clangd-16 cmake flex git \
   git-extras golang htop jq libc++-16-dev-wasm32 libc++abi-16-dev-wasm32 \
@@ -45,7 +49,7 @@ sudo apt install autossh bison build-essential clang-16 clang-16-doc \
   php-memcache php-pear php-xdebug php-xml php-zip php8.1-cli php8.1-curl \
   php8.1-dev php8.1-fpm php8.1-imap php8.1-mysql php8.1-opcache php8.1-readline \
   php8.1-soap php8.1-xml pv python-is-python3 python3-clang-16 python3-dev \
-  ruby-dev shellcheck tidy wget wslu xcape xsel zlib1g-dev zsh
+  ruby-dev shellcheck sqlcmd tidy wget wslu xcape xsel zlib1g-dev zsh
 
 git clone https://github.com/darcmattr/dotfiles ~/dotfiles
 sh ~/dotfiles/helpers/debianish-update-alternatives.sh
