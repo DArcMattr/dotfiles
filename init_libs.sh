@@ -7,7 +7,6 @@ grab_go() {
     'github.com/antonmedv/fx'
     'github.com/cosmtrek/air'
     'github.com/junegunn/fzf'
-    'github.com/lighttiger2505/sqls'
     'github.com/tdewolff/minify/cmd/minify'
     'golang.org/x/tools/cmd/guru'
     'golang.org/x/tools/gopls'
