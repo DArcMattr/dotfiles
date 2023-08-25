@@ -1,4 +1,4 @@
-U.lspconfig.pyls.setup {
+U.lspconfig.pylsp.setup {
   capabilities = U.capabilities,
   autostart = true,
   root_dir = U.lspconfig.util.find_git_ancestor,
