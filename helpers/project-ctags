@@ -16,6 +16,11 @@ project_ctags() {
         STATUS=$?
         ;;
 
+      py)
+        TAG="${PROJECT_ROOT}/python.tags"
+        STATUS=$?
+        ;;
+
       js|mjs)
         TAG="${PROJECT_ROOT}/js.tags"
         STATUS=$?
