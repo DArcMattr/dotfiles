@@ -2,5 +2,6 @@
 
 CC=clang
 CXX=clang++
+BROWSER="/mnt/c/Users/darceneaux/AppData/Local/Vivaldi/Application/vivaldi.exe"
 
-export CC CXX
+export CC CXX BROWSER
