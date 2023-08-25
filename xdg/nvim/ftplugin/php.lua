@@ -14,4 +14,3 @@ U.dap.adapters.php = {
   command = 'node',
   args = { os.getenv('HOME') .. '/contrib/vscode-php-debug/out/phpDebug.js' }
 }
-
