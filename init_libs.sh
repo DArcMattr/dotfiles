@@ -81,7 +81,7 @@ grab_pips() {
     'psutil'
     'pyemojify'
     'pynvim'
-    'python-language-server[all]'
+    'python-lsp-server[yapf]'
     's3cmd'
     'sphinx'
   )
