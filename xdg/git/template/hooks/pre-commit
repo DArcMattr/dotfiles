@@ -7,7 +7,7 @@
 . "${HOME}/dotfiles/helpers/project-ctags"
 
 if [ "$(git rev-parse --verify HEAD > /dev/null 2>&1)" = 0 ]; then
-	AGAINST='4b825dc642cb6eb9a060e54bf8d69288fbee4904' # hash of empty repo
+	AGAINST=$(git hash-object -t tree /dev/null) # hash of empty tree
 else
 	AGAINST='HEAD'
 fi
@@ -28,6 +28,11 @@ for FILE in ${FILES}; do
 
 		php)
 			ERROR="$(php -l "${FILE}")"
+			STATUS=$?
+			;;
+
+		py)
+			ERROR="$(python -m py_compile "${FILE}")"
 			STATUS=$?
 			;;
 
@@ -60,4 +65,4 @@ for FILE in ${FILES}; do
 done
 
 # shellcheck disable=SC2086
-project_ctags ${FILES} >/dev/null 2>&1 & 
+project_ctags ${FILES} >/dev/null 2>&1 &
