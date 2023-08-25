@@ -5,6 +5,7 @@ alias ll='LC_COLLATE=C ls -AalFh'
 alias expected_install='./autogen.sh && ./configure --prefix=$HOME/.local && make install clean'
 alias nvf='nvim $(fzf)'
 alias nvdno='nvim $(git dno @~1)'
+alias unpm='sh -c "cd ~/dotfiles && npm install $(npm outdated | cut -d' ' -f 1 | sed '1d' | xargs -I '$' echo '$@latest' | xargs echo)"'
 
 nvrg() {
   nvim $(rg -l "${@}")
