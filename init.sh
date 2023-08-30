@@ -21,9 +21,12 @@ find "${DOTFILES}/symlinks/" -type f -printf '%p %P\n' | \
 find "${DOTFILES}/xdg/" -mindepth 1 -maxdepth 1 -type d -exec ln -sf "{}" "${DOT_CONFIG}/" \;
 
 (
+	sudo corepack enable
+	corepack prepare pnpm@latest --activate
+	# pnpm env use latest
 	cd "${DOTFILES}"
-	npm install
-	ln -s "${DOTFILES}/node_modules" "${LOCAL}/bin"
+	pnpm install
+	ln -s "${DOTFILES}/node_modules" "${LOCAL}/lib"
 )
 
 cd ~
