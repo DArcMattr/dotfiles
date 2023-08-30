@@ -1,7 +1,7 @@
 U.lspconfig.pylsp.setup {
-  capabilities = U.capabilities,
-  autostart = true,
-  root_dir = U.lspconfig.util.find_git_ancestor,
+  -- capabilities = U.capabilities,
+  -- autostart = true,
+  -- root_dir = U.lspconfig.util.find_git_ancestor,
 }
 
 vim.opt_local.shiftwidth = 4
