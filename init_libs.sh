@@ -57,7 +57,6 @@ grab_rust() {
     bat \
     cargo-deb \
     cargo-update \
-    eza \
     lsd \
     ripgrep \
     difftastic

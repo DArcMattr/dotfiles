@@ -8,39 +8,32 @@ alias nvdno='nvim $(git dno @~1)'
 alias unpm='sh -c "cd ~/dotfiles && npm install $(npm outdated | cut -d' ' -f 1 | sed '1d' | xargs -I '$' echo '$@latest' | xargs echo)"'
 
 nvrg() {
-  nvim $(rg -l "${@}")
+	nvim $(rg -l "${@}")
 }
 
 dir() {
-  {
-    LL=$(ll "${@}")
-    echo "${LL}" | awk '/^d/ {print $0}'
-    echo "${LL}" | awk '! /^(d|total)/ {print $0}'
-    echo "${LL}" | awk '/^total/ {print $0}'
-  } | ${PAGER:-less}
+	{
+		LL=$(ll "${@}")
+		echo "${LL}" | awk '/^d/ {print $0}'
+		echo "${LL}" | awk '! /^(d|total)/ {print $0}'
+		echo "${LL}" | awk '/^total/ {print $0}'
+	} | ${PAGER:-less}
 }
 
 if lsd >/dev/null 2>&1; then
   alias ls='\lsd --color=always'
   dir() {
-    LL=$(ll "${@}")
-    echo "${LL}" | ${PAGER:-less}
-  }
-elif eza >/dev/null 2>&1; then
-  alias ls='\eza --color=always'
-  alias ll='ls -lFhg --all --color-scale --git --time-style=long-iso'
-  dir() {
-    LL=$(ll --group-directories-first "${@}")
+    LL=$(ll --icon always "${@}")
     echo "${LL}" | ${PAGER:-less}
   }
 elif ls --color=always -d . >/dev/null 2>&1; then
-  alias ls='\ls --color=always'
+	alias ls='\ls --color=always'
 elif ls -G -d . >/dev/null 2>&1; then # colorls is main system ls already
-  alias ls='\ls -G'
+	alias ls='\ls -G'
 elif colorls -G -d . >/dev/null 2>&1; then
-  alias ls='\colorls -G'
+	alias ls='\colorls -G'
 else # Solaris or other *NIX
-  alias ls='\ls'
+	alias ls='\ls'
 fi
 
 alias key='\man -k'
