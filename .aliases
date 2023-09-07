@@ -1,7 +1,7 @@
 # .aliases
 # vim:ft=zsh:
 
-alias ll='LC_COLLATE=C ls -AalFh'
+alias ll='ls -alFh'
 alias expected_install='./autogen.sh && ./configure --prefix=$HOME/.local && make install clean'
 alias nvf='nvim $(fzf)'
 alias nvdno='nvim $(git dno @~1)'
@@ -21,15 +21,14 @@ dir() {
 }
 
 if lsd >/dev/null 2>&1; then
-  alias ls='\lsd'
-  alias ll='LC_COLLATE=C \lsd -lFhg'
+  alias ls='\lsd --color=always'
   dir() {
     LL=$(ll "${@}")
     echo "${LL}" | ${PAGER:-less}
   }
 elif eza >/dev/null 2>&1; then
   alias ls='\eza --color=always'
-  alias ll='LC_COLLATE=C ls -lFhg --all --color-scale --git --time-style=long-iso'
+  alias ll='ls -lFhg --all --color-scale --git --time-style=long-iso'
   dir() {
     LL=$(ll --group-directories-first "${@}")
     echo "${LL}" | ${PAGER:-less}
