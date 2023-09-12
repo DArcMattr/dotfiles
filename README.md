@@ -21,12 +21,14 @@ sudo add-apt-repository -y multiverse
 sudo add-apt-repository -y ppa:git-core/ppa
 sudo add-apt-repository -y ppa:neovim-ppa/unstable
 sudo add-apt-repository -y ppa:ondrej/php
-curl -sL https://deb.nodesource.com/setup_current.x | \
-  sudo -E bash - # argh, I hate this
 curl -sS "https://apt.llvm.org/llvm-snapshot.gpg.key" | \
   sudo tee /etc/apt/trusted.gpg.d/llvm.asc
 curl -sS "http://nginx.org/keys/nginx_signing.key" | \
   sudo tee /etc/apt/trusted.gpg.d/nginx.asc
+curl -fsSL "http://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key" | \
+  sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg 
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" |
+    \ sudo tee /etc/apt/sources.list.d/nodesource.list
 curl -sS "https://packages.microsoft.com/keys/microsoft.asc" | \
   sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
 sudo add-apt-repository \
@@ -56,6 +58,8 @@ sh ~/dotfiles/helpers/debianish-update-alternatives.sh
 curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
 python /tmp/get-pip.py --user --break-system-packages
 chsh -s $(which zsh)
+sudo corepack enable
+sudo corepack prepare pnpm@latest --activate
 ```
 
 Refresh the shell session, then run the following:
