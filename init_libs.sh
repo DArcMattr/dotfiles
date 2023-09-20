@@ -108,14 +108,6 @@ grab_pips() {
   fi
 }
 
-grab_npms() {
-  (
-    cd "${HOME}/dotfiles"
-    ncu -u
-    npm install
-  )
-}
-
 grab_composer() {
   (
     cd /tmp
