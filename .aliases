@@ -5,19 +5,18 @@ alias ll='ls -alFh'
 alias expected_install='./autogen.sh && ./configure --prefix=$HOME/.local && make install clean'
 alias nvf='nvim $(fzf)'
 alias nvdno='nvim $(git dno @~1)'
-alias unpm='sh -c "cd ~/dotfiles && npm install $(npm outdated | cut -d' ' -f 1 | sed '1d' | xargs -I '$' echo '$@latest' | xargs echo)"'
 
 nvrg() {
-	nvim $(rg -l "${@}")
+  nvim $(rg -l "${@}")
 }
 
 dir() {
-	{
-		LL=$(ll "${@}")
-		echo "${LL}" | awk '/^d/ {print $0}'
-		echo "${LL}" | awk '! /^(d|total)/ {print $0}'
-		echo "${LL}" | awk '/^total/ {print $0}'
-	} | ${PAGER:-less}
+  {
+    LL=$(ll "${@}")
+    echo "${LL}" | awk '/^d/ {print $0}'
+    echo "${LL}" | awk '! /^(d|total)/ {print $0}'
+    echo "${LL}" | awk '/^total/ {print $0}'
+  } | ${PAGER:-less}
 }
 
 if lsd >/dev/null 2>&1; then
@@ -27,32 +26,31 @@ if lsd >/dev/null 2>&1; then
     echo "${LL}" | ${PAGER:-less}
   }
 elif ls --color=always -d . >/dev/null 2>&1; then
-	alias ls='\ls --color=always'
+  alias ls='\ls --color=always'
 elif ls -G -d . >/dev/null 2>&1; then # colorls is main system ls already
-	alias ls='\ls -G'
+  alias ls='\ls -G'
 elif colorls -G -d . >/dev/null 2>&1; then
-	alias ls='\colorls -G'
+  alias ls='\colorls -G'
 else # Solaris or other *NIX
-	alias ls='\ls'
+  alias ls='\ls'
 fi
 
 alias key='\man -k'
 alias info='info --vi-keys'
 alias sicp='racket -i -p neil/sicp -l xrepl'
-alias agp='ag --pager=less'
+alias rgp='rg --pager=less'
 alias venv='python -m venv'
 alias jsonize='python -m json.tool'
-alias composer="${HOME}/.local/bin/composer"
 
 # Suffix aliases
 if alias -s >/dev/null 2>&1; then
-	alias -s css=nvim
-	alias -s md=nvim
-	alias -s rst=nvim
-	alias -s scss=nvim
-	alias -s txt=nvim
-	alias -s php=nvim
-	alias -s json=jsonize
+  alias -s css=nvim
+  alias -s md=nvim
+  alias -s rst=nvim
+  alias -s scss=nvim
+  alias -s txt=nvim
+  alias -s php=nvim
+  alias -s json=jsonize
 fi
 
 # Functions, used where aliases would break
@@ -134,18 +132,6 @@ superupdate() {
   fi
 }
 
-vman() {
-  if [ -x /usr/bin/nvim ]; then
-    if [ "${#}" -eq 2 ]; then
-      /usr/bin/nvim -R "man://${2}(${1})"
-    else
-      /usr/bin/nvim -R "man://${1}"
-    fi
-  else
-    /usr/bin/man "${@}"
-  fi
-}
-
 tmuxt() {
   SESSION="$(echo "${USER}" | sed -e 's/[\. ]/_/g')"
 
@@ -158,7 +144,7 @@ tmuxt() {
       tmux set-option -t "${SESSION}" status-position top
     fi
 
-    . "${XDG_CONFIG_HOME}/tmux/.tmux.${HOST}.conf"
+    . "${XDG_CONFIG_HOME}/tmux/.tmux.${HOST}"
 
     tmux select-window -t "${SESSION}":0
   fi
