@@ -6,7 +6,7 @@
     "eslint_d": "^12.2.1",
     "intelephense": "^1.9.5",
     "neovim": "^4.10.1",
-    "sass": "^1.66.1",
+    "sass": "^1.67.0",
     "sql-language-server": "^1.7.0",
     "stylelint": "^15.10.3",
     "stylelint-config-recommended": "^13.0.0",
