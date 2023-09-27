@@ -18,45 +18,45 @@ end
 bootstrap_pckr()
 
 require('pckr').add{
-	{
-		'nvim-treesitter/nvim-treesitter',
-		run = ':TSUpdate' ,
-		requires = {
-			'windwp/nvim-ts-autotag'
-		},
-	},
-	{
-		'hrsh7th/nvim-cmp',
-		requires = {
-			{ 'hrsh7th/cmp-nvim-lsp' },
-		},
-	},
-	{ 'Shougo/denite.nvim', run = ':UpdateRemotePlugins' },
-	{ 'Valloric/MatchTagAlways' },
-	{ 'akinsho/bufferline.nvim' },
-	{ 'fatih/vim-go', ft = { 'go' }, run = ':GoUpdateBinaries' },
-	{ 'hilojack/vim-xt' }, -- xdebug trace output syntax
-	{ 'isRuslan/vim-es6', ft = { 'js', 'jsx', 'javascript.jsx', 'mjs' } },
-	{ 'jeffkreeftmeijer/vim-numbertoggle' },
-	{ 'mattn/emmet-vim' },
-	{
-		'rcarriga/nvim-dap-ui',
-		requires = {
-			'mfussenegger/nvim-dap',
-			'theHamsta/nvim-dap-virtual-text',
-		}
-	},
-	{ 'mhinz/vim-signify' },
-	{ 'nathanaelkane/vim-indent-guides' },
-	{ 'neovim/nvim-lspconfig' },
-	{ 'nvim-lualine/lualine.nvim' },
-	{ 'tpope/vim-fugitive' },
-	{ 'tpope/vim-repeat' },
-	{ 'tpope/vim-surround' },
-	{ 'vim-scripts/DirDiff.vim' },
-	{ 'vim-scripts/csv.vim' },
-	{ 'windwp/nvim-autopairs' },
-	{ 'OmniSharp/omnisharp-vim', ft = { 'cs' }, run = ':OmniSharpInstall' },
+  {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate' ,
+    requires = {
+      'windwp/nvim-ts-autotag'
+    },
+  },
+  {
+    'hrsh7th/nvim-cmp',
+    requires = {
+      { 'hrsh7th/cmp-nvim-lsp' },
+    },
+  },
+  { 'Shougo/denite.nvim', run = ':UpdateRemotePlugins' },
+  { 'Valloric/MatchTagAlways' },
+  { 'akinsho/bufferline.nvim' },
+  { 'fatih/vim-go', ft = { 'go' }, run = ':GoUpdateBinaries' },
+  { 'hilojack/vim-xt' }, -- xdebug trace output syntax
+  { 'isRuslan/vim-es6', ft = { 'js', 'jsx', 'javascript.jsx', 'mjs' } },
+  { 'jeffkreeftmeijer/vim-numbertoggle' },
+  { 'mattn/emmet-vim' },
+  {
+    'rcarriga/nvim-dap-ui',
+    requires = {
+      'mfussenegger/nvim-dap',
+      'theHamsta/nvim-dap-virtual-text',
+    }
+  },
+  { 'mhinz/vim-signify' },
+  { 'nathanaelkane/vim-indent-guides' },
+  { 'neovim/nvim-lspconfig' },
+  { 'nvim-lualine/lualine.nvim' },
+  { 'tpope/vim-fugitive' },
+  { 'tpope/vim-repeat' },
+  { 'tpope/vim-surround' },
+  { 'vim-scripts/DirDiff.vim' },
+  { 'vim-scripts/csv.vim' },
+  { 'windwp/nvim-autopairs' },
+  { 'OmniSharp/omnisharp-vim', ft = { 'cs' }, run = ':OmniSharpInstall' },
 }
 
 -- Globals live in U namespace
@@ -265,7 +265,8 @@ vim.keymap.set('n', '<F3>',           U.dap.step_into)
 vim.keymap.set('n', '<F4>',           U.dap.step_out)
 vim.keymap.set('n', '<F5>',           U.dap.continue)
 vim.keymap.set('n', '<F6>',           function() U.dap.terminate(); dapui.close() end)
-vim.keymap.set('n', '<F10>',          U.dap.toggle_breakpoint)
+vim.keymap.set('n', '<F9>',           U.dap.toggle_breakpoint)
+vim.keymap.set('n', '<F10>',          function() U.dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { silent = true})
 vim.keymap.set('n', '<F11>',          function() U.dap.set_exception_breakpoints('Exception') end)
 vim.keymap.set('n', '<F12>',          function() U.dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
 vim.keymap.set('n', '<Leader><S-b>',  'gUiw')
@@ -276,7 +277,6 @@ vim.keymap.set('n', '<Leader>a',      function() vim.opt.relativenumber = not(vi
 vim.keymap.set('n', '<Leader>b',      'guiw')
 vim.keymap.set('n', '<Leader>d*',     ':DeniteCursorWord grep:.<Cr>')
 vim.keymap.set('n', '<Leader>d/',     ':Denite grep:.<Cr>')
-vim.keymap.set('n', '<Leader>db',     function() U.dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { silent = true})
 vim.keymap.set('n', '<Leader>dl',     U.dap.run_last)
 vim.keymap.set('n', '<Leader>do',     ':Denite outline<Cr>')
 vim.keymap.set('n', '<Leader>dr',     U.dap.repl.open)
