@@ -1,0 +1,1 @@
+U.lspconfig.ocamlsp.setup { }
