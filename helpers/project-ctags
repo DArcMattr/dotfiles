@@ -50,5 +50,6 @@ project_ctags() {
 #  )
 #}
 
-
-project_ctags ${@}
+if (( zsh_eval_context[(I)file] )); then
+	project_ctags ${@}
+fi
