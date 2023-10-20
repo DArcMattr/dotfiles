@@ -4,3 +4,5 @@ unfunction sssh
 sssh() {
 	(TERM=xterm-256color autossh -t "${1}" 'tmux attach || tmux new') 2>/dev/null
 }
+
+[[ ! -r /home/darc/.opam/opam-init/init.zsh ]] || source /home/darc/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
