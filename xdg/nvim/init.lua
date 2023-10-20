@@ -19,10 +19,10 @@ bootstrap_pckr()
 
 require('pckr').add{
   {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate' ,
+    'windwp/nvim-ts-autotag',
     requires = {
-      'windwp/nvim-ts-autotag'
+      'nvim-treesitter/nvim-treesitter',
+      run = ':TSUpdate',
     },
   },
   {
@@ -126,6 +126,7 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
   },
   ensure_installed = {
+    -- 'bash',
     'c_sharp',
     'css',
     'html',
@@ -133,7 +134,7 @@ require'nvim-treesitter.configs'.setup {
     'jsdoc',
     'json',
     'lua',
-    'markdown',
+    -- 'markdown',
     'php',
     'phpdoc',
     'python',
