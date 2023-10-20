@@ -34,23 +34,23 @@ curl -sS "https://packages.microsoft.com/keys/microsoft.asc" | \
 sudo add-apt-repository \
   "deb http://nginx.org/packages/mainline/ubuntu ${REL} nginx"
 sudo add-apt-repository \
-  "deb http://apt.llvm.org/${REL}/ llvm-toolchain-${REL}-16 main"
+  "deb http://apt.llvm.org/${REL}/ llvm-toolchain-${REL}-17 main"
 sudo add-apt-repository \
     "$(wget -qO- https://packages.microsoft.com/config/ubuntu/22.04/prod.list)" # XXX
-sudo apt install autossh bison build-essential clang-16 clang-16-doc \
-  clang-format-16 clang-tidy-16 clang-tools-16 clangd-16 cmake flex git \
-  git-extras golang htop jq libc++-16-dev-wasm32 libc++abi-16-dev-wasm32 \
-  libclang-16-dev libclang-common-16-dev libclang-rt-16-dev \
-  libclang-rt-16-dev-wasm32 libclang-rt-16-dev-wasm32 libclang-rt-16-dev-wasm64 \
-  libclang-rt-16-dev-wasm64 libclang1-16 libevent-dev libfuzzer-16-dev \
-  libgit2-dev libjansson-dev libllvm-16-ocaml-dev libllvm16 liblua5.3-dev \
-  liblzma-dev libncurses5-dev libnss3-tools libomp-16-dev libpcre3-dev \
-  libsqlite3-dev libssh2-1-dev libssl-dev libxml2-dev libyaml-dev lld-16 \
-  lldb-16 llvm-16 llvm-16-dev llvm-16-doc llvm-16-examples llvm-16-runtime \
+sudo apt install autossh bison build-essential clang-17 clang-17-doc \
+  clang-format-17 clang-tidy-17 clang-tools-17 clangd-17 cmake flex git \
+  git-extras golang htop jq libc++-17-dev-wasm32 libc++abi-17-dev-wasm32 \
+  libclang-17-dev libclang-common-17-dev libclang-rt-17-dev \
+  libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm64 \
+  libclang-rt-17-dev-wasm64 libclang1-17 libevent-dev libfuzzer-17-dev \
+  libgit2-dev libjansson-dev libllvm-17-ocaml-dev libllvm16 liblua5.3-dev \
+  liblzma-dev libncurses5-dev libnss3-tools libomp-17-dev libpcre3-dev \
+  libsqlite3-dev libssh2-1-dev libssl-dev libxml2-dev libyaml-dev lld-17 \
+  lldb-17 llvm-17 llvm-17-dev llvm-17-doc llvm-17-examples llvm-17-runtime \
   lsyncd neovim nginx nodejs php-common php-gd php-imagick php-mbstring \
   php-memcache php-pear php-xdebug php-xml php-zip php8.1-cli php8.1-curl \
   php8.1-dev php8.1-fpm php8.1-imap php8.1-mysql php8.1-opcache php8.1-readline \
-  php8.1-soap php8.1-xml pv python-is-python3 python3-clang-16 python3-dev \
+  php8.1-soap php8.1-xml pv python-is-python3 python3-clang-17 python3-dev \
   ruby-dev shellcheck sqlcmd tidy wget wslu xcape xsel zlib1g-dev zsh
 
 git clone https://github.com/darcmattr/dotfiles ~/dotfiles
