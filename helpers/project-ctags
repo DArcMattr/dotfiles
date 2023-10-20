@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 
 project_ctags() {
   PROJECT_ROOT="$(while [ ! -f '.editorconfig' ] && [ '/' != "${PWD}" ]; do cd .. ;done; [ / != "${PWD}"  ] && echo "${PWD}" || echo .)"
@@ -50,6 +50,4 @@ project_ctags() {
 #  )
 #}
 
-if (( zsh_eval_context[(I)file] )); then
-	project_ctags ${@}
-fi
+project_ctags ${@}
