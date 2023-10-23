@@ -35,8 +35,6 @@ require('pckr').add{
   { 'Valloric/MatchTagAlways' },
   { 'akinsho/bufferline.nvim' },
   { 'fatih/vim-go', ft = { 'go' }, run = ':GoUpdateBinaries' },
-  { 'hilojack/vim-xt' }, -- xdebug trace output syntax
-  { 'isRuslan/vim-es6', ft = { 'js', 'jsx', 'javascript.jsx', 'mjs' } },
   { 'jeffkreeftmeijer/vim-numbertoggle' },
   { 'mattn/emmet-vim' },
   {
@@ -55,7 +53,10 @@ require('pckr').add{
   { 'tpope/vim-surround' },
   { 'vim-scripts/DirDiff.vim' },
   { 'vim-scripts/csv.vim' },
-  { 'windwp/nvim-autopairs' },
+  {
+    'windwp/nvim-autopairs',
+    config = function() require('nvim-autopairs').setup {} end
+  },
   { 'OmniSharp/omnisharp-vim', ft = { 'cs' }, run = ':OmniSharpInstall' },
 }
 
@@ -113,7 +114,6 @@ U.dap.listeners.after.event_exited['dapui_config']      = dapui.close
 
 require'nvim-dap-virtual-text'.setup()
 require'lualine'.setup { options = { theme = 'powerline' } }
-require'nvim-autopairs'.setup {}
 require'nvim-treesitter.configs'.setup {
   autotag = {
     enable = true,
