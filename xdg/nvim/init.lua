@@ -22,7 +22,41 @@ require('pckr').add{
     'windwp/nvim-ts-autotag',
     requires = {
       'nvim-treesitter/nvim-treesitter',
-      run = ':TSUpdate',
+      config = function()
+        local configs = require('nvim-treesitter.configs')
+        configs.setup({
+          autotag = {
+            enable = true,
+          },
+          highlight = {
+            disabled = {},
+            enable = true,
+          },
+          indent = {
+            enable = true,
+          },
+          ensure_installed = {
+            'bash',
+            'c_sharp',
+            'css',
+            'html',
+            'javascript',
+            'jsdoc',
+            'json',
+            'lua',
+            'markdown',
+            'php',
+            'phpdoc',
+            'python',
+            'sql',
+            'vim',
+          },
+        })
+      end,
+      run = function()
+        local ts_update = require('nvim-treesitter.install').update({ with_sync = true})
+        ts_update()
+      end,
     },
   },
   {
@@ -115,32 +149,6 @@ U.dap.listeners.after.event_exited['dapui_config']      = dapui.close
 require'nvim-dap-virtual-text'.setup()
 require'lualine'.setup { options = { theme = 'powerline' } }
 require'nvim-treesitter.configs'.setup {
-  autotag = {
-    enable = true,
-  },
-  highlight = {
-    disabled = {},
-    enable = true,
-  },
-  indent = {
-    enable = true,
-  },
-  ensure_installed = {
-    -- 'bash',
-    'c_sharp',
-    'css',
-    'html',
-    'javascript',
-    'jsdoc',
-    'json',
-    'lua',
-    -- 'markdown',
-    'php',
-    'phpdoc',
-    'python',
-    'sql',
-    'vim',
-  },
 }
 
 vim.g.c_space_errors = 1
