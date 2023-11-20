@@ -1,12 +1,13 @@
+node_modules/
 symlinks/.pandoc/buttondown.css
 symlinks/.pandoc/buttondown.css.map
-symlinks/.ssh/authorized_keys
-symlinks/.ssh/known_hosts
-symlinks/.ssh/id_rsa*
-symlinks/.ssh/id_ed25519*
-symlinks/.ssh/vagrant_*
 symlinks/.ssh/*.pem
+symlinks/.ssh/authorized_keys
+symlinks/.ssh/id_ed25519*
+symlinks/.ssh/id_rsa*
+symlinks/.ssh/known_hosts
 symlinks/.ssh/sockets/
+symlinks/.ssh/vagrant_*
 xdg/composer/.htaccess
 xdg/composer/auth.json
 xdg/composer/keys.dev.pub
@@ -16,6 +17,5 @@ xdg/fish/fishd.*
 xdg/git/gitk
 xdg/nvim/*.tags
 xdg/nvim/.netrwhist
+xdg/nvim/lazy-lock.json
 xdg/nvim/plugged/
-xdg/nvim/plugin/packer_compiled.lua
-node_modules/

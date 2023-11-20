@@ -1,82 +1,156 @@
 U = {}
-local function bootstrap_pckr()
-  local pckr_path = vim.fn.stdpath("data") .. "/pckr/pckr.nvim"
 
-  if not vim.loop.fs_stat(pckr_path) then
-    vim.fn.system({
-      'git',
-      'clone',
-      "--filter=blob:none",
-      'https://github.com/lewis6991/pckr.nvim',
-      pckr_path
-    })
-  end
-
-  vim.opt.rtp:prepend(pckr_path)
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-bootstrap_pckr()
-
-require('pckr').add{
+local lazyvim_plugins = {
   {
-    'windwp/nvim-ts-autotag',
-    requires = {
-      'nvim-treesitter/nvim-treesitter',
-      config = function()
-        local configs = require('nvim-treesitter.configs')
-        configs.setup({
-          autotag = {
-            enable = true,
-          },
-          highlight = {
-            disabled = {},
-            enable = true,
-          },
-          indent = {
-            enable = true,
-          },
-          ensure_installed = {
-            'bash',
-            'c_sharp',
-            'css',
-            'html',
-            'javascript',
-            'jsdoc',
-            'json',
-            'lua',
-            'markdown',
-            'php',
-            'phpdoc',
-            'python',
-            'sql',
-            'vim',
-          },
-        })
-      end,
-      run = function()
-        local ts_update = require('nvim-treesitter.install').update({ with_sync = true})
-        ts_update()
-      end,
-    },
+    'nvim-treesitter/nvim-treesitter',
+    config = function()
+      local configs = require('nvim-treesitter.configs')
+      configs.setup({
+        autotag = {
+          enable = true,
+        },
+        highlight = {
+          disabled = {},
+          enable = true,
+        },
+        indent = {
+          enable = true,
+        },
+        ensure_installed = {
+          'bash',
+          'c',
+          'c_sharp',
+          'css',
+          'diff',
+          'go',
+          'gomod',
+          'gowork',
+          'gosum',
+          'html',
+          'javascript',
+          'jsdoc',
+          'json',
+          'lua',
+          'markdown',
+          'markdown_inline',
+          'php',
+          'phpdoc',
+          'python',
+          'rst',
+          'sql',
+          'vim',
+          'vimdoc',
+          'yaml',
+        },
+      })
+    end,
+    build = function()
+      local ts_update = require('nvim-treesitter.install').update({ with_sync = true})
+      ts_update()
+    end,
+    dependencies = {
+      'windwp/nvim-ts-autotag',
+    }
   },
   {
     'hrsh7th/nvim-cmp',
-    requires = {
+    dependencies = {
       { 'hrsh7th/cmp-nvim-lsp' },
     },
   },
-  { 'Shougo/denite.nvim', run = ':UpdateRemotePlugins' },
+  { 'Shougo/denite.nvim', build = ':UpdateRemotePlugins' },
   { 'Valloric/MatchTagAlways' },
-  { 'akinsho/bufferline.nvim' },
-  { 'fatih/vim-go', ft = { 'go' }, run = ':GoUpdateBinaries' },
+  {
+    'akinsho/bufferline.nvim',
+    opts = {},
+  },
+  {
+    'fatih/vim-go',
+    -- ft = { 'go' },
+    build = ':GoUpdateBinaries'
+  },
   { 'jeffkreeftmeijer/vim-numbertoggle' },
   { 'mattn/emmet-vim' },
   {
-    'rcarriga/nvim-dap-ui',
-    requires = {
-      'mfussenegger/nvim-dap',
+    'mfussenegger/nvim-dap',
+    dependencies = {
       'theHamsta/nvim-dap-virtual-text',
-    }
+      'rcarriga/nvim-dap-ui',
+    },
+    keys = {
+      {'<F2>',           function() require('dap').step_over() end, { mode = {'n'}, }, desc = 'Step Over', },
+      {'<F3>',           function() require('dap').step_into() end, { mode = {'n'}, }, desc = 'Step Into', },
+      {'<F4>',           function() require('dap').step_out() end, { mode = {'n'}, },},
+      {'<F5>',           function() require('dap').continue() end, { mode = {'n'}, },},
+      {'<F6>',           function() require('dap').terminate(); dapui.close() end, { mode = {'n'}, },},
+      {'<F9>',           function() require('dap').toggle_breakpoint() end, { mode = {'n'}, },},
+      {'<F10>',          function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { silent = true}, { mode = {'n'}, },},
+      {'<F11>',          function() require('dap').set_exception_breakpoints('Exception') end, { mode = {'n'}, },},
+      {'<F12>',          function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { mode = {'n'}, },},
+      {'<Leader>dl',     function() require('dap').run_last() end, { mode = {'n'}, },},
+      {'<Leader>dr',     function() require('dap').repl.open() end, { mode = {'n'}, },},
+    },
+    config = function(_, opts)
+      local dap   = require('dap')
+      local dapui = require('dapui')
+
+      U.dap = dap
+      U.dapui = dapui
+
+      dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+      dap.listeners.after.event_terminated['dapui_config']  = dapui.close
+      dap.listeners.after.event_exited['dapui_config']      = dapui.close
+
+      dapui.setup({
+        layouts = {
+            {
+              elements = {
+                'watches',
+                { id = 'scopes', size = 0.5 },
+                { id = 'stacks', size = 0.25 },
+                { id = 'breakpoints', size = 0.1 },
+                { id = 'console', size = 0.15 },
+              },
+              size = 79,
+              position = 'right',
+          },
+          {
+            elements = {
+              'repl',
+            },
+            size = 0.15,
+            position = 'bottom',
+          },
+        },
+        controls = {
+          enabled = true,
+          element = 'repl',
+          icons = {
+            pause = '',
+            play = '',
+            step_into = '',
+            step_over = '',
+            step_out = '',
+            step_back = '',
+            run_last = '↻',
+            terminate = '□',
+          },
+        },
+      })
+    end,
   },
   { 'mhinz/vim-signify' },
   { 'nathanaelkane/vim-indent-guides' },
@@ -89,10 +163,18 @@ require('pckr').add{
   { 'vim-scripts/csv.vim' },
   {
     'windwp/nvim-autopairs',
-    config = function() require('nvim-autopairs').setup {} end
+    config = function()
+      require('nvim-autopairs').setup {}
+    end
   },
-  { 'OmniSharp/omnisharp-vim', ft = { 'cs' }, run = ':OmniSharpInstall' },
+  {
+    'OmniSharp/omnisharp-vim',
+    -- ft = { 'cs' },
+    build = ':OmniSharpInstall'
+  },
 }
+
+require('lazy').setup(lazyvim_plugins, {})
 
 -- Globals live in U namespace
 U.capabilities = require'cmp_nvim_lsp'.default_capabilities()
@@ -100,56 +182,10 @@ U.dap          = require'dap'
 U.lspconfig    = require'lspconfig'
 
 local cmp           = require'cmp'
-local dapui         = require'dapui'
 local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
-local treesitter    = package.loaded['nvim-treesitter']
-
-require'bufferline'.setup {}
-
-dapui.setup({
-  layouts = {
-      {
-        elements = {
-          'watches',
-          { id = 'scopes', size = 0.5 },
-          { id = 'stacks', size = 0.25 },
-          { id = 'breakpoints', size = 0.1 },
-          { id = 'console', size = 0.15 },
-        },
-        size = 79,
-        position = 'right',
-    },
-    {
-      elements = {
-        'repl',
-      },
-      size = 0.15,
-      position = 'bottom',
-    },
-  },
-  controls = {
-    enabled = true,
-    element = 'repl',
-    icons = {
-      pause = '',
-      play = '',
-      step_into = '',
-      step_over = '',
-      step_out = '',
-      step_back = '',
-      run_last = '↻',
-      terminate = '□',
-    },
-  },
-})
-U.dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-U.dap.listeners.after.event_terminated['dapui_config']  = dapui.close
-U.dap.listeners.after.event_exited['dapui_config']      = dapui.close
 
 require'nvim-dap-virtual-text'.setup()
 require'lualine'.setup { options = { theme = 'powerline' } }
-require'nvim-treesitter.configs'.setup {
-}
 
 vim.g.c_space_errors = 1
 vim.g.colors_name = 'industry'
@@ -261,7 +297,6 @@ vim.keymap.set('i', '<C-b>',   '<Esc>gUiwi')
 vim.keymap.set('i', '<Cr>',    function() return vim.fn.pumvisible() == 1 and '<C-y>' or '<C-g>u<Cr>' end, { expr = true })
 vim.keymap.set('i', '<S-Tab>', function() return vim.fn.pumvisible() == 1 and '<C-p>' or '<C-h>' end,      { expr = true })
 vim.keymap.set('i', '<Tab>',   function() return vim.fn.pumvisible() == 1 and '<C-n>' or '<Tab>' end,      { expr = true })
-
 vim.keymap.set('n', '<C-PageDown>',   ':bp<Cr>')
 vim.keymap.set('n', '<C-PageUp>',     ':bn<Cr>')
 vim.keymap.set('n', '<C-d>',          '<C-d>zz')
@@ -269,15 +304,6 @@ vim.keymap.set('n', '<C-e>',          '3<C-e>')
 vim.keymap.set('n', '<C-p>',          ':Denite file/rec<Cr>')
 vim.keymap.set('n', '<C-u>',          '<C-u>zz')
 vim.keymap.set('n', '<C-y>',          '3<C-y>')
-vim.keymap.set('n', '<F2>',           U.dap.step_over)
-vim.keymap.set('n', '<F3>',           U.dap.step_into)
-vim.keymap.set('n', '<F4>',           U.dap.step_out)
-vim.keymap.set('n', '<F5>',           U.dap.continue)
-vim.keymap.set('n', '<F6>',           function() U.dap.terminate(); dapui.close() end)
-vim.keymap.set('n', '<F9>',           U.dap.toggle_breakpoint)
-vim.keymap.set('n', '<F10>',          function() U.dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { silent = true})
-vim.keymap.set('n', '<F11>',          function() U.dap.set_exception_breakpoints('Exception') end)
-vim.keymap.set('n', '<F12>',          function() U.dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
 vim.keymap.set('n', '<Leader><S-b>',  'gUiw')
 vim.keymap.set('n', '<Leader><F7>',   function() vim.opt.spell = not(vim.opt.spell:get())  end, { silent = true })
 vim.keymap.set('n', '<Leader>[',      vim.diagnostic.goto_prev)
@@ -286,9 +312,7 @@ vim.keymap.set('n', '<Leader>a',      function() vim.opt.relativenumber = not(vi
 vim.keymap.set('n', '<Leader>b',      'guiw')
 vim.keymap.set('n', '<Leader>d*',     ':DeniteCursorWord grep:.<Cr>')
 vim.keymap.set('n', '<Leader>d/',     ':Denite grep:.<Cr>')
-vim.keymap.set('n', '<Leader>dl',     U.dap.run_last)
 vim.keymap.set('n', '<Leader>do',     ':Denite outline<Cr>')
-vim.keymap.set('n', '<Leader>dr',     U.dap.repl.open)
 vim.keymap.set('n', '<Leader>gb',     ':Git blame<Cr>')
 vim.keymap.set('n', '<Leader>gc',     ':Git commit<Cr>')
 vim.keymap.set('n', '<Leader>gd',     ':Gdiffsplit<Cr>')
