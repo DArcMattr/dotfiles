@@ -2,6 +2,7 @@
 # vim:ft=zsh:
 
 alias ll='ls -alFh'
+alias composer='~/.local/bin/composer'
 alias expected_install='./autogen.sh && ./configure --prefix=$HOME/.local && make install clean'
 alias nvf='nvim $(fzf)'
 alias nvdno='nvim $(git dno @~1)'
@@ -105,13 +106,12 @@ sssh() {
 
 superupdate() {
   if [ -z "$(apt >/dev/null 2>&1)" ]; then
-    \sudo \sh -c " \
-      \apt update && \
-      \apt -y upgrade && \
-      \apt -y full-upgrade && \
-      \apt-get -y autoclean && \
-      \apt -y autoremove && \
-      \apt-get -y clean"
+    /usr/bin/sudo /usr/bin/sh -c "/usr/bin/apt update && \
+/usr/bin/apt -y upgrade && \
+/usr/bin/apt -y full-upgrade && \
+/usr/bin/apt -y autoclean && \
+/usr/bin/apt -y autoremove && \
+/usr/bin/apt -y clean"
   elif [ -z "$(apt-get >/dev/null 2>&1)" ]; then
     \sudo \sh -c " \
       \apt-get update && \
@@ -129,6 +129,10 @@ superupdate() {
       \sudo \freebsd-update install"
   else
     echoerr "This script is not configured for your system."
+  fi
+
+  if typeset -f superupdate_local > /dev/null; then
+    superupdate_local
   fi
 }
 
