@@ -66,9 +66,18 @@ local lazyvim_plugins = {
       'windwp/nvim-ts-autotag',
       {
         'stevearc/aerial.nvim',
-        opts = {},
+        opts = {
+          layout = {
+            min_width = { 20, .1 },
+            resize_to_content = true,
+            win_opts = {
+              signcolumn = no,
+              statuscolumn = ' ',
+            },
+          },
+        },
         keys = {
-          { '<Leader>do', '<Cmd>AerialToggle<Cr>!', { silent = true }, }
+          { '<Leader>do', '<Cmd>AerialToggle!<Cr>', { silent = true }, }
         },
       }
     },
@@ -77,8 +86,44 @@ local lazyvim_plugins = {
   {
     'hrsh7th/nvim-cmp',
     dependencies = {
-      { 'hrsh7th/cmp-nvim-lsp' },
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
     },
+    event = { 'InsertEnter', },
+    opts = function()
+      local cmp = require('cmp')
+      local defaults = require('cmp.config.default')()
+      return {
+        mapping = cmp.mapping.preset.insert({
+          ['<C-b>']     = cmp.mapping.scroll_docs(-4),
+          ['<C-f>']     = cmp.mapping.scroll_docs(4),
+          ['<C-n>']     = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+          ['<C-p>']     = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-e>']     = cmp.mapping.abort(),
+          ['<Cr>']      = cmp.mapping.confirm({ select = true }),
+          ['<S-Cr>']    = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+          }),
+          ['<C-Cr>'] = function(fallback)
+            cmp.abort()
+            fallback()
+          end,
+        }),
+        sorting = defaults.sorting,
+        sources = {
+          { name = 'nvim_lsp' },
+          { name = 'buffer' },
+          { name = 'path' },
+        },
+        window = {
+          completion = cmp.config.window.bordered()
+        },
+      }
+    end,
+    version = false,
   },
   {
     'nvim-telescope/telescope.nvim',
@@ -97,6 +142,7 @@ local lazyvim_plugins = {
         { '<C-p>',      builtin.find_files },
         { '<Leader>d*', builtin.grep_string, mode = { 'n', 'v'}, },
         { '<Leader>d/', builtin.live_grep },
+        { '<Leader>ds', builtin.lsp_document_symbols },
         { '<Leader>ls', builtin.buffers },
       }
     end,
@@ -128,17 +174,17 @@ local lazyvim_plugins = {
       local dap = require('dap')
       local dapui = require('dapui')
       return {
-        { '<F2>',           dap.step_over, desc = 'Step Over', },
-        { '<F3>',           dap.step_into, desc = 'Step Into', },
-        { '<F4>',           dap.step_out, },
-        { '<F5>',           dap.continue, },
-        { '<F6>',           function() dap.terminate(); dapui.close() end, },
-        { '<F9>',           dap.toggle_breakpoint, },
-        { '<F10>',          function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { silent = true},},
-        { '<F11>',          function() dap.set_exception_breakpoints('Exception') end,},
-        { '<F12>',          function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end,},
-        { '<Leader>dl',     dap.run_last, },
-        { '<Leader>dr',     dap.repl.open, },
+        { '<F2>',       dap.step_over, desc = 'Step Over', },
+        { '<F3>',       dap.step_into, desc = 'Step Into', },
+        { '<F4>',       dap.step_out, },
+        { '<F5>',       dap.continue, },
+        { '<F6>',       function() dap.terminate(); dapui.close() end, },
+        { '<F9>',       dap.toggle_breakpoint, },
+        { '<F10>',      function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { silent = true},},
+        { '<F11>',      function() dap.set_exception_breakpoints('Exception') end,},
+        { '<F12>',      function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end,},
+        { '<Leader>dl', dap.run_last, },
+        { '<Leader>dr', dap.repl.open, },
       }
     end,
     config = function(_, opts)
@@ -190,8 +236,6 @@ local lazyvim_plugins = {
       })
     end,
   },
--- nvim-telescope, stevearc/aerial.nvim, delphinus/cmp-ctags {}
-  --
   { 'mhinz/vim-signify' },
   { 'nathanaelkane/vim-indent-guides' },
   { 'neovim/nvim-lspconfig' },
@@ -229,8 +273,6 @@ require('lazy').setup(lazyvim_plugins, {
 U.capabilities = require'cmp_nvim_lsp'.default_capabilities()
 U.dap          = require'dap'
 U.lspconfig    = require'lspconfig'
-
-local cmp           = require'cmp'
 
 vim.g.c_space_errors = 1
 vim.g.colors_name = 'industry'
@@ -427,26 +469,6 @@ TODO:
   dap_scopes - keymap for 'send variable to repl'
   dap-repl - config to make easier to use
 ]]
-
-cmp.setup({
-  window = {
-    completion = cmp.config.window.bordered()
-  },
-  mapping = {
-    ['<C-b>']     = cmp.mapping.scroll_docs(-4),
-    ['<C-f>']     = cmp.mapping.scroll_docs(4),
-    ['<C-n>']     = cmp.mapping.select_next_item(),
-    ['<C-p>']     = cmp.mapping.select_prev_item(),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>']     = cmp.mapping.abort(),
-    ['<CR>']      = cmp.mapping.confirm({ select = true }),
-  },
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'buffer' },
-    { name = 'path' },
-  }
-})
 
 local FocusEvents = vim.api.nvim_create_augroup('FocusEvents', { clear = true })
 vim.api.nvim_create_autocmd({ 'FocusGained' }, {
