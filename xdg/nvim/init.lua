@@ -53,6 +53,7 @@ local lazyvim_plugins = {
           'sql',
           'vim',
           'vimdoc',
+          'xml',
           'yaml',
         },
       })
@@ -63,7 +64,15 @@ local lazyvim_plugins = {
     end,
     dependencies = {
       'windwp/nvim-ts-autotag',
-    }
+      {
+        'stevearc/aerial.nvim',
+        opts = {},
+        keys = {
+          { '<Leader>do', '<Cmd>AerialToggle<Cr>!', { silent = true }, }
+        },
+      }
+    },
+    event = { 'VeryLazy', },
   },
   {
     'hrsh7th/nvim-cmp',
@@ -71,7 +80,27 @@ local lazyvim_plugins = {
       { 'hrsh7th/cmp-nvim-lsp' },
     },
   },
-  { 'Shougo/denite.nvim', build = ':UpdateRemotePlugins' },
+  {
+    'nvim-telescope/telescope.nvim',
+    cmd = 'Telescope',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+    event = { 'VeryLazy' },
+    extensions = {
+      aerial = {
+      },
+    },
+    keys = function()
+      local builtin = require('telescope.builtin')
+      return {
+        { '<C-p>',      builtin.find_files },
+        { '<Leader>d*', builtin.grep_string, mode = { 'n', 'v'}, },
+        { '<Leader>d/', builtin.live_grep },
+        { '<Leader>ls', builtin.buffers },
+      }
+    end,
+  },
   { 'Valloric/MatchTagAlways' },
   {
     'akinsho/bufferline.nvim',
@@ -80,29 +109,38 @@ local lazyvim_plugins = {
   {
     'fatih/vim-go',
     -- ft = { 'go' },
-    build = ':GoUpdateBinaries'
+    build = '<Cmd>GoUpdateBinaries<Cr>'
   },
   { 'jeffkreeftmeijer/vim-numbertoggle' },
   { 'mattn/emmet-vim' },
   {
     'mfussenegger/nvim-dap',
     dependencies = {
-      'theHamsta/nvim-dap-virtual-text',
+      {
+        'theHamsta/nvim-dap-virtual-text',
+        config = function()
+          require('nvim-dap-virtual-text').setup()
+        end
+      },
       'rcarriga/nvim-dap-ui',
     },
-    keys = {
-      {'<F2>',           function() require('dap').step_over() end, { mode = {'n'}, }, desc = 'Step Over', },
-      {'<F3>',           function() require('dap').step_into() end, { mode = {'n'}, }, desc = 'Step Into', },
-      {'<F4>',           function() require('dap').step_out() end, { mode = {'n'}, },},
-      {'<F5>',           function() require('dap').continue() end, { mode = {'n'}, },},
-      {'<F6>',           function() require('dap').terminate(); dapui.close() end, { mode = {'n'}, },},
-      {'<F9>',           function() require('dap').toggle_breakpoint() end, { mode = {'n'}, },},
-      {'<F10>',          function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { silent = true}, { mode = {'n'}, },},
-      {'<F11>',          function() require('dap').set_exception_breakpoints('Exception') end, { mode = {'n'}, },},
-      {'<F12>',          function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { mode = {'n'}, },},
-      {'<Leader>dl',     function() require('dap').run_last() end, { mode = {'n'}, },},
-      {'<Leader>dr',     function() require('dap').repl.open() end, { mode = {'n'}, },},
-    },
+    keys = function()
+      local dap = require('dap')
+      local dapui = require('dapui')
+      return {
+        { '<F2>',           dap.step_over, desc = 'Step Over', },
+        { '<F3>',           dap.step_into, desc = 'Step Into', },
+        { '<F4>',           dap.step_out, },
+        { '<F5>',           dap.continue, },
+        { '<F6>',           function() dap.terminate(); dapui.close() end, },
+        { '<F9>',           dap.toggle_breakpoint, },
+        { '<F10>',          function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { silent = true},},
+        { '<F11>',          function() dap.set_exception_breakpoints('Exception') end,},
+        { '<F12>',          function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end,},
+        { '<Leader>dl',     dap.run_last, },
+        { '<Leader>dr',     dap.repl.open, },
+      }
+    end,
     config = function(_, opts)
       local dap   = require('dap')
       local dapui = require('dapui')
@@ -152,10 +190,19 @@ local lazyvim_plugins = {
       })
     end,
   },
+-- nvim-telescope, stevearc/aerial.nvim, delphinus/cmp-ctags {}
+  --
   { 'mhinz/vim-signify' },
   { 'nathanaelkane/vim-indent-guides' },
   { 'neovim/nvim-lspconfig' },
-  { 'nvim-lualine/lualine.nvim' },
+  {
+    'nvim-lualine/lualine.nvim',
+    opts = {
+      options = {
+        theme = 'powerline'
+      }
+    },
+  },
   { 'tpope/vim-fugitive' },
   { 'tpope/vim-repeat' },
   { 'tpope/vim-surround' },
@@ -174,7 +221,9 @@ local lazyvim_plugins = {
   },
 }
 
-require('lazy').setup(lazyvim_plugins, {})
+require('lazy').setup(lazyvim_plugins, {
+  spec = {}
+})
 
 -- Globals live in U namespace
 U.capabilities = require'cmp_nvim_lsp'.default_capabilities()
@@ -182,10 +231,6 @@ U.dap          = require'dap'
 U.lspconfig    = require'lspconfig'
 
 local cmp           = require'cmp'
-local parser_config = require'nvim-treesitter.parsers'.get_parser_configs()
-
-require'nvim-dap-virtual-text'.setup()
-require'lualine'.setup { options = { theme = 'powerline' } }
 
 vim.g.c_space_errors = 1
 vim.g.colors_name = 'industry'
@@ -282,6 +327,13 @@ vim.opt.wildignore:append {
   'build/*', 'dist/*'
 }
 
+if vim.fn.executable('rg') == 1 then
+  vim.opt.grepprg='rg --vimgrep --no-heading --smart-case'
+  vim.opt.grepformat='%f:%l:%c:%m,%f:%l:%m'
+else
+  vim.opt.grepprg='grep -nH $*'
+end
+
 vim.cmd.highlight('TermCursor', 'ctermfg=yellow guifg=yellow')
 vim.cmd.highlight('LineNr',     'gui=bold guifg=#c6c6c6 guibg=#00005f')
 vim.cmd.highlight('LineNr',     'gui=bold guifg=#c6c6c6 guibg=#00005f')
@@ -292,7 +344,6 @@ vim.cmd.highlight('SpellBad',   'term=standout,underline cterm=underline ctermfg
 vim.cmd.highlight('SpellCap',   'term=underline cterm=underline gui=undercurl')
 vim.cmd.highlight('SpellLocal', 'term=underline cterm=underline gui=undercurl')
 vim.cmd.highlight('SpellRare',  'term=underline cterm=underline gui=undercurl')
-
 vim.keymap.set('i', '<C-b>',   '<Esc>gUiwi')
 vim.keymap.set('i', '<Cr>',    function() return vim.fn.pumvisible() == 1 and '<C-y>' or '<C-g>u<Cr>' end, { expr = true })
 vim.keymap.set('i', '<S-Tab>', function() return vim.fn.pumvisible() == 1 and '<C-p>' or '<C-h>' end,      { expr = true })
@@ -301,7 +352,6 @@ vim.keymap.set('n', '<C-PageDown>',   ':bp<Cr>')
 vim.keymap.set('n', '<C-PageUp>',     ':bn<Cr>')
 vim.keymap.set('n', '<C-d>',          '<C-d>zz')
 vim.keymap.set('n', '<C-e>',          '3<C-e>')
-vim.keymap.set('n', '<C-p>',          ':Denite file/rec<Cr>')
 vim.keymap.set('n', '<C-u>',          '<C-u>zz')
 vim.keymap.set('n', '<C-y>',          '3<C-y>')
 vim.keymap.set('n', '<Leader><S-b>',  'gUiw')
@@ -310,9 +360,6 @@ vim.keymap.set('n', '<Leader>[',      vim.diagnostic.goto_prev)
 vim.keymap.set('n', '<Leader>]',      vim.diagnostic.goto_next)
 vim.keymap.set('n', '<Leader>a',      function() vim.opt.relativenumber = not(vim.opt.relativenumber:get()) end)
 vim.keymap.set('n', '<Leader>b',      'guiw')
-vim.keymap.set('n', '<Leader>d*',     ':DeniteCursorWord grep:.<Cr>')
-vim.keymap.set('n', '<Leader>d/',     ':Denite grep:.<Cr>')
-vim.keymap.set('n', '<Leader>do',     ':Denite outline<Cr>')
 vim.keymap.set('n', '<Leader>gb',     ':Git blame<Cr>')
 vim.keymap.set('n', '<Leader>gc',     ':Git commit<Cr>')
 vim.keymap.set('n', '<Leader>gd',     ':Gdiffsplit<Cr>')
@@ -321,9 +368,8 @@ vim.keymap.set('n', '<Leader>gp',     ':Git push<Cr>')
 vim.keymap.set('n', '<Leader>gs',     ':Git<Cr>')
 vim.keymap.set('n', '<Leader>il',     vim.diagnostic.setloclist)
 vim.keymap.set('n', '<Leader>io',     vim.diagnostic.open_float)
-vim.keymap.set('n', '<Leader>ls',     ':Denite buffer<Cr>')
 vim.keymap.set('n', '<Leader>o',      'i<Cr><Esc>')
-vim.keymap.set('n', '<Leader>q',      ':nohlsearch<Cr>')
+vim.keymap.set('n', '<Leader>q',      '<Cmd>nohlsearch<Cr>')
 vim.keymap.set('n', '<Leader>t',      ':enew<Cr>')
 vim.keymap.set('n', '<Left>',         ':bp<Cr>')
 vim.keymap.set('n', '<M-i>',          'i<Space><Esc>')
@@ -454,31 +500,6 @@ vim.api.nvim_set_hl(0, 'CursorLine', { underline = true })
 vim.cmd([[
 " mark scm conflict markers as errors
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$' "
-
-" Denite
-call denite#custom#option( 'default', {
-\  'auto_resize': 1,
-\  'prompt': '>',
-\  'short': 1,
-\  'split': 'floating_relative_cursor',
-\})
-call denite#custom#option( 'list', { 'mode': 'normal' } )
-
-if executable('rg')
-  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
-  set grepformat=%f:%l:%c:%m,%f:%l:%m
-
-  call denite#custom#var('grep', {
-    \ 'command': ['rg'],
-    \ 'default_opts': ['-i', '--vimgrep', '--no-heading'],
-    \ 'recursive_opts': [],
-    \ 'pattern_opt': ['--regexp'],
-    \ 'separator': ['--'],
-    \ 'final_opts': [],
-    \ })
-else
-  set grepprg=grep\ -nH\ $*
-endif
 
 command! -nargs=1 Silent |
 \   execute ':silent !'.<q-args> |
