@@ -41,10 +41,11 @@ curl -L https://cpanmin.us | perl - App::cpanminus
 	grab_composer
 	grab_pips
 	grab_gems
-	grab_git -d "${CONTRIB}/ctags"               -r https://github.com/universal-ctags/ctags.git      -b master
+	grab_git -d "${CONTRIB}/ctags"               -r https://github.com/universal-ctags/ctags.git
 	grab_git -d "${CONTRIB}/tmux"                -r https://github.com/tmux/tmux.git
 	grab_git -d "${CONTRIB}/autoenv"             -r https://github.com/zpm-zsh/autoenv.git -n
 	grab_git -d "${CONTRIB}/luarocks"            -r https://github.com/luarocks/luarocks -n
+	grab_git -d "${CONTRIB}/zsh-completions"     -r https://github.com/zsh-users/zsh-completions -n
 
 	cpanm -n --installdeps -l ${LOCAL} Neovim::Ext
 

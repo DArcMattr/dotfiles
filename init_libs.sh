@@ -137,6 +137,7 @@ grab_composer() {
         composer global install
       )
     else
+      composer self-update
       composer global upgrade
     fi
   )

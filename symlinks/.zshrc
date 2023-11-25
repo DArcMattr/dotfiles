@@ -15,6 +15,10 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+if [[ -r ~/contrib/zsh-completions ]]; then
+	fpath=(~/contrib/zsh-completions $fpath)
+fi
+
 if [[ -r ~/contrib/autoenv/autoenv.plugin.zsh ]]; then
   source ~/contrib/autoenv/autoenv.plugin.zsh
 fi
