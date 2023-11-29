@@ -7,3 +7,7 @@ BROWSER="/mnt/c/Users/darceneaux/AppData/Local/Vivaldi/Application/vivaldi.exe"
 alias docker-compose='echo "no"'
 
 export CC CXX BROWSER
+
+superupdate_local() {
+	nvim --headless '+Lazy! sync' +qa
+}
