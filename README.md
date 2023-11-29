@@ -48,9 +48,9 @@ sudo apt install autossh bison build-essential clang-17 clang-17-doc \
   libsqlite3-dev libssh2-1-dev libssl-dev libxml2-dev libyaml-dev lld-17 \
   lldb-17 llvm-17 llvm-17-dev llvm-17-doc llvm-17-examples llvm-17-runtime \
   lsyncd neovim nginx nodejs php-common php-gd php-imagick php-mbstring \
-  php-memcache php-pear php-xdebug php-xml php-zip php8.2-cli php8.2-curl \
-  php8.2-dev php8.2-fpm php8.2-imap php8.2-mysql php8.2-opcache php8.2-readline \
-  php8.2-soap php8.2-xml pv python-is-python3 python3-clang-17 python3-dev \
+  php-memcache php-pear php-xdebug php-xml php-zip php8.3-cli php8.3-curl \
+  php8.3-dev php8.3-fpm php8.3-imap php8.3-mysql php8.3-opcache php8.3-readline \
+  php8.3-soap php8.3-xml pv python-is-python3 python3-clang-17 python3-dev \
   ruby-dev shellcheck sqlcmd tidy wget wslu xcape xsel zlib1g-dev zsh
 
 git clone https://github.com/darcmattr/dotfiles ~/dotfiles
