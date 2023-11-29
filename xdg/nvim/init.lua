@@ -13,6 +13,15 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.g.c_space_errors = 1
+vim.g.colors_name = 'industry'
+vim.g.editorconfig_enable = true
+vim.g.indent_guides_enable_on_vim_startup = 1
+vim.g.indent_guides_exclude_filetypes = {'help', 'man', 'netrw'}
+vim.g.loaded_perl_provider = 0
+vim.g.mapleader = ','
+vim.g.maplocalleader = ' '
+
 local lazyvim_plugins = {
   {
     'nvim-treesitter/nvim-treesitter',
@@ -20,13 +29,6 @@ local lazyvim_plugins = {
       local configs = require('nvim-treesitter.configs')
       configs.setup({
         autotag = {
-          enable = true,
-        },
-        highlight = {
-          disabled = {},
-          enable = true,
-        },
-        indent = {
           enable = true,
         },
         ensure_installed = {
@@ -56,6 +58,13 @@ local lazyvim_plugins = {
           'xml',
           'yaml',
         },
+        highlight = {
+          disabled = {},
+          enable = true,
+        },
+        indent = {
+          enable = true,
+        },
       })
     end,
     build = function()
@@ -66,6 +75,10 @@ local lazyvim_plugins = {
       'windwp/nvim-ts-autotag',
       {
         'stevearc/aerial.nvim',
+        event = { 'VeryLazy' },
+        keys = {
+          { '<Leader>do', '<Cmd>AerialToggle!<Cr>', { silent = true } },
+        },
         opts = {
           layout = {
             min_width = { 20, .1 },
@@ -75,9 +88,6 @@ local lazyvim_plugins = {
               statuscolumn = ' ',
             },
           },
-        },
-        keys = {
-          { '<Leader>do', '<Cmd>AerialToggle!<Cr>', { silent = true }, }
         },
       }
     },
@@ -132,10 +142,6 @@ local lazyvim_plugins = {
       'nvim-lua/plenary.nvim',
     },
     event = { 'VeryLazy' },
-    extensions = {
-      aerial = {
-      },
-    },
     keys = function()
       local builtin = require('telescope.builtin')
       return {
@@ -148,10 +154,6 @@ local lazyvim_plugins = {
     end,
   },
   { 'Valloric/MatchTagAlways' },
-  {
-    'akinsho/bufferline.nvim',
-    opts = {},
-  },
   {
     'fatih/vim-go',
     -- ft = { 'go' },
@@ -234,6 +236,16 @@ local lazyvim_plugins = {
           },
         },
       })
+
+      vim.fn.sign_define('DapBreakpoint',
+        { text = '●', texthl = '', linehl = 'debugBreakpoint', numhl = 'debugBreakpoint' }
+      )
+      vim.fn.sign_define('DapBreakpointCondition',
+        { text = '◆', texthl = '', linehl = 'debugBreakpoint', numhl = 'debugBreakpoint' }
+      )
+      vim.fn.sign_define('DapStopped',
+        { text = '▶', texthl = '', linehl = 'debugPC', numhl = 'debugPC' }
+      )
     end,
   },
   { 'mhinz/vim-signify' },
@@ -244,7 +256,27 @@ local lazyvim_plugins = {
     opts = {
       options = {
         theme = 'powerline'
-      }
+      },
+      sections = {
+        lualine_c = {
+          {
+            'filename',
+            path = 1,
+          },
+        },
+        lualine_x = {
+          'aerial'
+        },
+      },
+      tabline = {
+        lualine_a = {
+          {
+            'buffers',
+            mode = 4,
+          },
+        },
+        lualine_z = {'tabs'},
+      },
     },
   },
   { 'tpope/vim-fugitive' },
@@ -274,23 +306,7 @@ U.capabilities = require'cmp_nvim_lsp'.default_capabilities()
 U.dap          = require'dap'
 U.lspconfig    = require'lspconfig'
 
-vim.g.c_space_errors = 1
-vim.g.colors_name = 'industry'
-vim.g.editorconfig_enable = true
-vim.g.indent_guides_enable_on_vim_startup = 1
-vim.g.indent_guides_exclude_filetypes = {'help', 'man', 'netrw'}
-vim.g.loaded_perl_provider = 0
-vim.g.mapleader = ','
-vim.g.maplocalleader = ' '
-
 vim.fn.setenv('GIT_SSL_NO_VERIFY', 'true')
-vim.fn.sign_define('DapBreakpoint',
-    { text = '●', texthl = '', linehl = 'debugBreakpoint', numhl = 'debugBreakpoint' }
-)
-vim.fn.sign_define('DapBreakpointCondition',
-    { text = '◆', texthl = '', linehl = 'debugBreakpoint', numhl = 'debugBreakpoint' }
-)
-vim.fn.sign_define('DapStopped', { text = '▶', texthl = '', linehl = 'debugPC', numhl = 'debugPC' })
 
 vim.opt.autoindent      = true
 vim.opt.autoread        = true
@@ -439,7 +455,6 @@ vim.keymap.set({'n', 'v'}, ':',       ';')
 vim.keymap.set({'n', 'v'}, ';',       ':')
 vim.keymap.set({'n', 'x'}, 'c',       '"xc')
 
-
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
@@ -464,11 +479,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<Leader>l3',     vim.lsp.buf.rename, opts)
   end
 })
---[[
-TODO:
-  dap_scopes - keymap for 'send variable to repl'
-  dap-repl - config to make easier to use
-]]
 
 local FocusEvents = vim.api.nvim_create_augroup('FocusEvents', { clear = true })
 vim.api.nvim_create_autocmd({ 'FocusGained' }, {
