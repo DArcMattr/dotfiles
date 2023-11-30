@@ -24,7 +24,6 @@
     "squizlabs/php_codesniffer": "@dev",
     "tacnoman/dephpugger": "@dev",
     "vimeo/psalm": "@stable",
-    "wp-cli/wp-cli-bundle": "@dev",
     "wp-coding-standards/wpcs": "@stable"
   },
   "minimum-stability": "dev",
