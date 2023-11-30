@@ -33,6 +33,13 @@ cd ~
 git clone --recursive https://github.com/sorin-ionescu/prezto.git \
 	"${ZDOTDIR:-${HOME}}/.zprezto"
 
+(
+	cd /tmp
+	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+	chmod +x /tmp/wp-cli.phar
+	mv /tmp/wp-cli.phar "${LOCAL}/bin/wp"
+)
+
 curl -L https://cpanmin.us | perl - App::cpanminus
 
 (
