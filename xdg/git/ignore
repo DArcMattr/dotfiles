@@ -46,10 +46,10 @@ Thumbs.db
 
 # Local config files #
 ######################
-.lvimrc
 wp-cli.local.yml
 yarn.lock
 package-json.lock
+.nvim.lua
 
 # tool-generated files #
 ########################
