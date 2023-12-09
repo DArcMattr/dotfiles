@@ -21,6 +21,7 @@ vim.g.indent_guides_exclude_filetypes = {'help', 'man', 'netrw'}
 vim.g.loaded_perl_provider = 0
 vim.g.mapleader = ','
 vim.g.maplocalleader = ' '
+vim.g.node_host_prog = vim.env.HOME .. '/.local/node_modules/.bin/neovim-node-host'
 
 local lazyvim_plugins = {
   {
@@ -305,8 +306,6 @@ require('lazy').setup(lazyvim_plugins, {
 U.capabilities = require'cmp_nvim_lsp'.default_capabilities()
 U.dap          = require'dap'
 U.lspconfig    = require'lspconfig'
-
-vim.fn.setenv('GIT_SSL_NO_VERIFY', 'true')
 
 vim.opt.autoindent      = true
 vim.opt.autoread        = true
