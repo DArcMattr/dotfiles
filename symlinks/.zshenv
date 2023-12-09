@@ -5,7 +5,7 @@ skip_global_compinit=1
 export LOCAL="${HOME}/.local"
 
 # Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath manpath path
+typeset -gU cdpath fpath mailpath manpath path perl5lib perl_local_lib_root
 
 if which ruby >/dev/null && which gem >/dev/null; then
   gem_path="$(ruby -e 'puts Gem.user_dir')/bin"
@@ -64,8 +64,6 @@ export AUTOSSH_PORT=0
 export MANWIDTH="$(( 96 > $(tput cols) ? $(tput cols) : 96 ))"
 
 export HGEDITOR="${HOME}/dotfiles/helpers/hgeditor"
-export PERL5LIB="${LOCAL}/lib/perl5${PERL5LIB:+:${PERL5LIB}}";
-export PERL_LOCAL_LIB_ROOT="${HOME}/.local${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}";
 export PERL_MB_OPT="--install_base '${LOCAL}'";
 export PERL_MM_OPT="INSTALL_BASE='${LOCAL}'";
 
@@ -77,6 +75,7 @@ cdpath=(
 # Set the list of directories that Zsh searches for programs.
 path=(
   $go_bin
+  $cargo_path
   $cargo_path
   $php_path
   $gem_path
@@ -92,6 +91,16 @@ path=(
 manpath=(
   ${LOCAL}/share/man
   $manpath
+)
+
+perl5lib=(
+  ${LOCAL}/lib/perl5
+  ${PERL5LIB}
+)
+
+perl_local_lib_root=(
+  ${LOCAL}
+  ${PERL_LOCAL_LIB_ROOT}
 )
 
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
