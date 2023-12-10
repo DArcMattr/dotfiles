@@ -90,7 +90,16 @@ local lazyvim_plugins = {
             },
           },
         },
-      }
+      },
+      {
+        "ray-x/go.nvim",
+        config = function()
+        require('go').setup()
+        end,
+        event = { 'CmdLineEnter' },
+        ft = { 'go', 'gomod' },
+        build = ':lua require("go.install").update_all_sync()'
+      },
     },
     event = { 'VeryLazy', },
   },
@@ -155,11 +164,6 @@ local lazyvim_plugins = {
     end,
   },
   { 'Valloric/MatchTagAlways' },
-  {
-    'fatih/vim-go',
-    -- ft = { 'go' },
-    build = '<Cmd>GoUpdateBinaries<Cr>'
-  },
   { 'jeffkreeftmeijer/vim-numbertoggle' },
   { 'mattn/emmet-vim' },
   {

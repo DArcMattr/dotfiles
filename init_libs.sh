@@ -11,7 +11,7 @@ grab_go() {
     'golang.org/x/tools/cmd/guru'
     'golang.org/x/tools/gopls'
   )
-  version='1.20.4'
+  version='1.21.4'
 
   while getopts "v:" opt; do
     case "$opt" in
