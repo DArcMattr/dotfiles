@@ -14,7 +14,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 vim.g.c_space_errors = 1
-vim.g.colors_name = 'industry'
 vim.g.editorconfig_enable = true
 vim.g.indent_guides_enable_on_vim_startup = 1
 vim.g.indent_guides_exclude_filetypes = {'help', 'man', 'netrw'}
@@ -395,6 +394,7 @@ else
   vim.opt.grepprg='grep -nH $*'
 end
 
+vim.cmd.colorscheme('industry')
 vim.cmd.highlight('TermCursor', 'ctermfg=yellow guifg=yellow')
 vim.cmd.highlight('LineNr',     'gui=bold guifg=#c6c6c6 guibg=#00005f')
 vim.cmd.highlight('LineNr',     'gui=bold guifg=#c6c6c6 guibg=#00005f')
@@ -405,6 +405,7 @@ vim.cmd.highlight('SpellBad',   'term=standout,underline cterm=underline ctermfg
 vim.cmd.highlight('SpellCap',   'term=underline cterm=underline gui=undercurl')
 vim.cmd.highlight('SpellLocal', 'term=underline cterm=underline gui=undercurl')
 vim.cmd.highlight('SpellRare',  'term=underline cterm=underline gui=undercurl')
+
 vim.keymap.set('i', '<C-b>',   '<Esc>gUiwi')
 vim.keymap.set('i', '<Cr>',    function() return vim.fn.pumvisible() == 1 and '<C-y>' or '<C-g>u<Cr>' end, { expr = true })
 vim.keymap.set('i', '<S-Tab>', function() return vim.fn.pumvisible() == 1 and '<C-p>' or '<C-h>' end,      { expr = true })
