@@ -1,3 +1,5 @@
+$include /etc/inputrc
+
 # Two escapes clears command line
 "\e\e": "\C-a\C-k"
 
@@ -25,5 +27,3 @@ set meta-flag on
 set output-meta on
 set show-all-if-ambiguous on
 set visible-stats on
-
-$include /etc/inputrc
