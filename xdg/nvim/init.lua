@@ -46,6 +46,7 @@ local lazyvim_plugins = {
           'jsdoc',
           'json',
           'lua',
+          'make',
           'markdown',
           'markdown_inline',
           'php',
@@ -97,7 +98,7 @@ local lazyvim_plugins = {
         end,
         event = { 'CmdLineEnter' },
         ft = { 'go', 'gomod' },
-        build = ':lua require("go.install").update_all_sync()'
+        build = ':lua require("go.install").update_all_sync()',
       },
     },
     event = { 'VeryLazy', },
@@ -463,16 +464,20 @@ vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
     local opts = { buffer = ev.buf }
+    local id = vim.tbl_get(ev, 'data', 'client_id')
+    local client = id and vim.lsp.get_client_by_id(id)
 
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
     vim.keymap.set('n', '<Leader>l<C-k>', vim.lsp.buf.signature_help,       opts)
     vim.keymap.set('n', '<Leader>l<S-d>', vim.lsp.buf.implementation,       opts)
     vim.keymap.set('n', '<Leader>l<S-w>', vim.lsp.buf.workspace_symbol,     opts)
+    vim.keymap.set('n', '<Leader>la',     vim.lsp.buf.code_action,          opts)
     vim.keymap.set('n', '<Leader>ld',     vim.lsp.buf.declaration,          opts)
     vim.keymap.set('n', '<Leader>lf',     vim.lsp.buf.format,               opts)
     vim.keymap.set('n', '<Leader>lg',     vim.lsp.buf.type_definition,      opts)
     vim.keymap.set('n', '<Leader>lk',     vim.lsp.buf.hover,                opts)
+    vim.keymap.set('n', '<Leader>lm',     vim.lsp.buf.format,               opts)
     vim.keymap.set('n', '<Leader>lo',     vim.lsp.buf.document_symbol,      opts)
     vim.keymap.set('n', '<Leader>lr',     vim.lsp.buf.references,           opts)
     vim.keymap.set('n', '<Leader>le',     vim.lsp.buf.definition,           opts)
@@ -481,7 +486,60 @@ vim.api.nvim_create_autocmd('LspAttach', {
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, opts)
     vim.keymap.set('n', '<Leader>l3',     vim.lsp.buf.rename, opts)
+    if client == nil or not client.supports_method('textDocument/inlayHint') then
+      return
+    end
+
+    -- warning: this api is not stable yet
+    vim.lsp.inlay_hint.enable(ev.buf, true)
+    vim.cmd.highlight('LspInlayHint', 'guifg=gray')
   end
+})
+
+vim.diagnostic.config({
+  float = {
+    border = 'rounded',
+  },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '✘',
+      [vim.diagnostic.severity.WARN] = '▲',
+      [vim.diagnostic.severity.HINT] = '⚑',
+      [vim.diagnostic.severity.INFO] = '»',
+    },
+  },
+})
+
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+  vim.lsp.handlers.hover,
+  { border = 'rounded' }
+)
+
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
+  vim.lsp.handlers.signature_help,
+  { border = 'rounded' }
+)
+
+local BufNewFileEvents = vim.api.nvim_create_augroup('BufNewFileEvents', { clear = true })
+vim.api.nvim_create_autocmd({'BufNewFile'}, {
+  group = BufNewFileEvents,
+  pattern = '*.c',
+  command = '0r $HOME/.config/nvim/templates/c/template.c',
+})
+
+local ModeEvents = vim.api.nvim_create_augroup('ModeEvents', { clear = true })
+vim.api.nvim_create_autocmd('ModeChanged', {
+  pattern = {'n:i', 'v:s'},
+  group = ModeEvents,
+  desc = 'Disable diagnostics in insert and select mode',
+  callback = function(e) vim.diagnostic.disable(e.buf) end
+})
+
+vim.api.nvim_create_autocmd('ModeChanged', {
+  pattern = 'i:n',
+  group = ModeEvents,
+  desc = 'Enable diagnostics when leaving insert mode',
+  callback = function(e) vim.diagnostic.enable(e.buf) end
 })
 
 local FocusEvents = vim.api.nvim_create_augroup('FocusEvents', { clear = true })
@@ -532,6 +590,15 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
   end
 })
 vim.api.nvim_set_hl(0, 'CursorLine', { underline = true })
+--[[ aaaaa
+vim.api.nvim_create_user_command('Silent',
+  function(opts)
+              vim.cmd.execute(':silent !' .. opts.args)
+              vim.cmd.redraw
+  end,
+  { nargs = 1 }
+)
+]]
 
 vim.cmd([[
 " mark scm conflict markers as errors
