@@ -38,6 +38,7 @@ git clone --recursive https://github.com/sorin-ionescu/prezto.git \
 	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 	chmod +x /tmp/wp-cli.phar
 	mv /tmp/wp-cli.phar "${LOCAL}/bin/wp"
+	${LOCAL}/bin/wp package install git@github.com:schlessera/wp-cli-psysh.git
 )
 
 curl -L https://cpanmin.us | perl - App::cpanminus
