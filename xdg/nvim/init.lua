@@ -94,7 +94,7 @@ local lazyvim_plugins = {
       {
         "ray-x/go.nvim",
         config = function()
-        require('go').setup()
+          require('go').setup()
         end,
         event = { 'CmdLineEnter' },
         ft = { 'go', 'gomod' },
@@ -292,12 +292,14 @@ local lazyvim_plugins = {
   {
     'windwp/nvim-autopairs',
     config = function()
-      require('nvim-autopairs').setup {}
-    end
+      require('nvim-autopairs').setup {
+        disable_filetype = { 'dap-repl' },
+      }
+    end,
   },
   {
     'OmniSharp/omnisharp-vim',
-    -- ft = { 'cs' },
+    ft = { 'cs' },
     build = ':OmniSharpInstall'
   },
 }
@@ -520,13 +522,6 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
   { border = 'rounded' }
 )
 
-local BufNewFileEvents = vim.api.nvim_create_augroup('BufNewFileEvents', { clear = true })
-vim.api.nvim_create_autocmd({'BufNewFile'}, {
-  group = BufNewFileEvents,
-  pattern = '*.c',
-  command = '0r $HOME/.config/nvim/templates/c/template.c',
-})
-
 local ModeEvents = vim.api.nvim_create_augroup('ModeEvents', { clear = true })
 vim.api.nvim_create_autocmd('ModeChanged', {
   pattern = {'n:i', 'v:s'},
@@ -534,7 +529,6 @@ vim.api.nvim_create_autocmd('ModeChanged', {
   desc = 'Disable diagnostics in insert and select mode',
   callback = function(e) vim.diagnostic.disable(e.buf) end
 })
-
 vim.api.nvim_create_autocmd('ModeChanged', {
   pattern = 'i:n',
   group = ModeEvents,
