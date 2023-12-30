@@ -1,4 +1,5 @@
 U = {}
+require('utils')
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -181,17 +182,18 @@ local lazyvim_plugins = {
       local dap = require('dap')
       local dapui = require('dapui')
       return {
-        { '<F2>',       dap.step_over, desc = 'Step Over', },
-        { '<F3>',       dap.step_into, desc = 'Step Into', },
-        { '<F4>',       dap.step_out, },
-        { '<F5>',       dap.continue, },
-        { '<F6>',       function() dap.terminate(); dapui.close() end, },
-        { '<F9>',       dap.toggle_breakpoint, },
-        { '<F10>',      function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { silent = true},},
-        { '<F11>',      function() dap.set_exception_breakpoints('Exception') end,},
-        { '<F12>',      function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end,},
-        { '<Leader>dl', dap.run_last, },
-        { '<Leader>dr', dap.repl.open, },
+        { '<F2>',  dap.step_over, desc = 'Step Over', },
+        { '<F3>',  dap.step_into, desc = 'Step Into', },
+        { '<F4>',  dap.step_out, },
+        { '<F5>',  dap.continue, },
+        { '<F6>',  function() dap.terminate(); dapui.close() end, },
+        { '<F9>',  dap.toggle_breakpoint, },
+        { '<F11>', function() dap.set_exception_breakpoints('Exception') end,},
+        { '<F12>', function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end,},
+        { '<Leader>drl', dap.run_last, },
+        { '<Leader>dro', dap.repl.open, },
+        { '<Leader>dlc', U.utils.dapRunConfigWithArgs, },
+        { '<Leader><F9>', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { silent = true},},
       }
     end,
     config = function(_, opts)
@@ -318,6 +320,7 @@ vim.opt.autoread        = true
 vim.opt.background      = 'dark'
 vim.opt.backspace       = { 'indent', 'eol', 'start' }
 vim.opt.bomb            = false
+vim.opt.cinoptions      = { 't0','+4','(4','u4','w1' }
 vim.opt.colorcolumn     = '+1'
 vim.opt.completeopt     = { 'menuone', 'longest' }
 vim.opt.copyindent      = true

@@ -1,17 +1,16 @@
-U.lspconfig.clangd.setup {
-  autostart = true,
-  capabilities = U.capabilities,
-  flags = {
-    debounce_text_changes = 150
-  },
-}
-
-vim.opt_local.cinoptions  = { 't0','+4','(4','u4','w1' }
-
 U.dap.adapters.lldb = {
   type = 'executable',
   command = '/usr/bin/lldb-vscode',
   name = 'lldb',
+  env = {
+    LLDB_LAUNCH_FLAG_LAUNCH_IN_TTY = "YES"
+  },
+}
+
+U.dap.adapters.c = {
+  type = 'executable',
+  command = 'lldb-vscode',
+  name = "lldb"
 }
 
 U.dap.configurations.c = {
@@ -20,11 +19,10 @@ U.dap.configurations.c = {
     type = 'lldb',
     request = 'launch',
     program = function()
-      return vim.fn.input( 'Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
     end,
     cwd = "${workspaceFolder}",
     stopOnEntry = false,
     args = {},
-    runInTerminal = true,
   }
 }
