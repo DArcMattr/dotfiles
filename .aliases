@@ -3,6 +3,7 @@
 
 alias ll='ls -alFh'
 alias composer='~/.local/bin/composer'
+alias doge='doge -mh $(($(tput lines) -1))'
 alias expected_install='./autogen.sh && ./configure --prefix=$HOME/.local && make install clean'
 alias nvf='nvim $(fzf)'
 alias nvdno='nvim $(git dno @~1)'
