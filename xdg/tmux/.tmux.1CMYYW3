@@ -21,5 +21,6 @@ tmux rename-window -t "${SESSION}:2" "API"
 tmux select-pane -t "${SESSION}:2.4"
 
 tmux send-keys -t "${SESSION}:2.1" "cake console" C-m
-# tmux send-keys -t "${SESSION}:2.2" "mycli --login-path=dtldev dtl" C-m
+tmux send-keys -t "${SESSION}:2.2" "sqlcmd" C-m
+#tmux send-keys -t "${SESSION}:2.3" "xtail ${DIRECTORY}/logs/api/cake/app-debug-*.log" C-m
 tmux send-keys -t "${SESSION}:2.3" "tail -n 100 -F ${DIRECTORY}/logs/api/cake/app-debug-*.log" C-m
