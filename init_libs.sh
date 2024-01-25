@@ -42,7 +42,16 @@ grab_go() {
 }
 
 grab_rust() {
-  if [ ! -x "${HOME}/.cargo/bin" ] && [ ! "$(which rustc >/dev/null)" ]; then
+  pkgs=(
+    bat
+    cargo-deb
+    cargo-update
+    difftastic
+    lsd
+    "ripgrep --features 'pcre2'"
+  )
+  dir="${HOME}/.cargo/bin"
+  if [ ! -x "${dir}" ] && [ ! "$(which rustc >/dev/null)" ]; then
     curl https://sh.rustup.rs -sSf | sh
     "${HOME}/.cargo/env"
     rehash
@@ -53,13 +62,13 @@ grab_rust() {
 
   "${HOME}/.cargo/bin/rustup" completions zsh >! "${HOME}/.local/share/zsh/site-functions/_rustup"
 
-  cd "${HOME}" && "${HOME}/.cargo/bin/cargo" install --force \
-    bat \
-    cargo-deb \
-    cargo-update \
-    difftastic \
-    lsd \
-    ripgrep
+  for pkg in $pkgs
+  do
+		eval "$(printf "%s %s" "${dir}/cargo install" "${pkg}")"
+  done
+  cargo install-update -a
+  "${dir}/rg" --generate man >! ${LOCAL}/share/man/man1/rg.1
+  "${dir}/rg" --generate complete-zsh >! "${HOME}"/.local/share/zsh/site-functions/_rg
 }
 
 grab_pips() {
