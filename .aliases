@@ -22,9 +22,9 @@ dir() {
 }
 
 if lsd >/dev/null 2>&1; then
-  alias ls='\lsd --color=always'
+  alias ls=lsd
   dir() {
-    LL=$(ll --icon always "${@}")
+    LL=$(ll --color=always "${@}")
     echo "${LL}" | ${PAGER:-less}
   }
 elif ls --color=always -d . >/dev/null 2>&1; then
@@ -40,9 +40,9 @@ fi
 alias key='\man -k'
 alias info='info --vi-keys'
 alias sicp='racket -i -p neil/sicp -l xrepl'
-alias rgp='rg --pager=less'
+alias rgp='rg --pager=${PAGER}'
 alias venv='python -m venv'
-alias jsonize='python -m json.tool'
+alias jsonize='jq .'
 
 # Suffix aliases
 if alias -s >/dev/null 2>&1; then
@@ -143,7 +143,7 @@ tmuxt() {
   if tmux has-session -t "${SESSION}" >/dev/null 2>&1; then
     echo "Session ${SESSION} already exists, attaching"
   else
-    tmux new-session -d -s "${SESSION}" -x "$(tput cols)" -y "$(tput lines)"
+    TERM=tmux-256color tmux new-session -d -s "${SESSION}" -x "$(tput cols)" -y "$(tput lines)"
 
     if [ ! -n "${SSH_CLIENT}" ] && [ ! -n "${SSH_TTY}" ]; then
       tmux set-option -t "${SESSION}" status-position top
