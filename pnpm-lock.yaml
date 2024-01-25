@@ -29,9 +29,6 @@ dependencies:
   svgo:
     specifier: ^3.2.0
     version: 3.2.0
-  tree-sitter-cli:
-    specifier: ^0.20.8
-    version: 0.20.8
   typescript:
     specifier: ^5.3.3
     version: 5.3.3
@@ -157,8 +154,8 @@ packages:
     dependencies:
       '@vscode/l10n': 0.0.16
       typescript: 5.3.3
-      vscode-css-languageservice: 6.2.11
-      vscode-html-languageservice: 5.1.1
+      vscode-css-languageservice: 6.2.12
+      vscode-html-languageservice: 5.1.2
       vscode-languageserver: 8.2.0-next.3
       vscode-languageserver-protocol: 3.17.5
       vscode-languageserver-textdocument: 1.0.11
@@ -446,8 +443,8 @@ packages:
     resolution: {integrity: sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==}
     dev: false
 
-  /@types/node@20.11.5:
-    resolution: {integrity: sha512-g557vgQjUUfN76MZAN/dt1z3dzcUsimuysco0KeluHgrPdJXkP/XdAURgyO2W9fZWHRtRBiVKzKn8vyOAwlG+w==}
+  /@types/node@20.11.6:
+    resolution: {integrity: sha512-+EOokTnksGVgip2PbYbr3xnR7kZigh4LbybAfBAw5BpnQ+FqBYUsvCEjYd70IXKlbohQ64mzEYmMtlWUY8q//Q==}
     dependencies:
       undici-types: 5.26.5
     dev: false
@@ -474,6 +471,10 @@ packages:
 
   /@vscode/l10n@0.0.16:
     resolution: {integrity: sha512-JT5CvrIYYCrmB+dCana8sUqJEcGB1ZDXNLMQ2+42bW995WmNoenijWMUdZfwmuQUTQcEVVIa2OecZzTYWUW9Cg==}
+    dev: false
+
+  /@vscode/l10n@0.0.18:
+    resolution: {integrity: sha512-KYSIHVmslkaCDyw013pphY+d7x1qV8IZupYfeIfzNA+nsaWHbn5uPuQRvdRFsa9zFzGeudPuoGoZ1Op4jrJXIQ==}
     dev: false
 
   /abbrev@2.0.0:
@@ -1767,8 +1768,8 @@ packages:
     resolution: {integrity: sha512-ZClg6AaYvamvYEE82d3Iyd3vSSIjQ+odgjaTzRuO3s7toCdFKczob2i0zCh7JE8kWn17yvAWhUVxvqGwUalsRA==}
     dev: false
 
-  /jsonc-parser@3.2.0:
-    resolution: {integrity: sha512-gfFQZrcTc8CnKXp6Y4/CBT3fTc0OVuDofpre4aEeEpSBPV5X5v4+Vmx+8snU7RLPrNHPKSgLxGo9YuQzz20o+w==}
+  /jsonc-parser@3.2.1:
+    resolution: {integrity: sha512-AilxAyFOAcK5wA1+LeaySVBrHsGQvUFCDWXKpZjzaL0PqW+xfBOttn8GNtWKFWqneyMZj41MWF9Kl6iPWLwgOA==}
     dev: false
 
   /jsonfile@6.1.0:
@@ -2218,7 +2219,7 @@ packages:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.11.5
+      '@types/node': 20.11.6
       long: 5.2.3
     dev: false
 
@@ -2471,14 +2472,14 @@ packages:
       spdx-license-ids: 3.0.16
     dev: false
 
-  /spdx-exceptions@2.3.0:
-    resolution: {integrity: sha512-/tTrYOC7PPI1nUAgx34hUpqXuyJG+DTHJTnIULG4rDygi4xu/tfgmq1e1cIRwRzwZgo4NLySi+ricLkZkw4i5A==}
+  /spdx-exceptions@2.4.0:
+    resolution: {integrity: sha512-hcjppoJ68fhxA/cjbN4T8N6uCUejN8yFw69ttpqtBeCbF3u13n7mb31NB9jKwGTTWWnt9IbRA/mf1FprYS8wfw==}
     dev: false
 
   /spdx-expression-parse@3.0.1:
     resolution: {integrity: sha512-cbqHunsQWnJNE6KhVSMsMeH5H/L9EpymbzqTQ3uLwNCLZ1Q481oWaofqH7nO6V07xlXwY6PhQdQ2IedWx/ZK4Q==}
     dependencies:
-      spdx-exceptions: 2.3.0
+      spdx-exceptions: 2.4.0
       spdx-license-ids: 3.0.16
     dev: false
 
@@ -2709,12 +2710,6 @@ packages:
       punycode: 2.3.1
     dev: false
 
-  /tree-sitter-cli@0.20.8:
-    resolution: {integrity: sha512-XjTcS3wdTy/2cc/ptMLc/WRyOLECRYcMTrSWyhZnj1oGSOWbHLTklgsgRICU3cPfb0vy+oZCC33M43u6R1HSCA==}
-    hasBin: true
-    requiresBuild: true
-    dev: false
-
   /trim-newlines@4.1.1:
     resolution: {integrity: sha512-jRKj0n0jXWo6kh62nA5TEh3+4igKDXLvzBJcPpiizP7oOolUrYIxmVBG9TOtHYFHoddUk6YvAkGeGoSVTXfQXQ==}
     engines: {node: '>=12'}
@@ -2833,29 +2828,29 @@ packages:
       extsprintf: 1.3.0
     dev: false
 
-  /vscode-css-languageservice@6.2.11:
-    resolution: {integrity: sha512-qn49Wa6K94LnizpVxmlYrcPf1Cb36gq1nNueW0COhi4shylXBzET5wuDbH8ZWQlJD0HM5Mmnn7WE9vQVVs+ULA==}
+  /vscode-css-languageservice@6.2.12:
+    resolution: {integrity: sha512-PS9r7HgNjqzRl3v91sXpCyZPc8UDotNo6gntFNtGCKPhGA9Frk7g/VjX1Mbv3F00pn56D+rxrFzR9ep4cawOgA==}
     dependencies:
-      '@vscode/l10n': 0.0.16
+      '@vscode/l10n': 0.0.18
       vscode-languageserver-textdocument: 1.0.11
       vscode-languageserver-types: 3.17.5
       vscode-uri: 3.0.8
     dev: false
 
-  /vscode-html-languageservice@5.1.1:
-    resolution: {integrity: sha512-JenrspIIG/Q+93R6G3L6HdK96itSisMynE0glURqHpQbL3dKAKzdm8L40lAHNkwJeBg+BBPpAshZKv/38onrTQ==}
+  /vscode-html-languageservice@5.1.2:
+    resolution: {integrity: sha512-wkWfEx/IIR3s2P5yD4aTGHiOb8IAzFxgkSt1uSC3itJ4oDAm23yG7o0L29JljUdnXDDgLafPAvhv8A2I/8riHw==}
     dependencies:
-      '@vscode/l10n': 0.0.16
+      '@vscode/l10n': 0.0.18
       vscode-languageserver-textdocument: 1.0.11
       vscode-languageserver-types: 3.17.5
       vscode-uri: 3.0.8
     dev: false
 
-  /vscode-json-languageservice@5.3.7:
-    resolution: {integrity: sha512-jdDggN2SLMQw4C/tLr11v6/OK4cMVGy7tbyZRHQvukQ6lcflY3UV+ZMkmwHKCqXz2TmxkjQb536eJW6JMEVeew==}
+  /vscode-json-languageservice@5.3.9:
+    resolution: {integrity: sha512-0IcymTw0ZYX5Zcx+7KLLwTRvg0FzXUVnM1hrUH+sPhqEX0fHGg2h5UUOSp1f8ydGS7/xxzlFI3TR01yaHs6Y0Q==}
     dependencies:
-      '@vscode/l10n': 0.0.16
-      jsonc-parser: 3.2.0
+      '@vscode/l10n': 0.0.18
+      jsonc-parser: 3.2.1
       vscode-languageserver-textdocument: 1.0.11
       vscode-languageserver-types: 3.17.5
       vscode-uri: 3.0.8
@@ -2882,17 +2877,17 @@ packages:
     dependencies:
       '@vscode/l10n': 0.0.16
       core-js: 3.35.1
-      jsonc-parser: 3.2.0
+      jsonc-parser: 3.2.1
       regenerator-runtime: 0.13.11
       request-light: 0.7.0
       typescript: 4.9.5
-      vscode-css-languageservice: 6.2.11
-      vscode-html-languageservice: 5.1.1
-      vscode-json-languageservice: 5.3.7
+      vscode-css-languageservice: 6.2.12
+      vscode-html-languageservice: 5.1.2
+      vscode-json-languageservice: 5.3.9
       vscode-languageserver: 9.0.1
       vscode-languageserver-textdocument: 1.0.11
       vscode-languageserver-types: 3.17.5
-      vscode-markdown-languageservice: 0.4.0-alpha.8
+      vscode-markdown-languageservice: 0.4.0
       vscode-nls: 5.2.0
       vscode-uri: 3.0.8
     dev: false
@@ -2937,8 +2932,8 @@ packages:
       vscode-languageserver-protocol: 3.17.5
     dev: false
 
-  /vscode-markdown-languageservice@0.4.0-alpha.8:
-    resolution: {integrity: sha512-6S6RE5s+4biWg2xk9bpwNi6GihUYQIVxdO3I+jb/XDyvfmqYVxrN86cKLF8QSbaQvX3fMuBAxBLFfX93FdJi3w==}
+  /vscode-markdown-languageservice@0.4.0:
+    resolution: {integrity: sha512-3C8pZlC0ofHEYmWwHgenxL6//XrpkrgyytrqNpMlft46q9uBxSUfcXtEGt7wIDNLWsvmgqPqHBwEnBFtLwrWFA==}
     dependencies:
       '@vscode/l10n': 0.0.10
       node-html-parser: 6.1.12

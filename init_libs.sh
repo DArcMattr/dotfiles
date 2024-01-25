@@ -44,11 +44,11 @@ grab_go() {
 grab_rust() {
   pkgs=(
     bat
-    cargo-deb
     cargo-update
     difftastic
     lsd
     "ripgrep --features 'pcre2'"
+    tree-sitter-cli
   )
   dir="${HOME}/.cargo/bin"
   if [ ! -x "${dir}" ] && [ ! "$(which rustc >/dev/null)" ]; then
