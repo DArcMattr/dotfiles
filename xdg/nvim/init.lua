@@ -411,6 +411,8 @@ vim.cmd.highlight('SpellBad',   'term=standout,underline cterm=underline ctermfg
 vim.cmd.highlight('SpellCap',   'term=underline cterm=underline gui=undercurl')
 vim.cmd.highlight('SpellLocal', 'term=underline cterm=underline gui=undercurl')
 vim.cmd.highlight('SpellRare',  'term=underline cterm=underline gui=undercurl')
+vim.cmd.highlight('Normal',     'ctermbg=NONE guibg=NONE')
+vim.cmd.highlight('EndOfBuffer','ctermbg=NONE guibg=NONE')
 
 vim.keymap.set('i', '<C-b>',   '<Esc>gUiwi')
 vim.keymap.set('i', '<Cr>',    function() return vim.fn.pumvisible() == 1 and '<C-y>' or '<C-g>u<Cr>' end, { expr = true })
