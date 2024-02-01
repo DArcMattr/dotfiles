@@ -546,7 +546,7 @@ vim.api.nvim_create_autocmd({ 'FocusGained' }, {
   pattern = '*',
   group = FocusEvents,
   callback = function(buf)
-    -- vim.cmd.highlight('Normal', 'ctermbg=none guibg=none')
+    vim.cmd.highlight('Normal', 'ctermbg=none guibg=none')
     vim.opt.cursorcolumn = true
     vim.opt.cursorline = true
   end
@@ -555,7 +555,7 @@ vim.api.nvim_create_autocmd({ 'FocusLost' }, {
   pattern = '*',
   group = FocusEvents,
   callback = function(buf)
-    -- vim.cmd.highlight('Normal', 'ctermbg=darkgrey guibg=#181818')
+    vim.cmd.highlight('Normal', 'ctermbg=darkgrey guibg=#181818')
     vim.opt.cursorcolumn = false
     vim.opt.cursorline = false
   end
