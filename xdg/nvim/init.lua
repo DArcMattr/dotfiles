@@ -193,7 +193,7 @@ local lazyvim_plugins = {
         { '<Leader>drl', dap.run_last, },
         { '<Leader>dro', dap.repl.open, },
         { '<Leader>dlc', U.utils.dapRunConfigWithArgs, },
-        { '<Leader><F9>', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { silent = true},},
+        { '<F21>', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { silent = true},},
       }
     end,
     config = function(_, opts)
@@ -407,12 +407,13 @@ vim.cmd.highlight('LineNr',     'gui=bold guifg=#c6c6c6 guibg=#00005f')
 vim.cmd.highlight('LineNr',     'term=reverse cterm=bold ctermfg=251 ctermbg=17')
 vim.cmd.highlight('NonText',    'ctermfg=235 guifg=#262626')
 vim.cmd.highlight('OverLength', 'ctermbg=234 ctermfg=249 guibg=#1c1c1c guifg=#b2b2b2')
-vim.cmd.highlight('SpellBad',   'term=standout,underline cterm=underline ctermfg=1 guifg=#800000 gui=undercurl')
-vim.cmd.highlight('SpellCap',   'term=underline cterm=underline gui=undercurl')
-vim.cmd.highlight('SpellLocal', 'term=underline cterm=underline gui=undercurl')
-vim.cmd.highlight('SpellRare',  'term=underline cterm=underline gui=undercurl')
-vim.cmd.highlight('Normal',     'ctermbg=NONE guibg=NONE')
-vim.cmd.highlight('EndOfBuffer','ctermbg=NONE guibg=NONE')
+vim.cmd.highlight('SpellBad',   'term=standout,undercurl cterm=undercurl ctermfg=1 guifg=#800000 gui=undercurl guisp=#8080f0')
+vim.cmd.highlight('SpellCap',   'term=undercurl cterm=undercurl gui=undercurl')
+vim.cmd.highlight('SpellLocal', 'term=undercurl cterm=undercurl gui=undercurl')
+vim.cmd.highlight('SpellRare',  'term=undercurl cterm=undercurl gui=undercurl')
+vim.cmd.highlight('Normal',     'ctermbg=none guibg=none')
+vim.cmd.highlight('EndOfBuffer','ctermbg=none guibg=none')
+vim.cmd.highlight('NormalNC',   'ctermbg=darkgrey guibg=#181818')
 
 vim.keymap.set('i', '<C-b>',   '<Esc>gUiwi')
 vim.keymap.set('i', '<Cr>',    function() return vim.fn.pumvisible() == 1 and '<C-y>' or '<C-g>u<Cr>' end, { expr = true })
@@ -425,7 +426,7 @@ vim.keymap.set('n', '<C-e>',          '3<C-e>')
 vim.keymap.set('n', '<C-u>',          '<C-u>zz')
 vim.keymap.set('n', '<C-y>',          '3<C-y>')
 vim.keymap.set('n', '<Leader><S-b>',  'gUiw')
-vim.keymap.set('n', '<Leader><F7>',   function() vim.opt.spell = not(vim.opt.spell:get())  end, { silent = true })
+vim.keymap.set('n', '<F19>',   function() vim.opt.spell = not(vim.opt.spell:get())  end, { silent = true })
 vim.keymap.set('n', '<Leader>[',      vim.diagnostic.goto_prev)
 vim.keymap.set('n', '<Leader>]',      vim.diagnostic.goto_next)
 vim.keymap.set('n', '<Leader>a',      function() vim.opt.relativenumber = not(vim.opt.relativenumber:get()) end)
@@ -546,8 +547,8 @@ vim.api.nvim_create_autocmd({ 'FocusGained' }, {
   pattern = '*',
   group = FocusEvents,
   callback = function(buf)
-    vim.cmd.highlight('Normal', 'ctermbg=none guibg=none')
-    vim.cmd.highlight('EndOfBuffer', 'ctermbg=none guibg=none')
+    vim.opt.winhighlight = 'Normal:Normal'
+    vim.opt.winhighlight = 'EndOfBuffer:Normal'
     vim.opt.cursorcolumn = true
     vim.opt.cursorline = true
   end
@@ -556,8 +557,8 @@ vim.api.nvim_create_autocmd({ 'FocusLost' }, {
   pattern = '*',
   group = FocusEvents,
   callback = function(buf)
-    vim.cmd.highlight('Normal', 'ctermbg=darkgrey guibg=#181818')
-    vim.cmd.highlight('EndOfBuffer', 'ctermbg=darkgrey guibg=#181818')
+    vim.opt.winhighlight = 'Normal:NormalNC'
+    vim.opt.winhighlight = 'EndOfBuffer:NormalNC'
     vim.opt.cursorcolumn = false
     vim.opt.cursorline = false
   end
