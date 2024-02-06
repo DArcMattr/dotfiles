@@ -86,7 +86,7 @@ local lazyvim_plugins = {
             min_width = { 20, .1 },
             resize_to_content = true,
             win_opts = {
-              signcolumn = no,
+              signcolumn = 'no',
               statuscolumn = ' ',
             },
           },

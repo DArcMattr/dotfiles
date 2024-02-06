@@ -54,8 +54,10 @@ curl -L https://cpanmin.us | perl - App::cpanminus
 	grab_git -d "${CONTRIB}/autoenv"             -r https://github.com/zpm-zsh/autoenv.git -n
 	grab_git -d "${CONTRIB}/luarocks"            -r https://github.com/luarocks/luarocks -n
 	grab_git -d "${CONTRIB}/zsh-completions"     -r https://github.com/zsh-users/zsh-completions -n
+	# -- manually build the following TODO: script these
 	grab_git -d "${CONTRIB}/vscode-php-debug"    -r https://github.com/xdebug/vscode-php-debug.git -n
 	grab_git -d "${CONTRIB}/vscode-js-debug"     -r https://github.com/microsoft/vscode-js-debug.git -n
+	grab_git -d "${CONTRIB}/lua-language-server" -r https://github.com/LuaLS/lua-language-server.git -n
 
 	cpanm -n --installdeps -l ${LOCAL} Neovim::Ext PLS
 
