@@ -11,15 +11,11 @@ grab_go() {
     'golang.org/x/tools/cmd/guru'
     'golang.org/x/tools/gopls'
   )
-  version='1.21.4'
+  version=$(http 'https://go.dev/dl/?mode=json&include=all' | jq '.[0].version' | sed 's#"##g')
 
-  while getopts "v:" opt; do
+  while getopts "u" opt; do
     case "$opt" in
-      v) VERSION=${OPTARG:-${version}}
-        ;;
-
-      :) echo "Option -${opt} requires an argument." >&2
-        return 1
+      u) VERSION=${OPTARG:-${version}}
         ;;
 
       *) echo "Invalid Option: -${opt}" >&2
@@ -30,10 +26,10 @@ grab_go() {
 
   # bootstrap
   if (( ${+VERSION} )); then
-    go install "golang.org/dl/go${VERSION}@latest"
-    "${go_bin}/go${VERSION}" download
+    go install "golang.org/dl/${VERSION}@latest"
+    "${go_bin}/${VERSION}" download
 
-    ln -sf "${HOME}/go/bin/go${VERSION}" "${HOME}/.local/bin/go"
+    ln -sf "${HOME}/go/bin/${VERSION}" "${HOME}/.local/bin/go"
   fi
 
   for i in $pkgs; do
