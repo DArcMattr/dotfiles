@@ -5,7 +5,7 @@
     "eslint-config-jquery": "^3.0.2",
     "eslint_d": "^12.2.1",
     "intelephense": "^1.10.2",
-    "neovim": "^4.10.1",
+    "neovim": "^4.11.0",
     "poor-mans-t-sql-formatter-cli": "^1.6.10",
     "sass": "^1.70.0",
     "stylelint": "^15.11.0",
