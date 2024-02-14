@@ -12,6 +12,7 @@ $if mode=vi
   set keymap vi-insert
   "\C-p": history-search-backward
   "\C-l": clear-screen
+  "jk": vi-movement-mode
 $endif
 
 set bell-style off
