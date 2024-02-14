@@ -2,6 +2,8 @@
 
 # chicken & egg time here, relies on system version of go to bootstrap
 grab_go() {
+  new_version=$(http 'https://go.dev/dl/?mode=json&include=all' | jq '.[0].version' | sed 's#"##g')
+  printf "Remote version is %s, installed version is %s\n" "${new_version}" "$(go version)"
   pkgs=(
     'filippo.io/mkcert'
     'github.com/antonmedv/fx'
@@ -11,11 +13,10 @@ grab_go() {
     'golang.org/x/tools/cmd/guru'
     'golang.org/x/tools/gopls'
   )
-  version=$(http 'https://go.dev/dl/?mode=json&include=all' | jq '.[0].version' | sed 's#"##g')
 
   while getopts "u" opt; do
     case "$opt" in
-      u) VERSION=${OPTARG:-${version}}
+      u) VERSION=${OPTARG:-${new_version}}
         ;;
 
       *) echo "Invalid Option: -${opt}" >&2
