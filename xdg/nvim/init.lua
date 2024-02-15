@@ -21,7 +21,8 @@ vim.g.indent_guides_exclude_filetypes = {'help', 'man', 'netrw'}
 vim.g.loaded_perl_provider = 0
 vim.g.mapleader = ','
 vim.g.maplocalleader = ' '
-vim.g.node_host_prog = vim.env.HOME .. '/.local/node_modules/.bin/neovim-node-host'
+-- vim.g.node_host_prog = vim.env.HOME .. '/.local/node_modules/.bin/neovim-node-host'
+vim.g.ruby_host_prog = vim.env.HOME .. '/.local/share/gem/ruby/3.0.0/bin/neovim-ruby-host'
 
 local lazyvim_plugins = {
   {

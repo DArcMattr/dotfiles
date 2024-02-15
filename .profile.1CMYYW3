@@ -11,9 +11,10 @@ alias webgrind='php -S 0.0.0.0:8080 /var/www/vhosts/webgrind/index.php'
 export CC CXX BROWSER
 
 superupdate_local() {
-  cd ~/contrib/neovim && \
+  (cd ~/contrib/neovim && \
     git up && \
-    make CMAKE_INSTALL_PREFIX="${LOCAL}" install clean
+    rm -rf ~/.local/share/nvim/runtime && \
+    make CMAKE_RELEASE_TYPE=Release CMAKE_INSTALL_PREFIX="${LOCAL}" install clean)
   rehash
   nvim --headless '+Lazy! sync' +qa
 }
