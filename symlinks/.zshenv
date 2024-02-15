@@ -41,17 +41,6 @@ else
 fi
 export BROWSER
 
-# Editors
-if type "nvim" > /dev/null; then
-  EDITOR=$(which nvim)
-elif type "vim" > /dev/null; then
-  EDITOR=$(which vim)
-else
-  EDITOR=$(which vi)
-fi
-export EDITOR
-export VISUAL=${EDITOR}
-
 # Temporary Files
 if [[ ! -d "$TMPDIR" ]]; then
   export TMPDIR="/tmp/${LOGNAME}"
@@ -102,6 +91,17 @@ perl_local_lib_root=(
   ${LOCAL}
   ${PERL_LOCAL_LIB_ROOT}
 )
+
+# Editors
+if type "nvim" > /dev/null; then
+  EDITOR=$(which nvim)
+elif type "vim" > /dev/null; then
+  EDITOR=$(which vim)
+else
+  EDITOR=$(which vi)
+fi
+export EDITOR
+export VISUAL=${EDITOR}
 
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
