@@ -67,7 +67,6 @@ compinit
 
 umask 002
 
-# eval "$(starship init zsh)"
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -82,10 +81,10 @@ if [[ -r "${HOME}/dotfiles/.aliases" ]]; then
   source "${HOME}/dotfiles/.aliases"
 fi
 
-if [ -r "${LOCALRC}" ]; then
-  source "${LOCALRC}"
-fi
-
 if [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]]; then
   source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+fi
+
+if [ -r "${LOCALRC}" ]; then
+  source "${LOCALRC}"
 fi
