@@ -14,9 +14,12 @@ export XDG_CONFIG_HOME="${HOME}/.config"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 export LC_COLLATE=C
 
-#
+if [[ -x clang ]]; then
+  export CC=clang
+  export CXX=clang++
+fi
+
 # Less
-#
 
 # Set the default Less options.
 # Mouse-wheel scrolling has been disabled by -X (disable screen clearing).

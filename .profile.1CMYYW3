@@ -1,14 +1,10 @@
 # vim:ft=zsh:
 
-CC=clang
-CXX=clang++
-BROWSER="/mnt/c/Users/darceneaux/AppData/Local/Vivaldi/Application/vivaldi.exe"
+export BROWSER="wslview"
 
 alias docker-compose='echo "no"'
 alias dc='docker compose'
 alias webgrind='php -S 0.0.0.0:8080 /var/www/vhosts/webgrind/index.php'
-
-export CC CXX BROWSER
 
 superupdate_local() {
   (cd ~/contrib/neovim && \
