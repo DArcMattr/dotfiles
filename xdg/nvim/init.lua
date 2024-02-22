@@ -372,7 +372,6 @@ vim.opt.swapfile        = false
 vim.opt.synmaxcol       = 512
 vim.opt.tabstop         = 2
 vim.opt.termguicolors   = true
-vim.opt.textwidth       = 80
 vim.opt.timeout         = false
 vim.opt.title           = true
 vim.opt.titlestring     = '%t%( [%R%M]%)'
