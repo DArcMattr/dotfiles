@@ -1,6 +1,7 @@
 {
   "license": "MIT",
   "private": true,
+  "packageManager": "pnpm@8.15.4+sha256.cea6d0bdf2de3a0549582da3983c70c92ffc577ff4410cbf190817ddc35137c2",
   "dependencies": {
     "eslint-config-jquery": "^3.0.2",
     "eslint_d": "^12.2.1",
