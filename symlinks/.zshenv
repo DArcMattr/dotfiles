@@ -77,11 +77,6 @@ path=(
   $path
 )
 
-manpath=(
-  ${LOCAL}/share/man
-  $manpath
-)
-
 perl5lib=(
   ${LOCAL}/lib/perl5
   ${PERL5LIB}
