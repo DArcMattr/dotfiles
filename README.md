@@ -38,20 +38,21 @@ sudo add-apt-repository \
 sudo add-apt-repository \
     "$(wget -qO- https://packages.microsoft.com/config/ubuntu/22.04/prod.list)" # XXX
 sudo apt install autossh bison build-essential clang-17 clang-17-doc \
-  clang-format-17 clang-tidy-17 clang-tools-17 clangd-17 cmake fd-find flex git \
-  git-extras golang htop jq libc++-17-dev-wasm32 libc++abi-17-dev-wasm32 \
-  libclang-17-dev libclang-common-17-dev libclang-rt-17-dev \
-  libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm64 \
-  libclang-rt-17-dev-wasm64 libclang1-17 libevent-dev libfuzzer-17-dev \
-  libgit2-dev libjansson-dev libllvm-17-ocaml-dev libllvm16 liblua5.3-dev \
-  liblzma-dev libncurses5-dev libnss3-tools libomp-17-dev libpcre3-dev \
-  libsqlite3-dev libssh2-1-dev libssl-dev libxml2-dev libyaml-dev lld-17 \
-  lldb-17 llvm-17 llvm-17-dev llvm-17-doc llvm-17-examples llvm-17-runtime \
-  lsyncd neovim nginx nodejs php-common php-gd php-imagick php-mbstring \
-  php-memcache php-pear php-xdebug php-xml php-zip php8.3-cli php8.3-curl \
-  php8.3-dev php8.3-fpm php8.3-imap php8.3-mysql php8.3-opcache php8.3-readline \
-  php8.3-soap php8.3-xml pv python-is-python3 python3-clang-17 python3-dev \
-  ruby-dev shellcheck sqlcmd tidy wget wslu xcape xsel zlib1g-dev zsh
+  clang-format-17 clang-tidy-17 clang-tools-17 clangd-17 cmake fd-find flex \
+  fswatch git git-extras golang htop jq libc++-17-dev-wasm32 \
+  libc++abi-17-dev-wasm32 libclang-17-dev libclang-common-17-dev \
+  libclang-rt-17-dev libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm32 \
+  libclang-rt-17-dev-wasm64 libclang-rt-17-dev-wasm64 libclang1-17 \
+  libevent-dev libfuzzer-17-dev libgit2-dev libjansson-dev \
+  libllvm-17-ocaml-dev libllvm16 liblua5.3-dev liblzma-dev libncurses5-dev \
+  libnss3-tools libomp-17-dev libpcre3-dev libsqlite3-dev libssh2-1-dev \
+  libssl-dev libxml2-dev libyaml-dev lld-17 lldb-17 llvm-17 llvm-17-dev \
+  llvm-17-doc llvm-17-examples llvm-17-runtime lsyncd neovim nginx nodejs \
+  php-common php-gd php-imagick php-mbstring php-memcache php-pear php-xdebug \
+  php-xml php-zip php8.3-cli php8.3-curl php8.3-dev php8.3-fpm php8.3-imap \
+  php8.3-mysql php8.3-opcache php8.3-readline php8.3-soap php8.3-sqlite3 \
+  php8.3-xml pv python-is-python3 python3-clang-17 python3-dev ruby-dev \
+  shellcheck sqlcmd tidy wget wslu xcape xsel zlib1g-dev zsh
 
 git clone https://github.com/darcmattr/dotfiles ~/dotfiles
 sh ~/dotfiles/helpers/debianish-update-alternatives.sh

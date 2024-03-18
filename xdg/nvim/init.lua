@@ -328,7 +328,7 @@ vim.opt.completeopt     = { 'menuone', 'longest' }
 vim.opt.copyindent      = true
 vim.opt.cursorcolumn    = true
 vim.opt.cursorline      = true
-vim.opt.cursorlineopt   = 'number,screenline'
+vim.opt.cursorlineopt   = 'both'
 vim.opt.diffopt         = 'filler,vertical,internal,indent-heuristic,algorithm:patience'
 vim.opt.display         = 'lastline'
 vim.opt.encoding        = 'utf-8'
@@ -593,6 +593,7 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
   end
 })
 vim.api.nvim_set_hl(0, 'CursorLine', { underline = true })
+vim.api.nvim_set_hl(0, 'CursorColumn', { })
 --[[ aaaaa
 vim.api.nvim_create_user_command('Silent',
   function(opts)
