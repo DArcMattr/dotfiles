@@ -178,7 +178,10 @@ local lazyvim_plugins = {
           require('nvim-dap-virtual-text').setup()
         end
       },
-      'rcarriga/nvim-dap-ui',
+      {
+        'rcarriga/nvim-dap-ui',
+        dependencies = { 'nvim-neotest/nvim-nio' }
+      },
     },
     keys = function()
       local dap = require('dap')
