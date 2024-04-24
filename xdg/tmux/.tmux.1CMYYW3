@@ -2,25 +2,25 @@
 
 tmux set-option -ga terminal-overrides ",*:Tc"
 
-tmux split-window -h -l 50% -t "${SESSION}:0.0" \; \
-	split-window -v -l 50% -t "${SESSION}:0.1"
+tmux split-window -h -l 50% -t "${SESSION}:1.0" \; \
+	split-window -v -l 50% -t "${SESSION}:1.1"
 
-tmux send-keys -t "${SESSION}:0.1" "sssh animal" C-m
+tmux send-keys -t "${SESSION}:1.1" "sssh animal" C-m
 
-tmux new-window -t "${SESSION}":1
-tmux send-keys -t "${SESSION}":1 "htop" C-m
-tmux rename-window -t "${SESSION}":1 "htop"
+tmux new-window -t "${SESSION}":2
+tmux send-keys -t "${SESSION}":2 "htop" C-m
+tmux rename-window -t "${SESSION}":2 "htop"
 
 DIRECTORY='/var/www/vhosts/api-tracker'
-tmux new-window -t "${SESSION}:2" -c "${DIRECTORY}" \; \
-	split-window -h -l 60% -t "${SESSION}:2.0" -c "${DIRECTORY}" \; \
-	split-window -v -l 50% -t "${SESSION}:2.0" -c "${DIRECTORY}" \; \
-	split-window -v -l 50% -t "${SESSION}:2.0" -c "${DIRECTORY}" \; \
-	split-window -v -l 50% -t "${SESSION}:2.2" -c "${DIRECTORY}"
-tmux rename-window -t "${SESSION}:2" "API"
-tmux select-pane -t "${SESSION}:2.4"
+tmux new-window -t "${SESSION}:3" -c "${DIRECTORY}" \; \
+	split-window -h -l 60% -t "${SESSION}:3.0" -c "${DIRECTORY}" \; \
+	split-window -v -l 50% -t "${SESSION}:3.0" -c "${DIRECTORY}" \; \
+	split-window -v -l 50% -t "${SESSION}:3.0" -c "${DIRECTORY}" \; \
+	split-window -v -l 50% -t "${SESSION}:3.2" -c "${DIRECTORY}"
+tmux rename-window -t "${SESSION}:3" "API"
+tmux select-pane -t "${SESSION}:3.4"
 
-tmux send-keys -t "${SESSION}:2.1" "cake console" C-m
-tmux send-keys -t "${SESSION}:2.2" "sqlcmd" C-m
-#tmux send-keys -t "${SESSION}:2.3" "xtail ${DIRECTORY}/logs/api/cake/app-debug-*.log" C-m
-tmux send-keys -t "${SESSION}:2.3" "tail -n 100 -F ${DIRECTORY}/logs/api/cake/app-debug-*.log" C-m
+tmux send-keys -t "${SESSION}:3.1" "cake console" C-m
+tmux send-keys -t "${SESSION}:3.2" "sqlcmd" C-m
+#tmux send-keys -t "${SESSION}:3.3" "xtail ${DIRECTORY}/logs/api/cake/app-debug-*.log" C-m
+tmux send-keys -t "${SESSION}:3.3" "tail -n 100 -F ${DIRECTORY}/logs/api/cake/app-debug-*.log" C-m

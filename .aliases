@@ -151,7 +151,7 @@ tmuxt() {
 
     . "${XDG_CONFIG_HOME}/tmux/.tmux.${HOST}"
 
-    tmux select-window -t "${SESSION}":0
+    tmux select-window -t "${SESSION}":1
   fi
 
   tmux attach-session -t "${SESSION}"
