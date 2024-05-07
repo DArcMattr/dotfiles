@@ -504,7 +504,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     -- warning: this api is not stable yet
-    vim.lsp.inlay_hint.enable(ev.buf, true)
+    vim.lsp.inlay_hint.enable(true)
     vim.cmd.highlight('LspInlayHint', 'guifg=gray')
   end
 })
