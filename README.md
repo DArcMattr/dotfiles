@@ -28,7 +28,7 @@ curl -sS "http://nginx.org/keys/nginx_signing.key" | \
 curl -fsSL "http://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key" | \
   sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/nodesource.gpg 
 sudo add-apt-repository \
-  "deb https://deb.nodesource.com/node_21.x nodistro main"
+  "deb https://deb.nodesource.com/node_22.x nodistro main"
 curl -sS "https://packages.microsoft.com/keys/microsoft.asc" | \
   sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
 sudo add-apt-repository \
