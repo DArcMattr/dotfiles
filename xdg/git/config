@@ -44,12 +44,8 @@
   cmd = nvim -d $LOCAL $REMOTE
 [difftool "difft"]
   cmd = difft "$LOCAL" "$REMOTE"
-[fetch]
-  fsckobjects = true
 [format]
   pretty = oneline
-[fsck]
-  badTimezone = ignore
 [http]
   postBuffer = 524288000
 [init]
@@ -82,17 +78,11 @@
   followTags = true
 [rebase]
     missingCommitsCheck = error
-[receive]
-  fsckobjects = true
 [status]
   showUntrackedFiles = all
   submoduleSummary = true
 [submodule]
   recurse = true
-[transfer]
-  fsckobjects = true
-[url "git@github.com:"]
-  insteadOf = https://github.com/
 [alias]
   afetch = fetch --all --prune
   amend = commit --amend
