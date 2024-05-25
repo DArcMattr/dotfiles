@@ -59,6 +59,7 @@ sh ~/dotfiles/helpers/debianish-update-alternatives.sh
 curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
 python /tmp/get-pip.py --user --break-system-packages
 chsh -s $(which zsh)
+sudo cp ~/dotfiles/helpers/xdg-vars.sh /etc/profile.d/xdg-vars.sh
 sudo corepack enable
 sudo corepack prepare pnpm@latest --activate
 ```
