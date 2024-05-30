@@ -366,7 +366,7 @@ vim.opt.showcmd         = true
 vim.opt.showmatch       = true
 vim.opt.showmode        = false
 vim.opt.sidescrolloff   = 5
-vim.opt.signcolumn      = 'yes'
+vim.opt.signcolumn      = 'auto:2'
 vim.opt.smartcase       = true
 vim.opt.smarttab        = true
 vim.opt.softtabstop     = 2
@@ -538,13 +538,13 @@ vim.api.nvim_create_autocmd('ModeChanged', {
   pattern = {'n:i', 'v:s'},
   group = ModeEvents,
   desc = 'Disable diagnostics in insert and select mode',
-  callback = function(e) vim.diagnostic.disable(e.buf) end
+  callback = function(e) vim.diagnostic.enable(false) end
 })
 vim.api.nvim_create_autocmd('ModeChanged', {
   pattern = 'i:n',
   group = ModeEvents,
   desc = 'Enable diagnostics when leaving insert mode',
-  callback = function(e) vim.diagnostic.enable(e.buf) end
+  callback = function(e) vim.diagnostic.enable() end
 })
 
 local FocusEvents = vim.api.nvim_create_augroup('FocusEvents', { clear = true })
@@ -552,8 +552,7 @@ vim.api.nvim_create_autocmd({ 'FocusGained' }, {
   pattern = '*',
   group = FocusEvents,
   callback = function(buf)
-    vim.opt.winhighlight = 'Normal:Normal'
-    vim.opt.winhighlight = 'EndOfBuffer:Normal'
+    vim.opt.winhighlight = 'Normal:Normal,EndOfBuffer:Normal'
     vim.opt.cursorcolumn = true
     vim.opt.cursorline = true
   end
@@ -562,8 +561,7 @@ vim.api.nvim_create_autocmd({ 'FocusLost' }, {
   pattern = '*',
   group = FocusEvents,
   callback = function(buf)
-    vim.opt.winhighlight = 'Normal:NormalNC'
-    vim.opt.winhighlight = 'EndOfBuffer:NormalNC'
+    vim.opt.winhighlight = 'Normal:NormalNC,EndOfBuffer:NormalNC'
     vim.opt.cursorcolumn = false
     vim.opt.cursorline = false
   end
