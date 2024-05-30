@@ -45,6 +45,7 @@ grab_rust() {
     difftastic
     lsd
     "ripgrep --features 'pcre2'"
+    starship
     tree-sitter-cli
   )
   dir="${HOME}/.cargo/bin"
@@ -61,7 +62,7 @@ grab_rust() {
 
   for pkg in $pkgs
   do
-		eval "$(printf "%s %s" "${dir}/cargo install" "${pkg}")"
+    eval "$(printf "%s %s" "${dir}/cargo install" "${pkg}")"
   done
   cargo install-update -a
   "${dir}/rg" --generate man >! ${LOCAL}/share/man/man1/rg.1
