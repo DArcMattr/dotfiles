@@ -110,6 +110,7 @@ local lazyvim_plugins = {
   {
     'hrsh7th/nvim-cmp',
     dependencies = {
+      'delphinus/cmp-ctags',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
@@ -141,6 +142,16 @@ local lazyvim_plugins = {
           { name = 'nvim_lsp' },
           { name = 'buffer' },
           { name = 'path' },
+          {
+            name = 'ctags',
+            option = {
+              trigger_characters_ft = {
+                php = {
+                  '->', '::',
+                },
+              },
+            },
+          },
         },
         window = {
           completion = cmp.config.window.bordered()
