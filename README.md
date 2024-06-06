@@ -38,10 +38,10 @@ sudo add-apt-repository \
 sudo add-apt-repository \
     "$(wget -qO- https://packages.microsoft.com/config/ubuntu/22.04/prod.list)" # XXX
 sudo apt install autossh bison build-essential clang-17 clang-17-doc \
-  clang-format-17 clang-tidy-17 clang-tools-17 clangd-17 cmake fd-find flex \
-  fswatch git git-extras golang htop jq libc++-17-dev-wasm32 \
-  libc++abi-17-dev-wasm32 libclang-17-dev libclang-common-17-dev \
-  libclang-rt-17-dev libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm32 \
+  clang-format-17 clang-tidy-17 clang-tools-17 clangd-17 cmake flex fswatch git \
+  git-extras golang htop jq libc++-17-dev-wasm32 libc++abi-17-dev-wasm32 \
+  libclang-17-dev libclang-common-17-dev libclang-rt-17-dev \
+  libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm32 \
   libclang-rt-17-dev-wasm64 libclang-rt-17-dev-wasm64 libclang1-17 \
   libevent-dev libfuzzer-17-dev libgit2-dev libjansson-dev \
   libllvm-17-ocaml-dev libllvm16 liblua5.3-dev liblzma-dev libncurses5-dev \
