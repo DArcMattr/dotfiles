@@ -65,7 +65,6 @@ cdpath=(
 path=(
   $go_bin
   $cargo_path
-  $cargo_path
   $php_path
   $gem_path
   $haskell_path

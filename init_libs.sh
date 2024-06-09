@@ -43,6 +43,7 @@ grab_rust() {
     bat
     cargo-update
     difftastic
+    fd-find
     lsd
     "ripgrep --features 'pcre2'"
     starship
@@ -84,7 +85,7 @@ grab_pips() {
     'mycli'
     'neovim-remote'
     'pip'
-    'powerline-status'
+    'git+https://github.com/powerline/powerline.git@2.8.3'
     'psutil'
     'pyemojify'
     'pynvim'
