@@ -1,0 +1,11 @@
+#!/bin/sh
+
+tmux split-window -h -l 50% -t "${SESSION}:1.0"
+
+tmux new-window -t "${SESSION}":2
+tmux send-keys -t "${SESSION}":2 "htop" C-m
+tmux rename-window -t "${SESSION}":2 "htop"
+
+tmux new-window -t "${SESSION}:3"
+
+tmux select-pane -t "${SESSION}:1.0"

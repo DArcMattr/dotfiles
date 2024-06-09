@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+export CC=clang
+export CXX=clang++

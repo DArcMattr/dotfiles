@@ -1,0 +1,31 @@
+#!/usr/bin/env zsh
+alias wtfsound='systemctl --user restart pipewire-pulse.socket ; systemctl --user restart pipewire-pulse.service ; systemctl --user restart pipewire.socket ; systemctl --user restart pipewire.service '
+
+superupdate_local() {
+  (cd ~/contrib/neovim && \
+    git up && \
+    rm -rf ~/.local/share/nvim/runtime && \
+    make CMAKE_RELEASE_TYPE=Release CMAKE_INSTALL_PREFIX="${LOCAL}" install clean)
+  rehash
+  nvim --cmd "autocmd user LazyVimStarted lua require('lazy').sync()"
+}
+
+tmuxt() {
+  SESSION="$(echo "${USER}" | sed -e 's/[\. ]/_/g')"
+
+  if tmux has-session -t "${SESSION}" >/dev/null 2>&1; then
+    echo "Session ${SESSION} already exists, attaching"
+  else
+    TERM=tmux-256color systemd-run --scope --user $HOME/.local/bin/tmux new-session -d -s "${SESSION}"
+
+    if [ ! -n "${SSH_CLIENT}" ] && [ ! -n "${SSH_TTY}" ]; then
+      tmux set-option -t "${SESSION}" status-position top
+    fi
+
+    . "${XDG_CONFIG_HOME}/tmux/.tmux.${HOST}"
+
+    tmux select-window -t "${SESSION}":1
+  fi
+
+  tmux attach-session -t "${SESSION}"
+}
