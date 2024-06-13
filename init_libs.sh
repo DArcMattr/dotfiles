@@ -61,6 +61,7 @@ grab_rust() {
 
   "${HOME}/.cargo/bin/rustup" completions zsh >! "${HOME}/.local/share/zsh/site-functions/_rustup"
 
+  # cargo install --list | awk '/^[[:alnum:]]/ {print $1}'
   for pkg in $pkgs
   do
     eval "$(printf "%s %s" "${dir}/cargo install" "${pkg}")"
