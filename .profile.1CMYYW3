@@ -10,7 +10,7 @@ superupdate_local() {
   (cd ~/contrib/neovim && \
     git up && \
     rm -rf ~/.local/share/nvim/runtime && \
-    make CMAKE_RELEASE_TYPE=Release CMAKE_INSTALL_PREFIX="${LOCAL}" install clean)
+    make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX="${LOCAL}" install clean)
   rehash
   nvim --cmd "autocmd user LazyVimStarted lua require('lazy').sync()"
 }
