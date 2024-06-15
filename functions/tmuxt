@@ -1,0 +1,21 @@
+#!/usr/bin/env zsh
+
+# tmuxt() {
+  local SESSION="$(echo "${USER}" | sed -e 's/[\. ]/_/g')"
+
+  if tmux has-session -t "${SESSION}" >/dev/null 2>&1; then
+    echo "Session ${SESSION} already exists, attaching"
+  else
+    TERM=tmux-256color tmux new-session -d -s "${SESSION}" -x "$(tput cols)" -y "$(tput lines)"
+
+    if [ ! -n "${SSH_CLIENT}" ] && [ ! -n "${SSH_TTY}" ]; then
+      tmux set-option -t "${SESSION}" status-position top
+    fi
+
+    . "${XDG_CONFIG_HOME}/tmux/.tmux.${HOST}"
+
+    tmux select-window -t "${SESSION}":1
+  fi
+
+  tmux attach-session -t "${SESSION}"
+# }

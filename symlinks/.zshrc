@@ -1,14 +1,16 @@
-fpath=($fpath ~/.local/share/zsh/site-functions)
+#!/usr/bin/env zsh
+fpath=( ~/.local/share/zsh/site-functions ~/dotfiles/functions $fpath)
 
 COMPLETION_WAITING_DOTS="true"
 DISABLE_CORRECTION="true"
 KEYTIMEOUT=1
 LOCALRC="$(printf "${HOME}/dotfiles/.rc.${HOSTNAME:=$HOST}")"
 export PYTHONSTARTUP="${HOME}/dotfiles/helpers/pythonstartup.py"
+export ZDOTDIR="${ZDOTDIR:-$HOME}"
 
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+if [[ -s "${ZDOTDIR}/.zprezto/init.zsh" ]]; then
   zstyle ':completion:*' accept-exact '*(N)'
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+  source "${ZDOTDIR}/.zprezto/init.zsh"
 fi
 
 if [[ -r ~/contrib/zsh-completions ]]; then
@@ -16,7 +18,8 @@ if [[ -r ~/contrib/zsh-completions ]]; then
 fi
 
 if [[ -r ~/contrib/autoenv/autoenv.plugin.zsh ]]; then
-  source ~/contrib/autoenv/autoenv.plugin.zsh
+  fpath=(~/contrib/autoenv $fpath)
+  autoload autoenv
 fi
 
 if [[ -n ${ZSH_VERSION-} ]]; then
@@ -58,7 +61,7 @@ setopt pushd_ignore_dups
 bindkey -v
 
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
-autoload -Uz compinit
+autoload -Uz compinit tmuxt
 compinit
 
 umask 002

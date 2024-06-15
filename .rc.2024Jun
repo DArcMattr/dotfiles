@@ -9,23 +9,3 @@ superupdate_local() {
   rehash
   nvim --cmd "autocmd user LazyVimStarted lua require('lazy').sync()"
 }
-
-tmuxt() {
-  SESSION="$(echo "${USER}" | sed -e 's/[\. ]/_/g')"
-
-  if tmux has-session -t "${SESSION}" >/dev/null 2>&1; then
-    echo "Session ${SESSION} already exists, attaching"
-  else
-    TERM=tmux-256color systemd-run --scope --user $HOME/.local/bin/tmux new-session -d -s "${SESSION}"
-
-    if [ ! -n "${SSH_CLIENT}" ] && [ ! -n "${SSH_TTY}" ]; then
-      tmux set-option -t "${SESSION}" status-position top
-    fi
-
-    . "${XDG_CONFIG_HOME}/tmux/.tmux.${HOST}"
-
-    tmux select-window -t "${SESSION}":1
-  fi
-
-  tmux attach-session -t "${SESSION}"
-}
