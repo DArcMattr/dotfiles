@@ -37,10 +37,10 @@
 *.color7:       #a8a8a8
 *.color15:      #f8fcf8
 
-*.font: xft:Delugia:style=Regular:size=9
-*.boldFont: xft:Delugia:style=Bold:size=9
-*.italicFont: xft:Delugia:style=Italic:size=9
-*.boldItalicFont: xft:Delugia:style=Bold Italic:size=9
+*.font: xft:Cascadia Code PL Light:style=Regular:size=9
+*.boldFont: xft:Cascadia Code PL Light:style=Bold:size=9
+*.italicFont: xft:Cascadia Code PL Light:style=Italic:size=9
+*.boldItalicFont: xft:Cascadia Code PL Light:style=Bold Italic:size=9
 *customization: -color
 
 !! URxvt Appearance
