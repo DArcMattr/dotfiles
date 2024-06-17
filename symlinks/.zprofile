@@ -14,7 +14,7 @@ export CLICOLOR_FORCE=YES
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 export LC_COLLATE=C
 
-if [[ -x clang ]]; then
+if (( $+commands[clang] )); then
   export CC=clang
   export CXX=clang++
 fi
