@@ -156,7 +156,38 @@ An example
 mysql_config_editor set --login-path=local --host=127.0.0.1 --user=db_user --password
 ```
 
-### Keyboard Mapping Under GNOME/Wayland
+### Notes for Keyboard Mapping for laptops
+
+Now that I have a fancy keyboard with its own stored keymapping, I no longer
+have to work around the mapping dance between escape/control/capslock. But for
+when I get a new ThinkPad to toy around with, here we are
+
+#### Under X11
+
+TODO: figure out how to translate this to a libinput config
+
+    ```
+    !
+    ! This is an `xmodmap' input file for
+    !   PC 101 key, thin Delete, tall Enter (XFree86; US) keyboards.
+    ! Automatically generated on Thu Jan 17 06:15:49 2013 by darc with
+    ! XKeyCaps 2.46; Copyright (c) 1999 Jamie Zawinski <jwz@jwz.org>.
+    ! http://www.jwz.org/xkeycaps/
+    !
+    ! This file presupposes that the keyboard is in the default state, and
+    ! may malfunction if it is not.
+    !
+    remove Lock      = Caps_Lock
+
+    keycode 0x42 =	Control_L	NoSymbol	Control_L
+
+    add    Control = Control_L
+
+    ! for the Thinkpad keyboard
+    pointer = 1 9 3 4 5 6 7 8 2 10 11 12
+    ```
+
+#### Under Wayland
 
 I tried GNOME-under-Wayland, which means the `.Xmodmap` file does nothing
 anymore, so the alternative as I see it is to edit system files to get what
