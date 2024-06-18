@@ -39,3 +39,9 @@ sudo update-alternatives \
   --slave   /usr/bin/lldb                     lldb                     /usr/bin/lldb-17 \
   --slave   /usr/bin/lldb-server              lldb-server              /usr/bin/lldb-server-17 \
   --slave   /usr/bin/lldb-vscode              lldb-vscode              /usr/bin/lldb-vscode-17
+
+sudo update-alternatives \
+  --install  /usr/bin/cc                      cc                       /usr/bin/clang-17 50
+
+sudo update-alternatives \
+  --install  /usr/bin/cpp                     cpp                      /usr/bin/clang++-17 50
