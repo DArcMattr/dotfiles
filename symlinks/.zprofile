@@ -3,20 +3,28 @@
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+# Execute code that does not affect the current session in the background.
 
-LOCALPROFILE="${HOME}/dotfiles/.profile.${HOST}"
+{
+  # Compile the completion dump to increase startup speed.
+  zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
+  if [[
+    -s "$zcompdump"
+    && (
+      ! -s "${zcompdump}.zwc"
+      || "$zcompdump" -nt "${zcompdump}.zwc"
+    )
+  ]]; then
+    zcompile "$zcompdump"
+  fi
+} &!
 
-export PAGER='less'
-export MANPAGER='nvim +Man!'
-export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
-export CLICOLOR=YES
-export CLICOLOR_FORCE=YES
-export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
-export LC_COLLATE=C
-
-if (( $+commands[clang] )); then
-  export CC=clang
-  export CXX=clang++
+# Print a random, hopefully interesting, adage.
+if (( $+commands[fortune] )); then
+  if [[ -t 0 || -t 1 ]]; then
+    fortune -s
+    print
+  fi
 fi
 
 # Less
@@ -27,12 +35,44 @@ fi
 # export LESS='-F -g -i -M -R -S -w -X -z-4'
 
 export LESS="-EFIMQRsX~ -x2"
+export MANWIDTH="$(( 96 > $(tput cols) ? $(tput cols) : 96 ))"
+export PAGER='less'
+export PYTHONSTARTUP="${HOME}/dotfiles/helpers/pythonstartup.py"
+export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
+export HGEDITOR="${HOME}/dotfiles/helpers/hgeditor"
+export CLICOLOR=YES
+export CLICOLOR_FORCE=YES
+export ANSIBLE_NOCOWS=1
+export AUTOSSH_PORT=0
+export MANPAGER='nvim +Man!'
+export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
+
+# Editors
+if type "nvim" > /dev/null; then
+  EDITOR=$(which nvim)
+elif type "vim" > /dev/null; then
+  EDITOR=$(which vim)
+else
+  EDITOR=$(which vi)
+fi
+export EDITOR
+export VISUAL=${EDITOR}
+
+# Browsers
+if [[ "$OSTYPE" == darwin* ]]; then
+  BROWSER='open'
+else
+  BROWSER='xdg-open'
+fi
+export BROWSER
 
 # Set the Less input preprocessor.
 # Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
 if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
+
+LOCALPROFILE="${HOME}/dotfiles/.profile.${HOST}"
 
 if [ -r "${LOCALPROFILE}" ]; then
   source "${LOCALPROFILE}"
@@ -42,9 +82,3 @@ fi
 if [ -r "${XDG_CONFIG_HOME}/user-dirs.dirs" ]; then
   source "${XDG_CONFIG_HOME}/user-dirs.dirs"
 fi
-
-export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
-export XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
-export XDG_DATA_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}"
-export XDG_DATA_DIRS="${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
-export XDG_CONFIG_DIRS="${XDG_CONFIG_DIRS:-/etc/xdg}"

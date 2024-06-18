@@ -5,8 +5,6 @@ COMPLETION_WAITING_DOTS="true"
 DISABLE_CORRECTION="true"
 KEYTIMEOUT=1
 LOCALRC="$(printf "${HOME}/dotfiles/.rc.${HOSTNAME:=$HOST}")"
-export PYTHONSTARTUP="${HOME}/dotfiles/helpers/pythonstartup.py"
-export ZDOTDIR="${ZDOTDIR:-$HOME}"
 
 if [[ -s "${ZDOTDIR}/.zprezto/init.zsh" ]]; then
   zstyle ':completion:*' accept-exact '*(N)'
@@ -14,12 +12,12 @@ if [[ -s "${ZDOTDIR}/.zprezto/init.zsh" ]]; then
 fi
 
 if [[ -r ~/contrib/zsh-completions ]]; then
-	fpath=(~/contrib/zsh-completions $fpath)
+  fpath=(~/contrib/zsh-completions $fpath)
+  zstyle ':prezto:load' pmodule zsh-completions
 fi
 
 if [[ -r ~/contrib/autoenv/autoenv.plugin.zsh ]]; then
-  fpath=(~/contrib/autoenv $fpath)
-  autoload autoenv
+  source ~/contrib/autoenv/autoenv.plugin.zsh
 fi
 
 if [[ -n ${ZSH_VERSION-} ]]; then
@@ -65,12 +63,6 @@ autoload -Uz compinit tmuxt
 compinit
 
 umask 002
-
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-[[ ! -f ~/dotfiles/helpers/.p10k.zsh ]] || source ~/dotfiles/helpers/.p10k.zsh
 
 if [[ -r /etc/aliases.sh ]]; then
   source /etc/aliases.sh

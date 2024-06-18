@@ -9,6 +9,8 @@
 # General
 #
 
+zstyle ':prezto:load' pmodule-dirs ~/.local/share/zsh/site-functions
+
 # Set case-sensitivity for completion, history lookup, etc.
 # zstyle ':prezto:*:*' case-sensitive 'yes'
 
@@ -42,10 +44,7 @@ zstyle ':prezto:load' pmodule \
   'directory' \
   'spectrum' \
   'ssh' \
-  'syntax-highlighting' \
-  'prompt'
-
-zstyle ':prezto:load' pmodule-dirs ~/.local/share/zsh/site-functions
+  'syntax-highlighting'
 
 zstyle ':prezto:*:*' case-sensitive 'no'
 zstyle ':prezto:*:*' color 'yes'
