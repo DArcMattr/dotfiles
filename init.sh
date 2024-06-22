@@ -32,6 +32,7 @@ find "${DOTFILES}/xdg/" -mindepth 1 -maxdepth 1 -type d -exec ln -sf "{}" "${DOT
 	cd
 	pnpm install --global
 	pnpm completion zsh >! "${LOCAL}/share/share/site-functions/_pnpm"
+	# pnpm install -g $(jq -r '.dependencies | keys[]' $HOME/dotfiles/packages.json)
 )
 
 cd ~

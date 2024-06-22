@@ -12,6 +12,7 @@ export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
 export XDG_DATA_DIRS="${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}"
 export ZDOTDIR="${ZDOTDIR:-$HOME}"
+export PNPM_HOME="${LOCAL}/share/pnpm"
 
 if (( $+commands[clang] && $+commands[clang++] )); then
   export CC=clang
@@ -54,8 +55,8 @@ path=(
   $php_path
   $gem_path
   $haskell_path
+  ${PNPM_HOME}
   ${LOCAL}/bin
-  ${LOCAL}/lib/node_modules/.bin
   /usr/local/{,s}bin
   /usr/{,s}bin
   /{,s}bin
