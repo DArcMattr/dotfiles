@@ -110,7 +110,7 @@ local lazyvim_plugins = {
   {
     'hrsh7th/nvim-cmp',
     dependencies = {
-      'delphinus/cmp-ctags',
+      -- 'delphinus/cmp-ctags',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
@@ -416,7 +416,6 @@ else
   vim.opt.grepprg='grep -nH $*'
 end
 
-vim.cmd.colorscheme('industry')
 vim.cmd.highlight('TermCursor', 'ctermfg=yellow guifg=yellow')
 vim.cmd.highlight('LineNr',     'gui=bold guifg=#c6c6c6 guibg=#00005f')
 vim.cmd.highlight('LineNr',     'gui=bold guifg=#c6c6c6 guibg=#00005f')
@@ -605,8 +604,10 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
     vim.opt.timeoutlen = 200
   end
 })
+
 vim.api.nvim_set_hl(0, 'CursorLine', { underline = true })
 vim.api.nvim_set_hl(0, 'CursorColumn', { })
+
 --[[ aaaaa
 vim.api.nvim_create_user_command('Silent',
   function(opts)
@@ -616,6 +617,30 @@ vim.api.nvim_create_user_command('Silent',
   { nargs = 1 }
 )
 ]]
+
+local FugitiveStuffs = vim.api.nvim_create_augroup('FugitiveStuffs', { clear = true })
+vim.api.nvim_create_autocmd({'QuickFixCmdPost'}, {
+  group = FugitiveStuffs,
+  pattern = { "*grep*" },
+  command = 'cwindow',
+})
+vim.api.nvim_create_autocmd({'QuickFixCmdPost'}, {
+  group = FugitiveStuffs,
+  pattern = { "*llog*" },
+  command = 'cwindow',
+})
+vim.api.nvim_create_autocmd({'QuickFixCmdPost'}, {
+  group = FugitiveStuffs,
+  pattern = { "*log*" },
+  command = 'lwindow',
+})
+vim.api.nvim_create_autocmd({'BufReadPost'}, {
+  group = FugitiveStuffs,
+  pattern = { "fugitive://*" },
+  callback = function()
+      vim.opt.bufhidden = delete
+    end
+})
 
 vim.cmd([[
 " mark scm conflict markers as errors
@@ -648,13 +673,6 @@ if exists('$TMUX')
   tnoremap <silent> <C-\><C-N><C-w>h :silent call funcs#TmuxMove('h')<Cr>
   tnoremap <silent> <C-\><C-N><C-w>l :silent call funcs#TmuxMove('l')<Cr>
 endif
-
-augroup FugitiveStuffs
-  autocmd QuickFixCmdPost *grep* cwindow
-  autocmd QuickFixCmdPost *log* cwindow
-  autocmd QuickFixCmdPost *llog* lwindow
-  autocmd BufReadPost fugitive://* set bufhidden=delete
-augroup END
 
 augroup CloseLocListWindowGroup
   autocmd!
@@ -704,3 +722,5 @@ augroup StartupStuffs
   autocmd VimResized * execute 'normal! \<C-w>='
 augroup END
 ]])
+
+vim.cmd.colorscheme('industry')
