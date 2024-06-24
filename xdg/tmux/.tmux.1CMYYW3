@@ -1,6 +1,9 @@
 #!/bin/sh
 
 tmux set-option -ga terminal-overrides ",*:Tc"
+tmux set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
+tmux set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours - needs tmux-3.0
+tmux set -as terminal-overrides ',*:smuc=\E[4:3m'
 
 tmux split-window -h -l 50% -t "${SESSION}:1.0" \; \
 	split-window -v -l 50% -t "${SESSION}:1.1"
