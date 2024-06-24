@@ -19,7 +19,7 @@ vim.g.editorconfig_enable = true
 vim.g.indent_guides_enable_on_vim_startup = 1
 vim.g.indent_guides_exclude_filetypes = {'help', 'man', 'netrw'}
 vim.g.loaded_perl_provider = 0
-vim.g.loaded_node_provider = 0
+-- vim.g.loaded_node_provider = 0
 vim.g.mapleader = ','
 vim.g.maplocalleader = ' '
 -- vim.g.node_host_prog = vim.env.HOME .. '/.local/node_modules/.bin/neovim-node-host'
@@ -605,19 +605,6 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
   end
 })
 
-vim.api.nvim_set_hl(0, 'CursorLine', { underline = true })
-vim.api.nvim_set_hl(0, 'CursorColumn', { })
-
---[[ aaaaa
-vim.api.nvim_create_user_command('Silent',
-  function(opts)
-              vim.cmd.execute(':silent !' .. opts.args)
-              vim.cmd.redraw
-  end,
-  { nargs = 1 }
-)
-]]
-
 local FugitiveStuffs = vim.api.nvim_create_augroup('FugitiveStuffs', { clear = true })
 vim.api.nvim_create_autocmd({'QuickFixCmdPost'}, {
   group = FugitiveStuffs,
@@ -642,10 +629,41 @@ vim.api.nvim_create_autocmd({'BufReadPost'}, {
     end
 })
 
-vim.cmd([[
-" mark scm conflict markers as errors
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$' "
+local StartupStuffs = vim.api.nvim_create_augroup('StartupStuffs', { clear = true})
 
+vim.api.nvim_create_autocmd('BufRead', {
+  callback = function(opts)
+    vim.api.nvim_create_autocmd('BufWinEnter', {
+      once = true,
+      buffer = opts.buf,
+      callback = function()
+        local ft = vim.bo[opts.buf].filetype
+        local bt = vim.bo[opts.buf].buftype
+        local last_known_line = vim.api.nvim_buf_get_mark(opts.buf, '"')[1]
+        if
+          not (ft:match('commit') and ft:match('rebase'))
+          and not (bt:match('quickfix') and bt:match('nofile') and bt:match('help'))
+          and last_known_line > 1
+          and last_known_line <= vim.api.nvim_buf_line_count(opts.buf)
+        then
+          vim.api.nvim_feedkeys([[g`"]], 'nx', false)
+        end
+      end,
+    })
+  end,
+})
+
+--[[ aaaaa
+vim.api.nvim_create_user_command('Silent',
+  function(opts)
+              vim.cmd.execute(':silent !' .. opts.args)
+              vim.cmd.redraw
+  end,
+  { nargs = 1 }
+)
+]]
+
+vim.cmd([[
 command! -nargs=1 Silent |
 \   execute ':silent !'.<q-args> |
 \   :redraw!<Cr>
@@ -707,10 +725,10 @@ augroup END
 
 augroup StartupStuffs
   autocmd!
-  autocmd BufReadPost *
-  \ if line("'\"") > 1 && line("'\"") <= line("$") |
-  \   execute "normal! g`\""                       |
-  \ endif
+  " autocmd BufReadPost *
+  " \ if line("'\"") > 1 && line("'\"") <= line("$") |
+  " \   execute "normal! g`\""                       |
+  " \ endif
   autocmd WinEnter,BufEnter,BufRead,FileType *
   \ if !&modifiable |
   \   setlocal scrolloff=999 |
@@ -724,3 +742,5 @@ augroup END
 ]])
 
 vim.cmd.colorscheme('industry')
+vim.api.nvim_set_hl(0, 'CursorLine', { underline = true })
+vim.api.nvim_set_hl(0, 'CursorColumn', { })
