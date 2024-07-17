@@ -5,15 +5,14 @@
   "dependencies": {
     "eslint-config-jquery": "^3.0.2",
     "eslint_d": "^12.2.1",
-    "intelephense": "^1.10.4",
+    "intelephense": "^1.11.5",
     "neovim": "^4.11.0",
-    "poor-mans-t-sql-formatter-cli": "^1.6.10",
     "quicktype": "^23.0.170",
-    "sass": "^1.77.5",
+    "sass": "^1.77.8",
     "stylelint": "^15.11.0",
     "stylelint-config-recommended": "^13.0.0",
     "svgo": "^3.3.2",
-    "typescript": "^5.4.5",
+    "typescript": "^5.5.3",
     "typescript-language-server": "^3.3.2",
     "vscode-langservers-extracted": "^4.10.0"
   },
