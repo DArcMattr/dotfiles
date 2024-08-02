@@ -282,12 +282,16 @@ local lazyvim_plugins = {
       local capabilities = cmp_lsp.default_capabilities()
 
       lspconfig.cssls.setup{}
+      lspconfig.gopls.setup{}
+      lspconfig.html.setup{}
 
       lspconfig.intelephense.setup {
         capabilities = capabilities,
         autostart = true,
         root_dir = lspconfig.util.root_pattern('.git', 'composer.json', 'index.php'),
       }
+
+      lspconfig.jsonls.setup{}
 
       lspconfig.lua_ls.setup {
         on_init = function(client)
@@ -321,6 +325,7 @@ local lazyvim_plugins = {
       }
 
       lspconfig.pylsp.setup {}
+      lspconfig.tsserver.setup {}
     end,
   },
   {
@@ -688,6 +693,7 @@ vim.api.nvim_create_autocmd('BufRead', {
         local ft = vim.bo[opts.buf].filetype
         local bt = vim.bo[opts.buf].buftype
         local last_known_line = vim.api.nvim_buf_get_mark(opts.buf, '"')[1]
+
         if
           not (ft:match('commit') and ft:match('rebase'))
           and not (bt:match('quickfix') and bt:match('nofile') and bt:match('help'))
@@ -698,6 +704,17 @@ vim.api.nvim_create_autocmd('BufRead', {
         end
       end,
     })
+  end,
+})
+
+vim.api.nvim_create_autocmd({'WinEnter','BufEnter','BufRead','FileType'}, {
+  callback = function()
+    local modifiable = vim.api.nvim_get_option_value('modifiable', { scope = 'local' })
+
+    if not(modifiable) then
+      vim.opt_local.scrolloff=999
+    end
+    vim.api.nvim_call_function('funcs#SetColorColumn', {})
   end,
 })
 
@@ -726,6 +743,7 @@ endif
 " from https://gist.github.com/tarruda/5158535
 " TODO: check if vim.env.TMUX != nil
 if exists('$TMUX')
+" if os.getenv('TMUX') ~= nill then
   nnoremap <silent> <C-w>j :call funcs#TmuxMove('j')<Cr>
   nnoremap <silent> <C-w>k :call funcs#TmuxMove('k')<Cr>
   nnoremap <silent> <C-w>h :call funcs#TmuxMove('h')<Cr>
@@ -765,11 +783,6 @@ augroup END
 
 augroup StartupStuffs
   autocmd!
-  autocmd WinEnter,BufEnter,BufRead,FileType *
-  \ if !&modifiable |
-  \   setlocal scrolloff=999 |
-  \ endif |
-  \ call funcs#SetColorColumn()
   autocmd TermOpen *
   \ setlocal nonumber norelativenumber |
   \ startinsert
@@ -780,3 +793,6 @@ augroup END
 vim.cmd.colorscheme('industry')
 vim.api.nvim_set_hl(0, 'CursorLine', { underline = true })
 vim.api.nvim_set_hl(0, 'CursorColumn', { })
+vim.api.nvim_set_hl(0, 'Normal', { bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#111111' })
+vim.api.nvim_set_hl(0, 'OverLength', { bg = '#111111' })
