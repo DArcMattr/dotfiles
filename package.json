@@ -5,14 +5,15 @@
   "dependencies": {
     "eslint-config-jquery": "^3.0.2",
     "eslint_d": "^12.2.1",
-    "intelephense": "^1.11.5",
+    "intelephense": "^1.11.8",
     "neovim": "^4.11.0",
+    "punycode": "^2.3.1",
     "quicktype": "^23.0.170",
     "sass": "^1.77.8",
     "stylelint": "^15.11.0",
     "stylelint-config-recommended": "^13.0.0",
     "svgo": "^3.3.2",
-    "typescript": "^5.5.3",
+    "typescript": "^5.5.4",
     "typescript-language-server": "^3.3.2",
     "vscode-langservers-extracted": "^4.10.0"
   },
