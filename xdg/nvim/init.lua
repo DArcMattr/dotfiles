@@ -107,7 +107,7 @@ local lazyvim_plugins = {
   {
     'hrsh7th/nvim-cmp',
     dependencies = {
-      -- 'delphinus/cmp-ctags',
+      'delphinus/cmp-ctags',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
@@ -271,7 +271,58 @@ local lazyvim_plugins = {
   },
   { 'mhinz/vim-signify' },
   { 'nathanaelkane/vim-indent-guides' },
-  { 'neovim/nvim-lspconfig' },
+  {
+    'neovim/nvim-lspconfig',
+    dependencies = {
+      { 'hrsh7th/cmp-nvim-lsp' },
+    },
+    config = function()
+      local lspconfig = require('lspconfig')
+      local cmp_lsp = require('cmp_nvim_lsp')
+      local capabilities = cmp_lsp.default_capabilities()
+
+      lspconfig.cssls.setup{}
+
+      lspconfig.intelephense.setup {
+        capabilities = capabilities,
+        autostart = true,
+        root_dir = lspconfig.util.root_pattern('.git', 'composer.json', 'index.php'),
+      }
+
+      lspconfig.lua_ls.setup {
+        on_init = function(client)
+          local path = client.workspace_folders[1].name
+          if not vim.loop.fs_stat(path..'/.luarc.json') and not vim.loop.fs_stat(path..'/.luarc.jsonc') then
+            client.config.settings = vim.tbl_deep_extend('force', client.config.settings, {
+              Lua = {
+                runtime = {
+                  -- Tell the language server which version of Lua you're using
+                  -- (most likely LuaJIT in the case of Neovim)
+                  version = 'LuaJIT'
+                },
+                -- Make the server aware of Neovim runtime files
+                workspace = {
+                  checkThirdParty = false,
+                  library = {
+                    vim.env.VIMRUNTIME
+                    -- "${3rd}/luv/library"
+                    -- "${3rd}/busted/library",
+                  }
+                  -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+                  -- library = vim.api.nvim_get_runtime_file("", true)
+                },
+              }
+            })
+
+            client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+          end
+          return true
+        end
+      }
+
+      lspconfig.pylsp.setup {}
+    end,
+  },
   {
     'nvim-lualine/lualine.nvim',
     opts = {
@@ -694,14 +745,6 @@ augroup CloseLocListWindowGroup
   autocmd QuitPre * if empty(&buftype) | lclose | endif
 augroup END
 
-augroup OmniFunc
-  autocmd!
-  autocmd FileType *
-  \ if &omnifunc == "" |
-  \   setlocal omnifunc=syntaxcomplete#Complete |
-  \ endif
-augroup END
-
 " update diffs aggressively
 " https://groups.google.com/forum/?fromgroups=#!topic/vim_use/ZNZcBAABDgE
 augroup AutoDiffUpdate
@@ -722,10 +765,6 @@ augroup END
 
 augroup StartupStuffs
   autocmd!
-  " autocmd BufReadPost *
-  " \ if line("'\"") > 1 && line("'\"") <= line("$") |
-  " \   execute "normal! g`\""                       |
-  " \ endif
   autocmd WinEnter,BufEnter,BufRead,FileType *
   \ if !&modifiable |
   \   setlocal scrolloff=999 |

@@ -1,9 +1,3 @@
-U.lspconfig.intelephense.setup {
-  capabilities = U.capabilities,
-  autostart = true,
-  root_dir = U.lspconfig.util.root_pattern('.git', 'composer.json', 'index.php'),
-}
-
 vim.opt_local.iskeyword:append {'$'}
 vim.opt_local.suffixesadd:append {'.php'}
 vim.opt.foldmarker = '-[[[-,-]]]-'
