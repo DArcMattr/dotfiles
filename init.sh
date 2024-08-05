@@ -23,10 +23,14 @@ find "${DOTFILES}/xdg/" -mindepth 1 -maxdepth 1 -type d -exec ln -sf "{}" "${DOT
 (
 	sudo corepack enable
 	corepack prepare pnpm@latest --activate
+	pnpm config set global-dir "${LOCAL}"
+	pnpm config set global-bin-dir "${LOCAL}/bin"
+	mkdir -p "$(dirname $(pnpm root --global))"
+	ln -s ~/dotfiles/package.json "$(dirname $(pnpm root --global))"
+	ln -s ~/dotfiles/pnpm-lock.yaml "$(dirname $(pnpm root --global))"
 	# pnpm env use latest
-	cd "${DOTFILES}"
-	pnpm install
-	ln -s "${DOTFILES}/node_modules" "${LOCAL}/lib"
+	cd
+	pnpm install --global
 )
 
 cd ~
