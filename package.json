@@ -1,9 +1,8 @@
 {
   "license": "MIT",
   "private": true,
-  "packageManager": "pnpm@8.15.4+sha256.cea6d0bdf2de3a0549582da3983c70c92ffc577ff4410cbf190817ddc35137c2",
+  "packageManager": "pnpm@8.15.9+sha512.499434c9d8fdd1a2794ebf4552b3b25c0a633abcee5bb15e7b5de90f32f47b513aca98cd5cfd001c31f0db454bc3804edccd578501e4ca293a6816166bbd9f81",
   "dependencies": {
-    "eslint-config-jquery": "^3.0.2",
     "eslint_d": "^12.2.1",
     "intelephense": "^1.11.8",
     "neovim": "^4.11.0",
@@ -11,16 +10,10 @@
     "quicktype": "^23.0.170",
     "sass": "^1.77.8",
     "stylelint": "^15.11.0",
-    "stylelint-config-recommended": "^13.0.0",
     "svgo": "^3.3.2",
     "typescript": "^5.5.4",
     "typescript-language-server": "^3.3.2",
     "vscode-langservers-extracted": "^4.10.0"
-  },
-  "stylelint": {
-    "extends": [
-      "stylelint-config-recommended"
-    ]
   },
   "version": "0.0.0"
 }
