@@ -113,6 +113,8 @@ superupdate() {
 /usr/bin/apt -y autoclean && \
 /usr/bin/apt -y autoremove && \
 /usr/bin/apt -y clean"
+  elif [ -z "$(pacman >/dev/null 2>&1)" ]; then
+    \sudo \sh -c "pacman -Syu && flatpak update -y && yay -Syu --devel --needed"
   elif [ -z "$(apt-get >/dev/null 2>&1)" ]; then
     \sudo \sh -c " \
       \apt-get update && \
