@@ -31,6 +31,7 @@ find "${DOTFILES}/xdg/" -mindepth 1 -maxdepth 1 -type d -exec ln -sf "{}" "${DOT
 	# pnpm env use latest
 	cd
 	pnpm install --global
+	pnpm completion zsh >! "${LOCAL}/share/share/site-functions/_pnpm"
 )
 
 cd ~
