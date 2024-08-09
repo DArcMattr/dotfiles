@@ -288,6 +288,25 @@ local lazyvim_plugins = {
       lspconfig.intelephense.setup {
         capabilities = capabilities,
         autostart = true,
+        settings = {
+          codeLens = {
+            references = {
+              enable = true
+            },
+            implementations = {
+              enable = true
+            },
+            usages = {
+              enable = true
+            },
+            overrides = {
+              enable = true
+            },
+            parent = {
+              enable = true
+            },
+          },
+        },
         root_dir = lspconfig.util.root_pattern('.git', 'composer.json', 'index.php'),
       }
 
