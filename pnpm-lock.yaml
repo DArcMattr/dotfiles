@@ -12,8 +12,8 @@ importers:
         specifier: ^12.2.1
         version: 12.2.1
       intelephense:
-        specifier: ^1.11.8
-        version: 1.11.8
+        specifier: ^1.12.2
+        version: 1.12.2
       neovim:
         specifier: ^4.11.0
         version: 4.11.0
@@ -858,8 +858,8 @@ packages:
   fn.name@1.1.0:
     resolution: {integrity: sha512-GRnmB5gPyJpAhTQdSZTSp9uaPSvl09KoYcMQtsB9rQoOmzs9dH6ffeccH+Z+cv6P68Hu5bC6JjRh4Ah/mHSNRw==}
 
-  foreground-child@3.2.1:
-    resolution: {integrity: sha512-PXUUyLqrR2XCWICfv6ukppP96sdFwWbNEnfEMt7jNsISjMsvaLNinAHNDYyvkyU+SZG2BTSbT5NjG+vZslfGTA==}
+  foreground-child@3.3.0:
+    resolution: {integrity: sha512-Ld2g8rrAyMYFXBhEqMz8ZAHBi4J4uS1i/CxGMDnjyFWddMXLVcDp051DZfu+t7+ab7Wv6SMqpWmyFIj5UbfFvg==}
     engines: {node: '>=14'}
 
   form-data@4.0.0:
@@ -1023,8 +1023,8 @@ packages:
   ini@1.3.8:
     resolution: {integrity: sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==}
 
-  intelephense@1.11.8:
-    resolution: {integrity: sha512-EPmfUfMHFrou/SEBrckZHiKHMOtLd3M+skkJyVLUGIWX8a5/b7/+Rb92aNo9OzgjhFU1R2lt3UumvpiKyrdPew==}
+  intelephense@1.12.2:
+    resolution: {integrity: sha512-lFsJyOoNd4jICQOaid9W+JIVLkWa5N9cDG4nLG9M9zEYyJbfF43O+LyMubmgtycO9MoGkzEREEE6utXA5FgkBg==}
     hasBin: true
 
   ip-address@9.0.5:
@@ -1395,8 +1395,8 @@ packages:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
     engines: {node: '>=4'}
 
-  postcss-resolve-nested-selector@0.1.4:
-    resolution: {integrity: sha512-R6vHqZWgVnTAPq0C+xjyHfEZqfIYboCBVSy24MjxEDm+tIh1BU4O6o7DP7AA7kHzf136d+Qc5duI4tlpHjixDw==}
+  postcss-resolve-nested-selector@0.1.5:
+    resolution: {integrity: sha512-tum2m18S22ZSNjXatMG0FSk5ZL83pTttymeJx5Gzxg7RU0s1jNDU9rXltro4osQrukjyNormcb07IEjqEyPNaA==}
 
   postcss-safe-parser@6.0.0:
     resolution: {integrity: sha512-FARHN8pwH+WiS2OPCxJI8FuRJpTVnn6ZNFiqAM2aeW2LwTHWWmWgIyKC6cUo0L8aeKiF/14MNvnpls6R2PBeMQ==}
@@ -1846,8 +1846,8 @@ packages:
   vscode-languageserver-protocol@3.17.5:
     resolution: {integrity: sha512-mb1bvRJN8SVznADSGWM9u/b07H7Ecg0I3OgXDuLdn307rl/J3A9YD6/eYOssqhecL27hK1IPZAsaqh00i/Jljg==}
 
-  vscode-languageserver-protocol@3.17.6-next.8:
-    resolution: {integrity: sha512-knhdgXFpi00BLG2tE/UuyQ4mW7LpYl+g75W+ne/+1gKgXdwRzgJw28hWzoLEcf48EWjsQKrsS9xzkZGk2TTsfQ==}
+  vscode-languageserver-protocol@3.17.6-next.9:
+    resolution: {integrity: sha512-p4ddqAZa55xzkowM1zpMcQzAh0E1cUWBnQtr6lsXEJ4QupixMVWe53F9vbLbXCN6R/K5uNUaa861c2yS3tcEFw==}
 
   vscode-languageserver-textdocument@1.0.12:
     resolution: {integrity: sha512-cxWNPesCnQCcMPeenjKKsOCKQZ/L6Tv19DTRIGuLWe32lyzWhihGVJ/rcckZXJxfdKCFvRLS3fpBIsV/ZGX4zA==}
@@ -1858,8 +1858,8 @@ packages:
   vscode-languageserver-types@3.17.6-next.5:
     resolution: {integrity: sha512-QFmf3Yl1tCgUQfA77N9Me/LXldJXkIVypQbty2rJ1DNHQkC+iwvm4Z2tXg9czSwlhvv0pD4pbF5mT7WhAglolw==}
 
-  vscode-languageserver@10.0.0-next.8:
-    resolution: {integrity: sha512-p5Nb4zYRPEr0xmTzZXDqkxbMnDFiF+CEyZ4o26mji53QNyE6E2sGmWBz5HDnq2wDA30zkHIlKuEagHt8j2bmJA==}
+  vscode-languageserver@10.0.0-next.9:
+    resolution: {integrity: sha512-6Mlk4juL8/CS35Jan81aqMeWNHxDunobVyp3o/cJPqsEWC2nJNJ56OM7PbWIUXYSCcuGHhbV1WUTIXsUlcO7IA==}
     hasBin: true
 
   vscode-languageserver@9.0.1:
@@ -2823,7 +2823,7 @@ snapshots:
 
   fn.name@1.1.0: {}
 
-  foreground-child@3.2.1:
+  foreground-child@3.3.0:
     dependencies:
       cross-spawn: 7.0.3
       signal-exit: 4.1.0
@@ -2868,7 +2868,7 @@ snapshots:
 
   glob@10.4.5:
     dependencies:
-      foreground-child: 3.2.1
+      foreground-child: 3.3.0
       jackspeak: 3.4.3
       minimatch: 9.0.5
       minipass: 7.1.2
@@ -3012,7 +3012,7 @@ snapshots:
 
   ini@1.3.8: {}
 
-  intelephense@1.11.8:
+  intelephense@1.12.2:
     dependencies:
       '@bmewburn/js-beautify': 1.15.2
       '@bmewburn/vscode-html-languageserver': 1.11.0
@@ -3361,7 +3361,7 @@ snapshots:
 
   pluralize@8.0.0: {}
 
-  postcss-resolve-nested-selector@0.1.4: {}
+  postcss-resolve-nested-selector@0.1.5: {}
 
   postcss-safe-parser@6.0.0(postcss@8.4.41):
     dependencies:
@@ -3706,7 +3706,7 @@ snapshots:
       normalize-path: 3.0.0
       picocolors: 1.0.1
       postcss: 8.4.41
-      postcss-resolve-nested-selector: 0.1.4
+      postcss-resolve-nested-selector: 0.1.5
       postcss-safe-parser: 6.0.0(postcss@8.4.41)
       postcss-selector-parser: 6.1.1
       postcss-value-parser: 4.2.0
@@ -3902,7 +3902,7 @@ snapshots:
       vscode-css-languageservice: 6.3.0
       vscode-html-languageservice: 5.3.0
       vscode-json-languageservice: 5.4.0
-      vscode-languageserver: 10.0.0-next.8
+      vscode-languageserver: 10.0.0-next.9
       vscode-languageserver-textdocument: 1.0.12
       vscode-languageserver-types: 3.17.5
       vscode-markdown-languageservice: 0.5.0-alpha.7
@@ -3914,7 +3914,7 @@ snapshots:
       vscode-jsonrpc: 8.2.0
       vscode-languageserver-types: 3.17.5
 
-  vscode-languageserver-protocol@3.17.6-next.8:
+  vscode-languageserver-protocol@3.17.6-next.9:
     dependencies:
       vscode-jsonrpc: 9.0.0-next.5
       vscode-languageserver-types: 3.17.6-next.5
@@ -3925,9 +3925,9 @@ snapshots:
 
   vscode-languageserver-types@3.17.6-next.5: {}
 
-  vscode-languageserver@10.0.0-next.8:
+  vscode-languageserver@10.0.0-next.9:
     dependencies:
-      vscode-languageserver-protocol: 3.17.6-next.8
+      vscode-languageserver-protocol: 3.17.6-next.9
 
   vscode-languageserver@9.0.1:
     dependencies:
