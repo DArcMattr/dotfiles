@@ -51,8 +51,8 @@ sudo apt install autossh bison build-essential clang-17 clang-17-doc \
   php-common php-gd php-imagick php-mbstring php-memcache php-pear php-xdebug \
   php-xml php-zip php8.3-cli php8.3-curl php8.3-dev php8.3-fpm php8.3-imap \
   php8.3-mysql php8.3-opcache php8.3-readline php8.3-soap php8.3-sqlite3 \
-  php8.3-xml pv python-is-python3 python3-clang-17 python3-dev ruby-dev \
-  shellcheck sqlcmd tidy wget wslu xcape xsel zlib1g-dev zsh
+  php8.3-xml pv python-is-python3 python3-clang-17 python3-dev python3-venv \
+  ruby-dev shellcheck sqlcmd tidy wget wslu xcape xsel zlib1g-dev zsh
 
 git clone https://github.com/darcmattr/dotfiles ~/dotfiles
 sh ~/dotfiles/helpers/debianish-update-alternatives.sh
