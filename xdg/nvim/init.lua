@@ -14,6 +14,20 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.filetype.add {
+  extension = {
+    zsh = 'sh',
+    sh = 'sh',
+  },
+  filename = {
+    ['.zshrc'] = "sh",
+    ['.zshenv'] = "sh",
+    ['.zprofile'] = "sh",
+    ['.in'] = "sh",
+    ['.out'] = "sh",
+  },
+}
+
 vim.g.c_space_errors = 1
 vim.g.editorconfig_enable = true
 vim.g.indent_guides_enable_on_vim_startup = 1
@@ -281,6 +295,7 @@ local lazyvim_plugins = {
       local cmp_lsp = require('cmp_nvim_lsp')
       local capabilities = cmp_lsp.default_capabilities()
 
+      lspconfig.bashls.setup{}
       lspconfig.cssls.setup{}
       lspconfig.gopls.setup{}
       lspconfig.html.setup{}

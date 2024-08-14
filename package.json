@@ -3,8 +3,9 @@
   "private": true,
   "packageManager": "pnpm@8.15.9+sha512.499434c9d8fdd1a2794ebf4552b3b25c0a633abcee5bb15e7b5de90f32f47b513aca98cd5cfd001c31f0db454bc3804edccd578501e4ca293a6816166bbd9f81",
   "dependencies": {
+    "bash-language-server": "^5.4.0",
     "eslint_d": "^12.2.1",
-    "intelephense": "^1.12.2",
+    "intelephense": "^1.12.3",
     "neovim": "^4.11.0",
     "punycode": "^2.3.1",
     "quicktype": "^23.0.170",
