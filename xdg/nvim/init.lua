@@ -292,8 +292,6 @@ local lazyvim_plugins = {
     },
     config = function()
       local lspconfig = require('lspconfig')
-      local cmp_lsp = require('cmp_nvim_lsp')
-      local capabilities = cmp_lsp.default_capabilities()
 
       lspconfig.bashls.setup{}
       lspconfig.cssls.setup{}
@@ -301,7 +299,7 @@ local lazyvim_plugins = {
       lspconfig.html.setup{}
 
       lspconfig.intelephense.setup {
-        capabilities = capabilities,
+        capabilities = require('cmp_nvim_lsp').default_capabilities(),
         autostart = true,
         settings = {
           codeLens = {
