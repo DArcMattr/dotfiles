@@ -1,4 +1,3 @@
-node_modules/
 symlinks/.pandoc/buttondown.css
 symlinks/.pandoc/buttondown.css.map
 symlinks/.ssh/*.pem
