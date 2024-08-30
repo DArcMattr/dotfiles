@@ -102,6 +102,7 @@ grab_pips() {
     'hg-git'
     'httpie'
     'icdiff'
+    'marimo'
     'mercurial'
     'msgpack'
     'mycli'
