@@ -9,3 +9,5 @@ superupdate_local() {
   rehash
   nvim --cmd "autocmd user LazyVimStarted lua require('lazy').sync()"
 }
+
+export PAGER=nvimpager
