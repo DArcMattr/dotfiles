@@ -107,7 +107,7 @@ grab_pips() {
     'mycli'
     'neovim-remote'
     'pip'
-    'git+https://github.com/powerline/powerline.git@2.8.3'
+    'git+https://github.com/powerline/powerline.git@2.8.4'
     'psutil'
     'pyemojify'
     'pynvim'
