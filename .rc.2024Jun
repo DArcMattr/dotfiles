@@ -11,3 +11,4 @@ superupdate_local() {
 }
 
 export PAGER=nvimpager
+tmuxt

@@ -1,6 +1,8 @@
 #!/usr/bin/env zsh
 
 # tmuxt() {
+  [[ -z "$TMUX" ]] || return 1
+
   local SESSION="$(echo "${USER}" | sed -e 's/[\. ]/_/g')"
 
   if tmux has-session -t "${SESSION}" >/dev/null 2>&1; then
