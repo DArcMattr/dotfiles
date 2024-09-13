@@ -196,7 +196,7 @@ local lazyvim_plugins = {
   {
     'mfussenegger/nvim-dap',
     dependencies = {
-      {
+       {
         'theHamsta/nvim-dap-virtual-text',
         config = function()
           require('nvim-dap-virtual-text').setup()
@@ -358,7 +358,7 @@ local lazyvim_plugins = {
       }
 
       lspconfig.pylsp.setup {}
-      lspconfig.tsserver.setup {}
+      lspconfig.ts_ls.setup {}
     end,
   },
   {
