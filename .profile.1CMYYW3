@@ -9,7 +9,7 @@ alias webgrind='php -S 0.0.0.0:8080 /var/www/vhosts/webgrind/index.php'
 superupdate_local() {
   (cd ~/contrib/neovim && \
     git up && \
-    rm -rf ~/.local/share/nvim/runtime && \
+    rm -rf ~/.local/share/nvim/runtime ./.deps ./build && \
     make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX="${LOCAL}" install clean)
   rehash
   nvim --cmd "autocmd user LazyVimStarted lua require('lazy').sync()"
