@@ -51,6 +51,7 @@ local lazyvim_plugins = {
           'c_sharp',
           'css',
           'diff',
+          'gitcommit',
           'go',
           'gomod',
           'gowork',
@@ -237,6 +238,7 @@ local lazyvim_plugins = {
       dap.listeners.after.event_exited['dapui_config']      = dapui.close
 
       dapui.setup({
+        icons = { expanded = "▾", collapsed = "▸", current_frame = "»" },
         layouts = {
             {
               elements = {
