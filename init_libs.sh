@@ -48,7 +48,6 @@ grab_go() {
 
   # bootstrap
   if (( ${+VERSION} )); then
-    go install "golang.org/dl/${VERSION}@latest"
     "${go_bin}/${VERSION}" download
 
     ln -sf "${HOME}/go/bin/${VERSION}" "${HOME}/.local/bin/go"
