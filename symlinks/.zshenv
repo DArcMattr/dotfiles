@@ -20,7 +20,7 @@ if (( $+commands[clang] && $+commands[clang++] )); then
 fi
 
 # Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath gobin mailpath manpath path perl5lib perl_local_lib_root
+typeset -gU cdpath fpath gobin gopath mailpath manpath path perl5lib perl_local_lib_root
 
 if which ruby >/dev/null && which gem >/dev/null; then
   gem_path="$(ruby -e 'puts Gem.user_dir')/bin"
@@ -31,8 +31,10 @@ if [[ -x "${LOCAL}/bin/composer" || $(which composer >/dev/null 2>&1) ]]; then
 fi
 
 if [[ -x "${HOME}/go/bin" ]]; then
-  export GOPATH=${HOME}/go
-  gobin="${GOPATH}/bin"
+  gopath="${HOME}/go"
+  gobin="${gopath}/bin"
+  export GOPATH="${gopath}"
+  export GOBIN="${gobin}"
 fi
 
 if [[ -x "${HOME}/.cargo/bin" || $(which rustc >/dev/null 2>&1) ]]; then
