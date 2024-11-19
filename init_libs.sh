@@ -3,6 +3,7 @@
 # chicken & egg time here, relies on system version of go to bootstrap
 grab_go() {
   new_version=$(http 'https://go.dev/dl/?mode=json&include=all' | jq '.[0].version' | sed 's#"##g')
+  go_bin="$(go env GOBIN)"
   printf "Remote version is %s, installed version is %s\n" "${new_version}" "$(go version)"
   pkgs=(
     'filippo.io/mkcert'
@@ -48,9 +49,10 @@ grab_go() {
 
   # bootstrap
   if (( ${+VERSION} )); then
+    go install golang.org/dl/go${VERSION}@latest
     "${go_bin}/${VERSION}" download
 
-    ln -sf "${HOME}/go/bin/${VERSION}" "${HOME}/.local/bin/go"
+    ln -sf "${go_bin}/${VERSION}" "${HOME}/.local/bin/go"
   fi
 
   for i in $pkgs; do
