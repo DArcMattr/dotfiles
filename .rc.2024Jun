@@ -10,5 +10,12 @@ superupdate_local() {
   nvim --cmd "autocmd user LazyVimStarted lua require('lazy').sync()"
 }
 
+iphone_share() {
+  systemctl start avahi-daemon
+  echo "avahi-deamon service is started"
+  echo "uxplay is starting..." | boxes -d stone
+  xset s off -dpms && uxplay
+}
+
 export PAGER=nvimpager
 tmuxt
