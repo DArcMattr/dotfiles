@@ -50,9 +50,9 @@ grab_go() {
   # bootstrap
   if (( ${+VERSION} )); then
     go install golang.org/dl/go${VERSION}@latest
-    "${go_bin}/${VERSION}" download
+    "${go_bin}/go${VERSION}" download
 
-    ln -sf "${go_bin}/${VERSION}" "${HOME}/.local/bin/go"
+    ln -sf "${go_bin}/go${VERSION}" "${HOME}/.local/bin/go"
   fi
 
   for i in $pkgs; do
