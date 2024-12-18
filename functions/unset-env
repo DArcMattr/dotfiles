@@ -1,0 +1,21 @@
+#!/usr/bin/env zsh
+# @url https://gist.github.com/bulletinmybeard/d1bd0f479776689061f1238c645a69cb
+
+# unset-env() {
+    if [[ -f $1 ]]; then
+        echo "Environment file '$1' found. Unsetting variables..."
+        while IFS= read -r line || [[ -n $line ]]; do
+            var="${line%%=*}"
+            if [[ -n $var && $var != \#* ]]; then
+                if printenv | grep -q "^$var="; then
+                    echo "Unsetting $var"
+                    unset $var
+                else
+                    echo "$var is not set or already unset."
+                fi
+            fi
+        done < <(grep -Ev "^(#|$)" $1)
+    else
+        echo "Environment file '$1' not found."
+    fi
+# }

@@ -59,7 +59,7 @@ setopt pushd_ignore_dups
 bindkey -v
 
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
-autoload -Uz compinit tmuxt
+autoload -Uz compinit tmuxt set-env unset-env
 compinit
 
 umask 002

@@ -1,0 +1,20 @@
+#!/usr/bin/env zsh
+# @url https://gist.github.com/bulletinmybeard/d1bd0f479776689061f1238c645a69cb
+
+# set-env() {
+    if [[ -f $1 ]]; then
+        echo "Environment file '$1' found. Setting variables..."
+        while IFS='=' read -r var value || [[ -n $value ]]; do
+            if [[ -n $var && -n $value && $var != \#* ]]; then
+                if printenv | grep -q "^$var="; then
+                    echo "$var is already set. Overwriting..."
+                else
+                    echo "Setting $var"
+                fi
+                export "$var=$value"
+            fi
+        done < $1
+    else
+        echo "Environment file '$1' not found."
+    fi
+# }
