@@ -89,6 +89,16 @@ Which installs the `kotlinc` compiler and `kotlinc-jvm` REPL utility.
 
 ### WSL/Windows stuffs
 
+```
+#!/bin/sh
+(cd wslu && git up && make DESTDIR="${HOME}" PREFIX="${HOME}/.local" all install)
+(cd jq && git up && ./configure --prefix="${LOCAL}" --with-onigurama=builtin && make install-binaries clean)
+(cd raylib && git up ; make PLATFORM=PLATFORM_DESKTOP ; make ROOT=root DESTDIR="${LOCAL}" install clean )
+# (cd neovim && git up && make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX="${LOCAL}" all install distclean)
+(cd vscode-js-debug && git up && npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out )
+(cd vscode-php-debug && git up && npm install --legacy-peer-deps && npm run build )
+```
+
 #### Powershell on Windows
 
 Install Chocolatey and activate winget [TODO]
@@ -153,10 +163,14 @@ out of local configuration files.
 An example
 
 ```sh
-mysql_config_editor set --login-path=local --host=127.0.0.1 --user=db_user --password
+mysql_config_editor set --login-path=local --host=127.0.0.1 --user=<db_user> --password
 ```
 
 ### Notes for Keyboard Mapping for laptops
+
+I have a keyboard where I can edit the keymaps through its own firmware, so this
+following section is only here for historical purposes. I might even delete it
+and rely on source history to refer to it. 
 
 Now that I have a fancy keyboard with its own stored keymapping, I no longer
 have to work around the mapping dance between escape/control/capslock. But for
