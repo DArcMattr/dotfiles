@@ -1,5 +1,5 @@
 if exists('g:fvim_loaded')
-  set guifont=Delugia:h13
+  set guifont=Delugia:h12
 
   FVimCustomTitleBar v:true
   FVimFontAutoSnap v:true

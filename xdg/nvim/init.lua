@@ -207,7 +207,12 @@ local lazyvim_plugins = {
       },
       {
         'rcarriga/nvim-dap-ui',
-        dependencies = { 'nvim-neotest/nvim-nio' }
+        dependencies = {
+          'nvim-neotest/nvim-nio',
+        },
+        requires = {
+          'mfussenegger/nvim-dap',
+        },
       },
     },
     keys = function()
@@ -531,7 +536,7 @@ vim.keymap.set('n', '<C-e>',          '3<C-e>')
 vim.keymap.set('n', '<C-u>',          '<C-u>zz')
 vim.keymap.set('n', '<C-y>',          '3<C-y>')
 vim.keymap.set('n', '<Leader><S-b>',  'gUiw')
-vim.keymap.set('n', '<F19>',   function() vim.opt.spell = not(vim.opt.spell:get())  end, { silent = true })
+vim.keymap.set('n', '<S-F7>',   function() vim.opt.spell = not(vim.opt.spell:get())  end, { silent = true })
 vim.keymap.set('n', '<Leader>[',      vim.diagnostic.goto_prev)
 vim.keymap.set('n', '<Leader>]',      vim.diagnostic.goto_next)
 vim.keymap.set('n', '<Leader>a',      function() vim.opt.relativenumber = not(vim.opt.relativenumber:get()) end)
@@ -545,7 +550,7 @@ vim.keymap.set('n', '<Leader>gs',     ':Git<Cr>')
 vim.keymap.set('n', '<Leader>il',     vim.diagnostic.setloclist)
 vim.keymap.set('n', '<Leader>io',     vim.diagnostic.open_float)
 vim.keymap.set('n', '<Leader>o',      'i<Cr><Esc>')
-vim.keymap.set('n', '<Leader>q',      '<Cmd>nohlsearch<Cr>')
+-- vim.keymap.set('n', '<Leader>q',      '<Cmd>nohlsearch<Cr>')
 vim.keymap.set('n', '<Leader>t',      ':enew<Cr>')
 vim.keymap.set('n', '<Left>',         ':bp<Cr>')
 vim.keymap.set('n', '<M-i>',          'i<Space><Esc>')
