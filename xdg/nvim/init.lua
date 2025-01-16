@@ -432,14 +432,14 @@ vim.opt.autoread        = true
 vim.opt.background      = 'dark'
 vim.opt.backspace       = { 'indent', 'eol', 'start' }
 vim.opt.bomb            = false
-vim.opt.cinoptions      = { 't0','+4','(4','u4','w1' }
+vim.opt.cinoptions      = { 't0', '+4', '(4', 'u4', 'w1' }
 vim.opt.colorcolumn     = '+1'
 vim.opt.completeopt     = { 'menuone', 'longest' }
 vim.opt.copyindent      = true
 vim.opt.cursorcolumn    = true
 vim.opt.cursorline      = true
 vim.opt.cursorlineopt   = 'both'
-vim.opt.diffopt         = 'filler,vertical,internal,indent-heuristic,algorithm:patience'
+vim.opt.diffopt         = { 'filler', 'vertical', 'internal', 'indent-heuristic', 'algorithm:patience' }
 vim.opt.display         = 'lastline'
 vim.opt.encoding        = 'utf-8'
 vim.opt.expandtab       = true
@@ -454,7 +454,7 @@ vim.opt.joinspaces      = false
 vim.opt.laststatus      = 2
 vim.opt.lazyredraw      = true
 vim.opt.list            = true
-vim.opt.listchars       = 'eol:↲,precedes:«,extends:»,trail:·,tab:▸·,nbsp:¯'
+vim.opt.listchars       = { eol='↲', precedes='«', extends='»', trail='·', tab='▸·', nbsp='¯' }
 vim.opt.matchtime       = 5
 vim.opt.modeline        = true
 vim.opt.mouse           = 'a'
@@ -803,24 +803,6 @@ endif
 augroup CloseLocListWindowGroup
   autocmd!
   autocmd QuitPre * if empty(&buftype) | lclose | endif
-augroup END
-
-" update diffs aggressively
-" https://groups.google.com/forum/?fromgroups=#!topic/vim_use/ZNZcBAABDgE
-augroup AutoDiffUpdate
-  autocmd!
-  autocmd FilterWritePre * call funcs#SetDiffColors()
-  autocmd InsertLeave *
-  \ if &diff |
-  \   diffupdate |
-  \   let b:old_changedtick = b:changedtick |
-  \ endif
-  autocmd CursorHold *
-  \ if &diff &&
-  \     (!exists('b:old_changedtick') || b:old_changedtick != b:changedtick) |
-  \   let b:old_changedtick = b:changedtick |
-  \     diffupdate |
-  \ endif
 augroup END
 
 augroup StartupStuffs
