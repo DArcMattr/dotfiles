@@ -125,19 +125,19 @@ grab_pips() {
   #pip3 freeze --user | grep -v '^\-e' | cut -d = -f 1 | \
   #  xargs -n1 pip3 install -U --user
 
-  if [ ! -d "${config_home}/powerline" ]; then
-    mkdir -p "${config_home}/powerline"
-  fi
-
-  powerline_path="$(dirname "$(python3 -c 'import powerline; print (powerline.__file__)')")"
-
-  rsync -a "${powerline_path}/config_files/" "${config_home}/powerline"
-
-  if [ ! -f "${config_home}/powerline/powerline.conf" ]; then
-    ln -s \
-      "${powerline_path}/bindings/tmux/powerline.conf" \
-      "${config_home}/powerline/powerline.conf"
-  fi
+  # if [ ! -d "${config_home}/powerline" ]; then
+  #   mkdir -p "${config_home}/powerline"
+  # fi
+  #
+  # powerline_path="$(dirname "$(python3 -c 'import powerline; print (powerline.__file__)')")"
+  #
+  # rsync -a "${powerline_path}/config_files/" "${config_home}/powerline"
+  #
+  # if [ ! -f "${config_home}/powerline/powerline.conf" ]; then
+  #   ln -s \
+  #     "${powerline_path}/bindings/tmux/powerline.conf" \
+  #     "${config_home}/powerline/powerline.conf"
+  # fi
 }
 
 grab_composer() {
