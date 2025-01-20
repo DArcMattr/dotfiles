@@ -1,19 +1,5 @@
 local LocalPHP = vim.api.nvim_create_augroup('LocalPHP', { clear = true })
 
-U.lspconfig.intelephense.setup {
-    settings = {
-        intelephense = {
-            environment = { version = "8.1.0" },
-        }
-    }
-}
---[[
-vim.lsp.start({
-    name = 'php',
-    cmd =
-})
---]]
-
 U.dap.configurations.php = {
   {
     name = 'Listen for Xdebug',
@@ -23,40 +9,43 @@ U.dap.configurations.php = {
     -- log = true,
     hostname = "0.0.0.0",
     pathMappings = {
-      ["/var/www/html/"] = "${workspaceFolder}/",
+      ["/var/www/html/"] = "${workspaceFolder}/app/",
     }
   }
 }
 
-vim.env.PROJECT_ROOT = vim.fs.dirname(
-    vim.fs.find('composer.json', { upward = true })[1]
-)
+U.dap.configurations.javascript = {
+    {
+        type = "pwa-node",
+        request = "launch",
+        program = "${file}"
+    }
+}
 
-vim.g.php_version_id = 80100
+vim.g.php_version_id = 80300
 vim.opt.textwidth = 90
 vim.opt.includeexpr = vim.fn.substitute(vim.v.fname, '^/', '', '')
 
-vim.api.nvim_create_autocmd({'BufNewFile', 'BufEnter'}, {
+vim.api.nvim_create_autocmd({'BufNewFile', 'BufEnter', 'BufWinEnter'}, {
     pattern = '*',
     group = LocalPHP,
     callback = function(ev)
-        vim.opt.path = { '.', vim.env.PROJECT_ROOT }
+        vim.opt.path = { '.', vim.lsp.buf.list_workspace_folders()[1] }
     end
 })
 
-vim.api.nvim_create_autocmd({'BufNewFile', 'BufEnter'}, {
+vim.api.nvim_create_autocmd({'LspAttach'}, {
     pattern = '*.php',
     group = LocalPHP,
     callback = function(ev)
-        vim.opt.tags = { vim.env.PROJECT_ROOT .. '/php.tags' }
-        vim.opt.foldmarker = '-[[[-,-]]]-'
+        vim.opt.tags:append { vim.lsp.buf.list_workspace_folders()[1] .. '/php.tags' }
     end
 })
 
-vim.api.nvim_create_autocmd({'BufNewFile', 'BufEnter'}, {
+vim.api.nvim_create_autocmd({'LspAttach'}, {
     pattern = '*.js',
     group = LocalPHP,
     callback = function(ev)
-        vim.opt.tags = { vim.env.PROJECT_ROOT .. '/js.tags' }
+        vim.opt.tags:append { vim.lsp.buf.list_workspace_folders()[1] .. '/js.tags' }
     end
 })
