@@ -197,6 +197,11 @@ local lazyvim_plugins = {
   { 'jeffkreeftmeijer/vim-numbertoggle' },
   { 'mattn/emmet-vim' },
   {
+    'hat0uma/csvview.nvim', config = function()
+      require('csvview').setup()
+    end
+  },
+  {
     'mfussenegger/nvim-dap',
     dependencies = {
        {
@@ -402,7 +407,6 @@ local lazyvim_plugins = {
   { 'tpope/vim-repeat' },
   { 'tpope/vim-surround' },
   { 'vim-scripts/DirDiff.vim' },
-  { 'vim-scripts/csv.vim' },
   {
     'windwp/nvim-autopairs',
     config = function()
