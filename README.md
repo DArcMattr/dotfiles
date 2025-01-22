@@ -105,6 +105,13 @@ Install Chocolatey and activate winget [TODO]
 
 Install current Powershell v7 through Windows Store
 
+```powershell
+winget install JanDeDobbeleer.OhMyPosh -s winget
+Get-PoshThemes
+Install-Module PSReadline
+. $PROFILE
+```
+
 Contents of `$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`, can edit it by `notepad $PROFILE`.
 
 ```powershell
@@ -116,13 +123,6 @@ if ($host.Name -eq 'ConsoleHost') {
 }
 ```
 Once the profile is set up, run the following commands in a Powershell prompt:
-
-```powershell
-winget install JanDeDobbeleer.OhMyPosh
-Get-PoshThemes
-Install-Module PSReadline
-. $PROFILE
-```
 
 Update by `Update-Module` for PSReadline, and
 `winget upgrade JanDeDobbeleer.OhMyPosh`
@@ -137,16 +137,6 @@ Make file named `fvim.cmd`:
 @echo off
 wsl /mnt/c/tools/fvim/fvim.exe --wsl "$(wslpath %1)" &
 ```
-
-#### Configure CAPSLOCK
-
-Manually install https://github.com/ililim/dual-key-remap in order to get the
-same "tap CAPSLOCK for Escape, press for Control" behavior that exists in the
-Unix-like configuration. Use [Winaero Tweaker](https://winaerotweaker.com) to
-make an "Elevated Shortcut" for the program and place it in the Startup folder
-so the remapping can work in Admin mode shells. 
-
-In Unix-like environments `xcape` provides that functionality.
 
 ### Self-signed certificates
 
@@ -221,3 +211,13 @@ section in the file `/usr/share/X11/xkb/rules/evdev`, and append
 to the end of `/usr/share/X11/xkb/symbols/evdev.lst`, then using `dconf editor`,
 I had to add `'speshul:speshul'` to the **Custom value** field array to
 `/org/gnome/desktop/input-sources/xkb-options`. (ugh).
+
+#### Configure CAPSLOCK
+
+Manually install https://github.com/ililim/dual-key-remap in order to get the
+same "tap CAPSLOCK for Escape, press for Control" behavior that exists in the
+Unix-like configuration. Use [Winaero Tweaker](https://winaerotweaker.com) to
+make an "Elevated Shortcut" for the program and place it in the Startup folder
+so the remapping can work in Admin mode shells. 
+
+In Unix-like environments `xcape` provides that functionality.
