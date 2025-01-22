@@ -6,3 +6,6 @@ sssh() {
 }
 
 [[ ! -r /home/darc/.opam/opam-init/init.zsh ]] || source /home/darc/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+# bun completions
+[ -s "/home/darc/.local/_bun" ] && source "/home/darc/.local/_bun"
