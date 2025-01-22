@@ -7,6 +7,7 @@ symlinks/.ssh/id_rsa*
 symlinks/.ssh/known_hosts
 symlinks/.ssh/sockets/
 symlinks/.ssh/vagrant_*
+symlinks/.ssh/hosts/work.ssh
 xdg/composer/.htaccess
 xdg/composer/auth.json
 xdg/composer/keys.dev.pub
