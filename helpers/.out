@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+PATH="${OLDPATH}"
+unset OLDPATH
+unalias sample_alias
+
+unfunction sample_function

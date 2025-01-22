@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+OLDPATH=${PATH}
+PATH="${0:A:h}/sample/bin:${PATH}"
+
+alias sample_alias='ls -Al'
+
+function sample_function {
+	# sample function stuff here
+}
