@@ -34,24 +34,24 @@ curl -sS "https://packages.microsoft.com/keys/microsoft.asc" | \
 sudo add-apt-repository \
   "deb http://nginx.org/packages/mainline/ubuntu ${REL} nginx"
 sudo add-apt-repository \
-  "deb http://apt.llvm.org/${REL}/ llvm-toolchain-${REL}-17 main"
+  "deb http://apt.llvm.org/${REL}/ llvm-toolchain-${REL}-18 main"
 sudo add-apt-repository \
-    "$(wget -qO- https://packages.microsoft.com/config/ubuntu/22.04/prod.list)" # XXX
-sudo apt install autossh bison build-essential clang-17 clang-17-doc \
-  clang-format-17 clang-tidy-17 clang-tools-17 clangd-17 cmake flex fswatch git \
-  git-extras golang htop jq libc++-17-dev-wasm32 libc++abi-17-dev-wasm32 \
-  libclang-17-dev libclang-common-17-dev libclang-rt-17-dev \
-  libclang-rt-17-dev-wasm32 libclang-rt-17-dev-wasm32 \
-  libclang-rt-17-dev-wasm64 libclang-rt-17-dev-wasm64 libclang1-17 \
-  libevent-dev libfuzzer-17-dev libgit2-dev libjansson-dev \
-  libllvm-17-ocaml-dev libllvm16 liblua5.3-dev liblzma-dev libncurses5-dev \
-  libnss3-tools libomp-17-dev libpcre3-dev libsqlite3-dev libssh2-1-dev \
-  libssl-dev libxml2-dev libyaml-dev lld-17 lldb-17 llvm-17 llvm-17-dev \
-  llvm-17-doc llvm-17-examples llvm-17-runtime lsyncd neovim nginx nodejs \
+    "$(wget -qO- https://packages.microsoft.com/config/ubuntu/24.04/prod.list)" # XXX
+sudo apt install autossh bison build-essential clang-18 clang-18-doc \
+  clang-format-18 clang-tidy-18 clang-tools-18 clangd-18 cmake flex fswatch git \
+  git-extras golang htop jq libc++-18-dev-wasm32 libc++abi-18-dev-wasm32 \
+  libclang-18-dev libclang-common-18-dev libclang-rt-18-dev \
+  libclang-rt-18-dev-wasm32 libclang-rt-18-dev-wasm32 \
+  libclang-rt-18-dev-wasm64 libclang-rt-18-dev-wasm64 libclang1-18 \
+  libevent-dev libfuzzer-18-dev libgit2-dev libjansson-dev \
+  libllvm-18-ocaml-dev libllvm16 liblua5.3-dev liblzma-dev libncurses5-dev \
+  libnss3-tools libomp-18-dev libpcre3-dev libsqlite3-dev libssh2-1-dev \
+  libssl-dev libxml2-dev libyaml-dev lld-18 lldb-18 llvm-18 llvm-18-dev \
+  llvm-18-doc llvm-18-examples llvm-18-runtime lsyncd neovim nginx nodejs \
   php-common php-gd php-imagick php-mbstring php-memcache php-pear php-xdebug \
-  php-xml php-zip php8.3-cli php8.3-curl php8.3-dev php8.3-fpm php8.3-imap \
-  php8.3-mysql php8.3-opcache php8.3-readline php8.3-soap php8.3-sqlite3 \
-  php8.3-xml pv python-is-python3 python3-clang-17 python3-dev python3-venv \
+  php-xml php-zip php8.4-cli php8.4-curl php8.4-dev php8.4-fpm php8.4-imap \
+  php8.4-mysql php8.4-opcache php8.4-readline php8.4-soap php8.4-sqlite3 \
+  php8.4-xml pv python-is-python3 python3-clang-18 python3-dev python3-venv \
   ruby-dev shellcheck sqlcmd tidy wget wslu xcape xsel zlib1g-dev zsh
 
 git clone https://github.com/darcmattr/dotfiles ~/dotfiles
