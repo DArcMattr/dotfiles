@@ -9,3 +9,7 @@ sssh() {
 
 # bun completions
 [ -s "/home/darc/.local/_bun" ] && source "/home/darc/.local/_bun"
+
+if [ -z "$TMUX" ]; then
+  tmuxt
+fi

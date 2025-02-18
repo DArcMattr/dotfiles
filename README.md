@@ -99,6 +99,11 @@ Which installs the `kotlinc` compiler and `kotlinc-jvm` REPL utility.
 (cd vscode-php-debug && git up && npm install --legacy-peer-deps && npm run build )
 ```
 
+Create a desktop shortcut, with Properties: Target
+```
+C:\Windows\System32\wsl.exe -e zsh -lic "nohup wezterm &"
+```
+
 #### Powershell on Windows
 
 Install Chocolatey and activate winget [TODO]

@@ -5,7 +5,6 @@ export BROWSER="wslview"
 alias docker-compose='echo "no"'
 alias dc='docker compose'
 alias webgrind='php -S 0.0.0.0:8080 /var/www/vhosts/webgrind/index.php'
-alias wezterm='"/mnt/c/Program Files/WezTerm/wezterm.exe"'
 
 superupdate_local() {
   (cd ~/contrib/neovim && \
