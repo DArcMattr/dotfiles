@@ -11,11 +11,6 @@ if [[ -s "${ZDOTDIR}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR}/.zprezto/init.zsh"
 fi
 
-if [[ -r ~/contrib/zsh-completions ]]; then
-  fpath=(~/contrib/zsh-completions $fpath)
-  zstyle ':prezto:load' pmodule zsh-completions
-fi
-
 if [[ -r ~/contrib/autoenv/autoenv.plugin.zsh ]]; then
   source ~/contrib/autoenv/autoenv.plugin.zsh
 fi
