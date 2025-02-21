@@ -8,27 +8,19 @@ config.scrollback_lines = 0
 config.window_decorations = "RESIZE"
 
 config.font = wezterm.font_with_fallback {
+  -- 'Delugia',
   'Cascadia Code PL',
-  -- 'Noto Emoji',
+  -- 'codicon',
+  -- 'Segoe UI Symbol',
   -- 'Segoe UI Emoji',
+  -- 'Noto Color Emoji',
+  -- 'Symbola',
   -- 'Twemoji',
 }
 config.font_size = 9.0
 config.color_scheme = 'Campbell (Gogh)'
 config.audible_bell = 'Disabled'
-config.window_frame = {
-  border_top_color = 'black',
-  border_right_color = 'black',
-  border_bottom_color = 'black',
-  border_left_color = 'black',
-}
 config.window_decorations = 'NONE'
-config.window_padding = {
-  left = '0.5cell',
-  right = '0.5cell',
-  top = '0.5cell',
-  bottom = '0.5cell',
-}
 
 wezterm.on('gui-startup', function(cmd)
   local _, _, window = mux.spawn_window(cmd or {})
