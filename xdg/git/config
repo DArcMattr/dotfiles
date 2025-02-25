@@ -2,6 +2,8 @@
 [user]
   name = David Arceneaux
   email = david@davidthemachine.org
+[branch]
+  sort = -committerdate
 [color]
   ui = auto
   branch = auto
@@ -20,6 +22,8 @@
   added = yellow
   changed = green
   untracked = cyan
+[column]
+  ui = auto
 [commit]
   verbose = true
 [core]
@@ -44,8 +48,14 @@
   cmd = nvim -d $LOCAL $REMOTE
 [difftool "difft"]
   cmd = difft "$LOCAL" "$REMOTE"
+[fetch]
+  prune = true
+  pruneTags = true
+  all = true
 [format]
   pretty = oneline
+[help]
+  autocorrect = prompt
 [http]
   postBuffer = 524288000
 [init]
@@ -77,12 +87,20 @@
   ff = only
   followTags = true
 [rebase]
-    missingCommitsCheck = error
+  autoSquash = true
+  autoStash = true
+  missingCommitsCheck = error
+  updateRefs = true
+[rerere]
+  enabled = true
+  autoupdate = true
 [status]
   showUntrackedFiles = all
   submoduleSummary = true
 [submodule]
   recurse = true
+[tag]
+  sort = version:refname
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [alias]
