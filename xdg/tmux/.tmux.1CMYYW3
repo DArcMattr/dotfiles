@@ -1,10 +1,10 @@
 #!/bin/sh
 
-tmux set-option -ga terminal-overrides ",*:Tc"
-tmux set-option -ga aggressive-resize off
-tmux set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
-tmux set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours - needs tmux-3.0
-tmux set -as terminal-overrides ',*:smuc=\E[4:3m'
+tmux set -ga terminal-overrides ",*:Tc"
+tmux set -ga aggressive-resize off
+tmux set -gas terminal-overrides ',*:smuc=\E[4:3m'
+tmux set -gas terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
+tmux set -gas terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours - needs tmux-3.0
 
 tmux split-window -h -l 50% -t "${SESSION}:1.0" \; \
 	split-window -v -l 50% -t "${SESSION}:1.1"
@@ -14,6 +14,7 @@ tmux send-keys -t "${SESSION}:1.1" "sssh dev" C-m
 tmux new-window -t "${SESSION}":2
 tmux send-keys -t "${SESSION}":2 "btop" C-m
 tmux rename-window -t "${SESSION}":2 "btop"
+tmux set -t "${SESSION}":2 monitor-activity off
 
 DIRECTORY='/var/www/vhosts/api-tracker'
 tmux new-window -t "${SESSION}:3" -c "${DIRECTORY}" \; \
