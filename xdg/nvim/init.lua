@@ -496,6 +496,7 @@ vim.opt.virtualedit     = 'all'
 vim.opt.visualbell      = true
 vim.opt.wildmenu        = true
 vim.opt.wildmode        = { 'list:longest', 'list:full' }
+vim.opt.winborder       = 'rounded'
 vim.opt.wrap            = false
 
 vim.opt.clipboard:append { 'unnamedplus' }
@@ -611,9 +612,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 vim.diagnostic.config({
-  float = {
-    border = 'rounded',
-  },
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = '✘',
@@ -622,6 +620,7 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.INFO] = '»',
     },
   },
+  virtual_text = { current_line = true },
 })
 
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
