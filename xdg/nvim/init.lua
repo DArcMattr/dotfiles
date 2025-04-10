@@ -450,6 +450,7 @@ vim.opt.expandtab       = true
 vim.opt.exrc            = true
 vim.opt.formatoptions   = 'nqr12j'
 vim.opt.gdefault        = true
+vim.opt.guicursor       = 'n-v-i-c:ver50-Cursor'
 vim.opt.hidden          = true
 vim.opt.hlsearch        = true
 vim.opt.ignorecase      = true
@@ -684,6 +685,8 @@ vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
   callback = function()
     vim.opt.list = false
     vim.opt.timeoutlen = 0
+    vim.opt.cursorline = false
+    vim.opt.cursorcolumn = false
   end
 })
 vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
@@ -692,6 +695,8 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
   callback = function()
     vim.opt.list = true
     vim.opt.timeoutlen = 200
+    vim.opt.cursorline = true
+    vim.opt.cursorcolumn = true
   end
 })
 
@@ -810,22 +815,19 @@ augroup END
 ]])
 
 vim.cmd.colorscheme('industry')
+vim.api.nvim_set_hl(0, 'Cursor', { })
+vim.api.nvim_set_hl(0, 'TermCursor', { link = 'Cursor' })
 vim.api.nvim_set_hl(0, 'CursorLine', { underline = true })
-vim.api.nvim_set_hl(0, 'CursorColumn', { })
+vim.api.nvim_set_hl(0, 'CursorColumn', { reverse = true, blend = 50 })
 vim.api.nvim_set_hl(0, 'Normal', { bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'EndOfBuffer', { link = 'Normal' })
+vim.api.nvim_set_hl(0, 'NonText', { link = 'Normal' })
 vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#111111' })
-vim.api.nvim_set_hl(0, 'OverLength', { bg = '#111111' })
+vim.api.nvim_set_hl(0, 'OverLength', { bg = '#1c1c1c', fg = '#b2b2b2', ctermfg = 249, ctermbg = 235, bold = true })
 
-vim.cmd.highlight('TermCursor', 'ctermfg=yellow guifg=yellow')
-vim.cmd.highlight('LineNr',     'gui=bold guifg=#c6c6c6 guibg=#00005f')
-vim.cmd.highlight('LineNr',     'gui=bold guifg=#c6c6c6 guibg=#00005f')
-vim.cmd.highlight('LineNr',     'term=reverse cterm=bold ctermfg=251 ctermbg=17')
-vim.cmd.highlight('NonText',    'ctermfg=235 guifg=#262626')
-vim.cmd.highlight('OverLength', 'ctermbg=234 ctermfg=249 guibg=#1c1c1c guifg=#b2b2b2')
+vim.cmd.highlight('LineNr',     'gui=bold guifg=#c6c6c6 guibg=#00005f term=reverse cterm=bold ctermfg=251 ctermbg=17')
 vim.cmd.highlight('SpellBad',   'term=standout,undercurl cterm=undercurl ctermfg=1 guifg=#800000 gui=undercurl guisp=#8080f0')
 vim.cmd.highlight('SpellCap',   'term=undercurl cterm=undercurl gui=undercurl')
 vim.cmd.highlight('SpellLocal', 'term=undercurl cterm=undercurl gui=undercurl')
 vim.cmd.highlight('SpellRare',  'term=undercurl cterm=undercurl gui=undercurl')
-vim.cmd.highlight('Normal',     'ctermbg=none guibg=none')
-vim.cmd.highlight('EndOfBuffer','ctermbg=none guibg=none')
 vim.cmd.highlight('NormalNC',   'ctermbg=darkgrey guibg=#181818')
