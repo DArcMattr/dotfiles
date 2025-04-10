@@ -6,7 +6,7 @@ function! funcs#SetDiffColors()
 endfunction
 
 function! funcs#SetColorColumn()
-  execute 'match OverLength /\%'. ( &textwidth + 1 ) .'v.*/'
+  execute 'match OverLength /\%'. ( (&textwidth ?? 80) + 1 ) .'v.*/'
 endfunction
 
 function! funcs#TmuxMove(direction)
