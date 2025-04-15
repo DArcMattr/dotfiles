@@ -67,6 +67,7 @@ grab_rust() {
     difftastic
     fd-find
     lsd
+    neovide
     "ripgrep --features 'pcre2'"
     starship
     tree-sitter-cli

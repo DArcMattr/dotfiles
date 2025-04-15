@@ -34,24 +34,24 @@ curl -sS "https://packages.microsoft.com/keys/microsoft.asc" | \
 sudo add-apt-repository \
   "deb http://nginx.org/packages/mainline/ubuntu ${REL} nginx"
 sudo add-apt-repository \
-  "deb http://apt.llvm.org/${REL}/ llvm-toolchain-${REL}-18 main"
+  "deb http://apt.llvm.org/${REL}/ llvm-toolchain-${REL}-19 main"
 sudo add-apt-repository \
     "$(wget -qO- https://packages.microsoft.com/config/ubuntu/24.04/prod.list)" # XXX
-sudo apt install autossh bison build-essential clang-18 clang-18-doc \
-  clang-format-18 clang-tidy-18 clang-tools-18 clangd-18 cmake flex fswatch git \
-  git-extras golang htop jq libc++-18-dev-wasm32 libc++abi-18-dev-wasm32 \
-  libclang-18-dev libclang-common-18-dev libclang-rt-18-dev \
-  libclang-rt-18-dev-wasm32 libclang-rt-18-dev-wasm32 \
-  libclang-rt-18-dev-wasm64 libclang-rt-18-dev-wasm64 libclang1-18 \
-  libevent-dev libfuzzer-18-dev libgit2-dev libjansson-dev \
-  libllvm-18-ocaml-dev libllvm16 liblua5.3-dev liblzma-dev libncurses5-dev \
-  libnss3-tools libomp-18-dev libpcre3-dev libsqlite3-dev libssh2-1-dev \
-  libssl-dev libxml2-dev libyaml-dev lld-18 lldb-18 llvm-18 llvm-18-dev \
-  llvm-18-doc llvm-18-examples llvm-18-runtime lsyncd neovim nginx nodejs \
+sudo apt install autossh bison btop build-essential clang-19 clang-19-doc \
+  clang-format-19 clang-tidy-19 clang-tools-19 clangd-19 cmake flex fswatch git \
+  git-extras golang jq libc++-19-dev-wasm32 libc++abi-19-dev-wasm32 \
+  libclang-19-dev libclang-common-19-dev libclang-rt-19-dev \
+  libclang-rt-19-dev-wasm32 libclang-rt-19-dev-wasm32 \
+  libclang-rt-19-dev-wasm64 libclang-rt-19-dev-wasm64 libclang1-19 \
+  libevent-dev libfuzzer-19-dev libgit2-dev libjansson-dev \
+  libllvm-19-ocaml-dev libllvm19 liblua5.3-dev liblzma-dev libncurses5-dev \
+  libnss3-tools libomp-19-dev libpcre3-dev libsqlite3-dev libssh2-1-dev \
+  libssl-dev libxml2-dev libyaml-dev lld-19 lldb-19 llvm-19 llvm-19-dev \
+  llvm-19-doc llvm-19-examples llvm-19-runtime lsyncd neovim nginx nodejs \
   php-common php-gd php-imagick php-mbstring php-memcache php-pear php-xdebug \
   php-xml php-zip php8.4-cli php8.4-curl php8.4-dev php8.4-fpm php8.4-imap \
   php8.4-mysql php8.4-opcache php8.4-readline php8.4-soap php8.4-sqlite3 \
-  php8.4-xml pv python-is-python3 python3-clang-18 python3-dev python3-venv \
+  php8.4-xml pv python-is-python3 python3-clang-19 python3-dev python3-venv \
   ruby-dev shellcheck sqlcmd tidy wget wslu xcape xsel zlib1g-dev zsh
 
 git clone https://github.com/darcmattr/dotfiles ~/dotfiles
