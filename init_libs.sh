@@ -16,7 +16,7 @@ grab_go() {
     'github.com/davidrjenni/reftools/cmd/fillswitch'
     'github.com/fatih/gomodifytags'
     'github.com/go-delve/delve/cmd/dlv'
-    'github.com/golangci/golangci-lint/cmd/golangci-lint'
+    'github.com/golangci/golangci-lint/v2/cmd/golangci-lint'
     'github.com/josharian/impl'
     'github.com/junegunn/fzf'
     'github.com/koron/iferr'
