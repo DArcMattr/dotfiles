@@ -26,7 +26,7 @@
 # Remove -X and -F (exit if the content fits on one screen) to enable it.
 # export LESS='-F -g -i -M -R -S -w -X -z-4'
 
-export LESS="-EFIMQRsX~ -x2"
+export LESS="-~EFIMQRrsX -x2"
 export MANWIDTH="$(( 96 > $(tput cols) ? $(tput cols) : 96 ))"
 export PAGER='less'
 export PYTHONSTARTUP="${HOME}/dotfiles/helpers/pythonstartup.py"
