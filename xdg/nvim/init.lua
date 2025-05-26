@@ -639,13 +639,13 @@ vim.api.nvim_create_autocmd('ModeChanged', {
   pattern = {'n:i', 'v:s'},
   group = ModeEvents,
   desc = 'Disable diagnostics in insert and select mode',
-  callback = function(e) vim.diagnostic.enable(false) end
+  callback = function() vim.diagnostic.enable(false) end
 })
 vim.api.nvim_create_autocmd('ModeChanged', {
   pattern = 'i:n',
   group = ModeEvents,
   desc = 'Enable diagnostics when leaving insert mode',
-  callback = function(e) vim.diagnostic.enable() end
+  callback = function() vim.diagnostic.enable() end
 })
 
 local FocusEvents = vim.api.nvim_create_augroup('FocusEvents', { clear = true })
@@ -727,6 +727,7 @@ vim.api.nvim_create_autocmd({'BufReadPost'}, {
 local StartupStuffs = vim.api.nvim_create_augroup('StartupStuffs', { clear = true})
 
 vim.api.nvim_create_autocmd('BufRead', {
+  group = StartupStuffs,
   callback = function(opts)
     vim.api.nvim_create_autocmd('BufWinEnter', {
       once = true,

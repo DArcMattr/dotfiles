@@ -1,6 +1,6 @@
 vim.opt_local.iskeyword:append {'$'}
 
--- curl -OL https://github.com/microsoft/vscode-js-debug/releases/download/v1.96.0/js-debug-dap-v1.96.0.tar.gz
+-- curl -OL https://github.com/microsoft/vscode-js-debug/releases/download/v1.100.0/js-debug-dap-v1.100.1.tar.gz
 U.dap.adapters['pwa-node'] = { -- also repeat for typescript
   type = "server",
   host = "localhost",
