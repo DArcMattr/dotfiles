@@ -41,7 +41,10 @@
 # # which is explained in the docs for that config option.
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
-font-family=Cascadia Code PL Light
-font-size=9
-theme=Campbell
-gtk-titlebar=false
+confirm-close-surface = false
+font-family           = Cascadia Code PL
+font-size             = 9
+gtk-titlebar          = false
+maximize              = true
+theme                 = Builtin Dark
+window-decoration     = false
