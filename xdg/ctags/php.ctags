@@ -2,17 +2,23 @@
 
 --PHP-kinds=+cdfint-av
 
---regex-PHP=/^do_action\s*\(\s*['"]([a-z_]+)['"]\s*.*$/4listener_\1/A,actionListener/
---regex-PHP=/^do_action_ref_array\s*\(\s*['"]([a-z_]+)['"]\s*.*$/4listener_\1/A,actionListener/
---regex-PHP=/^do_action_deprecated\s*\(\s*['"]([a-z_]+)['"]\s*.*$/4listener_\1/A,actionListener/
---regex-PHP=/^function find([a-z_]+)\s*\(.*$/4action_\1/B,finderListener/
+# WordPress action hooks
+--regex-PHP=/^do_action\s*\(\s*['"]([a-z_]+)['"]\s*.*$/action_\1/A,actionListener/
+--regex-PHP=/^do_action_ref_array\s*\(\s*['"]([a-z_]+)['"]\s*.*$/action_\1/A,actionListener/
+--regex-PHP=/^do_action_deprecated\s*\(\s*['"]([a-z_]+)['"]\s*.*$/action_\1/A,actionListener/
+--regex-PHP=/^add_action\s*\(\s*['"]([a-z_]+)['"]\s*.*$/action_\1/L,action/
 
+# WordPress filter hooks
+--regex-PHP=/^add_filter\s*\(\s*['"]([a-z_]+)['"]\s*.*$/filter_\1/E,filter/
+--regex-PHP=/^apply_filters\s*\(\s*['"]([a-z_]+)["']\s*.*$/filter_\1/Q,filterListener/
+--regex-PHP=/^apply_filters_ref_array\s*\(\s*['"]([a-z_]+)["']\s*.*$/filter_\1/Q,filterListener/
+--regex-PHP=/^apply_filters_deprecated\s*\(\s*['"]([a-z_]+)["']\s*.*$/filter_\1/Q,filterListener/
 
---regex-PHP=/^add_action\s*\(\s*['"]([a-z_]+)['"]\s*.*$/4action_\1/L,action/
---regex-PHP=/^find\(\s*['"]([a-zA-Z_]+)['"]\s*.*$/function find\1/M,finder/
+# CakePHP finder definitions (captures findBaseQuery as finder_baseQuery)
+--regex-PHP=/^\s*public\s+function\s+find([A-Z][a-zA-Z0-9]*)\s*\(/finder_\L\1/F,finderMethod/
 
---regex-PHP=/^add_filter\s*\(\s*['"]([a-z_]+)['"]\s*.*$/9filter_\1/E,filter/
+# CakePHP finder usage (captures ->find('baseQuery') as finder_basequery)
+--regex-PHP=/->find\s*\(\s*['"]([a-zA-Z0-9_]+)['"]\s*[,\)]/finder_\L\1/U,finderUsage/
 
---regex-PHP=/^apply_filters\s*\(\s*['"]([a-z_]+)["']\s*.*$/9listener_\1/Q,filterListener/
---regex-PHP=/^apply_filters_ref_array\s*\(\s*['"]([a-z_]+)["']\s*.*$/9listener_\1/Q,filterListener/
---regex-PHP=/^apply_filters_deprecated\s*\(\s*['"]([a-z_]+)["']\s*.*$/9listener_\1/Q,filterListener/
+# Generic find usage for your custom implementation
+--regex-PHP=/^find\(\s*['"]([a-zA-Z_]+)['"]\s*.*$/finder_\L\1/M,finder/
