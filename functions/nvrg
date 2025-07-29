@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+# nvrg() {
+  nvim -c "/${1}" $(rg -l "${@}")
+# }

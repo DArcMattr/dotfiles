@@ -7,10 +7,6 @@ alias nvf='nvim $(fzf)'
 alias nvdno='nvim $(git dno @~1)'
 alias snvim='sudo -E $(which nvim)'
 
-nvrg() {
-  nvim $(rg -l "${@}")
-}
-
 dir() {
   {
     LL=$(ll "${@}")
