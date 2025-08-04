@@ -13,3 +13,11 @@ sssh() {
 if [ -z "$TMUX" ]; then
   tmuxt
 fi
+
+superupdate_local() {
+  (cd ~/contrib/neovim && \
+    git up && \
+    make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX="${LOCAL}" all install distclean)
+  rehash
+  nvim --cmd "autocmd user LazyVimStarted lua require('lazy').sync()"
+}

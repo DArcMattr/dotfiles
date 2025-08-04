@@ -1,15 +1,10 @@
 # vim:ft=zsh:
 
 export BROWSER="wslview"
+export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 
 alias docker-compose='echo "no"'
 alias dc='docker compose'
 alias webgrind='php -S 0.0.0.0:8080 /var/www/vhosts/webgrind/index.php'
 
-superupdate_local() {
-  (cd ~/contrib/neovim && \
-    git up && \
-    make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX="${LOCAL}" all install distclean)
-  rehash
-  nvim --cmd "autocmd user LazyVimStarted lua require('lazy').sync()"
-}
+export PATH="/mnt/c/Program Files/vagrant/bin:/mnt/c/Program Files/Oracle/VirtualBox:${PATH}"
