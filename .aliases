@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-alias ll='ls -alFh'
+alias ll='ls -alFgh'
 alias doge='doge -mh $(($(tput lines) -1))'
 alias expected_install='./autogen.sh && ./configure --prefix=$HOME/.local && make install clean'
 alias nvf='nvim $(fzf)'
