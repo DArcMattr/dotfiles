@@ -365,7 +365,7 @@ local lazyvim_plugins = {
               }
             })
 
-            client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+            client:notify("workspace/didChangeConfiguration", { settings = client.config.settings })
           end
           return true
         end
@@ -602,7 +602,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, opts)
     vim.keymap.set('n', '<Leader>l3',     vim.lsp.buf.rename, opts)
-    if client == nil or not client.supports_method('textDocument/inlayHint') then
+    if client == nil or not client:supports_method('textDocument/inlayHint') then
       return
     end
 
