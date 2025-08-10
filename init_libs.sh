@@ -14,6 +14,7 @@ grab_go() {
     'github.com/cweill/gotests/...'
     'github.com/davidrjenni/reftools/cmd/fillstruct'
     'github.com/davidrjenni/reftools/cmd/fillswitch'
+    'github.com/docker/docker-language-server/cmd/docker-language-server'
     'github.com/fatih/gomodifytags'
     'github.com/go-delve/delve/cmd/dlv'
     'github.com/golangci/golangci-lint/v2/cmd/golangci-lint'
