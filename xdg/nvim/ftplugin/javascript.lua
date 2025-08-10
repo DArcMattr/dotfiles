@@ -1,3 +1,4 @@
+vim.lsp.enable('ts_ls')
 vim.opt_local.iskeyword:append {'$'}
 
 -- curl -OL https://github.com/microsoft/vscode-js-debug/releases/download/v1.100.0/js-debug-dap-v1.100.1.tar.gz

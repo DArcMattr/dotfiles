@@ -36,6 +36,12 @@ vim.g.loaded_perl_provider = 0
 vim.g.mapleader = ','
 vim.g.maplocalleader = ' '
 
+vim.lsp.enable('pylsp')
+vim.lsp.enable('html')
+vim.lsp.enable('bashls')
+vim.lsp.enable('jsonls')
+vim.lsp.enable('ts_ls')
+
 local lazyvim_plugins = {
   {
     'nvim-treesitter/nvim-treesitter',
@@ -308,11 +314,6 @@ local lazyvim_plugins = {
     config = function()
       local lspconfig = require('lspconfig')
 
-      lspconfig.bashls.setup{}
-      lspconfig.cssls.setup{}
-      lspconfig.gopls.setup{}
-      lspconfig.html.setup{}
-
       lspconfig.intelephense.setup {
         capabilities = require('cmp_nvim_lsp').default_capabilities(),
         autostart = true,
@@ -338,8 +339,6 @@ local lazyvim_plugins = {
         root_dir = lspconfig.util.root_pattern('.git', 'composer.json', 'index.php'),
       }
 
-      lspconfig.jsonls.setup{}
-
       lspconfig.lua_ls.setup {
         on_init = function(client)
           local path = client.workspace_folders[1].name
@@ -349,9 +348,6 @@ local lazyvim_plugins = {
           return true
         end
       }
-
-      lspconfig.pylsp.setup {}
-      lspconfig.ts_ls.setup {}
     end,
   },
   {
