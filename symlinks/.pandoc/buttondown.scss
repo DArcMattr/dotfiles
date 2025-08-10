@@ -38,6 +38,7 @@
 /* Pandoc header DIV. Contains .title, .author and .date. Comes before div#TOC.
    Only appears if one of those three are in the document.
 */
+$font-size: 92.5%;
 $lh: 1.2rem;
 
 $color-html-background: #d1d1d1;
@@ -52,7 +53,7 @@ $color-link-dark: invert( $color-link-bright );
 @import "color_contrast";
 
 html {
-  font-size: 92.5%;
+  font-size: $font-size;
   line-height: $lh;
   padding: $lh;
   background-color: $color-html-background;
@@ -73,13 +74,51 @@ div#header, header {
   margin-bottom: .5 * $lh;
 }
 
-.title, .author, .date {
+.title, .author, .date, .subtitle {
   text-align: center;
+  font-size: 2.2 * $font-size;
+  font-family: "Liberation Serif", "Georgia", "Times New Roman", serif; /* Serif headers */
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 1.2 * $font-size;
+  font-style: italic;
+}
+
+.author, .date /* Pandoc author(s) and date text (p.author and p.date) */ {
+  text-align: center;
+}
+
+/* Abstract:
+   To use it, add an "abstract:" YAML variable to your document which will need
+   to follow the multi-line variable value rules, see the example at:
+   http://pandoc.org/MANUAL.html#extension-yaml_metadata_block
+   The default abstract-title is "Abstract".
+ */
+.abstract {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2 * $lh;
+  padding-right: 2 * $lh;
+  margin-bottom: .5 * $lh;
+  text-align: justify;
+  font-style: italic;
+  font-size: .9 * $font-size;
+}
+
+.abstract-title /* A div within div.abstract */ {
+  font-style: normal;
+  font-weight: bold;
+  text-align: center;
+  margin-left: inherit; /* don't next with --section-div rule */
+  margin-bottom: $lh;
+  margin-top: 1.4 * $lh;
 }
 
 /* Pandoc table of contents DIV when using the --toc option.
    NOTE: this doesn't support Pandoc's --id-prefix option for #TOC and #header.
-   Probably would need to use div[id$='TOC'] and div[id$='header'] as selectors.
+   Could use div[id$='TOC'] and div[id$='header'], etc., as selectors.
 */
 
 div#TOC, nav#TOC {
@@ -112,7 +151,7 @@ div#TOC, nav#TOC {
          text in parens
       */
       content: " (" attr(href) ") ";
-      font-size: 90%;
+      font-size: .9 * $font-size;
     }
 
     &[href^="#fnref"], &.reversefootnote {
@@ -130,6 +169,50 @@ h1, h2, h3, h4, h5, h6 {
   /* font-family: "Liberation Serif", "Georgia", "Times New Roman", serif; /* Serif headers */
   page-break-after: avoid;
   /* Firefox, Chrome, and Safari do not support the property value "avoid" */
+}
+
+/* Header level specific -
+   Make the spacing before and after a total of 1.68em (in body font) with 60% above
+ */
+h1  {
+    /* font-size: 200%; */
+    margin-block-start: 0.844em; /* was 0.67em*200%=1.34em'=21.4px */
+    margin-block-end: 0.563em; /* now 27,18px/16px/200% */
+    }
+
+h2  {
+    /* font-size: 150%; */
+    margin-block-start: 1.125em; /* 0.83em*150%=1.25em'=20px */
+    margin-block-end: 0.75em; /* now 1.4em'*2/150% split 60/40%=26.9/18px */
+    }
+h3  {
+    /* font-size: 117%; */
+    margin-block-start: 1.442em; /* 1.00em*117%=1.17em' */
+    margin-block-end: 0.962em; /* now 1.4em'*2/117% split 60/40%=26.9/17.9px */
+}
+h4  {
+    /* font-size: 100%; */
+    margin-block-start: 1.688em; /* 1.33em*100%=1.33em' */
+    margin-block-end: 1.125em; /*  now 1.4em'*2/100% split 60/40%=26.9/17.9px */
+}
+h5  {
+    /* font-size: 83%; */
+    /* margin-block-start: 2.033em; /* 1.67em*83%=1.39em' */
+    /* margin-block-end: 1.355em; /* 1.67em*83%=1.39em' */
+    font-size: 100%;
+    margin-block-start: 1.688em; /* 1.33em*100%=1.33em' */
+    margin-block-end: 1.125em; /*  now 1.4em'*2/100% split 60/40%=26.9/17.9px */
+    font-style: italic;
+}
+h6  {
+    /* font-size: 67%; */
+    /* margin-block-start: 2.529em; /* 2.33em*67%=1.56em' */
+    /* margin-block-end: 1.679em; /* 2.33em*67%=1.56em' */
+    font-size: 100%;
+    margin-block-start: 1.688em; /* 1.33em*100%=1.33em' */
+    margin-block-end: 1.125em; /*  now 1.4em'*2/100% split 60/40%=26.9/17.9px */
+    font-style: italic;
+    font-weight: normal;
 }
 
 /* Pandoc with --section-divs option */
@@ -150,7 +233,15 @@ li > p {
   /* IE: lack of space above a <li> when the item is inside a <p> */
 }
 
+ul /* whole unordered list */ {
+  padding-left: 2 * $lh; /* So bullets aren't quite so indented but items still line up with numbered items at the same level. */
+}
+
 ul li, ol li, hr, sub, sup {}
+
+ol /* Whole ordered list */ {
+  padding-left: 2 * $lh; /* So numbers aren't indented quite as much from the paragraph level they are in as the default does to allow for really big numbers */
+}
 
 /* ---- Some span elements --- */
 
@@ -204,15 +295,35 @@ a {
 
 
 @media screen {
+  a {
+    text-decoration: underline dotted; /* Static is subtle */
+  }
+
+  #TOC a /*, h1>a, h2>a, h3>a, h4>a, h5>a, h6>a */ {
+    text-decoration: none;
+    border-bottom: inherit;
+  }
+
   a:hover {
-    text-decoration: underline;
+    text-decoration: underline solid blue; /* Hover emphasizes */
+  }
+  /* Have linked images not show an outline unless hovered but reserve
+      the space for the outline so it doesn't move around. */
+  a img {
+    text-decoration: none;
+    border: 1px solid color-contrast( $color-body-background );
+  }
+  a img:hover {
+    text-decoration: none;
+    border: 1px dotted blue;
   }
 }
 
 @media print {
   a {
-    /* In print, a colored link is useless, so un-style it. */
-    color: color-contrast( $color-body-background );
+    /* In print, style link text is useless, so un-style it. */
+    color: inherit;
+    text-decoration: none;
     background: transparent;
     &[href^="http://"]:after, &[href^="https://"]:after {
       /* However, links that go somewhere else, might be useful to the reader,
@@ -220,7 +331,7 @@ a {
          text in parens
       */
       content: " (" attr(href) ") ";
-      font-size: 90%;
+      font-size: .9 * $font-size;
     }
 
     &[href^="#fnref"], &.reversefootnote {
@@ -248,7 +359,15 @@ img {
   max-width: 100%;
 }
 
-div.figure {
+@media print {
+  img {
+    /* Fit in letter page of 8.5"x11" with 1" margins and 0.5" for caption */
+    max-height: 8.5in;
+    max-width:  6.5in;
+  }
+}
+
+div.figure, figure {
   /* Center the image and caption */
   margin-left: auto;
   margin-right: auto;
@@ -256,7 +375,7 @@ div.figure {
   font-style: italic;
 }
 
-p.caption {
+p.caption, figcaption {
   /* Inherits div.figure props by default */
 }
 
@@ -416,7 +535,7 @@ tfoot {}
 caption {
   caption-side: top;
   border: none;
-  font-size: .75 * $lh;
+  font-size: .75 * $font-size;
   font-style: italic;
   text-align: center;
   margin-bottom: .25 * $lh;
@@ -453,7 +572,7 @@ dd {
 @media print {
 }
 
-div.footnotes li[id^="fn"] {}
+div.footnotes > ol > li[id^="fn"] {}
 
 /* You can class stuff as "noprint" to not print.
    Useful since you can't set this media conditional inside an HTML element's
@@ -465,4 +584,105 @@ div.footnotes li[id^="fn"] {}
   .noprint {
     display: none;
   }
+}
+/* Image tweaking classes */
+
+@media screen
+{
+img.shadow /* drop shadow */
+    {
+    box-shadow: 3px 3px 5px #b0b0b0;
+    }
+}
+@media print
+{
+img.shadow
+    {
+    box-shadow: 3px 3px 0px #b0b0b0;
+    }
+}
+
+img.pad /* padding around all edges */
+    {
+    padding: 10px;
+    }
+
+img.rounded /* Rounded corners */ {
+  border-radius: 10px;
+}
+
+img.border /* Box around with no border */ {
+  border: 1pt solid #c0c0c0;
+}
+
+img.well {
+  box-shadow: 0px 0px 5px #b0b0b0 inset;
+}
+
+
+img.right /* float right */ {
+  float: right;
+  clear: right;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+img.left /* float left */ {
+  float: left;
+  clear: left;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+div.figure img, figure img /* Put back these props for figure images since we can't exclude them easily in the prior rules */ {
+  float: none; /* Don't allow fig img to float */
+  clear: both;
+}
+
+img.top
+    {
+    vertical-align: top;
+    }
+
+img.bottom
+    {
+    vertical-align: bottom;
+    }
+
+img.middle
+    {
+    vertical-align: middle;
+    }
+
+img.baseline
+    {
+    vertical-align: baseline;
+    }
+
+img.margin /* Give inline image some space on the sides */
+    {
+    margin-left: 10px;
+    margin-right: 10px;
+    }
+
+/* Keep images from getting too large */
+
+img.max100
+    {
+    max-width: 100%;
+    }
+
+img.max95 /* Sometimes 95% works better */
+    {
+    max-width: 95%;
+    }
+
+img.max50 {
+  max-width: 50%;
+}
+
+img.max45 /* Sometimes 45% lets you get two side by side better */ {
+  max-width: 45%;
 }
