@@ -9,13 +9,13 @@ U.dap.adapters.lldb = {
   },
 }
 
-U.dap.adapters.c = {
+U.dap.adapters.cpp = {
   type = 'executable',
   command = 'lldb-dap',
   name = "lldb"
 }
 
-U.dap.configurations.c = {
+U.dap.configurations.cpp = {
   {
     name = 'Launch',
     type = 'lldb',
