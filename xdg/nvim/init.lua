@@ -36,10 +36,10 @@ vim.g.loaded_perl_provider = 0
 vim.g.mapleader = ','
 vim.g.maplocalleader = ' '
 
+-- load LSP servers which cover more than one filetype
 vim.lsp.enable('bashls')
 vim.lsp.enable('docker-language-server')
 vim.lsp.enable('html')
-vim.lsp.enable('pylsp')
 vim.lsp.enable('ts_ls')
 
 local lazyvim_plugins = {
