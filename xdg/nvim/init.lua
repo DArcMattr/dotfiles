@@ -799,7 +799,6 @@ vim.api.nvim_set_hl(0, 'Normal', { bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'EndOfBuffer', { link = 'Normal' })
 vim.api.nvim_set_hl(0, 'NonText', { link = 'Normal' })
 vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#111111' })
-vim.api.nvim_set_hl(0, 'OverLength', { bg = '#1c1c1c', fg = '#b2b2b2', ctermfg = 249, ctermbg = 235, bold = true })
 
 vim.cmd.highlight('LineNr',     'gui=bold guifg=#c6c6c6 guibg=#00005f term=reverse cterm=bold ctermfg=251 ctermbg=17')
 vim.cmd.highlight('SpellBad',   'term=standout,undercurl cterm=undercurl ctermfg=1 guifg=#800000 gui=undercurl guisp=#8080f0')
