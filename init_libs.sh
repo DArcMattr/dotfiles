@@ -18,6 +18,7 @@ grab_go() {
     'github.com/fatih/gomodifytags'
     'github.com/go-delve/delve/cmd/dlv'
     'github.com/golangci/golangci-lint/v2/cmd/golangci-lint'
+    'github.com/joe-re/sql-language-server'
     'github.com/josharian/impl'
     'github.com/junegunn/fzf'
     'github.com/koron/iferr'
