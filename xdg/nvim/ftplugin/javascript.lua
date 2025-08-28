@@ -1,23 +1,23 @@
 vim.lsp.enable('ts_ls')
 vim.opt_local.iskeyword:append {'$'}
 
--- curl -OL https://github.com/microsoft/vscode-js-debug/releases/download/v1.100.0/js-debug-dap-v1.100.1.tar.gz
+-- curl -OL https://github.com/microsoft/vscode-js-debug/releases/download/v1.102.0/js-debug-dap-v1.102.0.tar.gz
 U.dap.adapters['pwa-node'] = { -- also repeat for typescript
-  type = "server",
-  host = "localhost",
-  port = "${port}",
+  type = 'server',
+  host = 'localhost',
+  port = '${port}',
   executable = {
-    command = "node",
+    command = 'node',
     args = { os.getenv('HOME') .. '/contrib/js-debug/src/dapDebugServer.js', '${port}', },
   },
 }
 
 U.dap.configurations.javascript = {
   {
-    type = "pwa-node",
-    request = "launch",
-    name = "Launch file",
-    program = "${file}",
-    cwd = "${workspaceFolder}",
+    type = 'pwa-node',
+    request = 'launch',
+    name = 'Launch file',
+    program = '${file}',
+    cwd = '${workspaceFolder}',
   }
 }
