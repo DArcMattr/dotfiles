@@ -8,6 +8,11 @@ tmux new-window -t "${SESSION}":2
 tmux send-keys -t "${SESSION}":2 "btop" C-m
 tmux rename-window -t "${SESSION}":2 "btop"
 
-tmux new-window -t "${SESSION}:3"
+DIRECTORY="${HOME}/projects/handmade"
+tmux new-window -t "${SESSION}:3" -c "${DIRECTORY}" \; \
+  split-window -h -l 60% -t "${SESSION}:3.0" -c "${DIRECTORY}" \; \
+  split-window -v -l 20% -t "${SESSION}:3.1" -c "${DIRECTORY}"
+tmux rename-window -t "${SESSION}:3" 'handmade'
+tmux select-pane -t "${SESSION}:3.1"
 
 tmux select-pane -t "${SESSION}:1.0"
