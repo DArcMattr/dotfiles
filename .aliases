@@ -102,8 +102,7 @@ sssh() {
 
 superupdate() {
   if [ -z "$(apt >/dev/null 2>&1)" ]; then
-    /usr/bin/sudo /usr/bin/sh -c "/usr/bin/apt update && \
-/usr/bin/apt -y upgrade && \
+    /usr/bin/sudo /usr/bin/sh -c "/usr/bin/apt -y --update upgrade && \
 /usr/bin/apt -y full-upgrade && \
 /usr/bin/apt -y autoclean && \
 /usr/bin/apt -y autoremove && \
