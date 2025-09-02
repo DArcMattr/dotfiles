@@ -16,7 +16,7 @@ tmux send-keys -t "${SESSION}":2 "btop" C-m
 tmux rename-window -t "${SESSION}":2 "btop"
 tmux set -t "${SESSION}":2 monitor-activity off
 
-DIRECTORY='/var/www/vhosts/api-tracker'
+DIRECTORY='/home/darc/workspace/api-tracker'
 tmux new-window -t "${SESSION}:3" -c "${DIRECTORY}" \; \
 	split-window -h -l 60% -t "${SESSION}:3.0" -c "${DIRECTORY}" \; \
 	split-window -v -l 50% -t "${SESSION}:3.0" -c "${DIRECTORY}" \; \
