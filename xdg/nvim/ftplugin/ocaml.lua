@@ -1,1 +1,1 @@
-U.lspconfig.ocamlsp.setup { }
+vim.lsp.enable('ocamlsp')

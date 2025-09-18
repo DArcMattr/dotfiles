@@ -244,7 +244,7 @@ local lazyvim_plugins = {
         { '<F21>', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { silent = true},},
       }
     end,
-    config = function(_, opts)
+    config = function()
       local dap   = require('dap')
       local dapui = require('dapui')
 
@@ -311,44 +311,6 @@ local lazyvim_plugins = {
     dependencies = {
       { 'hrsh7th/cmp-nvim-lsp' },
     },
-    config = function()
-      local lspconfig = require('lspconfig')
-
-      lspconfig.intelephense.setup {
-        capabilities = require('cmp_nvim_lsp').default_capabilities(),
-        autostart = true,
-        settings = {
-          codeLens = {
-            references = {
-              enable = true
-            },
-            implementations = {
-              enable = true
-            },
-            usages = {
-              enable = true
-            },
-            overrides = {
-              enable = true
-            },
-            parent = {
-              enable = true
-            },
-          },
-        },
-        root_dir = lspconfig.util.root_pattern('.git', 'composer.json', 'index.php'),
-      }
-
-      lspconfig.lua_ls.setup {
-        on_init = function(client)
-          local path = client.workspace_folders[1].name
-          if not vim.loop.fs_stat(path..'/.luarc.json') and not vim.loop.fs_stat(path..'/.luarc.jsonc') then
-            client:notify("workspace/didChangeConfiguration", { settings = client.config.settings })
-          end
-          return true
-        end
-      }
-    end,
   },
   {
     'nvim-lualine/lualine.nvim',
@@ -404,7 +366,6 @@ require('lazy').setup(lazyvim_plugins, {
 -- Globals live in U namespace
 U.capabilities = require'cmp_nvim_lsp'.default_capabilities()
 U.dap          = require'dap'
-U.lspconfig    = require'lspconfig'
 
 vim.opt.autoindent      = true
 vim.opt.autoread        = true
