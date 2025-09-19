@@ -697,15 +697,21 @@ vim.api.nvim_create_autocmd({'WinEnter','BufEnter','BufRead','FileType'}, {
   end,
 })
 
---[[ aaaaa
-vim.api.nvim_create_user_command('Silent',
-  function(opts)
-              vim.cmd.execute(':silent !' .. opts.args)
-              vim.cmd.redraw
-  end,
-  { nargs = 1 }
-)
-]]
+-- adapted from https://gist.github.com/tarruda/5158535
+if os.getenv('TMUX') ~= nil then
+  vim.keymap.set('n', '<C-w>h',            function() U.utils.tmux_move('h') end, { desc = 'Move Left (tmux aware)',  silent = true })
+  vim.keymap.set('n', '<C-w>j',            function() U.utils.tmux_move('j') end, { desc = 'Move Down (tmux aware)',  silent = true })
+  vim.keymap.set('n', '<C-w>k',            function() U.utils.tmux_move('k') end, { desc = 'Move Up (tmux aware)',    silent = true })
+  vim.keymap.set('n', '<C-w>l',            function() U.utils.tmux_move('l') end, { desc = 'Move Right (tmux aware)', silent = true })
+  vim.keymap.set('n', '<C-w>left',         function() U.utils.tmux_move('h') end, { desc = 'Move Left (tmux aware)',  silent = true })
+  vim.keymap.set('n', '<C-w>up',           function() U.utils.tmux_move('k') end, { desc = 'Move Up (tmux aware)',    silent = true })
+  vim.keymap.set('n', '<C-w>down',         function() U.utils.tmux_move('j') end, { desc = 'Move Down (tmux aware)',  silent = true })
+  vim.keymap.set('n', '<C-w>right',        function() U.utils.tmux_move('l') end, { desc = 'Move Right (tmux aware)', silent = true })
+  vim.keymap.set('t', '<C-\\><C-N><C-w>h', function() U.utils.tmux_move('h') end, { desc = 'Move Left (tmux aware)',  silent = true })
+  vim.keymap.set('t', '<C-\\><C-N><C-w>j', function() U.utils.tmux_move('j') end, { desc = 'Move Down (tmux aware)',  silent = true })
+  vim.keymap.set('t', '<C-\\><C-N><C-w>k', function() U.utils.tmux_move('k') end, { desc = 'Move Up (tmux aware)',    silent = true })
+  vim.keymap.set('t', '<C-\\><C-N><C-w>l', function() U.utils.tmux_move('l') end, { desc = 'Move Right (tmux aware)', silent = true })
+end
 
 vim.cmd([[
 command! -nargs=1 Silent |
@@ -717,24 +723,6 @@ command! -nargs=1 Silent |
 if !exists(':DiffOrig')
   command DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_ | diffthis
   \   | wincmd p | diffthis
-endif
-
-" from https://gist.github.com/tarruda/5158535
-" TODO: check if vim.env.TMUX != nil
-if exists('$TMUX')
-" if os.getenv('TMUX') ~= nill then
-  nnoremap <silent> <C-w>j :call funcs#TmuxMove('j')<Cr>
-  nnoremap <silent> <C-w>k :call funcs#TmuxMove('k')<Cr>
-  nnoremap <silent> <C-w>h :call funcs#TmuxMove('h')<Cr>
-  nnoremap <silent> <C-w>l :call funcs#TmuxMove('l')<Cr>
-  nnoremap <silent> <C-w><down> :silent call funcs#TmuxMove('j')<Cr>
-  nnoremap <silent> <C-w><up> :silent call funcs#TmuxMove('k')<Cr>
-  nnoremap <silent> <C-w><left> :silent call funcs#TmuxMove('h')<Cr>
-  nnoremap <silent> <C-w><right> :silent call funcs#TmuxMove('l')<Cr>
-  tnoremap <silent> <C-\><C-N><C-w>j :silent call funcs#TmuxMove('j')<Cr>
-  tnoremap <silent> <C-\><C-N><C-w>k :silent call funcs#TmuxMove('k')<Cr>
-  tnoremap <silent> <C-\><C-N><C-w>h :silent call funcs#TmuxMove('h')<Cr>
-  tnoremap <silent> <C-\><C-N><C-w>l :silent call funcs#TmuxMove('l')<Cr>
 endif
 
 augroup CloseLocListWindowGroup

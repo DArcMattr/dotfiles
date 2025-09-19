@@ -49,3 +49,28 @@ function U.utils.dapRunConfigWithArgs()
   )
 end
 
+function U.utils.tmux_move(direction)
+  local oldw = vim.fn.winnr()
+
+  vim.cmd('silent! wincmd ' .. direction)
+  local neww = vim.fn.winnr()
+
+  -- Move back to original window
+  vim.cmd('silent! ' .. oldw .. 'wincmd w')
+
+  if oldw == neww then
+    local tmux_commands = {
+      j = "tmux select-pane -D",
+      k = "tmux select-pane -U",
+      h = "tmux select-pane -L",
+      l = "tmux select-pane -R"
+    }
+
+    local cmd = tmux_commands[direction]
+    if cmd then
+      vim.fn.system(cmd)
+    end
+  else
+    vim.cmd('wincmd ' .. direction)
+  end
+end
