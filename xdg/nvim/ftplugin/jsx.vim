@@ -12,5 +12,5 @@ let g:user_emmet_settings = {
 \  }
 
 lua <<EOF
-require'lspconfig'.tsserver.setup{}
+vim.lsp.enable('tsserver')
 EOF
