@@ -7,6 +7,7 @@ tmux split-window -h -l 50% -t "${SESSION}:1.0"
 tmux new-window -t "${SESSION}":2
 tmux send-keys -t "${SESSION}":2 "btop" C-m
 tmux rename-window -t "${SESSION}":2 "btop"
+tmux set -t "${SESSION}":2 monitor-activity off
 
 DIRECTORY="${HOME}/projects/handmade"
 tmux new-window -t "${SESSION}:3" -c "${DIRECTORY}" \; \
