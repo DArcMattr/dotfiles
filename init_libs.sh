@@ -98,22 +98,24 @@ grab_rust() {
 
 grab_pips() {
   config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
+
+  curl -LsSf https://astral.sh/uv/install.sh | sh # aaaaaa
   pip3pkgs=(
     'docutils'
     'doge'
     'flake8'
     'gsutil'
-    'hg-git'
+    # 'hg-git'
     'httpie'
     'icdiff'
     'marimo'
     'mercurial'
-    'msgpack'
+    # 'msgpack'
     'mycli'
     'neovim-remote'
     'pip'
     'git+https://github.com/powerline/powerline.git@2.8.4'
-    'psutil'
+    # 'psutil'
     'pyemojify'
     'pynvim'
     'python-lsp-server[yapf]'
@@ -121,7 +123,12 @@ grab_pips() {
     'sphinx'
   )
 
-  pip install -U --user --break-system-packages ${pip3pkgs}
+  for i in $pip3pkgs
+  do
+    uv tool install ${i} --force
+  done
+
+  # pip install -U --user --break-system-packages ${pip3pkgs}
 
   ## redundant to force an update of specific packages, then to update all the
   ## installed ones
