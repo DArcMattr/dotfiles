@@ -28,7 +28,7 @@
   verbose = true
 [core]
   attributesfile = ~/.config/git/attributes
-  autocrlf = input
+  autocrlf = false
   eol = lf
   safecrlf = warn
   whitespace = trailing-space,space-before-tab,indent-with-non-tab
