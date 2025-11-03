@@ -1,43 +1,28 @@
 U = {}
 require('utils')
 
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
     lazypath,
   })
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.filetype.add {
-  extension = {
-    zsh = 'sh',
-    sh = 'sh',
-  },
-  filename = {
-    ['.zshrc'] = "sh",
-    ['.zshenv'] = "sh",
-    ['.zprofile'] = "sh",
-    ['.in'] = "sh",
-    ['.out'] = "sh",
-  },
-}
-
 vim.g.c_space_errors = 1
 vim.g.editorconfig_enable = true
 vim.g.indent_guides_enable_on_vim_startup = 1
-vim.g.indent_guides_exclude_filetypes = {'help', 'man', 'netrw'}
+vim.g.indent_guides_exclude_filetypes = {'help', 'lazy', 'man', 'netrw'}
 vim.g.loaded_perl_provider = 0
 vim.g.mapleader = ','
 vim.g.maplocalleader = ' '
 
 -- load LSP servers which cover more than one filetype
-vim.lsp.enable('bashls')
 vim.lsp.enable('docker-language-server')
 vim.lsp.enable('html')
 vim.lsp.enable('ts_ls')
@@ -107,7 +92,7 @@ local lazyvim_plugins = {
           layout = {
             min_width = { 20, .1 },
             resize_to_content = true,
-            default_direction = "prefer_left",
+            default_direction = 'prefer_left',
             win_opts = {
               signcolumn = 'no',
               statuscolumn = ' ',
@@ -116,7 +101,7 @@ local lazyvim_plugins = {
         },
       },
       {
-        "ray-x/go.nvim",
+        'ray-x/go.nvim',
         config = function()
           require('go').setup()
         end,
@@ -256,7 +241,11 @@ local lazyvim_plugins = {
       dap.listeners.after.event_exited['dapui_config']      = dapui.close
 
       dapui.setup({
-        icons = { expanded = "▾", collapsed = "▸", current_frame = "»" },
+        icons = {
+          expanded = '▾',
+          collapsed = '▸',
+          current_frame = '»'
+        },
         layouts = {
             {
               elements = {
@@ -324,9 +313,7 @@ local lazyvim_plugins = {
             'filename',
             path = 1,
           },
-        },
-        lualine_x = {
-          'aerial'
+          'aerial',
         },
       },
       tabline = {
@@ -336,7 +323,7 @@ local lazyvim_plugins = {
             mode = 4,
           },
         },
-        lualine_z = {'tabs'},
+        lualine_z = { 'tabs' },
       },
     },
   },
@@ -470,10 +457,10 @@ vim.keymap.set('n', '<C-f>',          '<C-f>zz')
 vim.keymap.set('n', '<C-u>',          '<C-u>zz')
 vim.keymap.set('n', '<C-y>',          '3<C-y>')
 vim.keymap.set('n', '<Leader><S-b>',  'gUiw')
-vim.keymap.set('n', '<Leader>ss',   function() vim.opt.spell = not(vim.opt.spell:get())  end, { silent = true })
-vim.keymap.set('n', '<Leader>[',      vim.diagnostic.goto_prev)
-vim.keymap.set('n', '<Leader>]',      vim.diagnostic.goto_next)
-vim.keymap.set('n', '<Leader>a',      function() vim.opt.relativenumber = not(vim.opt.relativenumber:get()) end)
+vim.keymap.set('n', '<Leader>ss',     function() vim.opt.spell = not vim.api.nvim_get_option_value('spell', {}) end, { silent = true })
+vim.keymap.set('n', '<Leader>[',      function() vim.diagnostic.jump({count = 1}) end)
+vim.keymap.set('n', '<Leader>]',      function() vim.diagnostic.jump({count = -1}) end)
+vim.keymap.set('n', '<Leader>a',      function() vim.opt.relativenumber = not vim.api.nvim_get_option_value('relativenumber', {}) end)
 vim.keymap.set('n', '<Leader>b',      'guiw')
 vim.keymap.set('n', '<Leader>gb',     ':Git blame<Cr>')
 vim.keymap.set('n', '<Leader>gc',     ':Git commit<Cr>')
@@ -560,15 +547,8 @@ vim.diagnostic.config({
   virtual_text = { current_line = true },
 })
 
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-  vim.lsp.handlers.hover,
-  { border = 'rounded' }
-)
-
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
-  vim.lsp.handlers.signature_help,
-  { border = 'rounded' }
-)
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.buf.hover({border = 'rounded'})
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.buf.signature_help({border = 'rounded'})
 
 local ModeEvents = vim.api.nvim_create_augroup('ModeEvents', { clear = true })
 vim.api.nvim_create_autocmd('ModeChanged', {
@@ -588,7 +568,7 @@ local FocusEvents = vim.api.nvim_create_augroup('FocusEvents', { clear = true })
 vim.api.nvim_create_autocmd({ 'FocusGained' }, {
   pattern = '*',
   group = FocusEvents,
-  callback = function(buf)
+  callback = function()
     vim.opt.winhighlight = 'Normal:Normal,EndOfBuffer:Normal'
     vim.opt.cursorcolumn = true
     vim.opt.cursorline = true
@@ -597,7 +577,7 @@ vim.api.nvim_create_autocmd({ 'FocusGained' }, {
 vim.api.nvim_create_autocmd({ 'FocusLost' }, {
   pattern = '*',
   group = FocusEvents,
-  callback = function(buf)
+  callback = function()
     vim.opt.winhighlight = 'Normal:NormalNC,EndOfBuffer:NormalNC'
     vim.opt.cursorcolumn = false
     vim.opt.cursorline = false
@@ -639,24 +619,24 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
 local FugitiveStuffs = vim.api.nvim_create_augroup('FugitiveStuffs', { clear = true })
 vim.api.nvim_create_autocmd({'QuickFixCmdPost'}, {
   group = FugitiveStuffs,
-  pattern = { "*grep*" },
+  pattern = { '*grep*' },
   command = 'cwindow',
 })
 vim.api.nvim_create_autocmd({'QuickFixCmdPost'}, {
   group = FugitiveStuffs,
-  pattern = { "*llog*" },
+  pattern = { '*llog*' },
   command = 'cwindow',
 })
 vim.api.nvim_create_autocmd({'QuickFixCmdPost'}, {
   group = FugitiveStuffs,
-  pattern = { "*log*" },
+  pattern = { '*log*' },
   command = 'lwindow',
 })
 vim.api.nvim_create_autocmd({'BufReadPost'}, {
   group = FugitiveStuffs,
-  pattern = { "fugitive://*" },
+  pattern = { 'fugitive://*' },
   callback = function()
-      vim.opt.bufhidden = delete
+      vim.opt.bufhidden = 'delete'
     end
 })
 
@@ -739,12 +719,12 @@ augroup StartupStuffs
 augroup END
 ]])
 
-vim.cmd.colorscheme('industry')
+vim.cmd.colorscheme('koehler')
+vim.api.nvim_set_hl(0, 'Normal', { bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'Cursor', { })
 vim.api.nvim_set_hl(0, 'TermCursor', { link = 'Cursor' })
 vim.api.nvim_set_hl(0, 'CursorLine', { underline = true })
 vim.api.nvim_set_hl(0, 'CursorColumn', { reverse = true, blend = 50 })
-vim.api.nvim_set_hl(0, 'Normal', { bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'EndOfBuffer', { link = 'Normal' })
 vim.api.nvim_set_hl(0, 'NonText', { link = 'Normal' })
 vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#111111' })
