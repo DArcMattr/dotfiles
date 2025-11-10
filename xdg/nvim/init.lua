@@ -330,7 +330,6 @@ local lazyvim_plugins = {
   { 'tpope/vim-fugitive' },
   { 'tpope/vim-repeat' },
   { 'tpope/vim-surround' },
-  { 'vim-scripts/DirDiff.vim' },
   {
     'windwp/nvim-autopairs',
     config = function()
