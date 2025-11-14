@@ -1,10 +1,11 @@
 #!/bin/sh
 
-tmux set -ga terminal-overrides ",*:Tc"
+tmux set -gw window-size largest
 tmux set -ga aggressive-resize off
+tmux set -ga terminal-overrides ",*:Tc"
 tmux set -gas terminal-overrides ',*:smuc=\E[4:3m'
 tmux set -gas terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
-tmux set -gas terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours - needs tmux-3.0
+tmux set -gas terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
 
 tmux split-window -h -l 50% -t "${SESSION}:1.0" \; \
 	split-window -v -l 50% -t "${SESSION}:1.1"
@@ -21,11 +22,13 @@ tmux new-window -t "${SESSION}:3" -c "${DIRECTORY}" \; \
 	split-window -h -l 60% -t "${SESSION}:3.0" -c "${DIRECTORY}" \; \
 	split-window -v -l 50% -t "${SESSION}:3.0" -c "${DIRECTORY}" \; \
 	split-window -v -l 50% -t "${SESSION}:3.0" -c "${DIRECTORY}" \; \
-	split-window -v -l 50% -t "${SESSION}:3.2" -c "${DIRECTORY}"
+	split-window -v -l 50% -t "${SESSION}:3.2" -c "${DIRECTORY}" \; \
+	split-window -v -l 10% -t "${SESSION}:3.4" -c "${DIRECTORY}"
 tmux rename-window -t "${SESSION}:3" "API"
 tmux select-pane -t "${SESSION}:3.4"
 
 tmux send-keys -t "${SESSION}:3.1" "cake console" C-m
 tmux send-keys -t "${SESSION}:3.2" "sqlcmd" C-m
-#tmux send-keys -t "${SESSION}:3.3" "xtail ${DIRECTORY}/logs/api/cake/*-debug-*.log" C-m
+tmux send-keys -t "${SESSION}:3.5" "claude" C-m
+#tmux send-keys -t "${SESSION}:3.3" "xtail ${DIRECTORY}/logs/api/cake/{application,queries,error}-*.log" C-m
 tmux send-keys -t "${SESSION}:3.3" "tail -n 100 -F ${DIRECTORY}/logs/api/cake/{application,queries,error}-*.log" C-m
