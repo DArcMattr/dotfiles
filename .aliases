@@ -19,8 +19,7 @@ dir() {
 if lsd >/dev/null 2>&1; then
   alias ls=lsd
   dir() {
-    LL=$(ll --color=always --icon=always "${@}")
-    echo "${LL}" | ${PAGER:-less}
+    lsd -alFgh "${@}" | ${PAGER:-less}
   }
 elif ls --color=always -d . >/dev/null 2>&1; then
   alias ls='\ls --color=always'
