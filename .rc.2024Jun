@@ -21,7 +21,3 @@ cbuild() {
   base=${1:r}
   clang -g -c -o ./${base}.o ./${base}.c ; clang -g -lSDL3 -o ./${base} ./${base}.o
 }
-
-if [ -z "$TMUX" ]; then
-  tmuxt
-fi
