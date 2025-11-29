@@ -676,6 +676,47 @@ vim.api.nvim_create_autocmd({'WinEnter','BufEnter','BufRead','FileType'}, {
   end,
 })
 
+vim.api.nvim_create_autocmd('TermOpen', {
+  group = StartupStuffs,
+  pattern = '*',
+  callback = function()
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+    vim.cmd.startinsert()
+  end,
+})
+
+vim.api.nvim_create_autocmd('VimResized', {
+  group = StartupStuffs,
+  pattern = '*',
+  command = 'normal! <C-w>='
+})
+
+vim.api.nvim_create_autocmd('QuitPre', {
+  group = StartupStuffs,
+  pattern = '*',
+  callback = function()
+    if vim.bo.buftype == '' then
+      vim.cmd.lclose()
+    end
+  end
+})
+
+vim.api.nvim_create_user_command(
+  'Silent',
+  U.utils.silent_execute_shell,
+  { nargs = 1, complete = 'shellcmd', }
+)
+
+vim.api.nvim_create_user_command(
+  'DiffOrig',
+  U.utils.diff_orig,
+  {
+    nargs = 0,
+    desc = 'Diff the current buffer against the file on disk'
+  }
+)
+
 -- adapted from https://gist.github.com/tarruda/5158535
 if os.getenv('TMUX') ~= nil then
   vim.keymap.set('n', '<C-w>h',            function() U.utils.tmux_move('h') end, { desc = 'Move Left (tmux aware)',  silent = true })
@@ -693,29 +734,12 @@ if os.getenv('TMUX') ~= nil then
 end
 
 vim.cmd([[
-command! -nargs=1 Silent |
-\   execute ':silent !'.<q-args> |
-\   :redraw!<Cr>
-
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 if !exists(':DiffOrig')
   command DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_ | diffthis
   \   | wincmd p | diffthis
 endif
-
-augroup CloseLocListWindowGroup
-  autocmd!
-  autocmd QuitPre * if empty(&buftype) | lclose | endif
-augroup END
-
-augroup StartupStuffs
-  autocmd!
-  autocmd TermOpen *
-  \ setlocal nonumber norelativenumber |
-  \ startinsert
-  autocmd VimResized * execute 'normal! \<C-w>='
-augroup END
 ]])
 
 vim.cmd.colorscheme('koehler')
