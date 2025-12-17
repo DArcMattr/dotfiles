@@ -72,6 +72,7 @@ grab_rust() {
     neovide
     "ripgrep --features 'pcre2'"
     starship
+    uv
     tree-sitter-cli
   )
   dir="${HOME}/.cargo/bin"
@@ -96,26 +97,22 @@ grab_rust() {
   "${dir}/rg" --generate complete-zsh >! "${HOME}"/.local/share/zsh/site-functions/_rg
 }
 
-grab_pips() {
+grab_pips() { # install after rust install, which installs uv
   config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
 
-  curl -LsSf https://astral.sh/uv/install.sh | sh # aaaaaa
   pip3pkgs=(
     'docutils'
     'doge'
     'flake8'
     'gsutil'
-    # 'hg-git'
     'httpie'
     'icdiff'
     'marimo[recommended]'
     'mercurial'
-    # 'msgpack'
-    'mycli'
+    'mycli[all]'
     'neovim-remote'
     'pip'
     'git+https://github.com/powerline/powerline.git@2.8.4'
-    # 'psutil'
     'pyemojify'
     'pynvim'
     'python-lsp-server[yapf]'
