@@ -3,7 +3,8 @@ alias wtfsound='systemctl --user restart pipewire-pulse.socket ; systemctl --use
 
 superupdate_local() {
   (cd ~/contrib/neovim && \
-    git up && \
+    git fetch --all --prune --prune-tags --force && \
+    git merge --ff-only @{u} && \
     rm -rf ~/.local/share/nvim/runtime && \
     make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX="${LOCAL}" install clean)
   rehash
