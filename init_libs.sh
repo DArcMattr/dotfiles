@@ -74,6 +74,7 @@ grab_rust() {
     starship
     uv
     tree-sitter-cli
+    uv
   )
   dir="${HOME}/.cargo/bin"
   if [ ! -x "${dir}" ] && [ ! "$(which rustc >/dev/null)" ]; then
