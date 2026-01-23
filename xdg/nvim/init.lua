@@ -30,56 +30,49 @@ vim.lsp.enable('ts_ls')
 local lazyvim_plugins = {
   {
     'nvim-treesitter/nvim-treesitter',
-    config = function()
-      local configs = require('nvim-treesitter.configs')
-      configs.setup({
-        autotag = {
-          enable = true,
-        },
-        ensure_installed = {
-          'bash',
-          'c',
-          'c_sharp',
-          'comment',
-          'css',
-          'diff',
-          'gitcommit',
-          'go',
-          'gomod',
-          'gosum',
-          'gotmpl',
-          'gowork',
-          'html',
-          'javascript',
-          'jsdoc',
-          'json',
-          'lua',
-          'make',
-          'markdown',
-          'markdown_inline',
-          'php',
-          'phpdoc',
-          'python',
-          'rst',
-          'sql',
-          'vim',
-          'vimdoc',
-          'xml',
-          'yaml',
-        },
-        highlight = {
-          disabled = {},
-          enable = true,
-        },
-        indent = {
-          enable = true,
-        },
-      })
-    end,
-    build = function()
-      local ts_update = require('nvim-treesitter.install').update({ with_sync = true})
-      ts_update()
-    end,
+    build = ":TSUpdate",
+    main = 'nvim-treesitter.configs',
+    autotag = {
+      enable = true,
+    },
+    ensure_installed = {
+      'bash',
+      'c',
+      'c_sharp',
+      'comment',
+      'css',
+      'diff',
+      'gitcommit',
+      'go',
+      'gomod',
+      'gosum',
+      'gotmpl',
+      'gowork',
+      'html',
+      'javascript',
+      'jsdoc',
+      'json',
+      'lua',
+      'make',
+      'markdown',
+      'markdown_inline',
+      'php',
+      'phpdoc',
+      'python',
+      'rst',
+      'sql',
+      'vim',
+      'vimdoc',
+      'xml',
+      'yaml',
+    },
+    sync_install = false,
+    highlight = {
+      enable = true,
+    },
+    indent = {
+      enable = true,
+    },
     dependencies = {
       'windwp/nvim-ts-autotag',
       {
