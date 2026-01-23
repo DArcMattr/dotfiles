@@ -32,9 +32,6 @@ local lazyvim_plugins = {
     'nvim-treesitter/nvim-treesitter',
     build = ":TSUpdate",
     main = 'nvim-treesitter.configs',
-    autotag = {
-      enable = true,
-    },
     ensure_installed = {
       'bash',
       'c',
@@ -74,7 +71,10 @@ local lazyvim_plugins = {
       enable = true,
     },
     dependencies = {
-      'windwp/nvim-ts-autotag',
+      {
+        'windwp/nvim-ts-autotag',
+        opts = {},
+      },
       {
         'stevearc/aerial.nvim',
         event = { 'VeryLazy' },
@@ -95,16 +95,15 @@ local lazyvim_plugins = {
       },
       {
         'ray-x/go.nvim',
-        config = function()
-          require('go').setup()
-        end,
         event = { 'CmdLineEnter' },
         ft = { 'go', 'gomod' },
         build = ':lua require("go.install").update_all_sync()',
-        dependencies = { 'nvim-neotest/nvim-nio' }
+        dependencies = { 'nvim-neotest/nvim-nio' },
+        config = function()
+          require('go').setup()
+        end,
       },
     },
-    event = { 'VeryLazy', },
   },
   {
     'hrsh7th/nvim-cmp',
@@ -198,9 +197,6 @@ local lazyvim_plugins = {
         'rcarriga/nvim-dap-ui',
         dependencies = {
           'nvim-neotest/nvim-nio',
-        },
-        requires = {
-          'mfussenegger/nvim-dap',
         },
       },
     },
