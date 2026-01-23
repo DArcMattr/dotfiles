@@ -334,9 +334,12 @@ local lazyvim_plugins = {
   },
 }
 
-require('lazy').setup(lazyvim_plugins, {
-  spec = {}
-})
+require('lazy').setup(
+  vim.list_extend(
+    vim.list_extend({}, lazyvim_plugins),
+    U.utils.loadLocalPlugins()
+  )
+)
 
 -- Globals live in U namespace
 U.capabilities = require'cmp_nvim_lsp'.default_capabilities()

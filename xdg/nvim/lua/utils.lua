@@ -1,5 +1,14 @@
 U.utils = {}
 
+function U.utils.loadLocalPlugins()
+  local path = vim.fn.getcwd() .. '/.nvim-plugins.lua'
+  if vim.fn.filereadable(path) == 1 then
+    local ok, plugins = pcall(dofile, path)
+    return ok and plugins or {}
+  end
+  return {}
+end
+
 -- @link https://github.com/timtyrrell/dotfiles/blob/main/debugHelper.lua
 -- global function that loads a dap config and prompts for input args
 function U.utils.dapRunConfigWithArgs()
