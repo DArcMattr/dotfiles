@@ -72,9 +72,10 @@ grab_rust() {
     neovide
     "ripgrep --features 'pcre2'"
     starship
-    uv
     tree-sitter-cli
+    typst-cli
     uv
+    wasmtime-cli
   )
   dir="${HOME}/.cargo/bin"
   if [ ! -x "${dir}" ] && [ ! "$(which rustc >/dev/null)" ]; then
