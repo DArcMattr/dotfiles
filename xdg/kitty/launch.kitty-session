@@ -1,1 +1,1 @@
-launch --cwd=$HOME ./.config/kitty/tmux.sh
+launch zsh -c "exec ~/.config/kitty/tmux.sh"

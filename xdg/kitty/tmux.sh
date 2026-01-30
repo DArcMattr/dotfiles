@@ -1,3 +1,3 @@
 #!/usr/bin/env zsh
-source ~/dotfiles/functions/tmuxt
-tmuxt
+# Execute the tmuxt script directly (it's not a function, it's a script)
+exec ~/dotfiles/functions/tmuxt

@@ -103,6 +103,12 @@ Create a desktop shortcut, with Properties: Target
 C:\Windows\System32\wsl.exe -e zsh -lic "nohup wezterm &"
 ```
 
+#### kitty.cmd
+```
+@echo off
+wsl.exe -d UbuntuCustom --exec zsh -l -c "~/.local/bin/kitty"
+```
+
 #### Powershell on Windows
 
 Install Chocolatey and activate winget [TODO]
