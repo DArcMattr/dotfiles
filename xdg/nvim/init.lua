@@ -16,8 +16,6 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.c_space_errors = 1
 vim.g.editorconfig_enable = true
-vim.g.indent_guides_enable_on_vim_startup = 1
-vim.g.indent_guides_exclude_filetypes = {'help', 'lazy', 'man', 'netrw'}
 vim.g.loaded_perl_provider = 0
 vim.g.mapleader = ','
 vim.g.maplocalleader = ' '
@@ -26,6 +24,11 @@ vim.g.maplocalleader = ' '
 vim.lsp.enable('docker-language-server')
 vim.lsp.enable('html')
 vim.lsp.enable('ts_ls')
+
+local indent_highlights = {
+  'Whitespace',
+  'NormalFloat',
+}
 
 local lazyvim_plugins = {
   {
@@ -283,7 +286,21 @@ local lazyvim_plugins = {
     end,
   },
   { 'mhinz/vim-signify' },
-  { 'nathanaelkane/vim-indent-guides' },
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
+    opts = {
+      indent = {
+        highlight = indent_highlights,
+        char = '',
+      },
+      whitespace = {
+        highlight = indent_highlights,
+        remove_blankline_trail = false,
+      },
+      scope = { enabled = false, },
+    },
+  },
   {
     'neovim/nvim-lspconfig',
     dependencies = {
