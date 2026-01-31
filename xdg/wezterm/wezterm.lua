@@ -60,36 +60,39 @@ config.window_close_confirmation = 'NeverPrompt'
 config.window_decorations = 'NONE'
 
 wezterm.on("update-status", function(window, _)
-	local SOLID_LEFT_ARROW = ""
-	local prefix = ""
-	local date = wezterm.strftime '%Y-%m-%d %H:%M:%S'
+    local SOLID_LEFT_ARROW = ""
+    local prefix = ""
+    local date = wezterm.strftime '%Y-%m-%d %H:%M:%S'
 
-	if window:leader_is_active() then
-		prefix = " " .. utf8.char(0x1f47e) .. " "
-		SOLID_LEFT_ARROW = utf8.char(0xe0b2)
+    -- Initialize with a default (empty string or specific color)
+    -- so it's never nil when wezterm.format is called
+    local ARROW_FOREGROUND = { Text = "" }
+
+    if window:leader_is_active() then
+        prefix = " " .. utf8.char(0x1f47e) .. " "
+        SOLID_LEFT_ARROW = utf8.char(0xe0b2)
 
         if window:active_tab():tab_id() ~= 0 then
             ARROW_FOREGROUND = { Foreground = { Color = "#1e2030" } }
-        end
-
-        if window:active_tab():tab_id() == 0 then
+        else
+            -- Using 'else' is cleaner than two 'if' statements for tab_id == 0
             ARROW_FOREGROUND = { Foreground = { Color = "#C6A0F6" } }
         end
-	end
+    end
 
-	window:set_left_status(wezterm.format{
-		{ Background = { Color = "#b7bdf8" } },
-		{ Text = prefix },
-		ARROW_FOREGROUND,
-		{ Text = SOLID_LEFT_ARROW },
-	})
+    window:set_left_status(wezterm.format{
+        { Background = { Color = "#b7bdf8" } },
+        { Text = prefix },
+        ARROW_FOREGROUND, -- This is now guaranteed to be a valid table
+        { Text = SOLID_LEFT_ARROW },
+    })
 
-	window:set_right_status(wezterm.format{
-		{ Background = { Color = "#dd3333" } },
-		{ Foreground = { Color = "#eeeeee" } },
-		{ Text = date },
-    { }
-	})
+    window:set_right_status(wezterm.format{
+        { Background = { Color = "#dd3333" } },
+        { Foreground = { Color = "#eeeeee" } },
+        { Text = date },
+        -- Removed the empty { } table that was causing the 0 keys error
+    })
 end)
 
 return config
