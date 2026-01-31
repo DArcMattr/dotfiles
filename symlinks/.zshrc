@@ -30,10 +30,6 @@ if [[ -n ${ZSH_VERSION-} ]]; then
     unset have
     (( ${+commands[$1]} )) && have=yes
   }
-
-  if [[ -d /etc/bash_completion.d/ ]]; then
-    source /etc/bash_completion.d/*
-  fi
 fi
 
 unsetopt correct
