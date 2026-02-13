@@ -1,8 +1,5 @@
 #!/bin/sh
 
-tmux set-option -as terminal-features ",xterm-kitty:clipboard"
-tmux set-option -ga terminal-overrides ",*:Tc"
-
 tmux split-window -h -l 50% -t "${SESSION}:1.0"
 
 tmux new-window -t "${SESSION}":2
