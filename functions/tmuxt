@@ -8,7 +8,7 @@
   if tmux has-session -t "${SESSION}" >/dev/null 2>&1; then
     echo "Session ${SESSION} already exists, attaching"
   else
-    TERM=tmux-256color tmux new-session -d -s "${SESSION}" -x "$(tput cols)" -y "$(tput lines)"
+    tmux new-session -d -s "${SESSION}" -x "$(tput cols)" -y "$(tput lines)"
 
     if [ ! -n "${SSH_CLIENT}" ] && [ ! -n "${SSH_TTY}" ]; then
       tmux set-option -t "${SESSION}" status-position top

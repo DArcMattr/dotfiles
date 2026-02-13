@@ -1,1 +1,1 @@
-export DOCKER_HOST=unix://${XDG_RUNTIME_DIR}/docker.sock
+# in case if I need anything local

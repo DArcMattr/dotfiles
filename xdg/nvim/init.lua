@@ -727,7 +727,7 @@ vim.api.nvim_create_user_command(
 )
 
 -- adapted from https://gist.github.com/tarruda/5158535
-if os.getenv('TMUX') ~= nil then
+if vim.env.TMUX then
   vim.keymap.set('n', '<C-w>h',            function() U.utils.tmux_move('h') end, { desc = 'Move Left (tmux aware)',  silent = true })
   vim.keymap.set('n', '<C-w>j',            function() U.utils.tmux_move('j') end, { desc = 'Move Down (tmux aware)',  silent = true })
   vim.keymap.set('n', '<C-w>k',            function() U.utils.tmux_move('k') end, { desc = 'Move Up (tmux aware)',    silent = true })
