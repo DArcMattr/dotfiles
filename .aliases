@@ -71,7 +71,7 @@ catmd() {
 
   printf "${TMPFILE}\n"
 
-  pandoc -s --self-contained -c ~/.pandoc/buttondown.css \
+  pandoc -s --embed-resources --standalone -c ~/.pandoc/buttondown.css \
     --metadata title="${@}" \
     -t html5 -f gfm+smart "${@}" -o "${TMPFILE}"
 
