@@ -19,6 +19,17 @@ vim.g.editorconfig_enable = true
 vim.g.loaded_perl_provider = 0
 vim.g.mapleader = ','
 vim.g.maplocalleader = ' '
+vim.g.clipboard = {
+  name = 'OSC 52',
+  copy = {
+    ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+    ['_'] = require('vim.ui.clipboard.osc52').copy('*'),
+  },
+  paste = {
+    ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+    ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+  },
+}
 
 -- load LSP servers which cover more than one filetype
 vim.lsp.enable('docker-language-server')
