@@ -26,10 +26,12 @@
 # Remove -X and -F (exit if the content fits on one screen) to enable it.
 # export LESS='-F -g -i -M -R -S -w -X -z-4'
 
+_cols=$(tput cols 2>/dev/null || echo 80)
+
 export PAGER='less'
 export LESS="-~EFiIMQRsx2X"
 export LESSCHARSET=utf-8
-export MANWIDTH="$(( 96 > $(tput cols) ? $(tput cols) : 96 ))"
+export MANWIDTH="$(( 96 > ${_cols:-80} ? ${_cols:-80} : 96 ))"
 export PYTHONSTARTUP="${HOME}/dotfiles/helpers/pythonstartup.py"
 export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
 export HGEDITOR="${HOME}/dotfiles/helpers/hgeditor"
