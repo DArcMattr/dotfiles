@@ -3,6 +3,7 @@ local wezterm = require 'wezterm'
 local act = wezterm.action
 local config = wezterm.config_builder()
 local mux = wezterm.mux
+local hostname = wezterm.hostname()
 
 config.color_scheme = 'Campbell (Gogh)'
 config.exit_behavior = 'CloseOnCleanExit'
@@ -53,96 +54,140 @@ config.keys = {
   { key = '0', mods = 'LEADER|CTRL',  action=act.ResetFontSize},
 }
 for i = 0, 9 do
-	table.insert(config.keys, {
-		key = tostring((i + 1) % 10),
-		mods = 'LEADER',
-		action = wezterm.action.ActivateTab(i),
-	})
+  table.insert(config.keys, {
+    key = tostring((i + 1) % 10),
+    mods = 'LEADER',
+    action = wezterm.action.ActivateTab(i),
+  })
 end
 config.leader = { key='b', mods='ALT' }
-config.unix_domains = {
-  {
-    name = 'unix',
+config.default_workspace = 'Main'
+config.enable_tab_bar = true
+config.use_fancy_tab_bar = false
+config.tab_max_width = 32
+config.colors = {
+  tab_bar = {
+    -- The color of the strip that goes along the top/bottom of the tabs
+    background = '#1e1e2e',
+
+    -- The active tab (The one you're on)
+    active_tab = {
+      bg_color = '#89b4fa',
+      fg_color = '#1e1e2e',
+      intensity = 'Bold',
+    },
+
+    -- Inactive tabs
+    inactive_tab = {
+      bg_color = '#313244',
+      fg_color = '#cdd6f4',
+    },
+
+    -- Hovering over a tab
+    inactive_tab_hover = {
+      bg_color = '#45475a',
+      fg_color = '#f5e0dc',
+    },
   },
 }
-config.default_gui_startup_args = { 'connect', 'unix' }
 config.window_close_confirmation = 'NeverPrompt'
 config.window_decorations = 'NONE'
 
-wezterm.on('update-status', function(window, _)
-    local SOLID_LEFT_ARROW = ""
-    local prefix = ""
-    local date = wezterm.strftime '%Y-%m-%d %H:%M:%S'
+wezterm.on('update-status', function(window, pane)
+  local cells = {}
+  local ARROW = utf8.char(0xe0b0)
+  local ARROW_LEFT = utf8.char(0xe0b2)
 
-    -- Initialize with a default (empty string or specific color)
-    -- so it's never nil when wezterm.format is called
-    local ARROW_FOREGROUND = { Text = "" }
+  local blue_bg = '#005fff'
+  local grey_bg = '#3a3a3a'
+  local white_fg = '#ffffff'
 
-    if window:leader_is_active() then
-        prefix = " " .. utf8.char(0x1f47e) .. " "
-        SOLID_LEFT_ARROW = utf8.char(0xe0b2)
+  window:set_left_status(wezterm.format{
+    { Background = { Color = blue_bg } },
+    { Foreground = { Color = white_fg } },
+    { Text = '  ' .. window:active_workspace() .. '  ' },
 
-        if window:active_tab():tab_id() ~= 0 then
-            ARROW_FOREGROUND = { Foreground = { Color = "#1e2030" } }
-        else
-            -- Using 'else' is cleaner than two 'if' statements for tab_id == 0
-            ARROW_FOREGROUND = { Foreground = { Color = "#C6A0F6" } }
-        end
-    end
+    { Foreground = { Color = blue_bg } },
+    { Background = { Color = grey_bg } },
+    { Text = ARROW },
 
-    window:set_left_status(wezterm.format{
-        { Background = { Color = "#b7bdf8" } },
-        { Text = prefix },
-        ARROW_FOREGROUND, -- This is now guaranteed to be a valid table
-        { Text = SOLID_LEFT_ARROW },
-    })
+    { Foreground = { Color = white_fg } },
+    { Text = ' ' .. wezterm.hostname() .. ' ' },
 
-    window:set_right_status(wezterm.format{
-        { Background = { Color = "#dd3333" } },
-        { Foreground = { Color = "#eeeeee" } },
-        { Text = date },
-        -- Removed the empty { } table that was causing the 0 keys error
-    })
-end)
+    { Foreground = { Color = grey_bg } },
+    { Background = { Color = 'none' } },
+    { Text = ARROW },
+  })
 
-wezterm.on('mux-startup', function()
-  local workspace = 'Main'
-  local windows = mux.all_windows()
-  local window
-  local tab1
-  local pane1
-  if #windows > 0 then
-    window = windows[1]
-    tab1 = window:active_tab()
-    pane1 = tab1:active_pane()
-  else
-    tab1, pane1, window = mux.spawn_window { workspace = workspace }
+  local date = wezterm.strftime('%b %d %H:%M')
+  local time = wezterm.strftime('%H:%M %z')
+
+  local success, stdout, stderr = wezterm.run_child_process({ 'uptime', '-p' })
+  local uptime = success and stdout:gsub('^up ', ''):gsub('\n', '') or '?'
+
+  window:set_right_status(wezterm.format({
+    -- Uptime Segment
+    { Foreground = { Color = '#3a3a3a' } },
+    { Text = ARROW_LEFT },
+    { Background = { Color = '#3a3a3a' } },
+    { Foreground = { Color = '#ffffff' } },
+    { Text = ' ' .. uptime .. ' ' },
+
+    { Foreground = { Color = '#8a8a8a' } },
+    { Background = { Color = '#3a3a3a' } },
+    { Text = ARROW_LEFT },
+    { Background = { Color = '#8a8a8a' } },
+    { Foreground = { Color = '#1c1c1c' } },
+    { Text = ' ' .. date .. ' ' },
+
+    { Foreground = { Color = '#8a8a8a' } },
+    { Background = { Color = '#3a3a3a' } },
+    { Text = ARROW_LEFT },
+    { Background = { Color = '#8a8a8a' } },
+    { Foreground = { Color = '#1c1c1c' } },
+    { Text = ' ' .. time .. ' ' },
+  }))
+
+  if window:leader_is_active() then
+    table.insert(cells, { Background = { Color = '#fab387' } })
+    table.insert(cells, { Foreground = { Color = '#1e1e2e' } })
+    table.insert(cells, { Text = ' ' .. utf8.char(0x1f47e) .. ' ' })
   end
-  window:set_workspace(workspace)
-  tab1:set_title('Home')
-  pane1:split { direction = 'Right', size = 0.5 }
 
-  local tab2, _, _ = window:spawn_tab { args = { 'btop' } }
-  tab2:set_title('btop')
-
-  local handmade_dir = wezterm.home_dir .. '/projects/handmade'
-  local tab3, pane3, _ = window:spawn_tab { cwd = handmade_dir }
-
-  tab3:set_title('Handmade')
-  local p3_right = pane3:split {
-    direction = 'Right',
-    size = 0.666,
-    top_level = true,
-  }
-
-  p3_right:split {
-    direction = 'Bottom',
-    size = 0.2,
-  }
-
-  pane1:activate()
-  p3_right:activate()
-  tab1:activate()
+  if window:active_pane():is_zoomed() then
+    table.insert(cells, { Background = { Color = '#f38ba8' } })
+    table.insert(cells, { Text = ' ZOOM ' })
+  end
 end)
+
+wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
+  local ARROW_RIGHT = utf8.char(0xe0b0) -- 
+  local edge_background = '#1e1e2e' -- Match your main terminal bg
+  local background = '#3a3a3a'
+  local foreground = '#8a8a8a'
+
+  if tab.is_active then
+      background = '#005f87'
+      foreground = '#ffffff'
+  end
+
+  return {
+    { Background = { Color = background } },
+    { Foreground = { Color = foreground } },
+    { Text = ' ' .. tab.tab_index + 1 .. ': ' .. tab.active_pane.title .. ' ' },
+    { Background = { Color = edge_background } },
+    { Foreground = { Color = background } },
+    { Text = ARROW_RIGHT },
+  }
+end)
+
+wezterm.log_info('Attempting to load config for host: ' .. hostname)
+
+local success, err = pcall(require, 'host-' .. hostname)
+
+if not success then
+  wezterm.log_error('failed to load host config: ' .. tostring(err))
+end
+
 
 return config
