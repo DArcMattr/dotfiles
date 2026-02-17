@@ -104,6 +104,8 @@
   sort = version:refname
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[url "https://github.com/michaelbrusegard/tabline.wez"]
+  insteadOf = https://github.com/michaelbrusegard/tabline.wez
 [alias]
   afetch = fetch --all --prune --force
   amend = commit --amend
