@@ -1,11 +1,11 @@
 local wezterm = require 'wezterm'
+local mux = wezterm.mux
 
 wezterm.log_info('Loaded host config file')
 
 local wezterm = require 'wezterm'
 
 wezterm.on('gui-startup', function(spawn_args)
-    local mux = wezterm.mux
     wezterm.log_info('gui-startup: building layout')
 
     local tab1, pane1, window = mux.spawn_window(spawn_args or {})
@@ -33,5 +33,4 @@ wezterm.on('gui-startup', function(spawn_args)
     p3_right:split { direction = 'Bottom', size = 0.2 }
 
     tab1:activate()
-    window:gui_window():maximize()
 end)

@@ -14,6 +14,7 @@ config.enable_scroll_bar = true
 config.disable_default_key_bindings = true
 config.font = wezterm.font_with_fallback{'Maple Mono', 'Twemoji'}
 config.font_size = 9.0
+config.front_end = 'OpenGL'
 config.hide_tab_bar_if_only_one_tab = false
 config.inactive_pane_hsb = {
   saturation = 0.5,
@@ -74,17 +75,17 @@ local OPACITY_FOCUSED = 1
 local OPACITY_UNFOCUSED = 0.6666
 
 wezterm.on('window-focus-changed', function(window, pane)
-    local overrides = window:get_config_overrides() or {}
+  local overrides = window:get_config_overrides() or {}
 
-    if window:is_focused() then
-        overrides.window_background_opacity = OPACITY_FOCUSED
-        overrides.inactive_pane_hsb = { brightness = 0.8, saturation = 1.0 }
-    else
-        overrides.window_background_opacity = OPACITY_UNFOCUSED
-        overrides.inactive_pane_hsb = { brightness = 0.4, saturation = 0.6 }
-    end
+  if window:is_focused() then
+    overrides.window_background_opacity = OPACITY_FOCUSED
+    overrides.inactive_pane_hsb = { brightness = 0.8, saturation = 1.0 }
+  else
+    overrides.window_background_opacity = OPACITY_UNFOCUSED
+    overrides.inactive_pane_hsb = { brightness = 0.4, saturation = 0.6 }
+  end
 
-    window:set_config_overrides(overrides)
+  window:set_config_overrides(overrides)
 end)
 
 wezterm.log_info('Attempting to load config for host: ' .. hostname)
@@ -96,13 +97,10 @@ if not success then
 end
 
 tabline.setup({
-  options = {
-    theme = config.colorscheme,
-  },
   sections = {
     tabline_y = {
       'datetime',
-      style = '%Y-%m-%d %H:%M %Z',
+      style = '%Y-%m-%d %H:%M %z',
     },
   },
 })
