@@ -572,26 +572,6 @@ vim.api.nvim_create_autocmd('ModeChanged', {
   callback = function() vim.diagnostic.enable() end
 })
 
-local FocusEvents = vim.api.nvim_create_augroup('FocusEvents', { clear = true })
-vim.api.nvim_create_autocmd({ 'FocusGained' }, {
-  pattern = '*',
-  group = FocusEvents,
-  callback = function()
-    vim.opt.winhighlight = 'Normal:Normal,EndOfBuffer:Normal'
-    vim.opt.cursorcolumn = true
-    vim.opt.cursorline = true
-  end
-})
-vim.api.nvim_create_autocmd({ 'FocusLost' }, {
-  pattern = '*',
-  group = FocusEvents,
-  callback = function()
-    vim.opt.winhighlight = 'Normal:NormalNC,EndOfBuffer:NormalNC'
-    vim.opt.cursorcolumn = false
-    vim.opt.cursorline = false
-  end
-})
-
 local QF = vim.api.nvim_create_augroup('QF', { clear = true })
 vim.api.nvim_create_autocmd({ 'FileType'}, {
   pattern = 'qf',
@@ -649,7 +629,6 @@ vim.api.nvim_create_autocmd({'BufReadPost'}, {
 })
 
 local StartupStuffs = vim.api.nvim_create_augroup('StartupStuffs', { clear = true})
-
 vim.api.nvim_create_autocmd('BufRead', {
   group = StartupStuffs,
   callback = function(opts)
@@ -711,6 +690,27 @@ vim.api.nvim_create_autocmd('QuitPre', {
   end
 })
 
+vim.api.nvim_create_autocmd('ColorScheme', {
+  group = StartupStuffs,
+  pattern = '*',
+  callback = function()
+    vim.api.nvim_set_hl(0, 'Normal', { bg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'NormalNC', { bg = '#181818', ctermbg = 'darkgrey' })
+    vim.api.nvim_set_hl(0, 'Cursor', { })
+    vim.api.nvim_set_hl(0, 'TermCursor', { link = 'Cursor' })
+    vim.api.nvim_set_hl(0, 'CursorLine', { underline = true })
+    vim.api.nvim_set_hl(0, 'CursorColumn', { reverse = true, blend = 50 })
+    vim.api.nvim_set_hl(0, 'EndOfBuffer', { link = 'Normal' })
+    vim.api.nvim_set_hl(0, 'NonText', { link = 'Normal' })
+    vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#111111' })
+    vim.api.nvim_set_hl(0, 'LineNr', { bold = true, fg = '#c6c6c6', bg = '#00005f', ctermfg = 251, ctermbg = 17 })
+    vim.api.nvim_set_hl(0, 'SpellBad', { undercurl = true, fg = '#800000', sp = '#8080f0' })
+    vim.api.nvim_set_hl(0, 'SpellCap', { undercurl = true })
+    vim.api.nvim_set_hl(0, 'SpellLocal', { link = 'SpellCap' })
+    vim.api.nvim_set_hl(0, 'SpellRare', { link = 'SpellCap' })
+  end,
+})
+
 vim.api.nvim_create_user_command(
   'Silent',
   U.utils.silent_execute_shell,
@@ -742,28 +742,4 @@ if vim.env.TMUX then
   vim.keymap.set('t', '<C-\\><C-N><C-w>l', function() U.utils.tmux_move('l') end, { desc = 'Move Right (tmux aware)', silent = true })
 end
 
-vim.cmd([[
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-if !exists(':DiffOrig')
-  command DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_ | diffthis
-  \   | wincmd p | diffthis
-endif
-]])
-
 vim.cmd.colorscheme('koehler')
-vim.api.nvim_set_hl(0, 'Normal', { bg = 'NONE' })
-vim.api.nvim_set_hl(0, 'Cursor', { })
-vim.api.nvim_set_hl(0, 'TermCursor', { link = 'Cursor' })
-vim.api.nvim_set_hl(0, 'CursorLine', { underline = true })
-vim.api.nvim_set_hl(0, 'CursorColumn', { reverse = true, blend = 50 })
-vim.api.nvim_set_hl(0, 'EndOfBuffer', { link = 'Normal' })
-vim.api.nvim_set_hl(0, 'NonText', { link = 'Normal' })
-vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#111111' })
-
-vim.cmd.highlight('LineNr',     'gui=bold guifg=#c6c6c6 guibg=#00005f term=reverse cterm=bold ctermfg=251 ctermbg=17')
-vim.cmd.highlight('SpellBad',   'term=standout,undercurl cterm=undercurl ctermfg=1 guifg=#800000 gui=undercurl guisp=#8080f0')
-vim.cmd.highlight('SpellCap',   'term=undercurl cterm=undercurl gui=undercurl')
-vim.cmd.highlight('SpellLocal', 'term=undercurl cterm=undercurl gui=undercurl')
-vim.cmd.highlight('SpellRare',  'term=undercurl cterm=undercurl gui=undercurl')
-vim.cmd.highlight('NormalNC',   'ctermbg=darkgrey guibg=#181818')
