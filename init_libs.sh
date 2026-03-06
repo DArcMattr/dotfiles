@@ -2,15 +2,18 @@
 
 # chicken & egg time here, relies on system version of go to bootstrap
 grab_go() {
-  new_version=$(http 'https://go.dev/dl/?mode=json&include=all' | jq '.[0].version' | sed 's#"##g')
-  go_bin="$(go env GOBIN)"
-  printf "Remote version is %s, installed version is %s\n" "${new_version}" "$(go version)"
-  pkgs=(
+  local new_version=$(http --check-status --quiet --download 'https://go.dev/dl/?mode=json&include=all' | jq -r '.[0].version')
+  local go_bin="$(go env GOBIN)"
+  local updated_any=false
+
+  printf "Remote Go: %s | Local: %s\n\n" "${new_version}" "$(go version | awk '{print $3}')"
+
+  local pkgs=(
     'filippo.io/mkcert'
     'github.com/abenz1267/gomvp'
     'github.com/abice/go-enum'
-    'github.com/antonmedv/fx'
     'github.com/air-verse/air'
+    'github.com/antonmedv/fx'
     'github.com/cweill/gotests/...'
     'github.com/davidrjenni/reftools/cmd/fillstruct'
     'github.com/davidrjenni/reftools/cmd/fillswitch'
@@ -18,13 +21,13 @@ grab_go() {
     'github.com/fatih/gomodifytags'
     'github.com/go-delve/delve/cmd/dlv'
     'github.com/golangci/golangci-lint/v2/cmd/golangci-lint'
-    'github.com/joe-re/sql-language-server'
     'github.com/josharian/impl'
     'github.com/junegunn/fzf'
     'github.com/koron/iferr'
     'github.com/kyoh86/richgo'
     'github.com/onsi/ginkgo/v2/ginkgo'
     'github.com/segmentio/golines'
+    'github.com/sqls-server/sqls'
     'github.com/tdewolff/minify/cmd/minify'
     'github.com/tmc/json-to-struct'
     'go.uber.org/mock/mockgen'
@@ -38,28 +41,34 @@ grab_go() {
     'mvdan.cc/gofumpt'
   )
 
-  while getopts "u" opt; do
-    case "$opt" in
-      u) VERSION=${OPTARG:-${new_version}}
-        ;;
+  echo "Checking for package updates..."
+  for pkg in "${pkgs[@]}"; do
+    local bin_name="${pkg##*/}"
+    [[ "$bin_name" == "..." ]] && bin_name=$(basename "$(dirname "$pkg")")
 
-      *) echo "Invalid Option: -${opt}" >&2
-        return 1
-        ;;
-    esac
+    local local_bin="$go_bin/$bin_name"
+    local current_v=""
+
+    if [[ -f "$local_bin" ]]; then
+      current_v=$(go version -m "$local_bin" | awk '/mod/ {print $3; exit}')
+    fi
+
+    local mod_path="${pkg%/...}" # Strip trailing /... for go list
+    local latest_info=$(go list -m -f '{{if .Update}}{{.Update.Version}}{{else}}{{.Version}}{{end}}' "$mod_path@latest" 2>/dev/null)
+    local latest_v="${latest_info:-$current_v}"
+
+    if [[ -n "$current_v" && "$current_v" == "$latest_v" ]]; then
+      printf "  %-25s ✅ %s\n" "$bin_name" "$current_v"
+    else
+      printf "  %-25s 🚀 %s -> %s\n" "$bin_name" "${current_v:-none}" "$latest_v"
+      go install "$pkg@latest" && updated_any=true
+    fi
   done
 
-  # bootstrap
-  if (( ${+VERSION} )); then
-    go install golang.org/dl/go${VERSION}@latest
-    "${go_bin}/go${VERSION}" download
-
-    ln -sf "${go_bin}/${VERSION}" "${HOME}/.local/bin/go"
+  if [[ "$updated_any" == true ]]; then
+    echo "\nCleaning up Go build cache..."
+    go clean -cache
   fi
-
-  for i in $pkgs; do
-    go install "${i}@latest"
-  done
 }
 
 grab_rust() {
