@@ -16,6 +16,7 @@ U.dap.adapters.c = {
   name = "lldb"
 }
 
+--[[
 U.dap.configurations.c = {
   {
     name = 'Launch',
@@ -29,3 +30,4 @@ U.dap.configurations.c = {
     args = {},
   }
 }
+]]

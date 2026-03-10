@@ -352,10 +352,7 @@ local lazyvim_plugins = {
 }
 
 require('lazy').setup(
-  vim.list_extend(
-    vim.list_extend({}, lazyvim_plugins),
-    U.utils.loadLocalPlugins()
-  )
+  vim.tbl_deep_extend('force', {}, lazyvim_plugins, U.utils.loadLocalPlugins())
 )
 
 -- Globals live in U namespace
@@ -442,7 +439,7 @@ vim.opt.wildignore:append {
 }
 
 if vim.g.neovide then
-  vim.o.guifont = 'Cascadia Code PL Light:h9'
+  vim.opt.guifont = 'Cascadia Code PL Light:h9'
 end
 
 if vim.fn.executable('rg') == 1 then
@@ -677,7 +674,30 @@ vim.api.nvim_create_autocmd('TermOpen', {
 vim.api.nvim_create_autocmd('VimResized', {
   group = StartupStuffs,
   pattern = '*',
-  command = 'normal! <C-w>='
+  callback = function()
+    local dapui_active = false
+    local dapui_fts = {
+      ['dapui_scopes'] = true,
+      ['dapui_watches'] = true,
+      ['dapui_stacks'] = true,
+      ['dapui_breakpoints'] = true,
+      ['dapui_console'] = true,
+      ['dapui_repl'] = true,
+    }
+
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+      local buf = vim.api.nvim_win_get_buf(win)
+      local ft = vim.api.nvim_buf_get_option(buf, 'filetype')
+      if dapui_fts[ft] then
+        dapui_active = true
+        break
+      end
+    end
+
+    if not dapui_active then
+      vim.cmd('normal! <C-w>=')
+    end
+  end,
 })
 
 vim.api.nvim_create_autocmd('QuitPre', {

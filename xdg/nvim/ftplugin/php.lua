@@ -3,7 +3,7 @@ vim.lsp.enable('intelephense')
 vim.opt_local.iskeyword:append {'$'}
 vim.opt_local.suffixesadd:append {'.php'}
 vim.opt.foldmarker = '-[[[-,-]]]-'
-vim.g.mta_filetypes.php = 1 -- needed for a plugin, but don't remember what
+vim.g.mta_filetypes.php = 1 -- needed for MatchTagAlways
 
 U.dap.adapters.php = {
   type = 'executable',
