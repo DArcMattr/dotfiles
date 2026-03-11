@@ -162,6 +162,12 @@ local lazyvim_plugins = {
     version = false,
   },
   {
+    'nvimtools/none-ls.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+  },
+  {
     'nvim-telescope/telescope.nvim',
     cmd = 'Telescope',
     dependencies = {
