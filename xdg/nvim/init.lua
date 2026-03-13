@@ -1,5 +1,5 @@
 U = {}
-require('utils')
+require'utils'
 
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.uv.fs_stat(lazypath) then
@@ -100,10 +100,10 @@ local lazyvim_plugins = {
         'ray-x/go.nvim',
         event = { 'CmdLineEnter' },
         ft = { 'go', 'gomod' },
-        build = ':lua require("go.install").update_all_sync()',
+        build = ":lua require'go.install'.update_all_sync()",
         dependencies = { 'nvim-neotest/nvim-nio' },
         config = function()
-          require('go').setup()
+          require'go'.setup()
         end,
       },
     },
@@ -118,8 +118,8 @@ local lazyvim_plugins = {
     },
     event = { 'InsertEnter', },
     opts = function()
-      local cmp = require('cmp')
-      local defaults = require('cmp.config.default')()
+      local cmp = require'cmp'
+      local defaults = require'cmp.config.default'()
       return {
         mapping = cmp.mapping.preset.insert({
           ['<C-b>']     = cmp.mapping.scroll_docs(-4),
@@ -163,6 +163,13 @@ local lazyvim_plugins = {
   },
   {
     'nvimtools/none-ls.nvim',
+    config = function()
+      local nls = require'null-ls'
+      U.null_ls = nls
+      U.null_ls.setup({
+        U.null_ls.builtins.completion.spell,
+      })
+    end,
     dependencies = {
       'nvim-lua/plenary.nvim',
     },
@@ -175,7 +182,7 @@ local lazyvim_plugins = {
     },
     event = { 'VeryLazy' },
     keys = function()
-      local builtin = require('telescope.builtin')
+      local builtin = require'telescope.builtin'
       return {
         { '<C-p>',      builtin.find_files },
         { '<Leader>d*', builtin.grep_string, mode = { 'n', 'v'}, },
@@ -190,7 +197,7 @@ local lazyvim_plugins = {
   { 'mattn/emmet-vim' },
   {
     'hat0uma/csvview.nvim', config = function()
-      require('csvview').setup()
+      require'csvview'.setup()
     end
   },
   {
@@ -199,7 +206,7 @@ local lazyvim_plugins = {
        {
         'theHamsta/nvim-dap-virtual-text',
         config = function()
-          require('nvim-dap-virtual-text').setup()
+          require'nvim-dap-virtual-text'.setup()
         end
       },
       {
@@ -210,8 +217,8 @@ local lazyvim_plugins = {
       },
     },
     keys = function()
-      local dap = require('dap')
-      local dapui = require('dapui')
+      local dap = require'dap'
+      local dapui = require'dapui'
       return {
         { '<F2>',  dap.step_over, desc = 'Step Over', },
         { '<F3>',  dap.step_into, desc = 'Step Into', },
@@ -228,8 +235,8 @@ local lazyvim_plugins = {
       }
     end,
     config = function()
-      local dap   = require('dap')
-      local dapui = require('dapui')
+      local dap   = require'dap'
+      local dapui = require'dapui'
 
       U.dap = dap
       U.dapui = dapui
@@ -345,7 +352,7 @@ local lazyvim_plugins = {
   {
     'windwp/nvim-autopairs',
     config = function()
-      require('nvim-autopairs').setup {
+      require'nvim-autopairs'.setup {
         disable_filetype = { 'dap-repl' },
       }
     end,
@@ -357,7 +364,7 @@ local lazyvim_plugins = {
   },
 }
 
-require('lazy').setup(
+require'lazy'.setup(
   vim.tbl_deep_extend('force', {}, lazyvim_plugins, U.utils.loadLocalPlugins())
 )
 

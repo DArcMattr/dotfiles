@@ -1,4 +1,5 @@
 U.utils = {}
+U.null_ls_sources = {}
 
 function U.utils.loadLocalPlugins()
   local path = vim.fn.getcwd() .. '/.nvim-plugins.lua'
@@ -100,4 +101,12 @@ function U.utils.diff_orig()
   vim.wo.diff = true
   vim.api.nvim_command('wincmd p')
   vim.wo.diff = true
+end
+
+function U.utils.add_null_ls_sources(new_sources)
+  if type(new_sources) == 'table' then
+    for _, source in ipairs(new_sources) do
+      table.insert(U.null_ls_sources, source)
+    end
+  end
 end
