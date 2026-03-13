@@ -177,8 +177,17 @@ local lazyvim_plugins = {
   {
     'nvim-telescope/telescope.nvim',
     cmd = 'Telescope',
+    config = function(_, opts)
+      local telescope = require'telescope'
+      telescope.setup(opts)
+      telescope.load_extension('fzf')
+    end,
     dependencies = {
       'nvim-lua/plenary.nvim',
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'make',
+      },
     },
     event = { 'VeryLazy' },
     keys = function()
@@ -191,6 +200,34 @@ local lazyvim_plugins = {
         { '<Leader>ls', builtin.buffers },
       }
     end,
+    opts = {
+      extensions = {
+        fzf = {
+          case_mode = 'smart_case',
+          fuzzy = true,
+          override_file_sorter = true,
+          override_generic_sorter = true,
+        },
+      },
+      defaults = {
+        file_ignore_patterns = vim.opt.wildignore:get(),
+        set_env = { ['COLORTERM'] = 'truecolor' },
+      },
+      pickers = {
+        find_files = {
+          hidden = true,
+          find_command = (function()
+            local fzf_cmd = vim.env.FZF_DEFAULT_COMMAND
+            if fzf_cmd and fzf_cmd ~= '' then
+              local clean_cmd = fzf_cmd:gsub("['\"]", '')
+              return vim.split(clean_cmd, ' ')
+            end
+            return { 'rg', '--files', '--hidden', '--follow', '--no-ignore', '--glob', '!.git/*' }
+          end)(),
+          path_display = { 'truncate' },
+        },
+      },
+    },
   },
   { 'Valloric/MatchTagAlways' },
   { 'jeffkreeftmeijer/vim-numbertoggle' },
@@ -436,6 +473,7 @@ vim.opt.undofile        = true
 vim.opt.updatetime      = 300
 vim.opt.virtualedit     = 'all'
 vim.opt.visualbell      = true
+vim.opt.wildignorecase  = true
 vim.opt.wildmenu        = true
 vim.opt.wildmode        = { 'list:longest', 'list:full' }
 vim.opt.winborder       = 'rounded'

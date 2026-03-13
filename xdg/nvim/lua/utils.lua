@@ -107,6 +107,9 @@ function U.utils.add_null_ls_sources(new_sources)
   if type(new_sources) == 'table' then
     for _, source in ipairs(new_sources) do
       table.insert(U.null_ls_sources, source)
+      if U.null_ls then
+        U.null_ls.register(source)
+      end
     end
   end
 end
