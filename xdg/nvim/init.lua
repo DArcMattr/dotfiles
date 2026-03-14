@@ -283,6 +283,20 @@ local lazyvim_plugins = {
       dap.listeners.after.event_exited['dapui_config']      = dapui.close
 
       dapui.setup({
+        controls = {
+          enabled = true,
+          element = 'repl',
+          icons = {
+            pause = '',
+            play = '',
+            step_into = '',
+            step_over = '',
+            step_out = '',
+            step_back = '',
+            run_last = '↻',
+            terminate = '□',
+          },
+        },
         icons = {
           expanded = '▾',
           collapsed = '▸',
@@ -308,19 +322,16 @@ local lazyvim_plugins = {
             position = 'bottom',
           },
         },
-        controls = {
-          enabled = true,
-          element = 'repl',
-          icons = {
-            pause = '',
-            play = '',
-            step_into = '',
-            step_over = '',
-            step_out = '',
-            step_back = '',
-            run_last = '↻',
-            terminate = '□',
-          },
+        mappings = {
+          edit = 'e',
+          open = { '<Cr>', 'o' },
+          remove = 'd',
+          repl = 'r',
+          toggle = 't',
+        },
+        render = {
+          indent = 1,
+          max_value_lines = 100,
         },
       })
 
