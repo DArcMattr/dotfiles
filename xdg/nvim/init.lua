@@ -413,7 +413,7 @@ local lazyvim_plugins = {
 }
 
 require'lazy'.setup(
-  vim.tbl_deep_extend('force', {}, lazyvim_plugins, U.utils.loadLocalPlugins())
+  vim.list_extend(vim.deepcopy(lazyvim_plugins), U.utils.loadLocalPlugins())
 )
 
 -- Globals live in U namespace
@@ -427,7 +427,6 @@ vim.opt.backspace       = { 'indent', 'eol', 'start' }
 vim.opt.bomb            = false
 vim.opt.cinoptions      = { 't0', '+4', '(4', 'u4', 'w1' }
 vim.opt.colorcolumn     = '+1'
-vim.opt.completeopt     = { 'menuone', 'longest' }
 vim.opt.copyindent      = true
 vim.opt.cursorcolumn    = true
 vim.opt.cursorline      = true
@@ -438,7 +437,6 @@ vim.opt.encoding        = 'utf-8'
 vim.opt.expandtab       = true
 vim.opt.exrc            = true
 vim.opt.formatoptions   = 'nqr12j'
-vim.opt.gdefault        = true
 vim.opt.guicursor       = 'n-v-i-c:ver50-Cursor'
 vim.opt.hidden          = true
 vim.opt.hlsearch        = true
@@ -446,7 +444,6 @@ vim.opt.ignorecase      = true
 vim.opt.incsearch       = true
 vim.opt.joinspaces      = false
 vim.opt.laststatus      = 2
-vim.opt.lazyredraw      = true
 vim.opt.list            = true
 vim.opt.listchars       = { eol='↲', precedes='«', extends='»', trail='·', tab='▸·', nbsp='¯' }
 vim.opt.matchtime       = 5
@@ -536,9 +533,8 @@ vim.keymap.set('n', '<Leader>gl',     ':Git log -- %<Cr>')
 vim.keymap.set('n', '<Leader>gp',     ':Git push<Cr>')
 vim.keymap.set('n', '<Leader>gs',     ':Git<Cr>')
 vim.keymap.set('n', '<Leader>il',     vim.diagnostic.setloclist)
-vim.keymap.set('n', '<Leader>io',     vim.diagnostic.open_float)
+vim.keymap.set('n', '<Leader>io',     function() vim.diagnostic.open_float(nil, { focus = false, scope = 'cursor' }) end)
 vim.keymap.set('n', '<Leader>o',      'i<Cr><Esc>')
--- vim.keymap.set('n', '<Leader>q',      '<Cmd>nohlsearch<Cr>')
 vim.keymap.set('n', '<Leader>t',      ':enew<Cr>')
 vim.keymap.set('n', '<Left>',         ':bp<Cr>')
 vim.keymap.set('n', '<M-i>',          'i<Space><Esc>')
@@ -613,9 +609,6 @@ vim.diagnostic.config({
   },
   virtual_text = { current_line = true },
 })
-
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.buf.hover({border = 'rounded'})
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.buf.signature_help({border = 'rounded'})
 
 local ModeEvents = vim.api.nvim_create_augroup('ModeEvents', { clear = true })
 vim.api.nvim_create_autocmd('ModeChanged', {
@@ -700,8 +693,8 @@ vim.api.nvim_create_autocmd('BufRead', {
         local last_known_line = vim.api.nvim_buf_get_mark(opts.buf, '"')[1]
 
         if
-          not (ft:match('commit') and ft:match('rebase'))
-          and not (bt:match('quickfix') and bt:match('nofile') and bt:match('help'))
+          not (ft:match('commit') or ft:match('rebase'))
+          and not (bt:match('quickfix') or bt:match('nofile') or bt:match('help'))
           and last_known_line > 1
           and last_known_line <= vim.api.nvim_buf_line_count(opts.buf)
         then
@@ -749,7 +742,7 @@ vim.api.nvim_create_autocmd('VimResized', {
 
     for _, win in ipairs(vim.api.nvim_list_wins()) do
       local buf = vim.api.nvim_win_get_buf(win)
-      local ft = vim.api.nvim_buf_get_option(buf, 'filetype')
+      local ft = vim.api.nvim_get_option_value('filetype', { buf = buf})
       if dapui_fts[ft] then
         dapui_active = true
         break
