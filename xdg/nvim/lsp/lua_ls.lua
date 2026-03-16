@@ -9,7 +9,7 @@ return {
   settings = {
     Lua = {
       diagnostics = {
-        globals = { 'vim' },
+        globals = { 'vim', 'U' },
       },
       runtime = {
         -- Tell the language server which version of Lua you're using
