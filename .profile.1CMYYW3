@@ -8,4 +8,4 @@ alias dc='docker compose'
 alias webgrind='php -S 0.0.0.0:8080 /var/www/vhosts/webgrind/index.php'
 alias fixtime='sudo ntpdate pool.ntp.org'
 
-export PATH="/mnt/c/Program Files/vagrant/bin:/mnt/c/Program Files/Oracle/VirtualBox:${PATH}"
+export PATH="/mnt/c/Windows/System32/WindowsPowerShell/v1.0:${PATH}"

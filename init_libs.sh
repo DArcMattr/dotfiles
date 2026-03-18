@@ -128,6 +128,7 @@ grab_pips() { # install after rust install, which installs uv
     'pynvim'
     'python-lsp-server[yapf]'
     's3cmd'
+    'semgrep'
     'sphinx'
   )
 
