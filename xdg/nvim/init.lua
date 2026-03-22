@@ -230,6 +230,7 @@ local lazyvim_plugins = {
     },
   },
   { 'Valloric/MatchTagAlways' },
+  { 'carlos-algms/agentic.nvim', },
   { 'jeffkreeftmeijer/vim-numbertoggle' },
   { 'mattn/emmet-vim' },
   {
