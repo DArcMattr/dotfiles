@@ -59,6 +59,24 @@ vim.api.nvim_create_autocmd({'LspAttach'}, {
 })
 
 vim.api.nvim_create_autocmd({'LspAttach'}, {
+    pattern = '*.php',
+    group = LocalPHP,
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client and client.name == 'intelephense' then
+            client.config.settings = vim.tbl_deep_extend('force', client.config.settings or {}, {
+                intelephense = {
+                    diagnostics = {
+                        unusedSymbols = false,
+                    },
+                },
+            })
+            client:notify('workspace/didChangeConfiguration', { settings = client.config.settings })
+        end
+    end,
+})
+
+vim.api.nvim_create_autocmd({'LspAttach'}, {
     pattern = '*.js',
     group = LocalPHP,
     callback = function(_)
