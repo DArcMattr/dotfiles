@@ -16,10 +16,10 @@ fi
 
 superupdate_local() {
   (cd ~/contrib/neovim && \
-    git switch master
+    git switch master && \
     git fetch origin --prune --prune-tags --force && \
-    git merge --ff-only master && \
-    make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX="${LOCAL}" all install distclean)
+    git merge --ff-only origin/master && \
+    zig build install --prefix ${LOCAL} -Doptimize=ReleaseFast)
   rehash
   nvim --cmd "autocmd user LazyVimStarted lua require('lazy').sync()"
 }

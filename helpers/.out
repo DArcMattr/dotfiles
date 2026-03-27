@@ -1,6 +1,31 @@
 #!/usr/bin/env zsh
 PATH="${OLDPATH}"
-unset OLDPATH
-unalias sample_alias
+unset OLDPATH \
+    POSTMAN_API_KEY \
+    LDAP_USER \
+    LDAP_PASSWORD \
+    MSSQL_HOST \
+    MSSQL_PORT \
+    BEARER \
+    WORKSPACE_ID \
+    GITLAB_HOST \
+    GITLAB_PAT
+unalias cake \
+    phpcbf \
+    phpcs \
+    phpstan \
+    phpunit \
+    sqlcmd \
+    supervisorctl \
+    toggle_docker \
 
-unfunction sample_function
+# unfunction phptrace
+unfunction elasticcc
+unfunction subscribble
+unfunction http
+unfunction strim
+unfunction rebase-onto-develop
+unfunction run_in_docker
+unfunction sync_elastic
+unfunction test_run
+unfunction test_run_local_newman
