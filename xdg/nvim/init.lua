@@ -230,7 +230,9 @@ local lazyvim_plugins = {
     },
   },
   { 'Valloric/MatchTagAlways' },
-  { 'carlos-algms/agentic.nvim', },
+  { 'carlos-algms/agentic.nvim',
+    dependencies = { 'hakonharnes/img-clip.nvim', opts = {}, }
+  },
   { 'jeffkreeftmeijer/vim-numbertoggle' },
   { 'mattn/emmet-vim' },
   {
@@ -808,10 +810,10 @@ if vim.env.TMUX then
   vim.keymap.set('n', '<C-w>j',            function() U.utils.tmux_move('j') end, { desc = 'Move Down (tmux aware)',  silent = true })
   vim.keymap.set('n', '<C-w>k',            function() U.utils.tmux_move('k') end, { desc = 'Move Up (tmux aware)',    silent = true })
   vim.keymap.set('n', '<C-w>l',            function() U.utils.tmux_move('l') end, { desc = 'Move Right (tmux aware)', silent = true })
-  vim.keymap.set('n', '<C-w>left',         function() U.utils.tmux_move('h') end, { desc = 'Move Left (tmux aware)',  silent = true })
-  vim.keymap.set('n', '<C-w>up',           function() U.utils.tmux_move('k') end, { desc = 'Move Up (tmux aware)',    silent = true })
-  vim.keymap.set('n', '<C-w>down',         function() U.utils.tmux_move('j') end, { desc = 'Move Down (tmux aware)',  silent = true })
-  vim.keymap.set('n', '<C-w>right',        function() U.utils.tmux_move('l') end, { desc = 'Move Right (tmux aware)', silent = true })
+  vim.keymap.set('n', '<C-Left>',          function() U.utils.tmux_move('h') end, { desc = 'Move Left (tmux aware)',  silent = true })
+  vim.keymap.set('n', '<C-Up>',            function() U.utils.tmux_move('k') end, { desc = 'Move Up (tmux aware)',    silent = true })
+  vim.keymap.set('n', '<C-Down>',          function() U.utils.tmux_move('j') end, { desc = 'Move Down (tmux aware)',  silent = true })
+  vim.keymap.set('n', '<C-Right>',         function() U.utils.tmux_move('l') end, { desc = 'Move Right (tmux aware)', silent = true })
   vim.keymap.set('t', '<C-\\><C-N><C-w>h', function() U.utils.tmux_move('h') end, { desc = 'Move Left (tmux aware)',  silent = true })
   vim.keymap.set('t', '<C-\\><C-N><C-w>j', function() U.utils.tmux_move('j') end, { desc = 'Move Down (tmux aware)',  silent = true })
   vim.keymap.set('t', '<C-\\><C-N><C-w>k', function() U.utils.tmux_move('k') end, { desc = 'Move Up (tmux aware)',    silent = true })
