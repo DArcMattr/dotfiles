@@ -41,6 +41,25 @@ grab_go() {
     'mvdan.cc/gofumpt'
   )
 
+  while getopts "u" opt; do
+    case "$opt" in
+      u) VERSION=${OPTARG:-${new_version}}
+        ;;
+
+      *) echo "Invalid Option: -${opt}" >&2
+        return 1
+        ;;
+    esac
+  done
+
+  # bootstrap
+  if (( ${+VERSION} )); then
+    go install golang.org/dl/${VERSION}@latest
+    "${go_bin}/${VERSION}" download
+
+    ln -sf "${go_bin}/${VERSION}" "${HOME}/.local/bin/go"
+  fi
+
   echo "Checking for package updates..."
   for pkg in "${pkgs[@]}"; do
     local bin_name="${pkg##*/}"
