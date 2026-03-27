@@ -1,9 +1,193 @@
 #!/usr/bin/env zsh
-OLDPATH=${PATH}
-PATH="${0:A:h}/sample/bin:${PATH}"
+export OLDPATH=${PATH}
+export PATH="${0:A:h}/bin:${0:A:h}/app/vendor/bin:${PATH}"
+export POSTMAN_API_KEY='XXXXX'
+export WORKSPACE_ID='b4155b06-8769-43c2-8f63-e4dd4fa9f9c4'
+export GITLAB_HOST=gitlab.databank.local
+export GITLAB_PAT=XXXX
+LDAP_USER=XXXX
+LDAP_PASSWORD=XXXX
+BEARER=XXXX
+local impersonation_id=XXXX
+MSSQL_HOST=10.139.14.70 # dev
+# MSSQL_HOST=10.139.12.25 # stage
+MSSQL_PORT=1433
+# cake subscribe epicor  --queue darc
+# cake subscribe default --queue darc
 
-alias sample_alias='ls -Al'
+function subscribble {
+  parallel --line-buffer ::: \
+    'docker compose exec api /usr/local/bin/php /var/www/html/bin/cake.php subscribe epicor -p darc' \
+    'docker compose exec api /usr/local/bin/php /var/www/html/bin/cache.php subscribe default -p darc'
+}
 
-function sample_function {
-	# sample function stuff here
+function rebase-onto-develop {
+    git fetch origin && git rebase --onto origin/develop HEAD~1
+}
+
+alias cake='docker compose exec api /usr/local/bin/php /var/www/html/bin/cake.php'
+alias supervisorctl='docker compose exec api /usr/bin/supervisorctl'
+# alias claude='docker run -it --user 1000:1000 -v ~/.claude.json:/home/node/.claude.json:rw -v ~/.claude:/home/node/.claude:rw -v .:/workspace --entrypoint "/usr/local/share/npm-global/bin/claude" claude-code:latest'
+# alias claude='$HOME/.local/bin/claude'
+# alias composer='run_in_docker composer --no-interaction'
+alias toggle_docker='systemctl --user restart docker-compose-api.service'
+# alias composer='$LOCAL/bin/composer --no-interaction --ignore-platform-reqs'
+# alias elastic_log='docker logs -f api-elastic | jq -r .source'
+# alias xdebug_log='docker exec -it api-core tail -F /tmp/xdebug.log'
+alias sqlcmd='sqlcmd -S ${MSSQL_HOST},${MSSQL_PORT} -U"${LDAP_USER}" -P"${LDAP_PASSWORD}"'
+alias phpcs='${0:A:h}/bin/phpcs'
+alias phpcbf='${0:A:h}/bin/phpcbf'
+alias phpstan='${0:A:h}/bin/phpcstan'
+alias phpunit='${0:A:h}/bin/phpunit'
+# alias deploy_stg="ssh deployment@10.139.12.180 'cd /var/www/clients/api.databank.com && git fetch --all --prune && git rebase origin/develop'"
+# alias deploy="ssh dev 'cd /var/www/clients/api.databank.com && git fetch --all --prune && git rebase origin/develop'"
+# ssh root@api-www1.databank.host
+# alias elasticc="sudo tcpdump -A -nn -s 0 'tcp dst port 9200 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)' -i lo -w /var/www/vhosts/api-tracker/logs/elastic_queries.log"
+function elasticcc {
+    ssh others \
+        'cd /etc/docker/compose/elasticsearch && \
+            docker compose logs elasticsearch-01 elasticsearch-02 elasticsearch-03 --follow' | \
+        awk '/elasticsearch\.slowlog\.source/ && !/1245060/ {$1=$2=""; print $0 }' | \
+        jq .
+}
+
+function run_in_docker {
+   docker compose exec  --user ${CMD_USER:-'www-data'} ${SERVICE:-'api'} ${@}
+}
+
+function strim {
+    tail -n 100 -F "${1}" | \
+        sed 's# - #\n&#g' | \
+        sed 's#\\\\#\\#g' | \
+        sed 's#\\n#\n#g'  | \
+        sed 's#\\r##g'
+}
+
+# function test_run {
+#     newman run './postman/test_collection.json' \
+#         --verbose \
+#         --postman-api-key ${POSTMAN_API_KEY} \
+#         --environment 26588310-cb77b5ff-25c7-4f23-a8ab-3ce4ffee5cb9 \
+#         --working-dir "${0:A:h}"
+# }
+#
+function test_run_local_newman {
+    local env='37686147-ed3d5c1c-6f90-41b1-a1f0-d0427b657b8c'
+    local workspace='b4155b06-8769-43c2-8f63-e4dd4fa9f9c4'
+    npx newman run './postman/test_collection.json' \
+        --verbose \
+        --insecure \
+        --postman-api-key ${POSTMAN_API_KEY} \
+        --environment ${env} \
+        --working-dir "${0:A:h}" \
+        --reporters cli,postman-cloud,htmlextra \
+        --reporter-postman-cloud-apiKey ${POSTMAN_API_KEY} \
+        --reporter-postman-cloud-workspaceId ${workspace}
+}
+
+function test_run {
+    case "${1}" in
+        prod) ENV='26588310-01acb5c3-ac91-4a3c-9a83-74d2e8f9b2c2'
+            ;;
+
+        stage) ENV='26588310-cb77b5ff-25c7-4f23-a8ab-3ce4ffee5cb9'
+            ;;
+
+        dev) ENV='26588310-f455de6d-f6e6-47bf-a656-7e811b60da11'
+            ;;
+
+        local|*) ENV='37686147-ed3d5c1c-6f90-41b1-a1f0-d0427b657b8c'
+            ;;
+    esac
+
+    (
+        cd "${0:A:h}/postman"
+        postman collection run 26588479-a4ec39d0-9d1f-4979-b9fc-bf9d7201a862 \
+            --verbose \
+            --insecure \
+            --postman-api-key ${POSTMAN_API_KEY} \
+            --environment ${ENV} \
+            -i 26588479-51a43afa-0f97-4a31-8d87-5d3ac116b1d8
+    )
+}
+
+# function phptrace {
+#
+# }
+
+http () {
+    local extra_args=()
+    while getopts ":x" opt
+    do
+        case "${opt}" in
+            (x) extra_args+=('x-impersonation-id:${impersonation_id}') ;;
+        esac
+    done
+    shift $((OPTIND - 1))
+    ${HOME}/.local/bin/http -jv --verify no --auth-type bearer --auth "${bearer}" "${@}" "${extra_args[@]}"
+}
+
+function sync_elastic {
+    REMOTE='http://animal.edgewebhosting.net:9200'
+    LOCAL='http://api-tracker-elastic:9200'
+    curl -XDELETE "${LOCAL}/dev_tickets"
+    curl -XPUT "${LOCAL}/dev_tickets" \
+        -H 'Content-Type: application/json' \
+        -d "$( \
+                curl "${REMOTE}/stage_tickets" \
+                    | jq '.stage_tickets | del(.settings.index.provided_name, .settings.index.creation_date, .settings.index.uuid, .settings.index.version, .settings.index.resize, .settings.index.routing)' \
+            )"
+
+        curl -XPOST "${LOCAL}/_reindex?wait_for_completion=false&pretty" \
+            -H 'Content-Type: application/json' \
+            --data @- << EOL
+{
+  "source": {
+    "remote": {
+      "host": "${REMOTE}"},
+    "index": "stage_tickets",
+    "query": {
+      "match_all": {}
+    }
+  },
+  "dest": {
+    "index": "dev_tickets",
+    "op_type": "create"
+  }
+}
+EOL
+    curl -XPUT "${LOCAL}/dev_tickets" \
+        -H 'Content-Type: application/json' \
+        --data @- << EOL
+{
+  "index.search.slowlog.threshold.query.trace": "0s",
+  "index.search.slowlog.level": "trace"
+}
+EOL
+    curl -XDELETE "${LOCAL}/dev_ticket_events"
+    curl -XPUT "${LOCAL}/dev_ticket_events" \
+        -H 'Content-Type: application/json' \
+        -d "$( \
+                curl "${REMOTE}/stage_ticket_events" \
+                    | jq '.stage_ticket_events | del(.settings.index.provided_name, .settings.index.creation_date, .settings.index.uuid, .settings.index.version, .settings.index.resize, .settings.index.routing)' \
+            )"
+
+        curl -XPOST "${LOCAL}/_reindex?wait_for_completion=false&pretty" \
+            -H 'Content-Type: application/json' \
+            --data @- << EOL
+{
+  "source": {
+    "remote": {
+      "host": "${REMOTE}"},
+    "index": "stage_ticket_events",
+    "query": {
+      "match_all": {}
+    }
+  },
+  "dest": {
+    "index": "dev_ticket_events",
+    "op_type": "create"
+  }
+}
+EOL
 }
