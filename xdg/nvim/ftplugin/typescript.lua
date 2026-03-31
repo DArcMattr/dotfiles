@@ -1,7 +1,8 @@
 -- vim.b.tagcommands:append { 'typescript' : { 'tagfile' : $XDG_CONFIG_HOME . '/nvim/ts.tags' } }
+vim.lsp.enable('ts_ls')
 vim.opt_local.iskeyword:append {'$'}
 
--- curl -OL https://github.com/microsoft/vscode-js-debug/releases/download/v1.102.0/js-debug-dap-v1.102.0.tar.gz
+-- curl -OL https://github.com/microsoft/vscode-js-debug/releases/download/v1.112.0/js-debug-dap-v1.112.0.tar.gz
 U.dap.adapters['pwa-node'] = {
   type = 'server',
   host = 'localhost',
