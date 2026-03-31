@@ -31,4 +31,4 @@ tmux send-keys -t "${SESSION}:3.1" "cake console" C-m
 tmux send-keys -t "${SESSION}:3.2" "sqlcmd" C-m
 tmux send-keys -t "${SESSION}:3.5" "claude --resume" C-m
 # tmux send-keys -t "${SESSION}:3.3" "xtail ${DIRECTORY}/logs/api/*" C-m
-tmux send-keys -t "${SESSION}:3.3" "tail -n 100 -F ${DIRECTORY}/logs/api/{application,queries,error}-*.log | grep -v -E 'INFORMATION_SCHEMA|sp_columns|sp_statistics|sp_pkeys|sp_indexes|sp_fkeys|sys\\.(tables|columns|objects|indexes)|object_id\\(|SELECT \\[name\\]|EXEC sp_'" C-m | hl -F
+tmux send-keys -t "${SESSION}:3.3" "tail -F ${DIRECTORY}/logs/api/{application,queries,error}-*.log | grep -v -E 'INFORMATION_SCHEMA|sp_columns|sp_statistics|sp_pkeys|sp_indexes|sp_fkeys|sys\\.(tables|columns|objects|indexes)|object_id\\(|SELECT \\[name\\]|EXEC sp_' | hl -F" C-m
