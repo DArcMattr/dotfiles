@@ -20,11 +20,6 @@ vim.g.loaded_perl_provider = 0
 vim.g.mapleader = ','
 vim.g.maplocalleader = ' '
 
--- load LSP servers which cover more than one filetype
-vim.lsp.enable('docker-language-server')
-vim.lsp.enable('html')
-vim.lsp.enable('ts_ls')
-
 local indent_highlights = {
   'Whitespace',
   'NormalFloat',
@@ -231,7 +226,12 @@ local lazyvim_plugins = {
   },
   { 'Valloric/MatchTagAlways' },
   { 'carlos-algms/agentic.nvim',
-    dependencies = { 'hakonharnes/img-clip.nvim', opts = {}, }
+    dependencies = { 'hakonharnes/img-clip.nvim', opts = {}, },
+    keys = {
+      { '<Leader>cc', function() require'agentic'.toggle() end, mode = { 'n', 'v' }, desc = 'Toggle Agentic chat', },
+      { '<Leader>ca', function() require'agentic'.new_session() end, mode = { 'n', 'v' }, desc = 'New session', },
+      { '<Leader>cc', function() require'agentic'.toggle() end, mode = { 'n', 'v' }, desc = 'Toggle Agentic chat', },
+    },
   },
   { 'jeffkreeftmeijer/vim-numbertoggle' },
   { 'mattn/emmet-vim' },
