@@ -1,5 +1,5 @@
 local LocalPHP = vim.api.nvim_create_augroup('LocalPHP', { clear = true })
-local bin = vim.fn.getcwd() .. '/bin/'
+local bin = vim.fs.root(0, { ".git", "composer.json", "CLAUDE.md" }) .. '/bin/'
 
 U.dap.configurations.php = {
   {
@@ -41,17 +41,10 @@ vim.api.nvim_create_autocmd({'LspAttach'}, {
     callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         local root_dir = client ~= nil and client.config.root_dir
+
         if root_dir ~= nil then
             vim.opt.tags:append { vim.lsp.buf.list_workspace_folders()[1] .. '/php.tags' }
         end
-    end
-})
-
-vim.api.nvim_create_autocmd({'LspAttach'}, {
-    pattern = '*.php',
-    group = LocalPHP,
-    callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
         if client and client.name == 'intelephense' then
             client.config.settings = vim.tbl_deep_extend('force', client.config.settings or {}, {
                 intelephense = {
@@ -62,7 +55,7 @@ vim.api.nvim_create_autocmd({'LspAttach'}, {
             })
             client:notify('workspace/didChangeConfiguration', { settings = client.config.settings })
         end
-    end,
+    end
 })
 
 vim.api.nvim_create_autocmd({'LspAttach'}, {
@@ -74,7 +67,7 @@ vim.api.nvim_create_autocmd({'LspAttach'}, {
 })
 
 U.utils.add_null_ls_sources({
-  U.null_ls.builtins.diagnostics.phpcs.with({ command = bin .. 'phpcs' }),
-  U.null_ls.builtins.diagnostics.phpstan.with({ command = bin .. 'phpstan' }),
-  U.null_ls.builtins.formatting.phpcbf.with({ command = bin .. 'phpcbf' }),
+    U.null_ls.builtins.diagnostics.phpcs.with({ command = bin .. 'phpcs' }),
+    U.null_ls.builtins.diagnostics.phpstan.with({ command = bin .. 'phpstan' }),
+    U.null_ls.builtins.formatting.phpcbf.with({ command = bin .. 'phpcbf' }),
 })
