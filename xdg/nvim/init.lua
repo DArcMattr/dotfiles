@@ -278,9 +278,6 @@ local lazyvim_plugins = {
       local dap   = require'dap'
       local dapui = require'dapui'
 
-      U.dap = dap
-      U.dapui = dapui
-
       dap.listeners.after.event_initialized['dapui_config'] = dapui.open
       dap.listeners.after.event_terminated['dapui_config']  = dapui.close
       dap.listeners.after.event_exited['dapui_config']      = dapui.close
@@ -347,6 +344,9 @@ local lazyvim_plugins = {
       vim.fn.sign_define('DapStopped',
         { text = '▶', texthl = '', linehl = 'debugPC', numhl = 'debugPC' }
       )
+
+      U.dap = dap
+      U.dapui = dapui
     end,
   },
   { 'mhinz/vim-signify' },
