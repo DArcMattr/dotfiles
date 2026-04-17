@@ -172,3 +172,5 @@
   up = "!f() { git fetch origin --prune --prune-tags --force; git merge --ff-only @{u}; }; f"
   upr = "!f() { git pull && git submodule update --init --recursive; }; f"
   workprofile = "config user.email 'darceneaux@databank.com'"
+[protocol "file"]
+	allow = always
