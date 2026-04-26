@@ -35,9 +35,12 @@ find "${DOTFILES}/xdg/" -mindepth 1 -maxdepth 1 -type d -exec ln -sf "{}" "${DOT
 	# pnpm install -g $(jq -r '.dependencies | keys[]' $HOME/dotfiles/packages.json)
 )
 
-cd ~
-git clone --recursive https://github.com/sorin-ionescu/prezto.git \
-	"${ZDOTDIR:-${HOME}}/.zprezto"
+(
+  cd ~
+  git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${HOME}}/.zprezto"
+  cd "${ZDOTDIR:-${HOME}}/.zprezto"
+  git submodule add -f https://github.com/zpm-zsh/autoenv.git contrib/autoenv
+)
 
 (
 	cd /tmp
@@ -57,7 +60,6 @@ curl -L https://cpanmin.us | perl - App::cpanminus
 	grab_gems
 	grab_git -d "${CONTRIB}/ctags"               -r https://github.com/universal-ctags/ctags.git
 	grab_git -d "${CONTRIB}/tmux"                -r https://github.com/tmux/tmux.git
-	grab_git -d "${CONTRIB}/autoenv"             -r https://github.com/zpm-zsh/autoenv.git -n
 	grab_git -d "${CONTRIB}/luarocks"            -r https://github.com/luarocks/luarocks -n
 	# -- manually build the following TODO: script these
 	grab_git -d "${CONTRIB}/vscode-php-debug"    -r https://github.com/xdebug/vscode-php-debug.git -n

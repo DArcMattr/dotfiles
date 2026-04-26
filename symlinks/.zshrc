@@ -11,10 +11,6 @@ if [[ -s "${ZDOTDIR}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR}/.zprezto/init.zsh"
 fi
 
-if [[ -r ~/contrib/autoenv/autoenv.plugin.zsh ]]; then
-  source ~/contrib/autoenv/autoenv.plugin.zsh
-fi
-
 if [[ -n ${ZSH_VERSION-} ]]; then
   autoload -U +X bashcompinit && bashcompinit
 
