@@ -28,19 +28,20 @@
 
 _cols=$(tput cols 2>/dev/null || echo 80)
 
-export PAGER='less'
-export LESS="-~EFiIMQRsx2X"
-export LESSCHARSET=utf-8
-export MANWIDTH="$(( 96 > ${_cols:-80} ? ${_cols:-80} : 96 ))"
-export PYTHONSTARTUP="${HOME}/dotfiles/helpers/pythonstartup.py"
-export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
-export HGEDITOR="${HOME}/dotfiles/helpers/hgeditor"
-export CLICOLOR=YES
-export CLICOLOR_FORCE=YES
 export ANSIBLE_NOCOWS=1
 export AUTOSSH_PORT=0
-export MANPAGER='nvim +Man!'
+export CLICOLOR=YES
+export CLICOLOR_FORCE=YES
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
+export HGEDITOR="${HOME}/dotfiles/helpers/hgeditor"
+export LESS="-~EFiIMQRsx2X"
+export LESSCHARSET=utf-8
+export LD_LIBRARY_PATH="/usr/lib:$LIBRARY_PATH"
+export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
+export MANPAGER='nvim +Man!'
+export MANWIDTH="$(( 96 > ${_cols:-80} ? ${_cols:-80} : 96 ))"
+export PAGER='less'
+export PYTHONSTARTUP="${HOME}/dotfiles/helpers/pythonstartup.py"
 
 # Editors
 if type "nvim" > /dev/null; then
