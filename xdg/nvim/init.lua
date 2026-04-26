@@ -96,7 +96,10 @@ local lazyvim_plugins = {
         event = { 'CmdLineEnter' },
         ft = { 'go', 'gomod' },
         build = ":lua require'go.install'.update_all_sync()",
-        dependencies = { 'nvim-neotest/nvim-nio' },
+        dependencies = {
+          'nvim-neotest/nvim-nio',
+          'ray-x/guihua.lua'
+        },
         config = function()
           require'go'.setup()
         end,
