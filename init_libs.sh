@@ -126,9 +126,10 @@ grab_rust() {
 }
 
 grab_pips() { # install after rust install, which installs uv
-  config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
+  local config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
+  local p_dir="${config_home}/powerline"
 
-  pip3pkgs=(
+  local tools=(
     'docutils'
     'doge'
     'flake8'
@@ -140,7 +141,7 @@ grab_pips() { # install after rust install, which installs uv
     'mycli[all]'
     'neovim-remote'
     'pip'
-    'git+https://github.com/powerline/powerline.git@2.8.4'
+    'powerline-status@git+https://github.com/powerline/powerline.git@2.8.4'
     'pyemojify'
     'pynvim'
     'python-lsp-server[yapf]'
@@ -149,31 +150,22 @@ grab_pips() { # install after rust install, which installs uv
     'sphinx'
   )
 
-  for i in $pip3pkgs
-  do
+  for i in $tools; do
     uv tool install ${i} --force
   done
 
-  # pip install -U --user --break-system-packages ${pip3pkgs}
+  if [[ ! -f "${p_dir}/powerline.conf" ]]; then
+    mkdir -p "$p_dir"
 
-  ## redundant to force an update of specific packages, then to update all the
-  ## installed ones
-  #pip3 freeze --user | grep -v '^\-e' | cut -d = -f 1 | \
-  #  xargs -n1 pip3 install -U --user
+    # Use uv tool run to peek into the isolated env
+    local p_path
+    p_path=$(uv tool run --from powerline-status python3 -c 'import powerline, os; print(os.path.dirname(powerline.__file__))')
 
-  # if [ ! -d "${config_home}/powerline" ]; then
-  #   mkdir -p "${config_home}/powerline"
-  # fi
-  #
-  # powerline_path="$(dirname "$(python3 -c 'import powerline; print (powerline.__file__)')")"
-  #
-  # rsync -a "${powerline_path}/config_files/" "${config_home}/powerline"
-  #
-  # if [ ! -f "${config_home}/powerline/powerline.conf" ]; then
-  #   ln -s \
-  #     "${powerline_path}/bindings/tmux/powerline.conf" \
-  #     "${config_home}/powerline/powerline.conf"
-  # fi
+    if [[ -n "$p_path" ]]; then
+      rsync -a "${p_path}/config_files/" "$p_dir/"
+      ln -sf "${p_path}/bindings/tmux/powerline.conf" "${p_dir}/powerline.conf"
+    fi
+  fi
 }
 
 grab_composer() {

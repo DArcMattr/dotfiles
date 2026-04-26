@@ -18,4 +18,4 @@ xdg/git/gitk
 xdg/nvim/*.tags
 xdg/nvim/.netrwhist
 xdg/nvim/lazy-lock.json
-xdg/nvim/plugged/
+xdg/powerline/
