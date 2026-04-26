@@ -5,8 +5,7 @@ superupdate_local() {
   (cd ~/contrib/neovim && \
     git fetch --all --prune --prune-tags --force && \
     git merge --ff-only @{u} && \
-    rm -rf ~/.local/share/nvim/runtime && \
-    make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX="${LOCAL}" install clean)
+    make ENABLE_WASMTIME=ON CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX="${LOCAL}" install clean)
   rehash
   nvim --cmd "autocmd user LazyVimStarted lua require('lazy').sync()"
 }
