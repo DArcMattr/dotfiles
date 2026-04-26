@@ -45,7 +45,8 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'ssh' \
   'prompt' \
-  'syntax-highlighting'
+  'syntax-highlighting' \
+  'autoenv'
 
 zstyle ':prezto:*:*' case-sensitive 'no'
 zstyle ':prezto:*:*' color 'yes'
