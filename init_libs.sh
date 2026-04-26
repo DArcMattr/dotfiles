@@ -91,8 +91,10 @@ grab_go() {
 }
 
 grab_rust() {
+  # bootstrap rust's cargo packages for local user account
   pkgs=(
     bat
+    binstall
     cargo-update
     difftastic
     fd-find
@@ -103,16 +105,12 @@ grab_rust() {
     tree-sitter-cli
     typst-cli
     uv
-    wasmtime-cli
   )
   dir="${HOME}/.cargo/bin"
-  if [ ! -x "${dir}" ] && [ ! "$(which rustc >/dev/null)" ]; then
-    curl https://sh.rustup.rs -sSf | sh
-    "${HOME}/.cargo/env"
-    rehash
-  else
-    rustup self update
-    rustup update
+  mkdir -p "${dir}"
+  if [ ! -x "${dir}/rustup" ]; then
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
+    source "${HOME}/.cargo/env"
   fi
 
   "${HOME}/.cargo/bin/rustup" completions zsh >! "${HOME}/.local/share/zsh/site-functions/_rustup"
