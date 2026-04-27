@@ -69,7 +69,7 @@ path() {
 catmd() {
   local TMPFILE="$(mktemp).html"
 
-  pandoc -s --embed-resources -c ~/.pandoc/buttondown.css \
+  pandoc -s --embed-resources -c "${XDG_CONFIG_HOME}/pandoc/buttondown.css" \
     --metadata title="${1:-Markdown Preview}" \
     -t html5 -f gfm+smart "$1" -o "$TMPFILE"
 

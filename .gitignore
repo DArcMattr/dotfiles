@@ -1,5 +1,5 @@
-symlinks/.pandoc/buttondown.css
-symlinks/.pandoc/buttondown.css.map
+xdg/pandoc/buttondown.css
+xdg/pandoc/buttondown.css.map
 symlinks/.ssh/*.pem
 symlinks/.ssh/authorized_keys
 symlinks/.ssh/id_ed25519*
