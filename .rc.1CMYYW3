@@ -1,4 +1,4 @@
-# vim:ft=zsh:
+#!/usr/bin/env zsh
 unfunction sssh
 
 sssh() {
@@ -10,10 +10,6 @@ sssh() {
 # bun completions
 [ -s "/home/darc/.local/_bun" ] && source "/home/darc/.local/_bun"
 
-if [ -z "$TMUX" ]; then
-  tmuxt
-fi
-
 superupdate_local() {
   (cd ~/contrib/neovim && \
     git switch master && \
@@ -23,3 +19,9 @@ superupdate_local() {
   rehash
   nvim --cmd "autocmd user LazyVimStarted lua require('lazy').sync()"
 }
+
+[ -f "${HOME}/.claude/hooks/peon-ping/completions.bash" ] && source "${HOME}/.claude/hooks/peon-ping/completions.bash"
+
+if [ -z "$TMUX" ]; then
+  tmuxt
+fi
