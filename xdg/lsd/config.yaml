@@ -56,7 +56,7 @@ icons:
   when: always
   # Which icon theme to use.
   # Possible values: fancy, unicode
-  theme: unicode
+  theme: fancy
   # Separator between icon and the name
   # Default to 1 space
   separator: " "

@@ -4,32 +4,32 @@ alias ll='ls -alFgh'
 alias doge='doge -mh $(($(tput lines) -1))'
 alias expected_install='./autogen.sh && ./configure --prefix=$HOME/.local && make install clean'
 alias nvf='nvim $(fzf)'
-alias nvdno='nvim $(git dno @~1)'
-alias snvim='sudo -E $(which nvim)'
+alias snvim='sudo -e'
+
+nvdno() {
+  nvim $(git dno "${1:-@~1}")
+}
+compdef _git nvdno=git-checkout
+
+unalias ls 2>/dev/null
+
+if (( $+commands[lsd] )); then
+  alias ls='lsd -F --group-directories-first'
+elif ls --color=always -d . >/dev/null 2>&1; then
+  alias ls='ls --color=always -F'
+else
+  alias ls='ls -F'
+fi
 
 dir() {
+  local out
+  out=$(ls -algh "${@}")
   {
-    LL=$(ll "${@}")
-    echo "${LL}" | awk '/^d/ {print $0}'
-    echo "${LL}" | awk '! /^(d|total)/ {print $0}'
-    echo "${LL}" | awk '/^total/ {print $0}'
+    echo "$out" | grep "^d"
+    echo "$out" | grep -v "^d" | grep -v "^total"
+    echo "$out" | grep "^total"
   } | ${PAGER:-less}
 }
-
-if lsd >/dev/null 2>&1; then
-  alias ls=lsd
-  dir() {
-    lsd -alFgh "${@}" | ${PAGER:-less}
-  }
-elif ls --color=always -d . >/dev/null 2>&1; then
-  alias ls='\ls --color=always'
-elif ls -G -d . >/dev/null 2>&1; then # colorls is main system ls already
-  alias ls='\ls -G'
-elif colorls -G -d . >/dev/null 2>&1; then
-  alias ls='\colorls -G'
-else # Solaris or other *NIX
-  alias ls='\ls'
-fi
 
 alias key='\man -k'
 alias info='info --vi-keys'
@@ -63,26 +63,24 @@ echoerr() {
 }
 
 path() {
-  echo "${PATH}" | tr ':' '\n'
+  print -l ${path}
 }
 
 catmd() {
-  TMPFILE="$(mktemp -d)/index.html"
+  local TMPFILE="$(mktemp).html"
 
-  printf "${TMPFILE}\n"
+  pandoc -s --embed-resources -c ~/.pandoc/buttondown.css \
+    --metadata title="${1:-Markdown Preview}" \
+    -t html5 -f gfm+smart "$1" -o "$TMPFILE"
 
-  pandoc -s --embed-resources --standalone -c ~/.pandoc/buttondown.css \
-    --metadata title="${@}" \
-    -t html5 -f gfm+smart "${@}" -o "${TMPFILE}"
-
-  if command -v "wslview" >/dev/null 2>&1; then
-    wslview $(wslpath -w "${TMPFILE}")
-  elif command -v "${BROWSER}" >/dev/null 2>&1; then
-    ${BROWSER} "${TMPFILE}"
-  elif command -v "elinks" >/dev/null 2>&1; then
-    elinks -force-html "file://${TMPFILE}"
+  if command -v wslview >/dev/null 2>&1; then
+    wslview "$TMPFILE"
+  elif command -v xdg-open >/dev/null 2>&1; then
+    xdg-open "$TMPFILE"
+  elif [[ -n "$BROWSER" ]]; then
+    $BROWSER "$TMPFILE"
   else
-    lynx -force_html "file://${TMPFILE}"
+    lynx -force_html "$TMPFILE"
   fi
 }
 
@@ -96,19 +94,46 @@ pushterms() {
 }
 
 sssh() {
-  (TERM=screen-256color autossh -t "${1}" 'source ${HOME}/dotfiles/.aliases && tmuxt') 2>/dev/null
+  [[ -z "$1" ]] && echo "Usage: sssh <host>" && return 1
+  (TERM=screen-256color autossh -t "$1" 'source ${HOME}/dotfiles/.aliases && tmuxt') 2>/dev/null
 }
 
+_sssh_hosts() {
+  local -a ssh_hosts
+  local config_file="$HOME/.ssh/config"
+  local hosts_dir="$HOME/.ssh/hosts"
+
+  # 1. Parse the main config file for Host lines
+  if [[ -f "$config_file" ]]; then
+    ssh_hosts+=($(grep -i '^Host ' "$config_file" | awk '{for (i=2; i<=NF; i++) print $i}' | grep -v '*'))
+  fi
+
+  # 2. Parse all .ssh files in your include directory
+  if [[ -d "$hosts_dir" ]]; then
+    # Using 'cat' on the glob ensures we grab every Host entry in every file
+    ssh_hosts+=($(grep -ih '^Host ' "$hosts_dir"/*.ssh 2>/dev/null | awk '{for (i=2; i<=NF; i++) print $i}' | grep -v '*'))
+  fi
+
+  # 3. deduplicate and provide to Zsh
+  ssh_hosts=(${(u)ssh_hosts})
+
+  _describe -t ssh-hosts 'defined ssh hosts' ssh_hosts
+}
+
+compdef _sssh_hosts sssh
+
 superupdate() {
-  if [ -z "$(apt >/dev/null 2>&1)" ]; then
-    /usr/bin/sudo /usr/bin/sh -c "/usr/bin/apt -y --update upgrade && \
-/usr/bin/apt -y full-upgrade && \
-/usr/bin/apt -y autoclean && \
-/usr/bin/apt -y autoremove && \
-/usr/bin/apt -y clean"
-  elif [ -z "$(pacman >/dev/null 2>&1)" ]; then
-    \sudo \sh -c "pacman -Syu && flatpak update -y && yay -Syu --devel --needed"
-  elif [ -z "$(apt-get >/dev/null 2>&1)" ]; then
+  if command -v pacman >/dev/null 2>&1; then
+    # Prioritize 'yay' or 'paru' if available for CachyOS/AUR
+    local aur_helper=$(command -v \yay || command -v \paru)
+    sudo pacman -Syu
+    [[ -n "$aur_helper" ]] && $aur_helper -Sua --devel
+    command -v \flatpak >/dev/null && flatpak update -y
+  elif command -v apt >/dev/null 2>&1; then
+    \sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y
+  elif command -v pkg >/dev/null 2>&1; then # Modern FreeBSD
+    \sudo \sh -c "pkg update && pkg upgrade && pkg autoremove"
+  elif command -v apt-get 2>&1; then
     \sudo \sh -c " \
       \apt-get update && \
       \apt-get -y upgrade && \
@@ -116,13 +141,6 @@ superupdate() {
       \apt-get -y autoclean && \
       \apt-get -y autoremove && \
       \apt-get -y clean"
-  elif [ -z "$(portsnap >/dev/null 2>&1)" ]; then # XXX rewrite as pkg
-    \sudo \sh -c " \
-      \portsnap fetch update && \
-      \sudo \portmaster -aD && \
-      \sudo \pkg2ng && \
-      \sudo \freebsd-update fetch &&
-      \sudo \freebsd-update install"
   else
     echoerr "This script is not configured for your system."
   fi
@@ -143,7 +161,6 @@ no input blah blah
     ssh "${2}" "mkdir -p ~/.ssh ; cat >> ~/.ssh/authorized_keys ; chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys"
 }
 
-# compare to the output of `git ls-tree -r @`
 git_id() {
-  printf 'blob %s\0' "$(ls -l "$1" | awk '{print $5;}')" | cat - "$1" | sha1sum | awk '{print $1}'
+  git hash-object "$1"
 }
