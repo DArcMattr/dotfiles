@@ -6,6 +6,7 @@ export LC_COLLATE=C
 export LOCAL="${HOME}/.local"
 export PERL_MB_OPT="--install_base '${LOCAL}'";
 export PERL_MM_OPT="INSTALL_BASE='${LOCAL}'";
+export SUDO_EDITOR='nvim'
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
 export XDG_CONFIG_DIRS="${XDG_CONFIG_DIRS:-/etc/xdg}"
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"

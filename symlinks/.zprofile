@@ -36,6 +36,7 @@ export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 export HGEDITOR="${HOME}/dotfiles/helpers/hgeditor"
 export LESS="-~EFiIMQRsx2X"
 export LESSCHARSET=utf-8
+export LESSUTFCHARDEF=E000-F8FF:p,F0000-FFFFD:p,100000-10FFFD:p
 export LD_LIBRARY_PATH="/usr/lib:$LIBRARY_PATH"
 export LSCOLORS="ExFxCxDxBxEgEdAbAgAcAd"
 export MANPAGER='nvim +Man!'
