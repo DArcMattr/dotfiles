@@ -1,15 +1,12 @@
 #!/usr/bin/env zsh
 PATH="${OLDPATH}"
-unset OLDPATH \
-    POSTMAN_API_KEY \
-    LDAP_USER \
-    LDAP_PASSWORD \
-    MSSQL_HOST \
-    MSSQL_PORT \
-    BEARER \
-    WORKSPACE_ID \
-    GITLAB_HOST \
-    GITLAB_PAT
+
+if (( ${#_AUTOENV_DOTENV_VARS} )); then
+    unset "${_AUTOENV_DOTENV_VARS[@]}"
+fi
+unset _AUTOENV_DOTENV_VARS
+
+unset OLDPATH
 unalias cake \
     phpcbf \
     phpcs \
