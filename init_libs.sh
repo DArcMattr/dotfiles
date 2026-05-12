@@ -90,6 +90,25 @@ grab_go() {
   fi
 }
 
+grab_pnpm() {
+  pkgs=(
+    "@agentclientprotocol/claude-agent-acp"
+    "@google/gemini-cli"
+    "@stylelint/language-server"
+    "bash-language-server"
+    "intelephense"
+    "neovim"
+    "quicktype"
+    "sass"
+    "sql-language-server"
+    "stylelint"
+    "svgo"
+    "typescript"
+    "typescript-language-server"
+    "vscode-langservers-extracted"
+  )
+}
+
 grab_rust() {
   # bootstrap rust's cargo packages for local user account
   pkgs=(

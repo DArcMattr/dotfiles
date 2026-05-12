@@ -46,6 +46,11 @@ if [[ -x "${HOME}/.cabal/bin" ]]; then
   haskell_path="${HOME}/.cabal/bin"
 fi
 
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) local pnpm_bin="${PNPM_HOME}/bin"
+esac
+
 # Set the the list of directories that cd searches.
 cdpath=(
   $cdpath
@@ -58,7 +63,7 @@ path=(
   $php_path
   $gem_path
   $haskell_path
-  ${PNPM_HOME}
+  $pnpm_bin
   ${LOCAL}/bin
   /usr/local/{,s}bin
   /usr/{,s}bin
