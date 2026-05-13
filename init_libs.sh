@@ -111,10 +111,12 @@ grab_pnpm() {
 
 grab_rust() {
   # bootstrap rust's cargo packages for local user account
+  local cargo_path="${HOME}/.cargo/bin"
   pkgs=(
     bat
-    binstall
+    cargo-binstall
     cargo-update
+    diffsitter
     difftastic
     fd-find
     lsd
@@ -125,28 +127,32 @@ grab_rust() {
     typst-cli
     uv
   )
-  dir="${HOME}/.cargo/bin"
-  mkdir -p "${dir}"
-  if [ ! -x "${dir}/rustup" ]; then
+  mkdir -p "${cargo_path}"
+  if [ ! -x "${cargo_path}/rustup" ]; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
     source "${HOME}/.cargo/env"
   fi
 
-  "${HOME}/.cargo/bin/rustup" completions zsh >! "${HOME}/.local/share/zsh/site-functions/_rustup"
+  "${cargo_path}/rustup" completions zsh >! "${HOME}/.local/share/zsh/site-functions/_rustup"
 
   # cargo install --list | awk '/^[[:alnum:]]/ {print $1}'
   for pkg in $pkgs
   do
-    eval "$(printf "%s %s" "${dir}/cargo install" "${pkg}")"
+    eval "$(printf "%s %s" "${cargo_path}/cargo install" "${pkg}")"
   done
   cargo install-update -a
-  "${dir}/rg" --generate man >! ${LOCAL}/share/man/man1/rg.1
-  "${dir}/rg" --generate complete-zsh >! "${HOME}"/.local/share/zsh/site-functions/_rg
+  "${cargo_path}/bat" --completion zsh >! "${LOCAL}/share/zsh/site-functions/_bat"
+  "${cargo_path}/diffsitter" gen-completion zsh >! "${LOCAL}/share/zsh/site-functions/_diffsitter"
+  "${cargo_path}/fd" --gen-completions zsh >! "${LOCAL}/share/zsh/site-functions/_fd"
+  "${cargo_path}/rg" --generate man >! "${LOCAL}/share/man/man1/rg.1"
+  "${cargo_path}/rg" --generate complete-zsh >! "${HOME}/.local/share/zsh/site-functions/_rg"
+  "${cargo_path}/starship" completions zsh >! "${LOCAL}/share/zsh/site-functions/_starship"
+  "${cargo_path}/tree-sitter" complete --shell zsh >! "${LOCAL}/share/zsh/site-functions/_tree-sitter"
 }
 
 grab_pips() { # install after rust install, which installs uv
-  local config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
-  local p_dir="${config_home}/powerline"
+  local xdg_config_home="${XDG_CONFIG_HOME:=$HOME/.config}"
+  local p_dir="${xdg_config_home}/powerline"
 
   local tools=(
     'docutils'

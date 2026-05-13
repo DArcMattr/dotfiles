@@ -49,6 +49,8 @@
   cmd = nvim -c \"packadd nvim.difftool\" -c \"DiffTool $LOCAL $REMOTE\"
 [difftool "difft"]
   cmd = difft "$LOCAL" "$REMOTE"
+[difftool "ds"]
+  cmd = diffsitter "$LOCAL" "$REMOTE"
 [fetch]
   prune = true
   pruneTags = true
