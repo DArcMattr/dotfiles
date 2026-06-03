@@ -1,4 +1,9 @@
 #!/bin/sh
+tmux set -g pane-scrollbars modal
+tmux set -g pane-scrollbars-style 'fg=#40ff00,bg=default' # Green border matching, clean transparent background
+tmux set -s extended-keys on
+tmux set -s extended-keys-format csi-u
+tmux set -as terminal-features ',xterm-kitty:RGB:usstyle:extkeys:sync:hyperlinks'
 
 tmux split-window -h -l 50% -t "${SESSION}:1.0"
 
@@ -7,7 +12,7 @@ tmux send-keys -t "${SESSION}":2 "btop" C-m
 tmux rename-window -t "${SESSION}":2 "btop"
 tmux set -t "${SESSION}":2 monitor-activity off
 
-DIRECTORY="${HOME}/projects/handmade"
+DIRECTORY="${HOME}/Projects/handmade"
 tmux new-window -t "${SESSION}:3" -c "${DIRECTORY}" \; \
   split-window -h -l 60% -t "${SESSION}:3.0" -c "${DIRECTORY}" \; \
   split-window -v -l 20% -t "${SESSION}:3.1" -c "${DIRECTORY}"

@@ -416,7 +416,36 @@ local lazyvim_plugins = {
     ft = { 'cs' },
     build = ':OmniSharpInstall'
   },
+  {
+    'petertriho/nvim-scrollbar',
+    config = function()
+      require('scrollbar').setup({
+        show = true,
+        handle = {
+          text = " ",
+          color = "#404040",
+          cterm = nil,
+          highlight = "CursorColumn",
+        },
+        marks = {
+          Search = { color = "#ff9e64" },
+          Error = { color = "#db4b4b" },
+          Warn = { color = "#e0af68" },
+          Info = { color = "#0db9d7" },
+          Hint = { color = "#10b981" },
+          Misc = { color = "#9d7cd8" },
+        },
+        excluded_filetypes = {
+          'cmp_menu',
+          'noice',
+          'prompt',
+          'TelescopePrompt',
+        },
+      })
+    end
+  },
 }
+
 
 require'lazy'.setup(
   vim.list_extend(vim.deepcopy(lazyvim_plugins), U.utils.loadLocalPlugins())
@@ -447,6 +476,7 @@ vim.opt.guicursor       = 'n-v-i-c:ver50-Cursor'
 vim.opt.hidden          = true
 vim.opt.hlsearch        = true
 vim.opt.ignorecase      = true
+vim.opt.inccommand      = 'split'
 vim.opt.incsearch       = true
 vim.opt.joinspaces      = false
 vim.opt.laststatus      = 2
@@ -472,6 +502,7 @@ vim.opt.sidescrolloff   = 5
 vim.opt.signcolumn      = 'auto:2'
 vim.opt.smartcase       = true
 vim.opt.smarttab        = true
+vim.opt.smoothscroll    = true
 vim.opt.softtabstop     = 2
 vim.opt.splitbelow      = true
 vim.opt.startofline     = false

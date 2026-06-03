@@ -13,6 +13,7 @@ zstyle ':prezto:load' pmodule-dirs ~/.local/share/zsh/site-functions
 
 # Set case-sensitivity for completion, history lookup, etc.
 # zstyle ':prezto:*:*' case-sensitive 'yes'
+zstyle ':completion:*' menu select
 
 # Color output (auto set to 'no' on dumb terminals).
 zstyle ':prezto:*:*' color 'yes'

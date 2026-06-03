@@ -103,7 +103,7 @@ $character"""
 right_format = "$cmd_duration $time"
 
 [directory]
-truncate_to_repo = false
+truncate_to_repo = true
 truncation_symbol = '…/'
 
 [git_commit]
