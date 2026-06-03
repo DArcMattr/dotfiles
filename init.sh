@@ -24,9 +24,7 @@ find "${DOTFILES}/xdg/" -mindepth 1 -maxdepth 1 -type d -exec ln -sf "{}" "${DOT
 	sudo corepack enable
 	corepack prepare pnpm@latest --activate
 	pnpm setup
-	# pnpm env use latest
 	cd
-	pnpm install --global
 	pnpm completion zsh >! "${LOCAL}/share/zsh/site-functions/_pnpm"
 	pnpm install -g
 		@agentclientprotocol/claude-agent-acp \

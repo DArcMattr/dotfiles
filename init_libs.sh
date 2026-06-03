@@ -136,6 +136,8 @@ grab_rust() {
   "${cargo_path}/rustup" completions zsh >! "${HOME}/.local/share/zsh/site-functions/_rustup"
 
   # cargo install --list | awk '/^[[:alnum:]]/ {print $1}'
+  # lsd will install shell completions if SHELL_COMPLETIONS_DIR is set in the environment before
+  # building with cargo
   for pkg in $pkgs
   do
     eval "$(printf "%s %s" "${cargo_path}/cargo install" "${pkg}")"
@@ -148,6 +150,7 @@ grab_rust() {
   "${cargo_path}/rg" --generate complete-zsh >! "${HOME}/.local/share/zsh/site-functions/_rg"
   "${cargo_path}/starship" completions zsh >! "${LOCAL}/share/zsh/site-functions/_starship"
   "${cargo_path}/tree-sitter" complete --shell zsh >! "${LOCAL}/share/zsh/site-functions/_tree-sitter"
+  "${cargo_path}/uv" generate-shell-completion zsh >! "${LOCAL}/share/zsh/site-functions/_uv"
 }
 
 grab_pips() { # install after rust install, which installs uv
