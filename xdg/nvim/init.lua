@@ -229,7 +229,6 @@ local lazyvim_plugins = {
   },
   { 'Valloric/MatchTagAlways' },
   { 'carlos-algms/agentic.nvim',
-    dependencies = { 'hakonharnes/img-clip.nvim', opts = {}, },
     keys = {
       { '<Leader>cc', function() require'agentic'.toggle() end, mode = { 'n', 'v' }, desc = 'Toggle Agentic chat', },
       { '<Leader>ca', function() require'agentic'.new_session() end, mode = { 'n', 'v' }, desc = 'New session', },
