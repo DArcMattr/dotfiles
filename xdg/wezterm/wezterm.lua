@@ -12,7 +12,7 @@ config.exit_behavior = 'CloseOnCleanExit'
 config.default_cursor_style = 'BlinkingBlock'
 config.enable_scroll_bar = true
 config.disable_default_key_bindings = true
-config.font = wezterm.font_with_fallback{'Maple Mono', 'Twemoji'}
+config.font = wezterm.font_with_fallback{'Cascadia Mono PL', 'Twemoji'}
 config.font_size = 9.0
 config.front_end = 'OpenGL'
 config.hide_tab_bar_if_only_one_tab = false
@@ -39,6 +39,10 @@ config.keys = {
   { key = 'DownArrow',  mods = 'LEADER',  action=act{ActivatePaneDirection='Down'}},
   { key = 'UpArrow',    mods = 'LEADER', action=act{ActivatePaneDirection='Up'}},
   { key = 'RightArrow', mods = 'LEADER', action=act{ActivatePaneDirection='Right'}},
+  { key = 'LeftArrow',  mods = 'ALT',  action=act{ActivatePaneDirection='Left'}},
+  { key = 'DownArrow',  mods = 'ALT',  action=act{ActivatePaneDirection='Down'}},
+  { key = 'UpArrow',    mods = 'ALT', action=act{ActivatePaneDirection='Up'}},
+  { key = 'RightArrow', mods = 'ALT', action=act{ActivatePaneDirection='Right'}},
   { key = 'PageUp',   mods = 'ALT',   action=act.ActivateTabRelative(1)},
   { key = 'PageDown', mods = 'ALT',   action=act.ActivateTabRelative(-1)},
   { key = 'H', mods = 'LEADER|SHIFT', action=act{AdjustPaneSize={'Left', 5}}},

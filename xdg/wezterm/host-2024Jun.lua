@@ -5,15 +5,10 @@ wezterm.log_info('Loaded host config file')
 
 local wezterm = require 'wezterm'
 
-wezterm.on('gui-startup', function(spawn_args)
-    wezterm.log_info('gui-startup: building layout')
+wezterm.on('mux-startup', function()
+    wezterm.log_info('mux-startup: building layout')
 
-    local tab1, pane1, window = mux.spawn_window(spawn_args or {})
-
-    local gui_win = window:gui_window()
-    if gui_win then
-      gui_win:maximize()
-    end
+    local tab1, pane1, window = mux.spawn_window({})
 
     tab1:set_title('Home')
     pane1:split { direction = 'Right', size = 0.5 }
@@ -34,3 +29,14 @@ wezterm.on('gui-startup', function(spawn_args)
 
     tab1:activate()
 end)
+
+wezterm.on('gui-attached', function(domain)
+    wezterm.log_info('gui-attached: maximizing window')
+    for _, window in ipairs(mux.all_windows()) do
+        local gui_win = window:gui_window()
+        if gui_win then
+            gui_win:maximize()
+        end
+    end
+end)
+
