@@ -27,7 +27,6 @@
 [commit]
   verbose = true
 [core]
-  attributesfile = ~/.config/git/attributes
   autocrlf = false
   eol = lf
   safecrlf = warn

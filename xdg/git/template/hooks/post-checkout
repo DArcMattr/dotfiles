@@ -1,12 +1,26 @@
 #!/bin/sh
-. "${HOME}/dotfiles/helpers/project-ctags"
+. "$HOME/dotfiles/helpers/project-ctags"
 
-if [ "$(git rev-parse --verify HEAD > /dev/null 2>&1)" = 0 ]; then
-	AGAINST=$(git hash-object -t tree /dev/null) # hash of empty tree
+# Check if HEAD exists safely using the command's exit code directly
+if git rev-parse --verify HEAD > /dev/null 2>&1; then
+    AGAINST='HEAD'
 else
-	AGAINST='HEAD'
+    AGAINST=$(git hash-object -t tree /dev/null) # hash of empty tree
 fi
 
+# Grab changed files
 FILES="$(git diff-index --cached --name-only ${AGAINST})"
 
+# Run ctags in the background
 project_ctags ${FILES} >/dev/null 2>&1 &
+
+# Handle the template .gitattributes fallback logic
+if [ "$3" = "1" ]; then
+    WORK_TREE=$(git rev-parse --show-toplevel)
+
+    # If the repo came with its own attributes, disable our template's info/attributes
+    if [ -f "$WORK_TREE/.gitattributes" ] && [ -f "$WORK_TREE/.git/info/attributes" ]; then
+        mv "$WORK_TREE/.git/info/attributes" "$WORK_TREE/.git/info/attributes.bak"
+        echo "💡 Repository has its own .gitattributes. Local template defaults disabled."
+    fi
+fi
