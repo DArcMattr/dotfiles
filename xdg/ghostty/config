@@ -51,4 +51,4 @@ theme                 = Builtin Dark
 window-decoration     = false
 shell-integration = detect
 initial-command = zsh ~/dotfiles/xdg/kitty/tmux.sh
-# command = tmuxt
+# initial-command = ~/dotfiles/functions/tmuxt

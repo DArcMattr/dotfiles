@@ -1,0 +1,12 @@
+# ln -sf ~/.config/wezterm/wezterm-mux.service ~/dotfiles/xdg/wezterm/wezterm-mux.service
+[Unit]
+Description=WezTerm Mux Server
+After=network.target
+
+[Service]
+ExecStart=/home/darc/contrib/wezterm/target/release/wezterm-mux-server
+Type=simple
+Restart=always
+
+[Install]
+WantedBy=default.target
