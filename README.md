@@ -94,8 +94,8 @@ Which installs the `kotlinc` compiler and `kotlinc-jvm` REPL utility.
 (cd jq && git up && ./configure --prefix="${LOCAL}" --with-onigurama=builtin && make install-binaries clean)
 (cd raylib && git up ; make PLATFORM=PLATFORM_DESKTOP ; make ROOT=root DESTDIR="${LOCAL}" install clean )
 # (cd neovim && git up && make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX="${LOCAL}" all install distclean)
-(cd vscode-js-debug && git up && npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out )
-(cd vscode-php-debug && git up && npm install --legacy-peer-deps && npm run build )
+(cd $HOME/contrib/vscode-js-debug && git up && npm install --ignore-scripts --legacy-peer-deps && npx gulp dapDebugServer)
+(cd $HOME/contrib/vscode-php-debug && git up && npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out )
 ```
 
 Create a desktop shortcut, with Properties: Target

@@ -2,14 +2,13 @@
 vim.lsp.enable('ts_ls')
 vim.opt_local.iskeyword:append {'$'}
 
--- curl -OL https://github.com/microsoft/vscode-js-debug/releases/download/v1.112.0/js-debug-dap-v1.112.0.tar.gz
 U.dap.adapters['pwa-node'] = {
   type = 'server',
   host = 'localhost',
   port = '${port}',
   executable = {
     command = 'node',
-    args = { os.getenv('HOME') .. '/contrib/js-debug/src/dapDebugServer.js', '${port}', },
+    args = { os.getenv('HOME') .. '/contrib/vscode-js-debug/dist/src/dapDebugServer.js', '${port}', },
   },
 }
 
