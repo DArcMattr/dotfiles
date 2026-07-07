@@ -19,14 +19,7 @@
   fi
 } &!
 
-# Less
-
-# Set the default Less options.
-# Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
-# Remove -X and -F (exit if the content fits on one screen) to enable it.
-# export LESS='-F -g -i -M -R -S -w -X -z-4'
-
-_cols=$(tput cols 2>/dev/null || echo 80)
+local _cols=$(tput cols 2>/dev/null || echo 80)
 
 export ANSIBLE_NOCOWS=1
 export AUTOSSH_PORT=0
