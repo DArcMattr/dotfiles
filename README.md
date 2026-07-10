@@ -34,23 +34,23 @@ curl -sS "https://packages.microsoft.com/keys/microsoft.asc" | \
 sudo add-apt-repository \
   "deb http://nginx.org/packages/mainline/ubuntu ${REL} nginx"
 sudo add-apt-repository \
-  "deb http://apt.llvm.org/${REL}/ llvm-toolchain-${REL}-20 main"
+  "deb http://apt.llvm.org/${REL}/ llvm-toolchain-${REL}-21 main"
 sudo add-apt-repository \
     "$(wget -qO- https://packages.microsoft.com/config/ubuntu/24.04/prod.list)" # XXX
-sudo apt install autossh bison btop build-essential clang-20 clang-20-doc \
-  clang-format-20 clang-tidy-20 clang-tools-20 clangd-20 cmake flex fswatch git \
-  git-extras golang jq libc++-20-dev-wasm32 libc++abi-20-dev-wasm32 \
-  libclang-20-dev libclang-common-20-dev libclang-rt-20-dev \
-  libclang-rt-20-dev-wasm32 libclang-rt-20-dev-wasm64 libclang1-20 
-  libevent-dev libfuzzer-20-dev libgit2-dev libjansson-dev \
-  libllvm-20-ocaml-dev libllvm19 liblua5.3-dev liblzma-dev libncurses5-dev \
-  libnss3-tools libomp-20-dev libpcre3-dev libsqlite3-dev libssh2-1-dev \
-  libssl-dev libxml2-dev libyaml-dev lld-20 lldb-20 llvm-20 llvm-20-dev \
-  llvm-20-doc llvm-20-examples llvm-20-runtime lsyncd neovim nginx nodejs \
+sudo apt install autossh bison btop build-essential clang-21 clang-21-doc \
+  clang-format-21 clang-tidy-21 clang-tools-21 clangd-21 cmake flex fswatch git \
+  git-extras golang jq libc++-21-dev-wasm32 libc++abi-21-dev-wasm32 \
+  libclang-21-dev libclang-common-21-dev libclang-rt-21-dev \
+  libclang-rt-21-dev-wasm32 libclang-rt-21-dev-wasm64 libclang1-21 
+  libevent-dev libfuzzer-21-dev libgit2-dev libjansson-dev \
+  libllvm-21-ocaml-dev libllvm19 liblua5.3-dev liblzma-dev libncurses5-dev \
+  libnss3-tools libomp-21-dev libpcre3-dev libsqlite3-dev libssh2-1-dev \
+  libssl-dev libxml2-dev libyaml-dev lld-21 lldb-21 llvm-21 llvm-21-dev \
+  llvm-21-doc llvm-21-examples llvm-21-runtime lsyncd neovim nginx nodejs \
   php-common php-gd php-imagick php-mbstring php-memcache php-pear php-xdebug \
   php-xml php-zip php8.4-cli php8.4-curl php8.4-dev php8.4-fpm php8.4-imap \
   php8.4-mysql php8.4-opcache php8.4-readline php8.4-soap php8.4-sqlite3 \
-  php8.4-xml pv python-is-python3 python3-clang-20 python3-dev python3-venv \
+  php8.4-xml pv python-is-python3 python3-clang-21 python3-dev python3-venv \
   ruby-dev shellcheck sqlcmd tidy wget wslu xcape xsel zlib1g-dev zsh
 
 git clone https://github.com/darcmattr/dotfiles ~/dotfiles
