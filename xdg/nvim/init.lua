@@ -166,6 +166,10 @@ local lazyvim_plugins = {
       U.null_ls = nls
       U.null_ls.setup({
         U.null_ls.builtins.completion.spell,
+        should_attach = function(bufnr)
+          local name = vim.api.nvim_buf_get_name(bufnr)
+          return not name:match('^fugitive://') and not name:match('^gitsigns://')
+        end,
       })
     end,
     dependencies = {
