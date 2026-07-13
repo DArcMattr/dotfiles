@@ -36,7 +36,7 @@
   mnemonicprefix = true
   renames = copies
   submodule = log
-  tool = vim
+  tool = difft
 [diff "nodiff"]
   command = /bin/true
 [difftool]
@@ -44,12 +44,12 @@
   tool = difft
 [difftool "icdiff"]
   cmd = icdiff --line-numbers --highlight $LOCAL $REMOTE
-[difftool "vim"]
-  cmd = nvim -c \"packadd nvim.difftool\" -c \"DiffTool $LOCAL $REMOTE\"
 [difftool "difft"]
   cmd = difft "$LOCAL" "$REMOTE"
 [difftool "ds"]
   cmd = diffsitter "$LOCAL" "$REMOTE"
+[difftool "vim"]
+  cmd = nvim -c \"packadd nvim.difftool\" -c \"DiffTool $LOCAL $REMOTE\"
 [fetch]
   prune = true
   pruneTags = true
@@ -80,6 +80,8 @@
 [pager]
   diff =
   difftool = true
+[protocol "file"]
+  allow = always
 [pull]
   ff = only
   rebase = true
@@ -104,7 +106,7 @@
 [tag]
   sort = version:refname
 [url "git@github.com:"]
-	insteadOf = https://github.com/
+  insteadOf = https://github.com/
 [url "https://github.com/michaelbrusegard/tabline.wez"]
   insteadOf = https://github.com/michaelbrusegard/tabline.wez
 [alias]
@@ -134,6 +136,8 @@
   graph = log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %ar) %Cred%d' --date-order
   grep = grep -Ii
   integrate = "!~/dotfiles/helpers/git-integrate"
+  hdiff = -c core.pager=\"hunk pager\" diff
+  hshow = -c core.pager=\"hunk pager\" show
   la = "!f() { git config -l | grep alias | cut -c 7-; }; f"
   lasttag = describe --tags --abbrev=0
   lasttagcheckout = "!f() { git checkout \"$(git describe --tags --abbrev=0)\"; }; f"
@@ -174,5 +178,3 @@
   up = "!f() { git fetch origin --prune --prune-tags --force; git merge --ff-only @{u}; }; f"
   upr = "!f() { git pull && git submodule update --init --recursive; }; f"
   workprofile = "config user.email 'darceneaux@databank.com'"
-[protocol "file"]
-	allow = always
