@@ -8,7 +8,7 @@ tmux set -ga terminal-overrides ",*:Tc"
 tmux set -gas terminal-overrides ',*:smuc=\E[4:3m'
 tmux set -gas terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
 tmux set -gas terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
-tmux set -ga command-alias "claudewin=new-pane -T Claude -l 80 -c ${DIRECTORY} 'zsh -c \"claude --resume; exec zsh\"'"
+tmux set -ga command-alias "claudewin=new-pane -T Claude -l 80 -c ${DIRECTORY} 'zsh -lc \"claude --resume; exec zsh\"'"
 
 tmux split-window -h -l 50% -t "${SESSION}:1.0" \; \
 	split-window -v -l 50% -t "${SESSION}:1.1"
