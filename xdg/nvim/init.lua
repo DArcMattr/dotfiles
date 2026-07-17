@@ -236,7 +236,7 @@ local lazyvim_plugins = {
     keys = {
       { '<Leader>cc', function() require'agentic'.toggle() end, mode = { 'n', 'v' }, desc = 'Toggle Agentic chat', },
       { '<Leader>ca', function() require'agentic'.new_session() end, mode = { 'n', 'v' }, desc = 'New session', },
-      { '<Leader>cc', function() require'agentic'.toggle() end, mode = { 'n', 'v' }, desc = 'Toggle Agentic chat', },
+      { '<Leader>cr', function() require'agentic'.restore_session() end, mode = { 'n', 'v' }, desc = 'Restore Agentic chat', },
     },
   },
   { 'jeffkreeftmeijer/vim-numbertoggle' },
