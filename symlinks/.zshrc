@@ -53,9 +53,6 @@ umask 002
 
 eval "$(starship init zsh)"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/dotfiles/helpers/.p10k.zsh ]] || source ~/dotfiles/helpers/.p10k.zsh
-
 if [[ -r /etc/aliases.sh ]]; then
   source /etc/aliases.sh
 fi
