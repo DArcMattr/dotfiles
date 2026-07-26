@@ -3,13 +3,12 @@
 # only idempotent commands here so far
 # TODO: translate to ansible
 
-DOT_CONFIG=${XDG_CONFIG_HOME:=${HOME}/.config}
 CONTRIB="${HOME}${CONTRIB}"
 DOTFILES="${HOME}/dotfiles"
 LOCAL="${HOME}/.local"
 
 xdg-user-dirs-update
-mkdir -p ${CONTRIB} "${HOME}/.local/bin" "${DOT_CONFIG}" \
+mkdir -p ${CONTRIB} "${HOME}/.local/bin" "${HOME}/.config" "${HOME}/.cache/zsh" \
 	"${HOME}/.ssh/hosts" "${HOME}/.ssh/sockets" "${HOME}/.pandoc"
 
 tic -x "${DOTFILES}/tmux-256color.terminfo"
@@ -28,7 +27,6 @@ find "${DOTFILES}/xdg/" -mindepth 1 -maxdepth 1 -type d -exec ln -sf "{}" "${DOT
 	pnpm completion zsh >! "${LOCAL}/share/zsh/site-functions/_pnpm"
 	pnpm install -g
 		@agentclientprotocol/claude-agent-acp \
-		@google/gemini-cli \
 		@stylelint/language-server \
 		bash-language-server \
 		intelephense \
