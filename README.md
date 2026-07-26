@@ -59,6 +59,12 @@ curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
 python /tmp/get-pip.py --user --break-system-packages
 chsh -s $(which zsh)
 sudo cp ~/dotfiles/helpers/xdg-vars.sh /etc/profile.d/xdg-vars.sh
+mkdir -p ~/.local/state/zsh ~/.cache/zsh
+sudo touch /etc/zsh/zshenv
+sudo tee -a /etc/zsh/zshenv <<'EOL'
+emulate sh -c 'source /etc/profile'
+export ZDOTDIR=${XDG_CONFIG_HOME}/zsh
+EOL
 sudo corepack enable
 sudo corepack prepare pnpm@latest --activate
 ```

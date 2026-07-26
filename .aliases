@@ -33,10 +33,11 @@ dir() {
 
 alias key='\man -k'
 alias info='info --vi-keys'
-alias sicp='racket -i -p neil/sicp -l xrepl'
-alias rgp='rg --pager=${PAGER}'
-alias venv='python -m venv'
 alias jsonize='jq .'
+alias rgp='rg --pager=${PAGER}'
+alias sicp='racket -i -p neil/sicp -l xrepl'
+alias tree='dir --tree'
+alias venv='python -m venv'
 
 # Suffix aliases
 if alias -s >/dev/null 2>&1; then

@@ -7,7 +7,7 @@
 
 {
   # Compile the completion dump to increase startup speed.
-  zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
+  zcompdump="${XDG_CACHE_HOME}/zsh/zcompdump"
   if [[
     -s "$zcompdump"
     && (
@@ -27,6 +27,7 @@ export CLICOLOR=YES
 export CLICOLOR_FORCE=YES
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 export HGEDITOR="${HOME}/dotfiles/helpers/hgeditor"
+export HISTFILE="${XDG_STATE_HOME}/zsh/history"
 export LESS="-~EFiIMQRsx2X"
 export LESSCHARSET=utf-8
 export LESSUTFCHARDEF=E000-F8FF:p,F0000-FFFFD:p,100000-10FFFD:p

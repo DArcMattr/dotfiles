@@ -47,7 +47,7 @@ bindkey -v
 
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 autoload -Uz compinit tmuxt set-env unset-env nvrg
-compinit
+compinit -d "${XDG_CACHE_HOME}/zsh/zcompdump"
 
 umask 002
 
