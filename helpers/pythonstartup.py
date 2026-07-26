@@ -2,9 +2,9 @@
 Configure the Python REPL, `python -q`
 """
 try:
-    import readline
     import atexit
     import os
+    import readline
     import sys
     # import gnureadline as readline
 except ImportError as exception:
@@ -18,14 +18,13 @@ else:
         readline.parse_and_bind("tab: complete")
 
     # Enable History File
-    HISTORY_FILE = os.environ.get(
-        "PYTHON_HISTORY_FILE", os.path.join(os.environ['HOME'],
-                                            '.pythonhistory'))
+    histfile = os.path.join(os.getenv("XDG_STATE_HOME", os.path.expanduser("~/.local/state")), "python_history")
 
-    if os.path.isfile(HISTORY_FILE):
-        readline.read_history_file(HISTORY_FILE)
+    if os.path.isfile(histfile):
+        readline.read_history_file(histfile)
+        readline.set_history_length(1000)
     else:
-        open(HISTORY_FILE, 'a').close()
+        open(histfile, 'a').close()
 
-    atexit.register(readline.write_history_file, HISTORY_FILE)
-    print('Booted ~/pythonstartup.py.')
+    atexit.register(readline.write_history_file, histfile)
+    print('Booted pythonstartup.py.')
