@@ -30,10 +30,8 @@ find "${DOTFILES}/xdg/" -mindepth 1 -maxdepth 1 -type d -exec ln -sf "{}" "${DOT
 		@stylelint/language-server \
 		bash-language-server \
 		intelephense \
-		neovim \
 		quicktype \
 		sass \
-		sql-language-server \
 		stylelint \
 		svgo \
 		typescript \

@@ -93,14 +93,11 @@ grab_go() {
 grab_pnpm() {
   pkgs=(
     "@agentclientprotocol/claude-agent-acp"
-    "@google/gemini-cli"
     "@stylelint/language-server"
     "bash-language-server"
     "intelephense"
-    "neovim"
     "quicktype"
     "sass"
-    "sql-language-server"
     "stylelint"
     "svgo"
     "typescript"

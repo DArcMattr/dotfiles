@@ -16,6 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.c_space_errors = 1
 vim.g.editorconfig_enable = true
+vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.mapleader = ','
 vim.g.maplocalleader = ' '

@@ -60,8 +60,6 @@ sudo tee -a /etc/zsh/zshenv <<'EOL'
 emulate sh -c 'source /etc/profile'
 export ZDOTDIR=${XDG_CONFIG_HOME:-$HOME/.config}/zsh
 EOL
-sudo corepack enable
-sudo corepack prepare pnpm@latest --activate
 ```
 
 Refresh the shell session, then run the following:
