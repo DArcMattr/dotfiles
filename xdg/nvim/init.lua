@@ -27,6 +27,21 @@ local indent_highlights = {
 }
 
 local lazyvim_plugins = {
+  --[[ not supported in Windows Terminal Preview
+  {
+    'GooseRooster/osc-colors.nvim',
+    priority = 1000,
+    lazy = false,
+    opts = {
+      capabilities = {
+        undercurl = true,
+      },
+      ui = {
+        transparent = true,
+        dim_inactive = true,
+      },
+    },
+  }, ]]
   {
     'nvim-treesitter/nvim-treesitter',
     build = ":TSUpdate",
@@ -382,6 +397,7 @@ local lazyvim_plugins = {
     'nvim-lualine/lualine.nvim',
     opts = {
       options = {
+        -- theme = 'osc-colors'
         theme = 'powerline'
       },
       sections = {
@@ -449,7 +465,6 @@ local lazyvim_plugins = {
     end
   },
 }
-
 
 require'lazy'.setup(
   vim.list_extend(vim.deepcopy(lazyvim_plugins), U.utils.loadLocalPlugins())
