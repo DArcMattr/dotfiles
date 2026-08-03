@@ -1,0 +1,18 @@
+{
+	"name": "Campbell",
+	"groups": {
+		"information:regular":     { "fg": "campbell:white",        "bg": "campbell:black", "attrs": [] },
+		"information:highlighted": { "fg": "campbell:bright_white", "bg": "campbell:blue",   "attrs": [] },
+		"critical:failure":        { "fg": "campbell:bright_white", "bg": "campbell:red",    "attrs": [] },
+		"critical:success":        { "fg": "campbell:bright_white", "bg": "campbell:green",  "attrs": [] },
+		"warning:regular":         { "fg": "campbell:black",        "bg": "campbell:yellow", "attrs": [] },
+		"background":              { "fg": "campbell:white",        "bg": "campbell:black",  "attrs": [] },
+		"background:divider":      { "fg": "campbell:bright_black", "bg": "campbell:black",  "attrs": [] },
+		"uptime":                  { "fg": "campbell:white",        "bg": "campbell:black",  "attrs": [] },
+		"system_load":             { "fg": "campbell:black",        "bg": "campbell:red",  "attrs": [] },
+		"hostname":                { "fg": "campbell:white",        "bg": "campbell:black",  "attrs": [] },
+		"date":                    { "fg": "campbell:bright_black", "bg": "campbell:yellow",  "attrs": [] },
+		"time":                    { "fg": "campbell:bright_white", "bg": "campbell:black",  "attrs": ["bold"] },
+		"time:divider":            { "fg": "campbell:white",        "bg": "campbell:black",  "attrs": [] }
+	}
+}
