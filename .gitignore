@@ -18,5 +18,4 @@ xdg/git/gitk
 xdg/nvim/*.tags
 xdg/nvim/.netrwhist
 xdg/nvim/lazy-lock.json
-xdg/powerline/
 xdg/zsh/.zprezto

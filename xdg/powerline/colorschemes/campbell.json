@@ -10,8 +10,8 @@
 		"background:divider":      { "fg": "campbell:bright_black", "bg": "campbell:black",  "attrs": [] },
 		"uptime":                  { "fg": "campbell:white",        "bg": "campbell:black",  "attrs": [] },
 		"system_load":             { "fg": "campbell:black",        "bg": "campbell:red",  "attrs": [] },
-		"hostname":                { "fg": "campbell:white",        "bg": "campbell:black",  "attrs": [] },
-		"date":                    { "fg": "campbell:bright_black", "bg": "campbell:yellow",  "attrs": [] },
+		"hostname":                { "fg": "campbell:black",        "bg": "campbell:bright_green",  "attrs": [] },
+		"date":                    { "fg": "campbell:black",        "bg": "campbell:bright_yellow",  "attrs": [] },
 		"time":                    { "fg": "campbell:bright_white", "bg": "campbell:black",  "attrs": ["bold"] },
 		"time:divider":            { "fg": "campbell:white",        "bg": "campbell:black",  "attrs": [] }
 	}
