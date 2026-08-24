@@ -87,6 +87,7 @@
   rebase = true
 [push]
   autoSetupRemote = true
+  autoSetupMerge = always
   default = current
   ff = only
   followTags = true
