@@ -1,4 +1,5 @@
 vim.lsp.enable('intelephense')
+-- vim.lsp.enable('phpantom_lsp')
 
 vim.opt_local.iskeyword:append {'$'}
 vim.opt_local.suffixesadd:append {'.php'}

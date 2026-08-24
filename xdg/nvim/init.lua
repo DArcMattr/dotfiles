@@ -254,6 +254,13 @@ local lazyvim_plugins = {
       { '<Leader>ca', function() require'agentic'.new_session() end, mode = { 'n', 'v' }, desc = 'New session', },
       { '<Leader>cr', function() require'agentic'.restore_session() end, mode = { 'n', 'v' }, desc = 'Restore Agentic chat', },
     },
+    keymaps = {
+      prompt = {
+        submit = {
+          "<C-Cr>", mode = { "i", "n", "v", },
+        },
+      },
+    },
   },
   { 'jeffkreeftmeijer/vim-numbertoggle' },
   { 'mattn/emmet-vim' },
