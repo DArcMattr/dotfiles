@@ -30,6 +30,7 @@ grab_go() {
     'github.com/sqls-server/sqls'
     'github.com/tdewolff/minify/cmd/minify'
     'github.com/tmc/json-to-struct'
+    'gitlab.com/gitlab-org/cli/cmd/glab'
     'go.uber.org/mock/mockgen'
     'golang.org/x/tools/cmd/callgraph'
     'golang.org/x/tools/cmd/goimports'
