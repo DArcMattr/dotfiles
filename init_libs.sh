@@ -179,19 +179,6 @@ grab_pips() { # install after rust install, which installs uv
   for i in $tools; do
     uv tool install ${i} --force
   done
-
-  if [[ ! -f "${p_dir}/powerline.conf" ]]; then
-    mkdir -p "$p_dir"
-
-    # Use uv tool run to peek into the isolated env
-    local p_path
-    p_path=$(uv tool run --from powerline-status python3 -c 'import powerline, os; print(os.path.dirname(powerline.__file__))')
-
-    if [[ -n "$p_path" ]]; then
-      rsync -a "${p_path}/config_files/" "$p_dir/"
-      ln -sf "${p_path}/bindings/tmux/powerline.conf" "${p_dir}/powerline.conf"
-    fi
-  fi
 }
 
 grab_composer() {

@@ -16,7 +16,6 @@ sudo apt install -y curl software-properties-common
 sudo add-apt-repository -y universe
 sudo add-apt-repository -y multiverse
 sudo add-apt-repository -y ppa:git-core/ppa
-sudo add-apt-repository -y ppa:neovim-ppa/unstable
 sudo add-apt-repository -y ppa:ondrej/php
 curl -sS "https://apt.llvm.org/llvm-snapshot.gpg.key" | \
   sudo tee /etc/apt/trusted.gpg.d/llvm.asc
@@ -25,7 +24,7 @@ curl -sS "http://nginx.org/keys/nginx_signing.key" | \
 curl -fsSL "http://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key" | \
   sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/nodesource.gpg 
 sudo add-apt-repository \
-  "deb https://deb.nodesource.com/node_22.x nodistro main"
+  "deb https://deb.nodesource.com/node_24.x nodistro main"
 curl -sS "https://packages.microsoft.com/keys/microsoft.asc" | \
   sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
 sudo add-apt-repository \
@@ -33,22 +32,22 @@ sudo add-apt-repository \
 sudo add-apt-repository \
   "deb http://apt.llvm.org/${REL}/ llvm-toolchain-${REL}-21 main"
 sudo add-apt-repository \
-    "$(wget -qO- https://packages.microsoft.com/config/ubuntu/24.04/prod.list)" # XXX
+    "$(wget -qO- https://packages.microsoft.com/config/ubuntu/26.04/prod.list)" # XXX there's repo signing nonsense going on
 sudo apt install autossh bison btop build-essential clang-21 clang-21-doc \
   clang-format-21 clang-tidy-21 clang-tools-21 clangd-21 cmake flex fswatch git \
   git-extras golang jq libc++-21-dev-wasm32 libc++abi-21-dev-wasm32 \
   libclang-21-dev libclang-common-21-dev libclang-rt-21-dev \
-  libclang-rt-21-dev-wasm32 libclang-rt-21-dev-wasm64 libclang1-21 
+  libclang-rt-21-dev-wasm32 libclang-rt-21-dev-wasm64 libclang1-21 \
   libevent-dev libfuzzer-21-dev libgit2-dev libjansson-dev \
-  libllvm-21-ocaml-dev libllvm19 liblua5.3-dev liblzma-dev libncurses5-dev \
-  libnss3-tools libomp-21-dev libpcre3-dev libsqlite3-dev libssh2-1-dev \
+  libllvm-21-ocaml-dev libllvm21 liblua5.3-dev liblzma-dev \
+  libnss3-tools libomp-21-dev libsqlite3-dev libssh2-1-dev \
   libssl-dev libxml2-dev libyaml-dev lld-21 lldb-21 llvm-21 llvm-21-dev \
-  llvm-21-doc llvm-21-examples llvm-21-runtime lsyncd neovim nginx nodejs \
+  llvm-21-doc llvm-21-examples llvm-21-runtime lsyncd nginx nodejs \
   php-common php-gd php-imagick php-mbstring php-memcache php-pear php-xdebug \
-  php-xml php-zip php8.4-cli php8.4-curl php8.4-dev php8.4-fpm php8.4-imap \
-  php8.4-mysql php8.4-opcache php8.4-readline php8.4-soap php8.4-sqlite3 \
-  php8.4-xml pv python-is-python3 python3-clang-21 python3-dev python3-venv \
-  ruby-dev shellcheck sqlcmd tidy wget wslu xcape xsel zlib1g-dev zsh
+  php-xml php-zip php8.5-cli php8.5-curl php8.5-dev php8.5-fpm \
+  php8.5-mysql php8.5-readline php8.5-soap php8.5-sqlite3 \
+  php8.5-xml pv python-is-python3 python3-clang-21 python3-dev python3-venv \
+  ruby-dev shellcheck tidy wget xcape xsel zlib1g-dev zsh
 
 git clone https://github.com/darcmattr/dotfiles ~/dotfiles
 sh ~/dotfiles/helpers/debianish-update-alternatives.sh
@@ -92,9 +91,10 @@ Which installs the `kotlinc` compiler and `kotlinc-jvm` REPL utility.
 (cd wslu && git up && make DESTDIR="${HOME}" PREFIX="${HOME}/.local" all install)
 (cd jq && git up && ./configure --prefix="${LOCAL}" --with-onigurama=builtin && make install-binaries clean)
 (cd raylib && git up ; make PLATFORM=PLATFORM_DESKTOP ; make ROOT=root DESTDIR="${LOCAL}" install clean )
-# (cd neovim && git up && make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX="${LOCAL}" all install distclean)
+(cd $HOME/contrib/neovim && git up && make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX="${LOCAL}" all install distclean)
 (cd $HOME/contrib/vscode-js-debug && git up && npm install --ignore-scripts --legacy-peer-deps && npx gulp dapDebugServer)
 (cd $HOME/contrib/vscode-php-debug && git up && npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out )
+(cd $HOME/contrib/tmux && git up && ./autogen.sh && ./configure --prefix=$LOCAL --enable-sixel --with-TERM=tmux-256color && make install clean)
 ```
 
 Create a desktop shortcut, with Properties: Target
