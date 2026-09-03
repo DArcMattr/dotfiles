@@ -11,6 +11,12 @@ nvdno() {
 }
 compdef _git nvdno=git-checkout
 
+nvdiffall() {
+  local rev="${1:-@~1}"
+  nvim -c "tabdo silent! Gdiff ${rev}" -p $(git dno "${rev}")
+}
+compdef _git nvdiffall=git-checkout
+
 unalias ls 2>/dev/null
 
 if (( $+commands[lsd] )); then

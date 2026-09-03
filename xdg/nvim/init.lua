@@ -405,7 +405,8 @@ local lazyvim_plugins = {
     opts = {
       options = {
         -- theme = 'osc-colors'
-        theme = 'powerline'
+        theme = 'powerline',
+        always_show_tabline = false,
       },
       sections = {
         lualine_c = {
@@ -419,11 +420,18 @@ local lazyvim_plugins = {
       tabline = {
         lualine_a = {
           {
+            'tabs',
+            mode = 2,
+          },
+        },
+      },
+      winbar = {
+        lualine_a = {
+          {
             'buffers',
             mode = 4,
           },
         },
-        lualine_z = { 'tabs' },
       },
     },
   },
@@ -575,8 +583,14 @@ vim.keymap.set('i', '<C-b>',   '<Esc>gUiwi')
 vim.keymap.set('i', '<Cr>',    function() return vim.fn.pumvisible() == 1 and '<C-y>' or '<C-g>u<Cr>' end, { expr = true })
 vim.keymap.set('i', '<S-Tab>', function() return vim.fn.pumvisible() == 1 and '<C-p>' or '<C-h>' end,      { expr = true })
 vim.keymap.set('i', '<Tab>',   function() return vim.fn.pumvisible() == 1 and '<C-n>' or '<Tab>' end,      { expr = true })
-vim.keymap.set('n', '<C-PageDown>',   ':bp<Cr>')
-vim.keymap.set('n', '<C-PageUp>',     ':bn<Cr>')
+vim.keymap.set('n', '<C-PageDown>', function()
+  if #vim.api.nvim_list_tabpages() > 1 then vim.cmd('tabnext') else vim.cmd('bp') end
+end)
+vim.keymap.set('n', '<C-PageUp>', function()
+  if #vim.api.nvim_list_tabpages() > 1 then vim.cmd('tabprevious') else vim.cmd('bn') end
+end)
+vim.keymap.set('n', '<C-Tab>',        ':tabnext<Cr>')
+vim.keymap.set('n', '<C-S-Tab>',      ':tabprevious<Cr>')
 vim.keymap.set('n', '<C-b>',          '<C-b>zz')
 vim.keymap.set('n', '<C-d>',          '<C-d>zz')
 vim.keymap.set('n', '<C-e>',          '3<C-e>')
