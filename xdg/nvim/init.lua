@@ -430,6 +430,20 @@ local lazyvim_plugins = {
           {
             'buffers',
             mode = 4,
+            cond = function()
+              return vim.bo.buftype == ''
+            end,
+          },
+        },
+      },
+      inactive_winbar = {
+        lualine_a = {
+          {
+            'buffers',
+            mode = 4,
+            cond = function()
+              return vim.bo.buftype == ''
+            end,
           },
         },
       },
