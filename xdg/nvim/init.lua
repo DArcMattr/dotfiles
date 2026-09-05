@@ -263,6 +263,7 @@ local lazyvim_plugins = {
     },
   },
   { 'jeffkreeftmeijer/vim-numbertoggle' },
+  { 'marcinbarylka/campbell-dark.nvim' },
   { 'mattn/emmet-vim' },
   {
     'hat0uma/csvview.nvim', config = function()
@@ -908,4 +909,4 @@ if vim.env.TMUX then
   vim.keymap.set('t', '<C-\\><C-N><C-w>l', function() U.utils.tmux_move('l') end, { desc = 'Move Right (tmux aware)', silent = true })
 end
 
-vim.cmd.colorscheme('koehler')
+vim.cmd.colorscheme('campbell-dark')
