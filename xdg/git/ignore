@@ -61,3 +61,4 @@ package-json.lock
 fnord.*
 
 **/.claude/settings.local.json
+**/.serena
