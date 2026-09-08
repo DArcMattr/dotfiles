@@ -174,7 +174,7 @@ local lazyvim_plugins = {
       }
     end,
     version = false,
-  },
+  }, --[[
   {
     'nvimtools/none-ls.nvim',
     config = function()
@@ -191,6 +191,9 @@ local lazyvim_plugins = {
     dependencies = {
       'nvim-lua/plenary.nvim',
     },
+  }, ]]
+  {
+    'marcinbarylka/campbell-dark.nvim',
   },
   {
     'nvim-telescope/telescope.nvim',
@@ -504,6 +507,7 @@ require'lazy'.setup(
 U.capabilities = require'cmp_nvim_lsp'.default_capabilities()
 U.dap          = require'dap'
 
+vim.opt.autocomplete    = true
 vim.opt.autoindent      = true
 vim.opt.autoread        = true
 vim.opt.background      = 'dark'
@@ -511,6 +515,7 @@ vim.opt.backspace       = { 'indent', 'eol', 'start' }
 vim.opt.bomb            = false
 vim.opt.cinoptions      = { 't0', '+4', '(4', 'u4', 'w1' }
 vim.opt.colorcolumn     = '+1'
+vim.opt.completeopt     = { 'menu', 'menuone', 'preselect' }
 vim.opt.copyindent      = true
 vim.opt.cursorcolumn    = true
 vim.opt.cursorline      = true
@@ -536,7 +541,9 @@ vim.opt.modeline        = true
 vim.opt.mouse           = 'a'
 vim.opt.number          = true
 vim.opt.previewheight   = 20
+vim.opt.pumborder       = 'rounded'
 vim.opt.pumheight       = 15
+vim.opt.pummaxwidth     = 40
 vim.opt.relativenumber  = true
 vim.opt.scrolloff       = 3
 vim.opt.sessionoptions  = { 'blank', 'buffers', 'curdir', 'folds', 'help', 'tabpages', 'winsize' }
@@ -582,6 +589,23 @@ vim.opt.wildignore:append {
   '*.swp', '*.jpg', 'vendor/*', 'docs/*', 'node_modules/*', 'components/*',
   'build/*', 'dist/*'
 }
+
+vim.diagnostic.config({
+  severity_sort = true,
+  update_in_insert = false,
+  float = {
+    border = 'rounded',
+    source = true,
+  },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = 'E',
+      [vim.diagnostic.severity.WARN] = 'W',
+      [vim.diagnostic.severity.INFO] = 'I',
+      [vim.diagnostic.severity.HINT] = 'H',
+    },
+  },
+})
 
 if vim.g.neovide then
   vim.opt.guifont = 'Cascadia Code PL Light:h9'
@@ -857,6 +881,7 @@ vim.api.nvim_create_autocmd('QuitPre', {
   end
 })
 
+--[[
 vim.api.nvim_create_autocmd('ColorScheme', {
   group = StartupStuffs,
   pattern = '*',
@@ -876,7 +901,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     vim.api.nvim_set_hl(0, 'SpellLocal', { link = 'SpellCap' })
     vim.api.nvim_set_hl(0, 'SpellRare', { link = 'SpellCap' })
   end,
-})
+})  ]]
 
 vim.api.nvim_create_user_command(
   'Silent',
