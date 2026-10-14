@@ -12,5 +12,5 @@ let g:user_emmet_settings = {
 \  }
 
 lua <<EOF
-vim.lsp.enable('tsserver')
+vim.lsp.enable('tsc')
 EOF

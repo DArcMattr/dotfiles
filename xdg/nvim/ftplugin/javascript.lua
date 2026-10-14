@@ -1,4 +1,4 @@
-vim.lsp.enable('ts_ls')
+vim.lsp.enable('tsc')
 vim.opt_local.iskeyword:append {'$'}
 
 U.dap.adapters['pwa-node'] = { -- also repeat for typescript

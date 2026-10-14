@@ -102,7 +102,6 @@ grab_pnpm() {
     "stylelint"
     "svgo"
     "typescript"
-    "typescript-language-server"
     "vscode-langservers-extracted"
   )
 }
