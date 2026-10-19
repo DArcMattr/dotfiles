@@ -471,31 +471,33 @@ local lazyvim_plugins = {
   },
   {
     'petertriho/nvim-scrollbar',
+    branch = 'refactor/v2',
     config = function()
       require('scrollbar').setup({
-        show = true,
-        handle = {
-          text = " ",
-          color = "#404040",
-          cterm = nil,
-          highlight = "CursorColumn",
+        scrollbar = {
+          visibility = 'active',
+          thumb = {
+            highlight = { bg = '#404040' },
+          },
         },
         marks = {
-          Search = { color = "#ff9e64" },
-          Error = { color = "#db4b4b" },
-          Warn = { color = "#e0af68" },
-          Info = { color = "#0db9d7" },
-          Hint = { color = "#10b981" },
-          Misc = { color = "#9d7cd8" },
+          Search = { highlight = { fg = '#ff9e64' } },
+          Error = { highlight = { fg = '#db4b4b' } },
+          Warn = { highlight = { fg = '#e0af68' } },
+          Info = { highlight = { fg = '#0db9d7' } },
+          Hint = { highlight = { fg = '#10b981' } },
+          Misc = { highlight = { fg = '#9d7cd8' } },
         },
-        excluded_filetypes = {
-          'cmp_menu',
-          'noice',
-          'prompt',
-          'TelescopePrompt',
+        exclude = {
+          filetypes = {
+            'cmp_menu',
+            'noice',
+            'prompt',
+            'TelescopePrompt',
+          },
         },
       })
-    end
+    end,
   },
 }
 
