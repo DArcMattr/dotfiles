@@ -138,7 +138,7 @@ disabled = false
 disabled = false
 
 [time]
-time_format = "%T %Z"
+time_format = "%T %z"
 format = " at 🕙 $time($style) "
 disabled = false
 
