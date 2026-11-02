@@ -1,0 +1,67 @@
+#!/bin/sh
+# git-mk-cherry: create a branch from a target ref in a new worktree, then cherry-pick commits onto it.
+# Usage: git mk-cherry [--target REF] [--branch NAME] [--dir PATH] [--] <sha>...
+# Options must come before the shas.
+# The worktree is removed after a clean cherry-pick and kept when the cherry-pick stops.
+# Default target: $GIT_MK_CHERRY_TARGET, else git config mk-cherry.target, else origin/develop.
+# POSIX sh only: no arrays, [[ ]], pipefail, or ${var//a/b}.
+set -eu
+
+target="${GIT_MK_CHERRY_TARGET:-$(git config --get mk-cherry.target || echo origin/develop)}"
+branch=""
+dir=""
+
+usage() {
+  echo "usage: git mk-cherry [--target REF] [--branch NAME] [--dir PATH] [--] <sha>..." >&2
+  exit 2
+}
+
+# Stop at the first non-option argument. What remains in "$@" is the sha list,
+# which avoids needing an array to collect them.
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --target) target="${2:?--target needs a ref}"; shift 2 ;;
+    --branch) branch="${2:?--branch needs a name}"; shift 2 ;;
+    --dir)    dir="${2:?--dir needs a path}"; shift 2 ;;
+    -h|--help) sed -n '2,5p' "$0"; exit 0 ;;
+    --) shift; break ;;
+    -*) echo "unknown option: $1" >&2; usage ;;
+    *) break ;;
+  esac
+done
+
+[ $# -gt 0 ] || usage
+
+# Fail before creating anything if a commit is unknown.
+for sha in "$@"; do
+  git rev-parse --verify --quiet "${sha}^{commit}" >/dev/null || { echo "not a commit: $sha" >&2; exit 1; }
+done
+
+# Refresh the target only when its first path segment is a real remote (origin/develop).
+# Local refs such as "develop" skip the fetch.
+remote="${target%%/*}"
+if git remote get-url "$remote" >/dev/null 2>&1; then
+  git fetch "$remote" "${target#*/}"
+fi
+
+branch="${branch:-task/cherry-$(git rev-parse --short "$1")}"
+top="$(git rev-parse --show-toplevel)"
+# Sibling directory of the repo, with slashes in the branch name flattened.
+flat="$(printf '%s' "$branch" | tr '/' '-')"
+dir="${dir:-$top/../$(basename "$top")-$flat}"
+
+# --no-track stops the new branch from pushing to or pulling from the target by default.
+git worktree add --no-track -b "$branch" "$dir" "$target"
+
+if ! git -C "$dir" cherry-pick "$@"; then
+	# Keep the worktree on failure: the half-applied state is what the user needs to resolve
+	echo "Cherry-pick stopped. Resolve in: $dir" >&2
+	echo "Then run: git worktree remove $dir" >&2
+	exit 1
+fi
+
+# The commits live on the branch, so the worktree has done its job. Removing it leaves only the
+# branch, ready to push or check out.
+git worktree remove "$dir"
+
+echo "Branch $branch ready. Worktree removed."
