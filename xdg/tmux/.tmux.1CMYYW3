@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+# ./autogen.sh && ./configure --prefix=$LOCAL --with-TERM=tmux-256color && make install clean
 
 local DIRECTORY='/home/darc/workspace/api-tracker'
 
