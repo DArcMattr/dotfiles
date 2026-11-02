@@ -93,7 +93,7 @@ Which installs the `kotlinc` compiler and `kotlinc-jvm` REPL utility.
 (cd raylib && git up ; make PLATFORM=PLATFORM_DESKTOP ; make ROOT=root DESTDIR="${LOCAL}" install clean )
 (cd $HOME/contrib/neovim && git up && make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX="${LOCAL}" all install distclean)
 (cd $HOME/contrib/vscode-js-debug && git up && npm install --ignore-scripts --legacy-peer-deps && npx gulp dapDebugServer)
-(cd $HOME/contrib/vscode-php-debug && git up && npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out )
+(cd $HOME/contrib/vscode-php-debug && git up && npm install --legacy-peer-deps && npm run build)
 (cd $HOME/contrib/tmux && git up && ./autogen.sh && ./configure --prefix=$LOCAL --enable-sixel --with-TERM=tmux-256color && make install clean)
 ```
 
