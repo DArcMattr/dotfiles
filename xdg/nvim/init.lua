@@ -697,7 +697,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<Leader>lf',     vim.lsp.buf.format,               opts)
     vim.keymap.set('n', '<Leader>lg',     vim.lsp.buf.type_definition,      opts)
     vim.keymap.set('n', '<Leader>lk',     vim.lsp.buf.hover,                opts)
-    vim.keymap.set('n', '<Leader>lm',     vim.lsp.buf.format,               opts)
     vim.keymap.set('n', '<Leader>lo',     vim.lsp.buf.document_symbol,      opts)
     vim.keymap.set('n', '<Leader>lr',     vim.lsp.buf.references,           opts)
     vim.keymap.set('n', '<Leader>le',     vim.lsp.buf.definition,           opts)
