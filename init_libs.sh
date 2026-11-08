@@ -61,29 +61,19 @@ grab_go() {
     ln -sf "${go_bin}/${VERSION}" "${HOME}/.local/bin/go"
   fi
 
-  echo "Checking for package updates..."
+  if ! command -v gup >/dev/null 2>&1; then
+    go install github.com/nao1215/gup@latest
+  fi
+
   for pkg in "${pkgs[@]}"; do
     local bin_name="${pkg##*/}"
-    [[ "$bin_name" == "..." ]] && bin_name=$(basename "$(dirname "$pkg")")
-
-    local local_bin="$go_bin/$bin_name"
-    local current_v=""
-
-    if [[ -f "$local_bin" ]]; then
-      current_v=$(go version -m "$local_bin" | awk '/mod/ {print $3; exit}')
-    fi
-
-    local mod_path="${pkg%/...}" # Strip trailing /... for go list
-    local latest_info=$(go list -m -f '{{if .Update}}{{.Update.Version}}{{else}}{{.Version}}{{end}}' "$mod_path@latest" 2>/dev/null)
-    local latest_v="${latest_info:-$current_v}"
-
-    if [[ -n "$current_v" && "$current_v" == "$latest_v" ]]; then
-      printf "  %-25s ✅ %s\n" "$bin_name" "$current_v"
-    else
-      printf "  %-25s 🚀 %s -> %s\n" "$bin_name" "${current_v:-none}" "$latest_v"
-      go install "$pkg@latest" && updated_any=true
+    [[ "$bin_name" = "..." ]] && bin_name=$(basename "$(dirname "$pkg")")
+    if [[ ! -f "$go_bin/$bin_name" ]]; then
+      go install "$pkg@latest"
     fi
   done
+
+  gup update
 
   if [[ "$updated_any" == true ]]; then
     echo "\nCleaning up Go build cache..."
