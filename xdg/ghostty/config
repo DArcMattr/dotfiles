@@ -50,5 +50,4 @@ maximize              = true
 theme                 = Builtin Dark
 window-decoration     = false
 shell-integration = detect
-initial-command = zsh ~/dotfiles/xdg/kitty/tmux.sh
-# initial-command = ~/dotfiles/functions/tmuxt
+initial-command = zsh ~/dotfiles/xdg/ghostty/tmux.sh
