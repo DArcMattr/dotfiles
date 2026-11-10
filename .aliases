@@ -73,22 +73,46 @@ path() {
   print -l ${path}
 }
 
-catmd() {
-  local TMPFILE="$(mktemp).html"
+catmd () {
+	emulate -L zsh
 
-  pandoc -s --embed-resources -c "${XDG_CONFIG_HOME}/pandoc/buttondown.css" \
-    --metadata title="${1:-Markdown Preview}" \
-    -t html5 -f gfm+smart "$1" -o "$TMPFILE"
+	local src="$1"
+	local css="${XDG_CONFIG_HOME:-$HOME/.config}/pandoc/buttondown.css"
+	local outdir="${XDG_CACHE_HOME:-$HOME/.cache}/catmd"
+	local explorer=/mnt/c/Windows/explorer.exe
+	local tmp
+	local -a css_args
 
-  if command -v wslview >/dev/null 2>&1; then
-    wslview "$TMPFILE"
-  elif command -v xdg-open >/dev/null 2>&1; then
-    xdg-open "$TMPFILE"
-  elif [[ -n "$BROWSER" ]]; then
-    $BROWSER "$TMPFILE"
-  else
-    lynx -force_html "$TMPFILE"
-  fi
+	if [[ -z "$src" || ! -r "$src" ]]; then
+		print -u2 "usage: catmd <file.md>"
+		return 1
+	fi
+
+	mkdir -p "$outdir" || return 1
+
+	rm -f -- "$outdir"/*.html(N.mh+24)
+
+	tmp="$(mktemp --tmpdir="$outdir" --suffix=.html)" || return 1
+
+	[[ -r "$css" ]] && css_args=(-c "$css")
+
+	pandoc -s --embed-resources "${css_args[@]}" \
+		--metadata title="${src:t}" \
+		-t html5 -f gfm+smart-raw_html "$src" -o "$tmp" \
+		|| { rm -f -- "$tmp"; return 1 }
+
+	if [[ -x "$explorer" ]]; then
+		"$explorer" "$(wslpath -w "$tmp")"
+		return 0
+	elif (( $+commands[wslview] )); then
+		wslview "$tmp"
+	elif (( $+commands[xdg-open] )); then
+		xdg-open "$tmp"
+	elif [[ -n "$BROWSER" ]]; then
+		"$BROWSER" "$tmp"
+	else
+		lynx -force_html "$tmp"
+	fi
 }
 
 hgdiff() {
