@@ -130,6 +130,7 @@ grab_rust() {
     eval "$(printf "%s %s" "${cargo_path}/cargo install" "${pkg}")"
   done
   cargo install-update -a
+  "${cargo_path}/bat" --cache --build
   "${cargo_path}/bat" --completion zsh >! "${LOCAL}/share/zsh/site-functions/_bat"
   "${cargo_path}/diffsitter" gen-completion zsh >! "${LOCAL}/share/zsh/site-functions/_diffsitter"
   "${cargo_path}/fd" --gen-completions zsh >! "${LOCAL}/share/zsh/site-functions/_fd"
